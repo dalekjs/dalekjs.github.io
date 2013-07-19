@@ -1,0 +1,194 @@
+{
+    "project": {
+        "name": "dalek-browser-phantomjs",
+        "description": "PhantomJS binding for DalekJS",
+        "version": "0.0.1",
+        "url": ""
+    },
+    "files": {
+        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
+            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "index.js": {
+            "name": "index.js",
+            "modules": {
+                "DalekJS": 1
+            },
+            "classes": {
+                "Browser.PhantomJSDriver": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Browser": 1
+            }
+        }
+    },
+    "modules": {
+        "DalekJS": {
+            "name": "DalekJS",
+            "submodules": {},
+            "classes": {
+                "Browser.PhantomJSDriver": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Browser": 1
+            },
+            "tag": "module",
+            "file": "index.js",
+            "line": 32,
+            "description": "PhantomJS Driver base class",
+            "part": "PhantomJS",
+            "api": ""
+        }
+    },
+    "classes": {
+        "Browser.PhantomJSDriver": {
+            "name": "Browser.PhantomJSDriver",
+            "shortname": "Browser.PhantomJSDriver",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DalekJS",
+            "namespace": "Browser",
+            "file": "index.js",
+            "line": 32,
+            "description": "PhantomJS Driver base class"
+        }
+    },
+    "classitems": [
+        {
+            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "line": 1,
+            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "class": "Browser.PhantomJSDriver"
+        },
+        {
+            "file": "index.js",
+            "line": 44,
+            "description": "Verbose version of the browser name",
+            "itemtype": "property",
+            "name": "",
+            "type": "string",
+            "default": "PhantomJS",
+            "class": "Browser.PhantomJSDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 54,
+            "description": "Default port of the PhantomJSDriver\nThe port may change, cause the port conflict resultion\ntool might pick another one, if the default one is blocked",
+            "itemtype": "property",
+            "name": "",
+            "type": "integer",
+            "default": "9001",
+            "class": "Browser.PhantomJSDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 66,
+            "description": "Default host of the PhantomJSDriver\nThe host may be overriden with\na user configured value",
+            "itemtype": "property",
+            "name": "",
+            "type": "string",
+            "default": "localhost",
+            "class": "Browser.PhantomJSDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 78,
+            "description": "Root path of the PhantomJSDriver",
+            "itemtype": "property",
+            "name": "",
+            "type": "string",
+            "default": "/wd/hub",
+            "class": "Browser.PhantomJSDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 88,
+            "description": "Child process instance of the PhantomJS browser",
+            "itemtype": "property",
+            "name": "",
+            "type": "null|Object",
+            "class": "Browser.PhantomJSDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 97,
+            "description": "Resolves the driver port",
+            "itemtype": "method",
+            "name": "getPort",
+            "return": {
+                "description": "integer"
+            },
+            "class": "Browser.PhantomJSDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 108,
+            "description": "Returns the driver host",
+            "itemtype": "method",
+            "name": "getHost",
+            "type": "string",
+            "class": "Browser.PhantomJSDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 119,
+            "description": "Launches the PhantomJSDriver",
+            "itemtype": "method",
+            "name": "launch",
+            "return": {
+                "description": "Q.promise"
+            },
+            "class": "Browser.PhantomJSDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 141,
+            "description": "Kills the PhantomJSDriver processe",
+            "itemtype": "method",
+            "name": "kill",
+            "chainable": 1,
+            "class": "Browser.PhantomJSDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: part",
+            "line": " index.js:32"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:32"
+        },
+        {
+            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
+        }
+    ]
+}
