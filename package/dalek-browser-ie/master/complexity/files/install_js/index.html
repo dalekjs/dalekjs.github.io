@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>install.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">69.07</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">178</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="span6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="span6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
+      <p class="stat">35.79</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">1.84</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="span6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="span12">// Shamelessly copied from The Obvious Corporation
+
+/*
+ * This simply fetches the right version of iedriver
+ */
+
+&#039;use strict&#039;;
+
+var cp = require(&#039;child_process&#039;);
+var fs = require(&#039;fs&#039;);
+var http = require(&#039;http&#039;);
+var kew = require(&#039;kew&#039;);
+var path = require(&#039;path&#039;);
+var url = require(&#039;url&#039;);
+var rimraf = require(&#039;rimraf&#039;).sync;
+var AdmZip = require(&#039;adm-zip&#039;);
+var helper = require(&#039;./lib/iedriver&#039;);
+var ncp = require(&#039;ncp&#039;);
+var npmconf = require(&#039;npmconf&#039;);
+var util = require(&#039;util&#039;);
+
+var libPath = path.join(__dirname, &#039;lib&#039;, &#039;bin&#039;, &#039;iedriver&#039;);
+var downloadUrl = &#039;http://selenium.googlecode.com/files/IEDriverServer_&#039;;
+downloadUrl += &#039;Win32_2.33.0.zip&#039;;
+
+
+var fileName = downloadUrl.split(&#039;/&#039;).pop();
+
+function getRequestOptions(proxyUrl) {
+  if (proxyUrl) {
+    var options = url.parse(proxyUrl);
+    options.path = downloadUrl;
+    options.headers = { Host: url.parse(downloadUrl).host };
+    // turn basic authorization into proxy-authorization
+    if (options.auth) {
+      options.headers[&#039;Proxy-Authorization&#039;] = &#039;Basic &#039; + new Buffer(options.auth).toString(&#039;base64&#039;);
+      delete options.auth;
+    }
+
+    return options;
+  } else {
+    return url.parse(downloadUrl);
+  }
+}
+
+function requestBinary(requestOptions, filePath) {
+  var deferred = kew.defer();
+
+  var count = 0;
+  var notifiedCount = 0;
+  var outFile = fs.openSync(filePath, &#039;w&#039;);
+  var client = http.get(requestOptions, function (response) {
+    var status = response.statusCode;
+    console.log(&#039;Receiving...&#039;);
+    if (status === 200) {
+      response.addListener(&#039;data&#039;,   function (data) {
+        fs.writeSync(outFile, data, 0, data.length, null);
+        count += data.length;
+        if ((count - notifiedCount) &gt; 800000) {
+          console.log(&#039;Received &#039; + Math.floor(count / 1024) + &#039;K...&#039;);
+          notifiedCount = count;
+        }
+      });
+
+      response.addListener(&#039;end&#039;,   function () {
+        console.log(&#039;Received &#039; + Math.floor(count / 1024) + &#039;K total.&#039;);
+        fs.closeSync(outFile);
+        deferred.resolve(true);
+      });
+
+    } else {
+      client.abort();
+      deferred.reject(&#039;Error with http request: &#039; + util.inspect(response.headers));
+    }
+  });
+
+  return deferred.promise;
+}
+
+function extractDownload(filePath, tmpPath) {
+  var deferred = kew.defer();
+  var options = {cwd: tmpPath};
+
+  rimraf(libPath);
+
+  if (filePath.substr(-4) === &#039;.zip&#039;) {
+    console.log(&#039;Extracting zip contents&#039;);
+    try {
+      var zip = new AdmZip(filePath);
+      zip.extractAllTo(path.dirname(filePath), true);
+      deferred.resolve(true);
+    } catch (e) {
+      console.log(e);
+      deferred.reject(&#039;Error extracting archive &#039; + e.stack);
+    }
+
+  } else {
+    console.log(&#039;Extracting tar contents (via spawned process)&#039;);
+    cp.execFile(&#039;tar&#039;, [&#039;jxf&#039;, filePath], options, function (err) {
+      if (err) {
+        deferred.reject(&#039;Error extracting archive &#039; + err.stack);
+      } else {
+        deferred.resolve(true);
+      }
+    });
+  }
+  return deferred.promise;
+}
+
+function copyIntoPlace(tmpPath, targetPath) {
+  var deferred = kew.defer();
+  // Look for the extracted directory, so we can rename it.
+  var files = fs.readdirSync(tmpPath);
+  for (var i = 0; i &lt; files.length; i++) {
+    var file = path.join(tmpPath, files[i]);
+    file = file;
+    if (fs.statSync(file).isFile() &amp;&amp; file.search(&#039;zip&#039;) === -1) {
+      targetPath = targetPath.replace(&#039;iedriver&#039;, &#039;IEDriverServer&#039;);
+      try {
+        ncp(file, targetPath, deferred.makeNodeResolver());
+      } catch (e) {
+
+      }
+      break;
+    }
+  }
+  return deferred.promise;
+}
+
+function fixFilePermissions(tmpPath, libPath) {
+  fs.renameSync(libPath.replace(&#039;iedriver&#039;, &#039;IEDriverServer&#039;), libPath.replace(&#039;iedriver&#039;, &#039;IEDriverServer.exe&#039;));
+}
+
+function mkdir(name) {
+  var dir = path.dirname(name);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
+  }
+}
+
+npmconf.load(function(err, conf) {
+  if (err) {
+    console.log(&#039;Error loading npm config&#039;);
+    console.error(err);
+    process.exit(1);
+    return;
+  }
+
+  var tmpPath = path.join(conf.get(&#039;tmp&#039;), &#039;iedriver&#039;);
+  var downloadedFile = path.join(tmpPath, fileName);
+
+  var promise= kew.resolve(true);
+
+  // Start the install.
+  if (!fs.existsSync(downloadedFile)) {
+    promise = promise.then(function () {
+      rimraf(tmpPath);
+      mkdir(downloadedFile);
+      console.log(&#039;Downlaoading&#039;, downloadUrl);
+      console.log(&#039;Saving to&#039;, downloadedFile);
+      return requestBinary(getRequestOptions(conf.get(&#039;proxy&#039;)), downloadedFile);
+    });
+
+  } else {
+    console.log(&#039;Download already available at&#039;, downloadedFile);
+  }
+
+  promise.then(function () {
+    return extractDownload(downloadedFile, tmpPath);
+  })
+  .then(function () {
+    return copyIntoPlace(tmpPath, libPath);
+  })
+  .then(function () {
+    return fixFilePermissions(tmpPath, libPath);
+  })
+  .then(function () {
+    console.log(&#039;Done. IEDriver binary available at&#039;, helper.path);
+  })
+  .fail(function (err) {
+    console.error(&#039;IEDriver installation failed&#039;, err.stack);
+    process.exit(1);
+  });
+});</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>
