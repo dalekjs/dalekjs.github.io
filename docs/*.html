@@ -1,0 +1,236 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>DalekJS - Automated cross browser testing with JavaScript</title><meta name="description" content="DalekJS - Exterminate all the bugs"><meta name="viewport" content="width=device-width"><link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"><link rel="icon" href="/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="dns-prefetch" href="//dalekjs.github.io"><link rel="dns-prefetch" href="//fonts.googleapis.com"><link rel="dns-prefetch" href="//themes.googleusercontent.com"><link rel="dns-prefetch" href="//player.vimeo.com"><link rel="dns-prefetch" href="//a.vimeocdn.com"><link rel="dns-prefetch" href="//b.vimeocdn.com"><link rel="dns-prefetch" href="//www.google-analytics.com"><link rel="stylesheet" href="../css/ab501ffc.main.css"><link href="//fonts.googleapis.com/css?family=Londrina+Solid" rel="stylesheet" type="text/css"><link href="//fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css"><body data-buildtime="Thursday, July 18th, 2013, 3:17:46 PM"><div class="grid"><header class="grid__item one-whole"><nav role="select"><ul class="nav nav--fit nav--block"><li><a href="../index.html">DALEKJS</a></li><li><a href="../pages/getStarted.html" class="active">Get started</a></li><li><a href="../pages/documentation.html">Documentation</a></li><li><a href="../pages/support.html">Support</a></li><li><a href="../pages/faq.html">FAQ</a></li><li><a href="../pages/merch.html">Merch</a></li></ul><select onchange="if (this.value) window.location.href = this.value"><option value="../index.html">DALEKJS<option selected value="../pages/getStarted.html">Get started<option value="../pages/documentation.html">Documentation<option value="../pages/support.html">Support<option value="../pages/faq.html">FAQ<option value="../pages/merch.html">Merch</select></nav></header><div class="grid__item one-whole"><div class="grid__item one-quarter sidenav"><ul><li class="nav-mouseEvent"><a href="#meth-mouseEvent">mouseEvent</a></li><li class="nav-setHttpAuth"><a href="#meth-setHttpAuth">setHttpAuth</a></li><li class="nav-toFrame"><a href="#meth-toFrame">toFrame</a></li><li class="nav-waitFor"><a href="#meth-waitFor">waitFor</a></li><li class="nav-waitForResource"><a href="#meth-waitForResource">waitForResource</a></li><li class="nav-waitForText"><a href="#meth-waitForText">waitForText</a></li><li class="nav-waitUntilVisible"><a href="#meth-waitUntilVisible">waitUntilVisible</a></li><li class="nav-waitWhileVisible"><a href="#meth-waitWhileVisible">waitWhileVisible</a></li><li class="nav-screenshot"><a href="#meth-screenshot">screenshot</a></li><li class="nav-wait"><a href="#meth-wait">wait</a></li><li class="nav-reload"><a href="#meth-reload">reload</a></li><li class="nav-forward"><a href="#meth-forward">forward</a></li><li class="nav-back"><a href="#meth-back">back</a></li><li class="nav-click"><a href="#meth-click">click</a></li><li class="nav-setValue"><a href="#meth-setValue">setValue</a></li><li class="nav-open"><a href="#meth-open">open</a></li><li class="nav-type"><a href="#meth-type">type</a></li><li class="nav-answer"><a href="#meth-answer">answer</a></li><li class="nav-acceptAlert"><a href="#meth-acceptAlert">acceptAlert</a></li><li class="nav-dismissAlert"><a href="#meth-dismissAlert">dismissAlert</a></li><li class="nav-waitForElement"><a href="#meth-waitForElement">waitForElement</a></li></ul></div><div class="grid__item three-quarters"><h1 class="topic">Actions</h1><a name="meth-mouseEvent"></a><h2 class="method">.mouseEvent</h2><p>Triggers a mouse event on the first element found matching the provided selector. Supported events are mouseup, mousedown, click, mousemove, mouseover and mouseout. TODO: IMPLEMENT</p><a name="meth-setHttpAuth"></a><h2 class="method">.setHttpAuth</h2><p>Sets HTTP<em>AUTH</em>USER and HTTP<em>AUTH</em>PW values for HTTP based authentication systems.</p><p>If your site is behind a HTTP basic auth, you&#39;re able to set the username and the password</p><p><pre><code class="language-javascript">
+ test.setHttpAuth(&#39;OSWIN&#39;, &#39;rycbrar&#39;)
+     .open(&#39;http://admin.therift.com&#39;);
+ </code></pre></p><p>Most of the time, you`re not storing your passwords within files that will be checked in your vcs, for this scenario, you have two options:</p><p>The first option is, to use daleks cli capabilities to generate config variables from the command line, like this</p><p><code>batch $ dalek --vars USER=OSWIN,PASS=rycbrar</code></p><p><pre><code class="language-javascript">
+ test.setHttpAuth(test.config.get(&#39;USER&#39;), test.config.get(&#39;PASS&#39;))
+     .open(&#39;http://admin.therift.com&#39;);
+ </code></pre></p><p>The second option is, to use env variables to generate config variables from the command line, like this</p><p><code>batch $ SET USER=OSWIN $ SET PASS=rycbrar $ dalek</code></p><p><pre><code class="language-javascript">
+ test.setHttpAuth(test.config.get(&#39;USER&#39;), test.config.get(&#39;PASS&#39;))
+     .open(&#39;http://admin.therift.com&#39;);
+ </code></pre></p><p>If both, dalek variables &amp; env variables are set, the dalek variables win. For more information about this, I recommend to check out the <a href="/docs/config.html">configuration docs</a></p><a name="meth-toFrame"></a><h2 class="method">.toFrame</h2><p>Switches to an iFrame context</p><p>Sometimes you encounter situation, where you need to drive/access an iFrame sitting in your page. You can access such frames with this mehtod, but be aware of the fact, that the complete test</p><p><pre><code class="language-markup">
+ &lt;div&gt;
+   &lt;iframe id=&quot;login&quot; src=&quot;/login.html&quot;/&gt;
+ &lt;/div&gt;
+ </code></pre></p><p><pre><code class="language-javascript">
+  test.open(&#39;http:adomain.withiframe.com&#39;)
+    .title().is(&#39;Title of a page that embeds an iframe&#39;)
+    .toIFrame(&#39;#login&#39;)
+      .title().is(&#39;Title of a page that can be embedded as an iframe&#39;)
+    .toParent()
+ </code></pre></p><a name="meth-waitFor"></a><h2 class="method">.waitFor</h2><p>Waits until a function returns true to process any next step.</p><p>You can also set a callback on timeout using the onTimeout argument, and set the timeout using the timeout one, in milliseconds. The default timeout is set to 5000ms.</p><a name="meth-waitForResource"></a><h2 class="method">.waitForResource</h2><p>Wait until a resource that matches the given testFx is loaded to process a next step.</p><a name="meth-waitForText"></a><h2 class="method">.waitForText</h2><p>Waits until the passed text is present in the page contents before processing the immediate next step.</p><a name="meth-waitUntilVisible"></a><h2 class="method">.waitUntilVisible</h2><p>Waits until an element matching the provided selector expression is visible in the remote DOM to process a next step.</p><a name="meth-waitWhileVisible"></a><h2 class="method">.waitWhileVisible</h2><p>Waits until an element matching the provided selector expression is no longer visible in remote DOM to process a next step.</p><p><pre><code class="language-javascript">
+ </code></pre></p><a name="meth-screenshot"></a><h2 class="method">.screenshot</h2><p>Take a screenshot of the current page.</p><p>The pathname argument takes some placeholders that will be replaced Placeholder:</p><ul><li><code>:browser</code>- The browser name (e.g. ‘Chrome‘, ‘Safari‘, ‘Firefox‘, etc.)</li><li><code>:version</code>- The browser version (e.g. ‘10<em>0‘, ‘23</em>11_5‘, etc.)</li><li><code>:os</code>- The operating system (e.g.<code>OSX</code>,<code>Windows</code>,<code>Linux</code>)</li><li><code>:osVersion</code>- The operating system version (e.g<code>XP</code>,<code>7</code>,<code>10_8</code>, etc.)</li><li><code>:viewport</code>- The current viewport in pixels (e.g.<code>w1024_h768</code>)</li><li><code>:timestamp</code>- UNIX like timestapm (e.g.<code>637657345</code>)</li><li><code>:date</code>- Current date in format MM<em>DD</em>YYYY (e.g.<code>12_24_2013</code>)</li><li><p><code>:datetime</code>- Current datetime in format MM<em>DD</em>YYYY<em>HH</em>mm_ss (e.g.<code>12_24_2013_14_55_23</code>)</p><p><pre><code class="language-javascript">
+// creates &#39;my/folder/my_file.png&#39;
+test.screenshot(&#39;my/folder/my_file&#39;);
+// creates &#39;my/page/in/safari/homepage.png&#39;
+test.screenshot(&#39;my/page/in/:browser/homepage&#39;);
+// creates &#39;my/page/in/safari_6_0_1/homepage.png&#39;
+test.screenshot(&#39;my/page/in/:browser_:version/homepage&#39;);
+// creates &#39;my/page/in/safari_6_0_1/on/osx/homepage.png&#39;
+test.screenshot(&#39;my/page/in/:browser_:version/on/:os/homepage&#39;);
+// creates &#39;my/page/in/safari_6_0_1/on/osx_10_8/homepage.png&#39;
+test.screenshot(&#39;my/page/in/:browser_:version/on/:os_:osVersion/homepage&#39;);
+// creates &#39;my/page/at/w1024_h768/homepage.png&#39;
+test.screenshot(&#39;my/page/at/:viewport/homepage&#39;);
+// creates &#39;my/page/at/637657345/homepage.png&#39;
+test.screenshot(&#39;my/page/in_time/:timestamp/homepage&#39;);
+// creates &#39;my/page/at/12_24_2013/homepage.png&#39;
+test.screenshot(&#39;my/page/in_time/:date/homepage&#39;);
+// creates &#39;my/page/at/12_24_2013_14_55_23/homepage.png&#39;
+test.screenshot(&#39;my/page/in_time/:datetime/homepage&#39;);
+</code></pre></p></li></ul><a name="meth-wait"></a><h2 class="method">.wait</h2><p>Pause steps suite execution for a given amount of time, and optionally execute a step on done.</p><p>This makes sense, if you have a ticker for example, tht scrolls like every ten seconds &amp; you want to assure that the visible content changes every ten seconds</p><p><pre><code class="language-javascript">
+ test.open(&#39;http://myticker.org&#39;)
+   .visible(&#39;.ticker-element:first&#39;, &#39;First ticker element is visible&#39;)
+   .wait(10000)
+   .visible(&#39;.ticker-element:nth-child(2)&#39;, &#39;Snd. ticker element is visible&#39;)
+   .wait(10000)
+   .visible(&#39;.ticker-element:last&#39;, &#39;Third ticker element is visible&#39;)
+   .all.success(&#39;Ticker seems to work quite well&#39;);
+ </code></pre>If no timeout argument is given, a default timeout of 5 seconds will be used</p><p><pre><code class="language-javascript">
+ test.open(&#39;http://myticker.org&#39;)
+   .visible(&#39;.ticker-element:first&#39;, &#39;First ticker element is visible&#39;)
+   .wait()
+   .visible(&#39;.ticker-element:nth-child(2)&#39;, &#39;Snd. ticker element is visible&#39;)
+   .wait()
+   .visible(&#39;.ticker-element:last&#39;, &#39;Third ticker element is visible&#39;)
+   .all.success(&#39;This ticker changed every 5 seconds, cool!&#39;);
+ </code></pre></p><a name="meth-reload"></a><h2 class="method">.reload</h2><p>Reloads current page location.</p><p>This is basically the same as hitting F5/refresh in your browser</p><p><pre><code class="language-javascript">
+ test.open(&#39;http://google.com&#39;)
+   .refresh();
+ </code></pre></p><a name="meth-forward"></a><h2 class="method">.forward</h2><p>Moves a step forward in browser&#39;s history.</p><p>This is basically the same as hitting the forward button in your browser</p><p><pre><code class="language-javascript">
+ test.open(&#39;http://google.com&#39;)
+   .open(&#39;https://github.com&#39;)
+   .url.is(&#39;https://github.com/&#39;, &#39;We are at GitHub&#39;)
+   .back()
+   .url.is(&#39;http://google.com&#39;, &#39;We are at Google!&#39;)
+   .forward()
+   .url.is(&#39;https://github.com/&#39;, &#39;Back at GitHub! Timetravel FTW&#39;);
+ </code></pre></p><a name="meth-back"></a><h2 class="method">.back</h2><p>Moves back a step in browser&#39;s history.</p><p>This is basically the same as hitting the back button in your browser</p><p><pre><code class="language-javascript">
+ test.open(&#39;http://google.com&#39;)
+   .open(&#39;https://github.com&#39;)
+   .url.is(&#39;https://github.com/&#39;, &#39;We are at GitHub&#39;)
+   .back()
+   .url.is(&#39;http://google.com&#39;, &#39;We are at Google!&#39;)
+   .forward()
+   .url.is(&#39;https://github.com/&#39;, &#39;Back at GitHub! Timetravel FTW&#39;);
+ </code></pre></p><a name="meth-click"></a><h2 class="method">.click</h2><p>Performs a click on the element matching the provided selector expression.</p><p>If we take Daleks homepage (the one you&#39;re probably visiting right now), the HTML looks something like this</p><p><pre><code class="language-markup">
+ &lt;nav&gt;
+   &lt;ul&gt;
+     &lt;li&gt;&lt;a id=&quot;homeapge&quot; href=&quot;/index.html&quot;&gt;DalekJS&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;a id=&quot;docs&quot;  href=&quot;/docs.html&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;a id=&quot;faq&quot; href=&quot;/faq.html&quot;&gt;F.A.Q&lt;/a&gt;&lt;/li&gt;
+   &lt;/ul&gt;
+ &lt;/nav&gt;
+ </code></pre></p><p><pre><code class="language-javascript">
+ test.open(&#39;http://dalekjs.com&#39;)
+     .click(&#39;#faq&#39;)
+     .title().is(&#39;DalekJS - Frequently asked questions&#39;, &#39;What the F.A.Q.&#39;);
+ </code></pre></p><p>By default, this performs a left click.</p><a name="meth-setValue"></a><h2 class="method">.setValue</h2><p>Fills the fields of a form with given values.</p><p><pre><code class="language-markup">
+ &lt;nav&gt;
+   &lt;ul&gt;
+     &lt;li&gt;&lt;a id=&quot;homeapge&quot; href=&quot;/index.html&quot;&gt;DalekJS&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;a id=&quot;docs&quot;  href=&quot;/docs.html&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;a id=&quot;faq&quot; href=&quot;/faq.html&quot;&gt;F.A.Q&lt;/a&gt;&lt;/li&gt;
+   &lt;/ul&gt;
+ &lt;/nav&gt;
+ </code></pre></p><p><pre><code class="language-javascript">
+ test.open(&#39;http://dalekjs.com&#39;)
+     .setValue(&#39;#ijustwannahaveavalue&#39;, &#39;a value&#39;)
+     .title().is(&#39;DalekJS - Frequently asked questions&#39;, &#39;What the F.A.Q.&#39;);
+ </code></pre></p><a name="meth-open"></a><h2 class="method">.open</h2><p>Performs an HTTP request for opening a given location. You can forge GET, POST, PUT, DELETE and HEAD requests.</p><p><pre><code class="language-javascript">
+ test.open(&#39;http://dalekjs.com&#39;)
+     .url().is(&#39;http://dalekjs.com&#39;, &#39;DalekJS I&#39;m in you&#39;);
+ </code></pre></p><a name="meth-type"></a><h2 class="method">.type</h2><a name="meth-answer"></a><h2 class="method">.answer</h2><a name="meth-acceptAlert"></a><h2 class="method">.acceptAlert</h2><a name="meth-dismissAlert"></a><h2 class="method">.dismissAlert</h2><a name="meth-waitForElement"></a><h2 class="method">.waitForElement</h2><p>Waits until an element matching the provided selector expression exists in remote DOM to process any next step.</p></div><footer class="grid__item one-whole footer"><span class="footer__author">DalekJS created by <a class="footer__link" href="https://github.com/asciidisco">Sebastian Golasch</a></span><span class="footer__author">Logo by <a class="footer__link" href="http://www.redbubble.com/people/scottbarker">Scott Barker</a></span><span class="footer__author">Browser icons by <a class="footer__link" href="https://github.com/substack">Substack</a></span></footer></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-42520123-1', 'dalekjs.com');
+          ga('send', 'pageview');</script><script src="../js/f0e87ee3.main.js"></script></div><!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>DalekJS - Automated cross browser testing with JavaScript</title><meta name="description" content="DalekJS - Exterminate all the bugs"><meta name="viewport" content="width=device-width"><link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"><link rel="icon" href="/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="dns-prefetch" href="//dalekjs.github.io"><link rel="dns-prefetch" href="//fonts.googleapis.com"><link rel="dns-prefetch" href="//themes.googleusercontent.com"><link rel="dns-prefetch" href="//player.vimeo.com"><link rel="dns-prefetch" href="//a.vimeocdn.com"><link rel="dns-prefetch" href="//b.vimeocdn.com"><link rel="dns-prefetch" href="//www.google-analytics.com"><link rel="stylesheet" href="../css/ab501ffc.main.css"><link href="//fonts.googleapis.com/css?family=Londrina+Solid" rel="stylesheet" type="text/css"><link href="//fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css"><body data-buildtime="Thursday, July 18th, 2013, 3:54:42 PM"><div class="grid"><header class="grid__item one-whole"><nav role="select"><ul class="nav nav--fit nav--block"><li><a href="../index.html">DALEKJS</a></li><li><a href="../pages/getStarted.html" class="active">Get started</a></li><li><a href="../pages/documentation.html">Documentation</a></li><li><a href="../pages/support.html">Support</a></li><li><a href="../pages/faq.html">FAQ</a></li><li><a href="../pages/merch.html">Merch</a></li></ul><select onchange="if (this.value) window.location.href = this.value"><option value="../index.html">DALEKJS<option selected value="../pages/getStarted.html">Get started<option value="../pages/documentation.html">Documentation<option value="../pages/support.html">Support<option value="../pages/faq.html">FAQ<option value="../pages/merch.html">Merch</select></nav></header><div class="grid__item one-whole"><div class="grid__item one-quarter sidenav"><ul><li class="nav-chain"><a href="#meth-chain">chain</a></li><li class="nav-end"><a href="#meth-end">end</a></li><li class="nav-resourceExists"><a href="#meth-resourceExists">resourceExists</a></li><li class="nav-numberOfElements"><a href="#meth-numberOfElements">numberOfElements</a></li><li class="nav-numberOfVisibleElements"><a href="#meth-numberOfVisibleElements">numberOfVisibleElements</a></li><li class="nav-val"><a href="#meth-val">val</a></li><li class="nav-exists"><a href="#meth-exists">exists</a></li><li class="nav-doesntExist"><a href="#meth-doesntExist">doesntExist</a></li></ul></div><div class="grid__item three-quarters"><h1 class="topic">Assertions</h1><a name="meth-chain"></a><h2 class="method">.chain</h2><p>Starts assertion chaining</p><a name="meth-end"></a><h2 class="method">.end</h2><p>Ends an assertion chain</p><a name="meth-resourceExists"></a><h2 class="method">.resourceExists</h2><p>Asserts that a given ressource does exist in the environment.</p><a name="meth-numberOfElements"></a><h2 class="method">.numberOfElements</h2><p>Asserts that a given element appears n times on the page.</p><p>Given this portion of html, you would like to assure that all of these elements are ending up in your rendered markup on your page.</p><p><pre><code class="language-markup">
+ &lt;section id=&quot;blog-overview&quot;&gt;
+   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+ &lt;/section&gt;
+ </code></pre></p><p>The simple solution is to check if all these elements are present</p><p><pre><code class="language-javascript">
+ test.numberOfElements(&#39;#blog-overview .teaser&#39;, 4, &#39;4 blog teasers are present&#39;)
+ </code></pre>The alternate syntax for this is:</p><p><pre><code class="language-javascript">
+ test.numberOfElements(&#39;#blog-overview .teaser&#39;)
+     .is(4, &#39;4 blog teasers are present&#39;)
+ </code></pre></p><p>If you are not sure how many elements will exactly end up in your markup, you could use the between assertion handler</p><p><pre><code class="language-javascript">
+ test.numberOfElements(&#39;#blog-overview .teaser&#39;)
+     .is.between(2, 6, &#39;Between 2 and 6 blog teasers are present&#39;)
+ </code></pre></p><p>If you dealing with the situation that you have a minimum of elements, you expect, you can use this helper...</p><p><pre><code class="language-javascript">
+ test.numberOfElements(&#39;#blog-overview .teaser&#39;)
+     .is.gt(2, &#39;At least 3 blog teasers are present&#39;)
+ </code></pre>... if you want to know if its &#39;greater than equal&#39;, you can use this one...</p><p><pre><code class="language-javascript">
+ test.numberOfElements(&#39;#blog-overview .teaser&#39;)
+     .is.gte(2, &#39;At least 2 blog teasers are present&#39;)
+ </code></pre>... as well as their &#39;lower than&#39; and &#39;lower than equal&#39; equivalents</p><p><pre><code class="language-javascript">
+ test.numberOfElements(&#39;#blog-overview .teaser&#39;)
+     .is.lt(5, &#39;Less than 5 blog teasers are present&#39;)
+ </code></pre></p><p><pre><code class="language-javascript">
+ test.numberOfElements(&#39;#blog-overview .teaser&#39;)
+     .is.lte(5, &#39;Less than, or 5 blog teasers are present&#39;)
+ </code></pre>And if you just wan&#39;t to know, if a certain amount of teasers isn&#39;t present, you can still use the &#39;:not(): assertion helper</p><p><pre><code class="language-javascript">
+ test.numberOfElements(&#39;#blog-overview .teaser&#39;)
+     .is.not(5, &#39;There are more or less than 5 teasers present&#39;)
+ </code></pre></p><p>If you wan&#39;t to allow multiple correct values, you can use the &#39;:are()&#39; helper</p><p><pre><code class="language-javascript">
+ test.numberOfElements(&#39;#blog-overview .teaser&#39;)
+     .are([1,3,6], &#39;Teaser count is an odd number between 1 and 6&#39;)
+ </code></pre></p><p>of couse you can test for the opoosite with &#39;:are()&#39;</p><p><pre><code class="language-javascript">
+ test.numberOfElements(&#39;#blog-overview .teaser&#39;)
+     .are([0,2,4], &#39;Teaser count is not an even number between 1 and 6&#39;)
+ </code></pre></p><a name="meth-numberOfVisibleElements"></a><h2 class="method">.numberOfVisibleElements</h2><p>Asserts that a given element is visible n times in the current viewport.</p><p>Given this portion of html, you would like to assure that all of these elements are ending up in your rendered markup on your page.</p><p><pre><code class="language-markup">
+ &lt;section id=&quot;blog-overview&quot;&gt;
+   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+ &lt;/section&gt;
+ </code></pre></p><p>The simple solution is to check if all these elements are visible</p><p><pre><code class="language-javascript">
+ test.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;, 4, &#39;4 blog teasers are visible&#39;)
+ </code></pre>The alternate syntax for this is:</p><p><pre><code class="language-javascript">
+ test.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+     .is(4, &#39;4 blog teasers are visible&#39;)
+ </code></pre></p><p>If you are not sure how many elements will exactly be shown in the current viewport, you could use the between assertion handler</p><p><pre><code class="language-javascript">
+ test.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+     .is.between(2, 6, &#39;Between 2 and 6 blog teasers are visible&#39;)
+ </code></pre></p><p>If you dealing with the situation that you have a minimum of elements, you expect, you can use this helper...</p><p><pre><code class="language-javascript">
+ test.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+     .is.gt(2, &#39;At least 3 blog teasers are visible&#39;)
+ </code></pre>... if you want to know if its &#39;greater than equal&#39;, you can use this one...</p><p><pre><code class="language-javascript">
+ test.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+     .is.gte(2, &#39;At least 2 blog teasers are visible&#39;)
+ </code></pre>... as well as their &#39;lower than&#39; and &#39;lower than equal&#39; equivalents</p><p><pre><code class="language-javascript">
+ test.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+     .is.lt(5, &#39;Less than 5 blog teasers are visible&#39;)
+ </code></pre></p><p><pre><code class="language-javascript">
+ test.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+     .is.lte(5, &#39;Less than, or 5 blog teasers are visible&#39;)
+ </code></pre>And if you just wan&#39;t to know, if a certain amount of teasers isn&#39;t visible, you can still use the &#39;:not(): assertion helper</p><p><pre><code class="language-javascript">
+ test.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+     .is.not(5, &#39;There are more or less than 5 teasers visible&#39;)
+ </code></pre></p><p>If you wan&#39;t to allow multiple correct values, you can use the &#39;:are()&#39; helper</p><p><pre><code class="language-javascript">
+ test.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+     .are([1,3,6], &#39;Teaser count is an odd number between 1 and 6&#39;)
+ </code></pre></p><p>of couse you can test for the opoosite with &#39;:are()&#39; and &#39;:not()&#39;</p><p><pre><code class="language-javascript">
+ test.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+     .are.not([0,2,4], &#39;Teaser count is not an even number between 1 and 6&#39;)
+ </code></pre></p><a name="meth-val"></a><h2 class="method">.val</h2><p>Asserts that a given form field has the provided value.</p><p>Given this portion of html, we would like to get the information which option element is currently selected.</p><p><pre><code class="language-markup">
+ &lt;form name=&quot;fav-doctor&quot; id=&quot;fav-doctor&quot;&gt;
+   &lt;select id=&quot;the-doctors&quot;&gt;
+     &lt;option value=&quot;9&quot;&gt;Eccleston&lt;/option&gt;
+     &lt;option selected value=&quot;10&quot;&gt;Tennant&lt;/option&gt;
+     &lt;option value=&quot;11&quot;&gt;Smith&lt;/option&gt;
+   &lt;/select&gt;
+ &lt;/form&gt;
+ </code></pre></p><p><pre><code class="language-javascript">
+ test
+   .val(&#39;#the-doctors&#39;, 10, &#39;David is the favourite&#39;)
+   // lets change the favourite by selection the last option
+  .click(&#39;#the-doctors option:last&#39;)
+  .val(&#39;#the-doctors&#39;, 11, &#39;Matt is now my favourite, bow ties are cool&#39;)
+ </code></pre></p><p>This assertion is capable of getting the values from every form element that holds a value attribute</p><p>Getting texts out of normal input fields is pretty straight forward</p><p><pre><code class="language-markup">
+ &lt;label for=&quot;fav-enemy&quot;&gt;Tell my your favourity Who enemy:&lt;/label&gt;
+ &lt;input id=&quot;fav-enemy&quot; name=&quot;fav-enemy&quot; type=&quot;text&quot; value=&quot;Daleks&quot; /&gt;
+ </code></pre></p><p><pre><code class="language-javascript">
+ test
+   .val(&#39;#fav-enemy&#39;, &#39;Daleks&#39;, &#39;Daleks are so cute&#39;)
+   // lets change the favourite by typing smth. new
+  .type(&#39;#fav-enemy&#39;, &#39;Cyberman&#39;)
+  .val(&#39;#fav-enemy&#39;, &#39;Cyberman&#39;, &#39;Cyberman are so cyber&#39;)
+ </code></pre></p><p>Of course, you can use a bunch of assertion helpers, to enable yourself to do more than just one assertion with the &#39;:are()&#39; helper.</p><p><pre><code class="language-javascript">
+ test
+   .val(&#39;#fav-enemy&#39;)
+   .is(&#39;Daleks&#39;, &#39;Still cute, those daleks&#39;)
+   .is.not(&#39;Klingons&#39;, &#39;Different fandom bro&#39;)
+   // yep, multiple mentions are allowed
+   .are([&#39;Daleks&#39;, &#39;Cyberman&#39;, &#39;The master&#39;], &#39;All of them are cool&#39;);
+ </code></pre></p><a name="meth-exists"></a><h2 class="method">.exists</h2><p>Asserts that an element matching the provided selector expression exists in remote DOM environment.</p><p><pre><code class="language-markup">
+ &lt;body&gt;
+   &lt;p id=&quot;so-lonely&quot;&gt;Last of the timelords&lt;/p&gt;
+ &lt;/body&gt;
+ </code></pre></p><p><pre><code class="language-javascript">
+ test
+   .exists(&#39;#so-lonely&#39;, &#39;The loneliest element in the universe exists&#39;)
+ </code></pre></p><a name="meth-doesntExist"></a><h2 class="method">.doesntExist</h2><p>Asserts that an element matching the provided selector expression doesn&#39;t exists within the remote DOM environment.</p><p><pre><code class="language-markup">
+ &lt;body&gt;
+   &lt;p id=&quot;so-lonely&quot;&gt;Last of the timelords&lt;/p&gt;
+ &lt;/body&gt;
+ </code></pre></p><p><pre><code class="language-javascript">
+ test
+   .doesntExist(&#39;#the-master&#39;, &#39;The master element has not been seen&#39;)
+ </code></pre></p></div><footer class="grid__item one-whole footer"><span class="footer__author">DalekJS created by <a class="footer__link" href="https://github.com/asciidisco">Sebastian Golasch</a></span><span class="footer__author">Logo by <a class="footer__link" href="http://www.redbubble.com/people/scottbarker">Scott Barker</a></span><span class="footer__author">Browser icons by <a class="footer__link" href="https://github.com/substack">Substack</a></span></footer></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-42520123-1', 'dalekjs.com');
+          ga('send', 'pageview');</script><script src="../js/f0e87ee3.main.js"></script></div><!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>DalekJS - Automated cross browser testing with JavaScript</title><meta name="description" content="DalekJS - Exterminate all the bugs"><meta name="viewport" content="width=device-width"><link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"><link rel="icon" href="/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="dns-prefetch" href="//dalekjs.github.io"><link rel="dns-prefetch" href="//fonts.googleapis.com"><link rel="dns-prefetch" href="//themes.googleusercontent.com"><link rel="dns-prefetch" href="//player.vimeo.com"><link rel="dns-prefetch" href="//a.vimeocdn.com"><link rel="dns-prefetch" href="//b.vimeocdn.com"><link rel="dns-prefetch" href="//www.google-analytics.com"><link rel="stylesheet" href="../css/ab501ffc.main.css"><link href="//fonts.googleapis.com/css?family=Londrina+Solid" rel="stylesheet" type="text/css"><link href="//fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css"><body data-buildtime="Friday, July 19th, 2013, 2:27:37 PM"><div class="grid"><header class="grid__item one-whole"><nav role="select"><ul class="nav nav--fit nav--block"><li><a href="../index.html">DALEKJS</a></li><li><a href="../pages/getStarted.html" class="active">Get started</a></li><li><a href="../pages/documentation.html">Documentation</a></li><li><a href="../pages/support.html">Support</a></li><li><a href="../pages/faq.html">FAQ</a></li><li><a href="../pages/merch.html">Merch</a></li></ul><select onchange="if (this.value) window.location.href = this.value"><option value="../index.html">DALEKJS<option selected value="../pages/getStarted.html">Get started<option value="../pages/documentation.html">Documentation<option value="../pages/support.html">Support<option value="../pages/faq.html">FAQ<option value="../pages/merch.html">Merch</select></nav></header><div class="grid__item one-whole"><div class="grid__item one-quarter sidenav"><ul></ul></div><div class="grid__item three-quarters"><h1 class="topic">InternetExplorer</h1><p>Internet Explorer Driver base class</p></div><footer class="grid__item one-whole footer"><span class="footer__author">DalekJS created by <a class="footer__link" href="https://github.com/asciidisco">Sebastian Golasch</a></span><span class="footer__author">Logo by <a class="footer__link" href="http://www.redbubble.com/people/scottbarker">Scott Barker</a></span><span class="footer__author">Browser icons by <a class="footer__link" href="https://github.com/substack">Substack</a></span></footer></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-42520123-1', 'dalekjs.com');
+          ga('send', 'pageview');</script><script src="../js/f0e87ee3.main.js"></script></div>
