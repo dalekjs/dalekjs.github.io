@@ -1,0 +1,399 @@
+{
+    "project": {
+        "name": "dalek-internal-config",
+        "description": "DalekJS inetrnal config helper",
+        "version": "0.0.1",
+        "url": "http://dalekjs.com"
+    },
+    "files": {
+        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
+            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "index.js": {
+            "name": "index.js",
+            "modules": {
+                "DalekJS": 1
+            },
+            "classes": {
+                "Dalek.Config": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek": 1
+            }
+        }
+    },
+    "modules": {
+        "DalekJS": {
+            "name": "DalekJS",
+            "submodules": {},
+            "classes": {
+                "Dalek.Config": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek": 1
+            },
+            "tag": "module",
+            "file": "index.js",
+            "line": 49,
+            "description": "Parses config data & loads config files",
+            "part": "Config",
+            "api": ""
+        }
+    },
+    "classes": {
+        "Dalek.Config": {
+            "name": "Dalek.Config",
+            "shortname": "Dalek.Config",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DalekJS",
+            "namespace": "Dalek",
+            "file": "index.js",
+            "line": 49,
+            "description": "Parses config data & loads config files"
+        }
+    },
+    "classitems": [
+        {
+            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "line": 1,
+            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "class": "Dalek.Config"
+        },
+        {
+            "file": "index.js",
+            "line": 35,
+            "description": "Configures the config instance",
+            "params": [
+                {
+                    "name": "defaults",
+                    "description": "Default parameter options",
+                    "type": "Object"
+                },
+                {
+                    "name": "opts",
+                    "description": "Command line options",
+                    "type": "Object"
+                }
+            ],
+            "is_constructor": 1,
+            "class": "Dalek.Config"
+        },
+        {
+            "file": "index.js",
+            "line": 61,
+            "description": "Checks if a config file is available",
+            "itemtype": "method",
+            "name": "checkAvailabilityOfConfigFile",
+            "params": [
+                {
+                    "name": "pathname",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "config File path",
+                "type": "String"
+            },
+            "class": "Dalek.Config",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 80,
+            "description": "Iterator function that checks the existance of a given file",
+            "itemtype": "method",
+            "name": "_checkFile",
+            "params": [
+                {
+                    "name": "previousValue",
+                    "description": "Last iterations result",
+                    "type": "String"
+                },
+                {
+                    "name": "ext",
+                    "description": "File extension to check",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "config File path",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Config",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 99,
+            "description": "Loads a file & merges the results with the\ncommandline options & the default config",
+            "itemtype": "method",
+            "name": "load",
+            "params": [
+                {
+                    "name": "defaults",
+                    "description": "Default config",
+                    "type": "Object"
+                },
+                {
+                    "name": "pathname",
+                    "description": "Filename of the config file to load",
+                    "type": "String"
+                },
+                {
+                    "name": "opts",
+                    "description": "Command line options",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "config Merged config data",
+                "type": "Object"
+            },
+            "class": "Dalek.Config",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 122,
+            "description": "Loads a config file & parses it based on the file extension",
+            "itemtype": "method",
+            "name": "loadFile",
+            "params": [
+                {
+                    "name": "pathname",
+                    "description": "Filename of the config file to load",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "data Config data",
+                "type": "Object"
+            },
+            "class": "Dalek.Config",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 135,
+            "description": "Fetches & returns a config item",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "Key of the item to load",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "data Requested config data",
+                "type": "Mixed|null"
+            },
+            "class": "Dalek.Config",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 147,
+            "description": "Loads a json config file",
+            "itemtype": "method",
+            "name": "readjson",
+            "return": {
+                "description": "data Parsed config data",
+                "type": "Object"
+            },
+            "class": "Dalek.Config",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 159,
+            "description": "Loads a json5 config file",
+            "itemtype": "method",
+            "name": "readJson5",
+            "return": {
+                "description": "data Parsed config data",
+                "type": "Object"
+            },
+            "class": "Dalek.Config",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 171,
+            "description": "Loads a yaml config file",
+            "itemtype": "method",
+            "name": "readyaml",
+            "return": {
+                "description": "data Parsed config data",
+                "type": "Object"
+            },
+            "class": "Dalek.Config",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 183,
+            "description": "Loads a javascript config file",
+            "itemtype": "method",
+            "name": "readjs",
+            "return": {
+                "description": "data Parsed config data",
+                "type": "Object"
+            },
+            "class": "Dalek.Config",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 195,
+            "description": "Loads a coffescript config file",
+            "itemtype": "method",
+            "name": "readcoffee",
+            "return": {
+                "description": "data Parsed config data",
+                "type": "Object"
+            },
+            "class": "Dalek.Config",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 207,
+            "description": "Verifies if a reporter is given, exists & is valid",
+            "itemtype": "method",
+            "name": "verifyReporters",
+            "return": {
+                "description": "data List of verified reporters",
+                "type": "Array"
+            },
+            "class": "Dalek.Config",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 218,
+            "description": "Verifies if a driver is given, exists & is valid",
+            "itemtype": "method",
+            "name": "verifyDrivers",
+            "return": {
+                "description": "data List of verified drivers",
+                "type": "Array"
+            },
+            "class": "Dalek.Config",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 229,
+            "description": "Verifies if a driver is given, exists & is valid",
+            "itemtype": "method",
+            "name": "_verify",
+            "params": [
+                {
+                    "name": "check",
+                    "description": "Data that shoudl be mapped",
+                    "type": "Array"
+                },
+                {
+                    "name": "fn",
+                    "description": "Name of the function that should be invoked on the veryify object",
+                    "type": "String"
+                },
+                {
+                    "name": "instance",
+                    "description": "Object instance where the verify function should be invoked",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "data List of verified items",
+                "type": "Array"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Config",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 244,
+            "description": "Verifies if a driver is given, exists & is valid",
+            "itemtype": "method",
+            "name": "_verifyIterator",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "Name of the function that should be invoked on the veryify object",
+                    "type": "String"
+                },
+                {
+                    "name": "instance",
+                    "description": "Object instance where the verify function should be invoked",
+                    "type": "Object"
+                },
+                {
+                    "name": "elm",
+                    "description": "Name of the element that should be checked",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "element name of the verified element or false if checked failed",
+                "type": "String|null"
+            },
+            "priavte": "",
+            "class": "Dalek.Config",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: part",
+            "line": " index.js:49"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:49"
+        },
+        {
+            "message": "unknown tag: priavte",
+            "line": " index.js:244"
+        },
+        {
+            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
+        },
+        {
+            "message": "Missing item type\nConfigures the config instance",
+            "line": " index.js:35"
+        }
+    ]
+}
