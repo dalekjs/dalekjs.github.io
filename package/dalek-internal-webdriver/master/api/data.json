@@ -1,0 +1,2770 @@
+{
+    "project": {
+        "name": "dalek-internal-webdriver",
+        "description": "JavaScript Webdriver Client for DalekJS",
+        "version": "0.0.1",
+        "url": ""
+    },
+    "files": {
+        "lib/commands/cookie.js": {
+            "name": "lib/commands/cookie.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/commands/element.js": {
+            "name": "lib/commands/element.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/commands/execute.js": {
+            "name": "lib/commands/execute.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/commands/frame.js": {
+            "name": "lib/commands/frame.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/commands/ime.js": {
+            "name": "lib/commands/ime.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/commands/interaction.js": {
+            "name": "lib/commands/interaction.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/commands/page.js": {
+            "name": "lib/commands/page.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/commands/screenshot.js": {
+            "name": "lib/commands/screenshot.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/commands/session.js": {
+            "name": "lib/commands/session.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/commands/storage.js": {
+            "name": "lib/commands/storage.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/commands/timeout.js": {
+            "name": "lib/commands/timeout.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/commands/url.js": {
+            "name": "lib/commands/url.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/commands/window.js": {
+            "name": "lib/commands/window.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/driver.js": {
+            "name": "lib/driver.js",
+            "modules": {
+                "DalekJS": 1
+            },
+            "classes": {
+                "Internal.Driver": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Internal": 1
+            }
+        },
+        "lib/webdriver.js": {
+            "name": "lib/webdriver.js",
+            "modules": {},
+            "classes": {
+                "Internal.Webdriver": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Internal": 1
+            }
+        },
+        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
+            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "index.js": {
+            "name": "index.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "DalekJS": {
+            "name": "DalekJS",
+            "submodules": {},
+            "classes": {
+                "Internal.Driver": 1,
+                "Internal.Webdriver": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Internal": 1
+            },
+            "tag": "module",
+            "file": "lib/webdriver.js",
+            "line": 38,
+            "description": "Native Webdriver base class"
+        }
+    },
+    "classes": {
+        "Internal.Driver": {
+            "name": "Internal.Driver",
+            "shortname": "Internal.Driver",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DalekJS",
+            "namespace": "Internal",
+            "file": "lib/driver.js",
+            "line": 34,
+            "description": "Native Webdriver base class"
+        },
+        "Internal.Webdriver": {
+            "name": "Internal.Webdriver",
+            "shortname": "Internal.Webdriver",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DalekJS",
+            "namespace": "Internal",
+            "file": "lib/webdriver.js",
+            "line": 38,
+            "description": "Webdriver base class"
+        }
+    },
+    "classitems": [
+        {
+            "file": "lib/commands/cookie.js",
+            "line": 25,
+            "description": "Cookie related Webdriver endpoints",
+            "params": [
+                {
+                    "name": "Driver",
+                    "description": "Webdriver client instance",
+                    "type": "Dalek.Internal.Webdriver"
+                }
+            ],
+            "return": {
+                "description": "Driver Webdriver client instance",
+                "type": "Dalek.Internal.Webdriver"
+            },
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/cookie.js",
+            "line": 35,
+            "description": "Retrieve all cookies visible to the current page.",
+            "itemtype": "method",
+            "name": "getCookies",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/cookie"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/cookie.js",
+            "line": 49,
+            "description": "Retrieve a cookies by its name.",
+            "itemtype": "method",
+            "name": "getCookie",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/cookie/:name"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "name",
+                    "description": "Name of the cookie",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/cookie.js",
+            "line": 64,
+            "description": "Set a cookie.\nIf the cookie path is not specified, it should be set to \"/\".\nLikewise, if the domain is omitted,\nit should default to the current page's domain.",
+            "itemtype": "method",
+            "name": "setCookie",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/cookie"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "cookie",
+                    "description": "The cookie object",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 25,
+            "description": "Element related Webdriver endpoints",
+            "params": [
+                {
+                    "name": "Driver",
+                    "description": "Webdriver client instance",
+                    "type": "Dalek.Internal.Webdriver"
+                }
+            ],
+            "return": {
+                "description": "Driver Webdriver client instance",
+                "type": "Dalek.Internal.Webdriver"
+            },
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 35,
+            "description": "Search for an element on the page, starting from the document root.\nThe located element will be returned as a WebElement JSON object.",
+            "itemtype": "method",
+            "name": "element",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "selector",
+                    "description": "The The search target.",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 64,
+            "description": "Search for multiple elements on the page, starting from the document root.\nThe located element will be returned as a WebElement JSON object.",
+            "itemtype": "method",
+            "name": "elements",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/elements"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "selector",
+                    "description": "The The search target.",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 92,
+            "description": "Get the element on the page that currently has focus.\nThe element will be returned as a WebElement JSON object.",
+            "itemtype": "method",
+            "name": "active",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/element/:id/active"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "id",
+                    "description": "ID of the element to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 107,
+            "description": "Get the element on the page that currently has focus.\nThe element will be returned as a WebElement JSON object.",
+            "itemtype": "method",
+            "name": "elementInfo",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/element/:id"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "elementId",
+                    "description": "ID of the element to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 123,
+            "description": "Search for an element on the page, starting from the identified element.\nThe located element will be returned as a WebElement JSON object.\nThe table below lists the locator strategies that each server should support.\nEach locator must return the first matching element located in the DOM.",
+            "itemtype": "method",
+            "name": "childElement",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/:id/element"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "elementId",
+                    "description": "ID of the element to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "using",
+                    "description": "The locator strategy to use. // Not yet supported",
+                    "type": "POST"
+                },
+                {
+                    "name": "value",
+                    "description": "The The search target.",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 143,
+            "description": "Search for an element on the page, starting from the identified element.\nThe located element will be returned as a WebElement JSON object.\nThe table below lists the locator strategies that each server should support.\nEach locator must return the first matching element located in the DOM.",
+            "itemtype": "method",
+            "name": "element",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/:id/element"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "elementId",
+                    "description": "ID of the element to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "using",
+                    "description": "The locator strategy to use. // Not yet supported",
+                    "type": "POST"
+                },
+                {
+                    "name": "value",
+                    "description": "The The search target.",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 162,
+            "description": "Click on an element.",
+            "itemtype": "method",
+            "name": "click",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element/:id/click"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "id",
+                    "description": "ID of the element to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 177,
+            "description": "Submit a FORM element.\nThe submit command may also be applied to any element that is a descendant of a FORM element.",
+            "itemtype": "method",
+            "name": "submit",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element/:id/submit"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "id",
+                    "description": "ID of the element to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 193,
+            "description": "Returns the visible text for the element.",
+            "itemtype": "method",
+            "name": "text",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element/:id/text"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "id",
+                    "description": "ID of the element to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 208,
+            "description": "Send a sequence of key strokes to an element",
+            "itemtype": "method",
+            "name": "val",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element/:id/value"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "id",
+                    "description": "ID of the element to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "text",
+                    "description": "The keys sequence to be sent",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 228,
+            "description": "Query for an element's tag name",
+            "itemtype": "method",
+            "name": "name",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/element/:id/name"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "elementId",
+                    "description": "ID of the element to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 243,
+            "description": "Clear a TEXTAREA or text INPUT element's value",
+            "itemtype": "method",
+            "name": "clear",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/element/:id/clear"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "elementId",
+                    "description": "ID of the element to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 258,
+            "description": "Determine if an OPTION element, or an INPUT element of type checkbox or radiobutton is currently selected",
+            "itemtype": "method",
+            "name": "selected",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/element/:id/selected"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "elementId",
+                    "description": "ID of the element to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 273,
+            "description": "Determine if an element is currently enabled",
+            "itemtype": "method",
+            "name": "enabled",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/element/:id/enabled"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "elementId",
+                    "description": "ID of the element to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 288,
+            "description": "Get the value of an element's attribute.",
+            "itemtype": "method",
+            "name": "getAttribute",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element/:id/attribute/:name"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "elementId",
+                    "description": "ID of the element to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "attr",
+                    "description": "Attribute that should be fetched",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 309,
+            "description": "Test if two element IDs refer to the same DOM element",
+            "itemtype": "method",
+            "name": "equals",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/element/:id/equals/:other"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "elementId",
+                    "description": "ID of the element to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "other",
+                    "description": "ID of the element to compare",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 324,
+            "description": "Determine an element's location on the page.\nThe point (0, 0) refers to the upper-left corner of the page.\nThe element's coordinates are returned as a JSON object with x and y properties.",
+            "itemtype": "method",
+            "name": "displayed",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element/:id/displayed"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "elementId",
+                    "description": "ID of the element to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 341,
+            "description": "Determine an element's location on the page. The point (0, 0) refers to the upper-left corner of the page.\nThe element's coordinates are returned as a JSON object with x and y properties.",
+            "itemtype": "method",
+            "name": "location",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/element/:id/location"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "elementId",
+                    "description": "ID of the element to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 357,
+            "description": "Determine an element's location on the screen once it has been scrolled into view.\nNote: This is considered an internal command and should only be used to determine an element's location for correctly generating native events.",
+            "itemtype": "method",
+            "name": "locationInView",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/element/:id/location_in_view"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "elementId",
+                    "description": "ID of the element to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 373,
+            "description": "Determine an element's size in pixels.\nThe size will be returned as a JSON object with width and height properties.",
+            "itemtype": "method",
+            "name": "size",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/element/:id/size"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "elementId",
+                    "description": "ID of the element to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 389,
+            "description": "Query the value of an element's computed CSS property.\nThe CSS property to query should be specified using the CSS property name,\nnot the JavaScript property name (e.g. background-color instead of backgroundColor).",
+            "itemtype": "method",
+            "name": "cssProperty",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/element/:id/size"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "elementId",
+                    "description": "ID of the element to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "propertyName",
+                    "description": "Name of the css property to fetch",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/execute.js",
+            "line": 25,
+            "description": "Script execution related Webdriver endpoints",
+            "params": [
+                {
+                    "name": "Driver",
+                    "description": "Webdriver client instance",
+                    "type": "Dalek.Internal.Webdriver"
+                }
+            ],
+            "return": {
+                "description": "Driver Webdriver client instance",
+                "type": "Dalek.Internal.Webdriver"
+            },
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/execute.js",
+            "line": 35,
+            "description": "Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame.\nThe executed script is assumed to be synchronous and the result of evaluating the script is returned to the client.\nThe script argument defines the script to execute in the form of a function body.\nThe value returned by that function will be returned to the client.\nThe function will be invoked with the provided args array and the values may be accessed\nvia the arguments object in the order specified.",
+            "itemtype": "method",
+            "name": "execute",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/execute"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "script",
+                    "description": "The script to execute.",
+                    "type": "POST"
+                },
+                {
+                    "name": "args",
+                    "description": "The script arguments.",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/execute.js",
+            "line": 57,
+            "description": "Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame.\nThe executed script is assumed to be asynchronous and must signal that is done by invoking the provided callback,\nwhich is always provided as the final argument to the function. The value to this callback will be returned to the client.\nAsynchronous script commands may not span page loads.\nIf an unload event is fired while waiting for a script result, an error should be returned to the client.\n\nThe script argument defines the script to execute in teh form of a function body.\nThe function will be invoked with the provided args array and the values may be accessed\nvia the arguments object in the order specified.\nThe final argument will always be a callback function that must be invoked to signal that the script has finished.",
+            "itemtype": "method",
+            "name": "executeAsync",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/execute_async"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "script",
+                    "description": "The script to execute.",
+                    "type": "POST"
+                },
+                {
+                    "name": "args",
+                    "description": "The script arguments.",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/frame.js",
+            "line": 25,
+            "description": "Frame execution related Webdriver endpoints",
+            "params": [
+                {
+                    "name": "Driver",
+                    "description": "Webdriver client instance",
+                    "type": "Dalek.Internal.Webdriver"
+                }
+            ],
+            "return": {
+                "description": "Driver Webdriver client instance",
+                "type": "Dalek.Internal.Webdriver"
+            },
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/frame.js",
+            "line": 35,
+            "description": "Change focus to another frame on the page.\nIf the frame id is null, the server should switch to the page's default content.",
+            "itemtype": "method",
+            "name": "frame",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/frame"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "id",
+                    "description": "Identifier for the frame to change focus to.",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/ime.js",
+            "line": 25,
+            "description": "IME related Webdriver endpoints",
+            "params": [
+                {
+                    "name": "Driver",
+                    "description": "Webdriver client instance",
+                    "type": "Dalek.Internal.Webdriver"
+                }
+            ],
+            "return": {
+                "description": "Driver Webdriver client instance",
+                "type": "Dalek.Internal.Webdriver"
+            },
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/ime.js",
+            "line": 35,
+            "description": "Query the server's current status.\nThe server should respond with a general \"HTTP 200 OK\" response if it is alive and accepting commands.\nThe response body should be a JSON object describing the state of the server.\nAll server implementations should return two basic objects describing the server's current platform\nand when the server was built. All fields are optional; if omitted, the client should assume the value is uknown.\nFurthermore, server implementations may include additional fields not listed here.",
+            "itemtype": "method",
+            "name": "status",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/status"
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/ime.js",
+            "line": 53,
+            "description": "List all available engines on the machine.\nTo use an engine, it has to be present in this list.",
+            "itemtype": "method",
+            "name": "availableEngines",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/ime/available_engines"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/ime.js",
+            "line": 68,
+            "description": "Get the name of the active IME engine.\nThe name string is platform specific.",
+            "itemtype": "method",
+            "name": "activeEngine",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/ime/active_engine"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/ime.js",
+            "line": 83,
+            "description": "Indicates whether IME input is active at the moment",
+            "itemtype": "method",
+            "name": "activatedEngine",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/ime/activated"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/ime.js",
+            "line": 97,
+            "description": "De-activates the currently-active IME engine",
+            "itemtype": "method",
+            "name": "deactivateEngine",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/ime/deactivate"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/ime.js",
+            "line": 111,
+            "description": "Make an engines that is available (appears on the list returned by getAvailableEngines) active.\nAfter this call, the engine will be added to the list of engines loaded in the IME daemon\nand the input sent using sendKeys will be converted by the active engine.\nNote that this is a platform-independent method of activating IME\n(the platform-specific way being using keyboard shortcuts)",
+            "itemtype": "method",
+            "name": "activateEngine",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/ime/activate"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "engine",
+                    "description": "Name of the engine to activate",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/interaction.js",
+            "line": 25,
+            "description": "Interaction related Webdriver endpoints",
+            "params": [
+                {
+                    "name": "Driver",
+                    "description": "Webdriver client instance",
+                    "type": "Dalek.Internal.Webdriver"
+                }
+            ],
+            "return": {
+                "description": "Driver Webdriver client instance",
+                "type": "Dalek.Internal.Webdriver"
+            },
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/interaction.js",
+            "line": 35,
+            "description": "Move the mouse by an offset of the specificed element.\nIf no element is specified, the move is relative to the current mouse cursor.\nIf an element is provided but no offset, the mouse will be moved to the center of the element.\nIf the element is not visible, it will be scrolled into view.",
+            "itemtype": "method",
+            "name": "moveto",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/moveto"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "element",
+                    "description": "Opaque ID assigned to the element to move to, as described in the WebElement JSON Object. If not specified or is null, the offset is relative to current position of the mouse.",
+                    "type": "POST"
+                },
+                {
+                    "name": "xoffset",
+                    "description": "X offset to move to, relative to the top-left corner of the element. If not specified, the mouse will move to the middle of the element.",
+                    "type": "POST"
+                },
+                {
+                    "name": "yoffset",
+                    "description": "Y offset to move to, relative to the top-left corner of the element. If not specified, the mouse will move to the middle of the element.",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/interaction.js",
+            "line": 56,
+            "description": "Click any mouse button (at the coordinates set by the last moveto command).\nNote that calling this command after calling buttondown and before calling button up\n(or any out-of-order interactions sequence) will yield undefined behaviour).",
+            "itemtype": "method",
+            "name": "buttonClick",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/click"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "button",
+                    "description": "Which button, enum: {LEFT = 0, MIDDLE = 1 , RIGHT = 2}. Defaults to the left mouse button if not specified.",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/interaction.js",
+            "line": 74,
+            "description": "Click and hold the left mouse button (at the coordinates set by the last moveto command).\nNote that the next mouse-related command that should follow is buttonup.\nAny other mouse command (such as click or another call to buttondown) will yield undefined behaviour.",
+            "itemtype": "method",
+            "name": "buttondown",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/buttondown"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "button",
+                    "description": "Which button, enum: {LEFT = 0, MIDDLE = 1 , RIGHT = 2}. Defaults to the left mouse button if not specified.",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/interaction.js",
+            "line": 92,
+            "description": "Releases the mouse button previously held (where the mouse is currently at).\nMust be called once for every buttondown command issued.\nSee the note in click and buttondown about implications of out-of-order commands.",
+            "itemtype": "method",
+            "name": "buttonup",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/buttonup"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "button",
+                    "description": "Which button, enum: {LEFT = 0, MIDDLE = 1 , RIGHT = 2}. Defaults to the left mouse button if not specified.",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/interaction.js",
+            "line": 110,
+            "description": "Double-clicks at the current mouse coordinates (set by moveto).",
+            "itemtype": "method",
+            "name": "doubleclickPage",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/doubleclick"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/interaction.js",
+            "line": 124,
+            "description": "Single tap on the touch enabled device.",
+            "itemtype": "method",
+            "name": "tap",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/touch/click"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/interaction.js",
+            "line": 138,
+            "description": "Finger down on the screen.",
+            "itemtype": "method",
+            "name": "touchdown",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/touch/down"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "x",
+                    "description": "X coordinate on the screen.",
+                    "type": "POST"
+                },
+                {
+                    "name": "y",
+                    "description": "Y coordinate on the screen.",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/interaction.js",
+            "line": 155,
+            "description": "Finger up on the screen.",
+            "itemtype": "method",
+            "name": "touchup",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/touch/up"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "x",
+                    "description": "X coordinate on the screen.",
+                    "type": "POST"
+                },
+                {
+                    "name": "y",
+                    "description": "Y coordinate on the screen.",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/interaction.js",
+            "line": 172,
+            "description": "Finger move on the screen.",
+            "itemtype": "method",
+            "name": "touchmove",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/touch/move"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "x",
+                    "description": "X coordinate on the screen.",
+                    "type": "POST"
+                },
+                {
+                    "name": "y",
+                    "description": "Y coordinate on the screen.",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/interaction.js",
+            "line": 189,
+            "description": "Scroll on the touch screen using finger based motion events.\nUse this command if you don't care where the scroll starts on the screen.",
+            "itemtype": "method",
+            "name": "touchscroll",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/touch/scroll"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "x",
+                    "description": "X coordinate on the screen.",
+                    "type": "POST"
+                },
+                {
+                    "name": "y",
+                    "description": "Y coordinate on the screen.",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/interaction.js",
+            "line": 207,
+            "description": "Double tap on the touch screen using finger motion events.",
+            "itemtype": "method",
+            "name": "doubletap",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/touch/doubleclick"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/interaction.js",
+            "line": 221,
+            "description": "Long press on the touch screen using finger motion events.",
+            "itemtype": "method",
+            "name": "longpress",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/touch/longclick"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/interaction.js",
+            "line": 235,
+            "description": "Flick on the touch screen using finger motion events.\nThis flickcommand starts at a particulat screen location.",
+            "itemtype": "method",
+            "name": "flick",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/touch/flick"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "element",
+                    "description": "ID of the element where the flick starts",
+                    "type": "POST"
+                },
+                {
+                    "name": "xoffset",
+                    "description": "The x offset in pixels to flick by",
+                    "type": "POST"
+                },
+                {
+                    "name": "yoffset",
+                    "description": "The y offset in pixels to flick by",
+                    "type": "POST"
+                },
+                {
+                    "name": "speed",
+                    "description": "The speed in pixels per seconds",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 25,
+            "description": "Page information related Webdriver endpoints",
+            "params": [
+                {
+                    "name": "Driver",
+                    "description": "Webdriver client instance",
+                    "type": "Dalek.Internal.Webdriver"
+                }
+            ],
+            "return": {
+                "description": "Driver Webdriver client instance",
+                "type": "Dalek.Internal.Webdriver"
+            },
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 35,
+            "description": "Get the current page source",
+            "itemtype": "method",
+            "name": "source",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/title"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 49,
+            "description": "Get the current page title",
+            "itemtype": "method",
+            "name": "title",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/title"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 93,
+            "description": "Get the current geo location",
+            "itemtype": "method",
+            "name": "geoLocation",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/location"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 107,
+            "description": "Set the geo location",
+            "itemtype": "method",
+            "name": "setGeoLocation",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/location"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "latitude",
+                    "description": "The new location",
+                    "type": "POST"
+                },
+                {
+                    "name": "longitude",
+                    "description": "The new location",
+                    "type": "POST"
+                },
+                {
+                    "name": "altitude",
+                    "description": "The new location",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 125,
+            "description": "Get the log for a given log type.\nLog buffer is reset after each request.",
+            "itemtype": "method",
+            "name": "log",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/log"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 140,
+            "description": "Get available log types",
+            "itemtype": "method",
+            "name": "logTypes",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/log/types"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/screenshot.js",
+            "line": 25,
+            "description": "Screenshot related Webdriver endpoints",
+            "params": [
+                {
+                    "name": "Driver",
+                    "description": "Webdriver client instance",
+                    "type": "Dalek.Internal.Webdriver"
+                }
+            ],
+            "return": {
+                "description": "Driver Webdriver client instance",
+                "type": "Dalek.Internal.Webdriver"
+            },
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/screenshot.js",
+            "line": 35,
+            "description": "Take a screenshot of the current page.",
+            "itemtype": "method",
+            "name": "screenshot",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/screenshot"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/session.js",
+            "line": 25,
+            "description": "Browser session related Webdriver endpoints",
+            "params": [
+                {
+                    "name": "Driver",
+                    "description": "Webdriver client instance",
+                    "type": "Dalek.Internal.Webdriver"
+                }
+            ],
+            "return": {
+                "description": "Driver Webdriver client instance",
+                "type": "Dalek.Internal.Webdriver"
+            },
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/session.js",
+            "line": 35,
+            "description": "Create a new session. The server should attempt to create a session that most closely matches\nthe desired and required capabilities. Required capabilities have higher priority than\ndesired capabilities and must be set for the session to be created.",
+            "itemtype": "method",
+            "name": "createSession",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session"
+            ],
+            "params": [
+                {
+                    "name": "desiredCapabilities",
+                    "description": "An object describing the session's desired capabilities.",
+                    "type": "POST"
+                },
+                {
+                    "name": "requiredCapabilities",
+                    "description": "An object describing the session's required capabilities",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/session.js",
+            "line": 56,
+            "description": "Returns a list of the currently active sessions",
+            "itemtype": "method",
+            "name": "sessions",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/sessions"
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/session.js",
+            "line": 69,
+            "description": "Retrieve the capabilities of the specified session.",
+            "itemtype": "method",
+            "name": "session",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/session.js",
+            "line": 83,
+            "description": "Delete the session.",
+            "itemtype": "method",
+            "name": "session",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/storage.js",
+            "line": 25,
+            "description": "Storage related Webdriver endpoints",
+            "params": [
+                {
+                    "name": "Driver",
+                    "description": "Webdriver client instance",
+                    "type": "Dalek.Internal.Webdriver"
+                }
+            ],
+            "return": {
+                "description": "Driver Webdriver client instance",
+                "type": "Dalek.Internal.Webdriver"
+            },
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/storage.js",
+            "line": 35,
+            "description": "Get all keys of the browsers local storage",
+            "itemtype": "method",
+            "name": "getLocalStorage",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/local_storage"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/storage.js",
+            "line": 49,
+            "description": "Set the storage item for the given key",
+            "itemtype": "method",
+            "name": "setLocalStorage",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/local_storage"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "key",
+                    "description": "The key to set",
+                    "type": "POST"
+                },
+                {
+                    "name": "value",
+                    "description": "The value to set",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/storage.js",
+            "line": 66,
+            "description": "Get the number of items in the storage",
+            "itemtype": "method",
+            "name": "getLocalStorageSize",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/local_storage/size"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/storage.js",
+            "line": 80,
+            "description": "Get all keys of the browsers session storage",
+            "itemtype": "method",
+            "name": "getSessionStorage",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/session_storage"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/storage.js",
+            "line": 94,
+            "description": "Get the storage item for the given key",
+            "itemtype": "method",
+            "name": "getSessionStorageEntry",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/session_storage/key/:key"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "key",
+                    "description": "The key to get",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/storage.js",
+            "line": 109,
+            "description": "Get the number of items in the storage",
+            "itemtype": "method",
+            "name": "getSessionStorageSize",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/session_storage/size"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/storage.js",
+            "line": 123,
+            "description": "Get the status of the html5 application cache.",
+            "itemtype": "method",
+            "name": "applicationCacheStatus",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/application_cache/status"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/timeout.js",
+            "line": 25,
+            "description": "Timeout related Webdriver endpoints",
+            "params": [
+                {
+                    "name": "Driver",
+                    "description": "Webdriver client instance",
+                    "type": "Dalek.Internal.Webdriver"
+                }
+            ],
+            "return": {
+                "description": "Driver Webdriver client instance",
+                "type": "Dalek.Internal.Webdriver"
+            },
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/timeout.js",
+            "line": 35,
+            "description": "Configure the amount of time that a particular type of operation can execute for before\nthey are aborted and a |Timeout| error is returned to the client.",
+            "itemtype": "method",
+            "name": "timeouts",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/timeouts"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "type",
+                    "description": "The type of operation to set the timeout for. Valid values are: \"script\" for script timeouts, \"implicit\" for modifying the implicit wait timeout and \"page load\" for setting a page load timeout",
+                    "type": "POST"
+                },
+                {
+                    "name": "ms",
+                    "description": "The amount of time to wait, in milliseconds. This value has a lower bound of 0",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/timeout.js",
+            "line": 53,
+            "description": "Set the amount of time, in milliseconds, that asynchronous scripts executed by\n/session/:sessionId/execute_async are permitted to run before they are aborted\nand a |Timeout| error is returned to the client.",
+            "itemtype": "method",
+            "name": "asyncScript",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/timeouts/async_script"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "ms",
+                    "description": "The amount of time to wait, in milliseconds. This value has a lower bound of 0",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/timeout.js",
+            "line": 71,
+            "description": "Set the amount of time the driver should wait when searching for elements.\nWhen searching for a single element, the driver should poll the page until an element\nis found or the timeout expires, whichever occurs first. When searching for multiple elements,\nthe driver should poll the page until at least one element is found or the timeout expires,\nat which point it should return an empty list.",
+            "itemtype": "method",
+            "name": "implicitWait",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/timeouts/implicit_wait"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "ms",
+                    "description": "The amount of time to wait, in milliseconds. This value has a lower bound of 0",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/url.js",
+            "line": 25,
+            "description": "Url related Webdriver endpoints",
+            "params": [
+                {
+                    "name": "Driver",
+                    "description": "Webdriver client instance",
+                    "type": "Dalek.Internal.Webdriver"
+                }
+            ],
+            "return": {
+                "description": "Driver Webdriver client instance",
+                "type": "Dalek.Internal.Webdriver"
+            },
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/url.js",
+            "line": 35,
+            "description": "Navigate to a new URL",
+            "itemtype": "method",
+            "name": "url",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/url"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "page",
+                    "description": "The URL to navigate to.",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/url.js",
+            "line": 57,
+            "description": "Retrieve the URL of the current page",
+            "itemtype": "method",
+            "name": "getUrl",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/url"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/url.js",
+            "line": 71,
+            "description": "Navigate forwards in the browser history, if possible.",
+            "itemtype": "method",
+            "name": "forward",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/forward"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/url.js",
+            "line": 85,
+            "description": "Navigate backwards in the browser history, if possible",
+            "itemtype": "method",
+            "name": "back",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/back"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/url.js",
+            "line": 99,
+            "description": "Refresh the current page",
+            "itemtype": "method",
+            "name": "refresh",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/back"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/window.js",
+            "line": 25,
+            "description": "Window related Webdriver endpoints",
+            "params": [
+                {
+                    "name": "Driver",
+                    "description": "Webdriver client instance",
+                    "type": "Dalek.Internal.Webdriver"
+                }
+            ],
+            "return": {
+                "description": "Driver Webdriver client instance",
+                "type": "Dalek.Internal.Webdriver"
+            },
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/window.js",
+            "line": 35,
+            "description": "Retrieve the current window handle.",
+            "itemtype": "method",
+            "name": "windowHandle",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/window_handle"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/window.js",
+            "line": 49,
+            "description": "Retrieve the list of all window handles available to the session.",
+            "itemtype": "method",
+            "name": "windowHandles",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/window_handles"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/window.js",
+            "line": 63,
+            "description": "Change focus to another window.\nThe window to change focus to may be specified by its server assigned window handle, or by the value of its name attribute.",
+            "itemtype": "method",
+            "name": "changeWindow",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/window"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "name",
+                    "description": "Name of the window to switch to",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/window.js",
+            "line": 80,
+            "description": "Get the size of the specified window.\nIf the :windowHandle URL parameter is \"current\", the size of the currently active window will be returned.",
+            "itemtype": "method",
+            "name": "getWindowSize",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/window/:windowHandle/size"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "windowHandle",
+                    "description": "ID of the window to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/window.js",
+            "line": 96,
+            "description": "Change the size of the specified window.\nIf the :windowHandle URL parameter is \"current\",\nthe currently active window will be resized.",
+            "itemtype": "method",
+            "name": "setWindowSize",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/window/:windowHandle/size"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "windowHandle",
+                    "description": "ID of the window to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "width",
+                    "description": "The new window width",
+                    "type": "POST"
+                },
+                {
+                    "name": "height",
+                    "description": "The new window height",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/window.js",
+            "line": 116,
+            "description": "Get the position of the specified window.\nIf the :windowHandle URL parameter is \"current\", the position of the currently active window will be returned.",
+            "itemtype": "method",
+            "name": "getWindowPosition",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/window/:windowHandle/position"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "windowHandle",
+                    "description": "ID of the window to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/window.js",
+            "line": 132,
+            "description": "Maximize the specified window if not already maximized.\nIf the :windowHandle URL parameter is \"current\", the currently active window will be maximized.",
+            "itemtype": "method",
+            "name": "windowMaximize",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/window/:windowHandle/position"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "windowHandle",
+                    "description": "ID of the window to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/driver.js",
+            "line": 44,
+            "description": "Parses an JSON Wire protocol dummy url",
+            "itemtype": "method",
+            "name": "parseUrl",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "URL with placeholders",
+                    "type": "String"
+                },
+                {
+                    "name": "options",
+                    "description": "List of url options",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "url Parsed URL",
+                "type": "String"
+            },
+            "class": "Internal.Driver",
+            "module": "DalekJS",
+            "namespace": "Internal"
+        },
+        {
+            "file": "lib/driver.js",
+            "line": 57,
+            "description": "Replaces placeholders in urls",
+            "itemtype": "method",
+            "name": "_replacePlaceholderInUrl",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "List of url options",
+                    "type": "Object"
+                },
+                {
+                    "name": "url",
+                    "description": "URL with placeholders",
+                    "type": "String"
+                },
+                {
+                    "name": "option",
+                    "description": "Option to process",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "url Parsed URL",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Internal.Driver",
+            "module": "DalekJS",
+            "namespace": "Internal"
+        },
+        {
+            "file": "lib/driver.js",
+            "line": 72,
+            "description": "Generates a set of params for the message body of the request",
+            "itemtype": "method",
+            "name": "generateParamset",
+            "params": [
+                {
+                    "name": "requestedParams",
+                    "description": "Keys & placeholders for the paramset",
+                    "type": "Object|null"
+                },
+                {
+                    "name": "providedParams",
+                    "description": "Values for the paramset",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "params Params for the message body",
+                "type": "Object"
+            },
+            "class": "Internal.Driver",
+            "module": "DalekJS",
+            "namespace": "Internal"
+        },
+        {
+            "file": "lib/driver.js",
+            "line": 85,
+            "description": "Mpas object values & keys of two objects",
+            "itemtype": "method",
+            "name": "_mapParams",
+            "params": [
+                {
+                    "name": "providedParams",
+                    "description": "Values for the paramset",
+                    "type": "Object"
+                },
+                {
+                    "name": "params",
+                    "description": "The object to be filled",
+                    "type": "Object"
+                },
+                {
+                    "name": "param",
+                    "description": "The key of the output object",
+                    "type": "String"
+                },
+                {
+                    "name": "idx",
+                    "description": "Index of the iteration",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "params Params for the message body",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Internal.Driver",
+            "module": "DalekJS",
+            "namespace": "Internal"
+        },
+        {
+            "file": "lib/driver.js",
+            "line": 102,
+            "description": "Generates the message body for webdriver client requests of type POST",
+            "itemtype": "method",
+            "name": "generateBody",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Browser options (name, bin path, etc.)",
+                    "type": "Object"
+                },
+                {
+                    "name": "cb",
+                    "description": "Callback function that should be invoked to generate the message body",
+                    "type": "Function|undefined"
+                },
+                {
+                    "name": "wd",
+                    "description": "Webdriver base object",
+                    "type": "Dalek.Internal.Webdriver"
+                },
+                {
+                    "name": "params",
+                    "description": "Parameters that should be part of the message body",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "body Serialized JSON of body request data",
+                "type": "String"
+            },
+            "class": "Internal.Driver",
+            "module": "DalekJS",
+            "namespace": "Internal"
+        },
+        {
+            "file": "lib/driver.js",
+            "line": 128,
+            "description": "Generates the request options for a webdriver client request",
+            "itemtype": "method",
+            "name": "generateRequestOptions",
+            "params": [
+                {
+                    "name": "hostname",
+                    "description": "Hostname of the webdriver server",
+                    "type": "String"
+                },
+                {
+                    "name": "port",
+                    "description": "Port of the webdriver server",
+                    "type": "Integer"
+                },
+                {
+                    "name": "prefix",
+                    "description": "Url address prefix of the webdriver endpoint",
+                    "type": "String"
+                },
+                {
+                    "name": "url",
+                    "description": "Url of the webdriver method",
+                    "type": "String"
+                },
+                {
+                    "name": "method",
+                    "description": "Request method e.g. (GET, POST, DELETE, PUT)",
+                    "type": "String"
+                },
+                {
+                    "name": "body",
+                    "description": "The message body of the request",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "options Request options",
+                "type": "Object"
+            },
+            "class": "Internal.Driver",
+            "module": "DalekJS",
+            "namespace": "Internal"
+        },
+        {
+            "file": "lib/driver.js",
+            "line": 156,
+            "description": "Generates a new webdriver client command\nTakes a skeleton of obtions that will be converted\ninto a new function that can be invoked & will issue\na webdriver command to the webdriver server",
+            "itemtype": "method",
+            "name": "addCommand",
+            "params": [
+                {
+                    "name": "remote",
+                    "description": "Object skeleton that will be turned into a webdriver client method",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "Internal.Driver",
+            "module": "DalekJS",
+            "namespace": "Internal"
+        },
+        {
+            "file": "lib/driver.js",
+            "line": 173,
+            "description": "Generates the webdriver callback function",
+            "itemtype": "method",
+            "name": "_generateWebdriverCommand",
+            "params": [
+                {
+                    "name": "remote",
+                    "description": "Dummy request body (function name, url, method)",
+                    "type": "Object"
+                },
+                {
+                    "name": "driver",
+                    "description": "Driver instance",
+                    "type": "DalekJs.Internal.Driver"
+                }
+            ],
+            "return": {
+                "description": "webdriverCommand Generated webdriver command function",
+                "type": "Function"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Internal.Driver",
+            "module": "DalekJS",
+            "namespace": "Internal"
+        },
+        {
+            "file": "lib/driver.js",
+            "line": 200,
+            "description": "Response callback function",
+            "itemtype": "method",
+            "name": "_onResponse",
+            "params": [
+                {
+                    "name": "driver",
+                    "description": "Driver instance",
+                    "type": "DalekJs.Internal.Driver"
+                },
+                {
+                    "name": "remote",
+                    "description": "Dummy request body (function name, url, method)",
+                    "type": "Object"
+                },
+                {
+                    "name": "options",
+                    "description": "Request options (method, port, path, headers, etc.)",
+                    "type": "Object"
+                },
+                {
+                    "name": "deferred",
+                    "description": "Webdriver command deferred",
+                    "type": "Object"
+                },
+                {
+                    "name": "response",
+                    "description": "Response from the webdriver server",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Internal.Driver",
+            "module": "DalekJS",
+            "namespace": "Internal"
+        },
+        {
+            "file": "lib/driver.js",
+            "line": 220,
+            "description": "Concatenates chunks of strings",
+            "itemtype": "method",
+            "name": "_concatDataChunks",
+            "params": [
+                {
+                    "name": "chunk",
+                    "description": "String to add",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "data Concatenated string",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Internal.Driver",
+            "module": "DalekJS",
+            "namespace": "Internal"
+        },
+        {
+            "file": "lib/driver.js",
+            "line": 233,
+            "description": "Response end callback function",
+            "itemtype": "method",
+            "name": "_onResponseEnd",
+            "params": [
+                {
+                    "name": "driver",
+                    "description": "Driver instance",
+                    "type": "DalekJs.Internal.Driver"
+                },
+                {
+                    "name": "response",
+                    "description": "Response from the webdriver server",
+                    "type": "Object"
+                },
+                {
+                    "name": "remote",
+                    "description": "Dummy request body (function name, url, method)",
+                    "type": "Object"
+                },
+                {
+                    "name": "options",
+                    "description": "Request options (method, port, path, headers, etc.)",
+                    "type": "Object"
+                },
+                {
+                    "name": "deferred",
+                    "description": "Webdriver command deferred",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "priavte": "",
+            "class": "Internal.Driver",
+            "module": "DalekJS",
+            "namespace": "Internal"
+        },
+        {
+            "file": "lib/driver.js",
+            "line": 250,
+            "description": "On error callback function",
+            "itemtype": "method",
+            "name": "_onError",
+            "params": [
+                {
+                    "name": "driver",
+                    "description": "Driver instance",
+                    "type": "DalekJs.Internal.Driver"
+                },
+                {
+                    "name": "response",
+                    "description": "Response from the webdriver server",
+                    "type": "Object"
+                },
+                {
+                    "name": "remote",
+                    "description": "Dummy request body (function name, url, method)",
+                    "type": "Object"
+                },
+                {
+                    "name": "options",
+                    "description": "Request options (method, port, path, headers, etc.)",
+                    "type": "Object"
+                },
+                {
+                    "name": "deferred",
+                    "description": "Webdriver command deferred",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Internal.Driver",
+            "module": "DalekJS",
+            "namespace": "Internal"
+        },
+        {
+            "file": "lib/driver.js",
+            "line": 270,
+            "description": "On success callback function",
+            "itemtype": "method",
+            "name": "_onSuccess",
+            "params": [
+                {
+                    "name": "driver",
+                    "description": "Driver instance",
+                    "type": "DalekJs.Internal.Driver"
+                },
+                {
+                    "name": "response",
+                    "description": "Response from the webdriver server",
+                    "type": "Object"
+                },
+                {
+                    "name": "remote",
+                    "description": "Dummy request body (function name, url, method)",
+                    "type": "Object"
+                },
+                {
+                    "name": "options",
+                    "description": "Request options (method, port, path, headers, etc.)",
+                    "type": "Object"
+                },
+                {
+                    "name": "deferred",
+                    "description": "Webdriver command deferred",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Internal.Driver",
+            "module": "DalekJS",
+            "namespace": "Internal"
+        },
+        {
+            "file": "lib/webdriver.js",
+            "line": 27,
+            "description": "Stores the injected options as an object property",
+            "params": [
+                {
+                    "name": "opts",
+                    "description": "Webdriver options",
+                    "type": "Object"
+                }
+            ],
+            "is_constructor": 1,
+            "class": "Internal.Webdriver",
+            "module": "DalekJS",
+            "namespace": "Internal"
+        },
+        {
+            "file": "lib/webdriver.js",
+            "line": 48,
+            "description": "Local options, used to store data\nlike the current sessionId or similar",
+            "class": "Internal.Webdriver",
+            "module": "DalekJS",
+            "namespace": "Internal"
+        },
+        {
+            "file": "lib/webdriver.js",
+            "line": 55,
+            "description": "Checks if we have a valid webdriver session",
+            "itemtype": "method",
+            "name": "hasSession",
+            "return": {
+                "description": "Is valid session",
+                "type": "Bool"
+            },
+            "class": "Internal.Webdriver",
+            "module": "DalekJS",
+            "namespace": "Internal"
+        },
+        {
+            "file": "lib/webdriver.js",
+            "line": 66,
+            "description": "Closes the current webdriver session",
+            "itemtype": "method",
+            "name": "hasSession",
+            "chainable": 1,
+            "class": "Internal.Webdriver",
+            "module": "DalekJS",
+            "namespace": "Internal"
+        },
+        {
+            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "line": 1,
+            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "class": "",
+            "module": "DalekJS",
+            "namespace": "Internal"
+        },
+        {
+            "file": "index.js",
+            "line": 27,
+            "description": "Its a webdriver client",
+            "package": "Webdriver",
+            "api": "",
+            "class": "",
+            "module": "DalekJS",
+            "namespace": "Internal"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: priavte",
+            "line": " lib/driver.js:233"
+        },
+        {
+            "message": "unknown tag: package",
+            "line": " index.js:27"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:27"
+        },
+        {
+            "message": "Missing item type\nCookie related Webdriver endpoints",
+            "line": " lib/commands/cookie.js:25"
+        },
+        {
+            "message": "Missing item type\nElement related Webdriver endpoints",
+            "line": " lib/commands/element.js:25"
+        },
+        {
+            "message": "Missing item type\nScript execution related Webdriver endpoints",
+            "line": " lib/commands/execute.js:25"
+        },
+        {
+            "message": "Missing item type\nFrame execution related Webdriver endpoints",
+            "line": " lib/commands/frame.js:25"
+        },
+        {
+            "message": "Missing item type\nIME related Webdriver endpoints",
+            "line": " lib/commands/ime.js:25"
+        },
+        {
+            "message": "Missing item type\nInteraction related Webdriver endpoints",
+            "line": " lib/commands/interaction.js:25"
+        },
+        {
+            "message": "Missing item type\nPage information related Webdriver endpoints",
+            "line": " lib/commands/page.js:25"
+        },
+        {
+            "message": "Missing item type\nScreenshot related Webdriver endpoints",
+            "line": " lib/commands/screenshot.js:25"
+        },
+        {
+            "message": "Missing item type\nBrowser session related Webdriver endpoints",
+            "line": " lib/commands/session.js:25"
+        },
+        {
+            "message": "Missing item type\nStorage related Webdriver endpoints",
+            "line": " lib/commands/storage.js:25"
+        },
+        {
+            "message": "Missing item type\nTimeout related Webdriver endpoints",
+            "line": " lib/commands/timeout.js:25"
+        },
+        {
+            "message": "Missing item type\nUrl related Webdriver endpoints",
+            "line": " lib/commands/url.js:25"
+        },
+        {
+            "message": "Missing item type\nWindow related Webdriver endpoints",
+            "line": " lib/commands/window.js:25"
+        },
+        {
+            "message": "Missing item type\nStores the injected options as an object property",
+            "line": " lib/webdriver.js:27"
+        },
+        {
+            "message": "Missing item type\nLocal options, used to store data\nlike the current sessionId or similar",
+            "line": " lib/webdriver.js:48"
+        },
+        {
+            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
+        },
+        {
+            "message": "Missing item type\nIts a webdriver client",
+            "line": " index.js:27"
+        }
+    ]
+}

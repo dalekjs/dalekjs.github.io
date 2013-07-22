@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>lib/driver.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">72.78</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">270</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="span6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="span6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
+      <p class="stat">27.11</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">1.15</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="span6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="span12">/*!
+ *
+ * Copyright (c) 2013 Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ *
+ */
+
+&#039;use strict&#039;;
+
+// ext. libs
+var http = require(&#039;http&#039;);
+var Q = require(&#039;q&#039;);
+
+// export the driver base function
+module.exports = function exportDriverBase(WebDriver) {
+
+  /**
+   * Native Webdriver base class
+   *
+   * @module DalekJS
+   * @class Driver
+   * @namespace Internal
+   */
+
+  var Driver = {
+
+    /**
+     * Parses an JSON Wire protocol dummy url
+     *
+     * @method parseUrl
+     * @param {string} url URL with placeholders
+     * @param {object} options List of url options
+     * @return {string} url Parsed URL
+     */
+
+    parseUrl: function (url, options) {
+      return Object.keys(options).reduce(this._replacePlaceholderInUrl.bind(this, options), url);
+    },
+
+    /**
+     * Replaces placeholders in urls
+     *
+     * @method _replacePlaceholderInUrl
+     * @param {object} options List of url options
+     * @param {string} url URL with placeholders
+     * @param {string} option Option to process
+     * @return {string} url Parsed URL
+     * @private
+     */
+
+    _replacePlaceholderInUrl: function (options, url, option) {
+      return url.replace(&#039;:&#039; + option, options[option]);
+    },
+
+    /**
+     * Generates a set of params for the message body of the request
+     *
+     * @method generateParamset
+     * @param {object|null} requestedParams Keys &amp; placeholders for the paramset
+     * @param {object} providedParams Values for the paramset
+     * @return {object} params Params for the message body
+     */
+
+    generateParamset: function (requestedParams, providedParams) {
+      return !requestedParams ? {} : requestedParams.reduce(this._mapParams.bind(this, providedParams), {});
+    },
+
+    /**
+     * Mpas object values &amp; keys of two objects
+     *
+     * @method _mapParams
+     * @param {object} providedParams Values for the paramset
+     * @param {object} params The object to be filled
+     * @param {string} param The key of the output object
+     * @param {integer} idx Index of the iteration
+     * @return {object} params Params for the message body
+     * @private
+     */
+
+    _mapParams: function (providedParams, params, param, idx) {
+      params[param] = providedParams[idx];
+      return params;
+    },
+
+    /**
+     * Generates the message body for webdriver client requests of type POST
+     *
+     * @method generateBody
+     * @param {object} options Browser options (name, bin path, etc.)
+     * @param {function|undefined} cb Callback function that should be invoked to generate the message body
+     * @param {Dalek.Internal.Webdriver} wd Webdriver base object
+     * @param {object} params Parameters that should be part of the message body
+     * @return {string} body Serialized JSON of body request data
+     */
+
+    generateBody: function (options, cb, wd, params) {
+      // if no cb is given, generate a body with the `desiredCapabilities` object
+      if (!cb) {
+        // check if we have parameters set up
+        if (Object.keys(params).length &gt; 0) {
+          return JSON.stringify(params);
+        }
+        return JSON.stringify({desiredCapabilities: {browserName: &#039;chrome&#039;, version: &#039;&#039;, platform: &#039;ANY&#039;}});
+      }
+
+      // invoke the given callback &amp; stringify
+      var data = cb.call(wd, params);
+      return data === null ? &#039;{}&#039; : JSON.stringify(data);
+    },
+
+    /**
+     * Generates the request options for a webdriver client request
+     *
+     * @method generateRequestOptions
+     * @param {string} hostname Hostname of the webdriver server
+     * @param {integer} port Port of the webdriver server
+     * @param {string} prefix Url address prefix of the webdriver endpoint
+     * @param {string} url Url of the webdriver method
+     * @param {string} method Request method e.g. (GET, POST, DELETE, PUT)
+     * @param {string} body The message body of the request
+     * @return {object} options Request options
+     */
+
+    generateRequestOptions: function (hostname, port, prefix, url, method, body) {
+      var options = {
+        hostname: hostname,
+        port: port,
+        path: prefix + url,
+        method: method,
+        headers: {
+          &#039;Content-Type&#039;: &#039;application/json&#039;,
+          &#039;Content-Length&#039;: body.length
+        }
+      };
+
+      return options;
+    },
+
+    /**
+     * Generates a new webdriver client command
+     * Takes a skeleton of obtions that will be converted
+     * into a new function that can be invoked &amp; will issue
+     * a webdriver command to the webdriver server
+     *
+     * @method addCommand
+     * @param {object} remote Object skeleton that will be turned into a webdriver client method
+     * @chainable
+     */
+
+    addCommand: function (remote) {
+      // assign the generated function to the webdriver prototype
+      WebDriver.prototype[remote.name] = this._generateWebdriverCommand(remote, this);
+      return this;
+    },
+
+    /**
+     * Generates the webdriver callback function
+     *
+     * @method _generateWebdriverCommand
+     * @param {object} remote Dummy request body (function name, url, method)
+     * @param {DalekJs.Internal.Driver} driver Driver instance
+     * @return {function} webdriverCommand Generated webdriver command function
+     * @private
+     */
+
+    _generateWebdriverCommand: function (remote, driver) {
+      return function webdriverCommand() {
+        var deferred = Q.defer();
+        // the request meta data
+        var params = Driver.generateParamset(remote.params, arguments);
+        var body = Driver.generateBody({}, remote.onRequest, this, params);
+        var options = Driver.generateRequestOptions(this.opts.host, this.opts.port, this.opts.path, Driver.parseUrl(remote.url, this.options), remote.method, body);
+
+        // generate the request, wait for response &amp; fire the request
+        var req = new http.ClientRequest(options);
+        req.on(&#039;response&#039;, driver._onResponse.bind(this, driver, remote, options, deferred));
+        req.end(body);
+
+        return deferred.promise;
+      };
+    },
+
+    /**
+     * Response callback function
+     *
+     * @method _onResponse
+     * @param {DalekJs.Internal.Driver} driver Driver instance
+     * @param {object} remote Dummy request body (function name, url, method)
+     * @param {object} options Request options (method, port, path, headers, etc.)
+     * @param {object} deferred Webdriver command deferred
+     * @param {object} response Response from the webdriver server
+     * @chainable
+     * @private
+     */
+
+    _onResponse: function (driver, remote, options, deferred, response) {
+      this.data = &#039;&#039;;
+      response.on(&#039;data&#039;, driver._concatDataChunks.bind(this));
+      response.on(&#039;end&#039;, driver._onResponseEnd.bind(this, driver, response, remote, options, deferred));
+      return this;
+    },
+
+    /**
+     * Concatenates chunks of strings
+     *
+     * @method _concatDataChunks
+     * @param {string} chunk String to add
+     * @return {string} data Concatenated string
+     * @private
+     */
+
+    _concatDataChunks: function (chunk) {
+      return this.data += chunk;
+    },
+
+    /**
+     * Response end callback function
+     *
+     * @method _onResponseEnd
+     * @param {DalekJs.Internal.Driver} driver Driver instance
+     * @param {object} response Response from the webdriver server
+     * @param {object} remote Dummy request body (function name, url, method)
+     * @param {object} options Request options (method, port, path, headers, etc.)
+     * @param {object} deferred Webdriver command deferred
+     * @chainable
+     * @priavte
+     */
+
+    _onResponseEnd: function (driver, response, remote, options, deferred) {
+      return driver[(response.statusCode === 500 ? &#039;_onError&#039; : &#039;_onSuccess&#039;)].bind(this)(driver, response, remote, options, deferred);
+    },
+
+    /**
+     * On error callback function
+     *
+     * @method _onError
+     * @param {DalekJs.Internal.Driver} driver Driver instance
+     * @param {object} response Response from the webdriver server
+     * @param {object} remote Dummy request body (function name, url, method)
+     * @param {object} options Request options (method, port, path, headers, etc.)
+     * @param {object} deferred Webdriver command deferred
+     * @chainable
+     * @private
+     */
+
+    _onError: function (driver, response, remote, options, deferred) {
+      if (remote.onError) {
+        remote.onError.call(this, response, remote, options, deferred, this.data);
+      }
+      return this;
+    },
+
+    /**
+     * On success callback function
+     *
+     * @method _onSuccess
+     * @param {DalekJs.Internal.Driver} driver Driver instance
+     * @param {object} response Response from the webdriver server
+     * @param {object} remote Dummy request body (function name, url, method)
+     * @param {object} options Request options (method, port, path, headers, etc.)
+     * @param {object} deferred Webdriver command deferred
+     * @chainable
+     * @private
+     */
+
+    _onSuccess: function (driver, response, remote, options, deferred) {
+      if (remote.onResponse) {
+        remote.onResponse.call(this, response, remote, options, deferred, this.data);
+      } else {
+        deferred.resolve(this.data);
+      }
+      return this;
+    }
+  };
+
+  return Driver;
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>
