@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>index.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">66.56</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">954</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="span6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="span6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
+      <p class="stat">92.98</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">7.58</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="span6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="span12">/*!
+ *
+ * Copyright (c) 2013 Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
+
+&#039;use strict&#039;;
+
+// ext. libs
+var Q = require(&#039;q&#039;);
+var uuid = require(&#039;node-uuid&#039;);
+var chai = require(&#039;chai&#039;);
+
+// Module variable
+var Assertions;
+
+/**
+ * @module Assertions
+ * @class Assertions
+ * @namespace Dalek.Internal
+ */
+
+module.exports = function () {
+  return Assertions;
+};
+
+/**
+ * @constructor
+ * @part Assertions
+ * @api
+ */
+
+Assertions = function (opts) {
+  this.test = opts.test;
+  this.proceeded = [];
+  this.chaining = false;
+};
+
+/**
+ * Starts assertion chaining
+ *
+ * @method chain
+ * @api
+ */
+
+Assertions.prototype.chain = function () {
+  this.test.lastChain.push(&#039;chaining&#039;);
+  this.chaining = true;
+  return this;
+};
+
+/**
+ * Ends an assertion chain
+ *
+ * @method end
+ * @api
+ */
+
+Assertions.prototype.end = function () {
+  var lastAction = this.test.lastChain.pop();
+  if (lastAction === &#039;chaining&#039;) {
+    this.chaining = false;
+  }
+
+  if (lastAction  === &#039;querying&#039;) {
+    this.test.querying = false;
+  }
+  return this.test;
+};
+
+/**
+ * Asserts that a given ressource does exist in the environment.
+ *
+ * @method resourceExists
+ * @api
+ */
+
+Assertions.prototype.resourceExists = function (url, message) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;resourceExists&#039;, &#039;resourceExists&#039;, this._testTruthy, hash, {url: url, message: message}).bind(this.test);
+  this._addToActionQueue([url, hash], &#039;resourceExists&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that a given element appears n times on the page.
+ *
+ *
+ * Given this portion of html, you would like to assure that all of these elements
+ * are ending up in your rendered markup on your page.
+ *
+ * ```html
+ * &lt;section id=&quot;blog-overview&quot;&gt;
+ *   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+ *   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+ *   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+ *   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+ * &lt;/section&gt;
+ * ```
+ *
+ * The simple solution is to check if all these elements are present
+ *
+ * ```javascript
+ * test.numberOfElements(&#039;#blog-overview .teaser&#039;, 4, &#039;4 blog teasers are present&#039;)
+ * ```
+ * The alternate syntax for this is:
+ *
+ * ```javascript
+ * test.numberOfElements(&#039;#blog-overview .teaser&#039;)
+ *     .is(4, &#039;4 blog teasers are present&#039;)
+ * ```
+ *
+ * If you are not sure how many elements will exactly end up in your markup,
+ * you could use the between assertion handler
+ *
+ * ```javascript
+ * test.numberOfElements(&#039;#blog-overview .teaser&#039;)
+ *     .is.between(2, 6, &#039;Between 2 and 6 blog teasers are present&#039;)
+ * ```
+ *
+ * If you dealing with the situation that you have a minimum of elements,
+ * you expect, you can use this helper...
+ *
+ * ```javascript
+ * test.numberOfElements(&#039;#blog-overview .teaser&#039;)
+ *     .is.gt(2, &#039;At least 3 blog teasers are present&#039;)
+ * ```
+ * ... if you want to know if its &#039;greater than equal&#039;, you can use this one...
+ *
+ * ```javascript
+ * test.numberOfElements(&#039;#blog-overview .teaser&#039;)
+ *     .is.gte(2, &#039;At least 2 blog teasers are present&#039;)
+ * ```
+ * ... as well as their &#039;lower than&#039; and &#039;lower than equal&#039; equivalents
+ *
+ * ```javascript
+ * test.numberOfElements(&#039;#blog-overview .teaser&#039;)
+ *     .is.lt(5, &#039;Less than 5 blog teasers are present&#039;)
+ * ```
+ *
+ * ```javascript
+ * test.numberOfElements(&#039;#blog-overview .teaser&#039;)
+ *     .is.lte(5, &#039;Less than, or 5 blog teasers are present&#039;)
+ * ```
+ * And if you just wan&#039;t to know, if a certain amount of teasers isn&#039;t present,
+ * you can still use the &#039;:not(): assertion helper
+ *
+ * ```javascript
+ * test.numberOfElements(&#039;#blog-overview .teaser&#039;)
+ *     .is.not(5, &#039;There are more or less than 5 teasers present&#039;)
+ * ```
+ *
+ * If you wan&#039;t to allow multiple correct values, you can use the &#039;:are()&#039; helper
+ *
+ * ```javascript
+ * test.numberOfElements(&#039;#blog-overview .teaser&#039;)
+ *     .are([1,3,6], &#039;Teaser count is an odd number between 1 and 6&#039;)
+ * ```
+ *
+ * of couse you can test for the opoosite with &#039;:are()&#039;
+ *
+ * ```javascript
+ * test.numberOfElements(&#039;#blog-overview .teaser&#039;)
+ *     .are([0,2,4], &#039;Teaser count is not an even number between 1 and 6&#039;)
+ * ```
+ *
+ * @api
+ * @method numberOfElements
+ */
+
+Assertions.prototype.numberOfElements = function (selector, expected, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = expected;
+    expected = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;numberOfElements&#039;, &#039;numberOfElements&#039;, this._testShallowEquals, hash, {expected: expected, selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, expected, hash], &#039;getNumberOfElements&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ *
+ * Asserts that a given element is visible n times in the current viewport.
+ *
+ *
+ * Given this portion of html, you would like to assure that all of these elements
+ * are ending up in your rendered markup on your page.
+ *
+ * ```html
+ * &lt;section id=&quot;blog-overview&quot;&gt;
+ *   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+ *   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+ *   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+ *   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+ * &lt;/section&gt;
+ * ```
+ *
+ * The simple solution is to check if all these elements are visible
+ *
+ * ```javascript
+ * test.numberOfVisibleElements(&#039;#blog-overview .teaser&#039;, 4, &#039;4 blog teasers are visible&#039;)
+ * ```
+ * The alternate syntax for this is:
+ *
+ * ```javascript
+ * test.numberOfVisibleElements(&#039;#blog-overview .teaser&#039;)
+ *     .is(4, &#039;4 blog teasers are visible&#039;)
+ * ```
+ *
+ * If you are not sure how many elements will exactly be shown in the current viewport,
+ * you could use the between assertion handler
+ *
+ * ```javascript
+ * test.numberOfVisibleElements(&#039;#blog-overview .teaser&#039;)
+ *     .is.between(2, 6, &#039;Between 2 and 6 blog teasers are visible&#039;)
+ * ```
+ *
+ * If you dealing with the situation that you have a minimum of elements,
+ * you expect, you can use this helper...
+ *
+ * ```javascript
+ * test.numberOfVisibleElements(&#039;#blog-overview .teaser&#039;)
+ *     .is.gt(2, &#039;At least 3 blog teasers are visible&#039;)
+ * ```
+ * ... if you want to know if its &#039;greater than equal&#039;, you can use this one...
+ *
+ * ```javascript
+ * test.numberOfVisibleElements(&#039;#blog-overview .teaser&#039;)
+ *     .is.gte(2, &#039;At least 2 blog teasers are visible&#039;)
+ * ```
+ * ... as well as their &#039;lower than&#039; and &#039;lower than equal&#039; equivalents
+ *
+ * ```javascript
+ * test.numberOfVisibleElements(&#039;#blog-overview .teaser&#039;)
+ *     .is.lt(5, &#039;Less than 5 blog teasers are visible&#039;)
+ * ```
+ *
+ * ```javascript
+ * test.numberOfVisibleElements(&#039;#blog-overview .teaser&#039;)
+ *     .is.lte(5, &#039;Less than, or 5 blog teasers are visible&#039;)
+ * ```
+ * And if you just wan&#039;t to know, if a certain amount of teasers isn&#039;t visible,
+ * you can still use the &#039;:not(): assertion helper
+ *
+ * ```javascript
+ * test.numberOfVisibleElements(&#039;#blog-overview .teaser&#039;)
+ *     .is.not(5, &#039;There are more or less than 5 teasers visible&#039;)
+ * ```
+ *
+ * If you wan&#039;t to allow multiple correct values, you can use the &#039;:are()&#039; helper
+ *
+ * ```javascript
+ * test.numberOfVisibleElements(&#039;#blog-overview .teaser&#039;)
+ *     .are([1,3,6], &#039;Teaser count is an odd number between 1 and 6&#039;)
+ * ```
+ *
+ * of couse you can test for the opoosite with &#039;:are()&#039; and &#039;:not()&#039;
+ *
+ * ```javascript
+ * test.numberOfVisibleElements(&#039;#blog-overview .teaser&#039;)
+ *     .are.not([0,2,4], &#039;Teaser count is not an even number between 1 and 6&#039;)
+ * ```
+ *
+ * @api
+ * @method numberOfVisibleElements
+ */
+
+Assertions.prototype.numberOfVisibleElements = function (selector, expected, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = expected;
+    expected = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;numberOfVisibleElements&#039;, &#039;numberOfVisibleElements&#039;, this._testShallowEquals, hash, {expected: expected, selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, expected, hash], &#039;getNumberOfVisibleElements&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that a given form field has the provided value.
+ *
+ * Given this portion of html, we would like to get the information which option element
+ * is currently selected.
+ *
+ * ```html
+ * &lt;form name=&quot;fav-doctor&quot; id=&quot;fav-doctor&quot;&gt;
+ *   &lt;select id=&quot;the-doctors&quot;&gt;
+ *     &lt;option value=&quot;9&quot;&gt;Eccleston&lt;/option&gt;
+ *     &lt;option selected value=&quot;10&quot;&gt;Tennant&lt;/option&gt;
+ *     &lt;option value=&quot;11&quot;&gt;Smith&lt;/option&gt;
+ *   &lt;/select&gt;
+ * &lt;/form&gt;
+ * ```
+ *
+ * ```javascript
+ * test
+ *   .val(&#039;#the-doctors&#039;, 10, &#039;David is the favourite&#039;)
+ *   // lets change the favourite by selection the last option
+ *  .click(&#039;#the-doctors option:last&#039;)
+ *  .val(&#039;#the-doctors&#039;, 11, &#039;Matt is now my favourite, bow ties are cool&#039;)
+ * ```
+ *
+ * This assertion is capable of getting the values from every form element
+ * that holds a value attribute
+ *
+ * Getting texts out of normal input fields is pretty straight forward
+ *
+ * ```html
+ * &lt;label for=&quot;fav-enemy&quot;&gt;Tell my your favourity Who enemy:&lt;/label&gt;
+ * &lt;input id=&quot;fav-enemy&quot; name=&quot;fav-enemy&quot; type=&quot;text&quot; value=&quot;Daleks&quot; /&gt;
+ * ```
+ *
+ * ```javascript
+ * test
+ *   .val(&#039;#fav-enemy&#039;, &#039;Daleks&#039;, &#039;Daleks are so cute&#039;)
+ *   // lets change the favourite by typing smth. new
+ *  .type(&#039;#fav-enemy&#039;, &#039;Cyberman&#039;)
+ *  .val(&#039;#fav-enemy&#039;, &#039;Cyberman&#039;, &#039;Cyberman are so cyber&#039;)
+ * ```
+ *
+ * Of course, you can use a bunch of assertion helpers, to enable
+ * yourself to do more than just one assertion with the &#039;:are()&#039; helper.
+ *
+ * ```javascript
+ * test
+ *   .val(&#039;#fav-enemy&#039;)
+ *   .is(&#039;Daleks&#039;, &#039;Still cute, those daleks&#039;)
+ *   .is.not(&#039;Klingons&#039;, &#039;Different fandom bro&#039;)
+ *   // yep, multiple mentions are allowed
+ *   .are([&#039;Daleks&#039;, &#039;Cyberman&#039;, &#039;The master&#039;], &#039;All of them are cool&#039;);
+ * ```
+ *
+ * @method val
+ * @api
+ */
+
+
+Assertions.prototype.val = function (selector, expected, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = expected;
+    expected = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;val&#039;, &#039;val&#039;, this._testShallowEquals, hash, {expected: expected, selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, expected, hash], &#039;val&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+Assertions.prototype.css = function (selector, property, expected, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = expected;
+    expected = property;
+    property = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;css&#039;, &#039;css&#039;, this._testShallowEquals, hash, {expected: expected, selector: selector, porperty: property, message: message}).bind(this.test);
+  this._addToActionQueue([selector, property, expected, hash], &#039;css&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+Assertions.prototype.width = function (selector, expected, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = expected;
+    expected = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;width&#039;, &#039;width&#039;, this._testShallowEquals, hash, {expected: expected, selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, expected, hash], &#039;width&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+Assertions.prototype.height = function (selector, expected, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = expected;
+    expected = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;height&#039;, &#039;height&#039;, this._testShallowEquals, hash, {expected: expected, selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, expected, hash], &#039;height&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+Assertions.prototype.selected = function (selector, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;selected&#039;, &#039;selected&#039;, this._testShallowEquals, hash, {expected: true, selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, true, hash], &#039;selected&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+Assertions.prototype.notSelected = function (selector, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;selected&#039;, &#039;selected&#039;, this._testShallowEquals, hash, {expected: false, selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, false, hash], &#039;selected&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+Assertions.prototype.enabled = function (selector, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;enabled&#039;, &#039;enabled&#039;, this._testShallowEquals, hash, {expected: true, selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, true, hash], &#039;enabled&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+Assertions.prototype.disabled = function (selector, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;enabled&#039;, &#039;enabled&#039;, this._testShallowEquals, hash, {expected: false, selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, false, hash], &#039;enabled&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+Assertions.prototype.cookie = function (name, expected, message) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;cookie&#039;, &#039;cookie&#039;, this._testShallowEquals, hash, {expected: expected, name: name, message: message}).bind(this.test);
+  this._addToActionQueue([name, expected, hash], &#039;cookie&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that current HTTP status code is the same as the one passed as argument.
+ * TODO: Needs some work
+ */
+
+Assertions.prototype.httpStatus = function (status, message) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;httpStatus&#039;, &#039;httpStatus&#039;, this._testShallowEquals, hash, {expected: status, message: message}).bind(this.test);
+  this._addToActionQueue([status, hash], &#039;httpStatus&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that an element matching the provided selector expression exists in remote DOM environment.
+ *
+ * ```html
+ * &lt;body&gt;
+ *   &lt;p id=&quot;so-lonely&quot;&gt;Last of the timelords&lt;/p&gt;
+ * &lt;/body&gt;
+ * ```
+ *
+ * ```javascript
+ * test
+ *   .exists(&#039;#so-lonely&#039;, &#039;The loneliest element in the universe exists&#039;)
+ * ```
+ *
+ * @method exists
+ * @api
+ */
+
+Assertions.prototype.exists = function (selector, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;exists&#039;, &#039;exists&#039;, this._testTruthy, hash, {selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, hash], &#039;exists&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that an element matching the provided selector expression doesn&#039;t exists within the remote DOM environment.
+ *
+ * ```html
+ * &lt;body&gt;
+ *   &lt;p id=&quot;so-lonely&quot;&gt;Last of the timelords&lt;/p&gt;
+ * &lt;/body&gt;
+ * ```
+ *
+ * ```javascript
+ * test
+ *   .doesntExist(&#039;#the-master&#039;, &#039;The master element has not been seen&#039;)
+ * ```
+ *
+ * @method doesntExist
+ * @api
+ */
+
+Assertions.prototype.doesntExist = function (selector, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;exists&#039;, &#039;!exists&#039;, this._testFalsy, hash, {selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, hash], &#039;exists&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that the element matching the provided selector expression is not visible.
+ */
+
+Assertions.prototype.notVisible = function (selector, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;visible&#039;, &#039;!visible&#039;, this._testFalsy, hash, {selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, hash], &#039;visible&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that the element matching the provided selector expression is visible.
+ */
+
+Assertions.prototype.visible = function (selector, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;visible&#039;, &#039;visible&#039;, this._testTruthy, hash, {selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, hash], &#039;visible&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that given text does not exist in the provided selector.
+ */
+
+Assertions.prototype.doesntHaveText = function (selector, expected, message) {
+  var hash = uuid.v4();
+  if (this.test.querying === true) {
+    message = expected;
+    expected = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;text&#039;, &#039;!text&#039;, this._testShallowUnequals, hash, {selector: selector, expected: expected, message: message}).bind(this.test);
+  this._addToActionQueue([selector, expected, hash], &#039;text&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that given text does not exist in the provided selector.
+ */
+
+Assertions.prototype.alertDoesntHaveText = function (expected, message) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;alertText&#039;, &#039;!alertText&#039;, this._testShallowUnequals, hash, {expected: expected, message: message}).bind(this.test);
+  this._addToActionQueue([expected, hash], &#039;alertText&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that given text does exist in the provided selector.
+ */
+
+Assertions.prototype.text = function (selector, expected, message) {
+  var hash = uuid.v4();
+  if (this.test.querying === true) {
+    message = expected;
+    expected = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;text&#039;, &#039;text&#039;, this._testShallowEquals, hash, {selector: selector, expected: expected, message: message}).bind(this.test);
+  this._addToActionQueue([selector, expected, hash], &#039;text&#039;, cb);
+  return (this.chaining || this.test.querying) ? this : this.test;
+};
+
+/**
+ * Asserts that given alertText does exist in the provided alert/confirm or prompt dialog.
+ */
+
+Assertions.prototype.alertText = function (expected, message) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;alertText&#039;, &#039;alertText&#039;, this._testShallowEquals, hash, {expected: expected, message: message}).bind(this.test);
+  this._addToActionQueue([expected, hash], &#039;alertText&#039;, cb);
+  return (this.chaining || this.test.querying) ? this : this.test;
+};
+
+/**
+ * Asserts that given text does exist in the provided selector.
+ *
+ * @param {String} expected
+ * @param {String} message
+ * @return {Object}
+ */
+
+Assertions.prototype.title = function (expected, message) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;title&#039;, &#039;title&#039;, this._testShallowEquals, hash, {expected: expected, message: message}).bind(this.test);
+  this._addToActionQueue([expected, hash], &#039;title&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that given title does not mathc the given expactions
+ *
+ * @param {String} expected
+ * @param {String} message
+ * @return {Object}
+ */
+
+Assertions.prototype.doesntHaveTitle = function (expected, message) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;title&#039;, &#039;!title&#039;, this._testShallowUnequals, hash, {expected: expected, message: message}).bind(this.test);
+  this._addToActionQueue([expected, hash], &#039;title&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ *
+ */
+
+Assertions.prototype.url = function (expected, message) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;url&#039;, &#039;url&#039;, this._testShallowEquals, hash, {expected: expected, message: message}).bind(this.test);
+  this._addToActionQueue([expected, hash], &#039;url&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ *
+ */
+
+Assertions.prototype.doesntHaveUrl = function (expected, message) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;url&#039;, &#039;!url&#039;, this._testShallowUnequals, hash, {expected: expected, message: message}).bind(this.test);
+  this._addToActionQueue([expected, hash], &#039;url&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ *
+ */
+
+Assertions.prototype.attr = function (selector, attribute, expected, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = expected;
+    expected = attribute;
+    attribute = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;attribute&#039;, &#039;attribute&#039;, this._testShallowEquals, hash, {expected: expected, message: message, selector: selector, attribute: attribute}).bind(this.test);
+  this._addToActionQueue([selector, attribute, expected, hash], &#039;attribute&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+// TEST HELPER
+// -----------
+
+/**
+ *
+ */
+
+Assertions.prototype.is = function (expected, message) {
+  return this.generateTestHelper(&#039;is&#039;, &#039;_testShallowEquals&#039;, false)(expected, message);
+};
+
+
+/**
+ *
+ */
+
+Assertions.prototype.not = function (expected, message) {
+  return this.generateTestHelper(&#039;not&#039;, &#039;_testShallowEquals&#039;, true)(expected, message);
+};
+
+/**
+ *
+ */
+
+Assertions.prototype.between = function (expected, message) {
+  return this.generateTestHelper(&#039;between&#039;, &#039;_testBetween&#039;, false)(expected, message);
+};
+
+/**
+ *
+ */
+
+Assertions.prototype.gt = function (expected, message) {
+  return this.generateTestHelper(&#039;gt&#039;, &#039;_testGreaterThan&#039;, false)(expected, message);
+};
+
+/**
+ *
+ */
+
+Assertions.prototype.gte = function (expected, message) {
+  return this.generateTestHelper(&#039;gte&#039;, &#039;_testGreaterThanEqual&#039;, false)(expected, message);
+};
+
+/**
+ *
+ */
+
+Assertions.prototype.lt = function (expected, message) {
+  return this.generateTestHelper(&#039;lt&#039;, &#039;_testLowerThan&#039;, false)(expected, message);
+};
+
+/**
+ *
+ */
+
+Assertions.prototype.lte = function (expected, message) {
+  return this.generateTestHelper(&#039;lte&#039;, &#039;_testLowerThanEqual&#039;, false)(expected, message);
+};
+
+// HELPER METHODS
+// --------------
+
+/**
+ *
+ */
+
+Assertions.prototype._generateCallbackAssertion = function (key, type, test, hash, opts) {
+  var cb = function (data) {
+    if (data &amp;&amp; data.key === key &amp;&amp; data.hash === hash) {
+
+      this._lastGeneratedAction = {key: key, type: type, test: test, hash: hash, opts: opts, data: data};
+
+      if (!opts.expected &amp;&amp; (key === &#039;title&#039; || key === &#039;width&#039; || key === &#039;height&#039; || key === &#039;url&#039; || key === &#039;text&#039; || key === &#039;attribute&#039; || key === &#039;numberOfElements&#039; || key === &#039;numberOfVisibleElements&#039;)) {
+        return false;
+      }
+
+      var testResult = test(data.value, opts.expected);
+
+      this.reporter.emit(&#039;report:assertion&#039;, {
+        success: testResult,
+        expected: opts.expected,
+        value: data.value,
+        message: opts.message,
+        type: type
+      });
+
+      this.incrementExpectations();
+      if (!testResult) {
+        this.incrementFailedAssertions();
+      }
+    }
+  };
+  return cb;
+};
+
+/**
+ *
+ */
+
+Assertions.prototype._addToActionQueue = function (opts, driverMethod, cb) {
+  this._lastGeneratedShit = {opts: opts, driverMethod: driverMethod};
+  this.test.actionPromiseQueue.push(function () {
+    var deferredAction = Q.defer();
+    this.test.driver[driverMethod].apply(this.test.driver, opts);
+    deferredAction.resolve();
+    this.test.driver.events.on(&#039;driver:message&#039;, cb);
+    return deferredAction.promise;
+  }.bind(this));
+  return this;
+};
+
+/**
+ *
+ */
+
+Assertions.prototype.generateTestHelper = function (name, assertionFn, negate) {
+  return function (expected, message) {
+    var gen = this._lastGeneratedShit;
+
+    this.test.actionPromiseQueue.push(function () {
+      var deferredAction = Q.defer();
+      deferredAction.resolve();
+      this.test.driver.events.on(&#039;driver:message&#039;, function () {
+
+        if (gen.opts &amp;&amp; gen.opts[(gen.opts.length - 1)] &amp;&amp; this.test._lastGeneratedAction &amp;&amp; this.test._lastGeneratedAction.hash) {
+          if (gen.opts[(gen.opts.length - 1)] === this.test._lastGeneratedAction.hash &amp;&amp; !this.proceeded[this.test._lastGeneratedAction.hash + name]) {
+            var testResult = this[assertionFn](expected, this.test._lastGeneratedAction.data.value);
+
+            if (negate) {
+              testResult = !testResult;
+            }
+
+            this.proceeded[this.test._lastGeneratedAction.hash + name] = true;
+
+            this.test.reporter.emit(&#039;report:assertion&#039;, {
+              success: testResult,
+              expected: expected,
+              value: this.test._lastGeneratedAction.data.value,
+              message: message,
+              type: this.test._lastGeneratedAction.type
+            });
+
+            this.test.incrementExpectations();
+
+            if (!testResult) {
+              this.test.incrementFailedAssertions();
+            }
+          }
+        }
+      }.bind(this));
+      return deferredAction.promise;
+    }.bind(this));
+
+    return this.chaining ? this : this.test;
+  }.bind(this);
+};
+
+// ASSERT METHODS
+// --------------
+
+/**
+ * Assert if a given value shallow equals a snd. given value
+ *
+ * @method _testShallowEquals
+ * @param {mixed} a Value to test
+ * @param {mixed} b Value to test
+ * @return {bool} false if values don&#039;t match, true if they match
+ * @private
+ */
+
+Assertions.prototype._testShallowEquals = function (a, b) {
+  try {
+    chai.assert.equal(a, b);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+};
+
+/**
+ * Assert if a given value shallow does not equal a snd. given value
+ *
+ * @method _testShallowUnequals
+ * @param {mixed} a Value to test
+ * @param {mixed} b Value to test
+ * @return {bool} true if values don&#039;t match, false if they match
+ * @private
+ */
+
+Assertions.prototype._testShallowUnequals = function (a, b) {
+  try {
+    chai.assert.notEqual(a, b);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+};
+
+
+Assertions.prototype._testBetween = function (a, b) {
+  try {
+    chai.expect(b).to.be.within(a[0], a[1]);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+};
+
+Assertions.prototype._testGreaterThan = function (a, b) {
+  try {
+    chai.expect(b).to.be.above(a);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+};
+
+Assertions.prototype._testGreaterThanEqual = function (a, b) {
+  return this._testGreaterThan(a - 1, b);
+};
+
+Assertions.prototype._testLowerThan = function (a, b) {
+  try {
+    chai.expect(b).to.be.below(a);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+};
+
+Assertions.prototype._testLowerThanEqual = function (a, b) {
+  return this._testLowerThan(a + 1, b);
+};
+
+/**
+ * Assert if a given value is boolean &#039;true&#039;
+ *
+ * @method _testTruthy
+ * @param {bool} a Value to test
+ * @return {bool} false if value is false, true if value is true
+ * @private
+ */
+
+Assertions.prototype._testTruthy = function (a) {
+  return a === &#039;true&#039; || a === true;
+};
+
+/**
+ * Assert if a given value is boolean &#039;false&#039;
+ *
+ * @method _testFalsy
+ * @param {bool} a Value to test
+ * @return {bool} true if value is false, false if value is true
+ * @private
+ */
+
+Assertions.prototype._testFalsy = function (a) {
+  return a === &#039;false&#039; || a === false;
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>
