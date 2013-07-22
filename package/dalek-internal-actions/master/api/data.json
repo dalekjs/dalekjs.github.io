@@ -1,0 +1,708 @@
+{
+    "project": {
+        "name": "dalek-internal-actions",
+        "description": "DalekJS inetrnal browser action library",
+        "version": "0.0.1",
+        "url": "http://dalekjs.com"
+    },
+    "files": {
+        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
+            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "index.js": {
+            "name": "index.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {},
+    "classitems": [
+        {
+            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "line": 1,
+            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "class": ""
+        },
+        {
+            "file": "index.js",
+            "line": 30,
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 36,
+            "is_constructor": 1,
+            "part": "Actions",
+            "api": "",
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 46,
+            "description": "Selector helper",
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 60,
+            "description": "Triggers a mouse event on the first element found matching the provided selector.\nSupported events are mouseup, mousedown, click, mousemove, mouseover and mouseout.\nTODO: IMPLEMENT",
+            "itemtype": "method",
+            "name": "mouseEvent",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "selector",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "api": "",
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 79,
+            "description": "Sets HTTP_AUTH_USER and HTTP_AUTH_PW values for HTTP based authentication systems.\n\nIf your site is behind a HTTP basic auth, you're able to set the username and the password\n\n```javascript\ntest.setHttpAuth('OSWIN', 'rycbrar')\n    .open('http://admin.therift.com');\n```\n\nMost of the time, you`re not storing your passwords within files that will be checked\nin your vcs, for this scenario, you have two options:\n\nThe first option is, to use daleks cli capabilities to generate config variables\nfrom the command line, like this\n\n```batch\n$ dalek --vars USER=OSWIN,PASS=rycbrar\n```\n\n```javascript\ntest.setHttpAuth(test.config.get('USER'), test.config.get('PASS'))\n    .open('http://admin.therift.com');\n```\n\nThe second option is, to use env variables to generate config variables\nfrom the command line, like this\n\n```batch\n$ SET USER=OSWIN\n$ SET PASS=rycbrar\n$ dalek\n```\n\n```javascript\ntest.setHttpAuth(test.config.get('USER'), test.config.get('PASS'))\n    .open('http://admin.therift.com');\n```\n\nIf both, dalek variables & env variables are set, the dalek variables win.\nFor more information about this, I recommend to check out the [configuration docs](/docs/config.html)",
+            "itemtype": "method",
+            "name": "setHttpAuth",
+            "api": "",
+            "params": [
+                {
+                    "name": "username",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "password",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Actions"
+            },
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 135,
+            "description": "Switches to an iFrame context\n\nSometimes you encounter situation, where you need to drive/access an iFrame sitting in your page.\nYou can access such frames with this mehtod, but be aware of the fact, that the complete test\n\n```html\n<div>\n  <iframe id=\"login\" src=\"/login.html\"/>\n</div>\n```\n\n```javascript\n test.open('http:adomain.withiframe.com')\n   .title().is('Title of a page that embeds an iframe')\n   .toIFrame('#login')\n     .title().is('Title of a page that can be embedded as an iframe')\n   .toParent()\n```",
+            "api": "",
+            "itemtype": "method",
+            "name": "toFrame",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Actions"
+            },
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 168,
+            "description": "End of IFrame context",
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 179,
+            "description": "Change scope to a specific window context",
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 190,
+            "description": "Go back to the parent window context",
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 201,
+            "description": "Waits until a function returns true to process any next step.\n\nYou can also set a callback on timeout using the onTimeout argument,\nand set the timeout using the timeout one, in milliseconds. The default timeout is set to 5000ms.",
+            "api": "",
+            "itemtype": "method",
+            "name": "waitFor",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "timeout",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Actions"
+            },
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 221,
+            "description": "Wait until a resource that matches the given testFx is loaded to process a next step.",
+            "api": "",
+            "itemtype": "method",
+            "name": "waitForResource",
+            "params": [
+                {
+                    "name": "ressource",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "timeout",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Actions"
+            },
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 238,
+            "description": "Waits until the passed text is present in the page contents before processing the immediate next step.",
+            "api": "",
+            "itemtype": "method",
+            "name": "waitForText",
+            "params": [
+                {
+                    "name": "text",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "timeout",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Actions"
+            },
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 255,
+            "description": "Waits until an element matching the provided selector expression is visible in the remote DOM to process a next step.",
+            "api": "",
+            "itemtype": "method",
+            "name": "waitUntilVisible",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "timeout",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Actions"
+            },
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 272,
+            "description": "Waits until an element matching the provided selector expression is no longer visible in remote DOM to process a next step.\n\n```javascript\n```",
+            "api": "",
+            "itemtype": "method",
+            "name": "waitWhileVisible",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "timeout",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Actions"
+            },
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 292,
+            "description": "Take a screenshot of the current page.\n\nThe pathname argument takes some placeholders that will be replaced\nPlaceholder:\n\n  - `:browser` - The browser name (e.g. ‘Chrome‘, ‘Safari‘, ‘Firefox‘, etc.)\n  - `:version` -  The browser version (e.g. ‘10_0‘, ‘23_11_5‘, etc.)\n  - `:os` - The operating system (e.g. `OSX`, `Windows`, `Linux`)\n  - `:osVersion` - The operating system version (e.g `XP`, `7`, `10_8`, etc.)\n  - `:viewport` - The current viewport in pixels (e.g. `w1024_h768`)\n  - `:timestamp` - UNIX like timestapm (e.g. `637657345`)\n  - `:date` - Current date in format MM_DD_YYYY (e.g. `12_24_2013`)\n  - `:datetime` - Current datetime in format MM_DD_YYYY_HH_mm_ss (e.g. `12_24_2013_14_55_23`)\n\n```javascript\n// creates 'my/folder/my_file.png'\ntest.screenshot('my/folder/my_file');\n// creates 'my/page/in/safari/homepage.png'\ntest.screenshot('my/page/in/:browser/homepage');\n// creates 'my/page/in/safari_6_0_1/homepage.png'\ntest.screenshot('my/page/in/:browser_:version/homepage');\n// creates 'my/page/in/safari_6_0_1/on/osx/homepage.png'\ntest.screenshot('my/page/in/:browser_:version/on/:os/homepage');\n// creates 'my/page/in/safari_6_0_1/on/osx_10_8/homepage.png'\ntest.screenshot('my/page/in/:browser_:version/on/:os_:osVersion/homepage');\n// creates 'my/page/at/w1024_h768/homepage.png'\ntest.screenshot('my/page/at/:viewport/homepage');\n// creates 'my/page/at/637657345/homepage.png'\ntest.screenshot('my/page/in_time/:timestamp/homepage');\n// creates 'my/page/at/12_24_2013/homepage.png'\ntest.screenshot('my/page/in_time/:date/homepage');\n// creates 'my/page/at/12_24_2013_14_55_23/homepage.png'\ntest.screenshot('my/page/in_time/:datetime/homepage');\n```",
+            "api": "",
+            "itemtype": "method",
+            "name": "screenshot",
+            "params": [
+                {
+                    "name": "pathname",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Actions"
+            },
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 341,
+            "description": "Pause steps suite execution for a given amount of time, and optionally execute a step on done.\n\nThis makes sense, if you have a ticker for example, tht scrolls like every ten seconds\n& you want to assure that the visible content changes every ten seconds\n\n```javascript\ntest.open('http://myticker.org')\n  .visible('.ticker-element:first', 'First ticker element is visible')\n  .wait(10000)\n  .visible('.ticker-element:nth-child(2)', 'Snd. ticker element is visible')\n  .wait(10000)\n  .visible('.ticker-element:last', 'Third ticker element is visible')\n  .all.success('Ticker seems to work quite well');\n```\nIf no timeout argument is given, a default timeout of 5 seconds will be used\n\n```javascript\ntest.open('http://myticker.org')\n  .visible('.ticker-element:first', 'First ticker element is visible')\n  .wait()\n  .visible('.ticker-element:nth-child(2)', 'Snd. ticker element is visible')\n  .wait()\n  .visible('.ticker-element:last', 'Third ticker element is visible')\n  .all.success('This ticker changed every 5 seconds, cool!');\n```",
+            "itemtype": "method",
+            "name": "wait",
+            "api": "",
+            "params": [
+                {
+                    "name": "timeout",
+                    "description": "in milliseconds",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Actions"
+            },
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 381,
+            "description": "Reloads current page location.\n\nThis is basically the same as hitting F5/refresh in your browser\n\n```javascript\ntest.open('http://google.com')\n  .refresh();\n```",
+            "itemtype": "method",
+            "name": "reload",
+            "api": "",
+            "return": {
+                "description": "",
+                "type": "Actions"
+            },
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 403,
+            "description": "Moves a step forward in browser's history.\n\nThis is basically the same as hitting the forward button in your browser\n\n```javascript\ntest.open('http://google.com')\n  .open('https://github.com')\n  .url.is('https://github.com/', 'We are at GitHub')\n  .back()\n  .url.is('http://google.com', 'We are at Google!')\n  .forward()\n  .url.is('https://github.com/', 'Back at GitHub! Timetravel FTW');\n```",
+            "itemtype": "method",
+            "name": "forward",
+            "api": "",
+            "return": {
+                "description": "",
+                "type": "Actions"
+            },
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 430,
+            "description": "Moves back a step in browser's history.\n\nThis is basically the same as hitting the back button in your browser\n\n```javascript\ntest.open('http://google.com')\n  .open('https://github.com')\n  .url.is('https://github.com/', 'We are at GitHub')\n  .back()\n  .url.is('http://google.com', 'We are at Google!')\n  .forward()\n  .url.is('https://github.com/', 'Back at GitHub! Timetravel FTW');\n```",
+            "itemtype": "method",
+            "name": "back",
+            "api": "",
+            "return": {
+                "description": "",
+                "type": "Actions"
+            },
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 457,
+            "description": "Performs a click on the element matching the provided selector expression.\n\nIf we take Daleks homepage (the one you're probably visiting right now),\nthe HTML looks something like this\n\n```html\n<nav>\n  <ul>\n    <li><a id=\"homeapge\" href=\"/index.html\">DalekJS</a></li>\n    <li><a id=\"docs\"  href=\"/docs.html\">Documentation</a></li>\n    <li><a id=\"faq\" href=\"/faq.html\">F.A.Q</a></li>\n  </ul>\n</nav>\n```\n\n```javascript\ntest.open('http://dalekjs.com')\n    .click('#faq')\n    .title().is('DalekJS - Frequently asked questions', 'What the F.A.Q.');\n```\n\nBy default, this performs a left click.",
+            "api": "",
+            "itemtype": "method",
+            "name": "click",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Actions"
+            },
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 502,
+            "description": "Fills the fields of a form with given values.\n\n```html\n<nav>\n  <ul>\n    <li><a id=\"homeapge\" href=\"/index.html\">DalekJS</a></li>\n    <li><a id=\"docs\"  href=\"/docs.html\">Documentation</a></li>\n    <li><a id=\"faq\" href=\"/faq.html\">F.A.Q</a></li>\n  </ul>\n</nav>\n```\n\n```javascript\ntest.open('http://dalekjs.com')\n    .setValue('#ijustwannahaveavalue', 'a value')\n    .title().is('DalekJS - Frequently asked questions', 'What the F.A.Q.');\n```",
+            "api": "",
+            "itemtype": "method",
+            "name": "setValue",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Actions"
+            },
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 535,
+            "description": "Performs an HTTP request for opening a given location.\nYou can forge GET, POST, PUT, DELETE and HEAD requests.\n\n```javascript\ntest.open('http://dalekjs.com')\n    .url().is('http://dalekjs.com', 'DalekJS I'm in you');\n```",
+            "api": "",
+            "itemtype": "method",
+            "name": "open",
+            "params": [
+                {
+                    "name": "locations",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "settings",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Actions"
+            },
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 558,
+            "api": "",
+            "itemtype": "method",
+            "name": "type",
+            "params": [
+                {
+                    "name": "keystrokes",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "chainable"
+            },
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 580,
+            "api": "",
+            "itemtype": "method",
+            "name": "answer",
+            "params": [
+                {
+                    "name": "keystrokes",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "chainable"
+            },
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 596,
+            "api": "",
+            "itemtype": "method",
+            "name": "acceptAlert",
+            "params": [
+                {
+                    "name": "keystrokes",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "chainable"
+            },
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 612,
+            "api": "",
+            "itemtype": "method",
+            "name": "dismissAlert",
+            "return": {
+                "description": "chainable"
+            },
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 627,
+            "description": "Resizes the browser window",
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 638,
+            "description": "Maximizes the browser window",
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 649,
+            "description": "Sets a cookie",
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 660,
+            "description": "Waits until an element matching the provided\nselector expression exists in remote DOM to process any next step.",
+            "api": "",
+            "itemtype": "method",
+            "name": "waitForElement",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "timeout",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Actions"
+            },
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 678,
+            "access": "private",
+            "tagname": "",
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 701,
+            "access": "private",
+            "tagname": "",
+            "class": "",
+            "module": ""
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: part",
+            "line": " index.js:36"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:36"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:60"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:79"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:135"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:201"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:221"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:238"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:255"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:272"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:292"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:341"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:381"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:403"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:430"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:457"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:502"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:535"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:558"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:580"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:596"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:612"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:660"
+        },
+        {
+            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
+        },
+        {
+            "message": "Missing item type",
+            "line": " index.js:30"
+        },
+        {
+            "message": "Missing item type",
+            "line": " index.js:36"
+        },
+        {
+            "message": "Missing item type\nSelector helper",
+            "line": " index.js:46"
+        },
+        {
+            "message": "Missing item type\nEnd of IFrame context",
+            "line": " index.js:168"
+        },
+        {
+            "message": "Missing item type\nChange scope to a specific window context",
+            "line": " index.js:179"
+        },
+        {
+            "message": "Missing item type\nGo back to the parent window context",
+            "line": " index.js:190"
+        },
+        {
+            "message": "Missing item type\nResizes the browser window",
+            "line": " index.js:627"
+        },
+        {
+            "message": "Missing item type\nMaximizes the browser window",
+            "line": " index.js:638"
+        },
+        {
+            "message": "Missing item type\nSets a cookie",
+            "line": " index.js:649"
+        },
+        {
+            "message": "Missing item type",
+            "line": " index.js:678"
+        },
+        {
+            "message": "Missing item type",
+            "line": " index.js:701"
+        }
+    ]
+}
