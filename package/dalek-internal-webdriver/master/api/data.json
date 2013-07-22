@@ -2678,7 +2678,7 @@
             "file": "index.js",
             "line": 27,
             "description": "Its a webdriver client",
-            "package": "Webdriver",
+            "part": "Webdriver",
             "api": "",
             "class": "",
             "module": "DalekJS",
@@ -2691,7 +2691,7 @@
             "line": " lib/driver.js:233"
         },
         {
-            "message": "unknown tag: package",
+            "message": "unknown tag: part",
             "line": " index.js:27"
         },
         {
