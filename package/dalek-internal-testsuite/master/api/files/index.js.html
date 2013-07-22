@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>index.js - dalek-internal-testsuite</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="dalek-internal-testsuite"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.0.1</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Dalek.Testsuite.html">Dalek.Testsuite</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/DalekJS.html">DalekJS</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: index.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*!
+ *
+ * Copyright (c) 2013 Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ *
+ */
+
+&#x27;use strict&#x27;;
+
+// ext. libs
+var _ = require(&#x27;lodash&#x27;);
+var EventEmitter2 = require(&#x27;eventemitter2&#x27;).EventEmitter2;
+
+// int. libs
+var test = require(&#x27;dalek-internal-test&#x27;);
+
+/**
+ * @constructor
+ * @param {object} options
+ */
+
+var Testsuite = function (options) {
+  this.emitter = new EventEmitter2();
+  this.initialize(options);
+  this.suite = this.loadTestsuite(options.file);
+};
+
+/**
+ * Testsuite
+ *
+ * @module DalekJS
+ * @class Testsuite
+ * @namespace Dalek
+ * @part Testsuite
+ * @api
+ */
+
+Testsuite.prototype = {
+
+  /**
+   * Assigns the initial options
+   * driverEmitter -&gt; the drivers event dispatcher
+   * reporterEmitter -&gt; the reporters event dispatcher
+   * driver -&gt; the driver instance (e.g. native webdriver, selenium, etc.)
+   * name -&gt; the suites filename (default suite name)
+   *
+   * @method initialize
+   * @param {object} options
+   * @chainable
+   */
+
+  initialize: function (options) {
+    this.driverEmitter = options.driverEmitter;
+    this.reporterEmitter = options.reporterEmitter;
+    this.driver = options.driver;
+    this.name = options.file;
+    return this;
+  },
+
+  /**
+   * Loads the testsuite that should be executed
+   *
+   * @method loadTestsuite
+   * @param {string} testfile
+   * @return {object} testsuite
+   */
+
+  loadTestsuite: function (testfile) {
+    var suite = require(process.cwd() + &#x27;/&#x27; + testfile.replace(&#x27;.js&#x27;, &#x27;&#x27;).replace(&#x27;.coffee&#x27;, &#x27;&#x27;));
+    suite._uid = _.uniqueId(&#x27;Suite&#x27;);
+    return suite;
+  },
+
+  /**
+   * Checks if all tests from the testsuite are executed.
+   * Runs the next test if not.
+   * Triggers &#x60;asyncs&#x60; callback if the suite is finished.
+   * Decrements the &#x60;testsToBeExecuted&#x60; counter
+   *
+   * @method testFinished
+   * @param {function} callback
+   * @param {array} tests
+   * @param {object} test
+   * @param {string} event
+   * @chainable
+   */
+
+  testFinished: function (callback, tests) {
+    // check if there are still tests that should be executed in this suite,
+    // if so, run them
+    if (this.decrementTestsToBeExecuted() &gt; 1) {
+      this.executeNextTest(tests);
+      return this;
+    }
+
+    // move on to the next suite
+    callback();
+    return this;
+  },
+
+  /**
+   * Decrements number of tests that should be executed in this suite
+   *
+   * @method decrementTestsToBeExecuted
+   * @return {integer} numberOfTestsToBeExecuted
+   */
+
+  decrementTestsToBeExecuted: function () {
+    return (this.testsToBeExecuted--) -1;
+  },
+
+  /**
+   * Returns the name of the testsuite
+   * If the suite has no name, it will return the testsuites filename
+   *
+   * @method getName
+   * @return {string} name
+   */
+
+  getName: function () {
+    if (this.suite.name &amp;&amp; _.isString(this.suite.name)) {
+      var name = this.suite.name;
+      delete this.suite.name;
+      return name;
+    }
+
+    return this.name;
+  },
+
+  /**
+   * Returns the options of the testsuite
+   * If the suite has no options, it will return &#x60;null&#x60;
+   *
+   * @method getOptions
+   * @return {object|null} options
+   */
+
+  getOptions: function () {
+    if (this.suite.options &amp;&amp; _.isObject(this.suite.options)) {
+      var options = this.suite.options;
+      delete this.suite.options;
+      return options;
+    }
+
+    return null;
+  },
+
+  /**
+   * Returns all names (aka. object keys) the tests that should be executed
+   *
+   * @method getTests
+   * @return {array} test
+   */
+
+  getTests: function () {
+    return Object.keys(this.suite);
+  },
+
+  /**
+   * Returns the number of tests to be executed
+   *
+   * @method getNumberOfTests
+   * @param {array} tests
+   * @return {integer} numberOfTests
+   */
+
+  getNumberOfTests: function (tests) {
+    return tests.length;
+  },
+
+  /**
+   * Returns the next test, that should be executed
+   *
+   * @method getNextTest
+   * @return {string} testName
+   */
+
+  getNextTest: function (tests) {
+    return tests.shift();
+  },
+
+  /**
+   * Executes the next test in the sequence
+   *
+   * @method executeNextTest
+   * @param {array} tests
+   * @return {mixed} testValue
+   */
+
+  executeNextTest: function (tests) {
+    // grab the next test in the queue
+    var testName = this.getNextTest(tests);
+    // get the next test function
+    var testFunction = this.getTest(testName);
+    // generate an instance of the test &amp; start it
+    return testFunction(this.getTestInstance(testName));
+  },
+
+  /**
+   * Generates a new test instance
+   *
+   * @method getTestInstance
+   * @param {string} name
+   * @return {Dalek.Test} test
+   */
+
+  getTestInstance: function (name) {
+    return test({events: this.emitter, driver: this.driver, reporter: this.reporterEmitter, name: name});
+  },
+
+  /**
+   * Returns a test function by its name
+   *
+   * @method getTest
+   * @param {string} name
+   * @return {function} test
+   */
+
+  getTest: function (name) {
+    return this.suite[name] &amp;&amp; _.isFunction(this.suite[name]) ? this.suite[name] : this.testDoesNotExist;
+  },
+
+  /**
+   * Will be executed if a test is started, that does not exist
+   *
+   * @method testDoesNotExist
+   * @param {object} options
+   */
+
+  testDoesNotExist: function (options) {
+    console.error(&#x27;Test &quot;&#x27; + options.name + &#x27;&quot; does not exist!&#x27;);
+    process.exit(0);
+  },
+
+  /**
+   * Runs any tests from this testsuite in sequence
+   *
+   * @method run
+   * @param {function} callback
+   * @chainable
+   */
+
+  run: function (callback) {
+    var tests = [];
+
+    // extract suite name
+    this.name = this.getName();
+    // extract suite options
+    this.options = this.getOptions();
+
+    // extract tests
+    tests = this.getTests();
+    this.testsToBeExecuted = this.numberOfTests = this.getNumberOfTests(tests);
+    // kickstart the test execution
+    this.executeNextTest(tests);
+
+    // listen to the test:finished event &amp; then start the next test
+    // if there are no tests in this suite left,
+    // run the async callback &amp; mark this suite as finished
+    this.emitter.onAny(this.testFinished.bind(this, callback, tests));
+    return this;
+  }
+};
+
+// export the testuite instance
+module.exports = Testsuite;
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

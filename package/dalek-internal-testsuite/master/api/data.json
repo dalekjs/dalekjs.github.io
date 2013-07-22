@@ -1,0 +1,365 @@
+{
+    "project": {
+        "name": "dalek-internal-testsuite",
+        "description": "DalekJS internal testsuite helper library",
+        "version": "0.0.1",
+        "url": "http://dalekjs.com"
+    },
+    "files": {
+        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
+            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "index.js": {
+            "name": "index.js",
+            "modules": {
+                "DalekJS": 1
+            },
+            "classes": {
+                "Dalek.Testsuite": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek": 1
+            }
+        }
+    },
+    "modules": {
+        "DalekJS": {
+            "name": "DalekJS",
+            "submodules": {},
+            "classes": {
+                "Dalek.Testsuite": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek": 1
+            },
+            "tag": "module",
+            "file": "index.js",
+            "line": 45,
+            "description": "Testsuite",
+            "part": "Testsuite",
+            "api": ""
+        }
+    },
+    "classes": {
+        "Dalek.Testsuite": {
+            "name": "Dalek.Testsuite",
+            "shortname": "Dalek.Testsuite",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DalekJS",
+            "namespace": "Dalek",
+            "file": "index.js",
+            "line": 45,
+            "description": "Testsuite"
+        }
+    },
+    "classitems": [
+        {
+            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "line": 1,
+            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "class": "Dalek.Testsuite"
+        },
+        {
+            "file": "index.js",
+            "line": 34,
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "options",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "Dalek.Testsuite"
+        },
+        {
+            "file": "index.js",
+            "line": 57,
+            "description": "Assigns the initial options\ndriverEmitter -> the drivers event dispatcher\nreporterEmitter -> the reporters event dispatcher\ndriver -> the driver instance (e.g. native webdriver, selenium, etc.)\nname -> the suites filename (default suite name)",
+            "itemtype": "method",
+            "name": "initialize",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.Testsuite",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 77,
+            "description": "Loads the testsuite that should be executed",
+            "itemtype": "method",
+            "name": "loadTestsuite",
+            "params": [
+                {
+                    "name": "testfile",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "testsuite",
+                "type": "Object"
+            },
+            "class": "Dalek.Testsuite",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 91,
+            "description": "Checks if all tests from the testsuite are executed.\nRuns the next test if not.\nTriggers `asyncs` callback if the suite is finished.\nDecrements the `testsToBeExecuted` counter",
+            "itemtype": "method",
+            "name": "testFinished",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "tests",
+                    "description": "",
+                    "type": "Array"
+                },
+                {
+                    "name": "test",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "event",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.Testsuite",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 118,
+            "description": "Decrements number of tests that should be executed in this suite",
+            "itemtype": "method",
+            "name": "decrementTestsToBeExecuted",
+            "return": {
+                "description": "numberOfTestsToBeExecuted",
+                "type": "Integer"
+            },
+            "class": "Dalek.Testsuite",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 129,
+            "description": "Returns the name of the testsuite\nIf the suite has no name, it will return the testsuites filename",
+            "itemtype": "method",
+            "name": "getName",
+            "return": {
+                "description": "name",
+                "type": "String"
+            },
+            "class": "Dalek.Testsuite",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 147,
+            "description": "Returns the options of the testsuite\nIf the suite has no options, it will return `null`",
+            "itemtype": "method",
+            "name": "getOptions",
+            "return": {
+                "description": "options",
+                "type": "Object|null"
+            },
+            "class": "Dalek.Testsuite",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 165,
+            "description": "Returns all names (aka. object keys) the tests that should be executed",
+            "itemtype": "method",
+            "name": "getTests",
+            "return": {
+                "description": "test",
+                "type": "Array"
+            },
+            "class": "Dalek.Testsuite",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 176,
+            "description": "Returns the number of tests to be executed",
+            "itemtype": "method",
+            "name": "getNumberOfTests",
+            "params": [
+                {
+                    "name": "tests",
+                    "description": "",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "numberOfTests",
+                "type": "Integer"
+            },
+            "class": "Dalek.Testsuite",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 188,
+            "description": "Returns the next test, that should be executed",
+            "itemtype": "method",
+            "name": "getNextTest",
+            "return": {
+                "description": "testName",
+                "type": "String"
+            },
+            "class": "Dalek.Testsuite",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 199,
+            "description": "Executes the next test in the sequence",
+            "itemtype": "method",
+            "name": "executeNextTest",
+            "params": [
+                {
+                    "name": "tests",
+                    "description": "",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "testValue",
+                "type": "Mixed"
+            },
+            "class": "Dalek.Testsuite",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 216,
+            "description": "Generates a new test instance",
+            "itemtype": "method",
+            "name": "getTestInstance",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "test",
+                "type": "Dalek.Test"
+            },
+            "class": "Dalek.Testsuite",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 228,
+            "description": "Returns a test function by its name",
+            "itemtype": "method",
+            "name": "getTest",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "test",
+                "type": "Function"
+            },
+            "class": "Dalek.Testsuite",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 240,
+            "description": "Will be executed if a test is started, that does not exist",
+            "itemtype": "method",
+            "name": "testDoesNotExist",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "Dalek.Testsuite",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 252,
+            "description": "Runs any tests from this testsuite in sequence",
+            "itemtype": "method",
+            "name": "run",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.Testsuite",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: part",
+            "line": " index.js:45"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:45"
+        },
+        {
+            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
+        },
+        {
+            "message": "Missing item type",
+            "line": " index.js:34"
+        }
+    ]
+}
