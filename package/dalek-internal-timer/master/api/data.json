@@ -1,0 +1,153 @@
+{
+    "project": {
+        "name": "dalek-internal-timer",
+        "description": "DalekJS internal timer library",
+        "version": "0.0.1",
+        "url": "http://dalekjs.com"
+    },
+    "files": {
+        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
+            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "index.js": {
+            "name": "index.js",
+            "modules": {
+                "DalekJS": 1
+            },
+            "classes": {
+                "Timer": 1,
+                "Dalek.Timer": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek": 1
+            }
+        }
+    },
+    "modules": {
+        "DalekJS": {
+            "name": "DalekJS",
+            "submodules": {},
+            "classes": {
+                "Timer": 1,
+                "Dalek.Timer": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek": 1
+            },
+            "tag": "module",
+            "file": "index.js",
+            "line": 39,
+            "description": "Timing module to measure test run times",
+            "part": "Timer",
+            "api": ""
+        }
+    },
+    "classes": {
+        "Timer": {
+            "name": "Timer",
+            "shortname": "Timer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DalekJS",
+            "file": "index.js",
+            "line": 27,
+            "description": "Initializes the timers default values",
+            "is_constructor": 1
+        },
+        "Dalek.Timer": {
+            "name": "Dalek.Timer",
+            "shortname": "Dalek.Timer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DalekJS",
+            "namespace": "Dalek",
+            "file": "index.js",
+            "line": 39,
+            "description": "Timing module to measure test run times"
+        }
+    },
+    "classitems": [
+        {
+            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "line": 1,
+            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "class": "Timer"
+        },
+        {
+            "file": "index.js",
+            "line": 51,
+            "description": "Starts the timer",
+            "itemtype": "method",
+            "name": "start",
+            "chainable": 1,
+            "class": "Dalek.Timer",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 63,
+            "description": "Stops the timer",
+            "itemtype": "method",
+            "name": "stop",
+            "chainable": 1,
+            "class": "Dalek.Timer",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 75,
+            "description": "Returns the elapsed time in ms",
+            "itemtype": "method",
+            "name": "getElapsedTime",
+            "return": {
+                "description": "",
+                "type": "Float"
+            },
+            "class": "Dalek.Timer",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 86,
+            "description": "Returns an object with test run time informations\ncontaining hours, minutes & seconds",
+            "itemtype": "method",
+            "name": "getElapsedTimeFormatted",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Dalek.Timer",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: part",
+            "line": " index.js:39"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:39"
+        },
+        {
+            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
+        }
+    ]
+}
