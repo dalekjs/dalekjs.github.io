@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>index.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">56.44</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">118</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="span6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="span6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
+      <p class="stat">23.06</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">0.96</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="span6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="span12">/*!
+ *
+ * Copyright (c) 2013 Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
+
+&#039;use strict&#039;;
+
+// ext. libs
+var spawn = require(&#039;child_process&#039;).spawn;
+var optimist = require(&#039;optimist&#039;);
+
+/**
+ * Dalek Command Line Tools
+ *
+ * @part CLI
+ * @api
+ */
+
+module.exports = function () {
+
+  // Search for installed dalek by using node&#039;s built-in require() logic.
+  var child = spawn(process.execPath, [&#039;-p&#039;, &#039;-e&#039;, &#039;require.resolve(&quot;dalekjs&quot;)&#039;]);
+  var dalekpath = &#039;&#039;;
+  child.stdout.on(&#039;data&#039;, function (data) {
+    dalekpath += data;
+  });
+
+  // when the child process exists, dalek-cli will check
+  // if a local dalekjs installation exists, if so,
+  // it will check the parameters
+  child.on(&#039;exit&#039;, function(code) {
+    // Removing trailing newline from stdout.
+    dalekpath = dalekpath.trim();
+    // If a local dalek isn&#039;t found, throw an error an exit
+    if (code !== 127 &amp;&amp; dalekpath) {
+      var argv = optimist
+        .usage(&#039;Usage: dalek [test files] {OPTIONS}&#039;)
+        .wrap(80)
+        .option(&#039;version&#039;, {
+          alias: &#039;v&#039;,
+          desc : &#039;Shows the version of the dalek-cli &amp; local dalek installation&#039;
+        })
+        .option(&#039;reporter&#039;, {
+          alias: &#039;r&#039;,
+          type : &#039;string&#039;,
+          desc : &#039;Reporter(s) you would like to invoke&#039;
+        })
+        .option(&#039;driver&#039;, {
+          alias: &#039;d&#039;,
+          type : &#039;string&#039;,
+          desc : &#039;Driver(s) you would like to invoke&#039;
+        })
+        .option(&#039;browser&#039;, {
+          alias: &#039;b&#039;,
+          type : &#039;string&#039;,
+          desc : &#039;Browser(s) you would like to invoke&#039;
+        })
+        .option(&#039;logLevel&#039;, {
+          alias: &#039;l&#039;,
+          type : &#039;string&#039;,
+          desc : &#039;Log level, controls the amount of information outputted to the console (0 to 5)&#039;
+        })
+        .option(&#039;no-colors&#039;, {
+          type : &#039;boolean&#039;,
+          desc : &#039;Disable colorized output in the console&#039;
+        })
+        .option(&#039;no-symbols&#039;, {
+          type : &#039;boolean&#039;,
+          desc : &#039;Disable UTF-8 symbols in the console&#039;
+        })
+        .option(&#039;help&#039;, {
+          alias : &#039;h&#039;,
+          desc : &#039;Show this message&#039;
+        })
+        .check(function (argv) {
+          // output some version info
+          if (argv.version) {
+            // load the versions
+            var fs = require(&#039;fs&#039;);
+            var localVersion = JSON.parse(fs.readFileSync(dalekpath.replace(&#039;index.js&#039;, &#039;package.json&#039;))).version;
+            var cliVersion = JSON.parse(fs.readFileSync(__dirname + &#039;/package.json&#039;)).version;
+
+            console.log(&#039;DalekJS CLI Tools Version:&#039;, cliVersion);
+            console.log(&#039;DalekJS local install:&#039;, localVersion);
+            console.log(&#039;Brought to you with love by:&#039;, &#039;Sebastian Golasch (@asciidisco) 2013&#039;);
+            console.log(&#039;&#039;);
+            throw &#039;&#039;;
+          }
+
+          // show help
+          if (argv.help) {
+            throw &#039;&#039;;
+          }
+        })
+        .argv;
+
+      // run dalekjs
+      var Dalek = require(dalekpath);
+      var dalek = new Dalek({
+        tests: argv._,
+        driver: argv.driver ? argv.driver.split(&#039;,&#039;) : [],
+        reporter: argv.reporter ? argv.reporter.split(&#039;,&#039;) : [],
+        browser: argv.browser ? argv.browser.split(&#039;,&#039;) : [],
+        logLevel: argv.logLevel
+      });
+
+      dalek.run();
+
+    } else {
+      // check if the version flag is given, then spit out additional version info
+      if (process.argv[2] &amp;&amp; (process.argv[2] === &#039;-v&#039; || process.argv[2] === &#039;--version&#039;)) {
+        var fs = require(&#039;fs&#039;);
+        var cliVersion = JSON.parse(fs.readFileSync(__dirname + &#039;/package.json&#039;)).version;
+        console.log(&#039;DalekJS CLI Tools Version:&#039;, cliVersion);
+        console.log(&#039;Brought to you with love by:&#039;, &#039;Sebastian Golasch (@asciidisco) 2013&#039;);
+      } else {
+        console.log(&#039;No local DalekJS installation found&#039;);
+        console.log(&#039;Please follow the instruction here: http://dalekjs.com/pages/getStarted.html&#039;);
+        process.exit(127);
+      }
+    }
+  });
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>
