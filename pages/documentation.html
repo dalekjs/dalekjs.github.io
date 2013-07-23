@@ -16,21 +16,17 @@
         <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png" />
         <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png" />
 
-        <link rel="dns-prefetch" href="//dalekjs.github.io">
+        <link rel="dns-prefetch" href="//dalekjs.com">
         <link rel="dns-prefetch" href="//fonts.googleapis.com">
         <link rel="dns-prefetch" href="//themes.googleusercontent.com">
-        <link rel="dns-prefetch" href="//player.vimeo.com">
-        <link rel="dns-prefetch" href="//a.vimeocdn.com">
-        <link rel="dns-prefetch" href="//b.vimeocdn.com">
         <link rel="dns-prefetch" href="//www.google-analytics.com">
 
         <link rel="stylesheet" href="../css/d5872ee0.main.css">
 
-        <!-- Font stuff -->
         <link href='//fonts.googleapis.com/css?family=Londrina+Solid' rel='stylesheet' type='text/css'>
         <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
     </head>
-    <body><!--
+    <body data-buildtime="@@timestamp"><!--
 
         --><div class="grid"><!--
 
@@ -39,27 +35,30 @@
                     desktop menue
                     --><ul class="nav nav--fit nav--block"><!--
                         --><li><a href="../index.html">DALEKJS</a></li><!--
-                        --><li><a href="getStarted.html">Get started</a></li><!--
-                        --><li><a href="documentation.html" class="active">Documentation</a></li><!--
-                        --><li><a href="support.html">Support</a></li><!--
-                        --><li><a href="faq.html">FAQ</a></li><!--
-                        --><li><a href="merch.html">Merch</a></li><!--
+                        --><li><a  href="../pages/getStarted.html">Get started</a></li><!--
+                        --><li><a class="active" href="../pages/documentation.html">Documentation</a></li><!--
+                        --><li><a  href="../pages/support.html">Support</a></li><!--
+                        --><li><a  href="../pages/faq.html">FAQ</a></li><!--
+                        --><li><a  href="../pages/merch.html">Merch</a></li><!--
                     --></ul><!--
 
                     mobile menue
                     --><select onchange="if (this.value) window.location.href = this.value;"><!--
                         --><option value="../index.html">DALEKJS</option><!--
-                        --><option value="getStarted.html">Get started</option><!--
-                        --><option selected value="documentation.html">Documentation</option><!--
-                        --><option value="support.html">Support</option><!--
-                        --><option value="faq.html">FAQ</option><!--
-                        --><option value="merch.html">Merch</option><!--
+                        --><option  value="../pages/getStarted.html">Get started</option><!--
+                        --><option selected value="../pages/documentation.html">Documentation</option><!--
+                        --><option  value="../pages/support.html">Support</option><!--
+                        --><option  value="../pages/faq.html">FAQ</option><!--
+                        --><option  value="../pages/merch.html">Merch</option><!--
                     --></select><!--
                 --></nav><!--
-            --></header><!--
+            --></header>
+<!--
 
             Content wrapper
-            --><div class="wrapper grid__item one-whole"><!--
+            --><div class="wrapper grid__item one-whole" data-templatevars='{
+                "docs": true
+            }'><!--
 
                 Sidebar nav
                 --><div class="grid__item one-quarter sidenav"><!--
@@ -246,13 +245,26 @@
                  --></div><!--
              --></div><!--
 
+                --></div><!--
+        Footer
+                --></div><!--
+
             Footer
-            --><footer class="grid__item one-whole footer"><!--
+            --><footer id="footer" class="grid__item one-whole footer"><!--
                 --><span class="footer__author">DalekJS created by <a class="footer__link" href="https://github.com/asciidisco">Sebastian Golasch</a></span><!--
                 --><span class="footer__author">Logo by <a class="footer__link" href="http://www.redbubble.com/people/scottbarker">Scott Barker</a></span><!--
                 --><span class="footer__author">Browser icons by <a class="footer__link" href="https://github.com/substack">Substack</a></span><!--
             --></footer><!--
         --></div>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-42520123-1', 'dalekjs.com');
+          ga('send', 'pageview');
+        </script>
         <script src="../js/617db3e7.main.js"></script>
     </body>
 </html>
