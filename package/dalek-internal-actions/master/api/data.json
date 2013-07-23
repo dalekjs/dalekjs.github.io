@@ -389,7 +389,17 @@
         },
         {
             "file": "index.js",
-            "line": 511,
+            "line": 503,
+            "description": "Submits a form",
+            "api": "",
+            "itemtype": "method",
+            "name": "submit",
+            "class": "",
+            "module": ""
+        },
+        {
+            "file": "index.js",
+            "line": 517,
             "description": "Fills the fields of a form with given values.\n\n```html\n<nav>\n  <ul>\n    <li><a id=\"homeapge\" href=\"/index.html\">DalekJS</a></li>\n    <li><a id=\"docs\"  href=\"/docs.html\">Documentation</a></li>\n    <li><a id=\"faq\" href=\"/faq.html\">F.A.Q</a></li>\n  </ul>\n</nav>\n```\n\n```javascript\ntest.open('http://dalekjs.com')\n    .setValue('#ijustwannahaveavalue', 'a value')\n    .title().is('DalekJS - Frequently asked questions', 'What the F.A.Q.');\n```",
             "api": "",
             "itemtype": "method",
@@ -415,7 +425,7 @@
         },
         {
             "file": "index.js",
-            "line": 544,
+            "line": 550,
             "description": "Performs an HTTP request for opening a given location.\nYou can forge GET, POST, PUT, DELETE and HEAD requests.\n\n```javascript\ntest.open('http://dalekjs.com')\n    .url().is('http://dalekjs.com', 'DalekJS I'm in you');\n```",
             "api": "",
             "itemtype": "method",
@@ -441,7 +451,7 @@
         },
         {
             "file": "index.js",
-            "line": 567,
+            "line": 573,
             "api": "",
             "itemtype": "method",
             "name": "type",
@@ -460,7 +470,7 @@
         },
         {
             "file": "index.js",
-            "line": 589,
+            "line": 595,
             "api": "",
             "itemtype": "method",
             "name": "answer",
@@ -479,7 +489,7 @@
         },
         {
             "file": "index.js",
-            "line": 605,
+            "line": 611,
             "api": "",
             "itemtype": "method",
             "name": "acceptAlert",
@@ -498,7 +508,7 @@
         },
         {
             "file": "index.js",
-            "line": 621,
+            "line": 627,
             "api": "",
             "itemtype": "method",
             "name": "dismissAlert",
@@ -510,28 +520,28 @@
         },
         {
             "file": "index.js",
-            "line": 636,
+            "line": 642,
             "description": "Resizes the browser window",
             "class": "",
             "module": ""
         },
         {
             "file": "index.js",
-            "line": 647,
+            "line": 653,
             "description": "Maximizes the browser window",
             "class": "",
             "module": ""
         },
         {
             "file": "index.js",
-            "line": 658,
+            "line": 664,
             "description": "Sets a cookie",
             "class": "",
             "module": ""
         },
         {
             "file": "index.js",
-            "line": 669,
+            "line": 675,
             "description": "Waits until an element matching the provided\nselector expression exists in remote DOM to process any next step.",
             "api": "",
             "itemtype": "method",
@@ -557,7 +567,7 @@
         },
         {
             "file": "index.js",
-            "line": 687,
+            "line": 693,
             "access": "private",
             "tagname": "",
             "class": "",
@@ -565,7 +575,7 @@
         },
         {
             "file": "index.js",
-            "line": 710,
+            "line": 716,
             "access": "private",
             "tagname": "",
             "class": "",
@@ -651,31 +661,35 @@
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:511"
+            "line": " index.js:503"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:544"
+            "line": " index.js:517"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:567"
+            "line": " index.js:550"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:589"
+            "line": " index.js:573"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:605"
+            "line": " index.js:595"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:621"
+            "line": " index.js:611"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:669"
+            "line": " index.js:627"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:675"
         },
         {
             "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
@@ -695,23 +709,23 @@
         },
         {
             "message": "Missing item type\nResizes the browser window",
-            "line": " index.js:636"
+            "line": " index.js:642"
         },
         {
             "message": "Missing item type\nMaximizes the browser window",
-            "line": " index.js:647"
+            "line": " index.js:653"
         },
         {
             "message": "Missing item type\nSets a cookie",
-            "line": " index.js:658"
+            "line": " index.js:664"
         },
         {
             "message": "Missing item type",
-            "line": " index.js:687"
+            "line": " index.js:693"
         },
         {
             "message": "Missing item type",
-            "line": " index.js:710"
+            "line": " index.js:716"
         }
     ]
 }
