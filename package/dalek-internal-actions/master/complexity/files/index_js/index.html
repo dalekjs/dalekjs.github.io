@@ -49,7 +49,7 @@
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">722</p>
+      <p class="stat">741</p>
     </div>
   </div>
   <div class="row historical">
@@ -137,6 +137,9 @@ var Actions = function () {
 
 /**
  * Selector helper
+ *
+ * @api
+ * @method query
  */
 
 Actions.prototype.query = function (selector) {
@@ -146,6 +149,13 @@ Actions.prototype.query = function (selector) {
   that.querying = true;
   return this.test ? this : that;
 };
+
+/**
+ * Selector helper
+ *
+ * @api
+ * @method $
+ */
 
 Actions.prototype.$ = Actions.prototype.query;
 
@@ -733,6 +743,9 @@ Actions.prototype.dismissAlert = function () {
 
 /**
  * Resizes the browser window
+ *
+ * @api
+ * @method resize
  */
 
 Actions.prototype.resize = function (dimensions) {
@@ -744,6 +757,9 @@ Actions.prototype.resize = function (dimensions) {
 
 /**
  * Maximizes the browser window
+ *
+ * @api
+ * @method maximize
  */
 
 Actions.prototype.maximize = function () {
@@ -755,6 +771,9 @@ Actions.prototype.maximize = function () {
 
 /**
  * Sets a cookie
+ *
+ * @api
+ * @method setCookie
  */
 
 Actions.prototype.setCookie = function (name, contents) {
