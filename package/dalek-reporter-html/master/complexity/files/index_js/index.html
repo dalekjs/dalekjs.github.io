@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>index.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">68.43</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">280</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="span6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="span6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
+      <p class="stat">41.85</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">2.03</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="span6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="span12">/*!
+ *
+ * Copyright (c) 2013 Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ *
+ */
+
+&#039;use strict&#039;;
+
+// ext. libs
+var Handlebars = require(&#039;handlebars&#039;);
+var stylus = require(&#039;stylus&#039;);
+var fs = require(&#039;fs&#039;);
+
+// int. globals
+var reporter = null;
+
+/**
+ * Html reporter
+ *
+ * @class Reporter
+ * @constructor
+ * @part html
+ * @api
+ */
+
+function Reporter (opts) {
+  this.events = opts.events;
+  this.config = opts.config;
+  this.temporaryAssertions = [];
+  this.temp = {};
+
+  var defaultReportFolder = &#039;report/dalek&#039;;
+  this.dest = this.config.get(&#039;html-reporter&#039;) &amp;&amp; this.config.get(&#039;html-reporter&#039;).dest ? this.config.get(&#039;html-reporter&#039;).dest : defaultReportFolder;
+
+  this.loadTemplates();
+  this.initOutputHandlers();
+  this.startListening();
+}
+
+/**
+ * @module Reporter
+ */
+
+module.exports = function (opts) {
+  if (reporter === null) {
+    reporter = new Reporter(opts);
+  }
+
+  return reporter;
+};
+
+Reporter.prototype = {
+
+  /**
+   * Inits the html buffer objects
+   *
+   * @method initOutputHandlers
+   * @chainable
+   */
+
+  initOutputHandlers: function () {
+    this.output = {};
+    this.output.test = {};
+    return this;
+  },
+
+  /**
+   * Loads and prepares all the templates for
+   * CSS, JS &amp; HTML
+   *
+   * @method loadTemplates
+   * @chainable
+   */
+
+  loadTemplates: function () {
+    // render stylesheets
+    var precss = fs.readFileSync(__dirname + &#039;/themes/default/styl/default.styl&#039;, &#039;utf8&#039;);
+    stylus.render(precss, { filename: &#039;default.css&#039; }, function(err, css){
+      if (err) {
+        throw err;
+      }
+
+      this.styles = css;
+    }.bind(this));
+
+    // collect client js (to be inined later)
+    this.js = fs.readFileSync(__dirname + &#039;/themes/default/js/default.js&#039;, &#039;utf8&#039;);
+
+    // register handlebars helpers
+    Handlebars.registerHelper(&#039;roundNumber&#039;, function (number) {
+      return Math.round(number * Math.pow(10, 2)) / Math.pow(10, 2);
+    });
+
+    // collect &amp; compile templates
+    this.templates = {};
+    this.templates.test = Handlebars.compile(fs.readFileSync(__dirname + &#039;/themes/default/hbs/test.hbs&#039;, &#039;utf8&#039;));
+    this.templates.wrapper = Handlebars.compile(fs.readFileSync(__dirname + &#039;/themes/default/hbs/wrapper.hbs&#039;, &#039;utf8&#039;));
+    this.templates.testresult = Handlebars.compile(fs.readFileSync(__dirname + &#039;/themes/default/hbs/tests.hbs&#039;, &#039;utf8&#039;));
+    this.templates.banner = Handlebars.compile(fs.readFileSync(__dirname + &#039;/themes/default/hbs/banner.hbs&#039;, &#039;utf8&#039;));
+    this.templates.detail = Handlebars.compile(fs.readFileSync(__dirname + &#039;/themes/default/hbs/detail.hbs&#039;, &#039;utf8&#039;));
+
+    return this;
+  },
+
+  /**
+   * Connects to all the event listeners
+   *
+   * @method startListening
+   * @chainable
+   */
+
+  startListening: function () {
+    // index page
+    this.events.on(&#039;report:assertion&#039;, this.outputAssertionResult.bind(this));
+    this.events.on(&#039;report:test:finished&#039;, this.outputTestFinished.bind(this));
+    this.events.on(&#039;report:runner:finished&#039;, this.outputRunnerFinished.bind(this));
+    this.events.on(&#039;report:run:browser&#039;, this.outputRunBrowser.bind(this));
+
+    // detail page
+    this.events.on(&#039;report:test:started&#039;, this.startDetailPage.bind(this));
+    this.events.on(&#039;report:action&#039;, this.addActionToDetailPage.bind(this));
+    this.events.on(&#039;report:assertion&#039;, this.addAssertionToDetailPage.bind(this));
+    this.events.on(&#039;report:test:finished&#039;, this.finishDetailPage.bind(this));
+
+    return this;
+  },
+
+  /**
+   * Prepares the output for a test detail page
+   *
+   * @method startDetailPage
+   * @chainable
+   */
+
+  startDetailPage: function () {
+    this.detailContents = {};
+    this.detailContents.eventLog = [];
+    return this;
+  },
+
+  /**
+   * Adds an action output to the detail page
+   *
+   * @method addActionToDetailPage
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  addActionToDetailPage: function (data) {
+    data.isAction = true;
+    this.detailContents.eventLog.push(data);
+    return this;
+  },
+
+  /**
+   * Adds an assertion result to the detail page
+   *
+   * @method addAssertionToDetailPage
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  addAssertionToDetailPage: function (data) {
+    data.isAssertion = true;
+    this.detailContents.eventLog.push(data);
+    return this;
+  },
+
+  /**
+   * Writes a detail page to the file system
+   *
+   * @method finishDetailPage
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  finishDetailPage: function (data) {
+    this.detailContents.testResult = data;
+    this.detailContents.styles = this.styles;
+    this.detailContents.js = this.js;
+    fs.writeFileSync(this.dest + &#039;/details/&#039; + data.id + &#039;.html&#039;, this.templates.detail(this.detailContents), &#039;utf8&#039;);
+    return this;
+  },
+
+  /**
+   * Stores the current browser name
+   *
+   * @method outputRunBrowser
+   * @param {string} browser Browser name
+   * @chainable
+   */
+
+  outputRunBrowser: function (browser) {
+    this.temp.browser = browser;
+    return this;
+  },
+
+  /**
+   * Writes the index page to the filesystem
+   *
+   * @method outputRunnerFinished
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  outputRunnerFinished: function (data) {
+    var body = &#039;&#039;;
+    var contents = &#039;&#039;;
+    var tests = &#039;&#039;;
+    var banner = &#039;&#039;;
+
+    // add test results
+    var keys = Object.keys(this.output.test);
+    keys.forEach(function (key) {
+      tests += this.output.test[key];
+    }.bind(this));
+
+    // compile the test result template
+    body = this.templates.testresult({result: data, tests: tests});
+
+    // compile the banner
+    banner = this.templates.banner({status: data.status});
+
+    // compile the contents within the wrapper template
+    contents = this.templates.wrapper({styles: this.styles, js: this.js, banner: banner, body: body});
+
+    // save the main test output file
+    this.events.emit(&#039;report:written&#039;, {type: &#039;html&#039;, dest: this.dest});
+    this._recursiveMakeDirSync(this.dest + &#039;/details&#039;);
+    fs.writeFileSync(this.dest + &#039;/index.html&#039;, contents, &#039;utf8&#039;);
+    return this;
+  },
+
+  /**
+   * Pushes an assertion result to the index output queue
+   *
+   * @method outputAssertionResult
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  outputAssertionResult: function (data) {
+    this.temporaryAssertions.push(data);
+    return this;
+  },
+
+  /**
+   * Pushes an test result to the index output queue
+   *
+   * @method outputTestFinished
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  outputTestFinished: function (data) {
+    data.assertionInfo = this.temporaryAssertions;
+    data.browser = this.temp.browser;
+    this.output.test[data.id] = this.templates.test(data);
+    this.temporaryAssertions = [];
+    return this;
+  },
+
+  /**
+   * Helper method to generate deeper nested directory structures
+   *
+   * @method _recursiveMakeDirSync
+   * @param {string} path PAth to create
+   */
+
+  _recursiveMakeDirSync: function (path) {
+    var pathSep = require(&#039;path&#039;).sep;
+    var dirs = path.split(pathSep);
+    var root = &#039;&#039;;
+
+    while (dirs.length &gt; 0) {
+      var dir = dirs.shift();
+      if (dir === &#039;&#039;) {
+        root = pathSep;
+      }
+      if (!fs.existsSync(root + dir)) {
+        fs.mkdirSync(root + dir);
+      }
+      root += dir + pathSep;
+    }
+  }
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

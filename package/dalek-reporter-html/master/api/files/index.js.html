@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>index.js - dalek-reporter-html</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="dalek-reporter-html"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.0.1</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Reporter.html">Reporter</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Reporter.html">Reporter</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: index.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*!
+ *
+ * Copyright (c) 2013 Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ *
+ */
+
+&#x27;use strict&#x27;;
+
+// ext. libs
+var Handlebars = require(&#x27;handlebars&#x27;);
+var stylus = require(&#x27;stylus&#x27;);
+var fs = require(&#x27;fs&#x27;);
+
+// int. globals
+var reporter = null;
+
+/**
+ * Html reporter
+ *
+ * @class Reporter
+ * @constructor
+ * @part html
+ * @api
+ */
+
+function Reporter (opts) {
+  this.events = opts.events;
+  this.config = opts.config;
+  this.temporaryAssertions = [];
+  this.temp = {};
+
+  var defaultReportFolder = &#x27;report/dalek&#x27;;
+  this.dest = this.config.get(&#x27;html-reporter&#x27;) &amp;&amp; this.config.get(&#x27;html-reporter&#x27;).dest ? this.config.get(&#x27;html-reporter&#x27;).dest : defaultReportFolder;
+
+  this.loadTemplates();
+  this.initOutputHandlers();
+  this.startListening();
+}
+
+/**
+ * @module Reporter
+ */
+
+module.exports = function (opts) {
+  if (reporter === null) {
+    reporter = new Reporter(opts);
+  }
+
+  return reporter;
+};
+
+Reporter.prototype = {
+
+  /**
+   * Inits the html buffer objects
+   *
+   * @method initOutputHandlers
+   * @chainable
+   */
+
+  initOutputHandlers: function () {
+    this.output = {};
+    this.output.test = {};
+    return this;
+  },
+
+  /**
+   * Loads and prepares all the templates for
+   * CSS, JS &amp; HTML
+   *
+   * @method loadTemplates
+   * @chainable
+   */
+
+  loadTemplates: function () {
+    // render stylesheets
+    var precss = fs.readFileSync(__dirname + &#x27;/themes/default/styl/default.styl&#x27;, &#x27;utf8&#x27;);
+    stylus.render(precss, { filename: &#x27;default.css&#x27; }, function(err, css){
+      if (err) {
+        throw err;
+      }
+
+      this.styles = css;
+    }.bind(this));
+
+    // collect client js (to be inined later)
+    this.js = fs.readFileSync(__dirname + &#x27;/themes/default/js/default.js&#x27;, &#x27;utf8&#x27;);
+
+    // register handlebars helpers
+    Handlebars.registerHelper(&#x27;roundNumber&#x27;, function (number) {
+      return Math.round(number * Math.pow(10, 2)) / Math.pow(10, 2);
+    });
+
+    // collect &amp; compile templates
+    this.templates = {};
+    this.templates.test = Handlebars.compile(fs.readFileSync(__dirname + &#x27;/themes/default/hbs/test.hbs&#x27;, &#x27;utf8&#x27;));
+    this.templates.wrapper = Handlebars.compile(fs.readFileSync(__dirname + &#x27;/themes/default/hbs/wrapper.hbs&#x27;, &#x27;utf8&#x27;));
+    this.templates.testresult = Handlebars.compile(fs.readFileSync(__dirname + &#x27;/themes/default/hbs/tests.hbs&#x27;, &#x27;utf8&#x27;));
+    this.templates.banner = Handlebars.compile(fs.readFileSync(__dirname + &#x27;/themes/default/hbs/banner.hbs&#x27;, &#x27;utf8&#x27;));
+    this.templates.detail = Handlebars.compile(fs.readFileSync(__dirname + &#x27;/themes/default/hbs/detail.hbs&#x27;, &#x27;utf8&#x27;));
+
+    return this;
+  },
+
+  /**
+   * Connects to all the event listeners
+   *
+   * @method startListening
+   * @chainable
+   */
+
+  startListening: function () {
+    // index page
+    this.events.on(&#x27;report:assertion&#x27;, this.outputAssertionResult.bind(this));
+    this.events.on(&#x27;report:test:finished&#x27;, this.outputTestFinished.bind(this));
+    this.events.on(&#x27;report:runner:finished&#x27;, this.outputRunnerFinished.bind(this));
+    this.events.on(&#x27;report:run:browser&#x27;, this.outputRunBrowser.bind(this));
+
+    // detail page
+    this.events.on(&#x27;report:test:started&#x27;, this.startDetailPage.bind(this));
+    this.events.on(&#x27;report:action&#x27;, this.addActionToDetailPage.bind(this));
+    this.events.on(&#x27;report:assertion&#x27;, this.addAssertionToDetailPage.bind(this));
+    this.events.on(&#x27;report:test:finished&#x27;, this.finishDetailPage.bind(this));
+
+    return this;
+  },
+
+  /**
+   * Prepares the output for a test detail page
+   *
+   * @method startDetailPage
+   * @chainable
+   */
+
+  startDetailPage: function () {
+    this.detailContents = {};
+    this.detailContents.eventLog = [];
+    return this;
+  },
+
+  /**
+   * Adds an action output to the detail page
+   *
+   * @method addActionToDetailPage
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  addActionToDetailPage: function (data) {
+    data.isAction = true;
+    this.detailContents.eventLog.push(data);
+    return this;
+  },
+
+  /**
+   * Adds an assertion result to the detail page
+   *
+   * @method addAssertionToDetailPage
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  addAssertionToDetailPage: function (data) {
+    data.isAssertion = true;
+    this.detailContents.eventLog.push(data);
+    return this;
+  },
+
+  /**
+   * Writes a detail page to the file system
+   *
+   * @method finishDetailPage
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  finishDetailPage: function (data) {
+    this.detailContents.testResult = data;
+    this.detailContents.styles = this.styles;
+    this.detailContents.js = this.js;
+    fs.writeFileSync(this.dest + &#x27;/details/&#x27; + data.id + &#x27;.html&#x27;, this.templates.detail(this.detailContents), &#x27;utf8&#x27;);
+    return this;
+  },
+
+  /**
+   * Stores the current browser name
+   *
+   * @method outputRunBrowser
+   * @param {string} browser Browser name
+   * @chainable
+   */
+
+  outputRunBrowser: function (browser) {
+    this.temp.browser = browser;
+    return this;
+  },
+
+  /**
+   * Writes the index page to the filesystem
+   *
+   * @method outputRunnerFinished
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  outputRunnerFinished: function (data) {
+    var body = &#x27;&#x27;;
+    var contents = &#x27;&#x27;;
+    var tests = &#x27;&#x27;;
+    var banner = &#x27;&#x27;;
+
+    // add test results
+    var keys = Object.keys(this.output.test);
+    keys.forEach(function (key) {
+      tests += this.output.test[key];
+    }.bind(this));
+
+    // compile the test result template
+    body = this.templates.testresult({result: data, tests: tests});
+
+    // compile the banner
+    banner = this.templates.banner({status: data.status});
+
+    // compile the contents within the wrapper template
+    contents = this.templates.wrapper({styles: this.styles, js: this.js, banner: banner, body: body});
+
+    // save the main test output file
+    this.events.emit(&#x27;report:written&#x27;, {type: &#x27;html&#x27;, dest: this.dest});
+    this._recursiveMakeDirSync(this.dest + &#x27;/details&#x27;);
+    fs.writeFileSync(this.dest + &#x27;/index.html&#x27;, contents, &#x27;utf8&#x27;);
+    return this;
+  },
+
+  /**
+   * Pushes an assertion result to the index output queue
+   *
+   * @method outputAssertionResult
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  outputAssertionResult: function (data) {
+    this.temporaryAssertions.push(data);
+    return this;
+  },
+
+  /**
+   * Pushes an test result to the index output queue
+   *
+   * @method outputTestFinished
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  outputTestFinished: function (data) {
+    data.assertionInfo = this.temporaryAssertions;
+    data.browser = this.temp.browser;
+    this.output.test[data.id] = this.templates.test(data);
+    this.temporaryAssertions = [];
+    return this;
+  },
+
+  /**
+   * Helper method to generate deeper nested directory structures
+   *
+   * @method _recursiveMakeDirSync
+   * @param {string} path PAth to create
+   */
+
+  _recursiveMakeDirSync: function (path) {
+    var pathSep = require(&#x27;path&#x27;).sep;
+    var dirs = path.split(pathSep);
+    var root = &#x27;&#x27;;
+
+    while (dirs.length &gt; 0) {
+      var dir = dirs.shift();
+      if (dir === &#x27;&#x27;) {
+        root = pathSep;
+      }
+      if (!fs.existsSync(root + dir)) {
+        fs.mkdirSync(root + dir);
+      }
+      root += dir + pathSep;
+    }
+  }
+};
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
