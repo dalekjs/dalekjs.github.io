@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>index.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">67.64</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">188</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="span6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="span6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
+      <p class="stat">33.84</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">1.18</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="span6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="span12">/*!
+ *
+ * Copyright (c) 2013 Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ *
+ */
+
+&#039;use strict&#039;;
+
+// ext. libs
+var fs = require(&#039;fs&#039;);
+var path = require(&#039;path&#039;);
+
+var reporter = null;
+
+/**
+ * JSON reporter
+ *
+ * @class Reporter
+ * @constructor
+ * @part json
+ * @api
+ */
+
+function Reporter (opts) {
+  this.events = opts.events;
+  this.config = opts.config;
+  this.data = {};
+  this.data.tests = [];
+  this.browser = null;
+
+  var defaultReportFolder = &#039;report&#039;;
+  this.dest = this.config.get(&#039;json-reporter&#039;) &amp;&amp; this.config.get(&#039;json-reporter&#039;).dest ? this.config.get(&#039;json-reporter&#039;).dest : defaultReportFolder;
+
+  this.startListening();
+}
+
+/**
+ * @module Reporter
+ */
+
+module.exports = function (opts) {
+  if (reporter === null) {
+    reporter = new Reporter(opts);
+  }
+
+  return reporter;
+};
+
+Reporter.prototype = {
+
+  /**
+   * Connects to all the event listeners
+   *
+   * @method startListening
+   * @chainable
+   */
+
+  startListening: function () {
+    this.events.on(&#039;report:run:browser&#039;, this.runBrowser.bind(this));
+    this.events.on(&#039;report:assertion&#039;, this.assertion.bind(this));
+    this.events.on(&#039;report:action&#039;, this.action.bind(this));
+    this.events.on(&#039;report:test:started&#039;, this.testStarted.bind(this));
+    this.events.on(&#039;report:test:finished&#039;, this.testFinished.bind(this));
+    this.events.on(&#039;report:runner:finished&#039;, this.runnerFinished.bind(this));
+    return this;
+  },
+
+  /**
+   * Stores the current browser name
+   *
+   * @method runBrowser
+   * @param {string} browser Browser name
+   * @chainable
+   */
+
+  runBrowser: function (browser) {
+    this.browser = browser;
+    return this;
+  },
+
+  /**
+   * Generates JSON for an action
+   *
+   * @method action
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  action: function (data) {
+    data.kind = &#039;action&#039;;
+    this.actionQueue.push(data);
+    return this;
+  },
+
+  /**
+   * Generates JSON for an assertion
+   *
+   * @method assertion
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  assertion: function (data) {
+    data.kind = &#039;assertion&#039;;
+    this.actionQueue.push(data);
+    return this;
+  },
+
+  /**
+   * Sets up a new testcase
+   *
+   * @method testStarted
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  testStarted: function (data) {
+    this.currentTest = data;
+    this.actionQueue = [];
+    return this;
+  },
+
+  /**
+   * Writes data for a finished testcase
+   *
+   * @method testFinished
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  testFinished: function (data) {
+    this.data.tests.push({
+      id: data.id,
+      name: data.name,
+      browser: this.browser,
+      status: data.status,
+      passedAssertions: data.passedAssertions,
+      failedAssertions: data.failedAssertions,
+      actions: this.actionQueue
+    });
+    return this;
+  },
+
+  /**
+   * Serializes JSON and writes file to the file system
+   *
+   * @method runnerFinished
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  runnerFinished: function (data) {
+    this.data.elapsedTime = data.elapsedTime;
+    this.data.status = data.status;
+    this.data.assertions = data.assertions;
+    this.data.assertionsFailed = data.assertionsFailed;
+    this.data.assertionsPassed = data.assertionsPassed;
+
+    var contents = JSON.stringify(this.data, false, 4);
+
+    if (path.extname(this.dest) !== &#039;.json&#039;) {
+      this.dest = this.dest + &#039;/dalek.json&#039;;
+    }
+
+    this.events.emit(&#039;report:written&#039;, {type: &#039;json&#039;, dest: this.dest});
+    this._recursiveMakeDirSync(path.dirname(this.dest.replace(path.basename(this.dest, &#039;&#039;))));
+    fs.writeFileSync(this.dest, contents, &#039;utf8&#039;);
+    return this;
+  },
+
+  /**
+   * Helper method to generate deeper nested directory structures
+   *
+   * @method _recursiveMakeDirSync
+   * @param {string} path PAth to create
+   */
+
+  _recursiveMakeDirSync: function (path) {
+    var pathSep = require(&#039;path&#039;).sep;
+    var dirs = path.split(pathSep);
+    var root = &#039;&#039;;
+
+    while (dirs.length &gt; 0) {
+      var dir = dirs.shift();
+      if (dir === &#039;&#039;) {
+        root = pathSep;
+      }
+      if (!fs.existsSync(root + dir)) {
+        fs.mkdirSync(root + dir);
+      }
+      root += dir + pathSep;
+    }
+  }
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

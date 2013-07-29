@@ -1,0 +1,210 @@
+{
+    "project": {
+        "name": "dalek-reporter-json",
+        "description": "JSON reporter for the Dalekjs testing framework",
+        "version": "0.0.1",
+        "url": "http://dalekjs.com"
+    },
+    "files": {
+        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
+            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "index.js": {
+            "name": "index.js",
+            "modules": {
+                "Reporter": 1
+            },
+            "classes": {
+                "Reporter": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "Reporter": {
+            "name": "Reporter",
+            "submodules": {},
+            "classes": {
+                "Reporter": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "index.js",
+            "line": 33
+        }
+    },
+    "classes": {
+        "Reporter": {
+            "name": "Reporter",
+            "shortname": "Reporter",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Reporter",
+            "file": "index.js",
+            "line": 33,
+            "description": "JSON reporter",
+            "is_constructor": 1,
+            "part": "json",
+            "api": ""
+        }
+    },
+    "classitems": [
+        {
+            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "line": 1,
+            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "class": "Reporter"
+        },
+        {
+            "file": "index.js",
+            "line": 69,
+            "description": "Connects to all the event listeners",
+            "itemtype": "method",
+            "name": "startListening",
+            "chainable": 1,
+            "class": "Reporter",
+            "module": "Reporter"
+        },
+        {
+            "file": "index.js",
+            "line": 86,
+            "description": "Stores the current browser name",
+            "itemtype": "method",
+            "name": "runBrowser",
+            "params": [
+                {
+                    "name": "browser",
+                    "description": "Browser name",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Reporter",
+            "module": "Reporter"
+        },
+        {
+            "file": "index.js",
+            "line": 99,
+            "description": "Generates JSON for an action",
+            "itemtype": "method",
+            "name": "action",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Event data",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "Reporter",
+            "module": "Reporter"
+        },
+        {
+            "file": "index.js",
+            "line": 113,
+            "description": "Generates JSON for an assertion",
+            "itemtype": "method",
+            "name": "assertion",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Event data",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "Reporter",
+            "module": "Reporter"
+        },
+        {
+            "file": "index.js",
+            "line": 127,
+            "description": "Sets up a new testcase",
+            "itemtype": "method",
+            "name": "testStarted",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Event data",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "Reporter",
+            "module": "Reporter"
+        },
+        {
+            "file": "index.js",
+            "line": 141,
+            "description": "Writes data for a finished testcase",
+            "itemtype": "method",
+            "name": "testFinished",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Event data",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "Reporter",
+            "module": "Reporter"
+        },
+        {
+            "file": "index.js",
+            "line": 162,
+            "description": "Serializes JSON and writes file to the file system",
+            "itemtype": "method",
+            "name": "runnerFinished",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Event data",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "Reporter",
+            "module": "Reporter"
+        },
+        {
+            "file": "index.js",
+            "line": 189,
+            "description": "Helper method to generate deeper nested directory structures",
+            "itemtype": "method",
+            "name": "_recursiveMakeDirSync",
+            "params": [
+                {
+                    "name": "path",
+                    "description": "PAth to create",
+                    "type": "String"
+                }
+            ],
+            "class": "Reporter",
+            "module": "Reporter"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: part",
+            "line": " index.js:33"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:33"
+        },
+        {
+            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
+        }
+    ]
+}

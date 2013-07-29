@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>index.js - dalek-reporter-json</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="dalek-reporter-json"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.0.1</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Reporter.html">Reporter</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Reporter.html">Reporter</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: index.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*!
+ *
+ * Copyright (c) 2013 Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ *
+ */
+
+&#x27;use strict&#x27;;
+
+// ext. libs
+var fs = require(&#x27;fs&#x27;);
+var path = require(&#x27;path&#x27;);
+
+var reporter = null;
+
+/**
+ * JSON reporter
+ *
+ * @class Reporter
+ * @constructor
+ * @part json
+ * @api
+ */
+
+function Reporter (opts) {
+  this.events = opts.events;
+  this.config = opts.config;
+  this.data = {};
+  this.data.tests = [];
+  this.browser = null;
+
+  var defaultReportFolder = &#x27;report&#x27;;
+  this.dest = this.config.get(&#x27;json-reporter&#x27;) &amp;&amp; this.config.get(&#x27;json-reporter&#x27;).dest ? this.config.get(&#x27;json-reporter&#x27;).dest : defaultReportFolder;
+
+  this.startListening();
+}
+
+/**
+ * @module Reporter
+ */
+
+module.exports = function (opts) {
+  if (reporter === null) {
+    reporter = new Reporter(opts);
+  }
+
+  return reporter;
+};
+
+Reporter.prototype = {
+
+  /**
+   * Connects to all the event listeners
+   *
+   * @method startListening
+   * @chainable
+   */
+
+  startListening: function () {
+    this.events.on(&#x27;report:run:browser&#x27;, this.runBrowser.bind(this));
+    this.events.on(&#x27;report:assertion&#x27;, this.assertion.bind(this));
+    this.events.on(&#x27;report:action&#x27;, this.action.bind(this));
+    this.events.on(&#x27;report:test:started&#x27;, this.testStarted.bind(this));
+    this.events.on(&#x27;report:test:finished&#x27;, this.testFinished.bind(this));
+    this.events.on(&#x27;report:runner:finished&#x27;, this.runnerFinished.bind(this));
+    return this;
+  },
+
+  /**
+   * Stores the current browser name
+   *
+   * @method runBrowser
+   * @param {string} browser Browser name
+   * @chainable
+   */
+
+  runBrowser: function (browser) {
+    this.browser = browser;
+    return this;
+  },
+
+  /**
+   * Generates JSON for an action
+   *
+   * @method action
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  action: function (data) {
+    data.kind = &#x27;action&#x27;;
+    this.actionQueue.push(data);
+    return this;
+  },
+
+  /**
+   * Generates JSON for an assertion
+   *
+   * @method assertion
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  assertion: function (data) {
+    data.kind = &#x27;assertion&#x27;;
+    this.actionQueue.push(data);
+    return this;
+  },
+
+  /**
+   * Sets up a new testcase
+   *
+   * @method testStarted
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  testStarted: function (data) {
+    this.currentTest = data;
+    this.actionQueue = [];
+    return this;
+  },
+
+  /**
+   * Writes data for a finished testcase
+   *
+   * @method testFinished
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  testFinished: function (data) {
+    this.data.tests.push({
+      id: data.id,
+      name: data.name,
+      browser: this.browser,
+      status: data.status,
+      passedAssertions: data.passedAssertions,
+      failedAssertions: data.failedAssertions,
+      actions: this.actionQueue
+    });
+    return this;
+  },
+
+  /**
+   * Serializes JSON and writes file to the file system
+   *
+   * @method runnerFinished
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  runnerFinished: function (data) {
+    this.data.elapsedTime = data.elapsedTime;
+    this.data.status = data.status;
+    this.data.assertions = data.assertions;
+    this.data.assertionsFailed = data.assertionsFailed;
+    this.data.assertionsPassed = data.assertionsPassed;
+
+    var contents = JSON.stringify(this.data, false, 4);
+
+    if (path.extname(this.dest) !== &#x27;.json&#x27;) {
+      this.dest = this.dest + &#x27;/dalek.json&#x27;;
+    }
+
+    this.events.emit(&#x27;report:written&#x27;, {type: &#x27;json&#x27;, dest: this.dest});
+    this._recursiveMakeDirSync(path.dirname(this.dest.replace(path.basename(this.dest, &#x27;&#x27;))));
+    fs.writeFileSync(this.dest, contents, &#x27;utf8&#x27;);
+    return this;
+  },
+
+  /**
+   * Helper method to generate deeper nested directory structures
+   *
+   * @method _recursiveMakeDirSync
+   * @param {string} path PAth to create
+   */
+
+  _recursiveMakeDirSync: function (path) {
+    var pathSep = require(&#x27;path&#x27;).sep;
+    var dirs = path.split(pathSep);
+    var root = &#x27;&#x27;;
+
+    while (dirs.length &gt; 0) {
+      var dir = dirs.shift();
+      if (dir === &#x27;&#x27;) {
+        root = pathSep;
+      }
+      if (!fs.existsSync(root + dir)) {
+        fs.mkdirSync(root + dir);
+      }
+      root += dir + pathSep;
+    }
+  }
+};
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
