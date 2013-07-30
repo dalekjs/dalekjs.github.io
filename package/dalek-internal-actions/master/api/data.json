@@ -574,6 +574,7 @@
         {
             "file": "index.js",
             "line": 993,
+            "description": "Adds a method to the queue of actions/assertions to execute",
             "itemtype": "method",
             "name": "_addToActionQueue",
             "params": [
