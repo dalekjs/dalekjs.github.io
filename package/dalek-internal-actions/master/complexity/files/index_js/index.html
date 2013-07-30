@@ -49,7 +49,7 @@
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">982</p>
+      <p class="stat">1009</p>
     </div>
   </div>
   <div class="row historical">
@@ -137,7 +137,34 @@ var Actions = function () {
 };
 
 /**
- * Selector helper
+ * It can be really cumbersome to repeat selectors all over when performing
+ * multiple actions or assertions on the same element(s).
+ * When you use the query method (or its alias $), you&#039;re able to specify a
+ * selector once instead of repeating it all over the place.
+ *
+ * So, instead of writing this:
+ *
+ * ```javascript
+ * test.open(&#039;http://doctorwhotv.co.uk/&#039;)
+ *     .assert.text(&#039;#nav&#039;).is(&#039;Navigation&#039;)
+ *     .assert.visible(&#039;#nav&#039;)
+ *     .assert.attr(&#039;#nav&#039;, &#039;data-nav&#039;, &#039;true&#039;)
+ *     .click(&#039;#nav&#039;)
+ *     .done();
+ * ```
+ *
+ * you can write this instead
+ *
+ * ```javascript
+ * test.open(&#039;http://doctorwhotv.co.uk/&#039;)
+ *     .query(&#039;#nav&#039;)
+ *       .assert.text().is(&#039;Navigation&#039;)
+ *       .assert.visible()
+ *       .assert.attr(&#039;data-nav&#039;, &#039;true&#039;)
+ *       .click()
+ *     .end()
+ *     .done();
+ * ```
  *
  * @api
  * @method query
