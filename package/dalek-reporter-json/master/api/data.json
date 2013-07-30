@@ -51,9 +51,9 @@
             "module": "Reporter",
             "file": "index.js",
             "line": 33,
-            "description": "JSON reporter",
+            "description": "The JSON reporter can produce a file with the results of your testrun.\n\nThe reporter can be installed with the following command:\n```\n$ npm install dalek-reporter-json --save-dev\n```\n\nThe file will follow the following format. This is a first draft and will\ndefinitly change in future versions.\n\n```javascript\n{\n  \"tests\": [\n        {\n          \"id\": \"test806\",\n          \"name\": \"Can get !url (OK, TDD style, message, chained)\",\n          \"browser\": \"Chrome\",\n          \"status\": true,\n          \"passedAssertions\": 1,\n          \"failedAssertions\": 0,\n          \"actions\": [\n              {\n                  \"value\": \"http://localhost:5000/index.html\",\n                  \"type\": \"open\",\n                  \"uuid\": \"6ea84fc0-58bf-4e1f-bb9c-f035c6e6fae2\",\n                  \"kind\": \"action\",\n                  \"isAction\": true\n              },\n              {\n                  \"success\": true,\n                  \"expected\": \"http://localhost:5000/guinea.html\",\n                  \"value\": \"http://localhost:5000/index.html\",\n                  \"message\": \"Url is not whatever\",\n                  \"type\": \"url\",\n                  \"kind\": \"assertion\",\n                  \"isAssertion\": true\n              }\n          ]\n      }\n  ],\n  \"elapsedTime\": {\n      \"minutes\": 1,\n      \"seconds\": 43.328535046\n  },\n  \"status\": true,\n  \"assertions\": 1,\n  \"assertionsFailed\": 0,\n  \"assertionsPassed\": 1\n}\n```\n\nBy default the file will be written to `report/dalek.json`,\nyou can change this by adding a config option to the your Dalekfile\n\n```javascript\n\"json-reporter\": {\n  \"dest\": \"your/folder/your_file.json\"\n}\n```",
             "is_constructor": 1,
-            "part": "json",
+            "part": "JSON",
             "api": ""
         }
     },
@@ -66,7 +66,7 @@
         },
         {
             "file": "index.js",
-            "line": 69,
+            "line": 127,
             "description": "Connects to all the event listeners",
             "itemtype": "method",
             "name": "startListening",
@@ -76,7 +76,7 @@
         },
         {
             "file": "index.js",
-            "line": 86,
+            "line": 144,
             "description": "Stores the current browser name",
             "itemtype": "method",
             "name": "runBrowser",
@@ -93,7 +93,7 @@
         },
         {
             "file": "index.js",
-            "line": 99,
+            "line": 157,
             "description": "Generates JSON for an action",
             "itemtype": "method",
             "name": "action",
@@ -110,7 +110,7 @@
         },
         {
             "file": "index.js",
-            "line": 113,
+            "line": 171,
             "description": "Generates JSON for an assertion",
             "itemtype": "method",
             "name": "assertion",
@@ -127,7 +127,7 @@
         },
         {
             "file": "index.js",
-            "line": 127,
+            "line": 185,
             "description": "Sets up a new testcase",
             "itemtype": "method",
             "name": "testStarted",
@@ -144,7 +144,7 @@
         },
         {
             "file": "index.js",
-            "line": 141,
+            "line": 199,
             "description": "Writes data for a finished testcase",
             "itemtype": "method",
             "name": "testFinished",
@@ -161,7 +161,7 @@
         },
         {
             "file": "index.js",
-            "line": 162,
+            "line": 220,
             "description": "Serializes JSON and writes file to the file system",
             "itemtype": "method",
             "name": "runnerFinished",
@@ -178,7 +178,7 @@
         },
         {
             "file": "index.js",
-            "line": 189,
+            "line": 247,
             "description": "Helper method to generate deeper nested directory structures",
             "itemtype": "method",
             "name": "_recursiveMakeDirSync",

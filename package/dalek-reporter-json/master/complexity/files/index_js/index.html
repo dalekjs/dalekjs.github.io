@@ -49,7 +49,7 @@
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">188</p>
+      <p class="stat">246</p>
     </div>
   </div>
   <div class="row historical">
@@ -123,11 +123,69 @@ var path = require(&#039;path&#039;);
 var reporter = null;
 
 /**
- * JSON reporter
+ * The JSON reporter can produce a file with the results of your testrun.
+ *
+ * The reporter can be installed with the following command:
+ * ```
+ * $ npm install dalek-reporter-json --save-dev
+ * ```
+ *
+ * The file will follow the following format. This is a first draft and will
+ * definitly change in future versions.
+ *
+ * ```javascript
+ * {
+ *   &quot;tests&quot;: [
+ *         {
+ *           &quot;id&quot;: &quot;test806&quot;,
+ *           &quot;name&quot;: &quot;Can get !url (OK, TDD style, message, chained)&quot;,
+ *           &quot;browser&quot;: &quot;Chrome&quot;,
+ *           &quot;status&quot;: true,
+ *           &quot;passedAssertions&quot;: 1,
+ *           &quot;failedAssertions&quot;: 0,
+ *           &quot;actions&quot;: [
+ *               {
+ *                   &quot;value&quot;: &quot;http://localhost:5000/index.html&quot;,
+ *                   &quot;type&quot;: &quot;open&quot;,
+ *                   &quot;uuid&quot;: &quot;6ea84fc0-58bf-4e1f-bb9c-f035c6e6fae2&quot;,
+ *                   &quot;kind&quot;: &quot;action&quot;,
+ *                   &quot;isAction&quot;: true
+ *               },
+ *               {
+ *                   &quot;success&quot;: true,
+ *                   &quot;expected&quot;: &quot;http://localhost:5000/guinea.html&quot;,
+ *                   &quot;value&quot;: &quot;http://localhost:5000/index.html&quot;,
+ *                   &quot;message&quot;: &quot;Url is not whatever&quot;,
+ *                   &quot;type&quot;: &quot;url&quot;,
+ *                   &quot;kind&quot;: &quot;assertion&quot;,
+ *                   &quot;isAssertion&quot;: true
+ *               }
+ *           ]
+ *       }
+ *   ],
+ *   &quot;elapsedTime&quot;: {
+ *       &quot;minutes&quot;: 1,
+ *       &quot;seconds&quot;: 43.328535046
+ *   },
+ *   &quot;status&quot;: true,
+ *   &quot;assertions&quot;: 1,
+ *   &quot;assertionsFailed&quot;: 0,
+ *   &quot;assertionsPassed&quot;: 1
+ * }
+ * ```
+ *
+ * By default the file will be written to `report/dalek.json`,
+ * you can change this by adding a config option to the your Dalekfile
+ *
+ * ```javascript
+ * &quot;json-reporter&quot;: {
+ *   &quot;dest&quot;: &quot;your/folder/your_file.json&quot;
+ * }
+ * ```
  *
  * @class Reporter
  * @constructor
- * @part json
+ * @part JSON
  * @api
  */
 
