@@ -40,13 +40,13 @@
             },
             "tag": "module",
             "file": "index.js",
-            "line": 34
+            "line": 43
         }
     },
     "classes": {
         "Dalek.Internal.Assertions": {
             "name": "Dalek.Internal.Assertions",
-            "shortname": "Dalek.Internal.Assertions",
+            "shortname": "Assertions",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -55,7 +55,11 @@
             "module": "Assertions",
             "namespace": "Dalek.Internal",
             "file": "index.js",
-            "line": 34
+            "line": 43,
+            "description": "Assertions check if the assumptions you made about a website are correct.\nAssetions might check if the title of a page is as expected,\nif an element has the expected text,\nif your mobile website version only displays a certian amount of elements\nand many more...",
+            "is_constructor": 1,
+            "part": "Assertions",
+            "api": ""
         }
     },
     "classitems": [
@@ -67,28 +71,19 @@
         },
         {
             "file": "index.js",
-            "line": 44,
-            "is_constructor": 1,
-            "part": "Assertions",
-            "api": "",
-            "class": "Dalek.Internal.Assertions",
-            "module": "Assertions",
-            "namespace": "Dalek.Internal"
-        },
-        {
-            "file": "index.js",
-            "line": 56,
+            "line": 62,
             "description": "Starts assertion chaining",
+            "api": "",
             "itemtype": "method",
             "name": "chain",
-            "api": "",
+            "chainable": 1,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 69,
+            "line": 76,
             "description": "Ends an assertion chain",
             "itemtype": "method",
             "name": "end",
@@ -99,7 +94,7 @@
         },
         {
             "file": "index.js",
-            "line": 88,
+            "line": 95,
             "description": "Asserts that a given ressource does exist in the environment.",
             "itemtype": "method",
             "name": "resourceExists",
@@ -110,7 +105,7 @@
         },
         {
             "file": "index.js",
-            "line": 102,
+            "line": 109,
             "description": "Asserts that a given element appears n times on the page.\n\n\nGiven this portion of html, you would like to assure that all of these elements\nare ending up in your rendered markup on your page.\n\n```html\n<section id=\"blog-overview\">\n  <article class=\"teaser\"></article>\n  <article class=\"teaser\"></article>\n  <article class=\"teaser\"></article>\n  <article class=\"teaser\"></article>\n</section>\n```\n\nThe simple solution is to check if all these elements are present\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser', 4, '4 blog teasers are present')\n```\nThe alternate syntax for this is:\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .is(4, '4 blog teasers are present')\n```\n\nIf you are not sure how many elements will exactly end up in your markup,\nyou could use the between assertion handler\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .is.between(2, 6, 'Between 2 and 6 blog teasers are present')\n```\n\nIf you dealing with the situation that you have a minimum of elements,\nyou expect, you can use this helper...\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .is.gt(2, 'At least 3 blog teasers are present')\n```\n... if you want to know if its 'greater than equal', you can use this one...\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .is.gte(2, 'At least 2 blog teasers are present')\n```\n... as well as their 'lower than' and 'lower than equal' equivalents\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .is.lt(5, 'Less than 5 blog teasers are present')\n```\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .is.lte(5, 'Less than, or 5 blog teasers are present')\n```\nAnd if you just wan't to know, if a certain amount of teasers isn't present,\nyou can still use the ':not(): assertion helper\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .is.not(5, 'There are more or less than 5 teasers present')\n```\n\nIf you wan't to allow multiple correct values, you can use the ':are()' helper\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .are([1,3,6], 'Teaser count is an odd number between 1 and 6')\n```\n\nof couse you can test for the opoosite with ':are()'\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .are([0,2,4], 'Teaser count is not an even number between 1 and 6')\n```",
             "api": "",
             "itemtype": "method",
@@ -121,7 +116,7 @@
         },
         {
             "file": "index.js",
-            "line": 202,
+            "line": 209,
             "description": "Asserts that a given element is visible n times in the current viewport.\n\nGiven this portion of html, you would like to assure that all of these elements\n are ending up in your rendered markup on your page.\n```html\n <section id=\"blog-overview\">\n   <article class=\"teaser\"></article>\n   <article class=\"teaser\"></article>\n   <article class=\"teaser\"></article>\n   <article class=\"teaser\"></article>\n </section>\n ```\nThe simple solution is to check if all these elements are visible\n```javascript\n test.numberOfVisibleElements('#blog-overview .teaser', 4, '4 blog teasers are visible')\n ```\n The alternate syntax for this is:\n```javascript\n test.numberOfVisibleElements('#blog-overview .teaser')\n     .is(4, '4 blog teasers are visible')\n ```\nIf you are not sure how many elements will exactly be shown in the current viewport,\n you could use the between assertion handler\n```javascript\n test.numberOfVisibleElements('#blog-overview .teaser')\n     .is.between(2, 6, 'Between 2 and 6 blog teasers are visible')\n ```\nIf you dealing with the situation that you have a minimum of elements,\n you expect, you can use this helper...\n```javascript\n test.numberOfVisibleElements('#blog-overview .teaser')\n     .is.gt(2, 'At least 3 blog teasers are visible')\n ```\n ... if you want to know if its 'greater than equal', you can use this one...\n```javascript\n test.numberOfVisibleElements('#blog-overview .teaser')\n     .is.gte(2, 'At least 2 blog teasers are visible')\n ```\n ... as well as their 'lower than' and 'lower than equal' equivalents\n```javascript\n test.numberOfVisibleElements('#blog-overview .teaser')\n     .is.lt(5, 'Less than 5 blog teasers are visible')\n ```\n```javascript\n test.numberOfVisibleElements('#blog-overview .teaser')\n     .is.lte(5, 'Less than, or 5 blog teasers are visible')\n ```\n And if you just wan't to know, if a certain amount of teasers isn't visible,\n you can still use the ':not(): assertion helper\n```javascript\n test.numberOfVisibleElements('#blog-overview .teaser')\n     .is.not(5, 'There are more or less than 5 teasers visible')\n ```\nIf you wan't to allow multiple correct values, you can use the ':are()' helper\n```javascript\n test.numberOfVisibleElements('#blog-overview .teaser')\n     .are([1,3,6], 'Teaser count is an odd number between 1 and 6')\n ```\nof couse you can test for the opoosite with ':are()' and ':not()'\n```javascript\n test.numberOfVisibleElements('#blog-overview .teaser')\n     .are.not([0,2,4], 'Teaser count is not an even number between 1 and 6')\n ```",
             "api": "",
             "itemtype": "method",
@@ -132,7 +127,7 @@
         },
         {
             "file": "index.js",
-            "line": 303,
+            "line": 310,
             "description": "Asserts that a given form field has the provided value.\n\nGiven this portion of html, we would like to get the information which option element\nis currently selected.\n\n```html\n<form name=\"fav-doctor\" id=\"fav-doctor\">\n  <select id=\"the-doctors\">\n    <option value=\"9\">Eccleston</option>\n    <option selected value=\"10\">Tennant</option>\n    <option value=\"11\">Smith</option>\n  </select>\n</form>\n```\n\n```javascript\ntest\n  .val('#the-doctors', 10, 'David is the favourite')\n  // lets change the favourite by selection the last option\n .click('#the-doctors option:last')\n .val('#the-doctors', 11, 'Matt is now my favourite, bow ties are cool')\n```\n\nThis assertion is capable of getting the values from every form element\nthat holds a value attribute\n\nGetting texts out of normal input fields is pretty straight forward\n\n```html\n<label for=\"fav-enemy\">Tell my your favourity Who enemy:</label>\n<input id=\"fav-enemy\" name=\"fav-enemy\" type=\"text\" value=\"Daleks\" />\n```\n\n```javascript\ntest\n  .val('#fav-enemy', 'Daleks', 'Daleks are so cute')\n  // lets change the favourite by typing smth. new\n .type('#fav-enemy', 'Cyberman')\n .val('#fav-enemy', 'Cyberman', 'Cyberman are so cyber')\n```\n\nOf course, you can use a bunch of assertion helpers, to enable\nyourself to do more than just one assertion with the ':are()' helper.\n\n```javascript\ntest\n  .val('#fav-enemy')\n  .is('Daleks', 'Still cute, those daleks')\n  .is.not('Klingons', 'Different fandom bro')\n  // yep, multiple mentions are allowed\n  .are(['Daleks', 'Cyberman', 'The master'], 'All of them are cool');\n```",
             "itemtype": "method",
             "name": "val",
@@ -143,7 +138,7 @@
         },
         {
             "file": "index.js",
-            "line": 478,
+            "line": 485,
             "description": "Asserts that current HTTP status code is the same as the one passed as argument.\nTODO: Needs some work",
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
@@ -151,7 +146,7 @@
         },
         {
             "file": "index.js",
-            "line": 490,
+            "line": 497,
             "description": "Asserts that an element matching the provided selector expression exists in remote DOM environment.\n\n```html\n<body>\n  <p id=\"so-lonely\">Last of the timelords</p>\n</body>\n```\n\n```javascript\ntest\n  .exists('#so-lonely', 'The loneliest element in the universe exists')\n```",
             "itemtype": "method",
             "name": "exists",
@@ -162,7 +157,7 @@
         },
         {
             "file": "index.js",
-            "line": 521,
+            "line": 528,
             "description": "Asserts that an element matching the provided selector expression doesn't exists within the remote DOM environment.\n\n```html\n<body>\n  <p id=\"so-lonely\">Last of the timelords</p>\n</body>\n```\n\n```javascript\ntest\n  .doesntExist('#the-master', 'The master element has not been seen')\n```",
             "itemtype": "method",
             "name": "doesntExist",
@@ -173,7 +168,7 @@
         },
         {
             "file": "index.js",
-            "line": 552,
+            "line": 559,
             "description": "Asserts that the element matching the provided selector expression is not visible.",
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
@@ -181,7 +176,7 @@
         },
         {
             "file": "index.js",
-            "line": 569,
+            "line": 576,
             "description": "Asserts that the element matching the provided selector expression is visible.",
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
@@ -189,7 +184,7 @@
         },
         {
             "file": "index.js",
-            "line": 586,
+            "line": 593,
             "description": "Asserts that given text does not exist in the provided selector.",
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
@@ -197,7 +192,7 @@
         },
         {
             "file": "index.js",
-            "line": 603,
+            "line": 610,
             "description": "Asserts that given text does not exist in the provided selector.",
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
@@ -205,7 +200,7 @@
         },
         {
             "file": "index.js",
-            "line": 614,
+            "line": 621,
             "description": "Asserts that given text does exist in the provided selector.",
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
@@ -213,7 +208,7 @@
         },
         {
             "file": "index.js",
-            "line": 631,
+            "line": 638,
             "description": "Asserts that given alertText does exist in the provided alert/confirm or prompt dialog.",
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
@@ -221,7 +216,7 @@
         },
         {
             "file": "index.js",
-            "line": 642,
+            "line": 649,
             "description": "Asserts that given text does exist in the provided selector.",
             "params": [
                 {
@@ -245,7 +240,7 @@
         },
         {
             "file": "index.js",
-            "line": 657,
+            "line": 664,
             "description": "Asserts that given title does not mathc the given expactions",
             "params": [
                 {
@@ -269,98 +264,98 @@
         },
         {
             "file": "index.js",
-            "line": 672,
+            "line": 679,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 683,
+            "line": 690,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 694,
+            "line": 701,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 716,
+            "line": 723,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 725,
+            "line": 732,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 733,
+            "line": 740,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 741,
+            "line": 748,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 749,
+            "line": 756,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 757,
+            "line": 764,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 765,
+            "line": 772,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 776,
+            "line": 783,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 809,
+            "line": 816,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 825,
+            "line": 832,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 874,
+            "line": 881,
             "description": "Assert if a given value shallow equals a snd. given value",
             "itemtype": "method",
             "name": "_testShallowEquals",
@@ -388,7 +383,7 @@
         },
         {
             "file": "index.js",
-            "line": 894,
+            "line": 901,
             "description": "Assert if a given value shallow does not equal a snd. given value",
             "itemtype": "method",
             "name": "_testShallowUnequals",
@@ -416,7 +411,7 @@
         },
         {
             "file": "index.js",
-            "line": 953,
+            "line": 960,
             "description": "Assert if a given value is boolean 'true'",
             "itemtype": "method",
             "name": "_testTruthy",
@@ -439,7 +434,7 @@
         },
         {
             "file": "index.js",
-            "line": 966,
+            "line": 973,
             "description": "Assert if a given value is boolean 'false'",
             "itemtype": "method",
             "name": "_testFalsy",
@@ -464,139 +459,135 @@
     "warnings": [
         {
             "message": "unknown tag: part",
-            "line": " index.js:44"
+            "line": " index.js:43"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:44"
+            "line": " index.js:43"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:56"
+            "line": " index.js:62"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:69"
+            "line": " index.js:76"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:88"
+            "line": " index.js:95"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:102"
+            "line": " index.js:109"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:202"
+            "line": " index.js:209"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:303"
+            "line": " index.js:310"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:490"
+            "line": " index.js:497"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:521"
+            "line": " index.js:528"
         },
         {
             "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
             "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
         },
         {
-            "message": "Missing item type",
-            "line": " index.js:44"
-        },
-        {
             "message": "Missing item type\nAsserts that current HTTP status code is the same as the one passed as argument.\nTODO: Needs some work",
-            "line": " index.js:478"
+            "line": " index.js:485"
         },
         {
             "message": "Missing item type\nAsserts that the element matching the provided selector expression is not visible.",
-            "line": " index.js:552"
+            "line": " index.js:559"
         },
         {
             "message": "Missing item type\nAsserts that the element matching the provided selector expression is visible.",
-            "line": " index.js:569"
+            "line": " index.js:576"
         },
         {
             "message": "Missing item type\nAsserts that given text does not exist in the provided selector.",
-            "line": " index.js:586"
+            "line": " index.js:593"
         },
         {
             "message": "Missing item type\nAsserts that given text does not exist in the provided selector.",
-            "line": " index.js:603"
+            "line": " index.js:610"
         },
         {
             "message": "Missing item type\nAsserts that given text does exist in the provided selector.",
-            "line": " index.js:614"
+            "line": " index.js:621"
         },
         {
             "message": "Missing item type\nAsserts that given alertText does exist in the provided alert/confirm or prompt dialog.",
-            "line": " index.js:631"
+            "line": " index.js:638"
         },
         {
             "message": "Missing item type\nAsserts that given text does exist in the provided selector.",
-            "line": " index.js:642"
+            "line": " index.js:649"
         },
         {
             "message": "Missing item type\nAsserts that given title does not mathc the given expactions",
-            "line": " index.js:657"
+            "line": " index.js:664"
         },
         {
             "message": "Missing item type",
-            "line": " index.js:672"
+            "line": " index.js:679"
         },
         {
             "message": "Missing item type",
-            "line": " index.js:683"
+            "line": " index.js:690"
         },
         {
             "message": "Missing item type",
-            "line": " index.js:694"
+            "line": " index.js:701"
         },
         {
             "message": "Missing item type",
-            "line": " index.js:716"
+            "line": " index.js:723"
         },
         {
             "message": "Missing item type",
-            "line": " index.js:725"
+            "line": " index.js:732"
         },
         {
             "message": "Missing item type",
-            "line": " index.js:733"
+            "line": " index.js:740"
         },
         {
             "message": "Missing item type",
-            "line": " index.js:741"
+            "line": " index.js:748"
         },
         {
             "message": "Missing item type",
-            "line": " index.js:749"
+            "line": " index.js:756"
         },
         {
             "message": "Missing item type",
-            "line": " index.js:757"
+            "line": " index.js:764"
         },
         {
             "message": "Missing item type",
-            "line": " index.js:765"
+            "line": " index.js:772"
         },
         {
             "message": "Missing item type",
-            "line": " index.js:776"
+            "line": " index.js:783"
         },
         {
             "message": "Missing item type",
-            "line": " index.js:809"
+            "line": " index.js:816"
         },
         {
             "message": "Missing item type",
-            "line": " index.js:825"
+            "line": " index.js:832"
         }
     ]
 }
