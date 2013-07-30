@@ -36,7 +36,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "index.js",
-            "line": 34
+            "line": 35
         }
     },
     "classes": {
@@ -50,10 +50,10 @@
             "extension_for": [],
             "module": "Reporter",
             "file": "index.js",
-            "line": 34,
-            "description": "jUnit reporter",
+            "line": 35,
+            "description": "The jUnit reporter can produce a jUnit compatible file with the results of your testrun,\nthis reporter enables you to use daleks testresults within a CI environment like Jenkins.\n\nThe reporter can be installed with the following command:\n```\n$ npm install dalek-reporter-junit --save-dev\n```\n\nThe file will follow the jUnit XML format:\n\n```html\n<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<resource name=\"DalekJSTest\">\n    <testsuite start=\"1375125067\" name=\"Click - DalekJS guinea pig [Phantomjs]\" end=\"1375125067\" totalTests=\"0\">\n        <testcase start=\"1375125067\" name=\"Can click a select option (OK, jQuery style, no message)\" end=\"null\" result=\"null\">\n            <variation start=\"1375125067\" name=\"val\" end=\"1375125067\">\n                <severity>pass</severity>\n                <description>&lt;![CDATA[David is the favourite]]&gt;</description>\n                <resource>DalekJSTest</resource>\n            </variation>\n            <variation start=\"1375125067\" name=\"val\" end=\"null\">\n                <severity>pass</severity>\n                <description>&lt;![CDATA[Matt is now my favourite, bow ties are cool]]&gt;</description>\n                <resource>DalekJSTest</resource>\n            </variation>\n        </testcase>\n    </testsuite>\n </resource>\n```\n\nBy default the file will be written to `report/dalek.xml`,\nyou can change this by adding a config option to the your Dalekfile\n\n```javascript\n\"junit-reporter\": {\n  \"dest\": \"your/folder/your_file.xml\"\n}\n```",
             "is_constructor": 1,
-            "part": "junit",
+            "part": "JUnit",
             "api": ""
         }
     },
@@ -66,7 +66,7 @@
         },
         {
             "file": "index.js",
-            "line": 84,
+            "line": 122,
             "description": "Connects to all the event listeners",
             "itemtype": "method",
             "name": "startListening",
@@ -76,7 +76,7 @@
         },
         {
             "file": "index.js",
-            "line": 102,
+            "line": 140,
             "description": "Stores the current browser name",
             "itemtype": "method",
             "name": "runBrowser",
@@ -93,7 +93,7 @@
         },
         {
             "file": "index.js",
-            "line": 115,
+            "line": 153,
             "description": "Generates XML skeleton for testsuites",
             "itemtype": "method",
             "name": "testsuiteStarted",
@@ -110,7 +110,7 @@
         },
         {
             "file": "index.js",
-            "line": 139,
+            "line": 177,
             "description": "Finishes XML skeleton for testsuites",
             "itemtype": "method",
             "name": "testsuiteFinished",
@@ -120,7 +120,7 @@
         },
         {
             "file": "index.js",
-            "line": 151,
+            "line": 189,
             "description": "Generates XML skeleton for an assertion",
             "itemtype": "method",
             "name": "assertion",
@@ -137,7 +137,7 @@
         },
         {
             "file": "index.js",
-            "line": 183,
+            "line": 221,
             "description": "Generates XML skeleton for a testcase",
             "itemtype": "method",
             "name": "testStarted",
@@ -154,7 +154,7 @@
         },
         {
             "file": "index.js",
-            "line": 207,
+            "line": 245,
             "description": "Finishes XML skeleton for a testcase",
             "itemtype": "method",
             "name": "testFinished",
@@ -171,7 +171,7 @@
         },
         {
             "file": "index.js",
-            "line": 230,
+            "line": 268,
             "description": "Finishes XML and writes file to the file system",
             "itemtype": "method",
             "name": "runnerFinished",
@@ -188,7 +188,7 @@
         },
         {
             "file": "index.js",
-            "line": 256,
+            "line": 294,
             "description": "Helper method to generate deeper nested directory structures",
             "itemtype": "method",
             "name": "_recursiveMakeDirSync",
@@ -206,11 +206,11 @@
     "warnings": [
         {
             "message": "unknown tag: part",
-            "line": " index.js:34"
+            "line": " index.js:35"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:34"
+            "line": " index.js:35"
         },
         {
             "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",

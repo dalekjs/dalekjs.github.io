@@ -92,7 +92,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/index.js.html#l34"><code>index.js:34</code></a>
+            Defined in: <a href="../files/index.js.html#l35"><code>index.js:35</code></a>
         </div>
     
 
@@ -108,7 +108,33 @@
 
 
 <div class="box intro">
-    <p>jUnit reporter</p>
+    <p>The jUnit reporter can produce a jUnit compatible file with the results of your testrun,
+this reporter enables you to use daleks testresults within a CI environment like Jenkins.</p>
+<p>The reporter can be installed with the following command:</p>
+<pre class="code prettyprint"><code>$ npm install dalek-reporter-junit --save-dev</code></pre>
+<p>The file will follow the jUnit XML format:</p>
+<pre><code class="lang-html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;resource name=&quot;DalekJSTest&quot;&gt;
+    &lt;testsuite start=&quot;1375125067&quot; name=&quot;Click - DalekJS guinea pig [Phantomjs]&quot; end=&quot;1375125067&quot; totalTests=&quot;0&quot;&gt;
+        &lt;testcase start=&quot;1375125067&quot; name=&quot;Can click a select option (OK, jQuery style, no message)&quot; end=&quot;null&quot; result=&quot;null&quot;&gt;
+            &lt;variation start=&quot;1375125067&quot; name=&quot;val&quot; end=&quot;1375125067&quot;&gt;
+                &lt;severity&gt;pass&lt;/severity&gt;
+                &lt;description&gt;&amp;lt;![CDATA[David is the favourite]]&amp;gt;&lt;/description&gt;
+                &lt;resource&gt;DalekJSTest&lt;/resource&gt;
+            &lt;/variation&gt;
+            &lt;variation start=&quot;1375125067&quot; name=&quot;val&quot; end=&quot;null&quot;&gt;
+                &lt;severity&gt;pass&lt;/severity&gt;
+                &lt;description&gt;&amp;lt;![CDATA[Matt is now my favourite, bow ties are cool]]&amp;gt;&lt;/description&gt;
+                &lt;resource&gt;DalekJSTest&lt;/resource&gt;
+            &lt;/variation&gt;
+        &lt;/testcase&gt;
+    &lt;/testsuite&gt;
+ &lt;/resource&gt;</code></pre>
+<p>By default the file will be written to <code>report/dalek.xml</code>,
+you can change this by adding a config option to the your Dalekfile</p>
+<pre><code class="lang-javascript">&quot;junit-reporter&quot;: {
+  &quot;dest&quot;: &quot;your/folder/your_file.xml&quot;
+}</code></pre>
 
 </div>
 
@@ -147,7 +173,7 @@
             
         
         
-        <a href="../files/index.js.html#l34"><code>index.js:34</code></a>
+        <a href="../files/index.js.html#l35"><code>index.js:35</code></a>
         
         </p>
 
@@ -314,7 +340,7 @@
             
         
         
-        <a href="../files/index.js.html#l256"><code>index.js:256</code></a>
+        <a href="../files/index.js.html#l294"><code>index.js:294</code></a>
         
         </p>
 
@@ -405,7 +431,7 @@
             
         
         
-        <a href="../files/index.js.html#l151"><code>index.js:151</code></a>
+        <a href="../files/index.js.html#l189"><code>index.js:189</code></a>
         
         </p>
 
@@ -496,7 +522,7 @@
             
         
         
-        <a href="../files/index.js.html#l102"><code>index.js:102</code></a>
+        <a href="../files/index.js.html#l140"><code>index.js:140</code></a>
         
         </p>
 
@@ -587,7 +613,7 @@
             
         
         
-        <a href="../files/index.js.html#l230"><code>index.js:230</code></a>
+        <a href="../files/index.js.html#l268"><code>index.js:268</code></a>
         
         </p>
 
@@ -668,7 +694,7 @@
             
         
         
-        <a href="../files/index.js.html#l84"><code>index.js:84</code></a>
+        <a href="../files/index.js.html#l122"><code>index.js:122</code></a>
         
         </p>
 
@@ -735,7 +761,7 @@
             
         
         
-        <a href="../files/index.js.html#l207"><code>index.js:207</code></a>
+        <a href="../files/index.js.html#l245"><code>index.js:245</code></a>
         
         </p>
 
@@ -826,7 +852,7 @@
             
         
         
-        <a href="../files/index.js.html#l183"><code>index.js:183</code></a>
+        <a href="../files/index.js.html#l221"><code>index.js:221</code></a>
         
         </p>
 
@@ -907,7 +933,7 @@
             
         
         
-        <a href="../files/index.js.html#l139"><code>index.js:139</code></a>
+        <a href="../files/index.js.html#l177"><code>index.js:177</code></a>
         
         </p>
 
@@ -974,7 +1000,7 @@
             
         
         
-        <a href="../files/index.js.html#l115"><code>index.js:115</code></a>
+        <a href="../files/index.js.html#l153"><code>index.js:153</code></a>
         
         </p>
 

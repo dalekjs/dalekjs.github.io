@@ -49,7 +49,7 @@
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">255</p>
+      <p class="stat">293</p>
     </div>
   </div>
   <div class="row historical">
@@ -121,14 +121,52 @@ var fs = require(&#039;fs&#039;);
 var path = require(&#039;path&#039;);
 var jsonxml = require(&#039;jsontoxml&#039;);
 
+// int. global
 var reporter = null;
 
 /**
- * jUnit reporter
+ * The jUnit reporter can produce a jUnit compatible file with the results of your testrun,
+ * this reporter enables you to use daleks testresults within a CI environment like Jenkins.
+ *
+ * The reporter can be installed with the following command:
+ * ```
+ * $ npm install dalek-reporter-junit --save-dev
+ * ```
+ *
+ * The file will follow the jUnit XML format:
+ *
+ * ```html
+ * &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ * &lt;resource name=&quot;DalekJSTest&quot;&gt;
+ *     &lt;testsuite start=&quot;1375125067&quot; name=&quot;Click - DalekJS guinea pig [Phantomjs]&quot; end=&quot;1375125067&quot; totalTests=&quot;0&quot;&gt;
+ *         &lt;testcase start=&quot;1375125067&quot; name=&quot;Can click a select option (OK, jQuery style, no message)&quot; end=&quot;null&quot; result=&quot;null&quot;&gt;
+ *             &lt;variation start=&quot;1375125067&quot; name=&quot;val&quot; end=&quot;1375125067&quot;&gt;
+ *                 &lt;severity&gt;pass&lt;/severity&gt;
+ *                 &lt;description&gt;&amp;lt;![CDATA[David is the favourite]]&amp;gt;&lt;/description&gt;
+ *                 &lt;resource&gt;DalekJSTest&lt;/resource&gt;
+ *             &lt;/variation&gt;
+ *             &lt;variation start=&quot;1375125067&quot; name=&quot;val&quot; end=&quot;null&quot;&gt;
+ *                 &lt;severity&gt;pass&lt;/severity&gt;
+ *                 &lt;description&gt;&amp;lt;![CDATA[Matt is now my favourite, bow ties are cool]]&amp;gt;&lt;/description&gt;
+ *                 &lt;resource&gt;DalekJSTest&lt;/resource&gt;
+ *             &lt;/variation&gt;
+ *         &lt;/testcase&gt;
+ *     &lt;/testsuite&gt;
+ *  &lt;/resource&gt;
+ * ```
+ *
+ * By default the file will be written to `report/dalek.xml`,
+ * you can change this by adding a config option to the your Dalekfile
+ *
+ * ```javascript
+ * &quot;junit-reporter&quot;: {
+ *   &quot;dest&quot;: &quot;your/folder/your_file.xml&quot;
+ * }
+ * ```
  *
  * @class Reporter
  * @constructor
- * @part junit
+ * @part JUnit
  * @api
  */
 

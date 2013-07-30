@@ -119,14 +119,52 @@ var fs = require(&#x27;fs&#x27;);
 var path = require(&#x27;path&#x27;);
 var jsonxml = require(&#x27;jsontoxml&#x27;);
 
+// int. global
 var reporter = null;
 
 /**
- * jUnit reporter
+ * The jUnit reporter can produce a jUnit compatible file with the results of your testrun,
+ * this reporter enables you to use daleks testresults within a CI environment like Jenkins.
+ *
+ * The reporter can be installed with the following command:
+ * &#x60;&#x60;&#x60;
+ * $ npm install dalek-reporter-junit --save-dev
+ * &#x60;&#x60;&#x60;
+ *
+ * The file will follow the jUnit XML format:
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ * &lt;resource name=&quot;DalekJSTest&quot;&gt;
+ *     &lt;testsuite start=&quot;1375125067&quot; name=&quot;Click - DalekJS guinea pig [Phantomjs]&quot; end=&quot;1375125067&quot; totalTests=&quot;0&quot;&gt;
+ *         &lt;testcase start=&quot;1375125067&quot; name=&quot;Can click a select option (OK, jQuery style, no message)&quot; end=&quot;null&quot; result=&quot;null&quot;&gt;
+ *             &lt;variation start=&quot;1375125067&quot; name=&quot;val&quot; end=&quot;1375125067&quot;&gt;
+ *                 &lt;severity&gt;pass&lt;/severity&gt;
+ *                 &lt;description&gt;&amp;lt;![CDATA[David is the favourite]]&amp;gt;&lt;/description&gt;
+ *                 &lt;resource&gt;DalekJSTest&lt;/resource&gt;
+ *             &lt;/variation&gt;
+ *             &lt;variation start=&quot;1375125067&quot; name=&quot;val&quot; end=&quot;null&quot;&gt;
+ *                 &lt;severity&gt;pass&lt;/severity&gt;
+ *                 &lt;description&gt;&amp;lt;![CDATA[Matt is now my favourite, bow ties are cool]]&amp;gt;&lt;/description&gt;
+ *                 &lt;resource&gt;DalekJSTest&lt;/resource&gt;
+ *             &lt;/variation&gt;
+ *         &lt;/testcase&gt;
+ *     &lt;/testsuite&gt;
+ *  &lt;/resource&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * By default the file will be written to &#x60;report/dalek.xml&#x60;,
+ * you can change this by adding a config option to the your Dalekfile
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &quot;junit-reporter&quot;: {
+ *   &quot;dest&quot;: &quot;your/folder/your_file.xml&quot;
+ * }
+ * &#x60;&#x60;&#x60;
  *
  * @class Reporter
  * @constructor
- * @part junit
+ * @part JUnit
  * @api
  */
 
