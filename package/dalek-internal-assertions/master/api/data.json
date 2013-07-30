@@ -778,76 +778,127 @@
         {
             "file": "index.js",
             "line": 1022,
+            "itemtype": "method",
+            "name": "is",
+            "params": [],
+            "chainable": 1,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 1031,
+            "line": 1035,
+            "itemtype": "method",
+            "name": "not",
+            "params": [],
+            "chainable": 1,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 1039,
+            "line": 1048,
+            "itemtype": "method",
+            "name": "between",
+            "params": [],
+            "chainable": 1,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 1047,
+            "line": 1061,
+            "itemtype": "method",
+            "name": "gt",
+            "params": [],
+            "chainable": 1,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 1055,
+            "line": 1074,
+            "itemtype": "method",
+            "name": "gte",
+            "params": [],
+            "chainable": 1,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 1063,
+            "line": 1087,
+            "itemtype": "method",
+            "name": "lt",
+            "params": [],
+            "chainable": 1,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 1071,
+            "line": 1100,
+            "itemtype": "method",
+            "name": "lte",
+            "params": [],
+            "chainable": 1,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 1082,
+            "line": 1116,
+            "itemtype": "method",
+            "name": "_generateCallbackAssertion",
+            "params": [],
+            "return": {
+                "description": ""
+            },
+            "access": "private",
+            "tagname": "",
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 1115,
+            "line": 1156,
+            "itemtype": "method",
+            "name": "_addToActionQueue",
+            "params": [],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 1131,
+            "line": 1179,
+            "description": "Generates a function that can be used",
+            "itemtype": "method",
+            "name": "generateTestHelper",
+            "params": [],
+            "return": {
+                "description": ""
+            },
+            "access": "private",
+            "tagname": "",
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 1180,
+            "line": 1235,
             "description": "Assert if a given value shallow equals a snd. given value",
             "itemtype": "method",
             "name": "_testShallowEquals",
@@ -875,7 +926,7 @@
         },
         {
             "file": "index.js",
-            "line": 1200,
+            "line": 1255,
             "description": "Assert if a given value shallow does not equal a snd. given value",
             "itemtype": "method",
             "name": "_testShallowUnequals",
@@ -903,7 +954,147 @@
         },
         {
             "file": "index.js",
-            "line": 1259,
+            "line": 1275,
+            "description": "Assert if a given value matches a range",
+            "itemtype": "method",
+            "name": "_testBetween",
+            "params": [
+                {
+                    "name": "a",
+                    "description": "Range to test",
+                    "type": "Array"
+                },
+                {
+                    "name": "b",
+                    "description": "Value to compare",
+                    "type": "Bool"
+                }
+            ],
+            "return": {
+                "description": "testresult",
+                "type": "Bool"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Internal.Assertions",
+            "module": "Assertions",
+            "namespace": "Dalek.Internal"
+        },
+        {
+            "file": "index.js",
+            "line": 1295,
+            "description": "Assert if a given value is greater than the value to compare",
+            "itemtype": "method",
+            "name": "_testGreaterThan",
+            "params": [
+                {
+                    "name": "a",
+                    "description": "Value to test",
+                    "type": "Bool"
+                },
+                {
+                    "name": "b",
+                    "description": "Value to compare",
+                    "type": "Bool"
+                }
+            ],
+            "return": {
+                "description": "testresult",
+                "type": "Bool"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Internal.Assertions",
+            "module": "Assertions",
+            "namespace": "Dalek.Internal"
+        },
+        {
+            "file": "index.js",
+            "line": 1315,
+            "description": "Assert if a given value is greater or equal than the value to compare",
+            "itemtype": "method",
+            "name": "_testGreaterThanEqual",
+            "params": [
+                {
+                    "name": "a",
+                    "description": "Value to test",
+                    "type": "Bool"
+                },
+                {
+                    "name": "b",
+                    "description": "Value to compare",
+                    "type": "Bool"
+                }
+            ],
+            "return": {
+                "description": "testresult",
+                "type": "Bool"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Internal.Assertions",
+            "module": "Assertions",
+            "namespace": "Dalek.Internal"
+        },
+        {
+            "file": "index.js",
+            "line": 1329,
+            "description": "Assert if a given value is lower than the value to compare",
+            "itemtype": "method",
+            "name": "_testLowerThan",
+            "params": [
+                {
+                    "name": "a",
+                    "description": "Value to test",
+                    "type": "Bool"
+                },
+                {
+                    "name": "b",
+                    "description": "Value to compare",
+                    "type": "Bool"
+                }
+            ],
+            "return": {
+                "description": "testresult",
+                "type": "Bool"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Internal.Assertions",
+            "module": "Assertions",
+            "namespace": "Dalek.Internal"
+        },
+        {
+            "file": "index.js",
+            "line": 1349,
+            "description": "Assert if a given value is lower or equal than the value to compare",
+            "itemtype": "method",
+            "name": "_testLowerThanEqual",
+            "params": [
+                {
+                    "name": "a",
+                    "description": "Value to test",
+                    "type": "Bool"
+                },
+                {
+                    "name": "b",
+                    "description": "Value to compare",
+                    "type": "Bool"
+                }
+            ],
+            "return": {
+                "description": "testresult",
+                "type": "Bool"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Internal.Assertions",
+            "module": "Assertions",
+            "namespace": "Dalek.Internal"
+        },
+        {
+            "file": "index.js",
+            "line": 1363,
             "description": "Assert if a given value is boolean 'true'",
             "itemtype": "method",
             "name": "_testTruthy",
@@ -926,7 +1117,7 @@
         },
         {
             "file": "index.js",
-            "line": 1272,
+            "line": 1376,
             "description": "Assert if a given value is boolean 'false'",
             "itemtype": "method",
             "name": "_testFalsy",
@@ -1062,48 +1253,100 @@
             "line": " index.js:986"
         },
         {
-            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
-            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
-        },
-        {
-            "message": "Missing item type",
+            "message": "param name/type/descript missing",
             "line": " index.js:1022"
         },
         {
-            "message": "Missing item type",
-            "line": " index.js:1031"
+            "message": "param name/type/descript missing",
+            "line": " index.js:1022"
         },
         {
-            "message": "Missing item type",
-            "line": " index.js:1039"
+            "message": "param name/type/descript missing",
+            "line": " index.js:1035"
         },
         {
-            "message": "Missing item type",
-            "line": " index.js:1047"
+            "message": "param name/type/descript missing",
+            "line": " index.js:1035"
         },
         {
-            "message": "Missing item type",
-            "line": " index.js:1055"
+            "message": "param name/type/descript missing",
+            "line": " index.js:1048"
         },
         {
-            "message": "Missing item type",
-            "line": " index.js:1063"
+            "message": "param name/type/descript missing",
+            "line": " index.js:1048"
         },
         {
-            "message": "Missing item type",
-            "line": " index.js:1071"
+            "message": "param name/type/descript missing",
+            "line": " index.js:1061"
         },
         {
-            "message": "Missing item type",
-            "line": " index.js:1082"
+            "message": "param name/type/descript missing",
+            "line": " index.js:1061"
         },
         {
-            "message": "Missing item type",
-            "line": " index.js:1115"
+            "message": "param name/type/descript missing",
+            "line": " index.js:1074"
         },
         {
-            "message": "Missing item type",
-            "line": " index.js:1131"
+            "message": "param name/type/descript missing",
+            "line": " index.js:1074"
+        },
+        {
+            "message": "param name/type/descript missing",
+            "line": " index.js:1087"
+        },
+        {
+            "message": "param name/type/descript missing",
+            "line": " index.js:1087"
+        },
+        {
+            "message": "param name/type/descript missing",
+            "line": " index.js:1100"
+        },
+        {
+            "message": "param name/type/descript missing",
+            "line": " index.js:1100"
+        },
+        {
+            "message": "param name/type/descript missing",
+            "line": " index.js:1116"
+        },
+        {
+            "message": "param name/type/descript missing",
+            "line": " index.js:1116"
+        },
+        {
+            "message": "param name/type/descript missing",
+            "line": " index.js:1116"
+        },
+        {
+            "message": "param name/type/descript missing",
+            "line": " index.js:1156"
+        },
+        {
+            "message": "param name/type/descript missing",
+            "line": " index.js:1156"
+        },
+        {
+            "message": "param name/type/descript missing",
+            "line": " index.js:1156"
+        },
+        {
+            "message": "param name/type/descript missing",
+            "line": " index.js:1179"
+        },
+        {
+            "message": "param name/type/descript missing",
+            "line": " index.js:1179"
+        },
+        {
+            "message": "param name/type/descript missing",
+            "line": " index.js:1179"
+        },
+        {
+            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
         }
     ]
 }
