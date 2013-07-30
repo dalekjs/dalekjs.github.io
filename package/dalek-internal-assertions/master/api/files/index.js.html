@@ -150,7 +150,48 @@ Assertions = function (opts) {
 };
 
 /**
- * Starts assertion chaining
+ * It can be really cumbersome to always write assert, assert &amp; assert
+ * all over the place when your doing multiple assertions.
+ * To avoid this you can open an assertion context in your test that
+ * allows you to write n assetions, but can avoid to type asset before each.
+ *
+ * So, instead of writing this:
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
+ *     .assert.text(&#x27;#nav&#x27;).is(&#x27;Navigation&#x27;)
+ *     .assert.visible(&#x27;#nav&#x27;)
+ *     .assert.attr(&#x27;#nav&#x27;, &#x27;data-nav&#x27;, &#x27;true&#x27;)
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * you can write this:
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
+ *     .assert.chain()
+ *       .text(&#x27;#nav&#x27;).is(&#x27;Navigation&#x27;)
+ *       .visible(&#x27;#nav&#x27;)
+ *       .attr(&#x27;#nav&#x27;, &#x27;data-nav&#x27;, &#x27;true&#x27;)
+ *     .end()
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * to make it even more concise, you can combine this with the [actions.html#meth-query](query) method:
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
+ *     .assert.chain()
+ *       .query(&#x27;#nav&#x27;)
+ *           .text().is(&#x27;Navigation&#x27;)
+ *           .visible()
+ *           .attr(&#x27;data-nav&#x27;, &#x27;true&#x27;)
+ *         .end()
+ *     .end()
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * Always make sure, you terminate it with the [#meth-end](end) method!
  *
  * @api
  * @method chain
@@ -164,10 +205,23 @@ Assertions.prototype.chain = function () {
 };
 
 /**
- * Ends an assertion chain
+ * Terminates an assertion chain or a query
  *
- * @method end
+ * &#x60;&#x60;&#x60;javascript
+ * test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
+ *     .assert.chain()
+ *       .query(&#x27;#nav&#x27;)
+ *           .text().is(&#x27;Navigation&#x27;)
+ *           .visible()
+ *           .attr(&#x27;data-nav&#x27;, &#x27;true&#x27;)
+ *         .end()
+ *     .end()
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
  * @api
+ * @method end
+ * @chainable
  */
 
 Assertions.prototype.end = function () {
@@ -186,7 +240,9 @@ Assertions.prototype.end = function () {
  * Asserts that a given ressource does exist in the environment.
  *
  * @method resourceExists
- * @api
+ * @param {string} url URL of the resource to check
+ * @param {string} message Message for the test reporter
+ * @chainable
  */
 
 Assertions.prototype.resourceExists = function (url, message) {
@@ -229,7 +285,7 @@ Assertions.prototype.resourceExists = function (url, message) {
  *
  * &#x60;&#x60;&#x60;javascript
  * test.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
- *     .is.between(2, 6, &#x27;Between 2 and 6 blog teasers are present&#x27;)
+ *     .is.between([2, 6], &#x27;Between 2 and 6 blog teasers are present&#x27;)
  * &#x60;&#x60;&#x60;
  *
  * If you dealing with the situation that you have a minimum of elements,
@@ -264,22 +320,12 @@ Assertions.prototype.resourceExists = function (url, message) {
  *     .is.not(5, &#x27;There are more or less than 5 teasers present&#x27;)
  * &#x60;&#x60;&#x60;
  *
- * If you wan&#x27;t to allow multiple correct values, you can use the &#x27;:are()&#x27; helper
- *
- * &#x60;&#x60;&#x60;javascript
- * test.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
- *     .are([1,3,6], &#x27;Teaser count is an odd number between 1 and 6&#x27;)
- * &#x60;&#x60;&#x60;
- *
- * of couse you can test for the opoosite with &#x27;:are()&#x27;
- *
- * &#x60;&#x60;&#x60;javascript
- * test.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
- *     .are([0,2,4], &#x27;Teaser count is not an even number between 1 and 6&#x27;)
- * &#x60;&#x60;&#x60;
- *
  * @api
  * @method numberOfElements
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} expected Expected test result
+ * @param {string} message Message for the test reporter
+ * @chainable
  */
 
 Assertions.prototype.numberOfElements = function (selector, expected, message) {
@@ -365,22 +411,12 @@ Assertions.prototype.numberOfElements = function (selector, expected, message) {
  *     .is.not(5, &#x27;There are more or less than 5 teasers visible&#x27;)
  * &#x60;&#x60;&#x60;
  *
- * If you wan&#x27;t to allow multiple correct values, you can use the &#x27;:are()&#x27; helper
- *
- * &#x60;&#x60;&#x60;javascript
- * test.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
- *     .are([1,3,6], &#x27;Teaser count is an odd number between 1 and 6&#x27;)
- * &#x60;&#x60;&#x60;
- *
- * of couse you can test for the opoosite with &#x27;:are()&#x27; and &#x27;:not()&#x27;
- *
- * &#x60;&#x60;&#x60;javascript
- * test.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
- *     .are.not([0,2,4], &#x27;Teaser count is not an even number between 1 and 6&#x27;)
- * &#x60;&#x60;&#x60;
- *
  * @api
  * @method numberOfVisibleElements
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} expected Expected test result
+ * @param {string} message Message for the test reporter
+ * @chainable
  */
 
 Assertions.prototype.numberOfVisibleElements = function (selector, expected, message) {
@@ -439,22 +475,13 @@ Assertions.prototype.numberOfVisibleElements = function (selector, expected, mes
  *  .val(&#x27;#fav-enemy&#x27;, &#x27;Cyberman&#x27;, &#x27;Cyberman are so cyber&#x27;)
  * &#x60;&#x60;&#x60;
  *
- * Of course, you can use a bunch of assertion helpers, to enable
- * yourself to do more than just one assertion with the &#x27;:are()&#x27; helper.
- *
- * &#x60;&#x60;&#x60;javascript
- * test
- *   .val(&#x27;#fav-enemy&#x27;)
- *   .is(&#x27;Daleks&#x27;, &#x27;Still cute, those daleks&#x27;)
- *   .is.not(&#x27;Klingons&#x27;, &#x27;Different fandom bro&#x27;)
- *   // yep, multiple mentions are allowed
- *   .are([&#x27;Daleks&#x27;, &#x27;Cyberman&#x27;, &#x27;The master&#x27;], &#x27;All of them are cool&#x27;);
- * &#x60;&#x60;&#x60;
- *
- * @method val
  * @api
+ * @method val
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} expected Expected test result
+ * @param {string} message Message for the test reporter
+ * @chainable
  */
-
 
 Assertions.prototype.val = function (selector, expected, message) {
   var hash = uuid.v4();
@@ -469,6 +496,27 @@ Assertions.prototype.val = function (selector, expected, message) {
   this._addToActionQueue([selector, expected, hash], &#x27;val&#x27;, cb);
   return this.chaining ? this : this.test;
 };
+
+/**
+ * Checks the computed style of the browser.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;css
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method css
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} property CSS property to check
+ * @param {string} expected Expected test result
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
 
 Assertions.prototype.css = function (selector, property, expected, message) {
   var hash = uuid.v4();
@@ -485,6 +533,23 @@ Assertions.prototype.css = function (selector, property, expected, message) {
   return this.chaining ? this : this.test;
 };
 
+/**
+ * Checks the width of an element.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method width
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} expected Expected test result
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
 Assertions.prototype.width = function (selector, expected, message) {
   var hash = uuid.v4();
 
@@ -498,6 +563,23 @@ Assertions.prototype.width = function (selector, expected, message) {
   this._addToActionQueue([selector, expected, hash], &#x27;width&#x27;, cb);
   return this.chaining ? this : this.test;
 };
+
+/**
+ * Checks the height of an element.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method height
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} expected Expected test result
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
 
 Assertions.prototype.height = function (selector, expected, message) {
   var hash = uuid.v4();
@@ -513,6 +595,22 @@ Assertions.prototype.height = function (selector, expected, message) {
   return this.chaining ? this : this.test;
 };
 
+/**
+ * Determine if an &lt;option&gt; element, or an &lt;input&gt; element of type checkbox or radiobutton is currently selected.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method selected
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
 Assertions.prototype.selected = function (selector, message) {
   var hash = uuid.v4();
 
@@ -525,6 +623,22 @@ Assertions.prototype.selected = function (selector, message) {
   this._addToActionQueue([selector, true, hash], &#x27;selected&#x27;, cb);
   return this.chaining ? this : this.test;
 };
+
+/**
+ * Determine if an &lt;option&gt; element, or an &lt;input&gt; element of type checkbox or radiobutton is currently not selected.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method notSelected
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
 
 Assertions.prototype.notSelected = function (selector, message) {
   var hash = uuid.v4();
@@ -539,6 +653,22 @@ Assertions.prototype.notSelected = function (selector, message) {
   return this.chaining ? this : this.test;
 };
 
+/**
+ * Determine if an element is currently enabled.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method enabled
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
 Assertions.prototype.enabled = function (selector, message) {
   var hash = uuid.v4();
 
@@ -551,6 +681,22 @@ Assertions.prototype.enabled = function (selector, message) {
   this._addToActionQueue([selector, true, hash], &#x27;enabled&#x27;, cb);
   return this.chaining ? this : this.test;
 };
+
+/**
+ * Determine if an element is currently disabled.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method disabled
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
 
 Assertions.prototype.disabled = function (selector, message) {
   var hash = uuid.v4();
@@ -565,6 +711,20 @@ Assertions.prototype.disabled = function (selector, message) {
   return this.chaining ? this : this.test;
 };
 
+/**
+ * Checks the contents of a cookie.
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method cookie
+ * @param {string} name Name of the cookie
+ * @param {string} expect Expected testresult
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
 Assertions.prototype.cookie = function (name, expected, message) {
   var hash = uuid.v4();
   var cb = this._generateCallbackAssertion(&#x27;cookie&#x27;, &#x27;cookie&#x27;, this._testShallowEquals, hash, {expected: expected, name: name, message: message}).bind(this.test);
@@ -574,7 +734,12 @@ Assertions.prototype.cookie = function (name, expected, message) {
 
 /**
  * Asserts that current HTTP status code is the same as the one passed as argument.
- * TODO: Needs some work
+ * TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method for this)
+ *
+ * @method httpStatus
+ * @param {integer} status HTTP status code
+ * @param {string} message Message for the test reporter
+ * @chainable
  */
 
 Assertions.prototype.httpStatus = function (status, message) {
@@ -598,8 +763,11 @@ Assertions.prototype.httpStatus = function (status, message) {
  *   .exists(&#x27;#so-lonely&#x27;, &#x27;The loneliest element in the universe exists&#x27;)
  * &#x60;&#x60;&#x60;
  *
- * @method exists
  * @api
+ * @method exists
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} message Message for the test reporter
+ * @chainable
  */
 
 Assertions.prototype.exists = function (selector, message) {
@@ -629,8 +797,11 @@ Assertions.prototype.exists = function (selector, message) {
  *   .doesntExist(&#x27;#the-master&#x27;, &#x27;The master element has not been seen&#x27;)
  * &#x60;&#x60;&#x60;
  *
- * @method doesntExist
  * @api
+ * @method doesntExist
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} message Message for the test reporter
+ * @chainable
  */
 
 Assertions.prototype.doesntExist = function (selector, message) {
@@ -648,6 +819,18 @@ Assertions.prototype.doesntExist = function (selector, message) {
 
 /**
  * Asserts that the element matching the provided selector expression is not visible.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method notVisible
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} message Message for the test reporter
+ * @chainable
  */
 
 Assertions.prototype.notVisible = function (selector, message) {
@@ -665,6 +848,18 @@ Assertions.prototype.notVisible = function (selector, message) {
 
 /**
  * Asserts that the element matching the provided selector expression is visible.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method visible
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} message Message for the test reporter
+ * @chainable
  */
 
 Assertions.prototype.visible = function (selector, message) {
@@ -682,6 +877,19 @@ Assertions.prototype.visible = function (selector, message) {
 
 /**
  * Asserts that given text does not exist in the provided selector.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method doesntHaveText
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} expected Expected testresult
+ * @param {string} message Message for the test reporter
+ * @chainable
  */
 
 Assertions.prototype.doesntHaveText = function (selector, expected, message) {
@@ -698,10 +906,22 @@ Assertions.prototype.doesntHaveText = function (selector, expected, message) {
 };
 
 /**
- * Asserts that given text does not exist in the provided selector.
+ * Asserts that given text does not exist in the current alert/prompt/confirm dialog.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method dialogDoesntHaveText
+ * @param {string} expected Expected testresult
+ * @param {string} message Message for the test reporter
+ * @chainable
  */
 
-Assertions.prototype.alertDoesntHaveText = function (expected, message) {
+Assertions.prototype.dialogDoesntHaveText = function (expected, message) {
   var hash = uuid.v4();
   var cb = this._generateCallbackAssertion(&#x27;alertText&#x27;, &#x27;!alertText&#x27;, this._testShallowUnequals, hash, {expected: expected, message: message}).bind(this.test);
   this._addToActionQueue([expected, hash], &#x27;alertText&#x27;, cb);
@@ -710,6 +930,19 @@ Assertions.prototype.alertDoesntHaveText = function (expected, message) {
 
 /**
  * Asserts that given text does exist in the provided selector.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method text
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} expected Expected testresult
+ * @param {string} message Message for the test reporter
+ * @chainable
  */
 
 Assertions.prototype.text = function (selector, expected, message) {
@@ -727,9 +960,21 @@ Assertions.prototype.text = function (selector, expected, message) {
 
 /**
  * Asserts that given alertText does exist in the provided alert/confirm or prompt dialog.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method dialogText
+ * @param {string} expected Expected testresult
+ * @param {string} message Message for the test reporter
+ * @chainable
  */
 
-Assertions.prototype.alertText = function (expected, message) {
+Assertions.prototype.dialogText = function (expected, message) {
   var hash = uuid.v4();
   var cb = this._generateCallbackAssertion(&#x27;alertText&#x27;, &#x27;alertText&#x27;, this._testShallowEquals, hash, {expected: expected, message: message}).bind(this.test);
   this._addToActionQueue([expected, hash], &#x27;alertText&#x27;, cb);
@@ -737,11 +982,19 @@ Assertions.prototype.alertText = function (expected, message) {
 };
 
 /**
- * Asserts that given text does exist in the provided selector.
+ * Asserts that the page title is as expected.
  *
- * @param {String} expected
- * @param {String} message
- * @return {Object}
+ * &#x60;&#x60;&#x60;html
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method title
+ * @param {string} expected Expected testresult
+ * @param {string} message Message for the test reporter
+ * @chainable
  */
 
 Assertions.prototype.title = function (expected, message) {
@@ -752,11 +1005,19 @@ Assertions.prototype.title = function (expected, message) {
 };
 
 /**
- * Asserts that given title does not mathc the given expactions
+ * Asserts that given title does not match the given expactions
  *
- * @param {String} expected
- * @param {String} message
- * @return {Object}
+ * &#x60;&#x60;&#x60;html
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method title
+ * @param {string} expected Expected testresult
+ * @param {string} message Message for the test reporter
+ * @chainable
  */
 
 Assertions.prototype.doesntHaveTitle = function (expected, message) {
@@ -767,7 +1028,19 @@ Assertions.prototype.doesntHaveTitle = function (expected, message) {
 };
 
 /**
+ * Asserts that the pages url is as expected.
  *
+ * &#x60;&#x60;&#x60;html
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method url
+ * @param {string} expected Expected testresult
+ * @param {string} message Message for the test reporter
+ * @chainable
  */
 
 Assertions.prototype.url = function (expected, message) {
@@ -778,7 +1051,19 @@ Assertions.prototype.url = function (expected, message) {
 };
 
 /**
+ * Asserts that the pages url does not match the expectation.
  *
+ * &#x60;&#x60;&#x60;html
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method doesntHaveUrl
+ * @param {string} expected Expected testresult
+ * @param {string} message Message for the test reporter
+ * @chainable
  */
 
 Assertions.prototype.doesntHaveUrl = function (expected, message) {
@@ -789,7 +1074,21 @@ Assertions.prototype.doesntHaveUrl = function (expected, message) {
 };
 
 /**
+ * Asserts that an elements attribute is as expected.
  *
+ * &#x60;&#x60;&#x60;html
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method attr
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} attribute The attribute to test
+ * @param {string} expected Expected testresult
+ * @param {string} message Message for the test reporter
+ * @chainable
  */
 
 Assertions.prototype.attr = function (selector, attribute, expected, message) {
