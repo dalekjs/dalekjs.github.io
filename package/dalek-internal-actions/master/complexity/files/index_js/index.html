@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">72.80</p>
+      <p class="stat">71.72</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">741</p>
+      <p class="stat">906</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">62.34</p>
+      <p class="stat">64.29</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">3.43</p>
+      <p class="stat">3.45</p>
     </div>
   </div>
 </div>
@@ -140,6 +140,8 @@ var Actions = function () {
  *
  * @api
  * @method query
+ * @param {string} selector Selector of the element to query
+ * @chainable
  */
 
 Actions.prototype.query = function (selector) {
@@ -151,10 +153,12 @@ Actions.prototype.query = function (selector) {
 };
 
 /**
- * Selector helper
+ * Alias of query
  *
  * @api
  * @method $
+ * @param {string} selector Selector of the element to query
+ * @chainable
  */
 
 Actions.prototype.$ = Actions.prototype.query;
@@ -168,7 +172,6 @@ Actions.prototype.$ = Actions.prototype.query;
  * @param {string} type
  * @param {string} selector
  * @chainable
- * @api
  */
 
 Actions.prototype.mouseEvent = function (type, selector) {
@@ -221,7 +224,6 @@ Actions.prototype.mouseEvent = function (type, selector) {
  * For more information about this, I recommend to check out the [configuration docs](/docs/config.html)
  *
  * @method setHttpAuth
- * @api
  * @param {string} username
  * @param {string} password
  * @return {Actions}
@@ -237,8 +239,12 @@ Actions.prototype.setHttpAuth = function (username, password) {
 /**
  * Switches to an iFrame context
  *
- * Sometimes you encounter situation, where you need to drive/access an iFrame sitting in your page.
- * You can access such frames with this mehtod, but be aware of the fact, that the complete test
+ * Sometimes you encounter situations, where you need to drive/access an iFrame sitting in your page.
+ * You can access such frames with this mehtod, but be aware of the fact, that the complete test context
+ * than switches to the iframe context, every action and assertion will be executed within the iFrame context.
+ * Btw.: The domain of the IFrame can be whatever you want, this method has no same origin policy restrictions.
+ *
+ * If you wan&#039;t to get back to the parents context, you have to use the &lt;a href=&quot;#meth-toParent&quot;&gt;toParent&lt;/a&gt; method.
  *
  * ```html
  * &lt;div&gt;
@@ -247,31 +253,55 @@ Actions.prototype.setHttpAuth = function (username, password) {
  * ```
  *
  * ```javascript
- *  test.open(&#039;http:adomain.withiframe.com&#039;)
- *    .title().is(&#039;Title of a page that embeds an iframe&#039;)
+ *  test.open(&#039;http://adomain.withiframe.com&#039;)
+ *    .assert.title().is(&#039;Title of a page that embeds an iframe&#039;)
  *    .toIFrame(&#039;#login&#039;)
- *      .title().is(&#039;Title of a page that can be embedded as an iframe&#039;)
+ *      .assert.title().is(&#039;Title of a page that can be embedded as an iframe&#039;)
  *    .toParent()
+ *    .done();
  * ```
  *
  * @api
  * @method toFrame
- * @param {string} selector
- * @return {Actions}
+ * @param {string} selector Selector of the frame to switch to
+ * @chainable
  */
 
 Actions.prototype.toFrame = function (selector) {
   var hash = uuid.v4();
+
+  if (this.querying === true) {
+    selector = this.selector;
+  }
+
   var cb = this._generateCallbackAssertion(&#039;toFrame&#039;, &#039;toFrame&#039;, selector, hash);
   this._addToActionQueue([selector, hash], &#039;toFrame&#039;, cb);
   return this;
 };
 
 /**
- * End of IFrame context
+ * Switches back to the parent page context when the test context has been
+ * switched to an iFrame context
+ *
+ * ```html
+ * &lt;div&gt;
+ *   &lt;iframe id=&quot;login&quot; src=&quot;/login.html&quot;/&gt;
+ * &lt;/div&gt;
+ * ```
+ *
+ * ```javascript
+ *  test.open(&#039;http://adomain.withiframe.com&#039;)
+ *    .assert.title().is(&#039;Title of a page that embeds an iframe&#039;)
+ *    .toIFrame(&#039;#login&#039;)
+ *      .assert.title().is(&#039;Title of a page that can be embedded as an iframe&#039;)
+ *    .toParent()
+ *    .assert.title().is(&#039;Title of a page that embeds an iframe&#039;)
+ *    .done();
+ * ```
  *
  * @api
  * @method toParent
+ * @chainable
  */
 
 Actions.prototype.toParent = function () {
@@ -282,10 +312,34 @@ Actions.prototype.toParent = function () {
 };
 
 /**
- * Change scope to a specific window context
+ * Switches to a different window context
+ *
+ * Sometimes you encounter situations, where you need to access a .
+ * You can access such frames with this mehtod, but be aware of the fact, that the complete test context
+ * than switches to the window context, every action and assertion will be executed within the chosen window context.
+ * Btw.: The domain of the window can be whatever you want, this method has no same origin policy restrictions.
+ *
+ * If you want to get back to the parents context, you have to use the &lt;a href=&quot;#meth-toParentWindow&quot;&gt;toParentWindow&lt;/a&gt; method.
+ *
+ * ```html
+ * &lt;div&gt;
+ *   &lt;a onclick=&quot;window.open(&#039;http://google.com&#039;,&#039;goog&#039;,&#039;width=480, height=300&#039;)&quot;&gt;Open Google&lt;/a&gt;
+ * &lt;/div&gt;
+ * ```
+ *
+ * ```javascript
+ *  test.open(&#039;http://adomain.com&#039;)
+ *    .assert.title().is(&#039;Title of a page that can open a popup window&#039;)
+ *    .toWindow(&#039;goog&#039;)
+ *      .assert.title().is(&#039;Google&#039;)
+ *    .toParentWindow()
+ *    .done();
+ * ```
  *
  * @api
  * @method toWindow
+ * @param {string} name Name of the window to switch to
+ * @chainable
  */
 
 Actions.prototype.toWindow = function (name) {
@@ -296,10 +350,28 @@ Actions.prototype.toWindow = function (name) {
 };
 
 /**
- * Go back to the parent window context
+ * Switches back to the parent windoe context when the test context has been
+ * switched to a different windoe context
+ *
+ * ```html
+ * &lt;div&gt;
+ *   &lt;a onclick=&quot;window.open(&#039;http://google.com&#039;,&#039;goog&#039;,&#039;width=480, height=300&#039;)&quot;&gt;Open Google&lt;/a&gt;
+ * &lt;/div&gt;
+ * ```
+ *
+ * ```javascript
+ *  test.open(&#039;http://adomain.com&#039;)
+ *    .assert.title().is(&#039;Title of a page that can open a popup window&#039;)
+ *    .toWindow(&#039;goog&#039;)
+ *      .assert.title().is(&#039;Google&#039;)
+ *    .toParentWindow()
+ *    .assert.title().is(&#039;Title of a page that can open a popup window&#039;)
+ *    .done();
+ * ```
  *
  * @api
  * @method toParentWindow
+ * @chainable
  */
 
 Actions.prototype.toParentWindow = function () {
@@ -315,11 +387,10 @@ Actions.prototype.toParentWindow = function () {
  * You can also set a callback on timeout using the onTimeout argument,
  * and set the timeout using the timeout one, in milliseconds. The default timeout is set to 5000ms.
  *
- * @api
  * @method waitFor
- * @param {function} fn
- * @param {number} timeout
- * @return {Actions}
+ * @param {function} fn Async function that resolves an promise when ready
+ * @param {number} timeout Timeout in miliseconds
+ * @chainable
  */
 
 Actions.prototype.waitFor = function (fn, timeout) {
@@ -332,11 +403,10 @@ Actions.prototype.waitFor = function (fn, timeout) {
 /**
  * Wait until a resource that matches the given testFx is loaded to process a next step.
  *
- * @api
  * @method waitForResource
- * @param {string} ressource
- * @param {number} timeout
- * @return {Actions}
+ * @param {string} ressource URL of the ressource that should be waited for
+ * @param {number} timeout Timeout in miliseconds
+ * @chainable
  */
 
 Actions.prototype.waitForResource = function (ressource, timeout) {
@@ -349,11 +419,10 @@ Actions.prototype.waitForResource = function (ressource, timeout) {
 /**
  * Waits until the passed text is present in the page contents before processing the immediate next step.
  *
- * @api
  * @method waitForText
- * @param {string} text
- * @param {number} timeout
- * @return {Actions}
+ * @param {string} text Text to be waited for
+ * @param {number} timeout Timeout in miliseconds
+ * @chainable
  */
 
 Actions.prototype.waitForText = function (text, timeout) {
@@ -366,15 +435,20 @@ Actions.prototype.waitForText = function (text, timeout) {
 /**
  * Waits until an element matching the provided selector expression is visible in the remote DOM to process a next step.
  *
- * @api
  * @method waitUntilVisible
- * @param {string} selector
- * @param {number} timeout
- * @return {Actions}
+ * @param {string} selector Selector of the element that should be waited to become invisible
+ * @param {number} timeout Timeout in miliseconds
+ * @chainable
  */
 
 Actions.prototype.waitUntilVisible = function (selector, timeout) {
   var hash = uuid.v4();
+
+  if (this.querying === true) {
+    timeout = selector;
+    selector = this.selector;
+  }
+
   var cb = this._generateCallbackAssertion(&#039;waitUntilVisible&#039;, &#039;waitUntilVisible&#039;, selector, timeout, hash);
   this._addToActionQueue([selector, (timeout ? parseInt(timeout, 10) : 5000), hash], &#039;waitUntilVisible&#039;, cb);
   return this;
@@ -383,18 +457,20 @@ Actions.prototype.waitUntilVisible = function (selector, timeout) {
 /**
  * Waits until an element matching the provided selector expression is no longer visible in remote DOM to process a next step.
  *
- * ```javascript
- * ```
- *
- * @api
  * @method waitWhileVisible
- * @param {string} selector
- * @param {number} timeout
- * @return {Actions}
+ * @param {string} selector Selector of the element that should be waited to become visible
+ * @param {number} timeout Timeout in miliseconds
+ * @chainable
  */
 
 Actions.prototype.waitWhileVisible = function (selector, timeout) {
   var hash = uuid.v4();
+
+  if (this.querying === true) {
+    timeout = selector;
+    selector = this.selector;
+  }
+
   var cb = this._generateCallbackAssertion(&#039;waitWhileVisible&#039;, &#039;waitWhileVisible&#039;, selector, timeout, hash);
   this._addToActionQueue([selector, (timeout ? parseInt(timeout, 10) : 5000), hash], &#039;waitWhileVisible&#039;, cb);
   return this;
@@ -438,8 +514,8 @@ Actions.prototype.waitWhileVisible = function (selector, timeout) {
  *
  * @api
  * @method screenshot
- * @param {string} pathname
- * @return {Actions}
+ * @param {string} pathname Name of the folder and file the screenshot should be saved to
+ * @return chainable
  */
 
 Actions.prototype.screenshot = function (pathname) {
@@ -457,29 +533,29 @@ Actions.prototype.screenshot = function (pathname) {
  *
  * ```javascript
  * test.open(&#039;http://myticker.org&#039;)
- *   .visible(&#039;.ticker-element:first&#039;, &#039;First ticker element is visible&#039;)
+ *   .assert.visible(&#039;.ticker-element:first-child&#039;, &#039;First ticker element is visible&#039;)
  *   .wait(10000)
- *   .visible(&#039;.ticker-element:nth-child(2)&#039;, &#039;Snd. ticker element is visible&#039;)
+ *   .assert.visible(&#039;.ticker-element:nth-child(2)&#039;, &#039;Snd. ticker element is visible&#039;)
  *   .wait(10000)
- *   .visible(&#039;.ticker-element:last&#039;, &#039;Third ticker element is visible&#039;)
- *   .all.success(&#039;Ticker seems to work quite well&#039;);
+ *   .assert.visible(&#039;.ticker-element:last-child&#039;, &#039;Third ticker element is visible&#039;)
+ *   .done();
  * ```
  * If no timeout argument is given, a default timeout of 5 seconds will be used
  *
  * ```javascript
  * test.open(&#039;http://myticker.org&#039;)
- *   .visible(&#039;.ticker-element:first&#039;, &#039;First ticker element is visible&#039;)
+ *   .assert.visible(&#039;.ticker-element:first-child&#039;, &#039;First ticker element is visible&#039;)
  *   .wait()
- *   .visible(&#039;.ticker-element:nth-child(2)&#039;, &#039;Snd. ticker element is visible&#039;)
+ *   .assert.visible(&#039;.ticker-element:nth-child(2)&#039;, &#039;Snd. ticker element is visible&#039;)
  *   .wait()
- *   .visible(&#039;.ticker-element:last&#039;, &#039;Third ticker element is visible&#039;)
- *   .all.success(&#039;This ticker changed every 5 seconds, cool!&#039;);
+ *   .assert.visible(&#039;.ticker-element:last-child&#039;, &#039;Third ticker element is visible&#039;)
+ *   .done();
  * ```
  *
- * @method wait
  * @api
+ * @method wait
  * @param {number} timeout in milliseconds
- * @return {Actions}
+ * @chainable
  */
 
 Actions.prototype.wait = function (timeout) {
@@ -496,12 +572,13 @@ Actions.prototype.wait = function (timeout) {
  *
  * ```javascript
  * test.open(&#039;http://google.com&#039;)
- *   .refresh();
+ *   .reload()
+ *   .done();
  * ```
  *
- * @method reload
  * @api
- * @return {Actions}
+ * @method reload
+ * @chainable
  */
 
 Actions.prototype.reload = function () {
@@ -519,16 +596,17 @@ Actions.prototype.reload = function () {
  * ```javascript
  * test.open(&#039;http://google.com&#039;)
  *   .open(&#039;https://github.com&#039;)
- *   .url.is(&#039;https://github.com/&#039;, &#039;We are at GitHub&#039;)
+ *   .assert.url.is(&#039;https://github.com/&#039;, &#039;We are at GitHub&#039;)
  *   .back()
- *   .url.is(&#039;http://google.com&#039;, &#039;We are at Google!&#039;)
+ *   .assert.url.is(&#039;http://google.com&#039;, &#039;We are at Google!&#039;)
  *   .forward()
- *   .url.is(&#039;https://github.com/&#039;, &#039;Back at GitHub! Timetravel FTW&#039;);
+ *   .assert.url.is(&#039;https://github.com/&#039;, &#039;Back at GitHub! Timetravel FTW&#039;)
+ *   .done();
  * ```
  *
- * @method forward
  * @api
- * @return {Actions}
+ * @method forward
+ * @chainable
  */
 
 Actions.prototype.forward = function () {
@@ -546,16 +624,17 @@ Actions.prototype.forward = function () {
  * ```javascript
  * test.open(&#039;http://google.com&#039;)
  *   .open(&#039;https://github.com&#039;)
- *   .url.is(&#039;https://github.com/&#039;, &#039;We are at GitHub&#039;)
+ *   .assert.url.is(&#039;https://github.com/&#039;, &#039;We are at GitHub&#039;)
  *   .back()
- *   .url.is(&#039;http://google.com&#039;, &#039;We are at Google!&#039;)
+ *   .assert.url.is(&#039;http://google.com&#039;, &#039;We are at Google!&#039;)
  *   .forward()
- *   .url.is(&#039;https://github.com/&#039;, &#039;Back at GitHub! Timetravel FTW&#039;);
+ *   .assert.url.is(&#039;https://github.com/&#039;, &#039;Back at GitHub! Timetravel FTW&#039;);
+ *   .done();
  * ```
  *
- * @method back
  * @api
- * @return {Actions}
+ * @method back
+ * @chainable
  */
 
 Actions.prototype.back = function () {
@@ -569,13 +648,13 @@ Actions.prototype.back = function () {
  * Performs a click on the element matching the provided selector expression.
  *
  * If we take Daleks homepage (the one you&#039;re probably visiting right now),
- * the HTML looks something like this
+ * the HTML looks something like this (it does not really, but hey, lets assume this for a second)
  *
  * ```html
  * &lt;nav&gt;
  *   &lt;ul&gt;
  *     &lt;li&gt;&lt;a id=&quot;homeapge&quot; href=&quot;/index.html&quot;&gt;DalekJS&lt;/a&gt;&lt;/li&gt;
- *     &lt;li&gt;&lt;a id=&quot;docs&quot;  href=&quot;/docs.html&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+ *     &lt;li&gt;&lt;a id=&quot;docs&quot; href=&quot;/docs.html&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
  *     &lt;li&gt;&lt;a id=&quot;faq&quot; href=&quot;/faq.html&quot;&gt;F.A.Q&lt;/a&gt;&lt;/li&gt;
  *   &lt;/ul&gt;
  * &lt;/nav&gt;
@@ -584,68 +663,63 @@ Actions.prototype.back = function () {
  * ```javascript
  * test.open(&#039;http://dalekjs.com&#039;)
  *     .click(&#039;#faq&#039;)
- *     .title().is(&#039;DalekJS - Frequently asked questions&#039;, &#039;What the F.A.Q.&#039;);
+ *     .assert.title().is(&#039;DalekJS - Frequently asked questions&#039;, &#039;What the F.A.Q.&#039;)
+ *     .done();
  * ```
  *
  * By default, this performs a left click.
+ * In the future it might become the ability to also execute a &quot;right button&quot; click.
  *
  * @api
  * @method click
- * @param {string} selector
- * @return {Actions}
+ * @param {string} selector Selector of the element to be clicked
+ * @chainable
  */
 
 Actions.prototype.click = function (selector) {
   var hash = uuid.v4();
+
+  if (this.querying === true) {
+    selector = this.selector;
+  }
+
   var cb = this._generateCallbackAssertion(&#039;click&#039;, &#039;click&#039;, selector, hash);
   this._addToActionQueue([selector, hash], &#039;click&#039;, cb);
   return this;
 };
 
 /**
- * Submits a form
+ * Submits a form.
+ *
+ * ```html
+ * &lt;form id=&quot;skaaro&quot; action=&quot;skaaro.php&quot; method=&quot;GET&quot;&gt;
+ *   &lt;input type=&quot;hidden&quot; name=&quot;intheshadows&quot; value=&quot;itis&quot;/&gt;
+ *   &lt;input type=&quot;text&quot; name=&quot;truth&quot; id=&quot;truth&quot; value=&quot;&quot;/&gt;
+ * &lt;/form&gt;
+ * ```
+ *
+ * ```javascript
+ * test.open(&#039;http://home.dalek.com&#039;)
+ *     .type(&#039;#truth&#039;, &#039;out there is&#039;)
+ *     .submit(&#039;#skaaro&#039;)
+ *     .done();
+ * ```
  *
  * @api
  * @method submit
+ * @param {string} selector Selector of the form to be submitted
+ * @chainable
  */
 
 Actions.prototype.submit = function (selector) {
   var hash = uuid.v4();
+
+  if (this.querying === true) {
+    selector = this.selector;
+  }
+
   var cb = this._generateCallbackAssertion(&#039;submit&#039;, &#039;submit&#039;, selector, hash);
   this._addToActionQueue([selector, hash], &#039;submit&#039;, cb);
-  return this;
-};
-
-/**
- * Fills the fields of a form with given values.
- *
- * ```html
- * &lt;nav&gt;
- *   &lt;ul&gt;
- *     &lt;li&gt;&lt;a id=&quot;homeapge&quot; href=&quot;/index.html&quot;&gt;DalekJS&lt;/a&gt;&lt;/li&gt;
- *     &lt;li&gt;&lt;a id=&quot;docs&quot;  href=&quot;/docs.html&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
- *     &lt;li&gt;&lt;a id=&quot;faq&quot; href=&quot;/faq.html&quot;&gt;F.A.Q&lt;/a&gt;&lt;/li&gt;
- *   &lt;/ul&gt;
- * &lt;/nav&gt;
- * ```
- *
- * ```javascript
- * test.open(&#039;http://dalekjs.com&#039;)
- *     .setValue(&#039;#ijustwannahaveavalue&#039;, &#039;a value&#039;)
- *     .title().is(&#039;DalekJS - Frequently asked questions&#039;, &#039;What the F.A.Q.&#039;);
- * ```
- *
- * @api
- * @method setValue
- * @param {string} selector
- * @param {string} value
- * @return {Actions}
- */
-
-Actions.prototype.setValue = function (selector, value) {
-  var hash = uuid.v4();
-  var cb = this._generateCallbackAssertion(&#039;setValue&#039;, &#039;setValue&#039;, selector + &#039; : &#039; + value, hash);
-  this._addToActionQueue([selector, value, hash], &#039;setValue&#039;, cb);
   return this;
 };
 
@@ -653,32 +727,53 @@ Actions.prototype.setValue = function (selector, value) {
  * Performs an HTTP request for opening a given location.
  * You can forge GET, POST, PUT, DELETE and HEAD requests.
  *
+ * Basically the same as typing a location into your browsers URL bar and
+ * hitting return.
+ *
  * ```javascript
  * test.open(&#039;http://dalekjs.com&#039;)
- *     .url().is(&#039;http://dalekjs.com&#039;, &#039;DalekJS I&#039;m in you&#039;);
+ *     .assert.url().is(&#039;http://dalekjs.com&#039;, &#039;DalekJS I&#039;m in you&#039;)
+ *     .done();
  * ```
  *
  * @api
  * @method open
- * @param {string} locations
- * @param {Object} settings
- * @return {Actions}
+ * @param {string} location URL of the page to open
+ * @chainable
  */
 
-Actions.prototype.open = function (location, settings) {
+Actions.prototype.open = function (location) {
   var hash = uuid.v4();
   var cb = this._generateCallbackAssertion(&#039;open&#039;, &#039;open&#039;, location, hash);
-  this._addToActionQueue([location, settings, hash], &#039;open&#039;, cb);
+  this._addToActionQueue([location, hash], &#039;open&#039;, cb);
   return this;
 };
 
 /**
+ * Types a text into an input field or text area.
+ * And yes, it really types, character for character, like you would
+ * do when using your keyboard.
  *
+ *
+ * ```html
+ * &lt;form id=&quot;skaaro&quot; action=&quot;skaaro.php&quot; method=&quot;GET&quot;&gt;
+ *   &lt;input type=&quot;hidden&quot; name=&quot;intheshadows&quot; value=&quot;itis&quot;/&gt;
+ *   &lt;input type=&quot;text&quot; name=&quot;truth&quot; id=&quot;truth&quot; value=&quot;&quot;/&gt;
+ * &lt;/form&gt;
+ * ```
+ *
+ * ```javascript
+ * test.open(&#039;http://home.dalek.com&#039;)
+ *     .type(&#039;#truth&#039;, &#039;out there is&#039;)
+ *     .assert.val(&#039;#truth&#039;, &#039;out there is&#039;, &#039;Text has been set&#039;)
+ *     .done();
+ * ```
  *
  * @api
  * @method type
- * @param {string} keystrokes
- * @return chainable
+ * @param {string} selector Selector of the form field to be filled
+ * @param {string} keystrokes Text to be applied to the element
+ * @chainable
  */
 
 Actions.prototype.type = function (selector, keystrokes) {
@@ -695,11 +790,26 @@ Actions.prototype.type = function (selector, keystrokes) {
 };
 
 /**
+ * Types a text into the text inout field of a prompt dialog.
+ * Like you would do when using your keyboard.
  *
+ * ```html
+ * &lt;div&gt;
+ *   &lt;a id=&quot;aquestion&quot; onclick=&quot;this.innerText = window.prompt(&#039;Your favourite companion:&#039;)&quot;&gt;????&lt;/a&gt;
+ * &lt;/div&gt;
+ * ```
+ *
+ * ```javascript
+ *  test.open(&#039;http://adomain.com&#039;)
+ *     .click(&#039;#aquestion&#039;)
+ *     .answer(&#039;Rose&#039;)
+ *     .assert.text(&#039;#aquestion&#039;).is(&#039;Rose&#039;, &#039;Awesome she was!&#039;)
+ *     .done();
+ * ```
  *
  * @api
  * @method answer
- * @param {string} keystrokes
+ * @param {string} keystrokes Text to be applied to the element
  * @return chainable
  */
 
@@ -711,15 +821,29 @@ Actions.prototype.answer = function (keystrokes) {
 };
 
 /**
+ * Accepts an alert/prompt/confirm dialog. This is basically the same actions as when
+ * you are clicking okay or hitting return in one of that dialogs.
  *
+ * ```html
+ * &lt;div&gt;
+ *   &lt;a id=&quot;attentione&quot; onclick=&quot;window.alert(&#039;Alonsy!&#039;)&quot;&gt;ALERT!ALERT!&lt;/a&gt;
+ * &lt;/div&gt;
+ * ```
  *
+ * ```javascript
+ *  test.open(&#039;http://adomain.com&#039;)
+ *     // alert appears
+ *     .click(&#039;#attentione&#039;)
+ *     // alert is gone
+ *     .accept()
+ *     .done();
+ * ```
  * @api
- * @method acceptAlert
- * @param {string} keystrokes
+ * @method accept
  * @return chainable
  */
 
-Actions.prototype.acceptAlert = function () {
+Actions.prototype.accept = function () {
   var hash = uuid.v4();
   var cb = this._generateCallbackAssertion(&#039;acceptAlert&#039;, &#039;acceptAlert&#039;, hash);
   this._addToActionQueue([hash], &#039;acceptAlert&#039;, cb);
@@ -727,14 +851,30 @@ Actions.prototype.acceptAlert = function () {
 };
 
 /**
+ * Dismisses an prompt/confirm dialog. This is basically the same actions as when
+ * you are clicking cancel in one of that dialogs.
  *
+ * ```html
+ * &lt;div&gt;
+ *   &lt;a id=&quot;nonono&quot; onclick=&quot;(this.innerText = window.confirm(&#039;No classic doctors in the 50th?&#039;) ? &#039;Buh!&#039; : &#039;:(&#039;) &quot;&gt;What!&lt;/a&gt;
+ * &lt;/div&gt;
+ * ```
  *
+ * ```javascript
+ *  test.open(&#039;http://adomain.com&#039;)
+ *     // prompt appears
+ *     .click(&#039;#nonono&#039;)
+ *     // prompt is gone
+ *     .dismiss()
+ *     .assert.text(&#039;#nonono&#039;).is(&#039;:(&#039;, &#039;So sad&#039;)
+ *     .done();
+ * ```
  * @api
- * @method dismissAlert
+ * @method dismiss
  * @return chainable
  */
 
-Actions.prototype.dismissAlert = function () {
+Actions.prototype.dismiss = function () {
   var hash = uuid.v4();
   var cb = this._generateCallbackAssertion(&#039;dismissAlert&#039;, &#039;dismissAlert&#039;, hash);
   this._addToActionQueue([hash], &#039;dismissAlert&#039;, cb);
@@ -742,10 +882,23 @@ Actions.prototype.dismissAlert = function () {
 };
 
 /**
- * Resizes the browser window
+ * Resizes the browser window.
+ *
+ * ```html
+ * ```
+ *
+ * ```css
+ * ```
+ *
+ * ```javascript
+ *  test.open(&#039;http://adomain.com&#039;)
+ *     .done();
+ * ```
  *
  * @api
  * @method resize
+ * @param {object} dimensions Width and height as properties to apply
+ * @chainable
  */
 
 Actions.prototype.resize = function (dimensions) {
@@ -758,8 +911,20 @@ Actions.prototype.resize = function (dimensions) {
 /**
  * Maximizes the browser window
  *
+ * ```html
+ * ```
+ *
+ * ```css
+ * ```
+ *
+ * ```javascript
+ *  test.open(&#039;http://adomain.com&#039;)
+ *     .done();
+ * ```
+ *
  * @api
  * @method maximize
+ * @chainable
  */
 
 Actions.prototype.maximize = function () {
@@ -789,9 +954,9 @@ Actions.prototype.setCookie = function (name, contents) {
  *
  * @api
  * @method waitForElement
- * @param {string} selector
- * @param {number} timeout
- * @return {Actions}
+ * @param {string} selector Selector that matches the element to wait for
+ * @param {number} timeout Timeout in milliseconds
+ * @chainable
  */
 
 Actions.prototype.waitForElement = function (selector, timeout) {
@@ -809,7 +974,7 @@ Actions.prototype.waitForElement = function (selector, timeout) {
 Actions.prototype._generateCallbackAssertion = function (key, type) {
   var cb = function (data) {
     if (data &amp;&amp; data.key === key &amp;&amp; !this.uuids[data.uuid]) {
-      if ((data &amp;&amp; data.value) || data.value === null) {
+      if (!data || (data.value &amp;&amp; data.value === null)) {
         data.value = &#039;&#039;;
       }
 
