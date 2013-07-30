@@ -548,7 +548,7 @@
         {
             "file": "index.js",
             "line": 963,
-            "description": "Generates a callback that will be fired when the action has been completed.\nThe callback itself will then validate the answer and will also emit an",
+            "description": "Generates a callback that will be fired when the action has been completed.\nThe callback itself will then validate the answer and will also emit an event\nthat the action has been successfully executed.",
             "itemtype": "method",
             "name": "_generateCallbackAssertion",
             "params": [
@@ -573,24 +573,23 @@
         },
         {
             "file": "index.js",
-            "line": 992,
-            "description": "Generates a callback that will be fired when the action has been completed.\nThe callback itself will then validate the answer and will also emit an",
+            "line": 993,
             "itemtype": "method",
-            "name": "_generateCallbackAssertion",
+            "name": "_addToActionQueue",
             "params": [
                 {
-                    "name": "key",
-                    "description": "Unique key of the action",
+                    "name": "opts",
+                    "description": "Options of the action to invoke",
+                    "type": "Object"
+                },
+                {
+                    "name": "driverMethod",
+                    "description": "Name of the method to call on the driver",
                     "type": "String"
                 },
                 {
-                    "name": "type",
-                    "description": "Type of the action (normalle the actions name)",
-                    "type": "String"
-                },
-                {
-                    "name": "The",
-                    "description": "generated callback function",
+                    "name": "A",
+                    "description": "callback function that will be executed when the action has been executed",
                     "type": "Function"
                 }
             ],

@@ -202,7 +202,7 @@ like clicking elements, open urls, filling out input fields, etc.</p>
                             </li>
                         
                             <li class="index-item method private">
-                                <a href="#method__generateCallbackAssertion">_generateCallbackAssertion</a>
+                                <a href="#method__addToActionQueue">_addToActionQueue</a>
 
                                 
                                 
@@ -518,8 +518,8 @@ like clicking elements, open urls, filling out input fields, etc.</p>
 </div>
 
                 
-                    <div id="method__generateCallbackAssertion" class="method item private">
-    <h3 class="name"><code>_generateCallbackAssertion</code></h3>
+                    <div id="method__addToActionQueue" class="method item private">
+    <h3 class="name"><code>_addToActionQueue</code></h3>
 
     
         <div class="args">
@@ -527,19 +527,19 @@ like clicking elements, open urls, filling out input fields, etc.</p>
             
                 <li class="arg">
                     
-                        <code>key</code>
+                        <code>opts</code>
                     
                 </li>
             
                 <li class="arg">
                     
-                        <code>type</code>
+                        <code>driverMethod</code>
                     
                 </li>
             
                 <li class="arg">
                     
-                        <code>The</code>
+                        <code>A</code>
                     
                 </li>
             
@@ -576,7 +576,7 @@ like clicking elements, open urls, filling out input fields, etc.</p>
             
         
         
-        <a href="../files/index.js.html#l992"><code>index.js:992</code></a>
+        <a href="../files/index.js.html#l993"><code>index.js:993</code></a>
         
         </p>
 
@@ -587,9 +587,7 @@ like clicking elements, open urls, filling out input fields, etc.</p>
     </div>
 
     <div class="description">
-        <p>Generates a callback that will be fired when the action has been completed.
-The callback itself will then validate the answer and will also emit an</p>
-
+        
     </div>
 
     
@@ -600,14 +598,14 @@ The callback itself will then validate the answer and will also emit an</p>
             
                 <li class="param">
                     
-                        <code class="param-name">key</code>
-                        <span class="type">String</span>
+                        <code class="param-name">opts</code>
+                        <span class="type">Object</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>Unique key of the action</p>
+                        <p>Options of the action to invoke</p>
 
                     </div>
 
@@ -616,14 +614,14 @@ The callback itself will then validate the answer and will also emit an</p>
             
                 <li class="param">
                     
-                        <code class="param-name">type</code>
+                        <code class="param-name">driverMethod</code>
                         <span class="type">String</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>Type of the action (normalle the actions name)</p>
+                        <p>Name of the method to call on the driver</p>
 
                     </div>
 
@@ -632,14 +630,14 @@ The callback itself will then validate the answer and will also emit an</p>
             
                 <li class="param">
                     
-                        <code class="param-name">The</code>
+                        <code class="param-name">A</code>
                         <span class="type">Function</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>generated callback function</p>
+                        <p>callback function that will be executed when the action has been executed</p>
 
                     </div>
 
@@ -722,7 +720,8 @@ The callback itself will then validate the answer and will also emit an</p>
 
     <div class="description">
         <p>Generates a callback that will be fired when the action has been completed.
-The callback itself will then validate the answer and will also emit an</p>
+The callback itself will then validate the answer and will also emit an event
+that the action has been successfully executed.</p>
 
     </div>
 
