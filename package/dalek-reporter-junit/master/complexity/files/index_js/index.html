@@ -49,7 +49,7 @@
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">293</p>
+      <p class="stat">307</p>
     </div>
   </div>
   <div class="row historical">
@@ -129,7 +129,8 @@ var reporter = null;
  * this reporter enables you to use daleks testresults within a CI environment like Jenkins.
  *
  * The reporter can be installed with the following command:
- * ```
+ *
+ * ```bash
  * $ npm install dalek-reporter-junit --save-dev
  * ```
  *
@@ -138,14 +139,14 @@ var reporter = null;
  * ```html
  * &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
  * &lt;resource name=&quot;DalekJSTest&quot;&gt;
- *     &lt;testsuite start=&quot;1375125067&quot; name=&quot;Click - DalekJS guinea pig [Phantomjs]&quot; end=&quot;1375125067&quot; totalTests=&quot;0&quot;&gt;
- *         &lt;testcase start=&quot;1375125067&quot; name=&quot;Can click a select option (OK, jQuery style, no message)&quot; end=&quot;null&quot; result=&quot;null&quot;&gt;
+ *     &lt;testsuite start=&quot;1375125067&quot; name=&quot;Click - DalekJS guinea pig [Phantomjs]&quot; end=&quot;1375125067&quot; totalTests=&quot;1&quot;&gt;
+ *         &lt;testcase start=&quot;1375125067&quot; name=&quot;Can click a select option (OK, jQuery style, no message)&quot; end=&quot;1375125067&quot; result=&quot;pass&quot;&gt;
  *             &lt;variation start=&quot;1375125067&quot; name=&quot;val&quot; end=&quot;1375125067&quot;&gt;
  *                 &lt;severity&gt;pass&lt;/severity&gt;
  *                 &lt;description&gt;&amp;lt;![CDATA[David is the favourite]]&amp;gt;&lt;/description&gt;
  *                 &lt;resource&gt;DalekJSTest&lt;/resource&gt;
  *             &lt;/variation&gt;
- *             &lt;variation start=&quot;1375125067&quot; name=&quot;val&quot; end=&quot;null&quot;&gt;
+ *             &lt;variation start=&quot;1375125067&quot; name=&quot;val&quot; end=&quot;1375125067&quot;&gt;
  *                 &lt;severity&gt;pass&lt;/severity&gt;
  *                 &lt;description&gt;&amp;lt;![CDATA[Matt is now my favourite, bow ties are cool]]&amp;gt;&lt;/description&gt;
  *                 &lt;resource&gt;DalekJSTest&lt;/resource&gt;
@@ -162,6 +163,19 @@ var reporter = null;
  * &quot;junit-reporter&quot;: {
  *   &quot;dest&quot;: &quot;your/folder/your_file.xml&quot;
  * }
+ * ```
+ *
+ * If you would like to use the reporter (in addition to the std. console reporter),
+ * you can start dalek with a special command line argument
+ *
+ * ```bash
+ * $ dalek your_test.js -r console,junit
+ * ```
+ *
+ * or you can add it to your Dalekfile
+ *
+ * ```javascript
+ * &quot;reporter&quot;: [&quot;console&quot;, &quot;junit&quot;]
  * ```
  *
  * @class Reporter

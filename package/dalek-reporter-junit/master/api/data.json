@@ -51,7 +51,7 @@
             "module": "Reporter",
             "file": "index.js",
             "line": 35,
-            "description": "The jUnit reporter can produce a jUnit compatible file with the results of your testrun,\nthis reporter enables you to use daleks testresults within a CI environment like Jenkins.\n\nThe reporter can be installed with the following command:\n```\n$ npm install dalek-reporter-junit --save-dev\n```\n\nThe file will follow the jUnit XML format:\n\n```html\n<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<resource name=\"DalekJSTest\">\n    <testsuite start=\"1375125067\" name=\"Click - DalekJS guinea pig [Phantomjs]\" end=\"1375125067\" totalTests=\"0\">\n        <testcase start=\"1375125067\" name=\"Can click a select option (OK, jQuery style, no message)\" end=\"null\" result=\"null\">\n            <variation start=\"1375125067\" name=\"val\" end=\"1375125067\">\n                <severity>pass</severity>\n                <description>&lt;![CDATA[David is the favourite]]&gt;</description>\n                <resource>DalekJSTest</resource>\n            </variation>\n            <variation start=\"1375125067\" name=\"val\" end=\"null\">\n                <severity>pass</severity>\n                <description>&lt;![CDATA[Matt is now my favourite, bow ties are cool]]&gt;</description>\n                <resource>DalekJSTest</resource>\n            </variation>\n        </testcase>\n    </testsuite>\n </resource>\n```\n\nBy default the file will be written to `report/dalek.xml`,\nyou can change this by adding a config option to the your Dalekfile\n\n```javascript\n\"junit-reporter\": {\n  \"dest\": \"your/folder/your_file.xml\"\n}\n```",
+            "description": "The jUnit reporter can produce a jUnit compatible file with the results of your testrun,\nthis reporter enables you to use daleks testresults within a CI environment like Jenkins.\n\nThe reporter can be installed with the following command:\n\n```bash\n$ npm install dalek-reporter-junit --save-dev\n```\n\nThe file will follow the jUnit XML format:\n\n```html\n<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<resource name=\"DalekJSTest\">\n    <testsuite start=\"1375125067\" name=\"Click - DalekJS guinea pig [Phantomjs]\" end=\"1375125067\" totalTests=\"1\">\n        <testcase start=\"1375125067\" name=\"Can click a select option (OK, jQuery style, no message)\" end=\"1375125067\" result=\"pass\">\n            <variation start=\"1375125067\" name=\"val\" end=\"1375125067\">\n                <severity>pass</severity>\n                <description>&lt;![CDATA[David is the favourite]]&gt;</description>\n                <resource>DalekJSTest</resource>\n            </variation>\n            <variation start=\"1375125067\" name=\"val\" end=\"1375125067\">\n                <severity>pass</severity>\n                <description>&lt;![CDATA[Matt is now my favourite, bow ties are cool]]&gt;</description>\n                <resource>DalekJSTest</resource>\n            </variation>\n        </testcase>\n    </testsuite>\n </resource>\n```\n\nBy default the file will be written to `report/dalek.xml`,\nyou can change this by adding a config option to the your Dalekfile\n\n```javascript\n\"junit-reporter\": {\n  \"dest\": \"your/folder/your_file.xml\"\n}\n```\n\nIf you would like to use the reporter (in addition to the std. console reporter),\nyou can start dalek with a special command line argument\n\n```bash\n$ dalek your_test.js -r console,junit\n```\n\nor you can add it to your Dalekfile\n\n```javascript\n\"reporter\": [\"console\", \"junit\"]\n```",
             "is_constructor": 1,
             "part": "JUnit",
             "api": ""
@@ -66,7 +66,7 @@
         },
         {
             "file": "index.js",
-            "line": 122,
+            "line": 136,
             "description": "Connects to all the event listeners",
             "itemtype": "method",
             "name": "startListening",
@@ -76,7 +76,7 @@
         },
         {
             "file": "index.js",
-            "line": 140,
+            "line": 154,
             "description": "Stores the current browser name",
             "itemtype": "method",
             "name": "runBrowser",
@@ -93,7 +93,7 @@
         },
         {
             "file": "index.js",
-            "line": 153,
+            "line": 167,
             "description": "Generates XML skeleton for testsuites",
             "itemtype": "method",
             "name": "testsuiteStarted",
@@ -110,7 +110,7 @@
         },
         {
             "file": "index.js",
-            "line": 177,
+            "line": 191,
             "description": "Finishes XML skeleton for testsuites",
             "itemtype": "method",
             "name": "testsuiteFinished",
@@ -120,7 +120,7 @@
         },
         {
             "file": "index.js",
-            "line": 189,
+            "line": 203,
             "description": "Generates XML skeleton for an assertion",
             "itemtype": "method",
             "name": "assertion",
@@ -137,7 +137,7 @@
         },
         {
             "file": "index.js",
-            "line": 221,
+            "line": 235,
             "description": "Generates XML skeleton for a testcase",
             "itemtype": "method",
             "name": "testStarted",
@@ -154,7 +154,7 @@
         },
         {
             "file": "index.js",
-            "line": 245,
+            "line": 259,
             "description": "Finishes XML skeleton for a testcase",
             "itemtype": "method",
             "name": "testFinished",
@@ -171,7 +171,7 @@
         },
         {
             "file": "index.js",
-            "line": 268,
+            "line": 282,
             "description": "Finishes XML and writes file to the file system",
             "itemtype": "method",
             "name": "runnerFinished",
@@ -188,7 +188,7 @@
         },
         {
             "file": "index.js",
-            "line": 294,
+            "line": 308,
             "description": "Helper method to generate deeper nested directory structures",
             "itemtype": "method",
             "name": "_recursiveMakeDirSync",
