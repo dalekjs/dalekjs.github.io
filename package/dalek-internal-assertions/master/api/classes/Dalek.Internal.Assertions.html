@@ -578,7 +578,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1156"><code>index.js:1156</code></a>
+        <a href="../files/index.js.html#l1272"><code>index.js:1272</code></a>
         
         </p>
 
@@ -638,7 +638,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1116"><code>index.js:1116</code></a>
+        <a href="../files/index.js.html#l1232"><code>index.js:1232</code></a>
         
         </p>
 
@@ -724,7 +724,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1275"><code>index.js:1275</code></a>
+        <a href="../files/index.js.html#l1391"><code>index.js:1391</code></a>
         
         </p>
 
@@ -849,7 +849,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1376"><code>index.js:1376</code></a>
+        <a href="../files/index.js.html#l1492"><code>index.js:1492</code></a>
         
         </p>
 
@@ -964,7 +964,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1295"><code>index.js:1295</code></a>
+        <a href="../files/index.js.html#l1411"><code>index.js:1411</code></a>
         
         </p>
 
@@ -1095,7 +1095,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1315"><code>index.js:1315</code></a>
+        <a href="../files/index.js.html#l1431"><code>index.js:1431</code></a>
         
         </p>
 
@@ -1226,7 +1226,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1329"><code>index.js:1329</code></a>
+        <a href="../files/index.js.html#l1445"><code>index.js:1445</code></a>
         
         </p>
 
@@ -1357,7 +1357,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1349"><code>index.js:1349</code></a>
+        <a href="../files/index.js.html#l1465"><code>index.js:1465</code></a>
         
         </p>
 
@@ -1488,7 +1488,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1235"><code>index.js:1235</code></a>
+        <a href="../files/index.js.html#l1351"><code>index.js:1351</code></a>
         
         </p>
 
@@ -1619,7 +1619,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1255"><code>index.js:1255</code></a>
+        <a href="../files/index.js.html#l1371"><code>index.js:1371</code></a>
         
         </p>
 
@@ -1744,7 +1744,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1363"><code>index.js:1363</code></a>
+        <a href="../files/index.js.html#l1479"><code>index.js:1479</code></a>
         
         </p>
 
@@ -1867,7 +1867,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l986"><code>index.js:986</code></a>
+        <a href="../files/index.js.html#l1102"><code>index.js:1102</code></a>
         
         </p>
 
@@ -1999,7 +1999,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1048"><code>index.js:1048</code></a>
+        <a href="../files/index.js.html#l1164"><code>index.js:1164</code></a>
         
         </p>
 
@@ -2162,7 +2162,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l624"><code>index.js:624</code></a>
+        <a href="../files/index.js.html#l716"><code>index.js:716</code></a>
         
         </p>
 
@@ -2174,7 +2174,11 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
 
     <div class="description">
         <p>Checks the contents of a cookie.</p>
-<p><code>javascript</code></p>
+<pre><code class="lang-javascript"> test
+   .open(&#39;http://cookiejar.io/not_your_mothers_javascript.html&#39;)
+   .setCookie(&#39;atestcookie&#39;, &#39;foobar=baz&#39;)
+   .assert.cookie(&#39;atestcookie&#39;, &#39;foobar=baz&#39;)
+   .done();</code></pre>
 
     </div>
 
@@ -2315,11 +2319,17 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
     </div>
 
     <div class="description">
-        <p>Checks the computed style of the browser.</p>
-<pre><code class="lang-html"><code>&#x60;</code>
-
-<code>&#x60;</code>css</code></pre>
-<p><code>javascript</code></p>
+        <p>Checks the computed style.</p>
+<pre><code class="lang-html">&lt;div id=&quot;superColoredElement&quot;&gt;Rose&lt;/div&gt;</code></pre>
+<pre><code class="lang-css">#superColoredElement {
+  background-color: rgba(255, 0, 0, 1);
+  color: rgba(0, 128, 0, 1);
+}</code></pre>
+<pre><code class="lang-javascript"> test
+   .open(&#39;http://unicorns.rainbows.io&#39;)
+   .assert.css(&#39;#superColoredElement&#39;, &#39;background-color&#39;, &#39;rgba(255, 0, 0, 1)&#39;)
+   .assert.css(&#39;#superColoredElement&#39;, &#39;color&#39;, &#39;rgba(0, 128, 0, 1)&#39;)
+   .done();</code></pre>
 
     </div>
 
@@ -2453,7 +2463,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l818"><code>index.js:818</code></a>
+        <a href="../files/index.js.html#l934"><code>index.js:934</code></a>
         
         </p>
 
@@ -2569,7 +2579,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l871"><code>index.js:871</code></a>
+        <a href="../files/index.js.html#l987"><code>index.js:987</code></a>
         
         </p>
 
@@ -2685,7 +2695,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l595"><code>index.js:595</code></a>
+        <a href="../files/index.js.html#l682"><code>index.js:682</code></a>
         
         </p>
 
@@ -2697,9 +2707,11 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
 
     <div class="description">
         <p>Determine if an element is currently disabled.</p>
-<pre><code class="lang-html"><code>&#x60;</code>
-
-<code>&#x60;</code>javascript</code></pre>
+<pre><code class="lang-html">&lt;input disabled id=&quot;onearth&quot; type=&quot;text&quot; size=&quot;50&quot; name=&quot;onearth&quot; placeholder=&quot;State your name, rank and intention!&quot;&gt;&lt;/input&gt;</code></pre>
+<pre><code class="lang-javascript">test
+  .open(&#39;http://doctor.thedoctor.com/doctor&#39;)
+  .assert.disabled(&#39;#onearth&#39;, &#39;Is disabled!&#39;)
+  .done();</code></pre>
 
     </div>
 
@@ -2801,7 +2813,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l696"><code>index.js:696</code></a>
+        <a href="../files/index.js.html#l795"><code>index.js:795</code></a>
         
         </p>
 
@@ -2817,7 +2829,9 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
   &lt;p id=&quot;so-lonely&quot;&gt;Last of the timelords&lt;/p&gt;
 &lt;/body&gt;</code></pre>
 <pre><code class="lang-javascript">test
-  .doesntExist(&#39;#the-master&#39;, &#39;The master element has not been seen&#39;)</code></pre>
+  .open(&#39;http://doctor.thedoctor.com/doctor&#39;)
+  .doesntExist(&#39;#the-master&#39;, &#39;The master element has not been seen&#39;)
+  .done();</code></pre>
 
     </div>
 
@@ -2925,7 +2939,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l788"><code>index.js:788</code></a>
+        <a href="../files/index.js.html#l904"><code>index.js:904</code></a>
         
         </p>
 
@@ -3057,7 +3071,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l963"><code>index.js:963</code></a>
+        <a href="../files/index.js.html#l1079"><code>index.js:1079</code></a>
         
         </p>
 
@@ -3173,7 +3187,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l566"><code>index.js:566</code></a>
+        <a href="../files/index.js.html#l648"><code>index.js:648</code></a>
         
         </p>
 
@@ -3185,9 +3199,11 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
 
     <div class="description">
         <p>Determine if an element is currently enabled.</p>
-<pre><code class="lang-html"><code>&#x60;</code>
-
-<code>&#x60;</code>javascript</code></pre>
+<pre><code class="lang-html">&lt;input id=&quot;onmars&quot; type=&quot;text&quot; size=&quot;50&quot; name=&quot;onmars&quot; placeholder=&quot;State your name, rank and intention!&quot;&gt;&lt;/input&gt;</code></pre>
+<pre><code class="lang-javascript">test
+  .open(&#39;http://doctor.thedoctor.com/doctor&#39;)
+  .assert.enabled(&#39;#onmars&#39;, &#39;Is enabled!&#39;)
+  .done();</code></pre>
 
     </div>
 
@@ -3355,7 +3371,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l662"><code>index.js:662</code></a>
+        <a href="../files/index.js.html#l759"><code>index.js:759</code></a>
         
         </p>
 
@@ -3371,7 +3387,9 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
   &lt;p id=&quot;so-lonely&quot;&gt;Last of the timelords&lt;/p&gt;
 &lt;/body&gt;</code></pre>
 <pre><code class="lang-javascript">test
-  .exists(&#39;#so-lonely&#39;, &#39;The loneliest element in the universe exists&#39;)</code></pre>
+  .open(&#39;http://doctor.thedoctor.com/doctor&#39;)
+  .assert.exists(&#39;#so-lonely&#39;, &#39;The loneliest element in the universe exists&#39;)
+  .done()</code></pre>
 
     </div>
 
@@ -3461,7 +3479,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l1179"><code>index.js:1179</code></a>
+        <a href="../files/index.js.html#l1295"><code>index.js:1295</code></a>
         
         </p>
 
@@ -3528,7 +3546,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l1061"><code>index.js:1061</code></a>
+        <a href="../files/index.js.html#l1177"><code>index.js:1177</code></a>
         
         </p>
 
@@ -3584,7 +3602,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l1074"><code>index.js:1074</code></a>
+        <a href="../files/index.js.html#l1190"><code>index.js:1190</code></a>
         
         </p>
 
@@ -3662,7 +3680,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l477"><code>index.js:477</code></a>
+        <a href="../files/index.js.html#l501"><code>index.js:501</code></a>
         
         </p>
 
@@ -3673,10 +3691,20 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
     </div>
 
     <div class="description">
-        <p>Checks the height of an element.</p>
-<pre><code class="lang-html"><code>&#x60;</code>
-
-<code>&#x60;</code>javascript</code></pre>
+        <p>Checks the actual height of an element.</p>
+<pre><code class="lang-html">  &lt;div id=&quot;fixed-dimensions&quot; style=&quot;height: 100px&quot;&gt;&lt;/div&gt;</code></pre>
+<pre><code class="lang-javascript"> test
+   .open(&#39;http://localhost:5000/index.html&#39;)
+   // all true, all pixel
+   .assert.height(&#39;#fixed-dimensions&#39;, 100)
+   .assert.height(&#39;#fixed-dimensions&#39;).is(100)
+   .assert.height(&#39;#fixed-dimensions&#39;).is.not(100)
+   .assert.height(&#39;#fixed-dimensions&#39;).is.gt(90)
+   .assert.height(&#39;#fixed-dimensions&#39;).is.gte(97)
+   .assert.height(&#39;#fixed-dimensions&#39;).is.lt(120)
+   .assert.height(&#39;#fixed-dimensions&#39;).is.lte(110)
+   .assert.height(&#39;#fixed-dimensions&#39;).is.between([90, 110])
+   .done();</code></pre>
 
     </div>
 
@@ -3794,7 +3822,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l645"><code>index.js:645</code></a>
+        <a href="../files/index.js.html#l742"><code>index.js:742</code></a>
         
         </p>
 
@@ -3892,7 +3920,7 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
             
         
         
-        <a href="../files/index.js.html#l1022"><code>index.js:1022</code></a>
+        <a href="../files/index.js.html#l1138"><code>index.js:1138</code></a>
         
         </p>
 
@@ -3948,7 +3976,7 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
             
         
         
-        <a href="../files/index.js.html#l1087"><code>index.js:1087</code></a>
+        <a href="../files/index.js.html#l1203"><code>index.js:1203</code></a>
         
         </p>
 
@@ -4004,7 +4032,7 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
             
         
         
-        <a href="../files/index.js.html#l1100"><code>index.js:1100</code></a>
+        <a href="../files/index.js.html#l1216"><code>index.js:1216</code></a>
         
         </p>
 
@@ -4060,7 +4088,7 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
             
         
         
-        <a href="../files/index.js.html#l1035"><code>index.js:1035</code></a>
+        <a href="../files/index.js.html#l1151"><code>index.js:1151</code></a>
         
         </p>
 
@@ -4132,7 +4160,7 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
             
         
         
-        <a href="../files/index.js.html#l537"><code>index.js:537</code></a>
+        <a href="../files/index.js.html#l597"><code>index.js:597</code></a>
         
         </p>
 
@@ -4143,10 +4171,24 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
     </div>
 
     <div class="description">
-        <p>Determine if an <option> element, or an <input> element of type checkbox or radiobutton is currently not selected.</p>
-<pre><code class="lang-html"><code>&#x60;</code>
-
-<code>&#x60;</code>javascript</code></pre>
+        <p>Determine if an <option> element, or an <input> element of type checkbox or radio is currently not selected.</p>
+<pre><code class="lang-html">&lt;input type=&quot;checkbox&quot; id=&quot;unchecked_checkbox&quot; name=&quot;unchecked_checkbox&quot;/&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;checked_checkbox&quot; name=&quot;checked_checkbox&quot; checked=&quot;checked&quot;/&gt;
+&lt;select id=&quot;select_elm&quot; name=&quot;select_elm&quot;&gt;
+  &lt;option value=&quot;9&quot;&gt;Eccleston&lt;/option&gt;
+  &lt;option selected value=&quot;10&quot;&gt;Tennant&lt;/option&gt;
+  &lt;option value=&quot;11&quot;&gt;Smith&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+<p>Checking radio and checkboxes:</p>
+<pre><code class="lang-javascript"> test
+   .open(&#39;http://selectables.org&#39;)
+   .assert.notSelected(&#39;#unchecked_checkbox&#39;)
+   .done();</code></pre>
+<p>Checking option elements:</p>
+<pre><code class="lang-javascript"> test
+   .open(&#39;http://selectables.org&#39;)
+   .assert.notSelected(&#39;#select_elm option:last-child&#39;)
+   .done();</code></pre>
 
     </div>
 
@@ -4248,7 +4290,7 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
             
         
         
-        <a href="../files/index.js.html#l730"><code>index.js:730</code></a>
+        <a href="../files/index.js.html#l831"><code>index.js:831</code></a>
         
         </p>
 
@@ -4260,9 +4302,14 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
 
     <div class="description">
         <p>Asserts that the element matching the provided selector expression is not visible.</p>
-<pre><code class="lang-html"><code>&#x60;</code>
-
-<code>&#x60;</code>javascript</code></pre>
+<pre><code class="lang-html">&lt;body&gt;
+  &lt;h1 style=&quot;display: none&quot;&gt;Me? So hidden...&lt;/h1&gt;
+  &lt;h2&gt;Me? So in viewport...&lt;/h2&gt;
+&lt;/body&gt;</code></pre>
+<pre><code class="lang-javascript"> test
+   .open(&#39;http://allyourviewportsbelongto.us&#39;)
+   .assert.notVisible(&#39;h1&#39;, &#39;Element is not visible&#39;)
+   .done();</code></pre>
 
     </div>
 
@@ -4813,7 +4860,7 @@ you can still use the &#39;:not(): assertion helper</p>
             
         
         
-        <a href="../files/index.js.html#l508"><code>index.js:508</code></a>
+        <a href="../files/index.js.html#l546"><code>index.js:546</code></a>
         
         </p>
 
@@ -4824,10 +4871,24 @@ you can still use the &#39;:not(): assertion helper</p>
     </div>
 
     <div class="description">
-        <p>Determine if an <option> element, or an <input> element of type checkbox or radiobutton is currently selected.</p>
-<pre><code class="lang-html"><code>&#x60;</code>
-
-<code>&#x60;</code>javascript</code></pre>
+        <p>Determine if an <option> element, or an <input> element of type checkbox or radio is currently selected.</p>
+<pre><code class="lang-html">&lt;input type=&quot;checkbox&quot; id=&quot;unchecked_checkbox&quot; name=&quot;unchecked_checkbox&quot;/&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;checked_checkbox&quot; name=&quot;checked_checkbox&quot; checked=&quot;checked&quot;/&gt;
+&lt;select id=&quot;select_elm&quot; name=&quot;select_elm&quot;&gt;
+  &lt;option value=&quot;9&quot;&gt;Eccleston&lt;/option&gt;
+  &lt;option selected value=&quot;10&quot;&gt;Tennant&lt;/option&gt;
+  &lt;option value=&quot;11&quot;&gt;Smith&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+<p>Checking radio and checkboxes:</p>
+<pre><code class="lang-javascript"> test
+   .open(&#39;http://selectables.org&#39;)
+   .assert.selected(&#39;#checked_checkbox&#39;)
+   .done();</code></pre>
+<p>Checking option elements:</p>
+<pre><code class="lang-javascript"> test
+   .open(&#39;http://selectables.org&#39;)
+   .assert.selected(&#39;#select_elm option:nth-child(2)&#39;)
+   .done();</code></pre>
 
     </div>
 
@@ -4935,7 +4996,7 @@ you can still use the &#39;:not(): assertion helper</p>
             
         
         
-        <a href="../files/index.js.html#l841"><code>index.js:841</code></a>
+        <a href="../files/index.js.html#l957"><code>index.js:957</code></a>
         
         </p>
 
@@ -5067,7 +5128,7 @@ you can still use the &#39;:not(): assertion helper</p>
             
         
         
-        <a href="../files/index.js.html#l917"><code>index.js:917</code></a>
+        <a href="../files/index.js.html#l1033"><code>index.js:1033</code></a>
         
         </p>
 
@@ -5183,7 +5244,7 @@ you can still use the &#39;:not(): assertion helper</p>
             
         
         
-        <a href="../files/index.js.html#l894"><code>index.js:894</code></a>
+        <a href="../files/index.js.html#l1010"><code>index.js:1010</code></a>
         
         </p>
 
@@ -5299,7 +5360,7 @@ you can still use the &#39;:not(): assertion helper</p>
             
         
         
-        <a href="../files/index.js.html#l940"><code>index.js:940</code></a>
+        <a href="../files/index.js.html#l1056"><code>index.js:1056</code></a>
         
         </p>
 
@@ -5574,7 +5635,7 @@ that holds a value attribute</p>
             
         
         
-        <a href="../files/index.js.html#l759"><code>index.js:759</code></a>
+        <a href="../files/index.js.html#l868"><code>index.js:868</code></a>
         
         </p>
 
@@ -5586,9 +5647,13 @@ that holds a value attribute</p>
 
     <div class="description">
         <p>Asserts that the element matching the provided selector expression is visible.</p>
-<pre><code class="lang-html"><code>&#x60;</code>
-
-<code>&#x60;</code>javascript</code></pre>
+<pre><code class="lang-html">&lt;body&gt;
+  &lt;h1&gt;Me? So in viewport...&lt;/h1&gt;
+&lt;/body&gt;</code></pre>
+<pre><code class="lang-javascript"> test
+   .open(&#39;http://allyourviewportsbelongto.us&#39;)
+   .assert.visible(&#39;h1&#39;, &#39;Element is visible&#39;)
+   .done();</code></pre>
 
     </div>
 
@@ -5696,7 +5761,7 @@ that holds a value attribute</p>
             
         
         
-        <a href="../files/index.js.html#l446"><code>index.js:446</code></a>
+        <a href="../files/index.js.html#l456"><code>index.js:456</code></a>
         
         </p>
 
@@ -5707,10 +5772,20 @@ that holds a value attribute</p>
     </div>
 
     <div class="description">
-        <p>Checks the width of an element.</p>
-<pre><code class="lang-html"><code>&#x60;</code>
-
-<code>&#x60;</code>javascript</code></pre>
+        <p>Checks the actual width of an element.</p>
+<pre><code class="lang-html">  &lt;div id=&quot;fixed-dimensions&quot; style=&quot;width: 100px&quot;&gt;&lt;/div&gt;</code></pre>
+<pre><code class="lang-javascript"> test
+   .open(&#39;http://localhost:5000/index.html&#39;)
+   // all true, all pixel
+   .assert.width(&#39;#fixed-dimensions&#39;, 100)
+   .assert.width(&#39;#fixed-dimensions&#39;).is(100)
+   .assert.width(&#39;#fixed-dimensions&#39;).is.not(100)
+   .assert.width(&#39;#fixed-dimensions&#39;).is.gt(90)
+   .assert.width(&#39;#fixed-dimensions&#39;).is.gte(97)
+   .assert.width(&#39;#fixed-dimensions&#39;).is.lt(120)
+   .assert.width(&#39;#fixed-dimensions&#39;).is.lte(110)
+   .assert.width(&#39;#fixed-dimensions&#39;).is.between([90, 110])
+   .done();</code></pre>
 
     </div>
 

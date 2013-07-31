@@ -206,7 +206,7 @@
         {
             "file": "index.js",
             "line": 410,
-            "description": "Checks the computed style of the browser.\n\n```html\n```\n\n```css\n```\n\n```javascript\n```",
+            "description": "Checks the computed style.\n\n```html\n<div id=\"superColoredElement\">Rose</div>\n```\n\n```css\n#superColoredElement {\n  background-color: rgba(255, 0, 0, 1);\n  color: rgba(0, 128, 0, 1);\n}\n```\n\n```javascript\n test\n   .open('http://unicorns.rainbows.io')\n   .assert.css('#superColoredElement', 'background-color', 'rgba(255, 0, 0, 1)')\n   .assert.css('#superColoredElement', 'color', 'rgba(0, 128, 0, 1)')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "css",
@@ -239,8 +239,8 @@
         },
         {
             "file": "index.js",
-            "line": 446,
-            "description": "Checks the width of an element.\n\n```html\n```\n\n```javascript\n```",
+            "line": 456,
+            "description": "Checks the actual width of an element.\n\n```html\n  <div id=\"fixed-dimensions\" style=\"width: 100px\"></div>\n```\n\n```javascript\n test\n   .open('http://localhost:5000/index.html')\n   // all true, all pixel\n   .assert.width('#fixed-dimensions', 100)\n   .assert.width('#fixed-dimensions').is(100)\n   .assert.width('#fixed-dimensions').is.not(100)\n   .assert.width('#fixed-dimensions').is.gt(90)\n   .assert.width('#fixed-dimensions').is.gte(97)\n   .assert.width('#fixed-dimensions').is.lt(120)\n   .assert.width('#fixed-dimensions').is.lte(110)\n   .assert.width('#fixed-dimensions').is.between([90, 110])\n   .done();\n\n```",
             "api": "",
             "itemtype": "method",
             "name": "width",
@@ -268,8 +268,8 @@
         },
         {
             "file": "index.js",
-            "line": 477,
-            "description": "Checks the height of an element.\n\n```html\n```\n\n```javascript\n```",
+            "line": 501,
+            "description": "Checks the actual height of an element.\n\n```html\n  <div id=\"fixed-dimensions\" style=\"height: 100px\"></div>\n```\n\n```javascript\n test\n   .open('http://localhost:5000/index.html')\n   // all true, all pixel\n   .assert.height('#fixed-dimensions', 100)\n   .assert.height('#fixed-dimensions').is(100)\n   .assert.height('#fixed-dimensions').is.not(100)\n   .assert.height('#fixed-dimensions').is.gt(90)\n   .assert.height('#fixed-dimensions').is.gte(97)\n   .assert.height('#fixed-dimensions').is.lt(120)\n   .assert.height('#fixed-dimensions').is.lte(110)\n   .assert.height('#fixed-dimensions').is.between([90, 110])\n   .done();\n\n```",
             "api": "",
             "itemtype": "method",
             "name": "height",
@@ -297,8 +297,8 @@
         },
         {
             "file": "index.js",
-            "line": 508,
-            "description": "Determine if an <option> element, or an <input> element of type checkbox or radiobutton is currently selected.\n\n```html\n```\n\n```javascript\n```",
+            "line": 546,
+            "description": "Determine if an <option> element, or an <input> element of type checkbox or radio is currently selected.\n\n```html\n<input type=\"checkbox\" id=\"unchecked_checkbox\" name=\"unchecked_checkbox\"/>\n<input type=\"checkbox\" id=\"checked_checkbox\" name=\"checked_checkbox\" checked=\"checked\"/>\n<select id=\"select_elm\" name=\"select_elm\">\n  <option value=\"9\">Eccleston</option>\n  <option selected value=\"10\">Tennant</option>\n  <option value=\"11\">Smith</option>\n</select>\n```\n\nChecking radio and checkboxes:\n\n```javascript\n test\n   .open('http://selectables.org')\n   .assert.selected('#checked_checkbox')\n   .done();\n```\n\nChecking option elements:\n\n```javascript\n test\n   .open('http://selectables.org')\n   .assert.selected('#select_elm option:nth-child(2)')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "selected",
@@ -321,8 +321,8 @@
         },
         {
             "file": "index.js",
-            "line": 537,
-            "description": "Determine if an <option> element, or an <input> element of type checkbox or radiobutton is currently not selected.\n\n```html\n```\n\n```javascript\n```",
+            "line": 597,
+            "description": "Determine if an <option> element, or an <input> element of type checkbox or radio is currently not selected.\n\n```html\n<input type=\"checkbox\" id=\"unchecked_checkbox\" name=\"unchecked_checkbox\"/>\n<input type=\"checkbox\" id=\"checked_checkbox\" name=\"checked_checkbox\" checked=\"checked\"/>\n<select id=\"select_elm\" name=\"select_elm\">\n  <option value=\"9\">Eccleston</option>\n  <option selected value=\"10\">Tennant</option>\n  <option value=\"11\">Smith</option>\n</select>\n```\n\nChecking radio and checkboxes:\n\n```javascript\n test\n   .open('http://selectables.org')\n   .assert.notSelected('#unchecked_checkbox')\n   .done();\n```\n\nChecking option elements:\n\n```javascript\n test\n   .open('http://selectables.org')\n   .assert.notSelected('#select_elm option:last-child')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "notSelected",
@@ -345,8 +345,8 @@
         },
         {
             "file": "index.js",
-            "line": 566,
-            "description": "Determine if an element is currently enabled.\n\n```html\n```\n\n```javascript\n```",
+            "line": 648,
+            "description": "Determine if an element is currently enabled.\n\n```html\n<input id=\"onmars\" type=\"text\" size=\"50\" name=\"onmars\" placeholder=\"State your name, rank and intention!\"></input>\n```\n\n```javascript\ntest\n  .open('http://doctor.thedoctor.com/doctor')\n  .assert.enabled('#onmars', 'Is enabled!')\n  .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "enabled",
@@ -369,8 +369,8 @@
         },
         {
             "file": "index.js",
-            "line": 595,
-            "description": "Determine if an element is currently disabled.\n\n```html\n```\n\n```javascript\n```",
+            "line": 682,
+            "description": "Determine if an element is currently disabled.\n\n```html\n<input disabled id=\"onearth\" type=\"text\" size=\"50\" name=\"onearth\" placeholder=\"State your name, rank and intention!\"></input>\n```\n\n```javascript\ntest\n  .open('http://doctor.thedoctor.com/doctor')\n  .assert.disabled('#onearth', 'Is disabled!')\n  .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "disabled",
@@ -393,8 +393,8 @@
         },
         {
             "file": "index.js",
-            "line": 624,
-            "description": "Checks the contents of a cookie.\n\n```javascript\n```",
+            "line": 716,
+            "description": "Checks the contents of a cookie.\n\n```javascript\n test\n   .open('http://cookiejar.io/not_your_mothers_javascript.html')\n   .setCookie('atestcookie', 'foobar=baz')\n   .assert.cookie('atestcookie', 'foobar=baz')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "cookie",
@@ -422,7 +422,7 @@
         },
         {
             "file": "index.js",
-            "line": 645,
+            "line": 742,
             "description": "Asserts that current HTTP status code is the same as the one passed as argument.\nTODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method for this)",
             "itemtype": "method",
             "name": "httpStatus",
@@ -445,8 +445,8 @@
         },
         {
             "file": "index.js",
-            "line": 662,
-            "description": "Asserts that an element matching the provided selector expression exists in remote DOM environment.\n\n```html\n<body>\n  <p id=\"so-lonely\">Last of the timelords</p>\n</body>\n```\n\n```javascript\ntest\n  .exists('#so-lonely', 'The loneliest element in the universe exists')\n```",
+            "line": 759,
+            "description": "Asserts that an element matching the provided selector expression exists in remote DOM environment.\n\n```html\n<body>\n  <p id=\"so-lonely\">Last of the timelords</p>\n</body>\n```\n\n```javascript\ntest\n  .open('http://doctor.thedoctor.com/doctor')\n  .assert.exists('#so-lonely', 'The loneliest element in the universe exists')\n  .done()\n```",
             "api": "",
             "itemtype": "method",
             "name": "exists",
@@ -469,8 +469,8 @@
         },
         {
             "file": "index.js",
-            "line": 696,
-            "description": "Asserts that an element matching the provided selector expression doesn't exists within the remote DOM environment.\n\n```html\n<body>\n  <p id=\"so-lonely\">Last of the timelords</p>\n</body>\n```\n\n```javascript\ntest\n  .doesntExist('#the-master', 'The master element has not been seen')\n```",
+            "line": 795,
+            "description": "Asserts that an element matching the provided selector expression doesn't exists within the remote DOM environment.\n\n```html\n<body>\n  <p id=\"so-lonely\">Last of the timelords</p>\n</body>\n```\n\n```javascript\ntest\n  .open('http://doctor.thedoctor.com/doctor')\n  .doesntExist('#the-master', 'The master element has not been seen')\n  .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "doesntExist",
@@ -493,8 +493,8 @@
         },
         {
             "file": "index.js",
-            "line": 730,
-            "description": "Asserts that the element matching the provided selector expression is not visible.\n\n```html\n```\n\n```javascript\n```",
+            "line": 831,
+            "description": "Asserts that the element matching the provided selector expression is not visible.\n\n```html\n<body>\n  <h1 style=\"display: none\">Me? So hidden...</h1>\n  <h2>Me? So in viewport...</h2>\n</body>\n```\n\n```javascript\n test\n   .open('http://allyourviewportsbelongto.us')\n   .assert.notVisible('h1', 'Element is not visible')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "notVisible",
@@ -517,8 +517,8 @@
         },
         {
             "file": "index.js",
-            "line": 759,
-            "description": "Asserts that the element matching the provided selector expression is visible.\n\n```html\n```\n\n```javascript\n```",
+            "line": 868,
+            "description": "Asserts that the element matching the provided selector expression is visible.\n\n```html\n<body>\n  <h1>Me? So in viewport...</h1>\n</body>\n```\n\n```javascript\n test\n   .open('http://allyourviewportsbelongto.us')\n   .assert.visible('h1', 'Element is visible')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "visible",
@@ -541,7 +541,7 @@
         },
         {
             "file": "index.js",
-            "line": 788,
+            "line": 904,
             "description": "Asserts that given text does not exist in the provided selector.\n\n```html\n```\n\n```javascript\n```",
             "api": "",
             "itemtype": "method",
@@ -570,7 +570,7 @@
         },
         {
             "file": "index.js",
-            "line": 818,
+            "line": 934,
             "description": "Asserts that given text does not exist in the current alert/prompt/confirm dialog.\n\n```html\n```\n\n```javascript\n```",
             "api": "",
             "itemtype": "method",
@@ -594,7 +594,7 @@
         },
         {
             "file": "index.js",
-            "line": 841,
+            "line": 957,
             "description": "Asserts that given text does exist in the provided selector.\n\n```html\n```\n\n```javascript\n```",
             "api": "",
             "itemtype": "method",
@@ -623,7 +623,7 @@
         },
         {
             "file": "index.js",
-            "line": 871,
+            "line": 987,
             "description": "Asserts that given alertText does exist in the provided alert/confirm or prompt dialog.\n\n```html\n```\n\n```javascript\n```",
             "api": "",
             "itemtype": "method",
@@ -647,7 +647,7 @@
         },
         {
             "file": "index.js",
-            "line": 894,
+            "line": 1010,
             "description": "Asserts that the page title is as expected.\n\n```html\n```\n\n```javascript\n```",
             "api": "",
             "itemtype": "method",
@@ -671,7 +671,7 @@
         },
         {
             "file": "index.js",
-            "line": 917,
+            "line": 1033,
             "description": "Asserts that given title does not match the given expactions\n\n```html\n```\n\n```javascript\n```",
             "api": "",
             "itemtype": "method",
@@ -695,7 +695,7 @@
         },
         {
             "file": "index.js",
-            "line": 940,
+            "line": 1056,
             "description": "Asserts that the pages url is as expected.\n\n```html\n```\n\n```javascript\n```",
             "api": "",
             "itemtype": "method",
@@ -719,7 +719,7 @@
         },
         {
             "file": "index.js",
-            "line": 963,
+            "line": 1079,
             "description": "Asserts that the pages url does not match the expectation.\n\n```html\n```\n\n```javascript\n```",
             "api": "",
             "itemtype": "method",
@@ -743,7 +743,7 @@
         },
         {
             "file": "index.js",
-            "line": 986,
+            "line": 1102,
             "description": "Asserts that an elements attribute is as expected.\n\n```html\n```\n\n```javascript\n```",
             "api": "",
             "itemtype": "method",
@@ -777,7 +777,7 @@
         },
         {
             "file": "index.js",
-            "line": 1022,
+            "line": 1138,
             "itemtype": "method",
             "name": "is",
             "params": [],
@@ -788,7 +788,7 @@
         },
         {
             "file": "index.js",
-            "line": 1035,
+            "line": 1151,
             "itemtype": "method",
             "name": "not",
             "params": [],
@@ -799,7 +799,7 @@
         },
         {
             "file": "index.js",
-            "line": 1048,
+            "line": 1164,
             "itemtype": "method",
             "name": "between",
             "params": [],
@@ -810,7 +810,7 @@
         },
         {
             "file": "index.js",
-            "line": 1061,
+            "line": 1177,
             "itemtype": "method",
             "name": "gt",
             "params": [],
@@ -821,7 +821,7 @@
         },
         {
             "file": "index.js",
-            "line": 1074,
+            "line": 1190,
             "itemtype": "method",
             "name": "gte",
             "params": [],
@@ -832,7 +832,7 @@
         },
         {
             "file": "index.js",
-            "line": 1087,
+            "line": 1203,
             "itemtype": "method",
             "name": "lt",
             "params": [],
@@ -843,7 +843,7 @@
         },
         {
             "file": "index.js",
-            "line": 1100,
+            "line": 1216,
             "itemtype": "method",
             "name": "lte",
             "params": [],
@@ -854,7 +854,7 @@
         },
         {
             "file": "index.js",
-            "line": 1116,
+            "line": 1232,
             "itemtype": "method",
             "name": "_generateCallbackAssertion",
             "params": [],
@@ -869,7 +869,7 @@
         },
         {
             "file": "index.js",
-            "line": 1156,
+            "line": 1272,
             "itemtype": "method",
             "name": "_addToActionQueue",
             "params": [],
@@ -882,7 +882,7 @@
         },
         {
             "file": "index.js",
-            "line": 1179,
+            "line": 1295,
             "description": "Generates a function that can be used",
             "itemtype": "method",
             "name": "generateTestHelper",
@@ -898,7 +898,7 @@
         },
         {
             "file": "index.js",
-            "line": 1235,
+            "line": 1351,
             "description": "Assert if a given value shallow equals a snd. given value",
             "itemtype": "method",
             "name": "_testShallowEquals",
@@ -926,7 +926,7 @@
         },
         {
             "file": "index.js",
-            "line": 1255,
+            "line": 1371,
             "description": "Assert if a given value shallow does not equal a snd. given value",
             "itemtype": "method",
             "name": "_testShallowUnequals",
@@ -954,7 +954,7 @@
         },
         {
             "file": "index.js",
-            "line": 1275,
+            "line": 1391,
             "description": "Assert if a given value matches a range",
             "itemtype": "method",
             "name": "_testBetween",
@@ -982,7 +982,7 @@
         },
         {
             "file": "index.js",
-            "line": 1295,
+            "line": 1411,
             "description": "Assert if a given value is greater than the value to compare",
             "itemtype": "method",
             "name": "_testGreaterThan",
@@ -1010,7 +1010,7 @@
         },
         {
             "file": "index.js",
-            "line": 1315,
+            "line": 1431,
             "description": "Assert if a given value is greater or equal than the value to compare",
             "itemtype": "method",
             "name": "_testGreaterThanEqual",
@@ -1038,7 +1038,7 @@
         },
         {
             "file": "index.js",
-            "line": 1329,
+            "line": 1445,
             "description": "Assert if a given value is lower than the value to compare",
             "itemtype": "method",
             "name": "_testLowerThan",
@@ -1066,7 +1066,7 @@
         },
         {
             "file": "index.js",
-            "line": 1349,
+            "line": 1465,
             "description": "Assert if a given value is lower or equal than the value to compare",
             "itemtype": "method",
             "name": "_testLowerThanEqual",
@@ -1094,7 +1094,7 @@
         },
         {
             "file": "index.js",
-            "line": 1363,
+            "line": 1479,
             "description": "Assert if a given value is boolean 'true'",
             "itemtype": "method",
             "name": "_testTruthy",
@@ -1117,7 +1117,7 @@
         },
         {
             "file": "index.js",
-            "line": 1376,
+            "line": 1492,
             "description": "Assert if a given value is boolean 'false'",
             "itemtype": "method",
             "name": "_testFalsy",
@@ -1174,43 +1174,31 @@
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:446"
+            "line": " index.js:456"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:477"
+            "line": " index.js:501"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:508"
+            "line": " index.js:546"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:537"
+            "line": " index.js:597"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:566"
+            "line": " index.js:648"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:595"
+            "line": " index.js:682"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:624"
-        },
-        {
-            "message": "unknown tag: api",
-            "line": " index.js:662"
-        },
-        {
-            "message": "unknown tag: api",
-            "line": " index.js:696"
-        },
-        {
-            "message": "unknown tag: api",
-            "line": " index.js:730"
+            "line": " index.js:716"
         },
         {
             "message": "unknown tag: api",
@@ -1218,131 +1206,143 @@
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:788"
+            "line": " index.js:795"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:818"
+            "line": " index.js:831"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:841"
+            "line": " index.js:868"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:871"
+            "line": " index.js:904"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:894"
+            "line": " index.js:934"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:917"
+            "line": " index.js:957"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:940"
+            "line": " index.js:987"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:963"
+            "line": " index.js:1010"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:986"
+            "line": " index.js:1033"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:1056"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:1079"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:1102"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1022"
+            "line": " index.js:1138"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1022"
+            "line": " index.js:1138"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1035"
+            "line": " index.js:1151"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1035"
+            "line": " index.js:1151"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1048"
+            "line": " index.js:1164"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1048"
+            "line": " index.js:1164"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1061"
+            "line": " index.js:1177"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1061"
+            "line": " index.js:1177"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1074"
+            "line": " index.js:1190"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1074"
+            "line": " index.js:1190"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1087"
+            "line": " index.js:1203"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1087"
+            "line": " index.js:1203"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1100"
+            "line": " index.js:1216"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1100"
+            "line": " index.js:1216"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1116"
+            "line": " index.js:1232"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1116"
+            "line": " index.js:1232"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1116"
+            "line": " index.js:1232"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1156"
+            "line": " index.js:1272"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1156"
+            "line": " index.js:1272"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1156"
+            "line": " index.js:1272"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1179"
+            "line": " index.js:1295"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1179"
+            "line": " index.js:1295"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1179"
+            "line": " index.js:1295"
         },
         {
             "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
