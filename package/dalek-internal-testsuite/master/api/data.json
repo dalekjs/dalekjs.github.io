@@ -156,7 +156,7 @@
         },
         {
             "file": "index.js",
-            "line": 118,
+            "line": 121,
             "description": "Decrements number of tests that should be executed in this suite",
             "itemtype": "method",
             "name": "decrementTestsToBeExecuted",
@@ -170,7 +170,7 @@
         },
         {
             "file": "index.js",
-            "line": 129,
+            "line": 132,
             "description": "Returns the name of the testsuite\nIf the suite has no name, it will return the testsuites filename",
             "itemtype": "method",
             "name": "getName",
@@ -184,7 +184,7 @@
         },
         {
             "file": "index.js",
-            "line": 147,
+            "line": 150,
             "description": "Returns the options of the testsuite\nIf the suite has no options, it will return `null`",
             "itemtype": "method",
             "name": "getOptions",
@@ -198,7 +198,7 @@
         },
         {
             "file": "index.js",
-            "line": 165,
+            "line": 168,
             "description": "Returns all names (aka. object keys) the tests that should be executed",
             "itemtype": "method",
             "name": "getTests",
@@ -212,7 +212,7 @@
         },
         {
             "file": "index.js",
-            "line": 176,
+            "line": 179,
             "description": "Returns the number of tests to be executed",
             "itemtype": "method",
             "name": "getNumberOfTests",
@@ -233,7 +233,7 @@
         },
         {
             "file": "index.js",
-            "line": 188,
+            "line": 191,
             "description": "Returns the next test, that should be executed",
             "itemtype": "method",
             "name": "getNextTest",
@@ -247,7 +247,7 @@
         },
         {
             "file": "index.js",
-            "line": 199,
+            "line": 202,
             "description": "Executes the next test in the sequence",
             "itemtype": "method",
             "name": "executeNextTest",
@@ -268,7 +268,7 @@
         },
         {
             "file": "index.js",
-            "line": 216,
+            "line": 219,
             "description": "Generates a new test instance",
             "itemtype": "method",
             "name": "getTestInstance",
@@ -289,7 +289,7 @@
         },
         {
             "file": "index.js",
-            "line": 228,
+            "line": 231,
             "description": "Returns a test function by its name",
             "itemtype": "method",
             "name": "getTest",
@@ -310,7 +310,7 @@
         },
         {
             "file": "index.js",
-            "line": 240,
+            "line": 243,
             "description": "Will be executed if a test is started, that does not exist",
             "itemtype": "method",
             "name": "testDoesNotExist",
@@ -327,7 +327,7 @@
         },
         {
             "file": "index.js",
-            "line": 252,
+            "line": 255,
             "description": "Runs any tests from this testsuite in sequence",
             "itemtype": "method",
             "name": "run",
