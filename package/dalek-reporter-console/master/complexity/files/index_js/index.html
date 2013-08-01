@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">68.53</p>
+      <p class="stat">68.08</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">87</p>
+      <p class="stat">107</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">21.93</p>
+      <p class="stat">25.16</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.69</p>
+      <p class="stat">0.72</p>
     </div>
   </div>
 </div>
@@ -120,11 +120,25 @@
 var reporter = null;
 
 /**
- * Console reporter
+ * Daleks basic reporter, all the lovely colors &amp; symbols you see when running dalek.
+ * The reporter will be installed by default.
+ *
+ * If you would like to use the reporter in addition to another one,
+ * you can start dalek with a special command line argument
+ *
+ * ```bash
+ * $ dalek your_test.js -r console,junit
+ * ```
+ *
+ * or you can add it to your Dalekfile
+ *
+ * ```javascript
+ * &quot;reporter&quot;: [&quot;console&quot;, &quot;junit&quot;]
+ * ```
  *
  * @class Reporter
  * @constructor
- * @part console
+ * @part Console
  * @api
  */
 
@@ -148,58 +162,64 @@ module.exports = function (opts) {
   return reporter;
 };
 
-/**
- * Imports an output module with the correct log state
- *
- * @method importLogModule
- * @param {object} data
- * @chainable
- */
+Reporter.prototype = {
 
-Reporter.prototype.importLogModule = function () {
-  var logModule = require(&#039;./lib/loglevel/level&#039; + this.level);
-  var methods = Object.keys(logModule.prototype);
+  /**
+   * Imports an output module with the correct log state
+   *
+   * @method importLogModule
+   * @param {object} data
+   * @chainable
+   */
 
-  methods.forEach(function (method) {
-    this[method] = logModule.prototype[method];
-  }.bind(this));
-  return this;
-};
+  importLogModule: function () {
+    var logModule = require(&#039;./lib/loglevel/level&#039; + this.level);
+    var methods = Object.keys(logModule.prototype);
 
-/**
- * Connects to all the event listeners
- *
- * @method startListening
- * @param {object} data
- * @chainable
- */
+    methods.forEach(function (method) {
+      this[method] = logModule.prototype[method];
+    }.bind(this));
+    return this;
+  },
 
-Reporter.prototype.startListening = function () {
-  // assertion &amp; action status
-  this.events.on(&#039;report:assertion&#039;, this.outputAssertionResult.bind(this));
-  this.events.on(&#039;report:assertion:status&#039;, this.outputAssertionExpecation.bind(this));
-  this.events.on(&#039;report:action&#039;, this.outputAction.bind(this));
+  /**
+   * Connects to all the event listeners
+   *
+   * @method startListening
+   * @param {object} data
+   * @chainable
+   */
 
-  // test status
-  this.events.on(&#039;report:test:finished&#039;, this.outputTestFinished.bind(this));
-  this.events.on(&#039;report:test:started&#039;, this.outputTestStarted.bind(this));
+  startListening: function () {
+    // assertion &amp; action status
+    this.events.on(&#039;report:assertion&#039;, this.outputAssertionResult.bind(this));
+    this.events.on(&#039;report:assertion:status&#039;, this.outputAssertionExpecation.bind(this));
+    this.events.on(&#039;report:action&#039;, this.outputAction.bind(this));
 
-  // runner status
-  this.events.on(&#039;report:runner:started&#039;, this.outputRunnerStarted.bind(this));
-  this.events.on(&#039;report:runner:finished&#039;, this.outputRunnerFinished.bind(this));
+    // test status
+    this.events.on(&#039;report:test:finished&#039;, this.outputTestFinished.bind(this));
+    this.events.on(&#039;report:test:started&#039;, this.outputTestStarted.bind(this));
 
-  // session &amp; browser status
-  this.events.on(&#039;report:run:browser&#039;, this.outputRunBrowser.bind(this));
-  this.events.on(&#039;report:driver:status&#039;, this.outputOSVersion.bind(this));
-  this.events.on(&#039;report:driver:session&#039;, this.outputBrowserVersion.bind(this));
+    // runner status
+    this.events.on(&#039;report:runner:started&#039;, this.outputRunnerStarted.bind(this));
+    this.events.on(&#039;report:runner:finished&#039;, this.outputRunnerFinished.bind(this));
 
-  // logs
-  this.events.on(&#039;report:log:system&#039;, this.outputLogUser.bind(this, &#039;system&#039;));
-  this.events.on(&#039;report:log:driver&#039;, this.outputLogUser.bind(this, &#039;driver&#039;));
-  this.events.on(&#039;report:log:browser&#039;, this.outputLogUser.bind(this, &#039;browser&#039;));
-  this.events.on(&#039;report:log:user&#039;, this.outputLogUser.bind(this, &#039;user&#039;));
+    // session &amp; browser status
+    this.events.on(&#039;report:run:browser&#039;, this.outputRunBrowser.bind(this));
+    this.events.on(&#039;report:driver:status&#039;, this.outputOSVersion.bind(this));
+    this.events.on(&#039;report:driver:session&#039;, this.outputBrowserVersion.bind(this));
 
-  return this;
+    // logs
+    this.events.on(&#039;report:log:system&#039;, this.outputLogUser.bind(this, &#039;system&#039;));
+    this.events.on(&#039;report:log:driver&#039;, this.outputLogUser.bind(this, &#039;driver&#039;));
+    this.events.on(&#039;report:log:browser&#039;, this.outputLogUser.bind(this, &#039;browser&#039;));
+    this.events.on(&#039;report:log:user&#039;, this.outputLogUser.bind(this, &#039;user&#039;));
+
+    // written reports
+    this.events.on(&#039;report:written&#039;, this.outputReportWritten.bind(this));
+
+    return this;
+  }
 };</textarea>
   </div>
 </div>

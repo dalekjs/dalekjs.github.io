@@ -184,7 +184,7 @@ LogLevel3.prototype.outputBrowserVersion = function (data) {
 };
 
 /**
- * Outpots operating system information
+ * Outputs operating system information
  *
  * @method outputOSVersion
  * @param {object} data
@@ -194,6 +194,20 @@ LogLevel3.prototype.outputBrowserVersion = function (data) {
 LogLevel3.prototype.outputOSVersion = function (data) {
   this.echo(&#x27;OS:&#x27;, {nl: false, ec: true, foreground: &#x27;white&#x27;});
   this.echo(data.os.name + &#x27; &#x27; + data.os.version + &#x27; &#x27; + data.os.arch, {foreground: &#x27;yellowBright&#x27;});
+  return this;
+};
+
+/**
+ * Outputs operating system information
+ *
+ * @method outputOSVersion
+ * @param {object} data
+ * @chainable
+ */
+
+LogLevel3.prototype.outputReportWritten = function (data) {
+  this.echo(this.symbol(&#x27;-&gt;&#x27;), {nl: true, ec: true, foreground: &#x27;yellow&#x27;});
+  this.echo(&#x27;Report type &quot;&#x27; + data.type + &#x27;&quot; written to &quot;&#x27; + data.dest + &#x27;&quot;&#x27;, {foreground: &#x27;yellow&#x27;});
   return this;
 };
 

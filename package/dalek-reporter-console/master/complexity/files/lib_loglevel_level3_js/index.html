@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">68.12</p>
+      <p class="stat">68.04</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">60</p>
+      <p class="stat">74</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">11.96</p>
+      <p class="stat">13.50</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.30</p>
+      <p class="stat">0.41</p>
     </div>
   </div>
 </div>
@@ -162,7 +162,7 @@ LogLevel3.prototype.outputBrowserVersion = function (data) {
 };
 
 /**
- * Outpots operating system information
+ * Outputs operating system information
  *
  * @method outputOSVersion
  * @param {object} data
@@ -172,6 +172,20 @@ LogLevel3.prototype.outputBrowserVersion = function (data) {
 LogLevel3.prototype.outputOSVersion = function (data) {
   this.echo(&#039;OS:&#039;, {nl: false, ec: true, foreground: &#039;white&#039;});
   this.echo(data.os.name + &#039; &#039; + data.os.version + &#039; &#039; + data.os.arch, {foreground: &#039;yellowBright&#039;});
+  return this;
+};
+
+/**
+ * Outputs operating system information
+ *
+ * @method outputOSVersion
+ * @param {object} data
+ * @chainable
+ */
+
+LogLevel3.prototype.outputReportWritten = function (data) {
+  this.echo(this.symbol(&#039;-&gt;&#039;), {nl: true, ec: true, foreground: &#039;yellow&#039;});
+  this.echo(&#039;Report type &quot;&#039; + data.type + &#039;&quot; written to &quot;&#039; + data.dest + &#039;&quot;&#039;, {foreground: &#039;yellow&#039;});
   return this;
 };</textarea>
   </div>

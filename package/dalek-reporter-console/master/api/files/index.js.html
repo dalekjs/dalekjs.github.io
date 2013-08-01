@@ -142,11 +142,25 @@
 var reporter = null;
 
 /**
- * Console reporter
+ * Daleks basic reporter, all the lovely colors &amp; symbols you see when running dalek.
+ * The reporter will be installed by default.
+ *
+ * If you would like to use the reporter in addition to another one,
+ * you can start dalek with a special command line argument
+ *
+ * &#x60;&#x60;&#x60;bash
+ * $ dalek your_test.js -r console,junit
+ * &#x60;&#x60;&#x60;
+ *
+ * or you can add it to your Dalekfile
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &quot;reporter&quot;: [&quot;console&quot;, &quot;junit&quot;]
+ * &#x60;&#x60;&#x60;
  *
  * @class Reporter
  * @constructor
- * @part console
+ * @part Console
  * @api
  */
 
@@ -170,58 +184,64 @@ module.exports = function (opts) {
   return reporter;
 };
 
-/**
- * Imports an output module with the correct log state
- *
- * @method importLogModule
- * @param {object} data
- * @chainable
- */
+Reporter.prototype = {
 
-Reporter.prototype.importLogModule = function () {
-  var logModule = require(&#x27;./lib/loglevel/level&#x27; + this.level);
-  var methods = Object.keys(logModule.prototype);
+  /**
+   * Imports an output module with the correct log state
+   *
+   * @method importLogModule
+   * @param {object} data
+   * @chainable
+   */
 
-  methods.forEach(function (method) {
-    this[method] = logModule.prototype[method];
-  }.bind(this));
-  return this;
-};
+  importLogModule: function () {
+    var logModule = require(&#x27;./lib/loglevel/level&#x27; + this.level);
+    var methods = Object.keys(logModule.prototype);
 
-/**
- * Connects to all the event listeners
- *
- * @method startListening
- * @param {object} data
- * @chainable
- */
+    methods.forEach(function (method) {
+      this[method] = logModule.prototype[method];
+    }.bind(this));
+    return this;
+  },
 
-Reporter.prototype.startListening = function () {
-  // assertion &amp; action status
-  this.events.on(&#x27;report:assertion&#x27;, this.outputAssertionResult.bind(this));
-  this.events.on(&#x27;report:assertion:status&#x27;, this.outputAssertionExpecation.bind(this));
-  this.events.on(&#x27;report:action&#x27;, this.outputAction.bind(this));
+  /**
+   * Connects to all the event listeners
+   *
+   * @method startListening
+   * @param {object} data
+   * @chainable
+   */
 
-  // test status
-  this.events.on(&#x27;report:test:finished&#x27;, this.outputTestFinished.bind(this));
-  this.events.on(&#x27;report:test:started&#x27;, this.outputTestStarted.bind(this));
+  startListening: function () {
+    // assertion &amp; action status
+    this.events.on(&#x27;report:assertion&#x27;, this.outputAssertionResult.bind(this));
+    this.events.on(&#x27;report:assertion:status&#x27;, this.outputAssertionExpecation.bind(this));
+    this.events.on(&#x27;report:action&#x27;, this.outputAction.bind(this));
 
-  // runner status
-  this.events.on(&#x27;report:runner:started&#x27;, this.outputRunnerStarted.bind(this));
-  this.events.on(&#x27;report:runner:finished&#x27;, this.outputRunnerFinished.bind(this));
+    // test status
+    this.events.on(&#x27;report:test:finished&#x27;, this.outputTestFinished.bind(this));
+    this.events.on(&#x27;report:test:started&#x27;, this.outputTestStarted.bind(this));
 
-  // session &amp; browser status
-  this.events.on(&#x27;report:run:browser&#x27;, this.outputRunBrowser.bind(this));
-  this.events.on(&#x27;report:driver:status&#x27;, this.outputOSVersion.bind(this));
-  this.events.on(&#x27;report:driver:session&#x27;, this.outputBrowserVersion.bind(this));
+    // runner status
+    this.events.on(&#x27;report:runner:started&#x27;, this.outputRunnerStarted.bind(this));
+    this.events.on(&#x27;report:runner:finished&#x27;, this.outputRunnerFinished.bind(this));
 
-  // logs
-  this.events.on(&#x27;report:log:system&#x27;, this.outputLogUser.bind(this, &#x27;system&#x27;));
-  this.events.on(&#x27;report:log:driver&#x27;, this.outputLogUser.bind(this, &#x27;driver&#x27;));
-  this.events.on(&#x27;report:log:browser&#x27;, this.outputLogUser.bind(this, &#x27;browser&#x27;));
-  this.events.on(&#x27;report:log:user&#x27;, this.outputLogUser.bind(this, &#x27;user&#x27;));
+    // session &amp; browser status
+    this.events.on(&#x27;report:run:browser&#x27;, this.outputRunBrowser.bind(this));
+    this.events.on(&#x27;report:driver:status&#x27;, this.outputOSVersion.bind(this));
+    this.events.on(&#x27;report:driver:session&#x27;, this.outputBrowserVersion.bind(this));
 
-  return this;
+    // logs
+    this.events.on(&#x27;report:log:system&#x27;, this.outputLogUser.bind(this, &#x27;system&#x27;));
+    this.events.on(&#x27;report:log:driver&#x27;, this.outputLogUser.bind(this, &#x27;driver&#x27;));
+    this.events.on(&#x27;report:log:browser&#x27;, this.outputLogUser.bind(this, &#x27;browser&#x27;));
+    this.events.on(&#x27;report:log:user&#x27;, this.outputLogUser.bind(this, &#x27;user&#x27;));
+
+    // written reports
+    this.events.on(&#x27;report:written&#x27;, this.outputReportWritten.bind(this));
+
+    return this;
+  }
 };
 
     </pre>

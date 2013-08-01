@@ -237,6 +237,9 @@ LevelBase.prototype.symbol = function (symbol) {
   case &#x27;&gt;&#x27;:
     symbol = &#x27;▶&#x27;;
     break;
+  case &#x27;-&gt;&#x27;:
+    symbol = &#x27;↝&#x27;;
+    break;
   case &#x27;&lt;&gt;&#x27;:
     symbol = &#x27;☁&#x27;;
     break;
@@ -385,6 +388,18 @@ LevelBase.prototype.outputBrowserVersion = function () {
  */
 
 LevelBase.prototype.outputOSVersion = function () {
+  return this;
+};
+
+/**
+ * Does nothing
+ *
+ * @method outputReportWritten
+ * @param {object} data
+ * @chainable
+ */
+
+LevelBase.prototype.outputReportWritten = function () {
   return this;
 };
 

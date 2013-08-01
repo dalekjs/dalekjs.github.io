@@ -307,9 +307,9 @@
             "namespace": "",
             "file": "index.js",
             "line": 30,
-            "description": "Console reporter",
+            "description": "Daleks basic reporter, all the lovely colors & symbols you see when running dalek.\nThe reporter will be installed by default.\n\nIf you would like to use the reporter in addition to another one,\nyou can start dalek with a special command line argument\n\n```bash\n$ dalek your_test.js -r console,junit\n```\n\nor you can add it to your Dalekfile\n\n```javascript\n\"reporter\": [\"console\", \"junit\"]\n```",
             "is_constructor": 1,
-            "part": "console",
+            "part": "Console",
             "api": ""
         }
     },
@@ -507,7 +507,24 @@
         {
             "file": "lib/loglevel/level3.js",
             "line": 72,
-            "description": "Outpots operating system information",
+            "description": "Outputs operating system information",
+            "itemtype": "method",
+            "name": "outputOSVersion",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "LogLevel3",
+            "module": "LogLevel3"
+        },
+        {
+            "file": "lib/loglevel/level3.js",
+            "line": 86,
+            "description": "Outputs operating system information",
             "itemtype": "method",
             "name": "outputOSVersion",
             "params": [
@@ -582,7 +599,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 134,
+            "line": 137,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputRunnerStarted",
@@ -599,7 +616,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 146,
+            "line": 149,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputTestFinished",
@@ -616,7 +633,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 158,
+            "line": 161,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputRunnerFinished",
@@ -633,7 +650,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 170,
+            "line": 173,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputAssertionResult",
@@ -650,7 +667,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 182,
+            "line": 185,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputRunBrowser",
@@ -667,7 +684,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 194,
+            "line": 197,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputAction",
@@ -677,7 +694,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 205,
+            "line": 208,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputAssertionExpecation",
@@ -694,7 +711,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 217,
+            "line": 220,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputAction",
@@ -711,7 +728,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 229,
+            "line": 232,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputTestStarted",
@@ -728,7 +745,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 241,
+            "line": 244,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputLogUser",
@@ -745,7 +762,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 253,
+            "line": 256,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputBrowserVersion",
@@ -762,10 +779,27 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 265,
+            "line": 268,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputOSVersion",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "LevelBase",
+            "module": "LevelBase"
+        },
+        {
+            "file": "lib/levelbase.js",
+            "line": 280,
+            "description": "Does nothing",
+            "itemtype": "method",
+            "name": "outputReportWritten",
             "params": [
                 {
                     "name": "data",
@@ -786,7 +820,7 @@
         },
         {
             "file": "index.js",
-            "line": 59,
+            "line": 75,
             "description": "Imports an output module with the correct log state",
             "itemtype": "method",
             "name": "importLogModule",
@@ -803,7 +837,7 @@
         },
         {
             "file": "index.js",
-            "line": 77,
+            "line": 93,
             "description": "Connects to all the event listeners",
             "itemtype": "method",
             "name": "startListening",
