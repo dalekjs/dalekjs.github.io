@@ -1,0 +1,452 @@
+{
+    "project": {
+        "name": "dalek-internal-driver",
+        "description": "DalekJS internal driver helper library",
+        "version": "0.0.1",
+        "url": "http://dalekjs.com"
+    },
+    "files": {
+        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
+            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "index.js": {
+            "name": "index.js",
+            "modules": {
+                "DalekJS": 1
+            },
+            "classes": {
+                "Dalek.Driver": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek": 1
+            }
+        }
+    },
+    "modules": {
+        "DalekJS": {
+            "name": "DalekJS",
+            "submodules": {},
+            "classes": {
+                "Dalek.Driver": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek": 1
+            },
+            "tag": "module",
+            "file": "index.js",
+            "line": 51,
+            "description": "Generates & starts drivers & browsers\nthe tests will be run in",
+            "part": "Driver",
+            "api": ""
+        }
+    },
+    "classes": {
+        "Dalek.Driver": {
+            "name": "Dalek.Driver",
+            "shortname": "Dalek.Driver",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DalekJS",
+            "namespace": "Dalek",
+            "file": "index.js",
+            "line": 51,
+            "description": "Generates & starts drivers & browsers\nthe tests will be run in"
+        }
+    },
+    "classitems": [
+        {
+            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "line": 1,
+            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "class": "Dalek.Driver"
+        },
+        {
+            "file": "index.js",
+            "line": 33,
+            "description": "Configures the driver instance",
+            "is_constructor": 1,
+            "class": "Dalek.Driver"
+        },
+        {
+            "file": "index.js",
+            "line": 64,
+            "description": "Checks if the requested driver is available",
+            "itemtype": "method",
+            "name": "isDriver",
+            "params": [
+                {
+                    "name": "driver",
+                    "description": "Name of the requested driver",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "isDriver Driver is availavle",
+                "type": "Bool"
+            },
+            "class": "Dalek.Driver",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 81,
+            "description": "Loads the requested driver\nEmits an event to the reporter",
+            "itemtype": "method",
+            "name": "loadDriver",
+            "params": [
+                {
+                    "name": "driver",
+                    "description": "Name of the requested driver",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "driverModule Instance of the driver module",
+                "type": "Object"
+            },
+            "class": "Dalek.Driver",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 95,
+            "description": "Returns a list with browser driver instances",
+            "itemtype": "method",
+            "name": "getDrivers",
+            "return": {
+                "description": "verifiedDrivers",
+                "type": "Array"
+            },
+            "class": "Dalek.Driver",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 106,
+            "description": "Returns a list with browser driver instances",
+            "itemtype": "method",
+            "name": "getVerifiedBrowser",
+            "params": [
+                {
+                    "name": "driver",
+                    "description": "Name of the requested driver",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "verifiedDrivers Array of dribver 'run' functions",
+                "type": "Array"
+            },
+            "class": "Dalek.Driver",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 118,
+            "description": "Returns a scoped version of the driver run function",
+            "itemtype": "method",
+            "name": "getVerifiedDriver",
+            "params": [
+                {
+                    "name": "driverModule",
+                    "description": "Instance of the used driver",
+                    "type": "Object"
+                },
+                {
+                    "name": "driver",
+                    "description": "Name of ther used driver",
+                    "type": "String"
+                },
+                {
+                    "name": "browser",
+                    "description": "Name of the used browser",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "run Function that kicks off execution of a testsuite chain in a browser",
+                "type": "Function"
+            },
+            "class": "Dalek.Driver",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 132,
+            "description": "Loads a browser driver",
+            "itemtype": "method",
+            "name": "loadBrowserConfiguration",
+            "params": [
+                {
+                    "name": "browser",
+                    "description": "Name of the requested browser driver",
+                    "type": "String"
+                },
+                {
+                    "name": "browsers",
+                    "description": "Configuration options for the requested browser",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "browserConfiguration Browser driver isntance and configuration meta data",
+                "type": "Object"
+            },
+            "class": "Dalek.Driver",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 152,
+            "description": "Loads the default browser driver",
+            "itemtype": "method",
+            "name": "getDefaultBrowserConfiguration",
+            "params": [
+                {
+                    "name": "browser",
+                    "description": "Name of the requested browser driver",
+                    "type": "String"
+                },
+                {
+                    "name": "browsers",
+                    "description": "Configuration options for the requested browser",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "browserConfiguration Browser driver isntance and configuration meta data",
+                "type": "Object"
+            },
+            "class": "Dalek.Driver",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 171,
+            "description": "Loads a user configured browser driver",
+            "itemtype": "method",
+            "name": "getUserBrowserConfiguration",
+            "params": [
+                {
+                    "name": "browser",
+                    "description": "Name of the requested browser driver",
+                    "type": "String"
+                },
+                {
+                    "name": "browsers",
+                    "description": "Configuration options for the requested browser",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "browserConfiguration Browser driver isntance and configuration meta data",
+                "type": "Object"
+            },
+            "class": "Dalek.Driver",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 190,
+            "description": "Couple driver & session status events for the reporter",
+            "itemtype": "method",
+            "name": "coupleReporterEvents",
+            "params": [
+                {
+                    "name": "driverName",
+                    "description": "Name of the requested driver",
+                    "type": "String"
+                },
+                {
+                    "name": "browser",
+                    "description": "Name of the requested browser",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.Driver",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 205,
+            "description": "Returns a list of testsuite runner functions",
+            "itemtype": "method",
+            "name": "getTestsuiteInstances",
+            "params": [
+                {
+                    "name": "driverInstance",
+                    "description": "Instance of the requested driver",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "testsuiteRunners List of testsuites that should be run",
+                "type": "Array"
+            },
+            "class": "Dalek.Driver",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 217,
+            "description": "Creates a testsuite runner function",
+            "itemtype": "method",
+            "name": "createTestsuiteInstance",
+            "params": [
+                {
+                    "name": "driverInstance",
+                    "description": "Instance of the requested driver",
+                    "type": "Object"
+                },
+                {
+                    "name": "file",
+                    "description": "Filename of the testsuite",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "testsuiteRunner Runner function from the testsuite",
+                "type": "Function"
+            },
+            "class": "Dalek.Driver",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 231,
+            "description": "Generates a testsuite instance, emits the\nbrowser running event & starts a new async() sesries execution\nWill be called when the driver is ready",
+            "itemtype": "method",
+            "name": "_onDriverReadyclear",
+            "params": [
+                {
+                    "name": "browser",
+                    "description": "Name of the requested browser",
+                    "type": "String"
+                },
+                {
+                    "name": "driverName",
+                    "description": "Name of the requested driver",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "Asyncs next() callback function",
+                    "type": "Function"
+                },
+                {
+                    "name": "driverInstance",
+                    "description": "Instance of the requested driver",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Driver",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 253,
+            "description": "Emits a 'tests complete' event & calls asyncs next() callback",
+            "itemtype": "method",
+            "name": "_onTestsuiteComplete",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "Asyncs next() callback function",
+                    "type": "Function"
+                },
+                {
+                    "name": "driverName",
+                    "description": "Name of the requested driver",
+                    "type": "String"
+                },
+                {
+                    "name": "browser",
+                    "description": "Name of the requested browser",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Driver",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 270,
+            "description": "Driver runner function.\nRegisters event handlers for this run,\nloads browser & driver configuration & instances,\nemits the 'driver ready' event for the browser/driver combination",
+            "itemtype": "method",
+            "name": "run",
+            "params": [
+                {
+                    "name": "driverName",
+                    "description": "Name of the requested driver",
+                    "type": "String"
+                },
+                {
+                    "name": "driverModule",
+                    "description": "Instance of the used driver module",
+                    "type": "Object"
+                },
+                {
+                    "name": "browser",
+                    "description": "Name of the requested browser",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "Asyncs next() callback function",
+                    "type": "Function"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.Driver",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: part",
+            "line": " index.js:51"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:51"
+        },
+        {
+            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
+        },
+        {
+            "message": "Missing item type\nConfigures the driver instance",
+            "line": " index.js:33"
+        }
+    ]
+}

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>index.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">71.93</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">284</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="span6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="span6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
+      <p class="stat">30.54</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">1.32</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="span6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="span12">/*!
+ *
+ * Copyright (c) 2013 Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ *
+ */
+
+&#039;use strict&#039;;
+
+// ext. libs
+var async = require(&#039;async&#039;);
+
+// int. libs
+var Testsuite = require(&#039;dalek-internal-testsuite&#039;);
+
+/**
+ * Configures the driver instance
+ *
+ * @constructor
+ */
+
+var Driver = function (options) {
+  // add configuration data to the driver instance
+  this.config = options.config;
+  this.browser = this.config.get(&#039;browser&#039;);
+  this.files = this.config.get(&#039;tests&#039;);
+  this.drivers = this.config.get(&#039;driver&#039;);
+
+  // link driver events
+  this.driverEmitter = options.driverEmitter;
+  this.reporterEvents = options.reporterEvents;
+};
+
+/**
+ * Generates &amp; starts drivers &amp; browsers
+ * the tests will be run in
+ *
+ * @module DalekJS
+ * @class Driver
+ * @namespace Dalek
+ * @part Driver
+ * @api
+ */
+
+Driver.prototype = {
+
+  /**
+   * Checks if the requested driver is available
+   *
+   * @method isDriver
+   * @param {string} driver Name of the requested driver
+   * @return {bool} isDriver Driver is availavle
+   */
+
+  isDriver: function (driver) {
+    try {
+      require.resolve(&#039;dalek-driver-&#039; + driver);
+    } catch (e) {
+      return false;
+    }
+    return true;
+  },
+
+  /**
+   * Loads the requested driver
+   * Emits an event to the reporter
+   *
+   * @method loadDriver
+   * @param {string} driver Name of the requested driver
+   * @return {object} driverModule Instance of the driver module
+   */
+
+  loadDriver: function (driver) {
+    this.reporterEvents.emit(&#039;report:log:system&#039;, &#039;Loading driver: &quot;&#039; + driver + &#039;&quot;&#039;);
+    return require(&#039;dalek-driver-&#039; + driver);
+  },
+
+  /**
+   * Returns a list with browser driver instances
+   *
+   * @method getDrivers
+   * @return {array} verifiedDrivers
+   */
+
+  getDrivers: function () {
+    return this.drivers.map(this.getVerifiedBrowser, this)[0];
+  },
+
+  /**
+   * Returns a list with browser driver instances
+   *
+   * @method getVerifiedBrowser
+   * @param {string} driver Name of the requested driver
+   * @return {array} verifiedDrivers Array of dribver &#039;run&#039; functions
+   */
+
+  getVerifiedBrowser: function (driver) {
+    return this.browser.map(this.getVerifiedDriver.bind(this, this.loadDriver(driver), driver));
+  },
+
+  /**
+   * Returns a scoped version of the driver run function
+   *
+   * @method getVerifiedDriver
+   * @param {object} driverModule Instance of the used driver
+   * @param {string} driver Name of ther used driver
+   * @param {string} browser Name of the used browser
+   * @return {function} run Function that kicks off execution of a testsuite chain in a browser
+   */
+
+  getVerifiedDriver: function (driverModule, driver, browser) {
+    return this.run.bind(this, driver, driverModule, browser);
+  },
+
+  /**
+   * Loads a browser driver
+   *
+   * @method loadBrowserConfiguration
+   * @param {string} browser Name of the requested browser driver
+   * @param {object} browsers Configuration options for the requested browser
+   * @return {object} browserConfiguration Browser driver isntance and configuration meta data
+   */
+
+  loadBrowserConfiguration: function (browser, browsers) {
+    var browserConfiguration;
+    try {
+      browserConfiguration = this.getDefaultBrowserConfiguration(browser, browsers);
+    } catch (e) {
+      browserConfiguration = this.getUserBrowserConfiguration(browser, browsers);
+    }
+
+    return browserConfiguration;
+  },
+
+  /**
+   * Loads the default browser driver
+   *
+   * @method getDefaultBrowserConfiguration
+   * @param {string} browser Name of the requested browser driver
+   * @param {object} browsers Configuration options for the requested browser
+   * @return {object} browserConfiguration Browser driver isntance and configuration meta data
+   */
+
+  getDefaultBrowserConfiguration: function (browser, browsers) {
+    var browserConfiguration = {configuration: null, module: null};
+    browserConfiguration.module = require(&#039;dalek-browser-&#039; + browser);
+    if (browsers[browser]) {
+      browserConfiguration.configuration = browsers[browser];
+    }
+
+    return browserConfiguration;
+  },
+
+  /**
+   * Loads a user configured browser driver
+   *
+   * @method getUserBrowserConfiguration
+   * @param {string} browser Name of the requested browser driver
+   * @param {object} browsers Configuration options for the requested browser
+   * @return {object} browserConfiguration Browser driver isntance and configuration meta data
+   */
+
+  getUserBrowserConfiguration: function (browser, browsers) {
+    var browserConfiguration = {configuration: null, module: null};
+    if (browsers[browser] &amp;&amp; browsers[browser].actAs) {
+      browserConfiguration.module = require(&#039;dalek-browser-&#039; + browsers[browser].actAs);
+      browserConfiguration.configuration = browsers[browser];
+    }
+
+    return browserConfiguration;
+  },
+
+  /**
+   * Couple driver &amp; session status events for the reporter
+   *
+   * @method coupleReporterEvents
+   * @param {string} driverName Name of the requested driver
+   * @param {string} browser Name of the requested browser
+   * @chainable
+   */
+
+  coupleReporterEvents: function (driverName, browser) {
+    this.driverEmitter.on(&#039;driver:sessionStatus:&#039; + driverName + &#039;:&#039; + browser, this.reporterEvents.emit.bind(this.reporterEvents, &#039;report:driver:session&#039;));
+    this.driverEmitter.on(&#039;driver:status:&#039; + driverName + &#039;:&#039; + browser, this.reporterEvents.emit.bind(this.reporterEvents, &#039;report:driver:status&#039;));
+    return this;
+  },
+
+  /**
+   * Returns a list of testsuite runner functions
+   *
+   * @method getTestsuiteInstances
+   * @param {object} driverInstance Instance of the requested driver
+   * @return {array} testsuiteRunners List of testsuites that should be run
+   */
+
+  getTestsuiteInstances: function (driverInstance) {
+    return this.files.map(this.createTestsuiteInstance.bind(this, driverInstance));
+  },
+
+  /**
+   * Creates a testsuite runner function
+   *
+   * @method createTestsuiteInstance
+   * @param {object} driverInstance Instance of the requested driver
+   * @param {string} file Filename of the testsuite
+   * @return {function} testsuiteRunner Runner function from the testsuite
+   */
+
+  createTestsuiteInstance: function (driverInstance, file) {
+    var suite = new Testsuite({file: file, driver: driverInstance, driverEmitter: this.driverEmitter, reporterEmitter: this.reporterEvents});
+    return suite.run.bind(suite);
+  },
+
+  /**
+   * Generates a testsuite instance, emits the
+   * browser running event &amp; starts a new async() sesries execution
+   * Will be called when the driver is ready
+   *
+   * @method _onDriverReadyclear
+   * @param {string} browser Name of the requested browser
+   * @param {string} driverName Name of the requested driver
+   * @param {function} callback Asyncs next() callback function
+   * @param {object} driverInstance Instance of the requested driver
+   * @chainable
+   * @private
+   */
+
+  _onDriverReady: function (browser, driverName, callback, driverInstance) {
+    // generate testsuite instance from test files
+    var testsuites = this.getTestsuiteInstances(driverInstance);
+    this.reporterEvents.emit(&#039;report:run:browser&#039;, browser.charAt(0).toUpperCase() + browser.slice(1));
+    async.series(testsuites, this._onTestsuiteComplete.bind(this, callback, driverName, browser));
+    return this;
+  },
+
+  /**
+   * Emits a &#039;tests complete&#039; event &amp; calls asyncs next() callback
+   *
+   * @method _onTestsuiteComplete
+   * @param {function} callback Asyncs next() callback function
+   * @param {string} driverName Name of the requested driver
+   * @param {string} browser Name of the requested browser
+   * @chainable
+   * @private
+   */
+
+  _onTestsuiteComplete: function (callback, driverName, browser) {
+    this.driverEmitter.emit(&#039;tests:complete:&#039; + driverName + &#039;:&#039; + browser);
+    callback();
+    return this;
+  },
+
+  /**
+   * Driver runner function.
+   * Registers event handlers for this run,
+   * loads browser &amp; driver configuration &amp; instances,
+   * emits the &#039;driver ready&#039; event for the browser/driver combination
+   *
+   * @method run
+   * @param {string} driverName Name of the requested driver
+   * @param {object} driverModule Instance of the used driver module
+   * @param {string} browser Name of the requested browser
+   * @param {function} callback Asyncs next() callback function
+   * @chainable
+   */
+
+  run: function (driverName, driverModule, browser, callback) {
+    // load browser configuration
+    var browsersRaw = this.config.get(&#039;browsers&#039;);
+    var browsers = [];
+
+    // Check if we have a valid browser conf, then get the data out
+    if (browsersRaw !== null) {
+      browsers = browsersRaw[0];
+    }
+
+    var browserConfiguration = this.loadBrowserConfiguration(browser, browsers);
+    var driverInstance = driverModule.create({events: this.driverEmitter, browser: browser, config: this.config, browserMo: browserConfiguration.module, browserConf: browserConfiguration.configuration});
+
+    // couple driver &amp; session status events for the reporter
+    this.coupleReporterEvents(driverName, browser);
+
+    // run the tests in the browser, when the driver is ready
+    // emit the tests:complete event, when all tests have been run
+    this.driverEmitter.on(&#039;driver:ready:&#039; + driverName + &#039;:&#039; + browser, this._onDriverReady.bind(this, browser, driverName, callback, driverInstance));
+    return this;
+  }
+};
+
+// export driver module
+module.exports = Driver;</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>
