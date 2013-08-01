@@ -48,7 +48,7 @@
             "tag": "module",
             "file": "index.js",
             "line": 35,
-            "description": "Internet Explorer Driver base class",
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Internet Explorer.\n\nThe browser plugin can be installed with the following command:\n\n```\n$ npm install dalek-browser-ie --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```js\n\"browsers\": [\"IE\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```\n$ dalek mytest.js -b IE\n```",
             "part": "InternetExplorer",
             "api": ""
         }
@@ -66,7 +66,7 @@
             "namespace": "Browser",
             "file": "index.js",
             "line": 35,
-            "description": "Internet Explorer Driver base class"
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Internet Explorer.\n\nThe browser plugin can be installed with the following command:\n\n```\n$ npm install dalek-browser-ie --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```js\n\"browsers\": [\"IE\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```\n$ dalek mytest.js -b IE\n```"
         }
     },
     "classitems": [
@@ -98,7 +98,7 @@
         },
         {
             "file": "index.js",
-            "line": 47,
+            "line": 66,
             "description": "Verbose version of the browser name",
             "itemtype": "property",
             "name": "longName",
@@ -111,7 +111,7 @@
         },
         {
             "file": "index.js",
-            "line": 58,
+            "line": 77,
             "description": "Default port of the IEDriverServer\nThe port may change, cause the port conflict resultion\ntool might pick another one, if the default one is blocked",
             "itemtype": "property",
             "name": "port",
@@ -123,7 +123,7 @@
         },
         {
             "file": "index.js",
-            "line": 70,
+            "line": 89,
             "description": "Default host of the IEDriverServer\nThe host may be overriden with\na user configured value",
             "itemtype": "property",
             "name": "host",
@@ -135,7 +135,7 @@
         },
         {
             "file": "index.js",
-            "line": 82,
+            "line": 101,
             "description": "Path to the IEDriverServer.exe file",
             "itemtype": "property",
             "name": "path",
@@ -147,7 +147,7 @@
         },
         {
             "file": "index.js",
-            "line": 92,
+            "line": 111,
             "description": "Child process instance of the IEDriverServer",
             "itemtype": "property",
             "name": "spawned",
@@ -158,7 +158,7 @@
         },
         {
             "file": "index.js",
-            "line": 101,
+            "line": 120,
             "description": "Resolves the driver port",
             "itemtype": "method",
             "name": "getPort",
@@ -172,7 +172,7 @@
         },
         {
             "file": "index.js",
-            "line": 112,
+            "line": 131,
             "description": "Returns the driver host",
             "itemtype": "method",
             "name": "getHost",
@@ -186,7 +186,7 @@
         },
         {
             "file": "index.js",
-            "line": 123,
+            "line": 142,
             "description": "Launches the driver\n(the driver takes care of launching the browser)",
             "itemtype": "method",
             "name": "launch",
@@ -200,7 +200,7 @@
         },
         {
             "file": "index.js",
-            "line": 146,
+            "line": 165,
             "description": "Kills the driver & browser processes",
             "itemtype": "method",
             "name": "kill",
@@ -211,7 +211,7 @@
         },
         {
             "file": "index.js",
-            "line": 173,
+            "line": 192,
             "description": "Lists all running processes (win only)",
             "itemtype": "method",
             "name": "_list",
@@ -238,7 +238,7 @@
         },
         {
             "file": "index.js",
-            "line": 219,
+            "line": 238,
             "description": "Kill a specific process (win only)",
             "itemtype": "method",
             "name": "_kill",
@@ -285,7 +285,7 @@
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:47"
+            "line": " index.js:66"
         },
         {
             "message": "Missing item type",

@@ -123,7 +123,26 @@ var exec = require(&#x27;child_process&#x27;).exec;
 var iedriver = require(&#x27;./lib/iedriver&#x27;);
 
 /**
- * Internet Explorer Driver base class
+ * This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).
+ * It provides all a WebDriverServer &amp; browser launcher for Internet Explorer.
+ *
+ * The browser plugin can be installed with the following command:
+ *
+ * &#x60;&#x60;&#x60;
+ * $ npm install dalek-browser-ie --save-dev
+ * &#x60;&#x60;&#x60;
+ *
+ * You can use the browser plugin by adding a config option to the your Dalekfile
+ *
+ * &#x60;&#x60;&#x60;js
+ * &quot;browsers&quot;: [&quot;IE&quot;]
+ * &#x60;&#x60;&#x60;
+ *
+ * Or you can tell Dalek that it should test in this browser via the command line:
+ *
+ * &#x60;&#x60;&#x60;
+ * $ dalek mytest.js -b IE
+ * &#x60;&#x60;&#x60;
  *
  * @module DalekJS
  * @class InternetExplorer
