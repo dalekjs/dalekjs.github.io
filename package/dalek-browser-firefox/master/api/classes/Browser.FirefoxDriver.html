@@ -158,7 +158,25 @@
 
 
 <div class="box intro">
-    <p>FirefoxDriver base class</p>
+    <p>This module is a browser plugin for <a href="//github.com/dalekjs/dalek">DalekJS</a>.
+It provides all a WebDriverServer &amp; browser launcher for Mozilla Firefox.</p>
+<p>The browser plugin can be installed with the following command:</p>
+<pre><code class="lang-bash">$ npm install dalek-browser-firefox --save-dev</code></pre>
+<p>You can use the browser plugin by adding a config option to the your Dalekfile</p>
+<pre><code class="lang-javascript">&quot;browsers&quot;: [&quot;firefox&quot;]</code></pre>
+<p>Or you can tell Dalek that it should test in this browser via the command line:</p>
+<pre><code class="lang-bash">$ dalek mytest.js -b firefox</code></pre>
+<p>Because of the availability of the Firefox Marionette testing framework,
+Dalek atm. can only drive the Firefox Aurora Debug builds.</p>
+<p>You also have to add the location of the browser executable to you Dalekfile,
+because Dalek isn&#39;t capable of finding the executable yet on its own.</p>
+<pre><code class="lang-javascript">&quot;browsers&quot;: [{
+  &quot;firefox&quot;: {
+    &quot;path&quot;: &quot;~/Apps/FirefoxAuroraDebug.app/&quot;
+  }
+}]</code></pre>
+<p>The Firefox plugin only implements a subset of Daleks Assertions &amp; Actions, so if you run into any bugs,
+the issue is most probably related to missing commands.</p>
 
 </div>
 
@@ -421,7 +439,7 @@
             
         
         
-        <a href="../files/index.js.html#l298"><code>index.js:298</code></a>
+        <a href="../files/index.js.html#l334"><code>index.js:334</code></a>
         
         </p>
 
@@ -478,7 +496,7 @@
             
         
         
-        <a href="../files/index.js.html#l449"><code>index.js:449</code></a>
+        <a href="../files/index.js.html#l485"><code>index.js:485</code></a>
         
         </p>
 
@@ -534,7 +552,7 @@
             
         
         
-        <a href="../files/index.js.html#l438"><code>index.js:438</code></a>
+        <a href="../files/index.js.html#l474"><code>index.js:474</code></a>
         
         </p>
 
@@ -590,7 +608,7 @@
             
         
         
-        <a href="../files/index.js.html#l460"><code>index.js:460</code></a>
+        <a href="../files/index.js.html#l496"><code>index.js:496</code></a>
         
         </p>
 
@@ -646,7 +664,7 @@
             
         
         
-        <a href="../files/index.js.html#l394"><code>index.js:394</code></a>
+        <a href="../files/index.js.html#l430"><code>index.js:430</code></a>
         
         </p>
 
@@ -706,7 +724,7 @@
             
         
         
-        <a href="../files/index.js.html#l348"><code>index.js:348</code></a>
+        <a href="../files/index.js.html#l384"><code>index.js:384</code></a>
         
         </p>
 
@@ -780,7 +798,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l309"><code>index.js:309</code></a>
+        <a href="../files/index.js.html#l345"><code>index.js:345</code></a>
         
         </p>
 
@@ -851,7 +869,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l381"><code>index.js:381</code></a>
+        <a href="../files/index.js.html#l417"><code>index.js:417</code></a>
         
         </p>
 
@@ -908,7 +926,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l285"><code>index.js:285</code></a>
+        <a href="../files/index.js.html#l321"><code>index.js:321</code></a>
         
         </p>
 
@@ -965,7 +983,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l261"><code>index.js:261</code></a>
+        <a href="../files/index.js.html#l297"><code>index.js:297</code></a>
         
         </p>
 
@@ -1019,7 +1037,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l234"><code>index.js:234</code></a>
+        <a href="../files/index.js.html#l270"><code>index.js:270</code></a>
         
         </p>
 
@@ -1077,7 +1095,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l173"><code>index.js:173</code></a>
+        <a href="../files/index.js.html#l209"><code>index.js:209</code></a>
         
         </p>
 
@@ -1150,7 +1168,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l162"><code>index.js:162</code></a>
+        <a href="../files/index.js.html#l198"><code>index.js:198</code></a>
         
         </p>
 
@@ -1223,7 +1241,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l151"><code>index.js:151</code></a>
+        <a href="../files/index.js.html#l187"><code>index.js:187</code></a>
         
         </p>
 
@@ -1294,7 +1312,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l214"><code>index.js:214</code></a>
+        <a href="../files/index.js.html#l250"><code>index.js:250</code></a>
         
         </p>
 
@@ -1355,7 +1373,7 @@ deletes the temp profile</p>
             
         
         
-        <a href="../files/index.js.html#l184"><code>index.js:184</code></a>
+        <a href="../files/index.js.html#l220"><code>index.js:220</code></a>
         
         </p>
 
@@ -1423,7 +1441,7 @@ deletes the temp profile</p>
             
         
         
-        <a href="../files/index.js.html#l107"><code>index.js:107</code></a>
+        <a href="../files/index.js.html#l143"><code>index.js:143</code></a>
         
         </p>
 
@@ -1470,7 +1488,7 @@ deletes the temp profile</p>
             
         
         
-        <a href="../files/index.js.html#l117"><code>index.js:117</code></a>
+        <a href="../files/index.js.html#l153"><code>index.js:153</code></a>
         
         </p>
 
@@ -1515,7 +1533,7 @@ deletes the temp profile</p>
             
         
         
-        <a href="../files/index.js.html#l85"><code>index.js:85</code></a>
+        <a href="../files/index.js.html#l121"><code>index.js:121</code></a>
         
         </p>
 
@@ -1564,7 +1582,7 @@ a user configured value</p>
             
         
         
-        <a href="../files/index.js.html#l51"><code>index.js:51</code></a>
+        <a href="../files/index.js.html#l87"><code>index.js:87</code></a>
         
         </p>
 
@@ -1611,7 +1629,7 @@ a user configured value</p>
             
         
         
-        <a href="../files/index.js.html#l73"><code>index.js:73</code></a>
+        <a href="../files/index.js.html#l109"><code>index.js:109</code></a>
         
         </p>
 
@@ -1660,7 +1678,7 @@ tool might pick another one, if the default one is blocked</p>
             
         
         
-        <a href="../files/index.js.html#l97"><code>index.js:97</code></a>
+        <a href="../files/index.js.html#l133"><code>index.js:133</code></a>
         
         </p>
 
@@ -1707,7 +1725,7 @@ tool might pick another one, if the default one is blocked</p>
             
         
         
-        <a href="../files/index.js.html#l61"><code>index.js:61</code></a>
+        <a href="../files/index.js.html#l97"><code>index.js:97</code></a>
         
         </p>
 
@@ -1756,7 +1774,7 @@ tool might pick another one, if the default one is blocked</p>
             
         
         
-        <a href="../files/index.js.html#l140"><code>index.js:140</code></a>
+        <a href="../files/index.js.html#l176"><code>index.js:176</code></a>
         
         </p>
 
@@ -1804,7 +1822,7 @@ path, name, etc.</p>
             
         
         
-        <a href="../files/index.js.html#l130"><code>index.js:130</code></a>
+        <a href="../files/index.js.html#l166"><code>index.js:166</code></a>
         
         </p>
 
