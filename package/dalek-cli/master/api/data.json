@@ -33,7 +33,7 @@
         {
             "file": "index.js",
             "line": 30,
-            "description": "Dalek Command Line Tools",
+            "description": "Dalek Command Line Tools\n\nThe command line interface is your interface to the world of DalekJS.\nThis is the way to run your tests.\nThere might be a web interface to Dalek in the future, but as long as there is not, you have to deal with this;\nBut hey, this isn't difficult & I know you can do it! *\nAvailable options:\n\n> --version, -v   Shows the version of the dalek-cli & local dalek installation\n\n> --reporter, -r  Reporter(s) you would like to invoke\n\n> --driver, -d    Driver(s) you would like to invoke\n\n> --browser, -b   Browser(s) you would like to invoke\n\n> --logLevel, -l  Log level, controls the amount of information outputted to the console (0 to 5)\n\n> --no-colors     Disable colorized output in the console\n\n> --no-symbols    Disable UTF-8 symbols in the console\n\n> --help, -h      Displays the cli help",
             "part": "CLI",
             "api": "",
             "class": ""
@@ -53,7 +53,7 @@
             "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
         },
         {
-            "message": "Missing item type\nDalek Command Line Tools",
+            "message": "Missing item type\nDalek Command Line Tools\n\nThe command line interface is your interface to the world of DalekJS.\nThis is the way to run your tests.\nThere might be a web interface to Dalek in the future, but as long as there is not, you have to deal with this;\nBut hey, this isn't difficult & I know you can do it! *\nAvailable options:\n\n> --version, -v   Shows the version of the dalek-cli & local dalek installation\n\n> --reporter, -r  Reporter(s) you would like to invoke\n\n> --driver, -d    Driver(s) you would like to invoke\n\n> --browser, -b   Browser(s) you would like to invoke\n\n> --logLevel, -l  Log level, controls the amount of information outputted to the console (0 to 5)\n\n> --no-colors     Disable colorized output in the console\n\n> --no-symbols    Disable UTF-8 symbols in the console\n\n> --help, -h      Displays the cli help",
             "line": " index.js:30"
         }
     ]
