@@ -321,6 +321,13 @@ like clicking elements, open urls, filling out input fields, etc.</p>
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_setValue">setValue</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_submit">submit</a>
 
                                 
@@ -471,7 +478,7 @@ like clicking elements, open urls, filling out input fields, etc.</p>
             
         
         
-        <a href="../files/index.js.html#l91"><code>index.js:91</code></a>
+        <a href="../files/index.js.html#l93"><code>index.js:93</code></a>
         
         </p>
 
@@ -576,7 +583,7 @@ like clicking elements, open urls, filling out input fields, etc.</p>
             
         
         
-        <a href="../files/index.js.html#l993"><code>index.js:993</code></a>
+        <a href="../files/index.js.html#l1034"><code>index.js:1034</code></a>
         
         </p>
 
@@ -709,7 +716,7 @@ like clicking elements, open urls, filling out input fields, etc.</p>
             
         
         
-        <a href="../files/index.js.html#l963"><code>index.js:963</code></a>
+        <a href="../files/index.js.html#l971"><code>index.js:971</code></a>
         
         </p>
 
@@ -824,7 +831,7 @@ that the action has been successfully executed.</p>
             
         
         
-        <a href="../files/index.js.html#l759"><code>index.js:759</code></a>
+        <a href="../files/index.js.html#l761"><code>index.js:761</code></a>
         
         </p>
 
@@ -915,7 +922,7 @@ you are clicking okay or hitting return in one of that dialogs.</p>
             
         
         
-        <a href="../files/index.js.html#l728"><code>index.js:728</code></a>
+        <a href="../files/index.js.html#l730"><code>index.js:730</code></a>
         
         </p>
 
@@ -1017,7 +1024,7 @@ Like you would do when using your keyboard.</p>
             
         
         
-        <a href="../files/index.js.html#l555"><code>index.js:555</code></a>
+        <a href="../files/index.js.html#l557"><code>index.js:557</code></a>
         
         </p>
 
@@ -1093,7 +1100,7 @@ Like you would do when using your keyboard.</p>
             
         
         
-        <a href="../files/index.js.html#l583"><code>index.js:583</code></a>
+        <a href="../files/index.js.html#l585"><code>index.js:585</code></a>
         
         </p>
 
@@ -1191,7 +1198,7 @@ In the future it might become the ability to also execute a &quot;right button&q
             
         
         
-        <a href="../files/index.js.html#l789"><code>index.js:789</code></a>
+        <a href="../files/index.js.html#l791"><code>index.js:791</code></a>
         
         </p>
 
@@ -1271,7 +1278,7 @@ you are clicking cancel in one of that dialogs.</p>
             
         
         
-        <a href="../files/index.js.html#l527"><code>index.js:527</code></a>
+        <a href="../files/index.js.html#l529"><code>index.js:529</code></a>
         
         </p>
 
@@ -1337,7 +1344,7 @@ you are clicking cancel in one of that dialogs.</p>
             
         
         
-        <a href="../files/index.js.html#l864"><code>index.js:864</code></a>
+        <a href="../files/index.js.html#l866"><code>index.js:866</code></a>
         
         </p>
 
@@ -1417,7 +1424,7 @@ you are clicking cancel in one of that dialogs.</p>
             
         
         
-        <a href="../files/index.js.html#l102"><code>index.js:102</code></a>
+        <a href="../files/index.js.html#l104"><code>index.js:104</code></a>
         
         </p>
 
@@ -1524,7 +1531,7 @@ TODO: IMPLEMENT</p>
             
         
         
-        <a href="../files/index.js.html#l662"><code>index.js:662</code></a>
+        <a href="../files/index.js.html#l664"><code>index.js:664</code></a>
         
         </p>
 
@@ -1643,7 +1650,7 @@ selector once instead of repeating it all over the place.</p>
     .assert.attr(&#39;#nav&#39;, &#39;data-nav&#39;, &#39;true&#39;)
     .click(&#39;#nav&#39;)
     .done();</code></pre>
-<p>you can write this instead</p>
+<p>you can write this:</p>
 <pre><code class="lang-javascript">test.open(&#39;http://doctorwhotv.co.uk/&#39;)
     .query(&#39;#nav&#39;)
       .assert.text().is(&#39;Navigation&#39;)
@@ -1652,6 +1659,7 @@ selector once instead of repeating it all over the place.</p>
       .click()
     .end()
     .done();</code></pre>
+<p>Always make sure, you terminate it with the <a href="end">assertions.html#meth-end</a> method!</p>
 
     </div>
 
@@ -1721,7 +1729,7 @@ selector once instead of repeating it all over the place.</p>
             
         
         
-        <a href="../files/index.js.html#l504"><code>index.js:504</code></a>
+        <a href="../files/index.js.html#l506"><code>index.js:506</code></a>
         
         </p>
 
@@ -1792,7 +1800,7 @@ selector once instead of repeating it all over the place.</p>
             
         
         
-        <a href="../files/index.js.html#l820"><code>index.js:820</code></a>
+        <a href="../files/index.js.html#l822"><code>index.js:822</code></a>
         
         </p>
 
@@ -1894,7 +1902,7 @@ and a height of 1024px. You can specify your own default in the configuration.</
             
         
         
-        <a href="../files/index.js.html#l415"><code>index.js:415</code></a>
+        <a href="../files/index.js.html#l417"><code>index.js:417</code></a>
         
         </p>
 
@@ -2017,7 +2025,7 @@ test.screenshot(&#39;my/page/in_time/:datetime/homepage&#39;);</code></pre>
             
         
         
-        <a href="../files/index.js.html#l906"><code>index.js:906</code></a>
+        <a href="../files/index.js.html#l908"><code>index.js:908</code></a>
         
         </p>
 
@@ -2098,7 +2106,7 @@ This will be a domain wide set cookie.</p>
             
         
         
-        <a href="../files/index.js.html#l120"><code>index.js:120</code></a>
+        <a href="../files/index.js.html#l122"><code>index.js:122</code></a>
         
         </p>
 
@@ -2190,6 +2198,135 @@ For more information about this, I recommend to check out the <a href="/docs/con
 </div>
 
                 
+                    <div id="method_setValue" class="method item">
+    <h3 class="name"><code>setValue</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>selector</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Actions.html" class="crosslink">Actions</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/index.js.html#l1001"><code>index.js:1001</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Fills the fields of a form with given values.</p>
+<pre><code class="lang-html">&lt;input type=&quot;hidden&quot; value=&quot;not really a value&quot; id=&quot;ijustwannahaveavalue&quot;/&gt;</code></pre>
+<pre><code class="lang-javascript">test.open(&#39;http://dalekjs.com&#39;)
+    .setValue(&#39;#ijustwannahaveavalue&#39;, &#39;a value&#39;)
+    .title().is(&#39;DalekJS - Frequently asked questions&#39;, &#39;What the F.A.Q.&#39;);</code></pre>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">selector</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Actions.html" class="crosslink">Actions</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
                     <div id="method_submit" class="method item">
     <h3 class="name"><code>submit</code></h3>
 
@@ -2234,7 +2371,7 @@ For more information about this, I recommend to check out the <a href="/docs/con
             
         
         
-        <a href="../files/index.js.html#l627"><code>index.js:627</code></a>
+        <a href="../files/index.js.html#l629"><code>index.js:629</code></a>
         
         </p>
 
@@ -2333,7 +2470,7 @@ For more information about this, I recommend to check out the <a href="/docs/con
             
         
         
-        <a href="../files/index.js.html#l175"><code>index.js:175</code></a>
+        <a href="../files/index.js.html#l177"><code>index.js:177</code></a>
         
         </p>
 
@@ -2349,7 +2486,7 @@ For more information about this, I recommend to check out the <a href="/docs/con
 You can access such frames with this mehtod, but be aware of the fact, that the complete test context
 than switches to the iframe context, every action and assertion will be executed within the iFrame context.
 Btw.: The domain of the IFrame can be whatever you want, this method has no same origin policy restrictions.</p>
-<p>If you wan&#39;t to get back to the parents context, you have to use the <a href="toParent">#meth-toParent&quot;</a> method.</p>
+<p>If you wan&#39;t to get back to the parents context, you have to use the <a href="#meth-toParent">toParent</a> method.</p>
 <pre><code class="lang-html">&lt;div&gt;
   &lt;iframe id=&quot;login&quot; src=&quot;/login.html&quot;/&gt;
 &lt;/div&gt;</code></pre>
@@ -2428,7 +2565,7 @@ Btw.: The domain of the IFrame can be whatever you want, this method has no same
             
         
         
-        <a href="../files/index.js.html#l218"><code>index.js:218</code></a>
+        <a href="../files/index.js.html#l220"><code>index.js:220</code></a>
         
         </p>
 
@@ -2496,7 +2633,7 @@ switched to an iFrame context</p>
             
         
         
-        <a href="../files/index.js.html#l288"><code>index.js:288</code></a>
+        <a href="../files/index.js.html#l290"><code>index.js:290</code></a>
         
         </p>
 
@@ -2574,7 +2711,7 @@ switched to a different windoe context</p>
             
         
         
-        <a href="../files/index.js.html#l250"><code>index.js:250</code></a>
+        <a href="../files/index.js.html#l252"><code>index.js:252</code></a>
         
         </p>
 
@@ -2590,7 +2727,7 @@ switched to a different windoe context</p>
 You can access such frames with this mehtod, but be aware of the fact, that the complete test context
 than switches to the window context, every action and assertion will be executed within the chosen window context.
 Btw.: The domain of the window can be whatever you want, this method has no same origin policy restrictions.</p>
-<p>If you want to get back to the parents context, you have to use the <a href="toParentWindow">#meth-toParentWindow&quot;</a> method.</p>
+<p>If you want to get back to the parents context, you have to use the <a href="#meth-toParentWindow">toParentWindow</a> method.</p>
 <pre><code class="lang-html">&lt;div&gt;
   &lt;a onclick=&quot;window.open(&#39;http://google.com&#39;,&#39;goog&#39;,&#39;width=480, height=300&#39;)&quot;&gt;Open Google&lt;/a&gt;
 &lt;/div&gt;</code></pre>
@@ -2685,7 +2822,7 @@ Btw.: The domain of the window can be whatever you want, this method has no same
             
         
         
-        <a href="../files/index.js.html#l688"><code>index.js:688</code></a>
+        <a href="../files/index.js.html#l690"><code>index.js:690</code></a>
         
         </p>
 
@@ -2802,7 +2939,7 @@ do when using your keyboard.</p>
             
         
         
-        <a href="../files/index.js.html#l464"><code>index.js:464</code></a>
+        <a href="../files/index.js.html#l466"><code>index.js:466</code></a>
         
         </p>
 
@@ -2916,7 +3053,7 @@ do when using your keyboard.</p>
             
         
         
-        <a href="../files/index.js.html#l320"><code>index.js:320</code></a>
+        <a href="../files/index.js.html#l322"><code>index.js:322</code></a>
         
         </p>
 
@@ -3031,7 +3168,7 @@ and set the timeout using the timeout one, in milliseconds. The default timeout 
             
         
         
-        <a href="../files/index.js.html#l930"><code>index.js:930</code></a>
+        <a href="../files/index.js.html#l932"><code>index.js:932</code></a>
         
         </p>
 
@@ -3156,7 +3293,7 @@ and appends new elements, when the call has been successfully answered:</p>
             
         
         
-        <a href="../files/index.js.html#l339"><code>index.js:339</code></a>
+        <a href="../files/index.js.html#l341"><code>index.js:341</code></a>
         
         </p>
 
@@ -3269,7 +3406,7 @@ and appends new elements, when the call has been successfully answered:</p>
             
         
         
-        <a href="../files/index.js.html#l355"><code>index.js:355</code></a>
+        <a href="../files/index.js.html#l357"><code>index.js:357</code></a>
         
         </p>
 
@@ -3382,7 +3519,7 @@ and appends new elements, when the call has been successfully answered:</p>
             
         
         
-        <a href="../files/index.js.html#l371"><code>index.js:371</code></a>
+        <a href="../files/index.js.html#l373"><code>index.js:373</code></a>
         
         </p>
 
@@ -3495,7 +3632,7 @@ and appends new elements, when the call has been successfully answered:</p>
             
         
         
-        <a href="../files/index.js.html#l393"><code>index.js:393</code></a>
+        <a href="../files/index.js.html#l395"><code>index.js:395</code></a>
         
         </p>
 

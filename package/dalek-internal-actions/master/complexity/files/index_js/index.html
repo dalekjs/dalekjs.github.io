@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">71.72</p>
+      <p class="stat">71.25</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">1009</p>
+      <p class="stat">1050</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">64.29</p>
+      <p class="stat">66.42</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">3.45</p>
+      <p class="stat">3.64</p>
     </div>
   </div>
 </div>
@@ -153,7 +153,7 @@ var Actions = function () {
  *     .done();
  * ```
  *
- * you can write this instead
+ * you can write this:
  *
  * ```javascript
  * test.open(&#039;http://doctorwhotv.co.uk/&#039;)
@@ -165,6 +165,8 @@ var Actions = function () {
  *     .end()
  *     .done();
  * ```
+ *
+ * Always make sure, you terminate it with the [assertions.html#meth-end](end) method!
  *
  * @api
  * @method query
@@ -272,7 +274,7 @@ Actions.prototype.setHttpAuth = function (username, password) {
  * than switches to the iframe context, every action and assertion will be executed within the iFrame context.
  * Btw.: The domain of the IFrame can be whatever you want, this method has no same origin policy restrictions.
  *
- * If you wan&#039;t to get back to the parents context, you have to use the [#meth-toParent&quot;](toParent) method.
+ * If you wan&#039;t to get back to the parents context, you have to use the [toParent](#meth-toParent) method.
  *
  * ```html
  * &lt;div&gt;
@@ -347,7 +349,7 @@ Actions.prototype.toParent = function () {
  * than switches to the window context, every action and assertion will be executed within the chosen window context.
  * Btw.: The domain of the window can be whatever you want, this method has no same origin policy restrictions.
  *
- * If you want to get back to the parents context, you have to use the [#meth-toParentWindow&quot;](toParentWindow) method.
+ * If you want to get back to the parents context, you have to use the [toParentWindow](#meth-toParentWindow) method.
  *
  * ```html
  * &lt;div&gt;
@@ -1047,6 +1049,12 @@ Actions.prototype.setCookie = function (name, contents) {
 
 Actions.prototype.waitForElement = function (selector, timeout) {
   var hash = uuid.v4();
+
+  if (this.querying === true) {
+    timeout = selector;
+    selector = this.selector;
+  }
+
   var cb = this._generateCallbackAssertion(&#039;waitForElement&#039;, &#039;waitForElement&#039;, selector + &#039; : &#039; + timeout, hash);
   this._addToActionQueue([selector, (timeout ? parseInt(timeout, 10) : 5000), hash], &#039;waitForElement&#039;, cb);
   return this;
@@ -1080,6 +1088,39 @@ Actions.prototype._generateCallbackAssertion = function (key, type) {
     }
   }.bind(this);
   return cb;
+};
+
+/**
+ * Fills the fields of a form with given values.
+ *
+ * ```html
+ * &lt;input type=&quot;hidden&quot; value=&quot;not really a value&quot; id=&quot;ijustwannahaveavalue&quot;/&gt;
+ * ```
+ *
+ * ```javascript
+ * test.open(&#039;http://dalekjs.com&#039;)
+ *     .setValue(&#039;#ijustwannahaveavalue&#039;, &#039;a value&#039;)
+ *     .title().is(&#039;DalekJS - Frequently asked questions&#039;, &#039;What the F.A.Q.&#039;);
+ * ```
+ *
+ * @api
+ * @method setValue
+ * @param {string} selector
+ * @param {string} value
+ * @return {Actions}
+ */
+
+Actions.prototype.setValue = function (selector, value) {
+  var hash = uuid.v4();
+
+  if (this.querying === true) {
+    value = selector;
+    selector = this.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;setValue&#039;, &#039;setValue&#039;, selector + &#039; : &#039; + value, hash);
+  this._addToActionQueue([selector, value, hash], &#039;setValue&#039;, cb);
+  return this;
 };
 
 /**

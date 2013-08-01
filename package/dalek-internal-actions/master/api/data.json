@@ -67,7 +67,7 @@
         {
             "file": "index.js",
             "line": 47,
-            "description": "It can be really cumbersome to repeat selectors all over when performing\nmultiple actions or assertions on the same element(s).\nWhen you use the query method (or its alias $), you're able to specify a\nselector once instead of repeating it all over the place.\n\nSo, instead of writing this:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .assert.text('#nav').is('Navigation')\n    .assert.visible('#nav')\n    .assert.attr('#nav', 'data-nav', 'true')\n    .click('#nav')\n    .done();\n```\n\nyou can write this instead\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .query('#nav')\n      .assert.text().is('Navigation')\n      .assert.visible()\n      .assert.attr('data-nav', 'true')\n      .click()\n    .end()\n    .done();\n```",
+            "description": "It can be really cumbersome to repeat selectors all over when performing\nmultiple actions or assertions on the same element(s).\nWhen you use the query method (or its alias $), you're able to specify a\nselector once instead of repeating it all over the place.\n\nSo, instead of writing this:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .assert.text('#nav').is('Navigation')\n    .assert.visible('#nav')\n    .assert.attr('#nav', 'data-nav', 'true')\n    .click('#nav')\n    .done();\n```\n\nyou can write this:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .query('#nav')\n      .assert.text().is('Navigation')\n      .assert.visible()\n      .assert.attr('data-nav', 'true')\n      .click()\n    .end()\n    .done();\n```\n\nAlways make sure, you terminate it with the [assertions.html#meth-end](end) method!",
             "api": "",
             "itemtype": "method",
             "name": "query",
@@ -83,7 +83,7 @@
         },
         {
             "file": "index.js",
-            "line": 91,
+            "line": 93,
             "description": "Alias of query",
             "api": "",
             "itemtype": "method",
@@ -100,7 +100,7 @@
         },
         {
             "file": "index.js",
-            "line": 102,
+            "line": 104,
             "description": "Triggers a mouse event on the first element found matching the provided selector.\nSupported events are mouseup, mousedown, click, mousemove, mouseover and mouseout.\nTODO: IMPLEMENT",
             "itemtype": "method",
             "name": "mouseEvent",
@@ -121,7 +121,7 @@
         },
         {
             "file": "index.js",
-            "line": 120,
+            "line": 122,
             "description": "Sets HTTP_AUTH_USER and HTTP_AUTH_PW values for HTTP based authentication systems.\n\nIf your site is behind a HTTP basic auth, you're able to set the username and the password\n\n```javascript\ntest.setHttpAuth('OSWIN', 'rycbrar')\n    .open('http://admin.therift.com');\n```\n\nMost of the time, you`re not storing your passwords within files that will be checked\nin your vcs, for this scenario, you have two options:\n\nThe first option is, to use daleks cli capabilities to generate config variables\nfrom the command line, like this\n\n```batch\n$ dalek --vars USER=OSWIN,PASS=rycbrar\n```\n\n```javascript\ntest.setHttpAuth(test.config.get('USER'), test.config.get('PASS'))\n    .open('http://admin.therift.com');\n```\n\nThe second option is, to use env variables to generate config variables\nfrom the command line, like this\n\n```batch\n$ SET USER=OSWIN\n$ SET PASS=rycbrar\n$ dalek\n```\n\n```javascript\ntest.setHttpAuth(test.config.get('USER'), test.config.get('PASS'))\n    .open('http://admin.therift.com');\n```\n\nIf both, dalek variables & env variables are set, the dalek variables win.\nFor more information about this, I recommend to check out the [configuration docs](/docs/config.html)",
             "itemtype": "method",
             "name": "setHttpAuth",
@@ -145,8 +145,8 @@
         },
         {
             "file": "index.js",
-            "line": 175,
-            "description": "Switches to an iFrame context\n\nSometimes you encounter situations, where you need to drive/access an iFrame sitting in your page.\nYou can access such frames with this mehtod, but be aware of the fact, that the complete test context\nthan switches to the iframe context, every action and assertion will be executed within the iFrame context.\nBtw.: The domain of the IFrame can be whatever you want, this method has no same origin policy restrictions.\n\nIf you wan't to get back to the parents context, you have to use the [#meth-toParent\"](toParent) method.\n\n```html\n<div>\n  <iframe id=\"login\" src=\"/login.html\"/>\n</div>\n```\n\n```javascript\n test.open('http://adomain.withiframe.com')\n   .assert.title().is('Title of a page that embeds an iframe')\n   .toIFrame('#login')\n     .assert.title().is('Title of a page that can be embedded as an iframe')\n   .toParent()\n   .done();\n```",
+            "line": 177,
+            "description": "Switches to an iFrame context\n\nSometimes you encounter situations, where you need to drive/access an iFrame sitting in your page.\nYou can access such frames with this mehtod, but be aware of the fact, that the complete test context\nthan switches to the iframe context, every action and assertion will be executed within the iFrame context.\nBtw.: The domain of the IFrame can be whatever you want, this method has no same origin policy restrictions.\n\nIf you wan't to get back to the parents context, you have to use the [toParent](#meth-toParent) method.\n\n```html\n<div>\n  <iframe id=\"login\" src=\"/login.html\"/>\n</div>\n```\n\n```javascript\n test.open('http://adomain.withiframe.com')\n   .assert.title().is('Title of a page that embeds an iframe')\n   .toIFrame('#login')\n     .assert.title().is('Title of a page that can be embedded as an iframe')\n   .toParent()\n   .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "toFrame",
@@ -162,7 +162,7 @@
         },
         {
             "file": "index.js",
-            "line": 218,
+            "line": 220,
             "description": "Switches back to the parent page context when the test context has been\nswitched to an iFrame context\n\n```html\n<div>\n  <iframe id=\"login\" src=\"/login.html\"/>\n</div>\n```\n\n```javascript\n test.open('http://adomain.withiframe.com')\n   .assert.title().is('Title of a page that embeds an iframe')\n   .toIFrame('#login')\n     .assert.title().is('Title of a page that can be embedded as an iframe')\n   .toParent()\n   .assert.title().is('Title of a page that embeds an iframe')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -172,8 +172,8 @@
         },
         {
             "file": "index.js",
-            "line": 250,
-            "description": "Switches to a different window context\n\nSometimes you encounter situations, where you need to access a .\nYou can access such frames with this mehtod, but be aware of the fact, that the complete test context\nthan switches to the window context, every action and assertion will be executed within the chosen window context.\nBtw.: The domain of the window can be whatever you want, this method has no same origin policy restrictions.\n\nIf you want to get back to the parents context, you have to use the [#meth-toParentWindow\"](toParentWindow) method.\n\n```html\n<div>\n  <a onclick=\"window.open('http://google.com','goog','width=480, height=300')\">Open Google</a>\n</div>\n```\n\n```javascript\n test.open('http://adomain.com')\n   .assert.title().is('Title of a page that can open a popup window')\n   .toWindow('goog')\n     .assert.title().is('Google')\n   .toParentWindow()\n   .done();\n```",
+            "line": 252,
+            "description": "Switches to a different window context\n\nSometimes you encounter situations, where you need to access a .\nYou can access such frames with this mehtod, but be aware of the fact, that the complete test context\nthan switches to the window context, every action and assertion will be executed within the chosen window context.\nBtw.: The domain of the window can be whatever you want, this method has no same origin policy restrictions.\n\nIf you want to get back to the parents context, you have to use the [toParentWindow](#meth-toParentWindow) method.\n\n```html\n<div>\n  <a onclick=\"window.open('http://google.com','goog','width=480, height=300')\">Open Google</a>\n</div>\n```\n\n```javascript\n test.open('http://adomain.com')\n   .assert.title().is('Title of a page that can open a popup window')\n   .toWindow('goog')\n     .assert.title().is('Google')\n   .toParentWindow()\n   .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "toWindow",
@@ -189,7 +189,7 @@
         },
         {
             "file": "index.js",
-            "line": 288,
+            "line": 290,
             "description": "Switches back to the parent windoe context when the test context has been\nswitched to a different windoe context\n\n```html\n<div>\n  <a onclick=\"window.open('http://google.com','goog','width=480, height=300')\">Open Google</a>\n</div>\n```\n\n```javascript\n test.open('http://adomain.com')\n   .assert.title().is('Title of a page that can open a popup window')\n   .toWindow('goog')\n     .assert.title().is('Google')\n   .toParentWindow()\n   .assert.title().is('Title of a page that can open a popup window')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -199,7 +199,7 @@
         },
         {
             "file": "index.js",
-            "line": 320,
+            "line": 322,
             "description": "Waits until a function returns true to process any next step.\n\nYou can also set a callback on timeout using the onTimeout argument,\nand set the timeout using the timeout one, in milliseconds. The default timeout is set to 5000ms.",
             "itemtype": "method",
             "name": "waitFor",
@@ -220,7 +220,7 @@
         },
         {
             "file": "index.js",
-            "line": 339,
+            "line": 341,
             "description": "Wait until a resource that matches the given testFx is loaded to process a next step.",
             "itemtype": "method",
             "name": "waitForResource",
@@ -241,7 +241,7 @@
         },
         {
             "file": "index.js",
-            "line": 355,
+            "line": 357,
             "description": "Waits until the passed text is present in the page contents before processing the immediate next step.",
             "itemtype": "method",
             "name": "waitForText",
@@ -262,7 +262,7 @@
         },
         {
             "file": "index.js",
-            "line": 371,
+            "line": 373,
             "description": "Waits until an element matching the provided selector expression is visible in the remote DOM to process a next step.",
             "itemtype": "method",
             "name": "waitUntilVisible",
@@ -283,7 +283,7 @@
         },
         {
             "file": "index.js",
-            "line": 393,
+            "line": 395,
             "description": "Waits until an element matching the provided selector expression is no longer visible in remote DOM to process a next step.",
             "itemtype": "method",
             "name": "waitWhileVisible",
@@ -304,7 +304,7 @@
         },
         {
             "file": "index.js",
-            "line": 415,
+            "line": 417,
             "description": "Take a screenshot of the current page.\n\nThe pathname argument takes some placeholders that will be replaced\nPlaceholder:\n\n  - `:browser` - The browser name (e.g. ‘Chrome‘, ‘Safari‘, ‘Firefox‘, etc.)\n  - `:version` -  The browser version (e.g. ‘10_0‘, ‘23_11_5‘, etc.)\n  - `:os` - The operating system (e.g. `OSX`, `Windows`, `Linux`)\n  - `:osVersion` - The operating system version (e.g `XP`, `7`, `10_8`, etc.)\n  - `:viewport` - The current viewport in pixels (e.g. `w1024_h768`)\n  - `:timestamp` - UNIX like timestapm (e.g. `637657345`)\n  - `:date` - Current date in format MM_DD_YYYY (e.g. `12_24_2013`)\n  - `:datetime` - Current datetime in format MM_DD_YYYY_HH_mm_ss (e.g. `12_24_2013_14_55_23`)\n\n```javascript\n// creates 'my/folder/my_file.png'\ntest.screenshot('my/folder/my_file');\n// creates 'my/page/in/safari/homepage.png'\ntest.screenshot('my/page/in/:browser/homepage');\n// creates 'my/page/in/safari_6_0_1/homepage.png'\ntest.screenshot('my/page/in/:browser_:version/homepage');\n// creates 'my/page/in/safari_6_0_1/on/osx/homepage.png'\ntest.screenshot('my/page/in/:browser_:version/on/:os/homepage');\n// creates 'my/page/in/safari_6_0_1/on/osx_10_8/homepage.png'\ntest.screenshot('my/page/in/:browser_:version/on/:os_:osVersion/homepage');\n// creates 'my/page/at/w1024_h768/homepage.png'\ntest.screenshot('my/page/at/:viewport/homepage');\n// creates 'my/page/at/637657345/homepage.png'\ntest.screenshot('my/page/in_time/:timestamp/homepage');\n// creates 'my/page/at/12_24_2013/homepage.png'\ntest.screenshot('my/page/in_time/:date/homepage');\n// creates 'my/page/at/12_24_2013_14_55_23/homepage.png'\ntest.screenshot('my/page/in_time/:datetime/homepage');\n```",
             "api": "",
             "itemtype": "method",
@@ -323,7 +323,7 @@
         },
         {
             "file": "index.js",
-            "line": 464,
+            "line": 466,
             "description": "Pause steps suite execution for a given amount of time, and optionally execute a step on done.\n\nThis makes sense, if you have a ticker for example, tht scrolls like every ten seconds\n& you want to assure that the visible content changes every ten seconds\n\n```javascript\ntest.open('http://myticker.org')\n  .assert.visible('.ticker-element:first-child', 'First ticker element is visible')\n  .wait(10000)\n  .assert.visible('.ticker-element:nth-child(2)', 'Snd. ticker element is visible')\n  .wait(10000)\n  .assert.visible('.ticker-element:last-child', 'Third ticker element is visible')\n  .done();\n```\nIf no timeout argument is given, a default timeout of 5 seconds will be used\n\n```javascript\ntest.open('http://myticker.org')\n  .assert.visible('.ticker-element:first-child', 'First ticker element is visible')\n  .wait()\n  .assert.visible('.ticker-element:nth-child(2)', 'Snd. ticker element is visible')\n  .wait()\n  .assert.visible('.ticker-element:last-child', 'Third ticker element is visible')\n  .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -340,7 +340,7 @@
         },
         {
             "file": "index.js",
-            "line": 504,
+            "line": 506,
             "description": "Reloads current page location.\n\nThis is basically the same as hitting F5/refresh in your browser\n\n```javascript\ntest.open('http://google.com')\n  .reload()\n  .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -350,7 +350,7 @@
         },
         {
             "file": "index.js",
-            "line": 527,
+            "line": 529,
             "description": "Moves a step forward in browser's history.\n\nThis is basically the same as hitting the forward button in your browser\n\n```javascript\ntest.open('http://google.com')\n  .open('https://github.com')\n  .assert.url.is('https://github.com/', 'We are at GitHub')\n  .back()\n  .assert.url.is('http://google.com', 'We are at Google!')\n  .forward()\n  .assert.url.is('https://github.com/', 'Back at GitHub! Timetravel FTW')\n  .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -360,7 +360,7 @@
         },
         {
             "file": "index.js",
-            "line": 555,
+            "line": 557,
             "description": "Moves back a step in browser's history.\n\nThis is basically the same as hitting the back button in your browser\n\n```javascript\ntest.open('http://google.com')\n  .open('https://github.com')\n  .assert.url.is('https://github.com/', 'We are at GitHub')\n  .back()\n  .assert.url.is('http://google.com', 'We are at Google!')\n  .forward()\n  .assert.url.is('https://github.com/', 'Back at GitHub! Timetravel FTW');\n  .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -370,7 +370,7 @@
         },
         {
             "file": "index.js",
-            "line": 583,
+            "line": 585,
             "description": "Performs a click on the element matching the provided selector expression.\n\nIf we take Daleks homepage (the one you're probably visiting right now),\nthe HTML looks something like this (it does not really, but hey, lets assume this for a second)\n\n```html\n<nav>\n  <ul>\n    <li><a id=\"homeapge\" href=\"/index.html\">DalekJS</a></li>\n    <li><a id=\"docs\" href=\"/docs.html\">Documentation</a></li>\n    <li><a id=\"faq\" href=\"/faq.html\">F.A.Q</a></li>\n  </ul>\n</nav>\n```\n\n```javascript\ntest.open('http://dalekjs.com')\n    .click('#faq')\n    .assert.title().is('DalekJS - Frequently asked questions', 'What the F.A.Q.')\n    .done();\n```\n\nBy default, this performs a left click.\nIn the future it might become the ability to also execute a \"right button\" click.",
             "api": "",
             "itemtype": "method",
@@ -387,7 +387,7 @@
         },
         {
             "file": "index.js",
-            "line": 627,
+            "line": 629,
             "description": "Submits a form.\n\n```html\n<form id=\"skaaro\" action=\"skaaro.php\" method=\"GET\">\n  <input type=\"hidden\" name=\"intheshadows\" value=\"itis\"/>\n  <input type=\"text\" name=\"truth\" id=\"truth\" value=\"\"/>\n</form>\n```\n\n```javascript\ntest.open('http://home.dalek.com')\n    .type('#truth', 'out there is')\n    .submit('#skaaro')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -404,7 +404,7 @@
         },
         {
             "file": "index.js",
-            "line": 662,
+            "line": 664,
             "description": "Performs an HTTP request for opening a given location.\nYou can forge GET, POST, PUT, DELETE and HEAD requests.\n\nBasically the same as typing a location into your browsers URL bar and\nhitting return.\n\n```javascript\ntest.open('http://dalekjs.com')\n    .assert.url().is('http://dalekjs.com', 'DalekJS I'm in you')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -421,7 +421,7 @@
         },
         {
             "file": "index.js",
-            "line": 688,
+            "line": 690,
             "description": "Types a text into an input field or text area.\nAnd yes, it really types, character for character, like you would\ndo when using your keyboard.\n\n\n```html\n<form id=\"skaaro\" action=\"skaaro.php\" method=\"GET\">\n  <input type=\"hidden\" name=\"intheshadows\" value=\"itis\"/>\n  <input type=\"text\" name=\"truth\" id=\"truth\" value=\"\"/>\n</form>\n```\n\n```javascript\ntest.open('http://home.dalek.com')\n    .type('#truth', 'out there is')\n    .assert.val('#truth', 'out there is', 'Text has been set')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -443,7 +443,7 @@
         },
         {
             "file": "index.js",
-            "line": 728,
+            "line": 730,
             "description": "Types a text into the text inout field of a prompt dialog.\nLike you would do when using your keyboard.\n\n```html\n<div>\n  <a id=\"aquestion\" onclick=\"this.innerText = window.prompt('Your favourite companion:')\">????</a>\n</div>\n```\n\n```javascript\n test.open('http://adomain.com')\n    .click('#aquestion')\n    .answer('Rose')\n    .assert.text('#aquestion').is('Rose', 'Awesome she was!')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -462,7 +462,7 @@
         },
         {
             "file": "index.js",
-            "line": 759,
+            "line": 761,
             "description": "Accepts an alert/prompt/confirm dialog. This is basically the same actions as when\nyou are clicking okay or hitting return in one of that dialogs.\n\n```html\n<div>\n  <a id=\"attentione\" onclick=\"window.alert('Alonsy!')\">ALERT!ALERT!</a>\n</div>\n```\n\n```javascript\n test.open('http://adomain.com')\n    // alert appears\n    .click('#attentione')\n    // alert is gone\n    .accept()\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -474,7 +474,7 @@
         },
         {
             "file": "index.js",
-            "line": 789,
+            "line": 791,
             "description": "Dismisses an prompt/confirm dialog. This is basically the same actions as when\nyou are clicking cancel in one of that dialogs.\n\n```html\n<div>\n  <a id=\"nonono\" onclick=\"(this.innerText = window.confirm('No classic doctors in the 50th?') ? 'Buh!' : ':(') \">What!</a>\n</div>\n```\n\n```javascript\n test.open('http://adomain.com')\n    // prompt appears\n    .click('#nonono')\n    // prompt is gone\n    .dismiss()\n    .assert.text('#nonono').is(':(', 'So sad')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -486,7 +486,7 @@
         },
         {
             "file": "index.js",
-            "line": 820,
+            "line": 822,
             "description": "Resizes the browser window to a set of given dimensions (in px).\nThe default configuration of dalek opening pages is a width of 1280px\nand a height of 1024px. You can specify your own default in the configuration.\n\n```html\n<div>\n  <span id=\"magicspan\">The span in the fireplace</span>\n</div>\n```\n\n```css\n#magicspan {\n  display: inline;\n}",
             "media": "all and (max-width: 500px) and (min-width: 300px) {\n  #magicspan {\n    display: none;\n  }\n}\n```\n\n```javascript\n test.open('http://adomain.com')\n    .assert.visible('#magicspan', 'Big screen, visible span')\n    .resize({width: 400, height: 500})\n    .assert.notVisible('#magicspan', 'Small screen, no visible span magic!')\n    .done();\n```",
             "api": "",
@@ -504,7 +504,7 @@
         },
         {
             "file": "index.js",
-            "line": 864,
+            "line": 866,
             "description": "Maximizes the browser window.\n\n```html\n<div>\n  <span id=\"magicspan\">The span in the fireplace</span>\n</div>\n```\n\n```css\n#magicspan {\n  display: inline;\n}",
             "media": "all and (max-width: 500px) and (min-width: 300px) {\n  #magicspan {\n    display: none;\n  }\n}\n```\n\n```javascript\n test.open('http://adomain.com')\n    .resize({width: 400, height: 500})\n    .assert.notVisible('#magicspan', 'Small screen, no visible span magic!')\n    .maximize()\n    .assert.visible('#magicspan', 'Big screen, visible span')\n    .done();\n```",
             "api": "",
@@ -515,7 +515,7 @@
         },
         {
             "file": "index.js",
-            "line": 906,
+            "line": 908,
             "description": "Sets a cookie.\nMore configuration options will be implemented in the future,\nby now, you can only set a cookie with a specific name and contents.\nThis will be a domain wide set cookie.\n\n```javascript\n test.open('http://adomain.com')\n     .setCookie('my_cookie_name', 'my=content')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -525,7 +525,7 @@
         },
         {
             "file": "index.js",
-            "line": 930,
+            "line": 932,
             "description": "Waits until an element matching the provided\nselector expression exists in remote DOM to process any next step.\n\nLets assume we have a ticker that loads its contents via AJAX,\nand appends new elements, when the call has been successfully answered:\n\n```javascript\ntest.open('http://myticker.org')\n  .assert.text('.ticker-element:first-child', 'First!', 'First ticker element is visible')\n  // now we load the next ticker element, defsult timeout is 5 seconds\n  .waitForElement('.ticker-element:nth-child(2)')\n  .assert.text('.ticker-element:nth-child(2)', 'Me snd. one', 'Snd. ticker element is visible')\n  // Lets assume that this AJAX call can take longer, so we raise the default timeout to 10 seconds\n  .waitForElement('.ticker-element:last-child', 10000)\n  .assert.text('.ticker-element:last-child', 'Me, third one!', 'Third ticker element is visible')\n  .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -547,7 +547,7 @@
         },
         {
             "file": "index.js",
-            "line": 963,
+            "line": 971,
             "description": "Generates a callback that will be fired when the action has been completed.\nThe callback itself will then validate the answer and will also emit an event\nthat the action has been successfully executed.",
             "itemtype": "method",
             "name": "_generateCallbackAssertion",
@@ -573,7 +573,32 @@
         },
         {
             "file": "index.js",
-            "line": 993,
+            "line": 1001,
+            "description": "Fills the fields of a form with given values.\n\n```html\n<input type=\"hidden\" value=\"not really a value\" id=\"ijustwannahaveavalue\"/>\n```\n\n```javascript\ntest.open('http://dalekjs.com')\n    .setValue('#ijustwannahaveavalue', 'a value')\n    .title().is('DalekJS - Frequently asked questions', 'What the F.A.Q.');\n```",
+            "api": "",
+            "itemtype": "method",
+            "name": "setValue",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Actions"
+            },
+            "class": "Actions"
+        },
+        {
+            "file": "index.js",
+            "line": 1034,
             "description": "Adds a method to the queue of actions/assertions to execute",
             "itemtype": "method",
             "name": "_addToActionQueue",
@@ -615,95 +640,99 @@
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:91"
+            "line": " index.js:93"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:175"
+            "line": " index.js:177"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:218"
+            "line": " index.js:220"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:250"
+            "line": " index.js:252"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:288"
+            "line": " index.js:290"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:415"
+            "line": " index.js:417"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:464"
+            "line": " index.js:466"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:504"
+            "line": " index.js:506"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:527"
+            "line": " index.js:529"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:555"
+            "line": " index.js:557"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:583"
+            "line": " index.js:585"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:627"
+            "line": " index.js:629"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:662"
+            "line": " index.js:664"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:688"
+            "line": " index.js:690"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:728"
+            "line": " index.js:730"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:759"
+            "line": " index.js:761"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:789"
+            "line": " index.js:791"
         },
         {
             "message": "unknown tag: media",
-            "line": " index.js:820"
+            "line": " index.js:822"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:820"
+            "line": " index.js:822"
         },
         {
             "message": "unknown tag: media",
-            "line": " index.js:864"
+            "line": " index.js:866"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:864"
+            "line": " index.js:866"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:906"
+            "line": " index.js:908"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:930"
+            "line": " index.js:932"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:1001"
         },
         {
             "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",

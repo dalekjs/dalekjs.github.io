@@ -151,7 +151,7 @@ var Actions = function () {
  *     .done();
  * &#x60;&#x60;&#x60;
  *
- * you can write this instead
+ * you can write this:
  *
  * &#x60;&#x60;&#x60;javascript
  * test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
@@ -163,6 +163,8 @@ var Actions = function () {
  *     .end()
  *     .done();
  * &#x60;&#x60;&#x60;
+ *
+ * Always make sure, you terminate it with the [assertions.html#meth-end](end) method!
  *
  * @api
  * @method query
@@ -270,7 +272,7 @@ Actions.prototype.setHttpAuth = function (username, password) {
  * than switches to the iframe context, every action and assertion will be executed within the iFrame context.
  * Btw.: The domain of the IFrame can be whatever you want, this method has no same origin policy restrictions.
  *
- * If you wan&#x27;t to get back to the parents context, you have to use the [#meth-toParent&quot;](toParent) method.
+ * If you wan&#x27;t to get back to the parents context, you have to use the [toParent](#meth-toParent) method.
  *
  * &#x60;&#x60;&#x60;html
  * &lt;div&gt;
@@ -345,7 +347,7 @@ Actions.prototype.toParent = function () {
  * than switches to the window context, every action and assertion will be executed within the chosen window context.
  * Btw.: The domain of the window can be whatever you want, this method has no same origin policy restrictions.
  *
- * If you want to get back to the parents context, you have to use the [#meth-toParentWindow&quot;](toParentWindow) method.
+ * If you want to get back to the parents context, you have to use the [toParentWindow](#meth-toParentWindow) method.
  *
  * &#x60;&#x60;&#x60;html
  * &lt;div&gt;
@@ -1045,6 +1047,12 @@ Actions.prototype.setCookie = function (name, contents) {
 
 Actions.prototype.waitForElement = function (selector, timeout) {
   var hash = uuid.v4();
+
+  if (this.querying === true) {
+    timeout = selector;
+    selector = this.selector;
+  }
+
   var cb = this._generateCallbackAssertion(&#x27;waitForElement&#x27;, &#x27;waitForElement&#x27;, selector + &#x27; : &#x27; + timeout, hash);
   this._addToActionQueue([selector, (timeout ? parseInt(timeout, 10) : 5000), hash], &#x27;waitForElement&#x27;, cb);
   return this;
@@ -1078,6 +1086,39 @@ Actions.prototype._generateCallbackAssertion = function (key, type) {
     }
   }.bind(this);
   return cb;
+};
+
+/**
+ * Fills the fields of a form with given values.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;input type=&quot;hidden&quot; value=&quot;not really a value&quot; id=&quot;ijustwannahaveavalue&quot;/&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.open(&#x27;http://dalekjs.com&#x27;)
+ *     .setValue(&#x27;#ijustwannahaveavalue&#x27;, &#x27;a value&#x27;)
+ *     .title().is(&#x27;DalekJS - Frequently asked questions&#x27;, &#x27;What the F.A.Q.&#x27;);
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method setValue
+ * @param {string} selector
+ * @param {string} value
+ * @return {Actions}
+ */
+
+Actions.prototype.setValue = function (selector, value) {
+  var hash = uuid.v4();
+
+  if (this.querying === true) {
+    value = selector;
+    selector = this.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;setValue&#x27;, &#x27;setValue&#x27;, selector + &#x27; : &#x27; + value, hash);
+  this._addToActionQueue([selector, value, hash], &#x27;setValue&#x27;, cb);
+  return this;
 };
 
 /**
