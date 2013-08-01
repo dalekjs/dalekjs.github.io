@@ -72,7 +72,7 @@
         {
             "file": "index.js",
             "line": 62,
-            "description": "It can be really cumbersome to always write assert, assert & assert\nall over the place when your doing multiple assertions.\nTo avoid this you can open an assertion context in your test that\nallows you to write n assetions, but can avoid to type asset before each.\n\nSo, instead of writing this:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .assert.text('#nav').is('Navigation')\n    .assert.visible('#nav')\n    .assert.attr('#nav', 'data-nav', 'true')\n    .done();\n```\n\nyou can write this:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .assert.chain()\n      .text('#nav').is('Navigation')\n      .visible('#nav')\n      .attr('#nav', 'data-nav', 'true')\n    .end()\n    .done();\n```\n\nto make it even more concise, you can combine this with the [actions.html#meth-query](query) method:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .assert.chain()\n      .query('#nav')\n          .text().is('Navigation')\n          .visible()\n          .attr('data-nav', 'true')\n        .end()\n    .end()\n    .done();\n```\n\nAlways make sure, you terminate it with the [#meth-end](end) method!",
+            "description": "It can be really cumbersome to always write assert, assert & assert\nall over the place when your doing multiple assertions.\nTo avoid this you can open an assertion context in your test that\nallows you to write n assetions, but can avoid to type asset before each.\n\nSo, instead of writing this:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .assert.text('#nav').is('Navigation')\n    .assert.visible('#nav')\n    .assert.attr('#nav', 'data-nav', 'true')\n    .done();\n```\n\nyou can write this:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .assert.chain()\n      .text('#nav').is('Navigation')\n      .visible('#nav')\n      .attr('#nav', 'data-nav', 'true')\n    .end()\n    .done();\n```\n\nto make it even more concise, you can combine this with the [query](actions.html#meth-query) method:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .assert.chain()\n      .query('#nav')\n          .text().is('Navigation')\n          .visible()\n          .attr('data-nav', 'true')\n        .end()\n    .end()\n    .done();\n```\n\nAlways make sure, you terminate it with the [end](#meth-end) method!",
             "api": "",
             "itemtype": "method",
             "name": "chain",
@@ -119,7 +119,7 @@
         {
             "file": "index.js",
             "line": 165,
-            "description": "Asserts that a given element appears n times on the page.\n\n\nGiven this portion of html, you would like to assure that all of these elements\nare ending up in your rendered markup on your page.\n\n```html\n<section id=\"blog-overview\">\n  <article class=\"teaser\"></article>\n  <article class=\"teaser\"></article>\n  <article class=\"teaser\"></article>\n  <article class=\"teaser\"></article>\n</section>\n```\n\nThe simple solution is to check if all these elements are present\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser', 4, '4 blog teasers are present')\n```\nThe alternate syntax for this is:\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .is(4, '4 blog teasers are present')\n```\n\nIf you are not sure how many elements will exactly end up in your markup,\nyou could use the between assertion handler\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .is.between([2, 6], 'Between 2 and 6 blog teasers are present')\n```\n\nIf you dealing with the situation that you have a minimum of elements,\nyou expect, you can use this helper...\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .is.gt(2, 'At least 3 blog teasers are present')\n```\n... if you want to know if its 'greater than equal', you can use this one...\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .is.gte(2, 'At least 2 blog teasers are present')\n```\n... as well as their 'lower than' and 'lower than equal' equivalents\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .is.lt(5, 'Less than 5 blog teasers are present')\n```\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .is.lte(5, 'Less than, or 5 blog teasers are present')\n```\nAnd if you just wan't to know, if a certain amount of teasers isn't present,\nyou can still use the ':not(): assertion helper\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .is.not(5, 'There are more or less than 5 teasers present')\n```",
+            "description": "Asserts that a given element appears n times on the page.\n\n\nGiven this portion of html, you would like to assure that all of these elements\nare ending up in your rendered markup on your page.\n\n```html\n<section id=\"blog-overview\">\n  <article class=\"teaser\"></article>\n  <article class=\"teaser\"></article>\n  <article class=\"teaser\"></article>\n  <article class=\"teaser\"></article>\n</section>\n```\n\nThe simple solution is to check if all these elements are present\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser', 4, '4 blog teasers are present')\n```\nThe alternate syntax for this is:\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .is(4, '4 blog teasers are present')\n```\n\nIf you are not sure how many elements will exactly end up in your markup,\nyou could use the between assertion handler\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .is.between([2, 6], 'Between 2 and 6 blog teasers are present')\n```\n\nIf you dealing with the situation that you have a minimum of elements,\nyou expect, you can use this helper...\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .is.gt(2, 'At least 3 blog teasers are present')\n```\n... if you want to know if its 'greater than equal', you can use this one...\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .is.gte(2, 'At least 2 blog teasers are present')\n```\n... as well as their 'lower than' and 'lower than equal' equivalents\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .is.lt(5, 'Less than 5 blog teasers are present')\n```\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .is.lte(5, 'Less than, or 5 blog teasers are present')\n```\nAnd if you just wan't to know, if a certain amount of teasers isn't present,\nyou can still use the not() assertion helper\n\n```javascript\ntest.numberOfElements('#blog-overview .teaser')\n    .is.not(5, 'There are more or less than 5 teasers present')\n```",
             "api": "",
             "itemtype": "method",
             "name": "numberOfElements",
@@ -542,7 +542,7 @@
         {
             "file": "index.js",
             "line": 904,
-            "description": "Asserts that given text does not exist in the provided selector.\n\n```html\n```\n\n```javascript\n```",
+            "description": "Asserts that given text does not exist in the provided selector.\n\n```html\n<body>\n  <h1>This is a casperjs sandbox</h1>\n</body>\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.doesntHaveText('h1', 'This page is a Dalek sandbox', 'It´s a sandbox!')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "doesntHaveText",
@@ -570,8 +570,8 @@
         },
         {
             "file": "index.js",
-            "line": 934,
-            "description": "Asserts that given text does not exist in the current alert/prompt/confirm dialog.\n\n```html\n```\n\n```javascript\n```",
+            "line": 941,
+            "description": "Asserts that given text does not exist in the current alert/prompt/confirm dialog.\n\n```html\n<a href=\"#\" id=\"alert_confirm\" onclick=\"confirm('Confirm me!')\">I make confirm</a>\n```\n\n```javascript\n test\n   .open('http://skaaro.com/index.html')\n   .click('#alert_confirm')\n   .assert.dialogDoesntHaveText('I am an alert')\n   .accept()\n   .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "dialogDoesntHaveText",
@@ -594,8 +594,8 @@
         },
         {
             "file": "index.js",
-            "line": 957,
-            "description": "Asserts that given text does exist in the provided selector.\n\n```html\n```\n\n```javascript\n```",
+            "line": 971,
+            "description": "Asserts that given text does exist in the provided selector.\n\n```html\n<body>\n  <h1>This is a Dalek sandbox</h1>\n</body>\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.text('h1', 'This page is a Dalek sandbox', 'Exterminate!')\n   .done();\n```\n\nof course, text works also with the assertion helpers is() and not()\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.text('h1').is('This page is a Dalek sandbox', 'Exterminate!')\n   .done();\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.text('h1').is.not('This page is a CasperJS sandbox', 'Exterminate!')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "text",
@@ -623,8 +623,8 @@
         },
         {
             "file": "index.js",
-            "line": 987,
-            "description": "Asserts that given alertText does exist in the provided alert/confirm or prompt dialog.\n\n```html\n```\n\n```javascript\n```",
+            "line": 1024,
+            "description": "Asserts that given alertText does exist in the provided alert/confirm or prompt dialog.\n\n```html\n<a href=\"#\" id=\"alert\" onclick=\"alert('I am an alert')\">I make alerts!</a>\n```\n\n```javascript\n test\n   .open('http://skaaro.com/index.html')\n   .click('#alert_confirm')\n   .assert.dialogText('I am an alert')\n   .accept()\n   .done();\n```\n\nof course, text works also with the assertion helpers is() and not()\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.dialogText().is('I am an alert', 'Exterminate!')\n   .done();\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.dialogText().is.not('I am an prompt', 'Exterminate!')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "dialogText",
@@ -647,8 +647,8 @@
         },
         {
             "file": "index.js",
-            "line": 1010,
-            "description": "Asserts that the page title is as expected.\n\n```html\n```\n\n```javascript\n```",
+            "line": 1070,
+            "description": "Asserts that the page title is as expected.\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .title('Doctor Who TV', 'Not your daleks tv')\n    .done();\n```\n\nYep, using assertion helpers is also possible:\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .title().is('Doctor Who TV', 'Not your daleks tv')\n    .done();\n```\n\nand the not() helper is available too:\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .title().is.not('Dalek Emperor TV', 'Not your daleks tv')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "title",
@@ -671,8 +671,8 @@
         },
         {
             "file": "index.js",
-            "line": 1033,
-            "description": "Asserts that given title does not match the given expactions\n\n```html\n```\n\n```javascript\n```",
+            "line": 1109,
+            "description": "Asserts that given title does not match the given expactions\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .doesntHaveTitle('Dalek Emperor TV', 'Not your daleks tv')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "title",
@@ -695,8 +695,8 @@
         },
         {
             "file": "index.js",
-            "line": 1056,
-            "description": "Asserts that the pages url is as expected.\n\n```html\n```\n\n```javascript\n```",
+            "line": 1132,
+            "description": "Asserts that the pages url is as expected.\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .url('http://doctorwhotv.co.uk/', 'Url is as expected')\n    .done();\n```\n\nYou can also check if the protocol changend,\nnice to see when you open github with http instead of https\n\n```javascript\n  test.open('http://github.com')\n    .url('https://github.com/', 'Changed prototcols')\n    .done();\n```\n\nYep, using assertion helpersx is also possible:\n\n```javascript\n  test.open('http://github.com')\n    .url().is('http://doctorwhotv.co.uk/', 'Url is as expected')\n    .done();\n```\n\nand the not() helper is available too:\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .url().is.not('http://doctorwhotv.co.uk/', 'Url is as expected')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "url",
@@ -719,8 +719,8 @@
         },
         {
             "file": "index.js",
-            "line": 1079,
-            "description": "Asserts that the pages url does not match the expectation.\n\n```html\n```\n\n```javascript\n```",
+            "line": 1180,
+            "description": "Asserts that the pages url does not match the expectation.\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .url('http://doctorwhotv.co.uk/', 'Url is as expected')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "doesntHaveUrl",
@@ -743,8 +743,8 @@
         },
         {
             "file": "index.js",
-            "line": 1102,
-            "description": "Asserts that an elements attribute is as expected.\n\n```html\n```\n\n```javascript\n```",
+            "line": 1203,
+            "description": "Asserts that an elements attribute is as expected.\n\n```html\n<form>\n  <button class=\"jumpButton\" type=\"submit\">Fire</button>\n</form>\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.attr('.jumpButton', 'type', 'submit')\n   .done();\n```\n\n```html\n<div id=\"dataDiv\" data-spot=\"cat\"></div>\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.attr('#dataDiv').is('data-spot', 'cat', 'We found Datas cat!')\n   .done();\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.attr('#dataDiv').is.not('data-spot', 'doc', 'Spot is not a dog!')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "attr",
@@ -777,10 +777,22 @@
         },
         {
             "file": "index.js",
-            "line": 1138,
+            "line": 1264,
+            "description": "Is helper",
             "itemtype": "method",
             "name": "is",
-            "params": [],
+            "params": [
+                {
+                    "name": "expected",
+                    "description": "Value to check",
+                    "type": "Mixed"
+                },
+                {
+                    "name": "message",
+                    "description": "Test message",
+                    "type": "String"
+                }
+            ],
             "chainable": 1,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
@@ -788,10 +800,22 @@
         },
         {
             "file": "index.js",
-            "line": 1151,
+            "line": 1277,
+            "description": "Not helper",
             "itemtype": "method",
             "name": "not",
-            "params": [],
+            "params": [
+                {
+                    "name": "expected",
+                    "description": "Value to check",
+                    "type": "Mixed"
+                },
+                {
+                    "name": "message",
+                    "description": "Test message",
+                    "type": "String"
+                }
+            ],
             "chainable": 1,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
@@ -799,10 +823,22 @@
         },
         {
             "file": "index.js",
-            "line": 1164,
+            "line": 1290,
+            "description": "Between helper",
             "itemtype": "method",
             "name": "between",
-            "params": [],
+            "params": [
+                {
+                    "name": "expected",
+                    "description": "Value to check",
+                    "type": "Mixed"
+                },
+                {
+                    "name": "message",
+                    "description": "Test message",
+                    "type": "String"
+                }
+            ],
             "chainable": 1,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
@@ -810,10 +846,22 @@
         },
         {
             "file": "index.js",
-            "line": 1177,
+            "line": 1303,
+            "description": "Gt helper",
             "itemtype": "method",
             "name": "gt",
-            "params": [],
+            "params": [
+                {
+                    "name": "expected",
+                    "description": "Value to check",
+                    "type": "Mixed"
+                },
+                {
+                    "name": "message",
+                    "description": "Test message",
+                    "type": "String"
+                }
+            ],
             "chainable": 1,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
@@ -821,10 +869,22 @@
         },
         {
             "file": "index.js",
-            "line": 1190,
+            "line": 1316,
+            "description": "Gte helper",
             "itemtype": "method",
             "name": "gte",
-            "params": [],
+            "params": [
+                {
+                    "name": "expected",
+                    "description": "Value to check",
+                    "type": "Mixed"
+                },
+                {
+                    "name": "message",
+                    "description": "Test message",
+                    "type": "String"
+                }
+            ],
             "chainable": 1,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
@@ -832,10 +892,22 @@
         },
         {
             "file": "index.js",
-            "line": 1203,
+            "line": 1329,
+            "description": "Lt helper",
             "itemtype": "method",
             "name": "lt",
-            "params": [],
+            "params": [
+                {
+                    "name": "expected",
+                    "description": "Value to check",
+                    "type": "Mixed"
+                },
+                {
+                    "name": "message",
+                    "description": "Test message",
+                    "type": "String"
+                }
+            ],
             "chainable": 1,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
@@ -843,10 +915,22 @@
         },
         {
             "file": "index.js",
-            "line": 1216,
+            "line": 1342,
+            "description": "Lte helper",
             "itemtype": "method",
             "name": "lte",
-            "params": [],
+            "params": [
+                {
+                    "name": "expected",
+                    "description": "Value to check",
+                    "type": "Mixed"
+                },
+                {
+                    "name": "message",
+                    "description": "Test message",
+                    "type": "String"
+                }
+            ],
             "chainable": 1,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
@@ -854,12 +938,25 @@
         },
         {
             "file": "index.js",
-            "line": 1232,
+            "line": 1358,
+            "description": "Generates a callback that will be fired when the action has been completed.\nThe callback itself will then validate the answer and will also emit an event\nthat the action has been successfully executed.",
             "itemtype": "method",
             "name": "_generateCallbackAssertion",
-            "params": [],
+            "params": [
+                {
+                    "name": "key",
+                    "description": "Unique key of the action",
+                    "type": "String"
+                },
+                {
+                    "name": "type",
+                    "description": "Type of the action (normalle the actions name)",
+                    "type": "String"
+                }
+            ],
             "return": {
-                "description": ""
+                "description": "The generated callback function",
+                "type": "Function"
             },
             "access": "private",
             "tagname": "",
@@ -869,20 +966,37 @@
         },
         {
             "file": "index.js",
-            "line": 1272,
+            "line": 1399,
+            "description": "Adds a method to the queue of actions/assertions to execute",
             "itemtype": "method",
             "name": "_addToActionQueue",
-            "params": [],
-            "chainable": 1,
+            "params": [
+                {
+                    "name": "opts",
+                    "description": "Options of the action to invoke",
+                    "type": "Object"
+                },
+                {
+                    "name": "driverMethod",
+                    "description": "Name of the method to call on the driver",
+                    "type": "String"
+                },
+                {
+                    "name": "A",
+                    "description": "callback function that will be executed when the action has been executed",
+                    "type": "Function"
+                }
+            ],
             "access": "private",
             "tagname": "",
+            "chainable": 1,
             "class": "Dalek.Internal.Assertions",
             "module": "Assertions",
             "namespace": "Dalek.Internal"
         },
         {
             "file": "index.js",
-            "line": 1295,
+            "line": 1422,
             "description": "Generates a function that can be used",
             "itemtype": "method",
             "name": "generateTestHelper",
@@ -898,7 +1012,7 @@
         },
         {
             "file": "index.js",
-            "line": 1351,
+            "line": 1478,
             "description": "Assert if a given value shallow equals a snd. given value",
             "itemtype": "method",
             "name": "_testShallowEquals",
@@ -926,7 +1040,7 @@
         },
         {
             "file": "index.js",
-            "line": 1371,
+            "line": 1498,
             "description": "Assert if a given value shallow does not equal a snd. given value",
             "itemtype": "method",
             "name": "_testShallowUnequals",
@@ -954,7 +1068,7 @@
         },
         {
             "file": "index.js",
-            "line": 1391,
+            "line": 1518,
             "description": "Assert if a given value matches a range",
             "itemtype": "method",
             "name": "_testBetween",
@@ -982,7 +1096,7 @@
         },
         {
             "file": "index.js",
-            "line": 1411,
+            "line": 1538,
             "description": "Assert if a given value is greater than the value to compare",
             "itemtype": "method",
             "name": "_testGreaterThan",
@@ -1010,7 +1124,7 @@
         },
         {
             "file": "index.js",
-            "line": 1431,
+            "line": 1558,
             "description": "Assert if a given value is greater or equal than the value to compare",
             "itemtype": "method",
             "name": "_testGreaterThanEqual",
@@ -1038,7 +1152,7 @@
         },
         {
             "file": "index.js",
-            "line": 1445,
+            "line": 1572,
             "description": "Assert if a given value is lower than the value to compare",
             "itemtype": "method",
             "name": "_testLowerThan",
@@ -1066,7 +1180,7 @@
         },
         {
             "file": "index.js",
-            "line": 1465,
+            "line": 1592,
             "description": "Assert if a given value is lower or equal than the value to compare",
             "itemtype": "method",
             "name": "_testLowerThanEqual",
@@ -1094,7 +1208,7 @@
         },
         {
             "file": "index.js",
-            "line": 1479,
+            "line": 1606,
             "description": "Assert if a given value is boolean 'true'",
             "itemtype": "method",
             "name": "_testTruthy",
@@ -1117,7 +1231,7 @@
         },
         {
             "file": "index.js",
-            "line": 1492,
+            "line": 1619,
             "description": "Assert if a given value is boolean 'false'",
             "itemtype": "method",
             "name": "_testFalsy",
@@ -1222,127 +1336,47 @@
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:934"
+            "line": " index.js:941"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:957"
+            "line": " index.js:971"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:987"
+            "line": " index.js:1024"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:1010"
+            "line": " index.js:1070"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:1033"
+            "line": " index.js:1109"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:1056"
+            "line": " index.js:1132"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:1079"
+            "line": " index.js:1180"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:1102"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1138"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1138"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1151"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1151"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1164"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1164"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1177"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1177"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1190"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1190"
-        },
-        {
-            "message": "param name/type/descript missing",
             "line": " index.js:1203"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1203"
+            "line": " index.js:1422"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1216"
+            "line": " index.js:1422"
         },
         {
             "message": "param name/type/descript missing",
-            "line": " index.js:1216"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1232"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1232"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1232"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1272"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1272"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1272"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1295"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1295"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1295"
+            "line": " index.js:1422"
         },
         {
             "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",

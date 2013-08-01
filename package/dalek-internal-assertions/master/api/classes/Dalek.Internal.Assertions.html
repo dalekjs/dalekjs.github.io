@@ -546,7 +546,29 @@ and many more...</p>
     <h3 class="name"><code>_addToActionQueue</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>opts</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>driverMethod</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>A</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
@@ -578,7 +600,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1272"><code>index.js:1272</code></a>
+        <a href="../files/index.js.html#l1399"><code>index.js:1399</code></a>
         
         </p>
 
@@ -589,9 +611,66 @@ and many more...</p>
     </div>
 
     <div class="description">
-        
+        <p>Adds a method to the queue of actions/assertions to execute</p>
+
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">opts</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Options of the action to invoke</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">driverMethod</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Name of the method to call on the driver</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">A</code>
+                        <span class="type">Function</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>callback function that will be executed when the action has been executed</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -604,12 +683,28 @@ and many more...</p>
     <h3 class="name"><code>_generateCallbackAssertion</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>key</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>type</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
         <span class="returns-inline">
-            <span class="type"></span>
+            <span class="type">Function</span>
         </span>
     
 
@@ -638,7 +733,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1232"><code>index.js:1232</code></a>
+        <a href="../files/index.js.html#l1358"><code>index.js:1358</code></a>
         
         </p>
 
@@ -649,9 +744,52 @@ and many more...</p>
     </div>
 
     <div class="description">
-        
+        <p>Generates a callback that will be fired when the action has been completed.
+The callback itself will then validate the answer and will also emit an event
+that the action has been successfully executed.</p>
+
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">key</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Unique key of the action</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">type</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Type of the action (normalle the actions name)</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -661,6 +799,10 @@ and many more...</p>
             <div class="returns-description">
                 
                     
+                        <span class="type">Function</span>:
+                    
+                    <p>The generated callback function</p>
+
                 
             </div>
         </div>
@@ -724,7 +866,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1391"><code>index.js:1391</code></a>
+        <a href="../files/index.js.html#l1518"><code>index.js:1518</code></a>
         
         </p>
 
@@ -849,7 +991,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1492"><code>index.js:1492</code></a>
+        <a href="../files/index.js.html#l1619"><code>index.js:1619</code></a>
         
         </p>
 
@@ -964,7 +1106,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1411"><code>index.js:1411</code></a>
+        <a href="../files/index.js.html#l1538"><code>index.js:1538</code></a>
         
         </p>
 
@@ -1095,7 +1237,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1431"><code>index.js:1431</code></a>
+        <a href="../files/index.js.html#l1558"><code>index.js:1558</code></a>
         
         </p>
 
@@ -1226,7 +1368,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1445"><code>index.js:1445</code></a>
+        <a href="../files/index.js.html#l1572"><code>index.js:1572</code></a>
         
         </p>
 
@@ -1357,7 +1499,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1465"><code>index.js:1465</code></a>
+        <a href="../files/index.js.html#l1592"><code>index.js:1592</code></a>
         
         </p>
 
@@ -1488,7 +1630,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1351"><code>index.js:1351</code></a>
+        <a href="../files/index.js.html#l1478"><code>index.js:1478</code></a>
         
         </p>
 
@@ -1619,7 +1761,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1371"><code>index.js:1371</code></a>
+        <a href="../files/index.js.html#l1498"><code>index.js:1498</code></a>
         
         </p>
 
@@ -1744,7 +1886,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1479"><code>index.js:1479</code></a>
+        <a href="../files/index.js.html#l1606"><code>index.js:1606</code></a>
         
         </p>
 
@@ -1867,7 +2009,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1102"><code>index.js:1102</code></a>
+        <a href="../files/index.js.html#l1203"><code>index.js:1203</code></a>
         
         </p>
 
@@ -1879,9 +2021,22 @@ and many more...</p>
 
     <div class="description">
         <p>Asserts that an elements attribute is as expected.</p>
-<pre><code class="lang-html"><code>&#x60;</code>
-
-<code>&#x60;</code>javascript</code></pre>
+<pre><code class="lang-html">&lt;form&gt;
+  &lt;button class=&quot;jumpButton&quot; type=&quot;submit&quot;&gt;Fire&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+<pre><code class="lang-javascript"> test
+   .open(&#39;http://dalekjs.com/guineapig/&#39;)
+   .assert.attr(&#39;.jumpButton&#39;, &#39;type&#39;, &#39;submit&#39;)
+   .done();</code></pre>
+<pre><code class="lang-html">&lt;div id=&quot;dataDiv&quot; data-spot=&quot;cat&quot;&gt;&lt;/div&gt;</code></pre>
+<pre><code class="lang-javascript"> test
+   .open(&#39;http://dalekjs.com/guineapig/&#39;)
+   .assert.attr(&#39;#dataDiv&#39;).is(&#39;data-spot&#39;, &#39;cat&#39;, &#39;We found Datas cat!&#39;)
+   .done();</code></pre>
+<pre><code class="lang-javascript"> test
+   .open(&#39;http://dalekjs.com/guineapig/&#39;)
+   .assert.attr(&#39;#dataDiv&#39;).is.not(&#39;data-spot&#39;, &#39;doc&#39;, &#39;Spot is not a dog!&#39;)
+   .done();</code></pre>
 
     </div>
 
@@ -1969,7 +2124,23 @@ and many more...</p>
     <h3 class="name"><code>between</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>expected</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>message</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
@@ -1999,7 +2170,7 @@ and many more...</p>
             
         
         
-        <a href="../files/index.js.html#l1164"><code>index.js:1164</code></a>
+        <a href="../files/index.js.html#l1290"><code>index.js:1290</code></a>
         
         </p>
 
@@ -2010,9 +2181,50 @@ and many more...</p>
     </div>
 
     <div class="description">
-        
+        <p>Between helper</p>
+
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">expected</code>
+                        <span class="type">Mixed</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Value to check</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">message</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Test message</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -2084,7 +2296,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
       .attr(&#39;#nav&#39;, &#39;data-nav&#39;, &#39;true&#39;)
     .end()
     .done();</code></pre>
-<p>to make it even more concise, you can combine this with the <a href="query">actions.html#meth-query</a> method:</p>
+<p>to make it even more concise, you can combine this with the <a href="actions.html#meth-query">query</a> method:</p>
 <pre><code class="lang-javascript">test.open(&#39;http://doctorwhotv.co.uk/&#39;)
     .assert.chain()
       .query(&#39;#nav&#39;)
@@ -2094,7 +2306,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
         .end()
     .end()
     .done();</code></pre>
-<p>Always make sure, you terminate it with the <a href="end">#meth-end</a> method!</p>
+<p>Always make sure, you terminate it with the <a href="#meth-end">end</a> method!</p>
 
     </div>
 
@@ -2463,7 +2675,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l934"><code>index.js:934</code></a>
+        <a href="../files/index.js.html#l941"><code>index.js:941</code></a>
         
         </p>
 
@@ -2475,9 +2687,13 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
 
     <div class="description">
         <p>Asserts that given text does not exist in the current alert/prompt/confirm dialog.</p>
-<pre><code class="lang-html"><code>&#x60;</code>
-
-<code>&#x60;</code>javascript</code></pre>
+<pre><code class="lang-html">&lt;a href=&quot;#&quot; id=&quot;alert_confirm&quot; onclick=&quot;confirm(&#39;Confirm me!&#39;)&quot;&gt;I make confirm&lt;/a&gt;</code></pre>
+<pre><code class="lang-javascript"> test
+   .open(&#39;http://skaaro.com/index.html&#39;)
+   .click(&#39;#alert_confirm&#39;)
+   .assert.dialogDoesntHaveText(&#39;I am an alert&#39;)
+   .accept()
+   .done();</code></pre>
 
     </div>
 
@@ -2579,7 +2795,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l987"><code>index.js:987</code></a>
+        <a href="../files/index.js.html#l1024"><code>index.js:1024</code></a>
         
         </p>
 
@@ -2591,9 +2807,22 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
 
     <div class="description">
         <p>Asserts that given alertText does exist in the provided alert/confirm or prompt dialog.</p>
-<pre><code class="lang-html"><code>&#x60;</code>
-
-<code>&#x60;</code>javascript</code></pre>
+<pre><code class="lang-html">&lt;a href=&quot;#&quot; id=&quot;alert&quot; onclick=&quot;alert(&#39;I am an alert&#39;)&quot;&gt;I make alerts!&lt;/a&gt;</code></pre>
+<pre><code class="lang-javascript"> test
+   .open(&#39;http://skaaro.com/index.html&#39;)
+   .click(&#39;#alert_confirm&#39;)
+   .assert.dialogText(&#39;I am an alert&#39;)
+   .accept()
+   .done();</code></pre>
+<p>of course, text works also with the assertion helpers is() and not()</p>
+<pre><code class="lang-javascript"> test
+   .open(&#39;http://dalekjs.com/guineapig/&#39;)
+   .assert.dialogText().is(&#39;I am an alert&#39;, &#39;Exterminate!&#39;)
+   .done();</code></pre>
+<pre><code class="lang-javascript"> test
+   .open(&#39;http://dalekjs.com/guineapig/&#39;)
+   .assert.dialogText().is.not(&#39;I am an prompt&#39;, &#39;Exterminate!&#39;)
+   .done();</code></pre>
 
     </div>
 
@@ -2951,9 +3180,13 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
 
     <div class="description">
         <p>Asserts that given text does not exist in the provided selector.</p>
-<pre><code class="lang-html"><code>&#x60;</code>
-
-<code>&#x60;</code>javascript</code></pre>
+<pre><code class="lang-html">&lt;body&gt;
+  &lt;h1&gt;This is a casperjs sandbox&lt;/h1&gt;
+&lt;/body&gt;</code></pre>
+<pre><code class="lang-javascript"> test
+   .open(&#39;http://dalekjs.com/guineapig/&#39;)
+   .assert.doesntHaveText(&#39;h1&#39;, &#39;This page is a Dalek sandbox&#39;, &#39;It´s a sandbox!&#39;)
+   .done();</code></pre>
 
     </div>
 
@@ -3071,7 +3304,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l1079"><code>index.js:1079</code></a>
+        <a href="../files/index.js.html#l1180"><code>index.js:1180</code></a>
         
         </p>
 
@@ -3083,9 +3316,9 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
 
     <div class="description">
         <p>Asserts that the pages url does not match the expectation.</p>
-<pre><code class="lang-html"><code>&#x60;</code>
-
-<code>&#x60;</code>javascript</code></pre>
+<pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
+    .url(&#39;http://doctorwhotv.co.uk/&#39;, &#39;Url is as expected&#39;)
+    .done();</code></pre>
 
     </div>
 
@@ -3479,7 +3712,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l1295"><code>index.js:1295</code></a>
+        <a href="../files/index.js.html#l1422"><code>index.js:1422</code></a>
         
         </p>
 
@@ -3516,7 +3749,23 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
     <h3 class="name"><code>gt</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>expected</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>message</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
@@ -3546,7 +3795,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l1177"><code>index.js:1177</code></a>
+        <a href="../files/index.js.html#l1303"><code>index.js:1303</code></a>
         
         </p>
 
@@ -3557,9 +3806,50 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
     </div>
 
     <div class="description">
-        
+        <p>Gt helper</p>
+
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">expected</code>
+                        <span class="type">Mixed</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Value to check</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">message</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Test message</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -3572,7 +3862,23 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
     <h3 class="name"><code>gte</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>expected</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>message</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
@@ -3602,7 +3908,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l1190"><code>index.js:1190</code></a>
+        <a href="../files/index.js.html#l1316"><code>index.js:1316</code></a>
         
         </p>
 
@@ -3613,9 +3919,50 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
     </div>
 
     <div class="description">
-        
+        <p>Gte helper</p>
+
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">expected</code>
+                        <span class="type">Mixed</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Value to check</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">message</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Test message</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -3890,7 +4237,23 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
     <h3 class="name"><code>is</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>expected</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>message</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
@@ -3920,7 +4283,7 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
             
         
         
-        <a href="../files/index.js.html#l1138"><code>index.js:1138</code></a>
+        <a href="../files/index.js.html#l1264"><code>index.js:1264</code></a>
         
         </p>
 
@@ -3931,9 +4294,50 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
     </div>
 
     <div class="description">
-        
+        <p>Is helper</p>
+
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">expected</code>
+                        <span class="type">Mixed</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Value to check</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">message</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Test message</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -3946,7 +4350,23 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
     <h3 class="name"><code>lt</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>expected</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>message</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
@@ -3976,7 +4396,7 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
             
         
         
-        <a href="../files/index.js.html#l1203"><code>index.js:1203</code></a>
+        <a href="../files/index.js.html#l1329"><code>index.js:1329</code></a>
         
         </p>
 
@@ -3987,9 +4407,50 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
     </div>
 
     <div class="description">
-        
+        <p>Lt helper</p>
+
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">expected</code>
+                        <span class="type">Mixed</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Value to check</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">message</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Test message</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -4002,7 +4463,23 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
     <h3 class="name"><code>lte</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>expected</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>message</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
@@ -4032,7 +4509,7 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
             
         
         
-        <a href="../files/index.js.html#l1216"><code>index.js:1216</code></a>
+        <a href="../files/index.js.html#l1342"><code>index.js:1342</code></a>
         
         </p>
 
@@ -4043,9 +4520,50 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
     </div>
 
     <div class="description">
-        
+        <p>Lte helper</p>
+
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">expected</code>
+                        <span class="type">Mixed</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Value to check</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">message</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Test message</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -4058,7 +4576,23 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
     <h3 class="name"><code>not</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>expected</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>message</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
@@ -4088,7 +4622,7 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
             
         
         
-        <a href="../files/index.js.html#l1151"><code>index.js:1151</code></a>
+        <a href="../files/index.js.html#l1277"><code>index.js:1277</code></a>
         
         </p>
 
@@ -4099,9 +4633,50 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
     </div>
 
     <div class="description">
-        
+        <p>Not helper</p>
+
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">expected</code>
+                        <span class="type">Mixed</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Value to check</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">message</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Test message</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -4459,7 +5034,7 @@ you expect, you can use this helper...</p>
 <pre><code class="lang-javascript">test.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is.lte(5, &#39;Less than, or 5 blog teasers are present&#39;)</code></pre>
 <p>And if you just wan&#39;t to know, if a certain amount of teasers isn&#39;t present,
-you can still use the &#39;:not(): assertion helper</p>
+you can still use the not() assertion helper</p>
 <pre><code class="lang-javascript">test.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is.not(5, &#39;There are more or less than 5 teasers present&#39;)</code></pre>
 
@@ -4996,7 +5571,7 @@ you can still use the &#39;:not(): assertion helper</p>
             
         
         
-        <a href="../files/index.js.html#l957"><code>index.js:957</code></a>
+        <a href="../files/index.js.html#l971"><code>index.js:971</code></a>
         
         </p>
 
@@ -5008,9 +5583,22 @@ you can still use the &#39;:not(): assertion helper</p>
 
     <div class="description">
         <p>Asserts that given text does exist in the provided selector.</p>
-<pre><code class="lang-html"><code>&#x60;</code>
-
-<code>&#x60;</code>javascript</code></pre>
+<pre><code class="lang-html">&lt;body&gt;
+  &lt;h1&gt;This is a Dalek sandbox&lt;/h1&gt;
+&lt;/body&gt;</code></pre>
+<pre><code class="lang-javascript"> test
+   .open(&#39;http://dalekjs.com/guineapig/&#39;)
+   .assert.text(&#39;h1&#39;, &#39;This page is a Dalek sandbox&#39;, &#39;Exterminate!&#39;)
+   .done();</code></pre>
+<p>of course, text works also with the assertion helpers is() and not()</p>
+<pre><code class="lang-javascript"> test
+   .open(&#39;http://dalekjs.com/guineapig/&#39;)
+   .assert.text(&#39;h1&#39;).is(&#39;This page is a Dalek sandbox&#39;, &#39;Exterminate!&#39;)
+   .done();</code></pre>
+<pre><code class="lang-javascript"> test
+   .open(&#39;http://dalekjs.com/guineapig/&#39;)
+   .assert.text(&#39;h1&#39;).is.not(&#39;This page is a CasperJS sandbox&#39;, &#39;Exterminate!&#39;)
+   .done();</code></pre>
 
     </div>
 
@@ -5128,7 +5716,7 @@ you can still use the &#39;:not(): assertion helper</p>
             
         
         
-        <a href="../files/index.js.html#l1033"><code>index.js:1033</code></a>
+        <a href="../files/index.js.html#l1109"><code>index.js:1109</code></a>
         
         </p>
 
@@ -5140,9 +5728,9 @@ you can still use the &#39;:not(): assertion helper</p>
 
     <div class="description">
         <p>Asserts that given title does not match the given expactions</p>
-<pre><code class="lang-html"><code>&#x60;</code>
-
-<code>&#x60;</code>javascript</code></pre>
+<pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
+    .doesntHaveTitle(&#39;Dalek Emperor TV&#39;, &#39;Not your daleks tv&#39;)
+    .done();</code></pre>
 
     </div>
 
@@ -5244,7 +5832,7 @@ you can still use the &#39;:not(): assertion helper</p>
             
         
         
-        <a href="../files/index.js.html#l1010"><code>index.js:1010</code></a>
+        <a href="../files/index.js.html#l1070"><code>index.js:1070</code></a>
         
         </p>
 
@@ -5256,9 +5844,17 @@ you can still use the &#39;:not(): assertion helper</p>
 
     <div class="description">
         <p>Asserts that the page title is as expected.</p>
-<pre><code class="lang-html"><code>&#x60;</code>
-
-<code>&#x60;</code>javascript</code></pre>
+<pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
+    .title(&#39;Doctor Who TV&#39;, &#39;Not your daleks tv&#39;)
+    .done();</code></pre>
+<p>Yep, using assertion helpers is also possible:</p>
+<pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
+    .title().is(&#39;Doctor Who TV&#39;, &#39;Not your daleks tv&#39;)
+    .done();</code></pre>
+<p>and the not() helper is available too:</p>
+<pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
+    .title().is.not(&#39;Dalek Emperor TV&#39;, &#39;Not your daleks tv&#39;)
+    .done();</code></pre>
 
     </div>
 
@@ -5360,7 +5956,7 @@ you can still use the &#39;:not(): assertion helper</p>
             
         
         
-        <a href="../files/index.js.html#l1056"><code>index.js:1056</code></a>
+        <a href="../files/index.js.html#l1132"><code>index.js:1132</code></a>
         
         </p>
 
@@ -5372,9 +5968,22 @@ you can still use the &#39;:not(): assertion helper</p>
 
     <div class="description">
         <p>Asserts that the pages url is as expected.</p>
-<pre><code class="lang-html"><code>&#x60;</code>
-
-<code>&#x60;</code>javascript</code></pre>
+<pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
+    .url(&#39;http://doctorwhotv.co.uk/&#39;, &#39;Url is as expected&#39;)
+    .done();</code></pre>
+<p>You can also check if the protocol changend,
+nice to see when you open github with http instead of https</p>
+<pre><code class="lang-javascript">  test.open(&#39;http://github.com&#39;)
+    .url(&#39;https://github.com/&#39;, &#39;Changed prototcols&#39;)
+    .done();</code></pre>
+<p>Yep, using assertion helpersx is also possible:</p>
+<pre><code class="lang-javascript">  test.open(&#39;http://github.com&#39;)
+    .url().is(&#39;http://doctorwhotv.co.uk/&#39;, &#39;Url is as expected&#39;)
+    .done();</code></pre>
+<p>and the not() helper is available too:</p>
+<pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
+    .url().is.not(&#39;http://doctorwhotv.co.uk/&#39;, &#39;Url is as expected&#39;)
+    .done();</code></pre>
 
     </div>
 
