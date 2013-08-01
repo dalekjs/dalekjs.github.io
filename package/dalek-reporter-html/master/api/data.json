@@ -51,7 +51,7 @@
             "module": "Reporter",
             "file": "index.js",
             "line": 35,
-            "description": "Html reporter",
+            "description": "The HTML reporter can produce a set of HTML files with the results of your testrun.\n\nThe reporter can be installed with the following command:\n\n```bash\n$ npm install dalek-reporter-html --save-dev\n```\n\nBy default the files will be written to the `report/dalek/` folder,\nyou can change this by adding a config option to the your Dalekfile\n\n```javascript\n\"html-reporter\": {\n  \"dest\": \"your/folder\"\n}\n```\n\nIf you would like to use the reporter (in addition to the std. console reporter),\nyou can start dalek with a special command line argument\n\n```bash\n$ dalek your_test.js -r console,html\n```\n\nor you can add it to your Dalekfile\n\n```javascript\n\"reporter\": [\"console\", \"html\"]\n```",
             "is_constructor": 1,
             "part": "html",
             "api": ""
@@ -66,7 +66,7 @@
         },
         {
             "file": "index.js",
-            "line": 72,
+            "line": 100,
             "description": "Inits the html buffer objects",
             "itemtype": "method",
             "name": "initOutputHandlers",
@@ -76,7 +76,7 @@
         },
         {
             "file": "index.js",
-            "line": 85,
+            "line": 113,
             "description": "Loads and prepares all the templates for\nCSS, JS & HTML",
             "itemtype": "method",
             "name": "loadTemplates",
@@ -86,7 +86,7 @@
         },
         {
             "file": "index.js",
-            "line": 123,
+            "line": 151,
             "description": "Connects to all the event listeners",
             "itemtype": "method",
             "name": "startListening",
@@ -96,7 +96,7 @@
         },
         {
             "file": "index.js",
-            "line": 146,
+            "line": 174,
             "description": "Prepares the output for a test detail page",
             "itemtype": "method",
             "name": "startDetailPage",
@@ -106,7 +106,7 @@
         },
         {
             "file": "index.js",
-            "line": 159,
+            "line": 187,
             "description": "Adds an action output to the detail page",
             "itemtype": "method",
             "name": "addActionToDetailPage",
@@ -123,7 +123,7 @@
         },
         {
             "file": "index.js",
-            "line": 173,
+            "line": 201,
             "description": "Adds an assertion result to the detail page",
             "itemtype": "method",
             "name": "addAssertionToDetailPage",
@@ -140,7 +140,7 @@
         },
         {
             "file": "index.js",
-            "line": 187,
+            "line": 215,
             "description": "Writes a detail page to the file system",
             "itemtype": "method",
             "name": "finishDetailPage",
@@ -157,7 +157,7 @@
         },
         {
             "file": "index.js",
-            "line": 203,
+            "line": 231,
             "description": "Stores the current browser name",
             "itemtype": "method",
             "name": "outputRunBrowser",
@@ -174,7 +174,7 @@
         },
         {
             "file": "index.js",
-            "line": 216,
+            "line": 244,
             "description": "Writes the index page to the filesystem",
             "itemtype": "method",
             "name": "outputRunnerFinished",
@@ -191,7 +191,7 @@
         },
         {
             "file": "index.js",
-            "line": 252,
+            "line": 280,
             "description": "Pushes an assertion result to the index output queue",
             "itemtype": "method",
             "name": "outputAssertionResult",
@@ -208,7 +208,7 @@
         },
         {
             "file": "index.js",
-            "line": 265,
+            "line": 293,
             "description": "Pushes an test result to the index output queue",
             "itemtype": "method",
             "name": "outputTestFinished",
@@ -225,7 +225,7 @@
         },
         {
             "file": "index.js",
-            "line": 281,
+            "line": 309,
             "description": "Helper method to generate deeper nested directory structures",
             "itemtype": "method",
             "name": "_recursiveMakeDirSync",

@@ -49,7 +49,7 @@
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">280</p>
+      <p class="stat">308</p>
     </div>
   </div>
   <div class="row historical">
@@ -125,7 +125,35 @@ var fs = require(&#039;fs&#039;);
 var reporter = null;
 
 /**
- * Html reporter
+ * The HTML reporter can produce a set of HTML files with the results of your testrun.
+ *
+ * The reporter can be installed with the following command:
+ *
+ * ```bash
+ * $ npm install dalek-reporter-html --save-dev
+ * ```
+ *
+ * By default the files will be written to the `report/dalek/` folder,
+ * you can change this by adding a config option to the your Dalekfile
+ *
+ * ```javascript
+ * &quot;html-reporter&quot;: {
+ *   &quot;dest&quot;: &quot;your/folder&quot;
+ * }
+ * ```
+ *
+ * If you would like to use the reporter (in addition to the std. console reporter),
+ * you can start dalek with a special command line argument
+ *
+ * ```bash
+ * $ dalek your_test.js -r console,html
+ * ```
+ *
+ * or you can add it to your Dalekfile
+ *
+ * ```javascript
+ * &quot;reporter&quot;: [&quot;console&quot;, &quot;html&quot;]
+ * ```
  *
  * @class Reporter
  * @constructor

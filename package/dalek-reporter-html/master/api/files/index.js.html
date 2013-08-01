@@ -123,7 +123,35 @@ var fs = require(&#x27;fs&#x27;);
 var reporter = null;
 
 /**
- * Html reporter
+ * The HTML reporter can produce a set of HTML files with the results of your testrun.
+ *
+ * The reporter can be installed with the following command:
+ *
+ * &#x60;&#x60;&#x60;bash
+ * $ npm install dalek-reporter-html --save-dev
+ * &#x60;&#x60;&#x60;
+ *
+ * By default the files will be written to the &#x60;report/dalek/&#x60; folder,
+ * you can change this by adding a config option to the your Dalekfile
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &quot;html-reporter&quot;: {
+ *   &quot;dest&quot;: &quot;your/folder&quot;
+ * }
+ * &#x60;&#x60;&#x60;
+ *
+ * If you would like to use the reporter (in addition to the std. console reporter),
+ * you can start dalek with a special command line argument
+ *
+ * &#x60;&#x60;&#x60;bash
+ * $ dalek your_test.js -r console,html
+ * &#x60;&#x60;&#x60;
+ *
+ * or you can add it to your Dalekfile
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &quot;reporter&quot;: [&quot;console&quot;, &quot;html&quot;]
+ * &#x60;&#x60;&#x60;
  *
  * @class Reporter
  * @constructor
