@@ -120,7 +120,23 @@ var spawn = require(&#x27;child_process&#x27;).spawn;
 var phantomjs = require(&#x27;phantomjs&#x27;);
 
 /**
- * PhantomJS Driver base class
+ * This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).
+ * It provides a browser launcher as well the PhantomJS browser itself.
+ *
+ * The browser plugin comes bundled with the DalekJS base framework.
+ *
+ * You can use the browser plugin beside others (it is the default)
+ * by adding a config option to the your Dalekfile:
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * &quot;browsers&quot;: [&quot;phantomjs&quot;, &quot;chrome&quot;]
+ * &#x60;&#x60;&#x60;
+ *
+ * Or you can tell Dalek that it should test in this &amp; another browser via the command line:
+ *
+ * &#x60;&#x60;&#x60;bash
+ * $ dalek mytest.js -b phantomjs,chrome
+ * &#x60;&#x60;&#x60;
  *
  * @module DalekJS
  * @class PhantomJSDriver

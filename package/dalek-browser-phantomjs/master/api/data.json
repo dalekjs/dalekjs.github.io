@@ -41,7 +41,7 @@
             "tag": "module",
             "file": "index.js",
             "line": 32,
-            "description": "PhantomJS Driver base class",
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides a browser launcher as well the PhantomJS browser itself.\n\nThe browser plugin comes bundled with the DalekJS base framework.\n\nYou can use the browser plugin beside others (it is the default)\nby adding a config option to the your Dalekfile:\n\n```javascript\n\"browsers\": [\"phantomjs\", \"chrome\"]\n```\n\nOr you can tell Dalek that it should test in this & another browser via the command line:\n\n```bash\n$ dalek mytest.js -b phantomjs,chrome\n```",
             "part": "PhantomJS",
             "api": ""
         }
@@ -59,7 +59,7 @@
             "namespace": "Browser",
             "file": "index.js",
             "line": 32,
-            "description": "PhantomJS Driver base class"
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides a browser launcher as well the PhantomJS browser itself.\n\nThe browser plugin comes bundled with the DalekJS base framework.\n\nYou can use the browser plugin beside others (it is the default)\nby adding a config option to the your Dalekfile:\n\n```javascript\n\"browsers\": [\"phantomjs\", \"chrome\"]\n```\n\nOr you can tell Dalek that it should test in this & another browser via the command line:\n\n```bash\n$ dalek mytest.js -b phantomjs,chrome\n```"
         }
     },
     "classitems": [
@@ -71,7 +71,7 @@
         },
         {
             "file": "index.js",
-            "line": 44,
+            "line": 60,
             "description": "Verbose version of the browser name",
             "itemtype": "property",
             "name": "",
@@ -83,7 +83,7 @@
         },
         {
             "file": "index.js",
-            "line": 54,
+            "line": 70,
             "description": "Default port of the PhantomJSDriver\nThe port may change, cause the port conflict resultion\ntool might pick another one, if the default one is blocked",
             "itemtype": "property",
             "name": "",
@@ -95,7 +95,7 @@
         },
         {
             "file": "index.js",
-            "line": 66,
+            "line": 82,
             "description": "Default host of the PhantomJSDriver\nThe host may be overriden with\na user configured value",
             "itemtype": "property",
             "name": "",
@@ -107,7 +107,7 @@
         },
         {
             "file": "index.js",
-            "line": 78,
+            "line": 94,
             "description": "Root path of the PhantomJSDriver",
             "itemtype": "property",
             "name": "",
@@ -119,7 +119,7 @@
         },
         {
             "file": "index.js",
-            "line": 88,
+            "line": 104,
             "description": "Child process instance of the PhantomJS browser",
             "itemtype": "property",
             "name": "",
@@ -130,7 +130,7 @@
         },
         {
             "file": "index.js",
-            "line": 97,
+            "line": 113,
             "description": "Resolves the driver port",
             "itemtype": "method",
             "name": "getPort",
@@ -143,7 +143,7 @@
         },
         {
             "file": "index.js",
-            "line": 108,
+            "line": 124,
             "description": "Returns the driver host",
             "itemtype": "method",
             "name": "getHost",
@@ -154,7 +154,7 @@
         },
         {
             "file": "index.js",
-            "line": 119,
+            "line": 135,
             "description": "Launches the PhantomJSDriver",
             "itemtype": "method",
             "name": "launch",
@@ -167,7 +167,7 @@
         },
         {
             "file": "index.js",
-            "line": 141,
+            "line": 157,
             "description": "Kills the PhantomJSDriver processe",
             "itemtype": "method",
             "name": "kill",
