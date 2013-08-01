@@ -49,7 +49,7 @@
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">133</p>
+      <p class="stat">152</p>
     </div>
   </div>
   <div class="row historical">
@@ -124,12 +124,31 @@ var spawn = require(&#039;child_process&#039;).spawn;
 var chromedriver = require(&#039;./lib/chromedriver&#039;);
 
 /**
- * Chrome Driver base class
+ * This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).
+ * It provides all a WebDriverServer &amp; browser launcher for Google Chrome.
+ *
+ * The browser plugin can be installed with the following command:
+ *
+ * ```
+ * $ npm install dalek-browser-chrome --save-dev
+ * ```
+ *
+ * You can use the browser plugin by adding a config option to the your Dalekfile
+ *
+ * ```js
+ * &quot;browsers&quot;: [&quot;chrome&quot;]
+ * ```
+ *
+ * Or you can tell Dalek that it should test in this browser via the command line:
+ *
+ * ```
+ * $ dalek mytest.js -b chrome
+ * ```
  *
  * @module DalekJS
  * @class ChromeDriver
  * @namespace Browser
- * @part chrome
+ * @part Chrome
  * @api
  */
 

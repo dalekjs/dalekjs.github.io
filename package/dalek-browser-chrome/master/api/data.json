@@ -48,8 +48,8 @@
             "tag": "module",
             "file": "index.js",
             "line": 34,
-            "description": "Chrome Driver base class",
-            "part": "chrome",
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Google Chrome.\n\nThe browser plugin can be installed with the following command:\n\n```\n$ npm install dalek-browser-chrome --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```js\n\"browsers\": [\"chrome\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```\n$ dalek mytest.js -b chrome\n```",
+            "part": "Chrome",
             "api": ""
         }
     },
@@ -66,7 +66,7 @@
             "namespace": "Browser",
             "file": "index.js",
             "line": 34,
-            "description": "Chrome Driver base class"
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Google Chrome.\n\nThe browser plugin can be installed with the following command:\n\n```\n$ npm install dalek-browser-chrome --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```js\n\"browsers\": [\"chrome\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```\n$ dalek mytest.js -b chrome\n```"
         }
     },
     "classitems": [
@@ -98,7 +98,7 @@
         },
         {
             "file": "index.js",
-            "line": 46,
+            "line": 65,
             "description": "Verbose version of the browser name",
             "itemtype": "property",
             "name": "longName",
@@ -110,7 +110,7 @@
         },
         {
             "file": "index.js",
-            "line": 56,
+            "line": 75,
             "description": "Default port of the ChromeWebDriverServer\nThe port may change, cause the port conflict resultion\ntool might pick another one, if the default one is blocked",
             "itemtype": "property",
             "name": "port",
@@ -122,7 +122,7 @@
         },
         {
             "file": "index.js",
-            "line": 68,
+            "line": 87,
             "description": "Default host of the ChromeWebDriverServer\nThe host may be overriden with\na user configured value",
             "itemtype": "property",
             "name": "host",
@@ -134,7 +134,7 @@
         },
         {
             "file": "index.js",
-            "line": 80,
+            "line": 99,
             "description": "Root path of the ChromeWebDriverServer",
             "itemtype": "property",
             "name": "path",
@@ -146,7 +146,7 @@
         },
         {
             "file": "index.js",
-            "line": 90,
+            "line": 109,
             "description": "Child process instance of the Chrome browser",
             "itemtype": "property",
             "name": "spawned",
@@ -157,7 +157,7 @@
         },
         {
             "file": "index.js",
-            "line": 99,
+            "line": 118,
             "description": "Resolves the driver port",
             "itemtype": "method",
             "name": "getPort",
@@ -171,7 +171,7 @@
         },
         {
             "file": "index.js",
-            "line": 110,
+            "line": 129,
             "description": "Returns the driver host",
             "itemtype": "method",
             "name": "getHost",
@@ -185,7 +185,7 @@
         },
         {
             "file": "index.js",
-            "line": 121,
+            "line": 140,
             "description": "Launches the ChromeWebDriverServer",
             "itemtype": "method",
             "name": "launch",
@@ -199,7 +199,7 @@
         },
         {
             "file": "index.js",
-            "line": 143,
+            "line": 162,
             "description": "Kills the ChromeWebDriverServer processe",
             "itemtype": "method",
             "name": "kill",
