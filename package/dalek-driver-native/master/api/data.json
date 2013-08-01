@@ -746,11 +746,6 @@
                     "name": "uuid",
                     "description": "Unique hash of that fn call",
                     "type": "String"
-                },
-                {
-                    "name": "timeout",
-                    "description": "Time to wait in ms",
-                    "type": "Integer"
                 }
             ],
             "return": {
@@ -765,7 +760,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 421,
+            "line": 418,
             "description": "Returns the number of elements matched by the selector",
             "itemtype": "method",
             "name": "getNumberOfElements",
@@ -793,7 +788,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 437,
+            "line": 434,
             "description": "Sends out an event with the results of the `getNumberOfElements` call",
             "itemtype": "method",
             "name": "_getNumberOfElementsCb",
@@ -831,7 +826,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 464,
+            "line": 461,
             "description": "Returns the number of visible elements matched by the selector",
             "itemtype": "method",
             "name": "getNumberOfVisibleElements",
@@ -859,7 +854,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 503,
+            "line": 500,
             "description": "Sends out an event with the results of the `getNumberOfVisibleElements` call",
             "itemtype": "method",
             "name": "_getNumberOfElementsCb",
@@ -897,7 +892,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 532,
+            "line": 529,
             "description": "Mixes in element methods",
             "params": [
                 {
@@ -2118,7 +2113,7 @@
         },
         {
             "message": "Missing item type\nMixes in element methods",
-            "line": " lib/commands/element.js:532"
+            "line": " lib/commands/element.js:529"
         },
         {
             "message": "Missing item type\nMixes in element methods",

@@ -497,7 +497,7 @@ var Element = {
 
   waitForElement: function (selector, timeout, hash, uuid) {
     this.actionQueue.push(this.webdriverClient.implicitWait.bind(this.webdriverClient, timeout));
-    this.actionQueue.push(this._waitForElementCb.bind(this, selector, hash, uuid, timeout));
+    this.actionQueue.push(this._waitForElementCb.bind(this, selector, hash, uuid));
     return this;
   },
 
@@ -508,17 +508,14 @@ var Element = {
    * @param {string} selector Selector expression to find the element
    * @param {string} hash Unique hash of that fn call
    * @param {string} uuid Unique hash of that fn call
-   * @param {integer} timeout Time to wait in ms
    * @return {object} promise WaitForElement promise
    * @private
    */
 
-  _waitForElementCb: function (selector, hash, uuid, timeout) {
+  _waitForElementCb: function (selector, hash, uuid) {
     var deferred = Q.defer();
-    setTimeout(function () {
-      this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;waitForElement&#x27;, selector: selector, uuid: uuid, hash: hash});
-      deferred.resolve();
-    }.bind(this), timeout);
+    this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;waitForElement&#x27;, selector: selector, uuid: uuid, hash: hash});
+    deferred.resolve();
     return deferred.promise;
   },
 
