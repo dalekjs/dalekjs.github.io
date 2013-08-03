@@ -675,7 +675,7 @@
             "description": "Asserts that given title does not match the given expactions\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .doesntHaveTitle('Dalek Emperor TV', 'Not your daleks tv')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
-            "name": "title",
+            "name": "doesntHaveTitle",
             "params": [
                 {
                     "name": "expected",
