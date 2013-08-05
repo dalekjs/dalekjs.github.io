@@ -1,45 +1,45 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>DalekJS - Documentation - Reporter - JSON</title><meta name="description" content="DalekJS - Documentation - Reporter - JSON"><meta name="viewport" content="width=device-width"><link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"><link rel="icon" href="/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="dns-prefetch" href="//dalekjs.com"><link rel="dns-prefetch" href="//fonts.googleapis.com"><link rel="dns-prefetch" href="//themes.googleusercontent.com"><link rel="dns-prefetch" href="//www.google-analytics.com"><link rel="stylesheet" href="../css/67d36ae8.main.css"><link href="//fonts.googleapis.com/css?family=Londrina+Solid" rel="stylesheet" type="text/css"><link href="//fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css"><body data-buildtime="Tuesday, July 30th, 2013, 12:12:15 PM"><div class="grid"><header class="grid__item one-whole"><nav role="select"><ul class="nav nav--fit nav--block"><li><a href="../index.html">DALEKJS</a></li><li><a href="../pages/getStarted.html">Get started</a></li><li><a class="active" href="../pages/documentation.html">Documentation</a></li><li><a href="../pages/support.html">Support</a></li><li><a href="../pages/faq.html">FAQ</a></li><li><a href="../pages/merch.html">Merch</a></li></ul><select onchange="if (this.value) window.location.href = this.value"><option value="../index.html">DALEKJS<option value="../pages/getStarted.html">Get started<option selected value="../pages/documentation.html">Documentation<option value="../pages/support.html">Support<option value="../pages/faq.html">FAQ<option value="../pages/merch.html">Merch</select></nav></header><div class="grid__item one-whole"><div class="grid__item one-quarter sidenav" id="sidenav"><ul></ul></div><div class="grid__item three-quarters" id="content"><div class="grid__item one-whole" id="scroller"><h1 class="topic">JSON</h1><p>The JSON reporter can produce a file with the results of your testrun.</p><p>The reporter can be installed with the following command:<code>$ npm install dalek-reporter-json --save-dev</code></p><p>The file will follow the following format. This is a first draft and will definitly change in future versions.</p><p><pre><code class="language-javascript">
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>DalekJS - Documentation - Reporter - JSON</title><meta name="description" content="DalekJS - Documentation - Reporter - JSON"><meta name="viewport" content="width=device-width"><link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"><link rel="icon" href="/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="dns-prefetch" href="//dalekjs.com"><link rel="dns-prefetch" href="//fonts.googleapis.com"><link rel="dns-prefetch" href="//themes.googleusercontent.com"><link rel="dns-prefetch" href="//www.google-analytics.com"><link rel="stylesheet" href="../css/67d36ae8.main.css"><link href="//fonts.googleapis.com/css?family=Londrina+Solid" rel="stylesheet" type="text/css"><link href="//fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css"><body data-buildtime="Tuesday, July 30th, 2013, 12:12:15 PM"><div class="grid"><header class="grid__item one-whole"><nav role="select"><ul class="nav nav--fit nav--block"><li><a href="../index.html">DALEKJS</a></li><li><a href="../pages/getStarted.html">Get started</a></li><li><a class="active" href="../pages/documentation.html">Documentation</a></li><li><a href="../pages/support.html">Support</a></li><li><a href="../pages/faq.html">FAQ</a></li><li><a href="../pages/merch.html">Merch</a></li></ul><select onchange="if (this.value) window.location.href = this.value"><option value="../index.html">DALEKJS<option value="../pages/getStarted.html">Get started<option selected value="../pages/documentation.html">Documentation<option value="../pages/support.html">Support<option value="../pages/faq.html">FAQ<option value="../pages/merch.html">Merch</select></nav></header><div class="grid__item one-whole"><div class="grid__item one-quarter sidenav" id="sidenav"><ul></ul></div><div class="grid__item three-quarters" id="content"><div class="grid__item one-whole" id="scroller"><h1 class="topic">JSON</h1><p>The JSON reporter can produce a file with the results of your test run.</p><p>The reporter can be installed with the following command:<code>$ npm install dalek-reporter-json --save-dev</code></p><p>The file will follow the following format. This is a first draft and will definitly change in future versions.</p><p><pre><code class="language-javascript">
  {
-   &quot;tests&quot;: [
+   "tests": [
          {
-           &quot;id&quot;: &quot;test806&quot;,
-           &quot;name&quot;: &quot;Can get !url (OK, TDD style, message, chained)&quot;,
-           &quot;browser&quot;: &quot;Chrome&quot;,
-           &quot;status&quot;: true,
-           &quot;passedAssertions&quot;: 1,
-           &quot;failedAssertions&quot;: 0,
-           &quot;actions&quot;: [
+           "id": "test806",
+           "name": "Can get !url (OK, TDD style, message, chained)",
+           "browser": "Chrome",
+           "status": true,
+           "passedAssertions": 1,
+           "failedAssertions": 0,
+           "actions": [
                {
-                   &quot;value&quot;: &quot;http://localhost:5000/index.html&quot;,
-                   &quot;type&quot;: &quot;open&quot;,
-                   &quot;uuid&quot;: &quot;6ea84fc0-58bf-4e1f-bb9c-f035c6e6fae2&quot;,
-                   &quot;kind&quot;: &quot;action&quot;,
-                   &quot;isAction&quot;: true
+                   "value": "http://localhost:5000/index.html",
+                   "type": "open",
+                   "uuid": "6ea84fc0-58bf-4e1f-bb9c-f035c6e6fae2",
+                   "kind": "action",
+                   "isAction": true
                },
                {
-                   &quot;success&quot;: true,
-                   &quot;expected&quot;: &quot;http://localhost:5000/guinea.html&quot;,
-                   &quot;value&quot;: &quot;http://localhost:5000/index.html&quot;,
-                   &quot;message&quot;: &quot;Url is not whatever&quot;,
-                   &quot;type&quot;: &quot;url&quot;,
-                   &quot;kind&quot;: &quot;assertion&quot;,
-                   &quot;isAssertion&quot;: true
+                   "success": true,
+                   "expected": "http://localhost:5000/guinea.html",
+                   "value": "http://localhost:5000/index.html",
+                   "message": "Url is not whatever",
+                   "type": "url",
+                   "kind": "assertion",
+                   "isAssertion": true
                }
            ]
        }
    ],
-   &quot;elapsedTime&quot;: {
-       &quot;minutes&quot;: 1,
-       &quot;seconds&quot;: 43.328535046
+   "elapsedTime": {
+       "minutes": 1,
+       "seconds": 43.328535046
    },
-   &quot;status&quot;: true,
-   &quot;assertions&quot;: 1,
-   &quot;assertionsFailed&quot;: 0,
-   &quot;assertionsPassed&quot;: 1
+   "status": true,
+   "assertions": 1,
+   "assertionsFailed": 0,
+   "assertionsPassed": 1
  }
  </code></pre></p><p>By default the file will be written to<code>report/dalek.json</code>, you can change this by adding a config option to the your Dalekfile</p><p><pre><code class="language-javascript">
- &quot;json-reporter&quot;: {
-   &quot;dest&quot;: &quot;your/folder/your_file.json&quot;
+ "json-reporter": {
+   "dest": "your/folder/your_file.json"
  }
  </code></pre></p></div></div></div><footer id="footer" class="grid__item one-whole footer"><span class="footer__author">DalekJS created by <a class="footer__link" href="https://github.com/asciidisco">Sebastian Golasch</a></span><span class="footer__author">Logo by <a class="footer__link" href="http://www.redbubble.com/people/scottbarker">Scott Barker</a></span><span class="footer__author">Browser icons by <a class="footer__link" href="https://github.com/substack">Substack</a></span></footer></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
