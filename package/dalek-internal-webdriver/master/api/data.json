@@ -2391,7 +2391,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 156,
+            "line": 158,
             "description": "Generates a new webdriver client command\nTakes a skeleton of obtions that will be converted\ninto a new function that can be invoked & will issue\na webdriver command to the webdriver server",
             "itemtype": "method",
             "name": "addCommand",
@@ -2409,7 +2409,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 173,
+            "line": 175,
             "description": "Generates the webdriver callback function",
             "itemtype": "method",
             "name": "_generateWebdriverCommand",
@@ -2437,7 +2437,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 200,
+            "line": 202,
             "description": "Response callback function",
             "itemtype": "method",
             "name": "_onResponse",
@@ -2477,7 +2477,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 220,
+            "line": 222,
             "description": "Concatenates chunks of strings",
             "itemtype": "method",
             "name": "_concatDataChunks",
@@ -2500,7 +2500,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 233,
+            "line": 235,
             "description": "Response end callback function",
             "itemtype": "method",
             "name": "_onResponseEnd",
@@ -2539,7 +2539,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 250,
+            "line": 252,
             "description": "On error callback function",
             "itemtype": "method",
             "name": "_onError",
@@ -2579,7 +2579,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 270,
+            "line": 272,
             "description": "On success callback function",
             "itemtype": "method",
             "name": "_onSuccess",
@@ -2688,7 +2688,7 @@
     "warnings": [
         {
             "message": "unknown tag: priavte",
-            "line": " lib/driver.js:233"
+            "line": " lib/driver.js:235"
         },
         {
             "message": "unknown tag: part",

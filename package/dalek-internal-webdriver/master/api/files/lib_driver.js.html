@@ -236,11 +236,13 @@ module.exports = function exportDriverBase(WebDriver) {
         port: port,
         path: prefix + url,
         method: method,
-        headers: {
-          &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
-          &#x27;Content-Length&#x27;: body.length
-        }
+        headers: {}
       };
+
+      if(method === &#x27;POST&#x27; || method === &#x27;PUT&#x27;) {
+        options.headers[&#x27;Content-Type&#x27;] = &#x27;application/json;charset=utf-8&#x27;;
+        options.headers[&#x27;Content-Length&#x27;] = Buffer.byteLength(body, &#x27;utf8&#x27;);
+      }
 
       return options;
     },
