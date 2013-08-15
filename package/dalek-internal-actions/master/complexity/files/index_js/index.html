@@ -49,7 +49,7 @@
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">1050</p>
+      <p class="stat">1060</p>
     </div>
   </div>
   <div class="row historical">
@@ -798,6 +798,16 @@ Actions.prototype.open = function (location) {
  *     .assert.val(&#039;#truth&#039;, &#039;out there is&#039;, &#039;Text has been set&#039;)
  *     .done();
  * ```
+ *
+ * You can also send special keys using unicode.
+ *
+ *  * ```javascript
+ * test.open(&#039;http://home.dalek.com&#039;)
+ *     .type(&#039;#truth&#039;, &#039;out \uE008there\uE008 is&#039;)
+ *     .assert.val(&#039;#truth&#039;, &#039;out THERE is&#039;, &#039;Text has been set&#039;)
+ *     .done();
+ * ```
+ * You can go [here](https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element/:id/value) to read up on special keys and unicodes for them (note that a code of U+EXXX is actually written in code as \uEXXX).
  *
  * @api
  * @method type

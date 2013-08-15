@@ -797,6 +797,16 @@ Actions.prototype.open = function (location) {
  *     .done();
  * &#x60;&#x60;&#x60;
  *
+ * You can also send special keys using unicode.
+ *
+ *  * &#x60;&#x60;&#x60;javascript
+ * test.open(&#x27;http://home.dalek.com&#x27;)
+ *     .type(&#x27;#truth&#x27;, &#x27;out \uE008there\uE008 is&#x27;)
+ *     .assert.val(&#x27;#truth&#x27;, &#x27;out THERE is&#x27;, &#x27;Text has been set&#x27;)
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ * You can go [here](https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element/:id/value) to read up on special keys and unicodes for them (note that a code of U+EXXX is actually written in code as \uEXXX).
+ *
  * @api
  * @method type
  * @param {string} selector Selector of the form field to be filled

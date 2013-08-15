@@ -422,7 +422,7 @@
         {
             "file": "index.js",
             "line": 690,
-            "description": "Types a text into an input field or text area.\nAnd yes, it really types, character for character, like you would\ndo when using your keyboard.\n\n\n```html\n<form id=\"skaaro\" action=\"skaaro.php\" method=\"GET\">\n  <input type=\"hidden\" name=\"intheshadows\" value=\"itis\"/>\n  <input type=\"text\" name=\"truth\" id=\"truth\" value=\"\"/>\n</form>\n```\n\n```javascript\ntest.open('http://home.dalek.com')\n    .type('#truth', 'out there is')\n    .assert.val('#truth', 'out there is', 'Text has been set')\n    .done();\n```",
+            "description": "Types a text into an input field or text area.\nAnd yes, it really types, character for character, like you would\ndo when using your keyboard.\n\n\n```html\n<form id=\"skaaro\" action=\"skaaro.php\" method=\"GET\">\n  <input type=\"hidden\" name=\"intheshadows\" value=\"itis\"/>\n  <input type=\"text\" name=\"truth\" id=\"truth\" value=\"\"/>\n</form>\n```\n\n```javascript\ntest.open('http://home.dalek.com')\n    .type('#truth', 'out there is')\n    .assert.val('#truth', 'out there is', 'Text has been set')\n    .done();\n```\n\nYou can also send special keys using unicode.\n\n * ```javascript\ntest.open('http://home.dalek.com')\n    .type('#truth', 'out \\uE008there\\uE008 is')\n    .assert.val('#truth', 'out THERE is', 'Text has been set')\n    .done();\n```\nYou can go [here](https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element/:id/value) to read up on special keys and unicodes for them (note that a code of U+EXXX is actually written in code as \\uEXXX).",
             "api": "",
             "itemtype": "method",
             "name": "type",
@@ -443,7 +443,7 @@
         },
         {
             "file": "index.js",
-            "line": 730,
+            "line": 740,
             "description": "Types a text into the text inout field of a prompt dialog.\nLike you would do when using your keyboard.\n\n```html\n<div>\n  <a id=\"aquestion\" onclick=\"this.innerText = window.prompt('Your favourite companion:')\">????</a>\n</div>\n```\n\n```javascript\n test.open('http://adomain.com')\n    .click('#aquestion')\n    .answer('Rose')\n    .assert.text('#aquestion').is('Rose', 'Awesome she was!')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -462,7 +462,7 @@
         },
         {
             "file": "index.js",
-            "line": 761,
+            "line": 771,
             "description": "Accepts an alert/prompt/confirm dialog. This is basically the same actions as when\nyou are clicking okay or hitting return in one of that dialogs.\n\n```html\n<div>\n  <a id=\"attentione\" onclick=\"window.alert('Alonsy!')\">ALERT!ALERT!</a>\n</div>\n```\n\n```javascript\n test.open('http://adomain.com')\n    // alert appears\n    .click('#attentione')\n    // alert is gone\n    .accept()\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -474,7 +474,7 @@
         },
         {
             "file": "index.js",
-            "line": 791,
+            "line": 801,
             "description": "Dismisses an prompt/confirm dialog. This is basically the same actions as when\nyou are clicking cancel in one of that dialogs.\n\n```html\n<div>\n  <a id=\"nonono\" onclick=\"(this.innerText = window.confirm('No classic doctors in the 50th?') ? 'Buh!' : ':(') \">What!</a>\n</div>\n```\n\n```javascript\n test.open('http://adomain.com')\n    // prompt appears\n    .click('#nonono')\n    // prompt is gone\n    .dismiss()\n    .assert.text('#nonono').is(':(', 'So sad')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -486,7 +486,7 @@
         },
         {
             "file": "index.js",
-            "line": 822,
+            "line": 832,
             "description": "Resizes the browser window to a set of given dimensions (in px).\nThe default configuration of dalek opening pages is a width of 1280px\nand a height of 1024px. You can specify your own default in the configuration.\n\n```html\n<div>\n  <span id=\"magicspan\">The span in the fireplace</span>\n</div>\n```\n\n```css\n#magicspan {\n  display: inline;\n}",
             "media": "all and (max-width: 500px) and (min-width: 300px) {\n  #magicspan {\n    display: none;\n  }\n}\n```\n\n```javascript\n test.open('http://adomain.com')\n    .assert.visible('#magicspan', 'Big screen, visible span')\n    .resize({width: 400, height: 500})\n    .assert.notVisible('#magicspan', 'Small screen, no visible span magic!')\n    .done();\n```",
             "api": "",
@@ -504,7 +504,7 @@
         },
         {
             "file": "index.js",
-            "line": 866,
+            "line": 876,
             "description": "Maximizes the browser window.\n\n```html\n<div>\n  <span id=\"magicspan\">The span in the fireplace</span>\n</div>\n```\n\n```css\n#magicspan {\n  display: inline;\n}",
             "media": "all and (max-width: 500px) and (min-width: 300px) {\n  #magicspan {\n    display: none;\n  }\n}\n```\n\n```javascript\n test.open('http://adomain.com')\n    .resize({width: 400, height: 500})\n    .assert.notVisible('#magicspan', 'Small screen, no visible span magic!')\n    .maximize()\n    .assert.visible('#magicspan', 'Big screen, visible span')\n    .done();\n```",
             "api": "",
@@ -515,7 +515,7 @@
         },
         {
             "file": "index.js",
-            "line": 908,
+            "line": 918,
             "description": "Sets a cookie.\nMore configuration options will be implemented in the future,\nby now, you can only set a cookie with a specific name and contents.\nThis will be a domain wide set cookie.\n\n```javascript\n test.open('http://adomain.com')\n     .setCookie('my_cookie_name', 'my=content')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -525,7 +525,7 @@
         },
         {
             "file": "index.js",
-            "line": 932,
+            "line": 942,
             "description": "Waits until an element matching the provided\nselector expression exists in remote DOM to process any next step.\n\nLets assume we have a ticker that loads its contents via AJAX,\nand appends new elements, when the call has been successfully answered:\n\n```javascript\ntest.open('http://myticker.org')\n  .assert.text('.ticker-element:first-child', 'First!', 'First ticker element is visible')\n  // now we load the next ticker element, defsult timeout is 5 seconds\n  .waitForElement('.ticker-element:nth-child(2)')\n  .assert.text('.ticker-element:nth-child(2)', 'Me snd. one', 'Snd. ticker element is visible')\n  // Lets assume that this AJAX call can take longer, so we raise the default timeout to 10 seconds\n  .waitForElement('.ticker-element:last-child', 10000)\n  .assert.text('.ticker-element:last-child', 'Me, third one!', 'Third ticker element is visible')\n  .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -547,7 +547,7 @@
         },
         {
             "file": "index.js",
-            "line": 971,
+            "line": 981,
             "description": "Generates a callback that will be fired when the action has been completed.\nThe callback itself will then validate the answer and will also emit an event\nthat the action has been successfully executed.",
             "itemtype": "method",
             "name": "_generateCallbackAssertion",
@@ -573,7 +573,7 @@
         },
         {
             "file": "index.js",
-            "line": 1001,
+            "line": 1011,
             "description": "Fills the fields of a form with given values.\n\n```html\n<input type=\"hidden\" value=\"not really a value\" id=\"ijustwannahaveavalue\"/>\n```\n\n```javascript\ntest.open('http://dalekjs.com')\n    .setValue('#ijustwannahaveavalue', 'a value')\n    .title().is('DalekJS - Frequently asked questions', 'What the F.A.Q.');\n```",
             "api": "",
             "itemtype": "method",
@@ -598,7 +598,7 @@
         },
         {
             "file": "index.js",
-            "line": 1034,
+            "line": 1044,
             "description": "Adds a method to the queue of actions/assertions to execute",
             "itemtype": "method",
             "name": "_addToActionQueue",
@@ -696,43 +696,43 @@
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:730"
+            "line": " index.js:740"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:761"
+            "line": " index.js:771"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:791"
+            "line": " index.js:801"
         },
         {
             "message": "unknown tag: media",
-            "line": " index.js:822"
+            "line": " index.js:832"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:822"
+            "line": " index.js:832"
         },
         {
             "message": "unknown tag: media",
-            "line": " index.js:866"
+            "line": " index.js:876"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:866"
+            "line": " index.js:876"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:908"
+            "line": " index.js:918"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:932"
+            "line": " index.js:942"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:1001"
+            "line": " index.js:1011"
         },
         {
             "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",

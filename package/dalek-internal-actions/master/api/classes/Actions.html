@@ -583,7 +583,7 @@ like clicking elements, open urls, filling out input fields, etc.</p>
             
         
         
-        <a href="../files/index.js.html#l1034"><code>index.js:1034</code></a>
+        <a href="../files/index.js.html#l1044"><code>index.js:1044</code></a>
         
         </p>
 
@@ -716,7 +716,7 @@ like clicking elements, open urls, filling out input fields, etc.</p>
             
         
         
-        <a href="../files/index.js.html#l971"><code>index.js:971</code></a>
+        <a href="../files/index.js.html#l981"><code>index.js:981</code></a>
         
         </p>
 
@@ -831,7 +831,7 @@ that the action has been successfully executed.</p>
             
         
         
-        <a href="../files/index.js.html#l761"><code>index.js:761</code></a>
+        <a href="../files/index.js.html#l771"><code>index.js:771</code></a>
         
         </p>
 
@@ -922,7 +922,7 @@ you are clicking okay or hitting return in one of that dialogs.</p>
             
         
         
-        <a href="../files/index.js.html#l730"><code>index.js:730</code></a>
+        <a href="../files/index.js.html#l740"><code>index.js:740</code></a>
         
         </p>
 
@@ -1198,7 +1198,7 @@ In the future it might become the ability to also execute a &quot;right button&q
             
         
         
-        <a href="../files/index.js.html#l791"><code>index.js:791</code></a>
+        <a href="../files/index.js.html#l801"><code>index.js:801</code></a>
         
         </p>
 
@@ -1344,7 +1344,7 @@ you are clicking cancel in one of that dialogs.</p>
             
         
         
-        <a href="../files/index.js.html#l866"><code>index.js:866</code></a>
+        <a href="../files/index.js.html#l876"><code>index.js:876</code></a>
         
         </p>
 
@@ -1800,7 +1800,7 @@ selector once instead of repeating it all over the place.</p>
             
         
         
-        <a href="../files/index.js.html#l822"><code>index.js:822</code></a>
+        <a href="../files/index.js.html#l832"><code>index.js:832</code></a>
         
         </p>
 
@@ -2025,7 +2025,7 @@ test.screenshot(&#39;my/page/in_time/:datetime/homepage&#39;);</code></pre>
             
         
         
-        <a href="../files/index.js.html#l908"><code>index.js:908</code></a>
+        <a href="../files/index.js.html#l918"><code>index.js:918</code></a>
         
         </p>
 
@@ -2250,7 +2250,7 @@ For more information about this, I recommend to check out the <a href="/docs/con
             
         
         
-        <a href="../files/index.js.html#l1001"><code>index.js:1001</code></a>
+        <a href="../files/index.js.html#l1011"><code>index.js:1011</code></a>
         
         </p>
 
@@ -2844,6 +2844,14 @@ do when using your keyboard.</p>
     .type(&#39;#truth&#39;, &#39;out there is&#39;)
     .assert.val(&#39;#truth&#39;, &#39;out there is&#39;, &#39;Text has been set&#39;)
     .done();</code></pre>
+<p>You can also send special keys using unicode.</p>
+<ul>
+<li><pre><code class="lang-javascript">test.open(&#39;http://home.dalek.com&#39;)
+ .type(&#39;#truth&#39;, &#39;out \uE008there\uE008 is&#39;)
+ .assert.val(&#39;#truth&#39;, &#39;out THERE is&#39;, &#39;Text has been set&#39;)
+ .done();</code></pre>
+You can go <a href="https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element/:id/value">here</a> to read up on special keys and unicodes for them (note that a code of U+EXXX is actually written in code as \uEXXX).</li>
+</ul>
 
     </div>
 
@@ -3168,7 +3176,7 @@ and set the timeout using the timeout one, in milliseconds. The default timeout 
             
         
         
-        <a href="../files/index.js.html#l932"><code>index.js:932</code></a>
+        <a href="../files/index.js.html#l942"><code>index.js:942</code></a>
         
         </p>
 
