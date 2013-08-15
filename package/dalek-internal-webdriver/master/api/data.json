@@ -807,6 +807,34 @@
             "class": "Internal.Driver"
         },
         {
+            "file": "lib/commands/element.js",
+            "line": 412,
+            "description": "Get the log for a given log type.\nLog buffer is reset after each request.",
+            "itemtype": "method",
+            "name": "sendKeys",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/keys"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "id",
+                    "description": "ID of the element to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "text",
+                    "description": "The keys sequence to be sent",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
             "file": "lib/commands/execute.js",
             "line": 25,
             "description": "Script execution related Webdriver endpoints",

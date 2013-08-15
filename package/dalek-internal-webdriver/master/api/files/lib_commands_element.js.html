@@ -501,6 +501,27 @@ module.exports = function (Driver) {
     }
   });
 
+  /**
+   * Get the log for a given log type.
+   * Log buffer is reset after each request.
+   *
+   * @method sendKeys
+   * @see https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/keys
+   * @param {GET} sessionId ID of the session to route the command to
+   * @param {GET} id ID of the element to route the command to
+   * @param {POST} text The keys sequence to be sent
+   */
+
+  Driver.addCommand({
+    name: &#x27;sendKeys&#x27;,
+    url: &#x27;/session/:sessionId/keys&#x27;,
+    method: &#x27;POST&#x27;,
+    params: [&#x27;text&#x27;],
+    onRequest: function (params) {
+      return {value: params.text.split(&#x27;&#x27;)};
+    }
+  });
+
 };
 
     </pre>
