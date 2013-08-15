@@ -828,6 +828,36 @@ Actions.prototype.type = function (selector, keystrokes) {
 };
 
 /**
+ * This acts just like .type() with a key difference.  This action can be used on non-input elements (useful for test site wide keyboard shortcuts and the like).  So assumeing we have a keyboard shortcut that display an alert box, we could test that with something like this:
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.open(&#x27;http://home.dalek.com&#x27;)
+ *     .sendKeys(&#x27;body&#x27;, &#x27;\uE00C&#x27;)
+ *     .assert.dialogText(&#x27;press the escape key give this alert text&#x27;)
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method sendKeys
+ * @param {string} selector Selector of the form field to be filled
+ * @param {string} keystrokes Text to be applied to the element
+ * @chainable
+ */
+
+Actions.prototype.sendKeys = function (selector, keystrokes) {
+  var hash = uuid.v4();
+
+  if (this.querying === true) {
+    keystrokes = selector;
+    selector = this.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;sendKeys&#x27;, &#x27;sendKeys&#x27;, selector, keystrokes, hash);
+  this._addToActionQueue([selector, keystrokes], &#x27;sendKeys&#x27;, cb);
+  return this;
+};
+
+/**
  * Types a text into the text inout field of a prompt dialog.
  * Like you would do when using your keyboard.
  *

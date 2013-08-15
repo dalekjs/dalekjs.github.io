@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">71.25</p>
+      <p class="stat">71.09</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">1060</p>
+      <p class="stat">1090</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">66.42</p>
+      <p class="stat">67.76</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">3.64</p>
+      <p class="stat">3.78</p>
     </div>
   </div>
 </div>
@@ -826,6 +826,36 @@ Actions.prototype.type = function (selector, keystrokes) {
 
   var cb = this._generateCallbackAssertion(&#039;type&#039;, &#039;type&#039;, selector, keystrokes, hash);
   this._addToActionQueue([selector, keystrokes], &#039;type&#039;, cb);
+  return this;
+};
+
+/**
+ * This acts just like .type() with a key difference.  This action can be used on non-input elements (useful for test site wide keyboard shortcuts and the like).  So assumeing we have a keyboard shortcut that display an alert box, we could test that with something like this:
+ *
+ * ```javascript
+ * test.open(&#039;http://home.dalek.com&#039;)
+ *     .sendKeys(&#039;body&#039;, &#039;\uE00C&#039;)
+ *     .assert.dialogText(&#039;press the escape key give this alert text&#039;)
+ *     .done();
+ * ```
+ *
+ * @api
+ * @method sendKeys
+ * @param {string} selector Selector of the form field to be filled
+ * @param {string} keystrokes Text to be applied to the element
+ * @chainable
+ */
+
+Actions.prototype.sendKeys = function (selector, keystrokes) {
+  var hash = uuid.v4();
+
+  if (this.querying === true) {
+    keystrokes = selector;
+    selector = this.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;sendKeys&#039;, &#039;sendKeys&#039;, selector, keystrokes, hash);
+  this._addToActionQueue([selector, keystrokes], &#039;sendKeys&#039;, cb);
   return this;
 };
 
