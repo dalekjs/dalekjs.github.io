@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">66.56</p>
+      <p class="stat">66.81</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">1607</p>
+      <p class="stat">1640</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">92.98</p>
+      <p class="stat">91.76</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">7.58</p>
+      <p class="stat">7.74</p>
     </div>
   </div>
 </div>
@@ -1208,7 +1208,7 @@ Assertions.prototype.title = function (expected, message) {
  * ```
  *
  * @api
- * @method doesntHaveTitle
+ * @method title
  * @param {string} expected Expected testresult
  * @param {string} message Message for the test reporter
  * @chainable
@@ -1444,6 +1444,19 @@ Assertions.prototype.lte = function (expected, message) {
   return this.generateTestHelper(&#039;lte&#039;, &#039;_testLowerThanEqual&#039;, false)(expected, message);
 };
 
+/**
+ * Contain helper
+ *
+ * @method contain
+ * @param {mixed} expected Value to check
+ * @param {string} message Test message
+ * @chainable
+ */
+
+Assertions.prototype.contain = function (expected, message) {
+  return this.generateTestHelper(&#039;contain&#039;, &#039;_contain&#039;, false)(expected, message);
+};
+
 // HELPER METHODS
 // --------------
 
@@ -1515,9 +1528,9 @@ Assertions.prototype._addToActionQueue = function (opts, driverMethod, cb) {
  * Generates a function that can be used
  *
  * @method generateTestHelper
- * @param
- * @param
- * @param
+ * @param name
+ * @param assertionFn
+ * @param negate
  * @return
  * @private
  */
@@ -1674,6 +1687,26 @@ Assertions.prototype._testGreaterThanEqual = function (a, b) {
 Assertions.prototype._testLowerThan = function (a, b) {
   try {
     chai.expect(b).to.be.below(a);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+};
+
+/**
+ * Assert if a given value contain another value
+ *
+ * @method _contain
+ * @param {bool} a Value to test
+ * @param {bool} b Value to compare
+ * @return {bool} testresult
+ * @private
+ */
+
+Assertions.prototype._contain = function (a, b) {
+  try {
+    chai.expect(b).to.include(a);
   } catch (e) {
     return false;
   }

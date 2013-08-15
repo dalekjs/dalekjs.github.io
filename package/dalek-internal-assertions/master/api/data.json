@@ -675,7 +675,7 @@
             "description": "Asserts that given title does not match the given expactions\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .doesntHaveTitle('Dalek Emperor TV', 'Not your daleks tv')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
-            "name": "doesntHaveTitle",
+            "name": "title",
             "params": [
                 {
                     "name": "expected",
@@ -938,7 +938,30 @@
         },
         {
             "file": "index.js",
-            "line": 1358,
+            "line": 1355,
+            "description": "Contain helper",
+            "itemtype": "method",
+            "name": "contain",
+            "params": [
+                {
+                    "name": "expected",
+                    "description": "Value to check",
+                    "type": "Mixed"
+                },
+                {
+                    "name": "message",
+                    "description": "Test message",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.Internal.Assertions",
+            "module": "Assertions",
+            "namespace": "Dalek.Internal"
+        },
+        {
+            "file": "index.js",
+            "line": 1371,
             "description": "Generates a callback that will be fired when the action has been completed.\nThe callback itself will then validate the answer and will also emit an event\nthat the action has been successfully executed.",
             "itemtype": "method",
             "name": "_generateCallbackAssertion",
@@ -966,7 +989,7 @@
         },
         {
             "file": "index.js",
-            "line": 1399,
+            "line": 1412,
             "description": "Adds a method to the queue of actions/assertions to execute",
             "itemtype": "method",
             "name": "_addToActionQueue",
@@ -996,11 +1019,24 @@
         },
         {
             "file": "index.js",
-            "line": 1422,
+            "line": 1435,
             "description": "Generates a function that can be used",
             "itemtype": "method",
             "name": "generateTestHelper",
-            "params": [],
+            "params": [
+                {
+                    "name": "name",
+                    "description": ""
+                },
+                {
+                    "name": "assertionFn",
+                    "description": ""
+                },
+                {
+                    "name": "negate",
+                    "description": ""
+                }
+            ],
             "return": {
                 "description": ""
             },
@@ -1012,7 +1048,7 @@
         },
         {
             "file": "index.js",
-            "line": 1478,
+            "line": 1491,
             "description": "Assert if a given value shallow equals a snd. given value",
             "itemtype": "method",
             "name": "_testShallowEquals",
@@ -1040,7 +1076,7 @@
         },
         {
             "file": "index.js",
-            "line": 1498,
+            "line": 1511,
             "description": "Assert if a given value shallow does not equal a snd. given value",
             "itemtype": "method",
             "name": "_testShallowUnequals",
@@ -1068,7 +1104,7 @@
         },
         {
             "file": "index.js",
-            "line": 1518,
+            "line": 1531,
             "description": "Assert if a given value matches a range",
             "itemtype": "method",
             "name": "_testBetween",
@@ -1096,7 +1132,7 @@
         },
         {
             "file": "index.js",
-            "line": 1538,
+            "line": 1551,
             "description": "Assert if a given value is greater than the value to compare",
             "itemtype": "method",
             "name": "_testGreaterThan",
@@ -1124,7 +1160,7 @@
         },
         {
             "file": "index.js",
-            "line": 1558,
+            "line": 1571,
             "description": "Assert if a given value is greater or equal than the value to compare",
             "itemtype": "method",
             "name": "_testGreaterThanEqual",
@@ -1152,7 +1188,7 @@
         },
         {
             "file": "index.js",
-            "line": 1572,
+            "line": 1585,
             "description": "Assert if a given value is lower than the value to compare",
             "itemtype": "method",
             "name": "_testLowerThan",
@@ -1180,7 +1216,35 @@
         },
         {
             "file": "index.js",
-            "line": 1592,
+            "line": 1605,
+            "description": "Assert if a given value contain another value",
+            "itemtype": "method",
+            "name": "_contain",
+            "params": [
+                {
+                    "name": "a",
+                    "description": "Value to test",
+                    "type": "Bool"
+                },
+                {
+                    "name": "b",
+                    "description": "Value to compare",
+                    "type": "Bool"
+                }
+            ],
+            "return": {
+                "description": "testresult",
+                "type": "Bool"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Internal.Assertions",
+            "module": "Assertions",
+            "namespace": "Dalek.Internal"
+        },
+        {
+            "file": "index.js",
+            "line": 1625,
             "description": "Assert if a given value is lower or equal than the value to compare",
             "itemtype": "method",
             "name": "_testLowerThanEqual",
@@ -1208,7 +1272,7 @@
         },
         {
             "file": "index.js",
-            "line": 1606,
+            "line": 1639,
             "description": "Assert if a given value is boolean 'true'",
             "itemtype": "method",
             "name": "_testTruthy",
@@ -1231,7 +1295,7 @@
         },
         {
             "file": "index.js",
-            "line": 1619,
+            "line": 1652,
             "description": "Assert if a given value is boolean 'false'",
             "itemtype": "method",
             "name": "_testFalsy",
@@ -1365,18 +1429,6 @@
         {
             "message": "unknown tag: api",
             "line": " index.js:1203"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1422"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1422"
-        },
-        {
-            "message": "param name/type/descript missing",
-            "line": " index.js:1422"
         },
         {
             "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
