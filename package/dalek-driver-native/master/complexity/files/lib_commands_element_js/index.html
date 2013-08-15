@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">67.73</p>
+      <p class="stat">67.76</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">519</p>
+      <p class="stat">552</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">77.24</p>
+      <p class="stat">79.29</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">4.73</p>
+      <p class="stat">5.01</p>
     </div>
   </div>
 </div>
@@ -473,6 +473,39 @@ var Element = {
   },
 
   /**
+   * Sends keys to an element (whether or not it is an input)
+   *
+   * @method sendKeys
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
+  sendKeys: function (selector, keystrokes, hash) {
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this.webdriverClient.sendKeys.bind(this.webdriverClient, keystrokes));
+    this.actionQueue.push(this._sendKeysCb.bind(this, selector, keystrokes, hash));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the `sendKeys` call
+   *
+   * @method _sendKeysCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @return {object} promise Type promise
+   * @private
+   */
+
+  _sendKeysCb: function (selector, keystrokes, hash) {
+    var deferred = Q.defer();
+    this.events.emit(&#039;driver:message&#039;, {key: &#039;sendKeys&#039;, value: selector, keystrokes: keystrokes, uuid: hash, hash: hash});
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
    * Wait for an element for a specific amount of time
    *
    * @method waitForElement
@@ -566,7 +599,7 @@ var Element = {
       var deferred = Q.defer();
       var res = JSON.parse(result);
       var resLength = res.value.length;
-      var curLength = 1;
+      var curLength = 0;
       var visibleElement = [];
 
       res.value.forEach(function (element) {

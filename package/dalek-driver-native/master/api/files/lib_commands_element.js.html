@@ -485,6 +485,39 @@ var Element = {
   },
 
   /**
+   * Sends keys to an element (whether or not it is an input)
+   *
+   * @method sendKeys
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
+  sendKeys: function (selector, keystrokes, hash) {
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this.webdriverClient.sendKeys.bind(this.webdriverClient, keystrokes));
+    this.actionQueue.push(this._sendKeysCb.bind(this, selector, keystrokes, hash));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the &#x60;sendKeys&#x60; call
+   *
+   * @method _sendKeysCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @return {object} promise Type promise
+   * @private
+   */
+
+  _sendKeysCb: function (selector, keystrokes, hash) {
+    var deferred = Q.defer();
+    this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;sendKeys&#x27;, value: selector, keystrokes: keystrokes, uuid: hash, hash: hash});
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
    * Wait for an element for a specific amount of time
    *
    * @method waitForElement
@@ -578,7 +611,7 @@ var Element = {
       var deferred = Q.defer();
       var res = JSON.parse(result);
       var resLength = res.value.length;
-      var curLength = 1;
+      var curLength = 0;
       var visibleElement = [];
 
       res.value.forEach(function (element) {

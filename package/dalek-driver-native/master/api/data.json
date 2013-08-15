@@ -695,6 +695,57 @@
         {
             "file": "lib/commands/element.js",
             "line": 383,
+            "description": "Sends keys to an element (whether or not it is an input)",
+            "itemtype": "method",
+            "name": "sendKeys",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 399,
+            "description": "Sends out an event with the results of the `sendKeys` call",
+            "itemtype": "method",
+            "name": "_sendKeysCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Type promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 416,
             "description": "Wait for an element for a specific amount of time",
             "itemtype": "method",
             "name": "waitForElement",
@@ -727,7 +778,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 400,
+            "line": 433,
             "description": "Sends out an event with the results of the `waitForElement` call",
             "itemtype": "method",
             "name": "_waitForElementCb",
@@ -760,7 +811,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 418,
+            "line": 451,
             "description": "Returns the number of elements matched by the selector",
             "itemtype": "method",
             "name": "getNumberOfElements",
@@ -788,7 +839,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 434,
+            "line": 467,
             "description": "Sends out an event with the results of the `getNumberOfElements` call",
             "itemtype": "method",
             "name": "_getNumberOfElementsCb",
@@ -826,7 +877,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 461,
+            "line": 494,
             "description": "Returns the number of visible elements matched by the selector",
             "itemtype": "method",
             "name": "getNumberOfVisibleElements",
@@ -854,7 +905,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 500,
+            "line": 533,
             "description": "Sends out an event with the results of the `getNumberOfVisibleElements` call",
             "itemtype": "method",
             "name": "_getNumberOfElementsCb",
@@ -892,7 +943,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 529,
+            "line": 562,
             "description": "Mixes in element methods",
             "params": [
                 {
@@ -2113,7 +2164,7 @@
         },
         {
             "message": "Missing item type\nMixes in element methods",
-            "line": " lib/commands/element.js:529"
+            "line": " lib/commands/element.js:562"
         },
         {
             "message": "Missing item type\nMixes in element methods",
