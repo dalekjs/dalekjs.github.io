@@ -300,7 +300,44 @@ var Page = {
     this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;dismissAlert&#x27;, hash: hash, value: true});
     deferred.resolve();
     return deferred.promise;
+  },
+
+  /**
+   * Wait for a specific amount of time
+   *
+   * @method wait
+   * @param {integer} timeout Time to wait in ms
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} uuid Unique hash of that fn call
+   * @chainable
+   */
+
+  wait: function (timeout, hash, uuid) {
+    this.actionQueue.push(this.webdriverClient.implicitWait.bind(this.webdriverClient, timeout));
+    this.actionQueue.push(this._waitCb.bind(this, timeout, hash, uuid));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the &#x60;wait&#x60; call
+   *
+   * @method _waitCb
+   * @param {integer} timeout Time to wait in ms
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} uuid Unique hash of that fn call
+   * @return {object} promise WaitForElement promise
+   * @private
+   */
+
+  _waitCb: function (timeout, hash, uuid) {
+    var deferred = Q.defer();
+    this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;wait&#x27;, timeout: timeout, uuid: uuid, hash: hash, value: timeout + &#x27; ms&#x27;});
+    setTimeout(function () {
+      deferred.resolve();
+    }.bind(this), timeout);
+    return deferred.promise;
   }
+
 };
 
 /**

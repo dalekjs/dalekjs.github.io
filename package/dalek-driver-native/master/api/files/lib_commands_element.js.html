@@ -460,7 +460,6 @@ var Element = {
 
   type: function (selector, keystrokes, hash) {
     this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
-    this.actionQueue.push(this.webdriverClient.clear.bind(this.webdriverClient));
     this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
     this.actionQueue.push(this.webdriverClient.val.bind(this.webdriverClient, keystrokes));
     this.actionQueue.push(this._typeCb.bind(this, selector, keystrokes, hash));

@@ -205,10 +205,10 @@ var Screenshot = {
     pathname = pathname.replace(&#039;:browser&#039;, this.browserName);
     pathname = pathname.replace(&#039;:version&#039;, this._parseBrowserVersion(this.sessionStatus.version));
     pathname = pathname.replace(&#039;:timestamp&#039;, Math.round(new Date().getTime() / 1000));
-    pathname = pathname.replace(&#039;:os&#039;, this._parseOS(this.driverStatus.os.name));
     pathname = pathname.replace(&#039;:osVersion&#039;, this._parseOSVersion(this.driverStatus.os.version));
-    pathname = pathname.replace(&#039;:date&#039;, this._parseDate());
+    pathname = pathname.replace(&#039;:os&#039;, this._parseOS(this.driverStatus.os.name));
     pathname = pathname.replace(&#039;:datetime&#039;, this._parseDatetime());
+    pathname = pathname.replace(&#039;:date&#039;, this._parseDate());
     pathname = pathname.replace(&#039;:viewport&#039;, this._parseViewport());
     return pathname;
   },

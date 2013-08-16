@@ -666,7 +666,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 366,
+            "line": 365,
             "description": "Sends out an event with the results of the `type` call",
             "itemtype": "method",
             "name": "_typeCb",
@@ -694,7 +694,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 383,
+            "line": 382,
             "description": "Sends keys to an element (whether or not it is an input)",
             "itemtype": "method",
             "name": "sendKeys",
@@ -717,7 +717,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 399,
+            "line": 398,
             "description": "Sends out an event with the results of the `sendKeys` call",
             "itemtype": "method",
             "name": "_sendKeysCb",
@@ -745,7 +745,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 416,
+            "line": 415,
             "description": "Wait for an element for a specific amount of time",
             "itemtype": "method",
             "name": "waitForElement",
@@ -778,7 +778,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 433,
+            "line": 432,
             "description": "Sends out an event with the results of the `waitForElement` call",
             "itemtype": "method",
             "name": "_waitForElementCb",
@@ -811,7 +811,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 451,
+            "line": 450,
             "description": "Returns the number of elements matched by the selector",
             "itemtype": "method",
             "name": "getNumberOfElements",
@@ -839,7 +839,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 467,
+            "line": 466,
             "description": "Sends out an event with the results of the `getNumberOfElements` call",
             "itemtype": "method",
             "name": "_getNumberOfElementsCb",
@@ -877,7 +877,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 494,
+            "line": 493,
             "description": "Returns the number of visible elements matched by the selector",
             "itemtype": "method",
             "name": "getNumberOfVisibleElements",
@@ -905,7 +905,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 533,
+            "line": 532,
             "description": "Sends out an event with the results of the `getNumberOfVisibleElements` call",
             "itemtype": "method",
             "name": "_getNumberOfElementsCb",
@@ -943,7 +943,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 562,
+            "line": 561,
             "description": "Mixes in element methods",
             "params": [
                 {
@@ -1297,7 +1297,68 @@
         },
         {
             "file": "lib/commands/page.js",
-            "line": 202,
+            "line": 201,
+            "description": "Wait for a specific amount of time",
+            "itemtype": "method",
+            "name": "wait",
+            "params": [
+                {
+                    "name": "timeout",
+                    "description": "Time to wait in ms",
+                    "type": "Integer"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 217,
+            "description": "Sends out an event with the results of the `wait` call",
+            "itemtype": "method",
+            "name": "_waitCb",
+            "params": [
+                {
+                    "name": "timeout",
+                    "description": "Time to wait in ms",
+                    "type": "Integer"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise WaitForElement promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 239,
             "description": "Mixes in page methods",
             "params": [
                 {
@@ -2164,7 +2225,7 @@
         },
         {
             "message": "Missing item type\nMixes in element methods",
-            "line": " lib/commands/element.js:562"
+            "line": " lib/commands/element.js:561"
         },
         {
             "message": "Missing item type\nMixes in element methods",
@@ -2172,7 +2233,7 @@
         },
         {
             "message": "Missing item type\nMixes in page methods",
-            "line": " lib/commands/page.js:202"
+            "line": " lib/commands/page.js:239"
         },
         {
             "message": "Missing item type",
