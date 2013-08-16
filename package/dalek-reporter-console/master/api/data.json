@@ -429,7 +429,7 @@
         },
         {
             "file": "lib/loglevel/level2.js",
-            "line": 99,
+            "line": 101,
             "description": "Outputs a message when all assertions of a test has been run",
             "itemtype": "method",
             "name": "outputAssertionExpecation",
@@ -449,7 +449,7 @@
         },
         {
             "file": "lib/loglevel/level2.js",
-            "line": 124,
+            "line": 126,
             "description": "Outputs a message when a test has been finished",
             "itemtype": "method",
             "name": "outputTestFinished",

@@ -197,6 +197,8 @@ LogLevel2.prototype.outputAssertionResult = function (data) {
     this.echo(data.type.toUpperCase(), {nl: false, ec: true, foreground: &#x27;magentaBright&#x27;});
     if (data.message) {
       this.echo(data.message, {foreground: &#x27;greenBright&#x27;});
+    } else {
+      this.echo(&#x27;&#x27;);
     }
   } else {
     this.echo(this.symbol(&#x27;x&#x27;), {nl: false, ec: true, foreground: &#x27;redBright&#x27;});
