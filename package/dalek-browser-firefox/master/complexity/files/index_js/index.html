@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">71.86</p>
+      <p class="stat">71.85</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">516</p>
+      <p class="stat">513</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,7 +63,7 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">38.66</p>
+      <p class="stat">38.46</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
@@ -152,11 +152,8 @@ var WebDriverServer = require(&#039;./lib/webdriver&#039;);
  *
  * Because of the availability of the Firefox Marionette testing framework,
  * Dalek atm. can only drive the Firefox Nightly Debug builds.
- * Also, some weird change that the Mozillians have done to the testing framework,
- * the latest browser version dalek supports atm. is version 24, and to be exactly,
- * the version from the 18th of June.
  *
- * You can get the browser here [http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/](http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/)
+ * You can get them from Mozillas FTP server, for example the one from the 16th August [http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/08/2013-08-16-mozilla-central-debug/](http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/)
  *
  * Dalek looks for the browser in the std. installation directory, if you installed the
  * browser in a different place, you can add the location of the browser executable to you Dalekfile,
@@ -416,7 +413,7 @@ var FirefoxDriver = {
     var df = Q.defer();
 
     // start the browser, grep its output
-    this.spawned = spawn(this.binary, [&#039;-P&#039;, profileName]);
+    this.spawned = spawn(this.binary, [&#039;-marionette&#039;, &#039;-P&#039;, profileName]);
     this.spawned.stdout.on(&#039;data&#039;, this._onBrowserStartup.bind(this, df));
 
     // connect to the marionette socket server

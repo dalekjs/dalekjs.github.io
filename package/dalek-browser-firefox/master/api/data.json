@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-browser-firefox",
         "description": "Firefox browser binding for DalekJS",
-        "version": "0.0.2",
+        "version": "0.0.3",
         "url": "http://dalekjs.com"
     },
     "files": {
@@ -392,7 +392,7 @@
             "tag": "module",
             "file": "index.js",
             "line": 39,
-            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Mozilla Firefox.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-firefox --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browsers\": [\"firefox\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b firefox\n```\n\nBecause of the availability of the Firefox Marionette testing framework,\nDalek atm. can only drive the Firefox Nightly Debug builds.\nAlso, some weird change that the Mozillians have done to the testing framework,\nthe latest browser version dalek supports atm. is version 24, and to be exactly,\nthe version from the 18th of June.\n\nYou can get the browser here [http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/](http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/)\n\nDalek looks for the browser in the std. installation directory, if you installed the\nbrowser in a different place, you can add the location of the browser executable to you Dalekfile,\nbecause Dalek isn't capable of finding the executable yet on its own.\n\n```javascript\n\"browsers\": [{\n  \"firefox\": {\n    \"path\": \"~/Apps/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin\"\n  }\n}]\n```\n\nThe Firefox plugin only implements a subset of Daleks Assertions & Actions, so if you run into any bugs,\nthe issue is most probably related to missing commands.\nPlease report any issues you find, Thank you :)",
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Mozilla Firefox.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-firefox --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browsers\": [\"firefox\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b firefox\n```\n\nBecause of the availability of the Firefox Marionette testing framework,\nDalek atm. can only drive the Firefox Nightly Debug builds.\n\nYou can get them from Mozillas FTP server, for example the one from the 16th August [http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/08/2013-08-16-mozilla-central-debug/](http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/)\n\nDalek looks for the browser in the std. installation directory, if you installed the\nbrowser in a different place, you can add the location of the browser executable to you Dalekfile,\nbecause Dalek isn't capable of finding the executable yet on its own.\n\n```javascript\n\"browsers\": [{\n  \"firefox\": {\n    \"path\": \"~/Apps/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin\"\n  }\n}]\n```\n\nThe Firefox plugin only implements a subset of Daleks Assertions & Actions, so if you run into any bugs,\nthe issue is most probably related to missing commands.\nPlease report any issues you find, Thank you :)",
             "part": "Firefox",
             "api": ""
         }
@@ -746,7 +746,7 @@
             "namespace": "Browser",
             "file": "index.js",
             "line": 39,
-            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Mozilla Firefox.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-firefox --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browsers\": [\"firefox\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b firefox\n```\n\nBecause of the availability of the Firefox Marionette testing framework,\nDalek atm. can only drive the Firefox Nightly Debug builds.\nAlso, some weird change that the Mozillians have done to the testing framework,\nthe latest browser version dalek supports atm. is version 24, and to be exactly,\nthe version from the 18th of June.\n\nYou can get the browser here [http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/](http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/)\n\nDalek looks for the browser in the std. installation directory, if you installed the\nbrowser in a different place, you can add the location of the browser executable to you Dalekfile,\nbecause Dalek isn't capable of finding the executable yet on its own.\n\n```javascript\n\"browsers\": [{\n  \"firefox\": {\n    \"path\": \"~/Apps/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin\"\n  }\n}]\n```\n\nThe Firefox plugin only implements a subset of Daleks Assertions & Actions, so if you run into any bugs,\nthe issue is most probably related to missing commands.\nPlease report any issues you find, Thank you :)"
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Mozilla Firefox.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-firefox --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browsers\": [\"firefox\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b firefox\n```\n\nBecause of the availability of the Firefox Marionette testing framework,\nDalek atm. can only drive the Firefox Nightly Debug builds.\n\nYou can get them from Mozillas FTP server, for example the one from the 16th August [http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/08/2013-08-16-mozilla-central-debug/](http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/)\n\nDalek looks for the browser in the std. installation directory, if you installed the\nbrowser in a different place, you can add the location of the browser executable to you Dalekfile,\nbecause Dalek isn't capable of finding the executable yet on its own.\n\n```javascript\n\"browsers\": [{\n  \"firefox\": {\n    \"path\": \"~/Apps/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin\"\n  }\n}]\n```\n\nThe Firefox plugin only implements a subset of Daleks Assertions & Actions, so if you run into any bugs,\nthe issue is most probably related to missing commands.\nPlease report any issues you find, Thank you :)"
         }
     },
     "classitems": [
@@ -3706,7 +3706,7 @@
         },
         {
             "file": "index.js",
-            "line": 94,
+            "line": 91,
             "description": "Verbose version of the browser name",
             "itemtype": "property",
             "name": "longName",
@@ -3718,7 +3718,7 @@
         },
         {
             "file": "index.js",
-            "line": 104,
+            "line": 101,
             "description": "Default port of the FirefoxWebDriverServer\nThe port may change, cause the port conflict resultion\ntool might pick another one, if the default one is blocked",
             "itemtype": "property",
             "name": "port",
@@ -3730,7 +3730,7 @@
         },
         {
             "file": "index.js",
-            "line": 116,
+            "line": 113,
             "description": "Default port of the Marionette TCP service\nThe port may change, cause the port conflict resultion\ntool might pick another one, if the default one is blocked",
             "itemtype": "property",
             "name": "marionettePort",
@@ -3742,7 +3742,7 @@
         },
         {
             "file": "index.js",
-            "line": 128,
+            "line": 125,
             "description": "Default host of the FirefoxWebDriverServer\nThe host may be overriden with\na user configured value",
             "itemtype": "property",
             "name": "host",
@@ -3754,7 +3754,7 @@
         },
         {
             "file": "index.js",
-            "line": 140,
+            "line": 137,
             "description": "Root path of the FirefoxWebDriverServer",
             "itemtype": "property",
             "name": "path",
@@ -3766,7 +3766,7 @@
         },
         {
             "file": "index.js",
-            "line": 150,
+            "line": 147,
             "description": "Path to the Firefox binary file",
             "itemtype": "property",
             "name": "binary",
@@ -3778,7 +3778,7 @@
         },
         {
             "file": "index.js",
-            "line": 160,
+            "line": 157,
             "description": "Paths to the default Firefox binary files",
             "itemtype": "property",
             "name": "defaultBinaries",
@@ -3789,7 +3789,7 @@
         },
         {
             "file": "index.js",
-            "line": 173,
+            "line": 170,
             "description": "Child process instance of the Firefox browser",
             "itemtype": "property",
             "name": "spawned",
@@ -3801,7 +3801,7 @@
         },
         {
             "file": "index.js",
-            "line": 183,
+            "line": 180,
             "description": "Collected data about the created profile,\npath, name, etc.",
             "itemtype": "property",
             "name": "profile",
@@ -3813,7 +3813,7 @@
         },
         {
             "file": "index.js",
-            "line": 194,
+            "line": 191,
             "description": "Resolves the driver port",
             "itemtype": "method",
             "name": "getPort",
@@ -3827,7 +3827,7 @@
         },
         {
             "file": "index.js",
-            "line": 205,
+            "line": 202,
             "description": "Resolves the marionette port",
             "itemtype": "method",
             "name": "getMarionettePort",
@@ -3841,7 +3841,7 @@
         },
         {
             "file": "index.js",
-            "line": 216,
+            "line": 213,
             "description": "Returns the driver host",
             "itemtype": "method",
             "name": "getHost",
@@ -3855,7 +3855,7 @@
         },
         {
             "file": "index.js",
-            "line": 227,
+            "line": 224,
             "description": "Launches the FirefoxWebDriverServer & the browser",
             "itemtype": "method",
             "name": "launch",
@@ -3869,7 +3869,7 @@
         },
         {
             "file": "index.js",
-            "line": 256,
+            "line": 253,
             "description": "Kills the browser processes,\nshuts down the TCP (Marionette) & HTTP connection (Webdriver)\ndeletes the temp profile",
             "itemtype": "method",
             "name": "kill",
@@ -3880,7 +3880,7 @@
         },
         {
             "file": "index.js",
-            "line": 276,
+            "line": 273,
             "itemtype": "method",
             "name": "getBrowserBinary",
             "class": "Browser.FirefoxDriver",
@@ -3889,7 +3889,7 @@
         },
         {
             "file": "index.js",
-            "line": 317,
+            "line": 314,
             "itemtype": "method",
             "name": "_startBrowser",
             "access": "private",
@@ -3900,7 +3900,7 @@
         },
         {
             "file": "index.js",
-            "line": 341,
+            "line": 338,
             "description": "Consumes the console output when the browser is started",
             "itemtype": "method",
             "name": "_onBrowserStartup",
@@ -3912,7 +3912,7 @@
         },
         {
             "file": "index.js",
-            "line": 354,
+            "line": 351,
             "description": "Checks if the browser is ready for communication",
             "itemtype": "method",
             "name": "_browserIsReady",
@@ -3924,7 +3924,7 @@
         },
         {
             "file": "index.js",
-            "line": 365,
+            "line": 362,
             "description": "Creates a new firefox profile",
             "itemtype": "method",
             "name": "_createProfile",
@@ -3940,7 +3940,7 @@
         },
         {
             "file": "index.js",
-            "line": 404,
+            "line": 401,
             "description": "Creates user preferences for the profile\nSaves them in `user.js` in the newly created profile",
             "itemtype": "method",
             "name": "_createProfile",
@@ -3956,7 +3956,7 @@
         },
         {
             "file": "index.js",
-            "line": 437,
+            "line": 434,
             "description": "Deletes the user profile that has been created for this browser session",
             "itemtype": "method",
             "name": "_deleteProfile",
@@ -3969,7 +3969,7 @@
         },
         {
             "file": "index.js",
-            "line": 450,
+            "line": 447,
             "itemtype": "method",
             "name": "_checkUserSetBinary",
             "access": "private",
@@ -3980,7 +3980,7 @@
         },
         {
             "file": "index.js",
-            "line": 506,
+            "line": 503,
             "itemtype": "method",
             "name": "_checkBinarywin32",
             "access": "private",
@@ -3991,7 +3991,7 @@
         },
         {
             "file": "index.js",
-            "line": 517,
+            "line": 514,
             "itemtype": "method",
             "name": "_checkBinarydarwin",
             "access": "private",
@@ -4002,7 +4002,7 @@
         },
         {
             "file": "index.js",
-            "line": 528,
+            "line": 525,
             "itemtype": "method",
             "name": "_checkLinuxBinary",
             "access": "private",
