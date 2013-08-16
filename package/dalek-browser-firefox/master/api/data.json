@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-browser-firefox",
         "description": "Firefox browser binding for DalekJS",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "url": "http://dalekjs.com"
     },
     "files": {
@@ -392,7 +392,7 @@
             "tag": "module",
             "file": "index.js",
             "line": 39,
-            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Mozilla Firefox.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-firefox --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browsers\": [\"firefox\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b firefox\n```\n\nBecause of the availability of the Firefox Marionette testing framework,\nDalek atm. can only drive the Firefox Aurora Debug builds.\n\nYou also have to add the location of the browser executable to you Dalekfile,\nbecause Dalek isn't capable of finding the executable yet on its own.\n\n```javascript\n\"browsers\": [{\n  \"firefox\": {\n    \"path\": \"~/Apps/FirefoxAuroraDebug.app/\"\n  }\n}]\n```\n\nThe Firefox plugin only implements a subset of Daleks Assertions & Actions, so if you run into any bugs,\nthe issue is most probably related to missing commands.",
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Mozilla Firefox.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-firefox --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browsers\": [\"firefox\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b firefox\n```\n\nBecause of the availability of the Firefox Marionette testing framework,\nDalek atm. can only drive the Firefox Nightly Debug builds.\nAlso, some weird change that the Mozillians have done to the testing framework,\nthe latest browser version dalek supports atm. is version 24, and to be exactly,\nthe version from the 18th of June.\n\nYou can get the browser here [http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/](http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/)\n\nDalek looks for the browser in the std. installation directory, if you installed the\nbrowser in a different place, you can add the location of the browser executable to you Dalekfile,\nbecause Dalek isn't capable of finding the executable yet on its own.\n\n```javascript\n\"browsers\": [{\n  \"firefox\": {\n    \"path\": \"~/Apps/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin\"\n  }\n}]\n```\n\nThe Firefox plugin only implements a subset of Daleks Assertions & Actions, so if you run into any bugs,\nthe issue is most probably related to missing commands.\nPlease report any issues you find, Thank you :)",
             "part": "Firefox",
             "api": ""
         }
@@ -746,7 +746,7 @@
             "namespace": "Browser",
             "file": "index.js",
             "line": 39,
-            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Mozilla Firefox.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-firefox --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browsers\": [\"firefox\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b firefox\n```\n\nBecause of the availability of the Firefox Marionette testing framework,\nDalek atm. can only drive the Firefox Aurora Debug builds.\n\nYou also have to add the location of the browser executable to you Dalekfile,\nbecause Dalek isn't capable of finding the executable yet on its own.\n\n```javascript\n\"browsers\": [{\n  \"firefox\": {\n    \"path\": \"~/Apps/FirefoxAuroraDebug.app/\"\n  }\n}]\n```\n\nThe Firefox plugin only implements a subset of Daleks Assertions & Actions, so if you run into any bugs,\nthe issue is most probably related to missing commands."
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Mozilla Firefox.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-firefox --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browsers\": [\"firefox\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b firefox\n```\n\nBecause of the availability of the Firefox Marionette testing framework,\nDalek atm. can only drive the Firefox Nightly Debug builds.\nAlso, some weird change that the Mozillians have done to the testing framework,\nthe latest browser version dalek supports atm. is version 24, and to be exactly,\nthe version from the 18th of June.\n\nYou can get the browser here [http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/](http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/)\n\nDalek looks for the browser in the std. installation directory, if you installed the\nbrowser in a different place, you can add the location of the browser executable to you Dalekfile,\nbecause Dalek isn't capable of finding the executable yet on its own.\n\n```javascript\n\"browsers\": [{\n  \"firefox\": {\n    \"path\": \"~/Apps/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin\"\n  }\n}]\n```\n\nThe Firefox plugin only implements a subset of Daleks Assertions & Actions, so if you run into any bugs,\nthe issue is most probably related to missing commands.\nPlease report any issues you find, Thank you :)"
         }
     },
     "classitems": [
@@ -3140,7 +3140,7 @@
         },
         {
             "file": "lib/commands/webdriver/window.js",
-            "line": 114,
+            "line": 128,
             "description": "Get the size of the specified window.\nIf the :windowHandle URL parameter is \"current\", the size of the currently active window will be returned.",
             "itemtype": "method",
             "name": "getWindowSize",
@@ -3165,7 +3165,7 @@
         },
         {
             "file": "lib/commands/webdriver/window.js",
-            "line": 131,
+            "line": 145,
             "description": "Change the position of the specified window.\nIf the :windowHandle URL parameter is \"current\", the currently active window will be moved.",
             "itemtype": "method",
             "name": "windowPosition",
@@ -3190,7 +3190,7 @@
         },
         {
             "file": "lib/commands/webdriver/window.js",
-            "line": 148,
+            "line": 162,
             "description": "Get the position of the specified window.\nIf the :windowHandle URL parameter is \"current\", the position of the currently active window will be returned.",
             "itemtype": "method",
             "name": "getWindowPosition",
@@ -3215,7 +3215,7 @@
         },
         {
             "file": "lib/commands/webdriver/window.js",
-            "line": 164,
+            "line": 178,
             "description": "Maximize the specified window if not already maximized.\nIf the :windowHandle URL parameter is \"current\", the currently active window will be maximized.",
             "itemtype": "method",
             "name": "windowMaximize",
@@ -3240,7 +3240,7 @@
         },
         {
             "file": "lib/commands/webdriver/window.js",
-            "line": 180,
+            "line": 194,
             "description": "Get the current browser orientation.\nThe server should return a valid orientation value {LANDSCAPE|PORTRAIT}.",
             "itemtype": "method",
             "name": "getOrientation",
@@ -3260,7 +3260,7 @@
         },
         {
             "file": "lib/commands/webdriver/window.js",
-            "line": 195,
+            "line": 209,
             "description": "Set the browser orientation.\nMust be one of the two values {LANDSCAPE|PORTRAIT}.",
             "itemtype": "method",
             "name": "orientation",
@@ -3285,7 +3285,7 @@
         },
         {
             "file": "lib/commands/webdriver/window.js",
-            "line": 212,
+            "line": 226,
             "description": "Gets the text of the currently displayed JavaScript alert(), confirm(), or prompt() dialog.",
             "itemtype": "method",
             "name": "dialogText",
@@ -3305,7 +3305,7 @@
         },
         {
             "file": "lib/commands/webdriver/window.js",
-            "line": 226,
+            "line": 240,
             "description": "Sends keystrokes to a JavaScript prompt() dialog.",
             "itemtype": "method",
             "name": "alertText",
@@ -3330,7 +3330,7 @@
         },
         {
             "file": "lib/commands/webdriver/window.js",
-            "line": 242,
+            "line": 256,
             "description": "Accepts the currently displayed alert dialog.\nUsually, this is equivalent to clicking on the 'OK' button in the dialog.",
             "itemtype": "method",
             "name": "acceptDialog",
@@ -3350,7 +3350,7 @@
         },
         {
             "file": "lib/commands/webdriver/window.js",
-            "line": 257,
+            "line": 271,
             "description": "Dismisses the currently displayed alert dialog.\nFor confirm() and prompt() dialogs, this is equivalent to clicking the 'Cancel' button.\nFor alert() dialogs, this is equivalent to clicking the 'OK' button.",
             "itemtype": "method",
             "name": "dismissDialog",
@@ -3706,7 +3706,7 @@
         },
         {
             "file": "index.js",
-            "line": 87,
+            "line": 94,
             "description": "Verbose version of the browser name",
             "itemtype": "property",
             "name": "longName",
@@ -3718,7 +3718,7 @@
         },
         {
             "file": "index.js",
-            "line": 97,
+            "line": 104,
             "description": "Default port of the FirefoxWebDriverServer\nThe port may change, cause the port conflict resultion\ntool might pick another one, if the default one is blocked",
             "itemtype": "property",
             "name": "port",
@@ -3730,7 +3730,7 @@
         },
         {
             "file": "index.js",
-            "line": 109,
+            "line": 116,
             "description": "Default port of the Marionette TCP service\nThe port may change, cause the port conflict resultion\ntool might pick another one, if the default one is blocked",
             "itemtype": "property",
             "name": "marionettePort",
@@ -3742,7 +3742,7 @@
         },
         {
             "file": "index.js",
-            "line": 121,
+            "line": 128,
             "description": "Default host of the FirefoxWebDriverServer\nThe host may be overriden with\na user configured value",
             "itemtype": "property",
             "name": "host",
@@ -3754,7 +3754,7 @@
         },
         {
             "file": "index.js",
-            "line": 133,
+            "line": 140,
             "description": "Root path of the FirefoxWebDriverServer",
             "itemtype": "property",
             "name": "path",
@@ -3766,7 +3766,7 @@
         },
         {
             "file": "index.js",
-            "line": 143,
+            "line": 150,
             "description": "Path to the Firefox binary file",
             "itemtype": "property",
             "name": "binary",
@@ -3778,7 +3778,7 @@
         },
         {
             "file": "index.js",
-            "line": 153,
+            "line": 160,
             "description": "Paths to the default Firefox binary files",
             "itemtype": "property",
             "name": "defaultBinaries",
@@ -3789,7 +3789,7 @@
         },
         {
             "file": "index.js",
-            "line": 166,
+            "line": 173,
             "description": "Child process instance of the Firefox browser",
             "itemtype": "property",
             "name": "spawned",
@@ -3801,7 +3801,7 @@
         },
         {
             "file": "index.js",
-            "line": 176,
+            "line": 183,
             "description": "Collected data about the created profile,\npath, name, etc.",
             "itemtype": "property",
             "name": "profile",
@@ -3813,7 +3813,7 @@
         },
         {
             "file": "index.js",
-            "line": 187,
+            "line": 194,
             "description": "Resolves the driver port",
             "itemtype": "method",
             "name": "getPort",
@@ -3827,7 +3827,7 @@
         },
         {
             "file": "index.js",
-            "line": 198,
+            "line": 205,
             "description": "Resolves the marionette port",
             "itemtype": "method",
             "name": "getMarionettePort",
@@ -3841,7 +3841,7 @@
         },
         {
             "file": "index.js",
-            "line": 209,
+            "line": 216,
             "description": "Returns the driver host",
             "itemtype": "method",
             "name": "getHost",
@@ -3855,7 +3855,7 @@
         },
         {
             "file": "index.js",
-            "line": 220,
+            "line": 227,
             "description": "Launches the FirefoxWebDriverServer & the browser",
             "itemtype": "method",
             "name": "launch",
@@ -3869,7 +3869,7 @@
         },
         {
             "file": "index.js",
-            "line": 250,
+            "line": 256,
             "description": "Kills the browser processes,\nshuts down the TCP (Marionette) & HTTP connection (Webdriver)\ndeletes the temp profile",
             "itemtype": "method",
             "name": "kill",
@@ -3880,7 +3880,7 @@
         },
         {
             "file": "index.js",
-            "line": 270,
+            "line": 276,
             "itemtype": "method",
             "name": "getBrowserBinary",
             "class": "Browser.FirefoxDriver",
@@ -3889,7 +3889,7 @@
         },
         {
             "file": "index.js",
-            "line": 297,
+            "line": 317,
             "itemtype": "method",
             "name": "_startBrowser",
             "access": "private",
@@ -3900,7 +3900,7 @@
         },
         {
             "file": "index.js",
-            "line": 321,
+            "line": 341,
             "description": "Consumes the console output when the browser is started",
             "itemtype": "method",
             "name": "_onBrowserStartup",
@@ -3912,7 +3912,7 @@
         },
         {
             "file": "index.js",
-            "line": 334,
+            "line": 354,
             "description": "Checks if the browser is ready for communication",
             "itemtype": "method",
             "name": "_browserIsReady",
@@ -3924,7 +3924,7 @@
         },
         {
             "file": "index.js",
-            "line": 345,
+            "line": 365,
             "description": "Creates a new firefox profile",
             "itemtype": "method",
             "name": "_createProfile",
@@ -3940,7 +3940,7 @@
         },
         {
             "file": "index.js",
-            "line": 384,
+            "line": 404,
             "description": "Creates user preferences for the profile\nSaves them in `user.js` in the newly created profile",
             "itemtype": "method",
             "name": "_createProfile",
@@ -3956,7 +3956,7 @@
         },
         {
             "file": "index.js",
-            "line": 417,
+            "line": 437,
             "description": "Deletes the user profile that has been created for this browser session",
             "itemtype": "method",
             "name": "_deleteProfile",
@@ -3969,7 +3969,7 @@
         },
         {
             "file": "index.js",
-            "line": 430,
+            "line": 450,
             "itemtype": "method",
             "name": "_checkUserSetBinary",
             "access": "private",
@@ -3980,7 +3980,7 @@
         },
         {
             "file": "index.js",
-            "line": 474,
+            "line": 511,
             "itemtype": "method",
             "name": "_checkBinarywin32",
             "access": "private",
@@ -3991,7 +3991,7 @@
         },
         {
             "file": "index.js",
-            "line": 485,
+            "line": 522,
             "itemtype": "method",
             "name": "_checkBinarydarwin",
             "access": "private",
@@ -4002,7 +4002,7 @@
         },
         {
             "file": "index.js",
-            "line": 496,
+            "line": 533,
             "itemtype": "method",
             "name": "_checkLinuxBinary",
             "access": "private",

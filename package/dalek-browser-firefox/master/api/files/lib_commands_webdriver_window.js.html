@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1</em>
+            <em>API Docs for: 0.0.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -248,7 +248,21 @@ module.exports = function (Driver) {
     name: &#x27;windowSize&#x27;,
     url: &#x27;/session/:sessionId/window/:windowHandle/size&#x27;,
     method: &#x27;post&#x27;,
-    params: {width: &#x27;width&#x27;, height: &#x27;height&#x27;}
+    params: {width: &#x27;width&#x27;, height: &#x27;height&#x27;},
+    onRequest: function (req, res) {
+      // load the marionette connection id &amp; then request the session id
+      this.events.emit(&#x27;marionette:cmd:windowSize&#x27;, {&#x27;sessionId&#x27;: req.params.sessionId, &#x27;value&#x27;: &#x27;window.resizeTo(&quot;&#x27; + req.body.height + &#x27;&quot;, &quot;&#x27; + req.body.width + &#x27;&quot;)&#x27; });
+      this.events.on(&#x27;marionette:cmd:windowSize:response&#x27;, function () {
+        var answer = {
+          sessionId: req.params.sessionId,
+          status: 0,
+          value: true
+        };
+
+        res.status(200);
+        res.send(JSON.stringify(answer));
+      }.bind(this));
+    }
   });
 
   /**

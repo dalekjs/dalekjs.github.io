@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1</em>
+            <em>API Docs for: 0.0.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -173,7 +173,18 @@
  * @namespace FirefoxDriver.Commands.Marionette
  */
 
-module.exports = function () {
+module.exports = function (Marionette) {
+
+  Marionette.addCommand({
+    name: &#x27;windowSize&#x27;,
+    request: {
+      to: &#x27;:marionetteId&#x27;,
+      session: &#x27;:sessionId&#x27;,
+      type: &#x27;executeScript&#x27;,
+      value: &#x27;:value&#x27;,
+      newSandbox: false
+    }
+  });
 
 };
 

@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">41.00</p>
+      <p class="stat">51.45</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">249</p>
+      <p class="stat">263</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">9.84</p>
+      <p class="stat">11.16</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.53</p>
+      <p class="stat">0.77</p>
     </div>
   </div>
 </div>
@@ -200,7 +200,21 @@ module.exports = function (Driver) {
     name: &#039;windowSize&#039;,
     url: &#039;/session/:sessionId/window/:windowHandle/size&#039;,
     method: &#039;post&#039;,
-    params: {width: &#039;width&#039;, height: &#039;height&#039;}
+    params: {width: &#039;width&#039;, height: &#039;height&#039;},
+    onRequest: function (req, res) {
+      // load the marionette connection id &amp; then request the session id
+      this.events.emit(&#039;marionette:cmd:windowSize&#039;, {&#039;sessionId&#039;: req.params.sessionId, &#039;value&#039;: &#039;window.resizeTo(&quot;&#039; + req.body.height + &#039;&quot;, &quot;&#039; + req.body.width + &#039;&quot;)&#039; });
+      this.events.on(&#039;marionette:cmd:windowSize:response&#039;, function () {
+        var answer = {
+          sessionId: req.params.sessionId,
+          status: 0,
+          value: true
+        };
+
+        res.status(200);
+        res.send(JSON.stringify(answer));
+      }.bind(this));
+    }
   });
 
   /**

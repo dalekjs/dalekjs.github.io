@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1</em>
+            <em>API Docs for: 0.0.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -199,21 +199,28 @@ var WebDriverServer = require(&#x27;./lib/webdriver&#x27;);
  * &#x60;&#x60;&#x60;
  *
  * Because of the availability of the Firefox Marionette testing framework,
- * Dalek atm. can only drive the Firefox Aurora Debug builds.
+ * Dalek atm. can only drive the Firefox Nightly Debug builds.
+ * Also, some weird change that the Mozillians have done to the testing framework,
+ * the latest browser version dalek supports atm. is version 24, and to be exactly,
+ * the version from the 18th of June.
  *
- * You also have to add the location of the browser executable to you Dalekfile,
+ * You can get the browser here [http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/](http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/)
+ *
+ * Dalek looks for the browser in the std. installation directory, if you installed the
+ * browser in a different place, you can add the location of the browser executable to you Dalekfile,
  * because Dalek isn&#x27;t capable of finding the executable yet on its own.
  *
  * &#x60;&#x60;&#x60;javascript
  * &quot;browsers&quot;: [{
  *   &quot;firefox&quot;: {
- *     &quot;path&quot;: &quot;~/Apps/FirefoxAuroraDebug.app/&quot;
+ *     &quot;path&quot;: &quot;~/Apps/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin&quot;
  *   }
  * }]
  * &#x60;&#x60;&#x60;
  *
  * The Firefox plugin only implements a subset of Daleks Assertions &amp; Actions, so if you run into any bugs,
  * the issue is most probably related to missing commands.
+ * Please report any issues you find, Thank you :)
  *
  * @module DalekJS
  * @class FirefoxDriver
@@ -298,9 +305,9 @@ var FirefoxDriver = {
    */
 
   defaultBinaries: {
-    mac: {
-      bin: &#x27;Contents/MacOS/firefox-bin&#x27;
-    }
+    linux: &#x27;firefox&#x27;,
+    darwin: process.env.HOME + &#x27;/Applications/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin&#x27;,
+    win32: process.env.ProgramFiles + &#x27;\\NightlyDebug\\firefox.exe&#x27;
   },
 
   /**
@@ -366,7 +373,6 @@ var FirefoxDriver = {
 
   launch: function (options) {
     var deferred = Q.defer();
-
     // init the webdriver server, marionette bindings &amp; the event glue
     this.events = new Events();
     this.events.setMaxListeners(-1);
@@ -414,23 +420,37 @@ var FirefoxDriver = {
 
   getBrowserBinary: function (options) {
     var deferred = Q.defer();
-    var methodName = &#x27;_checkBinary&#x27; + process.platform;
+    var defaultBinary = null;
+
+    if (process.platform === &#x27;darwin&#x27;) {
+      defaultBinary = this.defaultBinaries.darwin;
+    }
+
+    if (defaultBinary === null &amp;&amp; process.platform === &#x27;win32&#x27;) {
+      defaultBinary = this.defaultBinaries.win32;
+    }
+
+    if (defaultBinary === null) {
+      defaultBinary = this.defaultBinaries.linux;
+    }
 
     // check if the user has set a custom binary
-    if (options.path) {
+    if (options &amp;&amp; options.path) {
       this._checkUserSetBinary(options.path, deferred);
       return deferred.promise;
     }
 
-    // try to find the firefox binary
-    // check if it is NOT windows or mac
-    if(!this[methodName]) {
-      this._checkLinuxBinary(deferred);
-      return deferred.promise;
+    // check if the binary exists
+    if (fs.existsSync(defaultBinary)) {
+      this.binary = defaultBinary;
+      deferred.resolve(defaultBinary);
+    } else {
+      // TODO: Use daleks super awesome not yet implemented error handler...
+      console.log(&#x27;BINARY NOT FOUND:&#x27;, defaultBinary);
+      process.exit();
+      deferred.reject();
     }
 
-    // must be windows or mac
-    this[methodName](deferred);
     return deferred.promise;
   },
 
@@ -479,7 +499,7 @@ var FirefoxDriver = {
    */
 
   _browserIsReady: function (data) {
-    return (String(data).search(&#x27;== 12&#x27;) !== -1);
+    return (String(data).search(&#x27;about:blank&#x27;) !== -1);
   },
 
   /**
@@ -578,6 +598,16 @@ var FirefoxDriver = {
     // check the binary location on a per OS basis
     switch (process.platform) {
     case &#x27;win32&#x27;:
+      // check if the binary exists
+      if (fs.existsSync(userPath)) {
+        this.binary = userPath;
+        deferred.resolve(userPath);
+      } else {
+        // TODO: Use daleks super awesome not yet implemented error handler...
+        console.log(&#x27;BINARY NOT FOUND:&#x27;, userPath);
+        process.exit();
+        deferred.reject();
+      }
       break;
     case &#x27;darwin&#x27;:
       // check if we need to replace the users home directory
@@ -589,9 +619,6 @@ var FirefoxDriver = {
       if (userPath[userPath.length - 1] !== &#x27;/&#x27;) {
         userPath += &#x27;/&#x27;;
       }
-
-      // add the default binary location
-      userPath += this.defaultBinaries.mac.bin;
 
       // check if the binary exists
       if (fs.existsSync(userPath)) {
@@ -605,6 +632,16 @@ var FirefoxDriver = {
       }
       break;
     default:
+      // check if the binary exists
+      if (fs.existsSync(userPath)) {
+        this.binary = userPath;
+        deferred.resolve(userPath);
+      } else {
+        // TODO: Use daleks super awesome not yet implemented error handler...
+        console.log(&#x27;BINARY NOT FOUND:&#x27;, userPath);
+        process.exit();
+        deferred.reject();
+      }
       break;
     }
 
