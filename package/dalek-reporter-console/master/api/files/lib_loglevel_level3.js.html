@@ -164,6 +164,11 @@ module.exports = LogLevel3;
  */
 
 LogLevel3.prototype.outputAction = function (data) {
+  // check for &#x60;nonsense&#x60; values
+  if (data.value === null || typeof data.value === &#x27;undefined&#x27;) {
+    data.value = &#x27;&#x27;;
+  }
+
   this.echo(this.symbol(&#x27;&gt;&#x27;), {nl: false, ec: true, foreground: &#x27;yellow&#x27;});
   this.echo(data.type.toUpperCase() + &#x27; &#x27; + data.value, {foreground: &#x27;yellow&#x27;});
   return this;

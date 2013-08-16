@@ -195,13 +195,17 @@ LogLevel2.prototype.outputAssertionResult = function (data) {
   if (data.success) {
     this.echo(this.symbol(&#x27;*&#x27;), {nl: false, ec: true, foreground: &#x27;greenBright&#x27;});
     this.echo(data.type.toUpperCase(), {nl: false, ec: true, foreground: &#x27;magentaBright&#x27;});
-    this.echo(data.message, {foreground: &#x27;greenBright&#x27;});
+    if (data.message) {
+      this.echo(data.message, {foreground: &#x27;greenBright&#x27;});
+    }
   } else {
     this.echo(this.symbol(&#x27;x&#x27;), {nl: false, ec: true, foreground: &#x27;redBright&#x27;});
     this.echo(data.type.toUpperCase(), {foreground: &#x27;redBright&#x27;});
     this.echo(&#x27;EXPECTED: &#x27; + data.expected, {indent: 4, foreground: &#x27;magentaBright&#x27;});
     this.echo(&#x27;FOUND: &#x27; + data.value, {indent: 4, foreground: &#x27;magentaBright&#x27;});
-    this.echo(&#x27;MESSAGE: &#x27; + data.message, {indent: 4, foreground: &#x27;magentaBright&#x27;});
+    if (data.message) {
+      this.echo(&#x27;MESSAGE: &#x27; + data.message, {indent: 4, foreground: &#x27;magentaBright&#x27;});
+    }
   }
   return this;
 };
