@@ -1455,6 +1455,19 @@ Assertions.prototype.contain = function (expected, message) {
   return this.generateTestHelper(&#x27;contain&#x27;, &#x27;_contain&#x27;, false)(expected, message);
 };
 
+/**
+ * Match helper
+ *
+ * @method match
+ * @param {string} expected Regex to match on
+ * @param {string} message Test message
+ * @chainable
+ */
+
+Assertions.prototype.match = function (expected, message) {
+  return this.generateTestHelper(&#x27;match&#x27;, &#x27;_match&#x27;, false)(expected, message);
+};
+
 // HELPER METHODS
 // --------------
 
@@ -1750,6 +1763,26 @@ Assertions.prototype._testTruthy = function (a) {
 
 Assertions.prototype._testFalsy = function (a) {
   return a === &#x27;false&#x27; || a === false;
+};
+
+/**
+ * Assert a given value matches a regex
+ *
+ * @method _contain
+ * @param {mixed} a Value to test
+ * @param {string} b Value to compare
+ * @return {bool} testresult
+ * @private
+ */
+
+Assertions.prototype._match = function (a, b) {
+  try {
+    chai.expect(b).to.match(a);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
 };
 
     </pre>

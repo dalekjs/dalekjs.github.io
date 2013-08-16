@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">66.81</p>
+      <p class="stat">67.05</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">1640</p>
+      <p class="stat">1673</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">91.76</p>
+      <p class="stat">91.11</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">7.74</p>
+      <p class="stat">7.89</p>
     </div>
   </div>
 </div>
@@ -1457,6 +1457,19 @@ Assertions.prototype.contain = function (expected, message) {
   return this.generateTestHelper(&#039;contain&#039;, &#039;_contain&#039;, false)(expected, message);
 };
 
+/**
+ * Match helper
+ *
+ * @method match
+ * @param {string} expected Regex to match on
+ * @param {string} message Test message
+ * @chainable
+ */
+
+Assertions.prototype.match = function (expected, message) {
+  return this.generateTestHelper(&#039;match&#039;, &#039;_match&#039;, false)(expected, message);
+};
+
 // HELPER METHODS
 // --------------
 
@@ -1752,6 +1765,26 @@ Assertions.prototype._testTruthy = function (a) {
 
 Assertions.prototype._testFalsy = function (a) {
   return a === &#039;false&#039; || a === false;
+};
+
+/**
+ * Assert a given value matches a regex
+ *
+ * @method _contain
+ * @param {mixed} a Value to test
+ * @param {string} b Value to compare
+ * @return {bool} testresult
+ * @private
+ */
+
+Assertions.prototype._match = function (a, b) {
+  try {
+    chai.expect(b).to.match(a);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
 };</textarea>
   </div>
 </div>

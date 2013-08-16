@@ -961,7 +961,30 @@
         },
         {
             "file": "index.js",
-            "line": 1371,
+            "line": 1368,
+            "description": "Match helper",
+            "itemtype": "method",
+            "name": "match",
+            "params": [
+                {
+                    "name": "expected",
+                    "description": "Regex to match on",
+                    "type": "String"
+                },
+                {
+                    "name": "message",
+                    "description": "Test message",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.Internal.Assertions",
+            "module": "Assertions",
+            "namespace": "Dalek.Internal"
+        },
+        {
+            "file": "index.js",
+            "line": 1384,
             "description": "Generates a callback that will be fired when the action has been completed.\nThe callback itself will then validate the answer and will also emit an event\nthat the action has been successfully executed.",
             "itemtype": "method",
             "name": "_generateCallbackAssertion",
@@ -989,7 +1012,7 @@
         },
         {
             "file": "index.js",
-            "line": 1412,
+            "line": 1425,
             "description": "Adds a method to the queue of actions/assertions to execute",
             "itemtype": "method",
             "name": "_addToActionQueue",
@@ -1019,7 +1042,7 @@
         },
         {
             "file": "index.js",
-            "line": 1435,
+            "line": 1448,
             "description": "Generates a function that can be used",
             "itemtype": "method",
             "name": "generateTestHelper",
@@ -1048,7 +1071,7 @@
         },
         {
             "file": "index.js",
-            "line": 1491,
+            "line": 1504,
             "description": "Assert if a given value shallow equals a snd. given value",
             "itemtype": "method",
             "name": "_testShallowEquals",
@@ -1076,7 +1099,7 @@
         },
         {
             "file": "index.js",
-            "line": 1511,
+            "line": 1524,
             "description": "Assert if a given value shallow does not equal a snd. given value",
             "itemtype": "method",
             "name": "_testShallowUnequals",
@@ -1104,7 +1127,7 @@
         },
         {
             "file": "index.js",
-            "line": 1531,
+            "line": 1544,
             "description": "Assert if a given value matches a range",
             "itemtype": "method",
             "name": "_testBetween",
@@ -1132,7 +1155,7 @@
         },
         {
             "file": "index.js",
-            "line": 1551,
+            "line": 1564,
             "description": "Assert if a given value is greater than the value to compare",
             "itemtype": "method",
             "name": "_testGreaterThan",
@@ -1160,7 +1183,7 @@
         },
         {
             "file": "index.js",
-            "line": 1571,
+            "line": 1584,
             "description": "Assert if a given value is greater or equal than the value to compare",
             "itemtype": "method",
             "name": "_testGreaterThanEqual",
@@ -1188,7 +1211,7 @@
         },
         {
             "file": "index.js",
-            "line": 1585,
+            "line": 1598,
             "description": "Assert if a given value is lower than the value to compare",
             "itemtype": "method",
             "name": "_testLowerThan",
@@ -1216,7 +1239,7 @@
         },
         {
             "file": "index.js",
-            "line": 1605,
+            "line": 1618,
             "description": "Assert if a given value contain another value",
             "itemtype": "method",
             "name": "_contain",
@@ -1244,7 +1267,7 @@
         },
         {
             "file": "index.js",
-            "line": 1625,
+            "line": 1638,
             "description": "Assert if a given value is lower or equal than the value to compare",
             "itemtype": "method",
             "name": "_testLowerThanEqual",
@@ -1272,7 +1295,7 @@
         },
         {
             "file": "index.js",
-            "line": 1639,
+            "line": 1652,
             "description": "Assert if a given value is boolean 'true'",
             "itemtype": "method",
             "name": "_testTruthy",
@@ -1295,7 +1318,7 @@
         },
         {
             "file": "index.js",
-            "line": 1652,
+            "line": 1665,
             "description": "Assert if a given value is boolean 'false'",
             "itemtype": "method",
             "name": "_testFalsy",
@@ -1308,6 +1331,34 @@
             ],
             "return": {
                 "description": "true if value is false, false if value is true",
+                "type": "Bool"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Internal.Assertions",
+            "module": "Assertions",
+            "namespace": "Dalek.Internal"
+        },
+        {
+            "file": "index.js",
+            "line": 1678,
+            "description": "Assert a given value matches a regex",
+            "itemtype": "method",
+            "name": "_contain",
+            "params": [
+                {
+                    "name": "a",
+                    "description": "Value to test",
+                    "type": "Mixed"
+                },
+                {
+                    "name": "b",
+                    "description": "Value to compare",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "testresult",
                 "type": "Bool"
             },
             "access": "private",
