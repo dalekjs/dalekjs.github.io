@@ -615,11 +615,6 @@ var FirefoxDriver = {
         userPath = userPath.replace(&#x27;~&#x27;, process.env.HOME);
       }
 
-      // check if we need to add a trailing slash
-      if (userPath[userPath.length - 1] !== &#x27;/&#x27;) {
-        userPath += &#x27;/&#x27;;
-      }
-
       // check if the binary exists
       if (fs.existsSync(userPath)) {
         this.binary = userPath;

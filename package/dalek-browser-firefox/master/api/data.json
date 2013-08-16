@@ -3980,7 +3980,7 @@
         },
         {
             "file": "index.js",
-            "line": 511,
+            "line": 506,
             "itemtype": "method",
             "name": "_checkBinarywin32",
             "access": "private",
@@ -3991,7 +3991,7 @@
         },
         {
             "file": "index.js",
-            "line": 522,
+            "line": 517,
             "itemtype": "method",
             "name": "_checkBinarydarwin",
             "access": "private",
@@ -4002,7 +4002,7 @@
         },
         {
             "file": "index.js",
-            "line": 533,
+            "line": 528,
             "itemtype": "method",
             "name": "_checkLinuxBinary",
             "access": "private",
