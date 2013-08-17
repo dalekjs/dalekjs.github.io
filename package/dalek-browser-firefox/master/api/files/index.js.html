@@ -171,6 +171,7 @@ var path = require(&#x27;path&#x27;);
 var fs = require(&#x27;fs&#x27;);
 var Q = require(&#x27;q&#x27;);
 var rimraf = require(&#x27;rimraf&#x27;);
+var which = require(&#x27;which&#x27;).sync;
 
 // int. libs
 var Marionette = require(&#x27;./lib/marionette&#x27;);
@@ -302,7 +303,7 @@ var FirefoxDriver = {
    */
 
   defaultBinaries: {
-    linux: &#x27;firefox&#x27;,
+    linux: which(&#x27;firefox&#x27;),
     darwin: process.env.HOME + &#x27;/Applications/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin&#x27;,
     win32: process.env.ProgramFiles + &#x27;\\NightlyDebug\\firefox.exe&#x27;
   },
@@ -372,7 +373,7 @@ var FirefoxDriver = {
     var deferred = Q.defer();
     // init the webdriver server, marionette bindings &amp; the event glue
     this.events = new Events();
-    this.events.setMaxListeners(-1);
+    this.events.setMaxListeners(Infinity);
     this.marionette = new Marionette(this.events);
     this.webDriverServer = new WebDriverServer(this.events);
 
@@ -524,7 +525,7 @@ var FirefoxDriver = {
       }
 
       // grep the profile data
-      var m = data.match(/^Success: created profile &#x27;[^&#x27;]+&#x27; at &#x27;([^&#x27;]+)/);
+      var m = data.match(/Success: created profile &#x27;[^&#x27;]+&#x27; at &#x27;([^&#x27;]+)/);
       var profilePath = path.join(path.dirname(m[1]));
 
       // create the user preferences
