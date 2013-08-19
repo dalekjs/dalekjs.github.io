@@ -3462,7 +3462,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
 &lt;/body&gt;</code></pre>
 <pre><code class="lang-javascript">test
   .open(&#39;http://doctor.thedoctor.com/doctor&#39;)
-  .doesntExist(&#39;#the-master&#39;, &#39;The master element has not been seen&#39;)
+  .assert.doesntExist(&#39;#the-master&#39;, &#39;The master element has not been seen&#39;)
   .done();</code></pre>
 
     </div>
@@ -3720,7 +3720,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
     <div class="description">
         <p>Asserts that the pages url does not match the expectation.</p>
 <pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
-    .url(&#39;http://doctorwhotv.co.uk/&#39;, &#39;Url is as expected&#39;)
+    .assert.doesntHaveUrl(&#39;http://doctorwhotv.co.uk/&#39;, &#39;Url is not expected&#39;)
     .done();</code></pre>
 
     </div>
@@ -5604,29 +5604,29 @@ are ending up in your rendered markup on your page.</p>
   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
 &lt;/section&gt;</code></pre>
 <p>The simple solution is to check if all these elements are present</p>
-<pre><code class="lang-javascript">test.numberOfElements(&#39;#blog-overview .teaser&#39;, 4, &#39;4 blog teasers are present&#39;)</code></pre>
+<pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;, 4, &#39;4 blog teasers are present&#39;)</code></pre>
 <p>The alternate syntax for this is:</p>
-<pre><code class="lang-javascript">test.numberOfElements(&#39;#blog-overview .teaser&#39;)
+<pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is(4, &#39;4 blog teasers are present&#39;)</code></pre>
 <p>If you are not sure how many elements will exactly end up in your markup,
 you could use the between assertion handler</p>
-<pre><code class="lang-javascript">test.numberOfElements(&#39;#blog-overview .teaser&#39;)
+<pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is.between([2, 6], &#39;Between 2 and 6 blog teasers are present&#39;)</code></pre>
 <p>If you dealing with the situation that you have a minimum of elements,
 you expect, you can use this helper...</p>
-<pre><code class="lang-javascript">test.numberOfElements(&#39;#blog-overview .teaser&#39;)
+<pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is.gt(2, &#39;At least 3 blog teasers are present&#39;)</code></pre>
 <p>... if you want to know if its &#39;greater than equal&#39;, you can use this one...</p>
-<pre><code class="lang-javascript">test.numberOfElements(&#39;#blog-overview .teaser&#39;)
+<pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is.gte(2, &#39;At least 2 blog teasers are present&#39;)</code></pre>
 <p>... as well as their &#39;lower than&#39; and &#39;lower than equal&#39; equivalents</p>
-<pre><code class="lang-javascript">test.numberOfElements(&#39;#blog-overview .teaser&#39;)
+<pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is.lt(5, &#39;Less than 5 blog teasers are present&#39;)</code></pre>
-<pre><code class="lang-javascript">test.numberOfElements(&#39;#blog-overview .teaser&#39;)
+<pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is.lte(5, &#39;Less than, or 5 blog teasers are present&#39;)</code></pre>
 <p>And if you just wan&#39;t to know, if a certain amount of teasers isn&#39;t present,
 you can still use the not() assertion helper</p>
-<pre><code class="lang-javascript">test.numberOfElements(&#39;#blog-overview .teaser&#39;)
+<pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is.not(5, &#39;There are more or less than 5 teasers present&#39;)</code></pre>
 
     </div>
@@ -5772,29 +5772,29 @@ you can still use the not() assertion helper</p>
    &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
  &lt;/section&gt;</code></pre>
 <p>The simple solution is to check if all these elements are visible</p>
-<pre><code class="lang-javascript"> test.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;, 4, &#39;4 blog teasers are visible&#39;)</code></pre>
+<pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;, 4, &#39;4 blog teasers are visible&#39;)</code></pre>
 <p> The alternate syntax for this is:</p>
-<pre><code class="lang-javascript"> test.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+<pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
      .is(4, &#39;4 blog teasers are visible&#39;)</code></pre>
 <p>If you are not sure how many elements will exactly be shown in the current viewport,
  you could use the between assertion handler</p>
-<pre><code class="lang-javascript"> test.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+<pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
      .is.between(2, 6, &#39;Between 2 and 6 blog teasers are visible&#39;)</code></pre>
 <p>If you dealing with the situation that you have a minimum of elements,
  you expect, you can use this helper...</p>
-<pre><code class="lang-javascript"> test.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+<pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
      .is.gt(2, &#39;At least 3 blog teasers are visible&#39;)</code></pre>
 <p> ... if you want to know if its &#39;greater than equal&#39;, you can use this one...</p>
-<pre><code class="lang-javascript"> test.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+<pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
      .is.gte(2, &#39;At least 2 blog teasers are visible&#39;)</code></pre>
 <p> ... as well as their &#39;lower than&#39; and &#39;lower than equal&#39; equivalents</p>
-<pre><code class="lang-javascript"> test.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+<pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
      .is.lt(5, &#39;Less than 5 blog teasers are visible&#39;)</code></pre>
-<pre><code class="lang-javascript"> test.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+<pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
      .is.lte(5, &#39;Less than, or 5 blog teasers are visible&#39;)</code></pre>
 <p> And if you just wan&#39;t to know, if a certain amount of teasers isn&#39;t visible,
  you can still use the &#39;:not(): assertion helper</p>
-<pre><code class="lang-javascript"> test.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+<pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
      .is.not(5, &#39;There are more or less than 5 teasers visible&#39;)</code></pre>
 
     </div>
@@ -6320,15 +6320,15 @@ you can still use the not() assertion helper</p>
     <div class="description">
         <p>Asserts that the page title is as expected.</p>
 <pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
-    .title(&#39;Doctor Who TV&#39;, &#39;Not your daleks tv&#39;)
+    .assert.title(&#39;Doctor Who TV&#39;, &#39;Not your daleks tv&#39;)
     .done();</code></pre>
 <p>Yep, using assertion helpers is also possible:</p>
 <pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
-    .title().is(&#39;Doctor Who TV&#39;, &#39;Not your daleks tv&#39;)
+    .assert.title().is(&#39;Doctor Who TV&#39;, &#39;Not your daleks tv&#39;)
     .done();</code></pre>
 <p>and the not() helper is available too:</p>
 <pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
-    .title().is.not(&#39;Dalek Emperor TV&#39;, &#39;Not your daleks tv&#39;)
+    .assert.title().is.not(&#39;Dalek Emperor TV&#39;, &#39;Not your daleks tv&#39;)
     .done();</code></pre>
 
     </div>
@@ -6444,7 +6444,7 @@ you can still use the not() assertion helper</p>
     <div class="description">
         <p>Asserts that given title does not match the given expactions</p>
 <pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
-    .doesntHaveTitle(&#39;Dalek Emperor TV&#39;, &#39;Not your daleks tv&#39;)
+    .assert.doesntHaveTitle(&#39;Dalek Emperor TV&#39;, &#39;Not your daleks tv&#39;)
     .done();</code></pre>
 
     </div>
@@ -6560,20 +6560,20 @@ you can still use the not() assertion helper</p>
     <div class="description">
         <p>Asserts that the pages url is as expected.</p>
 <pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
-    .url(&#39;http://doctorwhotv.co.uk/&#39;, &#39;Url is as expected&#39;)
+    .assert.url(&#39;http://doctorwhotv.co.uk/&#39;, &#39;Url is as expected&#39;)
     .done();</code></pre>
 <p>You can also check if the protocol changend,
 nice to see when you open github with http instead of https</p>
 <pre><code class="lang-javascript">  test.open(&#39;http://github.com&#39;)
-    .url(&#39;https://github.com/&#39;, &#39;Changed prototcols&#39;)
+    .assert.url(&#39;https://github.com/&#39;, &#39;Changed prototcols&#39;)
     .done();</code></pre>
 <p>Yep, using assertion helpersx is also possible:</p>
 <pre><code class="lang-javascript">  test.open(&#39;http://github.com&#39;)
-    .url().is(&#39;http://doctorwhotv.co.uk/&#39;, &#39;Url is as expected&#39;)
+    .assert.url().is(&#39;http://doctorwhotv.co.uk/&#39;, &#39;Url is as expected&#39;)
     .done();</code></pre>
 <p>and the not() helper is available too:</p>
 <pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
-    .url().is.not(&#39;http://doctorwhotv.co.uk/&#39;, &#39;Url is as expected&#39;)
+    .assert.url().is.not(&#39;http://doctorwhotv.co.uk/&#39;, &#39;Url is as expected&#39;)
     .done();</code></pre>
 
     </div>
@@ -6704,20 +6704,20 @@ is currently selected.</p>
   &lt;/select&gt;
 &lt;/form&gt;</code></pre>
 <pre><code class="lang-javascript">test
-  .val(&#39;#the-doctors&#39;, 10, &#39;David is the favourite&#39;)
+  .assert.val(&#39;#the-doctors&#39;, 10, &#39;David is the favourite&#39;)
   // lets change the favourite by selection the last option
  .click(&#39;#the-doctors option:last&#39;)
- .val(&#39;#the-doctors&#39;, 11, &#39;Matt is now my favourite, bow ties are cool&#39;)</code></pre>
+ .assert.val(&#39;#the-doctors&#39;, 11, &#39;Matt is now my favourite, bow ties are cool&#39;)</code></pre>
 <p>This assertion is capable of getting the values from every form element
 that holds a value attribute</p>
 <p>Getting texts out of normal input fields is pretty straight forward</p>
 <pre><code class="lang-html">&lt;label for=&quot;fav-enemy&quot;&gt;Tell my your favourity Who enemy:&lt;/label&gt;
 &lt;input id=&quot;fav-enemy&quot; name=&quot;fav-enemy&quot; type=&quot;text&quot; value=&quot;Daleks&quot; /&gt;</code></pre>
 <pre><code class="lang-javascript">test
-  .val(&#39;#fav-enemy&#39;, &#39;Daleks&#39;, &#39;Daleks are so cute&#39;)
+  .assert.val(&#39;#fav-enemy&#39;, &#39;Daleks&#39;, &#39;Daleks are so cute&#39;)
   // lets change the favourite by typing smth. new
  .type(&#39;#fav-enemy&#39;, &#39;Cyberman&#39;)
- .val(&#39;#fav-enemy&#39;, &#39;Cyberman&#39;, &#39;Cyberman are so cyber&#39;)</code></pre>
+ .assert.val(&#39;#fav-enemy&#39;, &#39;Cyberman&#39;, &#39;Cyberman are so cyber&#39;)</code></pre>
 
     </div>
 

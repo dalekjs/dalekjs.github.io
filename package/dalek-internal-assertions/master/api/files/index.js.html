@@ -271,12 +271,12 @@ Assertions.prototype.resourceExists = function (url, message) {
  * The simple solution is to check if all these elements are present
  *
  * &#x60;&#x60;&#x60;javascript
- * test.numberOfElements(&#x27;#blog-overview .teaser&#x27;, 4, &#x27;4 blog teasers are present&#x27;)
+ * test.assert.numberOfElements(&#x27;#blog-overview .teaser&#x27;, 4, &#x27;4 blog teasers are present&#x27;)
  * &#x60;&#x60;&#x60;
  * The alternate syntax for this is:
  *
  * &#x60;&#x60;&#x60;javascript
- * test.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
+ * test.assert.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
  *     .is(4, &#x27;4 blog teasers are present&#x27;)
  * &#x60;&#x60;&#x60;
  *
@@ -284,7 +284,7 @@ Assertions.prototype.resourceExists = function (url, message) {
  * you could use the between assertion handler
  *
  * &#x60;&#x60;&#x60;javascript
- * test.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
+ * test.assert.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
  *     .is.between([2, 6], &#x27;Between 2 and 6 blog teasers are present&#x27;)
  * &#x60;&#x60;&#x60;
  *
@@ -292,31 +292,31 @@ Assertions.prototype.resourceExists = function (url, message) {
  * you expect, you can use this helper...
  *
  * &#x60;&#x60;&#x60;javascript
- * test.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
+ * test.assert.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
  *     .is.gt(2, &#x27;At least 3 blog teasers are present&#x27;)
  * &#x60;&#x60;&#x60;
  * ... if you want to know if its &#x27;greater than equal&#x27;, you can use this one...
  *
  * &#x60;&#x60;&#x60;javascript
- * test.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
+ * test.assert.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
  *     .is.gte(2, &#x27;At least 2 blog teasers are present&#x27;)
  * &#x60;&#x60;&#x60;
  * ... as well as their &#x27;lower than&#x27; and &#x27;lower than equal&#x27; equivalents
  *
  * &#x60;&#x60;&#x60;javascript
- * test.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
+ * test.assert.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
  *     .is.lt(5, &#x27;Less than 5 blog teasers are present&#x27;)
  * &#x60;&#x60;&#x60;
  *
  * &#x60;&#x60;&#x60;javascript
- * test.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
+ * test.assert.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
  *     .is.lte(5, &#x27;Less than, or 5 blog teasers are present&#x27;)
  * &#x60;&#x60;&#x60;
  * And if you just wan&#x27;t to know, if a certain amount of teasers isn&#x27;t present,
  * you can still use the not() assertion helper
  *
  * &#x60;&#x60;&#x60;javascript
- * test.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
+ * test.assert.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
  *     .is.not(5, &#x27;There are more or less than 5 teasers present&#x27;)
  * &#x60;&#x60;&#x60;
  *
@@ -362,12 +362,12 @@ Assertions.prototype.numberOfElements = function (selector, expected, message) {
  * The simple solution is to check if all these elements are visible
  *
  * &#x60;&#x60;&#x60;javascript
- * test.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;, 4, &#x27;4 blog teasers are visible&#x27;)
+ * test.assert.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;, 4, &#x27;4 blog teasers are visible&#x27;)
  * &#x60;&#x60;&#x60;
  * The alternate syntax for this is:
  *
  * &#x60;&#x60;&#x60;javascript
- * test.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
+ * test.assert.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
  *     .is(4, &#x27;4 blog teasers are visible&#x27;)
  * &#x60;&#x60;&#x60;
  *
@@ -375,7 +375,7 @@ Assertions.prototype.numberOfElements = function (selector, expected, message) {
  * you could use the between assertion handler
  *
  * &#x60;&#x60;&#x60;javascript
- * test.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
+ * test.assert.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
  *     .is.between(2, 6, &#x27;Between 2 and 6 blog teasers are visible&#x27;)
  * &#x60;&#x60;&#x60;
  *
@@ -383,31 +383,31 @@ Assertions.prototype.numberOfElements = function (selector, expected, message) {
  * you expect, you can use this helper...
  *
  * &#x60;&#x60;&#x60;javascript
- * test.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
+ * test.assert.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
  *     .is.gt(2, &#x27;At least 3 blog teasers are visible&#x27;)
  * &#x60;&#x60;&#x60;
  * ... if you want to know if its &#x27;greater than equal&#x27;, you can use this one...
  *
  * &#x60;&#x60;&#x60;javascript
- * test.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
+ * test.assert.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
  *     .is.gte(2, &#x27;At least 2 blog teasers are visible&#x27;)
  * &#x60;&#x60;&#x60;
  * ... as well as their &#x27;lower than&#x27; and &#x27;lower than equal&#x27; equivalents
  *
  * &#x60;&#x60;&#x60;javascript
- * test.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
+ * test.assert.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
  *     .is.lt(5, &#x27;Less than 5 blog teasers are visible&#x27;)
  * &#x60;&#x60;&#x60;
  *
  * &#x60;&#x60;&#x60;javascript
- * test.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
+ * test.assert.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
  *     .is.lte(5, &#x27;Less than, or 5 blog teasers are visible&#x27;)
  * &#x60;&#x60;&#x60;
  * And if you just wan&#x27;t to know, if a certain amount of teasers isn&#x27;t visible,
  * you can still use the &#x27;:not(): assertion helper
  *
  * &#x60;&#x60;&#x60;javascript
- * test.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
+ * test.assert.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
  *     .is.not(5, &#x27;There are more or less than 5 teasers visible&#x27;)
  * &#x60;&#x60;&#x60;
  *
@@ -451,10 +451,10 @@ Assertions.prototype.numberOfVisibleElements = function (selector, expected, mes
  *
  * &#x60;&#x60;&#x60;javascript
  * test
- *   .val(&#x27;#the-doctors&#x27;, 10, &#x27;David is the favourite&#x27;)
+ *   .assert.val(&#x27;#the-doctors&#x27;, 10, &#x27;David is the favourite&#x27;)
  *   // lets change the favourite by selection the last option
  *  .click(&#x27;#the-doctors option:last&#x27;)
- *  .val(&#x27;#the-doctors&#x27;, 11, &#x27;Matt is now my favourite, bow ties are cool&#x27;)
+ *  .assert.val(&#x27;#the-doctors&#x27;, 11, &#x27;Matt is now my favourite, bow ties are cool&#x27;)
  * &#x60;&#x60;&#x60;
  *
  * This assertion is capable of getting the values from every form element
@@ -469,10 +469,10 @@ Assertions.prototype.numberOfVisibleElements = function (selector, expected, mes
  *
  * &#x60;&#x60;&#x60;javascript
  * test
- *   .val(&#x27;#fav-enemy&#x27;, &#x27;Daleks&#x27;, &#x27;Daleks are so cute&#x27;)
+ *   .assert.val(&#x27;#fav-enemy&#x27;, &#x27;Daleks&#x27;, &#x27;Daleks are so cute&#x27;)
  *   // lets change the favourite by typing smth. new
  *  .type(&#x27;#fav-enemy&#x27;, &#x27;Cyberman&#x27;)
- *  .val(&#x27;#fav-enemy&#x27;, &#x27;Cyberman&#x27;, &#x27;Cyberman are so cyber&#x27;)
+ *  .assert.val(&#x27;#fav-enemy&#x27;, &#x27;Cyberman&#x27;, &#x27;Cyberman are so cyber&#x27;)
  * &#x60;&#x60;&#x60;
  *
  * @api
@@ -894,7 +894,7 @@ Assertions.prototype.exists = function (selector, message) {
  * &#x60;&#x60;&#x60;javascript
  * test
  *   .open(&#x27;http://doctor.thedoctor.com/doctor&#x27;)
- *   .doesntExist(&#x27;#the-master&#x27;, &#x27;The master element has not been seen&#x27;)
+ *   .assert.doesntExist(&#x27;#the-master&#x27;, &#x27;The master element has not been seen&#x27;)
  *   .done();
  * &#x60;&#x60;&#x60;
  *
@@ -1162,7 +1162,7 @@ Assertions.prototype.dialogText = function (expected, message) {
  *
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
- *     .title(&#x27;Doctor Who TV&#x27;, &#x27;Not your daleks tv&#x27;)
+ *     .assert.title(&#x27;Doctor Who TV&#x27;, &#x27;Not your daleks tv&#x27;)
  *     .done();
  * &#x60;&#x60;&#x60;
  *
@@ -1170,7 +1170,7 @@ Assertions.prototype.dialogText = function (expected, message) {
  *
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
- *     .title().is(&#x27;Doctor Who TV&#x27;, &#x27;Not your daleks tv&#x27;)
+ *     .assert.title().is(&#x27;Doctor Who TV&#x27;, &#x27;Not your daleks tv&#x27;)
  *     .done();
  * &#x60;&#x60;&#x60;
  *
@@ -1178,7 +1178,7 @@ Assertions.prototype.dialogText = function (expected, message) {
  *
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
- *     .title().is.not(&#x27;Dalek Emperor TV&#x27;, &#x27;Not your daleks tv&#x27;)
+ *     .assert.title().is.not(&#x27;Dalek Emperor TV&#x27;, &#x27;Not your daleks tv&#x27;)
  *     .done();
  * &#x60;&#x60;&#x60;
  *
@@ -1201,7 +1201,7 @@ Assertions.prototype.title = function (expected, message) {
  *
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
- *     .doesntHaveTitle(&#x27;Dalek Emperor TV&#x27;, &#x27;Not your daleks tv&#x27;)
+ *     .assert.doesntHaveTitle(&#x27;Dalek Emperor TV&#x27;, &#x27;Not your daleks tv&#x27;)
  *     .done();
  * &#x60;&#x60;&#x60;
  *
@@ -1224,7 +1224,7 @@ Assertions.prototype.doesntHaveTitle = function (expected, message) {
  *
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
- *     .url(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;Url is as expected&#x27;)
+ *     .assert.url(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;Url is as expected&#x27;)
  *     .done();
  * &#x60;&#x60;&#x60;
  *
@@ -1233,7 +1233,7 @@ Assertions.prototype.doesntHaveTitle = function (expected, message) {
  *
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://github.com&#x27;)
- *     .url(&#x27;https://github.com/&#x27;, &#x27;Changed prototcols&#x27;)
+ *     .assert.url(&#x27;https://github.com/&#x27;, &#x27;Changed prototcols&#x27;)
  *     .done();
  * &#x60;&#x60;&#x60;
  *
@@ -1241,7 +1241,7 @@ Assertions.prototype.doesntHaveTitle = function (expected, message) {
  *
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://github.com&#x27;)
- *     .url().is(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;Url is as expected&#x27;)
+ *     .assert.url().is(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;Url is as expected&#x27;)
  *     .done();
  * &#x60;&#x60;&#x60;
  *
@@ -1249,7 +1249,7 @@ Assertions.prototype.doesntHaveTitle = function (expected, message) {
  *
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
- *     .url().is.not(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;Url is as expected&#x27;)
+ *     .assert.url().is.not(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;Url is as expected&#x27;)
  *     .done();
  * &#x60;&#x60;&#x60;
  *
@@ -1272,7 +1272,7 @@ Assertions.prototype.url = function (expected, message) {
  *
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
- *     .url(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;Url is as expected&#x27;)
+ *     .assert.doesntHaveUrl(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;Url is not expected&#x27;)
  *     .done();
  * &#x60;&#x60;&#x60;
  *
