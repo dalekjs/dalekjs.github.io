@@ -195,7 +195,7 @@
             "params": [
                 {
                     "name": "path",
-                    "description": "PAth to create",
+                    "description": "Path to create",
                     "type": "String"
                 }
             ],
