@@ -2465,7 +2465,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 202,
+            "line": 203,
             "description": "Response callback function",
             "itemtype": "method",
             "name": "_onResponse",
@@ -2505,7 +2505,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 222,
+            "line": 223,
             "description": "Concatenates chunks of strings",
             "itemtype": "method",
             "name": "_concatDataChunks",
@@ -2528,7 +2528,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 235,
+            "line": 236,
             "description": "Response end callback function",
             "itemtype": "method",
             "name": "_onResponseEnd",
@@ -2567,7 +2567,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 252,
+            "line": 253,
             "description": "On error callback function",
             "itemtype": "method",
             "name": "_onError",
@@ -2607,7 +2607,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 272,
+            "line": 273,
             "description": "On success callback function",
             "itemtype": "method",
             "name": "_onSuccess",
@@ -2716,7 +2716,7 @@
     "warnings": [
         {
             "message": "unknown tag: priavte",
-            "line": " lib/driver.js:235"
+            "line": " lib/driver.js:236"
         },
         {
             "message": "unknown tag: part",

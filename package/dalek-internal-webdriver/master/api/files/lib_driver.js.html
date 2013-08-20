@@ -283,6 +283,7 @@ module.exports = function exportDriverBase(WebDriver) {
         var options = Driver.generateRequestOptions(this.opts.host, this.opts.port, this.opts.path, Driver.parseUrl(remote.url, this.options), remote.method, body);
 
         // generate the request, wait for response &amp; fire the request
+        console.log(options);
         var req = new http.ClientRequest(options);
         req.on(&#x27;response&#x27;, driver._onResponse.bind(this, driver, remote, options, deferred));
         req.end(body);
