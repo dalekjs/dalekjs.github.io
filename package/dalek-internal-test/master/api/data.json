@@ -344,7 +344,7 @@
         },
         {
             "file": "index.js",
-            "line": 337,
+            "line": 344,
             "description": "Set up the instance",
             "itemtype": "method",
             "name": "_inheritAssertions",
