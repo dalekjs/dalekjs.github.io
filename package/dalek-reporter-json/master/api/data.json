@@ -36,7 +36,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "index.js",
-            "line": 33
+            "line": 34
         }
     },
     "classes": {
@@ -50,7 +50,7 @@
             "extension_for": [],
             "module": "Reporter",
             "file": "index.js",
-            "line": 33,
+            "line": 34,
             "description": "The JSON reporter can produce a file with the results of your testrun.\n\nThe reporter can be installed with the following command:\n```\n$ npm install dalek-reporter-json --save-dev\n```\n\nThe file will follow the following format. This is a first draft and will\ndefinitly change in future versions.\n\n```javascript\n{\n  \"tests\": [\n        {\n          \"id\": \"test806\",\n          \"name\": \"Can get !url (OK, TDD style, message, chained)\",\n          \"browser\": \"Chrome\",\n          \"status\": true,\n          \"passedAssertions\": 1,\n          \"failedAssertions\": 0,\n          \"actions\": [\n              {\n                  \"value\": \"http://localhost:5000/index.html\",\n                  \"type\": \"open\",\n                  \"uuid\": \"6ea84fc0-58bf-4e1f-bb9c-f035c6e6fae2\",\n                  \"kind\": \"action\",\n                  \"isAction\": true\n              },\n              {\n                  \"success\": true,\n                  \"expected\": \"http://localhost:5000/guinea.html\",\n                  \"value\": \"http://localhost:5000/index.html\",\n                  \"message\": \"Url is not whatever\",\n                  \"type\": \"url\",\n                  \"kind\": \"assertion\",\n                  \"isAssertion\": true\n              }\n          ]\n      }\n  ],\n  \"elapsedTime\": {\n      \"minutes\": 1,\n      \"seconds\": 43.328535046\n  },\n  \"status\": true,\n  \"assertions\": 1,\n  \"assertionsFailed\": 0,\n  \"assertionsPassed\": 1\n}\n```\n\nBy default the file will be written to `report/dalek.json`,\nyou can change this by adding a config option to the your Dalekfile\n\n```javascript\n\"json-reporter\": {\n  \"dest\": \"your/folder/your_file.json\"\n}\n```",
             "is_constructor": 1,
             "part": "JSON",
@@ -66,7 +66,7 @@
         },
         {
             "file": "index.js",
-            "line": 127,
+            "line": 129,
             "description": "Connects to all the event listeners",
             "itemtype": "method",
             "name": "startListening",
@@ -76,7 +76,7 @@
         },
         {
             "file": "index.js",
-            "line": 144,
+            "line": 146,
             "description": "Stores the current browser name",
             "itemtype": "method",
             "name": "runBrowser",
@@ -93,7 +93,7 @@
         },
         {
             "file": "index.js",
-            "line": 157,
+            "line": 159,
             "description": "Generates JSON for an action",
             "itemtype": "method",
             "name": "action",
@@ -110,7 +110,7 @@
         },
         {
             "file": "index.js",
-            "line": 171,
+            "line": 173,
             "description": "Generates JSON for an assertion",
             "itemtype": "method",
             "name": "assertion",
@@ -127,7 +127,7 @@
         },
         {
             "file": "index.js",
-            "line": 185,
+            "line": 187,
             "description": "Sets up a new testcase",
             "itemtype": "method",
             "name": "testStarted",
@@ -144,7 +144,7 @@
         },
         {
             "file": "index.js",
-            "line": 199,
+            "line": 201,
             "description": "Writes data for a finished testcase",
             "itemtype": "method",
             "name": "testFinished",
@@ -161,7 +161,7 @@
         },
         {
             "file": "index.js",
-            "line": 220,
+            "line": 222,
             "description": "Serializes JSON and writes file to the file system",
             "itemtype": "method",
             "name": "runnerFinished",
@@ -178,7 +178,7 @@
         },
         {
             "file": "index.js",
-            "line": 247,
+            "line": 249,
             "description": "Helper method to generate deeper nested directory structures",
             "itemtype": "method",
             "name": "_recursiveMakeDirSync",
@@ -196,11 +196,11 @@
     "warnings": [
         {
             "message": "unknown tag: part",
-            "line": " index.js:33"
+            "line": " index.js:34"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:33"
+            "line": " index.js:34"
         },
         {
             "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",

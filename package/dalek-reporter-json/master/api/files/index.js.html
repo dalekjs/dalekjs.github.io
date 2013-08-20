@@ -118,6 +118,7 @@
 var fs = require(&#x27;fs&#x27;);
 var path = require(&#x27;path&#x27;);
 
+// int. global
 var reporter = null;
 
 /**
@@ -191,6 +192,7 @@ function Reporter (opts) {
   this.events = opts.events;
   this.config = opts.config;
   this.data = {};
+  this.actionQueue = [];
   this.data.tests = [];
   this.browser = null;
 
