@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-cli",
         "description": "DalekJS Command line interface",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "url": ""
     },
     "files": {
