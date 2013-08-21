@@ -133,6 +133,9 @@ var Driver = function (options) {
   this.files = this.config.get(&#x27;tests&#x27;);
   this.drivers = this.config.get(&#x27;driver&#x27;);
 
+  // flag if we use the canary driver builds
+  this.driverIsCanary = false;
+
   // link driver events
   this.driverEmitter = options.driverEmitter;
   this.reporterEvents = options.reporterEvents;
@@ -163,7 +166,13 @@ Driver.prototype = {
     try {
       require.resolve(&#x27;dalek-driver-&#x27; + driver);
     } catch (e) {
-      return false;
+      try {
+        require.resolve(&#x27;dalek-driver-&#x27; + driver + &#x27;-canary&#x27;);
+      } catch (e) {
+        return false;
+      }
+      this.driverIsCanary = true;
+      return true;
     }
     return true;
   },
@@ -179,7 +188,7 @@ Driver.prototype = {
 
   loadDriver: function (driver) {
     this.reporterEvents.emit(&#x27;report:log:system&#x27;, &#x27;Loading driver: &quot;&#x27; + driver + &#x27;&quot;&#x27;);
-    return require(&#x27;dalek-driver-&#x27; + driver);
+    return require(&#x27;dalek-driver-&#x27; + driver + (this.driverIsCanary ? &#x27;-canary&#x27; : &#x27;&#x27;));
   },
 
   /**

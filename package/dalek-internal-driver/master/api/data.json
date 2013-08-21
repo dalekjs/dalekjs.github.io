@@ -40,7 +40,7 @@
             },
             "tag": "module",
             "file": "index.js",
-            "line": 51,
+            "line": 54,
             "description": "Generates & starts drivers & browsers\nthe tests will be run in",
             "part": "Driver",
             "api": ""
@@ -58,7 +58,7 @@
             "module": "DalekJS",
             "namespace": "Dalek",
             "file": "index.js",
-            "line": 51,
+            "line": 54,
             "description": "Generates & starts drivers & browsers\nthe tests will be run in"
         }
     },
@@ -78,7 +78,7 @@
         },
         {
             "file": "index.js",
-            "line": 64,
+            "line": 67,
             "description": "Checks if the requested driver is available",
             "itemtype": "method",
             "name": "isDriver",
@@ -99,7 +99,7 @@
         },
         {
             "file": "index.js",
-            "line": 81,
+            "line": 90,
             "description": "Loads the requested driver\nEmits an event to the reporter",
             "itemtype": "method",
             "name": "loadDriver",
@@ -120,7 +120,7 @@
         },
         {
             "file": "index.js",
-            "line": 95,
+            "line": 104,
             "description": "Returns a list with browser driver instances",
             "itemtype": "method",
             "name": "getDrivers",
@@ -134,7 +134,7 @@
         },
         {
             "file": "index.js",
-            "line": 106,
+            "line": 115,
             "description": "Returns a list with browser driver instances",
             "itemtype": "method",
             "name": "getVerifiedBrowser",
@@ -155,7 +155,7 @@
         },
         {
             "file": "index.js",
-            "line": 118,
+            "line": 127,
             "description": "Returns a scoped version of the driver run function",
             "itemtype": "method",
             "name": "getVerifiedDriver",
@@ -186,7 +186,7 @@
         },
         {
             "file": "index.js",
-            "line": 132,
+            "line": 141,
             "description": "Loads a browser driver",
             "itemtype": "method",
             "name": "loadBrowserConfiguration",
@@ -212,7 +212,7 @@
         },
         {
             "file": "index.js",
-            "line": 152,
+            "line": 161,
             "description": "Loads the default browser driver",
             "itemtype": "method",
             "name": "getDefaultBrowserConfiguration",
@@ -238,7 +238,7 @@
         },
         {
             "file": "index.js",
-            "line": 171,
+            "line": 180,
             "description": "Loads a user configured browser driver",
             "itemtype": "method",
             "name": "getUserBrowserConfiguration",
@@ -264,7 +264,7 @@
         },
         {
             "file": "index.js",
-            "line": 190,
+            "line": 199,
             "description": "Couple driver & session status events for the reporter",
             "itemtype": "method",
             "name": "coupleReporterEvents",
@@ -287,7 +287,7 @@
         },
         {
             "file": "index.js",
-            "line": 205,
+            "line": 214,
             "description": "Returns a list of testsuite runner functions",
             "itemtype": "method",
             "name": "getTestsuiteInstances",
@@ -308,7 +308,7 @@
         },
         {
             "file": "index.js",
-            "line": 217,
+            "line": 226,
             "description": "Creates a testsuite runner function",
             "itemtype": "method",
             "name": "createTestsuiteInstance",
@@ -334,7 +334,7 @@
         },
         {
             "file": "index.js",
-            "line": 231,
+            "line": 240,
             "description": "Generates a testsuite instance, emits the\nbrowser running event & starts a new async() sesries execution\nWill be called when the driver is ready",
             "itemtype": "method",
             "name": "_onDriverReadyclear",
@@ -369,7 +369,7 @@
         },
         {
             "file": "index.js",
-            "line": 253,
+            "line": 262,
             "description": "Emits a 'tests complete' event & calls asyncs next() callback",
             "itemtype": "method",
             "name": "_onTestsuiteComplete",
@@ -399,7 +399,7 @@
         },
         {
             "file": "index.js",
-            "line": 270,
+            "line": 279,
             "description": "Driver runner function.\nRegisters event handlers for this run,\nloads browser & driver configuration & instances,\nemits the 'driver ready' event for the browser/driver combination",
             "itemtype": "method",
             "name": "run",
@@ -434,11 +434,11 @@
     "warnings": [
         {
             "message": "unknown tag: part",
-            "line": " index.js:51"
+            "line": " index.js:54"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:51"
+            "line": " index.js:54"
         },
         {
             "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
