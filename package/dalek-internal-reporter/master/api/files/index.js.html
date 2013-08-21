@@ -138,7 +138,18 @@ var Reporter = {
     try {
       require.resolve(&#x27;dalek-reporter-&#x27; + reporter);
     } catch (e) {
-      return false;
+      try {
+        require.resolve(&#x27;dalek-reporter-&#x27; + reporter + &#x27;-canary&#x27;);
+      } catch (e) {
+        return false;
+      }
+
+      if (!this.isCanary) {
+        this.isCanary = {};
+      }
+
+      this.isCanary[reporter] = true;
+      return true;
     }
     return true;
   },
@@ -153,7 +164,7 @@ var Reporter = {
    */
 
   loadReporter: function (reporter, options) {
-    return require(&#x27;dalek-reporter-&#x27; + reporter)(options);
+    return require(&#x27;dalek-reporter-&#x27; + reporter + (this.isCanary[reporter] ? &#x27;-canary&#x27; : &#x27;&#x27;))(options);
   }
 };
 

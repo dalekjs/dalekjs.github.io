@@ -92,7 +92,7 @@
         },
         {
             "file": "index.js",
-            "line": 56,
+            "line": 67,
             "description": "Loads a requested reporter",
             "itemtype": "method",
             "name": "loadReporter",
