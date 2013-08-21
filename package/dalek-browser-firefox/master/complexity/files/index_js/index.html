@@ -255,7 +255,7 @@ var FirefoxDriver = {
    */
 
   defaultBinaries: {
-    linux: which(&#039;firefox&#039;),
+    linux: &#039;firefox&#039;,
     darwin: process.env.HOME + &#039;/Applications/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin&#039;,
     win32: process.env.ProgramFiles + &#039;\\Nightly\\firefox.exe&#039;
   },
@@ -381,7 +381,7 @@ var FirefoxDriver = {
     }
 
     if (defaultBinary === null) {
-      defaultBinary = this.defaultBinaries.linux;
+      defaultBinary = which(this.defaultBinaries.linux);
     }
 
     // check if the user has set a custom binary
