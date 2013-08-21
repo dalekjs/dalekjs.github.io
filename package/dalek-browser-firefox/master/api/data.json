@@ -3900,7 +3900,7 @@
         },
         {
             "file": "index.js",
-            "line": 339,
+            "line": 348,
             "description": "Consumes the console output when the browser is started",
             "itemtype": "method",
             "name": "_onBrowserStartup",
@@ -3912,7 +3912,7 @@
         },
         {
             "file": "index.js",
-            "line": 352,
+            "line": 361,
             "description": "Checks if the browser is ready for communication",
             "itemtype": "method",
             "name": "_browserIsReady",
@@ -3924,7 +3924,7 @@
         },
         {
             "file": "index.js",
-            "line": 363,
+            "line": 372,
             "description": "Creates a new firefox profile",
             "itemtype": "method",
             "name": "_createProfile",
@@ -3940,7 +3940,7 @@
         },
         {
             "file": "index.js",
-            "line": 402,
+            "line": 411,
             "description": "Creates user preferences for the profile\nSaves them in `user.js` in the newly created profile",
             "itemtype": "method",
             "name": "_createProfile",
@@ -3956,7 +3956,7 @@
         },
         {
             "file": "index.js",
-            "line": 435,
+            "line": 444,
             "description": "Deletes the user profile that has been created for this browser session",
             "itemtype": "method",
             "name": "_deleteProfile",
@@ -3969,7 +3969,7 @@
         },
         {
             "file": "index.js",
-            "line": 448,
+            "line": 457,
             "itemtype": "method",
             "name": "_checkUserSetBinary",
             "access": "private",
@@ -3980,7 +3980,7 @@
         },
         {
             "file": "index.js",
-            "line": 504,
+            "line": 513,
             "itemtype": "method",
             "name": "_checkBinarywin32",
             "access": "private",
@@ -3991,7 +3991,7 @@
         },
         {
             "file": "index.js",
-            "line": 515,
+            "line": 524,
             "itemtype": "method",
             "name": "_checkBinarydarwin",
             "access": "private",
@@ -4002,7 +4002,7 @@
         },
         {
             "file": "index.js",
-            "line": 526,
+            "line": 535,
             "itemtype": "method",
             "name": "_checkLinuxBinary",
             "access": "private",
