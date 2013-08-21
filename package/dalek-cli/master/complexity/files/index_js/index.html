@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">61.24</p>
+      <p class="stat">60.91</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">157</p>
+      <p class="stat">160</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">25.85</p>
+      <p class="stat">25.45</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.13</p>
+      <p class="stat">1.16</p>
     </div>
   </div>
 </div>
@@ -182,11 +182,11 @@ module.exports = function () {
           type : &#039;string&#039;,
           desc : &#039;Log level, controls the amount of information outputted to the console (0 to 5)&#039;
         })
-        .option(&#039;no-colors&#039;, {
+        .option(&#039;nocolors&#039;, {
           type : &#039;boolean&#039;,
           desc : &#039;Disable colorized output in the console&#039;
         })
-        .option(&#039;no-symbols&#039;, {
+        .option(&#039;nosymbols&#039;, {
           type : &#039;boolean&#039;,
           desc : &#039;Disable UTF-8 symbols in the console&#039;
         })
@@ -223,12 +223,15 @@ module.exports = function () {
         driver: argv.driver ? argv.driver.split(&#039;,&#039;) : [],
         reporter: argv.reporter ? argv.reporter.split(&#039;,&#039;) : [],
         browser: argv.browser ? argv.browser.split(&#039;,&#039;) : [],
-        logLevel: argv.logLevel
+        logLevel: argv.logLevel,
+        noColors: argv.nocolors,
+        noSymbols: argv.nosymbols
       });
 
       dalek.run();
 
     } else {
+
       // check if the version flag is given, then spit out additional version info
       if (process.argv[2] &amp;&amp; (process.argv[2] === &#039;-v&#039; || process.argv[2] === &#039;--version&#039;)) {
         var fs = require(&#039;fs&#039;);

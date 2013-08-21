@@ -176,11 +176,11 @@ module.exports = function () {
           type : &#x27;string&#x27;,
           desc : &#x27;Log level, controls the amount of information outputted to the console (0 to 5)&#x27;
         })
-        .option(&#x27;no-colors&#x27;, {
+        .option(&#x27;nocolors&#x27;, {
           type : &#x27;boolean&#x27;,
           desc : &#x27;Disable colorized output in the console&#x27;
         })
-        .option(&#x27;no-symbols&#x27;, {
+        .option(&#x27;nosymbols&#x27;, {
           type : &#x27;boolean&#x27;,
           desc : &#x27;Disable UTF-8 symbols in the console&#x27;
         })
@@ -217,12 +217,15 @@ module.exports = function () {
         driver: argv.driver ? argv.driver.split(&#x27;,&#x27;) : [],
         reporter: argv.reporter ? argv.reporter.split(&#x27;,&#x27;) : [],
         browser: argv.browser ? argv.browser.split(&#x27;,&#x27;) : [],
-        logLevel: argv.logLevel
+        logLevel: argv.logLevel,
+        noColors: argv.nocolors,
+        noSymbols: argv.nosymbols
       });
 
       dalek.run();
 
     } else {
+
       // check if the version flag is given, then spit out additional version info
       if (process.argv[2] &amp;&amp; (process.argv[2] === &#x27;-v&#x27; || process.argv[2] === &#x27;--version&#x27;)) {
         var fs = require(&#x27;fs&#x27;);
