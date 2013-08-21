@@ -1,8 +1,8 @@
 {
     "project": {
-        "name": "dalekjs",
+        "name": "dalekjs-canary-canary-canary-canary",
         "description": "A node based cross browser testing tool",
-        "version": "0.0.1",
+        "version": "0.0.1-2013-08-21-15-44-56-2013-08-21-15-46-00-2013-08-21-15-46-47-2013-08-21-15-47-42",
         "url": ""
     },
     "files": {
