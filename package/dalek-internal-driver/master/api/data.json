@@ -238,7 +238,7 @@
         },
         {
             "file": "index.js",
-            "line": 180,
+            "line": 184,
             "description": "Loads a user configured browser driver",
             "itemtype": "method",
             "name": "getUserBrowserConfiguration",
@@ -264,7 +264,7 @@
         },
         {
             "file": "index.js",
-            "line": 199,
+            "line": 203,
             "description": "Couple driver & session status events for the reporter",
             "itemtype": "method",
             "name": "coupleReporterEvents",
@@ -287,7 +287,7 @@
         },
         {
             "file": "index.js",
-            "line": 214,
+            "line": 218,
             "description": "Returns a list of testsuite runner functions",
             "itemtype": "method",
             "name": "getTestsuiteInstances",
@@ -308,7 +308,7 @@
         },
         {
             "file": "index.js",
-            "line": 226,
+            "line": 230,
             "description": "Creates a testsuite runner function",
             "itemtype": "method",
             "name": "createTestsuiteInstance",
@@ -334,7 +334,7 @@
         },
         {
             "file": "index.js",
-            "line": 240,
+            "line": 244,
             "description": "Generates a testsuite instance, emits the\nbrowser running event & starts a new async() sesries execution\nWill be called when the driver is ready",
             "itemtype": "method",
             "name": "_onDriverReadyclear",
@@ -369,7 +369,7 @@
         },
         {
             "file": "index.js",
-            "line": 262,
+            "line": 266,
             "description": "Emits a 'tests complete' event & calls asyncs next() callback",
             "itemtype": "method",
             "name": "_onTestsuiteComplete",
@@ -399,7 +399,7 @@
         },
         {
             "file": "index.js",
-            "line": 279,
+            "line": 283,
             "description": "Driver runner function.\nRegisters event handlers for this run,\nloads browser & driver configuration & instances,\nemits the 'driver ready' event for the browser/driver combination",
             "itemtype": "method",
             "name": "run",

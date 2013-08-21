@@ -259,7 +259,11 @@ Driver.prototype = {
 
   getDefaultBrowserConfiguration: function (browser, browsers) {
     var browserConfiguration = {configuration: null, module: null};
-    browserConfiguration.module = require(&#x27;dalek-browser-&#x27; + browser);
+    try {
+      browserConfiguration.module = require(&#x27;dalek-browser-&#x27; + browser);
+    } catch (e) {
+      browserConfiguration.module = require(&#x27;dalek-browser-&#x27; + browser + &#x27;-canary&#x27;);
+    }
     if (browsers[browser]) {
       browserConfiguration.configuration = browsers[browser];
     }
