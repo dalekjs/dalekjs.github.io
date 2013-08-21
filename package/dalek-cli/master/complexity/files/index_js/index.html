@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">56.44</p>
+      <p class="stat">61.24</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">140</p>
+      <p class="stat">157</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">23.06</p>
+      <p class="stat">25.85</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.96</p>
+      <p class="stat">1.13</p>
     </div>
   </div>
 </div>
@@ -150,21 +150,11 @@ var optimist = require(&#039;optimist&#039;);
 
 module.exports = function () {
 
-  // Search for installed dalek by using node&#039;s built-in require() logic.
-  var child = spawn(process.execPath, [&#039;-p&#039;, &#039;-e&#039;, &#039;require.resolve(&quot;dalekjs&quot;)&#039;]);
-  var dalekpath = &#039;&#039;;
-  child.stdout.on(&#039;data&#039;, function (data) {
-    dalekpath += data;
-  });
-
-  // when the child process exists, dalek-cli will check
-  // if a local dalekjs installation exists, if so,
-  // it will check the parameters
-  child.on(&#039;exit&#039;, function(code) {
+  var loadDalek = function (code, path, isCanary) {
     // Removing trailing newline from stdout.
-    dalekpath = dalekpath.trim();
+    path = path.trim();
     // If a local dalek isn&#039;t found, throw an error an exit
-    if (code !== 127 &amp;&amp; dalekpath) {
+    if (code !== 127 &amp;&amp; path) {
       var argv = optimist
         .usage(&#039;Usage: dalek [test files] {OPTIONS}&#039;)
         .wrap(80)
@@ -209,11 +199,11 @@ module.exports = function () {
           if (argv.version) {
             // load the versions
             var fs = require(&#039;fs&#039;);
-            var localVersion = JSON.parse(fs.readFileSync(dalekpath.replace(&#039;index.js&#039;, &#039;package.json&#039;))).version;
+            var localVersion = JSON.parse(fs.readFileSync(path.replace(&#039;index.js&#039;, &#039;package.json&#039;))).version;
             var cliVersion = JSON.parse(fs.readFileSync(__dirname + &#039;/package.json&#039;)).version;
 
             console.log(&#039;DalekJS CLI Tools Version:&#039;, cliVersion);
-            console.log(&#039;DalekJS local install:&#039;, localVersion);
+            console.log(&#039;DalekJS&#039;, (isCanary ? &#039;Canary&#039; : &#039;&#039;) ,&#039;local install:&#039;, localVersion);
             console.log(&#039;Brought to you with love by:&#039;, &#039;Sebastian Golasch (@asciidisco) 2013&#039;);
             console.log(&#039;&#039;);
             throw &#039;&#039;;
@@ -227,7 +217,7 @@ module.exports = function () {
         .argv;
 
       // run dalekjs
-      var Dalek = require(dalekpath);
+      var Dalek = require(path);
       var dalek = new Dalek({
         tests: argv._,
         driver: argv.driver ? argv.driver.split(&#039;,&#039;) : [],
@@ -251,6 +241,33 @@ module.exports = function () {
         process.exit(127);
       }
     }
+  };
+
+  // Search for installed dalek by using node&#039;s built-in require() logic.
+  var child = spawn(process.execPath, [&#039;-p&#039;, &#039;-e&#039;, &#039;require.resolve(&quot;dalekjs&quot;)&#039;]);
+  var dalekpath = &#039;&#039;;
+  child.stdout.on(&#039;data&#039;, function (data) {
+    dalekpath += data;
+  });
+
+  // when the child process exists, dalek-cli will check
+  // if a local dalekjs installation exists, if so,
+  // it will check the parameters
+  child.on(&#039;exit&#039;, function(code) {
+    // check for canary
+    if (!dalekpath) {
+      var canaryChild = spawn(process.execPath, [&#039;-p&#039;, &#039;-e&#039;, &#039;require.resolve(&quot;dalekjs-canary&quot;)&#039;]);
+      var canarypath = &#039;&#039;;
+      canaryChild.stdout.on(&#039;data&#039;, function (data) {
+        canarypath += data;
+      });
+      canaryChild.on(&#039;exit&#039;, function(code) {
+        loadDalek(code, canarypath, true);
+      });
+    } else {
+      loadDalek(code, dalekpath, false);
+    }
+
   });
 };</textarea>
   </div>

@@ -144,21 +144,11 @@ var optimist = require(&#x27;optimist&#x27;);
 
 module.exports = function () {
 
-  // Search for installed dalek by using node&#x27;s built-in require() logic.
-  var child = spawn(process.execPath, [&#x27;-p&#x27;, &#x27;-e&#x27;, &#x27;require.resolve(&quot;dalekjs&quot;)&#x27;]);
-  var dalekpath = &#x27;&#x27;;
-  child.stdout.on(&#x27;data&#x27;, function (data) {
-    dalekpath += data;
-  });
-
-  // when the child process exists, dalek-cli will check
-  // if a local dalekjs installation exists, if so,
-  // it will check the parameters
-  child.on(&#x27;exit&#x27;, function(code) {
+  var loadDalek = function (code, path, isCanary) {
     // Removing trailing newline from stdout.
-    dalekpath = dalekpath.trim();
+    path = path.trim();
     // If a local dalek isn&#x27;t found, throw an error an exit
-    if (code !== 127 &amp;&amp; dalekpath) {
+    if (code !== 127 &amp;&amp; path) {
       var argv = optimist
         .usage(&#x27;Usage: dalek [test files] {OPTIONS}&#x27;)
         .wrap(80)
@@ -203,11 +193,11 @@ module.exports = function () {
           if (argv.version) {
             // load the versions
             var fs = require(&#x27;fs&#x27;);
-            var localVersion = JSON.parse(fs.readFileSync(dalekpath.replace(&#x27;index.js&#x27;, &#x27;package.json&#x27;))).version;
+            var localVersion = JSON.parse(fs.readFileSync(path.replace(&#x27;index.js&#x27;, &#x27;package.json&#x27;))).version;
             var cliVersion = JSON.parse(fs.readFileSync(__dirname + &#x27;/package.json&#x27;)).version;
 
             console.log(&#x27;DalekJS CLI Tools Version:&#x27;, cliVersion);
-            console.log(&#x27;DalekJS local install:&#x27;, localVersion);
+            console.log(&#x27;DalekJS&#x27;, (isCanary ? &#x27;Canary&#x27; : &#x27;&#x27;) ,&#x27;local install:&#x27;, localVersion);
             console.log(&#x27;Brought to you with love by:&#x27;, &#x27;Sebastian Golasch (@asciidisco) 2013&#x27;);
             console.log(&#x27;&#x27;);
             throw &#x27;&#x27;;
@@ -221,7 +211,7 @@ module.exports = function () {
         .argv;
 
       // run dalekjs
-      var Dalek = require(dalekpath);
+      var Dalek = require(path);
       var dalek = new Dalek({
         tests: argv._,
         driver: argv.driver ? argv.driver.split(&#x27;,&#x27;) : [],
@@ -245,6 +235,33 @@ module.exports = function () {
         process.exit(127);
       }
     }
+  };
+
+  // Search for installed dalek by using node&#x27;s built-in require() logic.
+  var child = spawn(process.execPath, [&#x27;-p&#x27;, &#x27;-e&#x27;, &#x27;require.resolve(&quot;dalekjs&quot;)&#x27;]);
+  var dalekpath = &#x27;&#x27;;
+  child.stdout.on(&#x27;data&#x27;, function (data) {
+    dalekpath += data;
+  });
+
+  // when the child process exists, dalek-cli will check
+  // if a local dalekjs installation exists, if so,
+  // it will check the parameters
+  child.on(&#x27;exit&#x27;, function(code) {
+    // check for canary
+    if (!dalekpath) {
+      var canaryChild = spawn(process.execPath, [&#x27;-p&#x27;, &#x27;-e&#x27;, &#x27;require.resolve(&quot;dalekjs-canary&quot;)&#x27;]);
+      var canarypath = &#x27;&#x27;;
+      canaryChild.stdout.on(&#x27;data&#x27;, function (data) {
+        canarypath += data;
+      });
+      canaryChild.on(&#x27;exit&#x27;, function(code) {
+        loadDalek(code, canarypath, true);
+      });
+    } else {
+      loadDalek(code, dalekpath, false);
+    }
+
   });
 };
 
