@@ -109,10 +109,9 @@
 
 <div class="box intro">
     <p>Assertions check if the assumptions you made about a website are correct.
-Assetions might check if the title of a page is as expected,
-if an element has the expected text,
-if your mobile website version only displays a certian amount of elements
-and many more...</p>
+For example they might check if the title of a page or the content text of
+an element is as expected, or if your mobile website version only displays
+a certain amount of elements.</p>
 
 </div>
 
@@ -772,7 +771,7 @@ and many more...</p>
     </div>
 
     <div class="description">
-        <p>Assert a given value matches a regex</p>
+        <p>Assert a given value matches a RegEx</p>
 
     </div>
 
@@ -827,7 +826,7 @@ and many more...</p>
                     
                         <span class="type">Bool</span>:
                     
-                    <p>testresult</p>
+                    <p>test result</p>
 
                 
             </div>
@@ -958,7 +957,7 @@ and many more...</p>
                     
                         <span class="type">Bool</span>:
                     
-                    <p>testresult</p>
+                    <p>test result</p>
 
                 
             </div>
@@ -1071,7 +1070,7 @@ that the action has been successfully executed.</p>
                     
 
                     <div class="param-description">
-                        <p>Type of the action (normalle the actions name)</p>
+                        <p>Type of the action (usually the actions name)</p>
 
                     </div>
 
@@ -1222,7 +1221,7 @@ that the action has been successfully executed.</p>
                     
                         <span class="type">Bool</span>:
                     
-                    <p>testresult</p>
+                    <p>test result</p>
 
                 
             </div>
@@ -1462,7 +1461,7 @@ that the action has been successfully executed.</p>
                     
                         <span class="type">Bool</span>:
                     
-                    <p>testresult</p>
+                    <p>test result</p>
 
                 
             </div>
@@ -1593,7 +1592,7 @@ that the action has been successfully executed.</p>
                     
                         <span class="type">Bool</span>:
                     
-                    <p>testresult</p>
+                    <p>test result</p>
 
                 
             </div>
@@ -1724,7 +1723,7 @@ that the action has been successfully executed.</p>
                     
                         <span class="type">Bool</span>:
                     
-                    <p>testresult</p>
+                    <p>test result</p>
 
                 
             </div>
@@ -1855,7 +1854,7 @@ that the action has been successfully executed.</p>
                     
                         <span class="type">Bool</span>:
                     
-                    <p>testresult</p>
+                    <p>test result</p>
 
                 
             </div>
@@ -1931,7 +1930,7 @@ that the action has been successfully executed.</p>
     </div>
 
     <div class="description">
-        <p>Assert if a given value shallow equals a snd. given value</p>
+        <p>Assert if a given value shallow equals a second given value</p>
 
     </div>
 
@@ -1986,7 +1985,7 @@ that the action has been successfully executed.</p>
                     
                         <span class="type">Bool</span>:
                     
-                    <p>false if values don&#39;t match, true if they match</p>
+                    <p>false if values donʼt match, true if they match</p>
 
                 
             </div>
@@ -2062,7 +2061,7 @@ that the action has been successfully executed.</p>
     </div>
 
     <div class="description">
-        <p>Assert if a given value shallow does not equal a snd. given value</p>
+        <p>Assert if a given value shallow does not equal a second given value</p>
 
     </div>
 
@@ -2117,7 +2116,7 @@ that the action has been successfully executed.</p>
                     
                         <span class="type">Bool</span>:
                     
-                    <p>true if values don&#39;t match, false if they match</p>
+                    <p>true if values donʼt match, false if they match</p>
 
                 
             </div>
@@ -2321,7 +2320,7 @@ that the action has been successfully executed.</p>
 <pre><code class="lang-html">&lt;div id=&quot;dataDiv&quot; data-spot=&quot;cat&quot;&gt;&lt;/div&gt;</code></pre>
 <pre><code class="lang-javascript"> test
    .open(&#39;http://dalekjs.com/guineapig/&#39;)
-   .assert.attr(&#39;#dataDiv&#39;).is(&#39;data-spot&#39;, &#39;cat&#39;, &#39;We found Datas cat!&#39;)
+   .assert.attr(&#39;#dataDiv&#39;).is(&#39;data-spot&#39;, &#39;cat&#39;, &#39;We found Dataʼs cat!&#39;)
    .done();</code></pre>
 <pre><code class="lang-javascript"> test
    .open(&#39;http://dalekjs.com/guineapig/&#39;)
@@ -2377,7 +2376,7 @@ that the action has been successfully executed.</p>
                     
 
                     <div class="param-description">
-                        <p>Expected testresult</p>
+                        <p>Expected test result</p>
 
                     </div>
 
@@ -2557,7 +2556,7 @@ that the action has been successfully executed.</p>
             
         
         
-        <a href="../files/index.js.html#l62"><code>index.js:62</code></a>
+        <a href="../files/index.js.html#l61"><code>index.js:61</code></a>
         
         </p>
 
@@ -2570,8 +2569,8 @@ that the action has been successfully executed.</p>
     <div class="description">
         <p>It can be really cumbersome to always write assert, assert &amp; assert
 all over the place when your doing multiple assertions.
-To avoid this you can open an assertion context in your test that
-allows you to write n assetions, but can avoid to type asset before each.</p>
+To avoid this, open an assertion context in your test which allows
+you to write (n) assertions without having to write &#39;assert&#39; before each.</p>
 <p>So, instead of writing this:</p>
 <pre><code class="lang-javascript">test.open(&#39;http://doctorwhotv.co.uk/&#39;)
     .assert.text(&#39;#nav&#39;).is(&#39;Navigation&#39;)
@@ -2777,7 +2776,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l716"><code>index.js:716</code></a>
+        <a href="../files/index.js.html#l715"><code>index.js:715</code></a>
         
         </p>
 
@@ -2923,7 +2922,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l410"><code>index.js:410</code></a>
+        <a href="../files/index.js.html#l408"><code>index.js:408</code></a>
         
         </p>
 
@@ -3115,7 +3114,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
                     
 
                     <div class="param-description">
-                        <p>Expected testresult</p>
+                        <p>Expected test result</p>
 
                     </div>
 
@@ -3327,7 +3326,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l682"><code>index.js:682</code></a>
+        <a href="../files/index.js.html#l681"><code>index.js:681</code></a>
         
         </p>
 
@@ -3445,7 +3444,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l795"><code>index.js:795</code></a>
+        <a href="../files/index.js.html#l794"><code>index.js:794</code></a>
         
         </p>
 
@@ -3456,9 +3455,10 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
     </div>
 
     <div class="description">
-        <p>Asserts that an element matching the provided selector expression doesn&#39;t exists within the remote DOM environment.</p>
+        <p>Asserts that an element matching the provided selector expression doesnʼt
+exists within the remote DOM environment.</p>
 <pre><code class="lang-html">&lt;body&gt;
-  &lt;p id=&quot;so-lonely&quot;&gt;Last of the timelords&lt;/p&gt;
+  &lt;p id=&quot;so-lonely&quot;&gt;Last of the time lords&lt;/p&gt;
 &lt;/body&gt;</code></pre>
 <pre><code class="lang-javascript">test
   .open(&#39;http://doctor.thedoctor.com/doctor&#39;)
@@ -3584,7 +3584,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
     <div class="description">
         <p>Asserts that given text does not exist in the provided selector.</p>
 <pre><code class="lang-html">&lt;body&gt;
-  &lt;h1&gt;This is a casperjs sandbox&lt;/h1&gt;
+  &lt;h1&gt;This is a CasperJS sandbox&lt;/h1&gt;
 &lt;/body&gt;</code></pre>
 <pre><code class="lang-javascript"> test
    .open(&#39;http://dalekjs.com/guineapig/&#39;)
@@ -3624,7 +3624,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
                     
 
                     <div class="param-description">
-                        <p>Expected testresult</p>
+                        <p>Expected test result</p>
 
                     </div>
 
@@ -3718,9 +3718,9 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
     </div>
 
     <div class="description">
-        <p>Asserts that the pages url does not match the expectation.</p>
+        <p>Asserts that the pages URL does not match the expectation.</p>
 <pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
-    .assert.doesntHaveUrl(&#39;http://doctorwhotv.co.uk/&#39;, &#39;Url is not expected&#39;)
+    .assert.doesntHaveUrl(&#39;http://doctorwhotv.co.uk/&#39;, &#39;URL is not expected&#39;)
     .done();</code></pre>
 
     </div>
@@ -3740,7 +3740,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
                     
 
                     <div class="param-description">
-                        <p>Expected testresult</p>
+                        <p>Expected test result</p>
 
                     </div>
 
@@ -3823,7 +3823,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l648"><code>index.js:648</code></a>
+        <a href="../files/index.js.html#l647"><code>index.js:647</code></a>
         
         </p>
 
@@ -3925,7 +3925,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l117"><code>index.js:117</code></a>
+        <a href="../files/index.js.html#l116"><code>index.js:116</code></a>
         
         </p>
 
@@ -4007,7 +4007,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l759"><code>index.js:759</code></a>
+        <a href="../files/index.js.html#l758"><code>index.js:758</code></a>
         
         </p>
 
@@ -4505,7 +4505,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l501"><code>index.js:501</code></a>
+        <a href="../files/index.js.html#l499"><code>index.js:499</code></a>
         
         </p>
 
@@ -4647,7 +4647,7 @@ allows you to write n assetions, but can avoid to type asset before each.</p>
             
         
         
-        <a href="../files/index.js.html#l742"><code>index.js:742</code></a>
+        <a href="../files/index.js.html#l741"><code>index.js:741</code></a>
         
         </p>
 
@@ -5326,7 +5326,7 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
             
         
         
-        <a href="../files/index.js.html#l597"><code>index.js:597</code></a>
+        <a href="../files/index.js.html#l595"><code>index.js:595</code></a>
         
         </p>
 
@@ -5337,7 +5337,8 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
     </div>
 
     <div class="description">
-        <p>Determine if an <option> element, or an <input> element of type checkbox or radio is currently not selected.</p>
+        <p>Determine if an <option> element, or an <input> element of type
+checkbox or radio is currently not selected.</p>
 <pre><code class="lang-html">&lt;input type=&quot;checkbox&quot; id=&quot;unchecked_checkbox&quot; name=&quot;unchecked_checkbox&quot;/&gt;
 &lt;input type=&quot;checkbox&quot; id=&quot;checked_checkbox&quot; name=&quot;checked_checkbox&quot; checked=&quot;checked&quot;/&gt;
 &lt;select id=&quot;select_elm&quot; name=&quot;select_elm&quot;&gt;
@@ -5469,7 +5470,7 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
     <div class="description">
         <p>Asserts that the element matching the provided selector expression is not visible.</p>
 <pre><code class="lang-html">&lt;body&gt;
-  &lt;h1 style=&quot;display: none&quot;&gt;Me? So hidden...&lt;/h1&gt;
+  &lt;h1 style=&quot;display: none&quot;&gt;Me? So hidden …&lt;/h1&gt;
   &lt;h2&gt;Me? So in viewport...&lt;/h2&gt;
 &lt;/body&gt;</code></pre>
 <pre><code class="lang-javascript"> test
@@ -5583,7 +5584,7 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
             
         
         
-        <a href="../files/index.js.html#l165"><code>index.js:165</code></a>
+        <a href="../files/index.js.html#l164"><code>index.js:164</code></a>
         
         </p>
 
@@ -5595,7 +5596,7 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
 
     <div class="description">
         <p>Asserts that a given element appears n times on the page.</p>
-<p>Given this portion of html, you would like to assure that all of these elements
+<p>Given this portion of HTML, you would like to assure that all of these elements
 are ending up in your rendered markup on your page.</p>
 <pre><code class="lang-html">&lt;section id=&quot;blog-overview&quot;&gt;
   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
@@ -5613,18 +5614,18 @@ you could use the between assertion handler</p>
 <pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is.between([2, 6], &#39;Between 2 and 6 blog teasers are present&#39;)</code></pre>
 <p>If you dealing with the situation that you have a minimum of elements,
-you expect, you can use this helper...</p>
+you expect, you can use this helper:</p>
 <pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is.gt(2, &#39;At least 3 blog teasers are present&#39;)</code></pre>
-<p>... if you want to know if its &#39;greater than equal&#39;, you can use this one...</p>
+<p>If you want to know if its &#39;greater than equal&#39;, use this one</p>
 <pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is.gte(2, &#39;At least 2 blog teasers are present&#39;)</code></pre>
-<p>... as well as their &#39;lower than&#39; and &#39;lower than equal&#39; equivalents</p>
+<p>as well as their &#39;lower than&#39; and &#39;lower than equal&#39; equivalents.</p>
 <pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is.lt(5, &#39;Less than 5 blog teasers are present&#39;)</code></pre>
 <pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is.lte(5, &#39;Less than, or 5 blog teasers are present&#39;)</code></pre>
-<p>And if you just wan&#39;t to know, if a certain amount of teasers isn&#39;t present,
+<p>And if you just want to know, if a certain amount of teasers isnʼt present,
 you can still use the not() assertion helper</p>
 <pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is.not(5, &#39;There are more or less than 5 teasers present&#39;)</code></pre>
@@ -5751,7 +5752,7 @@ you can still use the not() assertion helper</p>
             
         
         
-        <a href="../files/index.js.html#l255"><code>index.js:255</code></a>
+        <a href="../files/index.js.html#l253"><code>index.js:253</code></a>
         
         </p>
 
@@ -5763,7 +5764,7 @@ you can still use the not() assertion helper</p>
 
     <div class="description">
         <p>Asserts that a given element is visible n times in the current viewport.</p>
-<p>Given this portion of html, you would like to assure that all of these elements
+<p>Given this portion of HTML, you would like to assure that all of these elements
  are ending up in your rendered markup on your page.</p>
 <pre><code class="lang-html"> &lt;section id=&quot;blog-overview&quot;&gt;
    &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
@@ -5781,18 +5782,18 @@ you can still use the not() assertion helper</p>
 <pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
      .is.between(2, 6, &#39;Between 2 and 6 blog teasers are visible&#39;)</code></pre>
 <p>If you dealing with the situation that you have a minimum of elements,
- you expect, you can use this helper...</p>
+ you expect, use this helper:</p>
 <pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
      .is.gt(2, &#39;At least 3 blog teasers are visible&#39;)</code></pre>
-<p> ... if you want to know if its &#39;greater than equal&#39;, you can use this one...</p>
+<p> If you want to know if its &#39;greater than equal&#39;, you can use this one</p>
 <pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
      .is.gte(2, &#39;At least 2 blog teasers are visible&#39;)</code></pre>
-<p> ... as well as their &#39;lower than&#39; and &#39;lower than equal&#39; equivalents</p>
+<p> as well as their &#39;lower than&#39; and &#39;lower than equal&#39; equivalents.</p>
 <pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
      .is.lt(5, &#39;Less than 5 blog teasers are visible&#39;)</code></pre>
 <pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
      .is.lte(5, &#39;Less than, or 5 blog teasers are visible&#39;)</code></pre>
-<p> And if you just wan&#39;t to know, if a certain amount of teasers isn&#39;t visible,
+<p> And if you just want to know, if a certain amount of teasers isnʼt visible,
  you can still use the &#39;:not(): assertion helper</p>
 <pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
      .is.not(5, &#39;There are more or less than 5 teasers visible&#39;)</code></pre>
@@ -5913,7 +5914,7 @@ you can still use the not() assertion helper</p>
             
         
         
-        <a href="../files/index.js.html#l149"><code>index.js:149</code></a>
+        <a href="../files/index.js.html#l148"><code>index.js:148</code></a>
         
         </p>
 
@@ -5924,7 +5925,7 @@ you can still use the not() assertion helper</p>
     </div>
 
     <div class="description">
-        <p>Asserts that a given ressource does exist in the environment.</p>
+        <p>Asserts that a given resource does exist in the environment.</p>
 
     </div>
 
@@ -6026,7 +6027,7 @@ you can still use the not() assertion helper</p>
             
         
         
-        <a href="../files/index.js.html#l546"><code>index.js:546</code></a>
+        <a href="../files/index.js.html#l544"><code>index.js:544</code></a>
         
         </p>
 
@@ -6224,7 +6225,7 @@ you can still use the not() assertion helper</p>
                     
 
                     <div class="param-description">
-                        <p>Expected testresult</p>
+                        <p>Expected test result</p>
 
                     </div>
 
@@ -6320,15 +6321,15 @@ you can still use the not() assertion helper</p>
     <div class="description">
         <p>Asserts that the page title is as expected.</p>
 <pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
-    .assert.title(&#39;Doctor Who TV&#39;, &#39;Not your daleks tv&#39;)
+    .assert.title(&#39;Doctor Who TV&#39;, &#39;Not your Daleks TV&#39;)
     .done();</code></pre>
 <p>Yep, using assertion helpers is also possible:</p>
 <pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
-    .assert.title().is(&#39;Doctor Who TV&#39;, &#39;Not your daleks tv&#39;)
+    .assert.title().is(&#39;Doctor Who TV&#39;, &#39;Not your Daleks TV&#39;)
     .done();</code></pre>
 <p>and the not() helper is available too:</p>
 <pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
-    .assert.title().is.not(&#39;Dalek Emperor TV&#39;, &#39;Not your daleks tv&#39;)
+    .assert.title().is.not(&#39;Dalek Emperor TV&#39;, &#39;Not your Daleks TV&#39;)
     .done();</code></pre>
 
     </div>
@@ -6348,7 +6349,7 @@ you can still use the not() assertion helper</p>
                     
 
                     <div class="param-description">
-                        <p>Expected testresult</p>
+                        <p>Expected test result</p>
 
                     </div>
 
@@ -6442,9 +6443,9 @@ you can still use the not() assertion helper</p>
     </div>
 
     <div class="description">
-        <p>Asserts that given title does not match the given expactions</p>
+        <p>Asserts that given title does not match the given expectations.</p>
 <pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
-    .assert.doesntHaveTitle(&#39;Dalek Emperor TV&#39;, &#39;Not your daleks tv&#39;)
+    .assert.doesntHaveTitle(&#39;Dalek Emperor TV&#39;, &#39;Not your Daleks TV&#39;)
     .done();</code></pre>
 
     </div>
@@ -6464,7 +6465,7 @@ you can still use the not() assertion helper</p>
                     
 
                     <div class="param-description">
-                        <p>Expected testresult</p>
+                        <p>Expected test result</p>
 
                     </div>
 
@@ -6560,20 +6561,20 @@ you can still use the not() assertion helper</p>
     <div class="description">
         <p>Asserts that the pages url is as expected.</p>
 <pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
-    .assert.url(&#39;http://doctorwhotv.co.uk/&#39;, &#39;Url is as expected&#39;)
+    .assert.url(&#39;http://doctorwhotv.co.uk/&#39;, &#39;URL is as expected&#39;)
     .done();</code></pre>
-<p>You can also check if the protocol changend,
-nice to see when you open github with http instead of https</p>
+<p>You can also check if the protocol changed,
+nice to see when you open GitHub with &#39;http&#39; instead of &#39;https&#39;</p>
 <pre><code class="lang-javascript">  test.open(&#39;http://github.com&#39;)
     .assert.url(&#39;https://github.com/&#39;, &#39;Changed prototcols&#39;)
     .done();</code></pre>
-<p>Yep, using assertion helpersx is also possible:</p>
+<p>Yep, using assertion helpers is also possible:</p>
 <pre><code class="lang-javascript">  test.open(&#39;http://github.com&#39;)
-    .assert.url().is(&#39;http://doctorwhotv.co.uk/&#39;, &#39;Url is as expected&#39;)
+    .assert.url().is(&#39;http://doctorwhotv.co.uk/&#39;, &#39;URL is as expected&#39;)
     .done();</code></pre>
 <p>and the not() helper is available too:</p>
 <pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
-    .assert.url().is.not(&#39;http://doctorwhotv.co.uk/&#39;, &#39;Url is as expected&#39;)
+    .assert.url().is.not(&#39;http://doctorwhotv.co.uk/&#39;, &#39;URL is as expected&#39;)
     .done();</code></pre>
 
     </div>
@@ -6593,7 +6594,7 @@ nice to see when you open github with http instead of https</p>
                     
 
                     <div class="param-description">
-                        <p>Expected testresult</p>
+                        <p>Expected test result</p>
 
                     </div>
 
@@ -6682,7 +6683,7 @@ nice to see when you open github with http instead of https</p>
             
         
         
-        <a href="../files/index.js.html#l346"><code>index.js:346</code></a>
+        <a href="../files/index.js.html#l344"><code>index.js:344</code></a>
         
         </p>
 
@@ -6694,7 +6695,7 @@ nice to see when you open github with http instead of https</p>
 
     <div class="description">
         <p>Asserts that a given form field has the provided value.</p>
-<p>Given this portion of html, we would like to get the information which option element
+<p>Given this portion of HTML, we would like to get the information which option element
 is currently selected.</p>
 <pre><code class="lang-html">&lt;form name=&quot;fav-doctor&quot; id=&quot;fav-doctor&quot;&gt;
   &lt;select id=&quot;the-doctors&quot;&gt;
@@ -6848,7 +6849,7 @@ that holds a value attribute</p>
     <div class="description">
         <p>Asserts that the element matching the provided selector expression is visible.</p>
 <pre><code class="lang-html">&lt;body&gt;
-  &lt;h1&gt;Me? So in viewport...&lt;/h1&gt;
+  &lt;h1&gt;Me? So in viewport …&lt;/h1&gt;
 &lt;/body&gt;</code></pre>
 <pre><code class="lang-javascript"> test
    .open(&#39;http://allyourviewportsbelongto.us&#39;)
@@ -6961,7 +6962,7 @@ that holds a value attribute</p>
             
         
         
-        <a href="../files/index.js.html#l456"><code>index.js:456</code></a>
+        <a href="../files/index.js.html#l454"><code>index.js:454</code></a>
         
         </p>
 

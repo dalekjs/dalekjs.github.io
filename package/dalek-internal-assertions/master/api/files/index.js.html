@@ -132,10 +132,9 @@ module.exports = function () {
 
 /**
  * Assertions check if the assumptions you made about a website are correct.
- * Assetions might check if the title of a page is as expected,
- * if an element has the expected text,
- * if your mobile website version only displays a certian amount of elements
- * and many more...
+ * For example they might check if the title of a page or the content text of
+ * an element is as expected, or if your mobile website version only displays
+ * a certain amount of elements.
  *
  * @class Assertions
  * @constructor
@@ -152,8 +151,8 @@ Assertions = function (opts) {
 /**
  * It can be really cumbersome to always write assert, assert &amp; assert
  * all over the place when your doing multiple assertions.
- * To avoid this you can open an assertion context in your test that
- * allows you to write n assetions, but can avoid to type asset before each.
+ * To avoid this, open an assertion context in your test which allows
+ * you to write (n) assertions without having to write &#x27;assert&#x27; before each.
  *
  * So, instead of writing this:
  *
@@ -237,7 +236,7 @@ Assertions.prototype.end = function () {
 };
 
 /**
- * Asserts that a given ressource does exist in the environment.
+ * Asserts that a given resource does exist in the environment.
  *
  * @method resourceExists
  * @param {string} url URL of the resource to check
@@ -255,8 +254,7 @@ Assertions.prototype.resourceExists = function (url, message) {
 /**
  * Asserts that a given element appears n times on the page.
  *
- *
- * Given this portion of html, you would like to assure that all of these elements
+ * Given this portion of HTML, you would like to assure that all of these elements
  * are ending up in your rendered markup on your page.
  *
  * &#x60;&#x60;&#x60;html
@@ -289,19 +287,19 @@ Assertions.prototype.resourceExists = function (url, message) {
  * &#x60;&#x60;&#x60;
  *
  * If you dealing with the situation that you have a minimum of elements,
- * you expect, you can use this helper...
+ * you expect, you can use this helper:
  *
  * &#x60;&#x60;&#x60;javascript
  * test.assert.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
  *     .is.gt(2, &#x27;At least 3 blog teasers are present&#x27;)
  * &#x60;&#x60;&#x60;
- * ... if you want to know if its &#x27;greater than equal&#x27;, you can use this one...
+ * If you want to know if its &#x27;greater than equal&#x27;, use this one
  *
  * &#x60;&#x60;&#x60;javascript
  * test.assert.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
  *     .is.gte(2, &#x27;At least 2 blog teasers are present&#x27;)
  * &#x60;&#x60;&#x60;
- * ... as well as their &#x27;lower than&#x27; and &#x27;lower than equal&#x27; equivalents
+ * as well as their &#x27;lower than&#x27; and &#x27;lower than equal&#x27; equivalents.
  *
  * &#x60;&#x60;&#x60;javascript
  * test.assert.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
@@ -312,7 +310,7 @@ Assertions.prototype.resourceExists = function (url, message) {
  * test.assert.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
  *     .is.lte(5, &#x27;Less than, or 5 blog teasers are present&#x27;)
  * &#x60;&#x60;&#x60;
- * And if you just wan&#x27;t to know, if a certain amount of teasers isn&#x27;t present,
+ * And if you just want to know, if a certain amount of teasers isnʼt present,
  * you can still use the not() assertion helper
  *
  * &#x60;&#x60;&#x60;javascript
@@ -347,7 +345,7 @@ Assertions.prototype.numberOfElements = function (selector, expected, message) {
  * Asserts that a given element is visible n times in the current viewport.
  *
  *
- * Given this portion of html, you would like to assure that all of these elements
+ * Given this portion of HTML, you would like to assure that all of these elements
  * are ending up in your rendered markup on your page.
  *
  * &#x60;&#x60;&#x60;html
@@ -380,19 +378,19 @@ Assertions.prototype.numberOfElements = function (selector, expected, message) {
  * &#x60;&#x60;&#x60;
  *
  * If you dealing with the situation that you have a minimum of elements,
- * you expect, you can use this helper...
+ * you expect, use this helper:
  *
  * &#x60;&#x60;&#x60;javascript
  * test.assert.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
  *     .is.gt(2, &#x27;At least 3 blog teasers are visible&#x27;)
  * &#x60;&#x60;&#x60;
- * ... if you want to know if its &#x27;greater than equal&#x27;, you can use this one...
+ * If you want to know if its &#x27;greater than equal&#x27;, you can use this one
  *
  * &#x60;&#x60;&#x60;javascript
  * test.assert.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
  *     .is.gte(2, &#x27;At least 2 blog teasers are visible&#x27;)
  * &#x60;&#x60;&#x60;
- * ... as well as their &#x27;lower than&#x27; and &#x27;lower than equal&#x27; equivalents
+ * as well as their &#x27;lower than&#x27; and &#x27;lower than equal&#x27; equivalents.
  *
  * &#x60;&#x60;&#x60;javascript
  * test.assert.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
@@ -403,7 +401,7 @@ Assertions.prototype.numberOfElements = function (selector, expected, message) {
  * test.assert.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
  *     .is.lte(5, &#x27;Less than, or 5 blog teasers are visible&#x27;)
  * &#x60;&#x60;&#x60;
- * And if you just wan&#x27;t to know, if a certain amount of teasers isn&#x27;t visible,
+ * And if you just want to know, if a certain amount of teasers isnʼt visible,
  * you can still use the &#x27;:not(): assertion helper
  *
  * &#x60;&#x60;&#x60;javascript
@@ -436,7 +434,7 @@ Assertions.prototype.numberOfVisibleElements = function (selector, expected, mes
 /**
  * Asserts that a given form field has the provided value.
  *
- * Given this portion of html, we would like to get the information which option element
+ * Given this portion of HTML, we would like to get the information which option element
  * is currently selected.
  *
  * &#x60;&#x60;&#x60;html
@@ -685,7 +683,8 @@ Assertions.prototype.selected = function (selector, message) {
 };
 
 /**
- * Determine if an &lt;option&gt; element, or an &lt;input&gt; element of type checkbox or radio is currently not selected.
+ * Determine if an &lt;option&gt; element, or an &lt;input&gt; element of type
+ * checkbox or radio is currently not selected.
  *
  * &#x60;&#x60;&#x60;html
  * &lt;input type=&quot;checkbox&quot; id=&quot;unchecked_checkbox&quot; name=&quot;unchecked_checkbox&quot;/&gt;
@@ -883,11 +882,12 @@ Assertions.prototype.exists = function (selector, message) {
 };
 
 /**
- * Asserts that an element matching the provided selector expression doesn&#x27;t exists within the remote DOM environment.
+ * Asserts that an element matching the provided selector expression doesnʼt
+ * exists within the remote DOM environment.
  *
  * &#x60;&#x60;&#x60;html
  * &lt;body&gt;
- *   &lt;p id=&quot;so-lonely&quot;&gt;Last of the timelords&lt;/p&gt;
+ *   &lt;p id=&quot;so-lonely&quot;&gt;Last of the time lords&lt;/p&gt;
  * &lt;/body&gt;
  * &#x60;&#x60;&#x60;
  *
@@ -923,7 +923,7 @@ Assertions.prototype.doesntExist = function (selector, message) {
  *
  * &#x60;&#x60;&#x60;html
  * &lt;body&gt;
- *   &lt;h1 style=&quot;display: none&quot;&gt;Me? So hidden...&lt;/h1&gt;
+ *   &lt;h1 style=&quot;display: none&quot;&gt;Me? So hidden …&lt;/h1&gt;
  *   &lt;h2&gt;Me? So in viewport...&lt;/h2&gt;
  * &lt;/body&gt;
  * &#x60;&#x60;&#x60;
@@ -960,7 +960,7 @@ Assertions.prototype.notVisible = function (selector, message) {
  *
  * &#x60;&#x60;&#x60;html
  * &lt;body&gt;
- *   &lt;h1&gt;Me? So in viewport...&lt;/h1&gt;
+ *   &lt;h1&gt;Me? So in viewport …&lt;/h1&gt;
  * &lt;/body&gt;
  * &#x60;&#x60;&#x60;
  *
@@ -996,7 +996,7 @@ Assertions.prototype.visible = function (selector, message) {
  *
  * &#x60;&#x60;&#x60;html
  * &lt;body&gt;
- *   &lt;h1&gt;This is a casperjs sandbox&lt;/h1&gt;
+ *   &lt;h1&gt;This is a CasperJS sandbox&lt;/h1&gt;
  * &lt;/body&gt;
  * &#x60;&#x60;&#x60;
  *
@@ -1010,7 +1010,7 @@ Assertions.prototype.visible = function (selector, message) {
  * @api
  * @method doesntHaveText
  * @param {string} selector Selector that matches the elements to test
- * @param {string} expected Expected testresult
+ * @param {string} expected Expected test result
  * @param {string} message Message for the test reporter
  * @chainable
  */
@@ -1046,7 +1046,7 @@ Assertions.prototype.doesntHaveText = function (selector, expected, message) {
  *
  * @api
  * @method dialogDoesntHaveText
- * @param {string} expected Expected testresult
+ * @param {string} expected Expected test result
  * @param {string} message Message for the test reporter
  * @chainable
  */
@@ -1093,7 +1093,7 @@ Assertions.prototype.dialogDoesntHaveText = function (expected, message) {
  * @api
  * @method text
  * @param {string} selector Selector that matches the elements to test
- * @param {string} expected Expected testresult
+ * @param {string} expected Expected test result
  * @param {string} message Message for the test reporter
  * @chainable
  */
@@ -1162,7 +1162,7 @@ Assertions.prototype.dialogText = function (expected, message) {
  *
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
- *     .assert.title(&#x27;Doctor Who TV&#x27;, &#x27;Not your daleks tv&#x27;)
+ *     .assert.title(&#x27;Doctor Who TV&#x27;, &#x27;Not your Daleks TV&#x27;)
  *     .done();
  * &#x60;&#x60;&#x60;
  *
@@ -1170,7 +1170,7 @@ Assertions.prototype.dialogText = function (expected, message) {
  *
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
- *     .assert.title().is(&#x27;Doctor Who TV&#x27;, &#x27;Not your daleks tv&#x27;)
+ *     .assert.title().is(&#x27;Doctor Who TV&#x27;, &#x27;Not your Daleks TV&#x27;)
  *     .done();
  * &#x60;&#x60;&#x60;
  *
@@ -1178,13 +1178,13 @@ Assertions.prototype.dialogText = function (expected, message) {
  *
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
- *     .assert.title().is.not(&#x27;Dalek Emperor TV&#x27;, &#x27;Not your daleks tv&#x27;)
+ *     .assert.title().is.not(&#x27;Dalek Emperor TV&#x27;, &#x27;Not your Daleks TV&#x27;)
  *     .done();
  * &#x60;&#x60;&#x60;
  *
  * @api
  * @method title
- * @param {string} expected Expected testresult
+ * @param {string} expected Expected test result
  * @param {string} message Message for the test reporter
  * @chainable
  */
@@ -1197,17 +1197,17 @@ Assertions.prototype.title = function (expected, message) {
 };
 
 /**
- * Asserts that given title does not match the given expactions
+ * Asserts that given title does not match the given expectations.
  *
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
- *     .assert.doesntHaveTitle(&#x27;Dalek Emperor TV&#x27;, &#x27;Not your daleks tv&#x27;)
+ *     .assert.doesntHaveTitle(&#x27;Dalek Emperor TV&#x27;, &#x27;Not your Daleks TV&#x27;)
  *     .done();
  * &#x60;&#x60;&#x60;
  *
  * @api
  * @method title
- * @param {string} expected Expected testresult
+ * @param {string} expected Expected test result
  * @param {string} message Message for the test reporter
  * @chainable
  */
@@ -1224,12 +1224,12 @@ Assertions.prototype.doesntHaveTitle = function (expected, message) {
  *
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
- *     .assert.url(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;Url is as expected&#x27;)
+ *     .assert.url(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;URL is as expected&#x27;)
  *     .done();
  * &#x60;&#x60;&#x60;
  *
- * You can also check if the protocol changend,
- * nice to see when you open github with http instead of https
+ * You can also check if the protocol changed,
+ * nice to see when you open GitHub with &#x27;http&#x27; instead of &#x27;https&#x27;
  *
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://github.com&#x27;)
@@ -1237,11 +1237,11 @@ Assertions.prototype.doesntHaveTitle = function (expected, message) {
  *     .done();
  * &#x60;&#x60;&#x60;
  *
- * Yep, using assertion helpersx is also possible:
+ * Yep, using assertion helpers is also possible:
  *
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://github.com&#x27;)
- *     .assert.url().is(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;Url is as expected&#x27;)
+ *     .assert.url().is(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;URL is as expected&#x27;)
  *     .done();
  * &#x60;&#x60;&#x60;
  *
@@ -1249,13 +1249,13 @@ Assertions.prototype.doesntHaveTitle = function (expected, message) {
  *
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
- *     .assert.url().is.not(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;Url is as expected&#x27;)
+ *     .assert.url().is.not(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;URL is as expected&#x27;)
  *     .done();
  * &#x60;&#x60;&#x60;
  *
  * @api
  * @method url
- * @param {string} expected Expected testresult
+ * @param {string} expected Expected test result
  * @param {string} message Message for the test reporter
  * @chainable
  */
@@ -1268,17 +1268,17 @@ Assertions.prototype.url = function (expected, message) {
 };
 
 /**
- * Asserts that the pages url does not match the expectation.
+ * Asserts that the pages URL does not match the expectation.
  *
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
- *     .assert.doesntHaveUrl(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;Url is not expected&#x27;)
+ *     .assert.doesntHaveUrl(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;URL is not expected&#x27;)
  *     .done();
  * &#x60;&#x60;&#x60;
  *
  * @api
  * @method doesntHaveUrl
- * @param {string} expected Expected testresult
+ * @param {string} expected Expected test result
  * @param {string} message Message for the test reporter
  * @chainable
  */
@@ -1313,7 +1313,7 @@ Assertions.prototype.doesntHaveUrl = function (expected, message) {
  * &#x60;&#x60;&#x60;javascript
  *  test
  *    .open(&#x27;http://dalekjs.com/guineapig/&#x27;)
- *    .assert.attr(&#x27;#dataDiv&#x27;).is(&#x27;data-spot&#x27;, &#x27;cat&#x27;, &#x27;We found Datas cat!&#x27;)
+ *    .assert.attr(&#x27;#dataDiv&#x27;).is(&#x27;data-spot&#x27;, &#x27;cat&#x27;, &#x27;We found Dataʼs cat!&#x27;)
  *    .done();
  * &#x60;&#x60;&#x60;
  *
@@ -1328,7 +1328,7 @@ Assertions.prototype.doesntHaveUrl = function (expected, message) {
  * @method attr
  * @param {string} selector Selector that matches the elements to test
  * @param {string} attribute The attribute to test
- * @param {string} expected Expected testresult
+ * @param {string} expected Expected test result
  * @param {string} message Message for the test reporter
  * @chainable
  */
@@ -1478,7 +1478,7 @@ Assertions.prototype.match = function (expected, message) {
  *
  * @method _generateCallbackAssertion
  * @param {string} key Unique key of the action
- * @param {string} type Type of the action (normalle the actions name)
+ * @param {string} type Type of the action (usually the actions name)
  * @return {function} The generated callback function
  * @private
  */
@@ -1592,12 +1592,12 @@ Assertions.prototype.generateTestHelper = function (name, assertionFn, negate) {
 // --------------
 
 /**
- * Assert if a given value shallow equals a snd. given value
+ * Assert if a given value shallow equals a second given value
  *
  * @method _testShallowEquals
  * @param {mixed} a Value to test
  * @param {mixed} b Value to test
- * @return {bool} false if values don&#x27;t match, true if they match
+ * @return {bool} false if values donʼt match, true if they match
  * @private
  */
 
@@ -1612,12 +1612,12 @@ Assertions.prototype._testShallowEquals = function (a, b) {
 };
 
 /**
- * Assert if a given value shallow does not equal a snd. given value
+ * Assert if a given value shallow does not equal a second given value
  *
  * @method _testShallowUnequals
  * @param {mixed} a Value to test
  * @param {mixed} b Value to test
- * @return {bool} true if values don&#x27;t match, false if they match
+ * @return {bool} true if values donʼt match, false if they match
  * @private
  */
 
@@ -1637,7 +1637,7 @@ Assertions.prototype._testShallowUnequals = function (a, b) {
  * @method _testBetween
  * @param {array} a Range to test
  * @param {bool} b Value to compare
- * @return {bool} testresult
+ * @return {bool} test result
  * @private
  */
 
@@ -1657,7 +1657,7 @@ Assertions.prototype._testBetween = function (a, b) {
  * @method _testGreaterThan
  * @param {bool} a Value to test
  * @param {bool} b Value to compare
- * @return {bool} testresult
+ * @return {bool} test result
  * @private
  */
 
@@ -1677,7 +1677,7 @@ Assertions.prototype._testGreaterThan = function (a, b) {
  * @method _testGreaterThanEqual
  * @param {bool} a Value to test
  * @param {bool} b Value to compare
- * @return {bool} testresult
+ * @return {bool} test result
  * @private
  */
 
@@ -1691,7 +1691,7 @@ Assertions.prototype._testGreaterThanEqual = function (a, b) {
  * @method _testLowerThan
  * @param {bool} a Value to test
  * @param {bool} b Value to compare
- * @return {bool} testresult
+ * @return {bool} test result
  * @private
  */
 
@@ -1711,7 +1711,7 @@ Assertions.prototype._testLowerThan = function (a, b) {
  * @method _contain
  * @param {bool} a Value to test
  * @param {bool} b Value to compare
- * @return {bool} testresult
+ * @return {bool} test result
  * @private
  */
 
@@ -1731,7 +1731,7 @@ Assertions.prototype._contain = function (a, b) {
  * @method _testLowerThanEqual
  * @param {bool} a Value to test
  * @param {bool} b Value to compare
- * @return {bool} testresult
+ * @return {bool} test result
  * @private
  */
 
@@ -1766,12 +1766,12 @@ Assertions.prototype._testFalsy = function (a) {
 };
 
 /**
- * Assert a given value matches a regex
+ * Assert a given value matches a RegEx
  *
  * @method _contain
  * @param {mixed} a Value to test
  * @param {string} b Value to compare
- * @return {bool} testresult
+ * @return {bool} test result
  * @private
  */
 
