@@ -168,17 +168,17 @@ It provides all a WebDriverServer &amp; browser launcher for Mozilla Firefox.</p
 <pre><code class="lang-bash">$ dalek mytest.js -b firefox</code></pre>
 <p>Because of the availability of the Firefox Marionette testing framework,
 Dalek atm. can only drive the Firefox Nightly Debug builds.</p>
-<p>You can get them from Mozillas FTP server, for example the one from the 16th August <a href="http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/"><a href="http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/08/2013-08-16-mozilla-central-debug/">http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/08/2013-08-16-mozilla-central-debug/</a></a></p>
+<p>You can get them from Mozillaʼs FTP server, for example the one from the 16th August <a href="http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/"><a href="http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/08/2013-08-16-mozilla-central-debug/">http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/08/2013-08-16-mozilla-central-debug/</a></a></p>
 <p>Dalek looks for the browser in the std. installation directory, if you installed the
 browser in a different place, you can add the location of the browser executable to you Dalekfile,
-because Dalek isn&#39;t capable of finding the executable yet on its own.</p>
+because Dalek isnʼt capable of finding the executable yet on its own.</p>
 <pre><code class="lang-javascript">&quot;browsers&quot;: [{
   &quot;firefox&quot;: {
     &quot;path&quot;: &quot;~/Apps/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin&quot;
   }
 }]</code></pre>
-<p>The Firefox plugin only implements a subset of Daleks Assertions &amp; Actions, so if you run into any bugs,
-the issue is most probably related to missing commands.
+<p>The Firefox plugin only implements a subset of Dalekʼs assertions &amp; actions,
+so if you run into any bugs, the issue is most probably related to missing commands.
 Please report any issues you find, Thank you :)</p>
 
 </div>
@@ -812,7 +812,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
     </div>
 
     <div class="description">
-        <p>Creates a new firefox profile</p>
+        <p>Creates a new Firefox profile</p>
 
     </div>
 
@@ -1547,7 +1547,7 @@ deletes the temp profile</p>
 
     <div class="description">
         <p>Default host of the FirefoxWebDriverServer
-The host may be overriden with
+The host may be overridden with
 a user configured value</p>
 
     </div>
@@ -1643,7 +1643,7 @@ a user configured value</p>
 
     <div class="description">
         <p>Default port of the Marionette TCP service
-The port may change, cause the port conflict resultion
+The port may change, cause the port conflict resolution
 tool might pick another one, if the default one is blocked</p>
 
     </div>
@@ -1739,7 +1739,7 @@ tool might pick another one, if the default one is blocked</p>
 
     <div class="description">
         <p>Default port of the FirefoxWebDriverServer
-The port may change, cause the port conflict resultion
+The port may change, cause the port conflict resolution
 tool might pick another one, if the default one is blocked</p>
 
     </div>
