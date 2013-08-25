@@ -111,7 +111,7 @@
         {
             "file": "index.js",
             "line": 75,
-            "description": "Default port of the ChromeWebDriverServer\nThe port may change, cause the port conflict resultion\ntool might pick another one, if the default one is blocked",
+            "description": "Default port of the ChromeWebDriverServer\nThe port may change, cause the port conflict resolution\ntool might pick another one, if the default one is blocked",
             "itemtype": "property",
             "name": "port",
             "type": "integer",
@@ -123,7 +123,7 @@
         {
             "file": "index.js",
             "line": 87,
-            "description": "Default host of the ChromeWebDriverServer\nThe host may be overriden with\na user configured value",
+            "description": "Default host of the ChromeWebDriverServer\nThe host may be overridden with\na user configured value",
             "itemtype": "property",
             "name": "host",
             "type": "string",
@@ -200,7 +200,7 @@
         {
             "file": "index.js",
             "line": 162,
-            "description": "Kills the ChromeWebDriverServer processe",
+            "description": "Kills the ChromeWebDriverServer process",
             "itemtype": "method",
             "name": "kill",
             "chainable": 1,
