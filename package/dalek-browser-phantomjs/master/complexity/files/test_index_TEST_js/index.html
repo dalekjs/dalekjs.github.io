@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">93.79</p>
+      <p class="stat">87.04</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">12</p>
+      <p class="stat">28</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">3.33</p>
+      <p class="stat">4.78</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.05</p>
+      <p class="stat">0.13</p>
     </div>
   </div>
 </div>
@@ -99,6 +99,22 @@ describe(&#039;dalek-browser-phantomjs&#039;, function() {
 
   it(&#039;should get default webdriver port&#039;, function(){
     expect(PhantomJSDriver.port).to.equal(9001);
+  });
+
+  it(&#039;should fail on busy port&#039;, function(done){
+    PhantomJSDriver.port = 80;
+    PhantomJSDriver.launch()
+      .fail(function() {
+        done();
+      });
+  });
+
+  it(&#039;should launch on port 9006&#039;, function(done){
+    PhantomJSDriver.port = 9006;
+    PhantomJSDriver.launch()
+      .then(function() {
+        done();
+      });
   });
 
 });</textarea>

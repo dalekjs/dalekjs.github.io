@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">80.44</p>
+      <p class="stat">77.24</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">145</p>
+      <p class="stat">148</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">11.93</p>
+      <p class="stat">13.83</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.27</p>
+      <p class="stat">0.31</p>
     </div>
   </div>
 </div>
@@ -191,7 +191,7 @@ var PhantomJSDriver = {
    * @default /wd/hub
    */
 
-	path: &#039;/wd/hub&#039;,
+  path: &#039;/wd/hub&#039;,
 
   /**
    * Child process instance of the PhantomJS browser
@@ -200,7 +200,7 @@ var PhantomJSDriver = {
    * @type null|Object
    */
 
-	spawned: null,
+  spawned: null,
 
   /**
    * Resolves the driver port
@@ -231,10 +231,10 @@ var PhantomJSDriver = {
    * @return Q.promise
    */
 
-	launch: function () {
-		var deferred = Q.defer();
-		var stream = &#039;&#039;;
-    this.spawned = spawn(phantomjs.path, [&#039;--webdriver&#039;, &#039;9001&#039;]);
+  launch: function () {
+    var deferred = Q.defer();
+    var stream = &#039;&#039;;
+    this.spawned = spawn(phantomjs.path, [&#039;--webdriver&#039;, this.getPort()]);
 
     this.spawned.stdout.on(&#039;data&#039;, function (data) {
       var dataStr = data + &#039;&#039;;
@@ -242,9 +242,12 @@ var PhantomJSDriver = {
       if (stream.search(&#039;GhostDriver - Main - running&#039;) !== -1) {
         deferred.resolve();
       }
+      else if (stream.search(&#039;Could not start Ghost Driver&#039;) !== -1) {
+        deferred.reject(&#039;Could not start Ghost Driver&#039;);
+      }
     });
     return deferred.promise;
-	},
+  },
 
   /**
    * Kills the PhantomJSDriver processe
@@ -253,9 +256,9 @@ var PhantomJSDriver = {
    * @chainable
    */
 
-	kill: function () {
-		this.spawned.kill(&#039;SIGTERM&#039;);
-	}
+  kill: function () {
+    this.spawned.kill(&#039;SIGTERM&#039;);
+  }
 };
 
 module.exports = PhantomJSDriver;</textarea>

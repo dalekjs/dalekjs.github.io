@@ -167,7 +167,7 @@
         },
         {
             "file": "index.js",
-            "line": 157,
+            "line": 160,
             "description": "Kills the PhantomJSDriver processe",
             "itemtype": "method",
             "name": "kill",
