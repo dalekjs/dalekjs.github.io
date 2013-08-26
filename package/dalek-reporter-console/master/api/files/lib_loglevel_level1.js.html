@@ -207,9 +207,9 @@ LogLevel1.prototype.outputRunnerFinished = function (data) {
   this.echo(&#x27;&#x27;, {nl: true});
 
   // echo the assertion &amp; time status
-  this.echo(
-    data.assertionsPassed + &#x27;/&#x27; + data.assertions + &#x27; assertions passed.&#x27; + &#x27; Elapsed Time: &#x27; + timeOutput,
-    {foreground: &#x27;whiteBright&#x27;, style: &#x27;bold&#x27;, background: (data.status ? &#x27;bgGreenBright&#x27; : &#x27;bgRedBright&#x27;)}
+  this.echo(&#x27; &#x27; +
+    data.assertionsPassed + &#x27;/&#x27; + data.assertions + &#x27; assertions passed.&#x27; + &#x27; Elapsed Time: &#x27; + timeOutput + &#x27; &#x27;,
+    {foreground: (data.status ? &#x27;black&#x27; : &#x27;whiteBright&#x27;), background: (data.status ? &#x27;bgGreenBright&#x27; : &#x27;bgRedBright&#x27;)}
   );
   return this;
 };
