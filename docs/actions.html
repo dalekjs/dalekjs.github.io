@@ -60,7 +60,7 @@
     .toParentWindow()
     .assert.title().is(&#39;Title of a page that can open a popup window&#39;)
     .done();
- </code></pre></p><a class="nav-helper" data-name="meth-screenshot"></a><h2 class="method">.screenshot</h2><p>Take a screenshot of the current page.</p><p>The pathname argument takes some placeholders that will be replaced Placeholder:</p><ul><li><code>:browser</code>- The browser name (e.g. ‘Chrome‘, ‘Safari‘, ‘Firefox‘, etc.)</li><li><code>:version</code>- The browser version (e.g. ‘10<em>0‘, ‘23</em>11_5‘, etc.)</li><li><code>:os</code>- The operating system (e.g.<code>OSX</code>,<code>Windows</code>,<code>Linux</code>)</li><li><code>:osVersion</code>- The operating system version (e.g<code>XP</code>,<code>7</code>,<code>10_8</code>, etc.)</li><li><code>:viewport</code>- The current viewport in pixels (e.g.<code>w1024_h768</code>)</li><li><code>:timestamp</code>- UNIX like timestapm (e.g.<code>637657345</code>)</li><li><code>:date</code>- Current date in format MM<em>DD</em>YYYY (e.g.<code>12_24_2013</code>)</li><li><p><code>:datetime</code>- Current datetime in format MM<em>DD</em>YYYY<em>HH</em>mm_ss (e.g.<code>12_24_2013_14_55_23</code>)</p><p><pre><code class="language-javascript">
+ </code></pre></p><a class="nav-helper" data-name="meth-screenshot"></a><h2 class="method">.screenshot</h2><p>Take a screenshot of the current page.</p><p>The pathname argument takes some placeholders that will be replaced Placeholder:</p><ul><li><code>:browser</code> - The browser name (e.g. ‘Chrome‘, ‘Safari‘, ‘Firefox‘, etc.)</li><li><code>:version</code> - The browser version (e.g. ‘10<em>0‘, ‘23</em>11_5‘, etc.)</li><li><code>:os</code> - The operating system (e.g. <code>OSX</code>, <code>Windows</code>, <code>Linux</code>)</li><li><code>:osVersion</code> - The operating system version (e.g <code>XP</code>, <code>7</code>, <code>10_8</code>, etc.)</li><li><code>:viewport</code> - The current viewport in pixels (e.g. <code>w1024_h768</code>)</li><li><code>:timestamp</code> - UNIX like timestapm (e.g. <code>637657345</code>)</li><li><code>:date</code> - Current date in format MM<em>DD</em>YYYY (e.g. <code>12_24_2013</code>)</li><li><p><code>:datetime</code> - Current datetime in format MM<em>DD</em>YYYY<em>HH</em>mm_ss (e.g. <code>12_24_2013_14_55_23</code>)</p><p><pre><code class="language-javascript">
 // creates &#39;my/folder/my_file.png&#39;
 test.screenshot(&#39;my/folder/my_file&#39;);
 // creates &#39;my/page/in/safari/homepage.png&#39;
@@ -201,7 +201,7 @@ test.open(&#39;http://home.dalek.com&#39;)
  &lt;div&gt;
    &lt;span id=&quot;magicspan&quot;&gt;The span in the fireplace&lt;/span&gt;
  &lt;/div&gt;
- </code></pre></p><p><code></code>`css #magicspan { display: inline; }</p><p>#magicspan { display: none; } }<code></code>`</p><p><pre><code class="language-javascript">
+ </code></pre></p><p><code></code>`css #magicspan { display: inline; }</p><p>#magicspan { display: none; } } <code></code>`</p><p><pre><code class="language-javascript">
   test.open(&#39;http://adomain.com&#39;)
      .assert.visible(&#39;#magicspan&#39;, &#39;Big screen, visible span&#39;)
      .resize({width: 400, height: 500})
@@ -211,7 +211,7 @@ test.open(&#39;http://home.dalek.com&#39;)
  &lt;div&gt;
    &lt;span id=&quot;magicspan&quot;&gt;The span in the fireplace&lt;/span&gt;
  &lt;/div&gt;
- </code></pre></p><p><code></code>`css #magicspan { display: inline; }</p><p>#magicspan { display: none; } }<code></code>`</p><p><pre><code class="language-javascript">
+ </code></pre></p><p><code></code>`css #magicspan { display: inline; }</p><p>#magicspan { display: none; } } <code></code>`</p><p><pre><code class="language-javascript">
   test.open(&#39;http://adomain.com&#39;)
      .resize({width: 400, height: 500})
      .assert.notVisible(&#39;#magicspan&#39;, &#39;Small screen, no visible span magic!&#39;)
@@ -244,4 +244,4 @@ test.open(&#39;http://home.dalek.com&#39;)
           })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
           ga('create', 'UA-42520123-1', 'dalekjs.com');
-          ga('send', 'pageview');</script><script src="../js/134a17e6.main.js"></script>
+          ga('send', 'pageview');</script><script src="../js/3cf75c19.main.js"></script>
