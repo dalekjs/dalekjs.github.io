@@ -45,6 +45,8 @@
             
                 <li><a href="../classes/FirefoxDriver.Commands.Marionette.Cookie.html">FirefoxDriver.Commands.Marionette.Cookie</a></li>
             
+                <li><a href="../classes/FirefoxDriver.Commands.Marionette.Element.html">FirefoxDriver.Commands.Marionette.Element</a></li>
+            
                 <li><a href="../classes/FirefoxDriver.Commands.Marionette.Execute.html">FirefoxDriver.Commands.Marionette.Execute</a></li>
             
                 <li><a href="../classes/FirefoxDriver.Commands.Marionette.Frame.html">FirefoxDriver.Commands.Marionette.Frame</a></li>
@@ -230,16 +232,11 @@ module.exports = function (Marionette) {
    */
 
   Marionette.addCommand({
-    name: &#x27;addCookie&#x27;,
+    name: &#x27;cookies&#x27;,
     request: {
       to: &#x27;:marionetteId&#x27;,
       session: &#x27;:sessionId&#x27;,
-      path: &#x27;:path&#x27;,
-      domain: &#x27;:domain&#x27;,
-      secure: &#x27;:secure&#x27;,
-      expiry: &#x27;:expiry&#x27;,
-      value: &#x27;:cookie&#x27;,
-      name: &#x27;:name&#x27;,
+      cookie: &#x27;:cookie&#x27;,
       type: &#x27;addCookie&#x27;
     }
   });

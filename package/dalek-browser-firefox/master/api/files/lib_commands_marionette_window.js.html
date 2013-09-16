@@ -45,6 +45,8 @@
             
                 <li><a href="../classes/FirefoxDriver.Commands.Marionette.Cookie.html">FirefoxDriver.Commands.Marionette.Cookie</a></li>
             
+                <li><a href="../classes/FirefoxDriver.Commands.Marionette.Element.html">FirefoxDriver.Commands.Marionette.Element</a></li>
+            
                 <li><a href="../classes/FirefoxDriver.Commands.Marionette.Execute.html">FirefoxDriver.Commands.Marionette.Execute</a></li>
             
                 <li><a href="../classes/FirefoxDriver.Commands.Marionette.Frame.html">FirefoxDriver.Commands.Marionette.Frame</a></li>
@@ -183,6 +185,25 @@ module.exports = function (Marionette) {
       type: &#x27;executeScript&#x27;,
       value: &#x27;:value&#x27;,
       newSandbox: false
+    }
+  });
+
+  Marionette.addCommand({
+    name: &#x27;windowHandles&#x27;,
+    request: {
+      to: &#x27;:marionetteId&#x27;,
+      session: &#x27;:sessionId&#x27;,
+      type: &#x27;getWindows&#x27;
+    }
+  });
+
+  Marionette.addCommand({
+    name: &#x27;changeWindow&#x27;,
+    request: {
+      to: &#x27;:marionetteId&#x27;,
+      session: &#x27;:sessionId&#x27;,
+      type: &#x27;switchToWindow&#x27;,
+      value: &#x27;:value&#x27;
     }
   });
 

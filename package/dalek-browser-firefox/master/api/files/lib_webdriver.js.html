@@ -45,6 +45,8 @@
             
                 <li><a href="../classes/FirefoxDriver.Commands.Marionette.Cookie.html">FirefoxDriver.Commands.Marionette.Cookie</a></li>
             
+                <li><a href="../classes/FirefoxDriver.Commands.Marionette.Element.html">FirefoxDriver.Commands.Marionette.Element</a></li>
+            
                 <li><a href="../classes/FirefoxDriver.Commands.Marionette.Execute.html">FirefoxDriver.Commands.Marionette.Execute</a></li>
             
                 <li><a href="../classes/FirefoxDriver.Commands.Marionette.Frame.html">FirefoxDriver.Commands.Marionette.Frame</a></li>
@@ -305,19 +307,12 @@ WebDriverServer.prototype._onRequest = function (command, req, res) {
     var answer = { sessionId: parameters.sessionId, status: 0};
 
     // check if we need to send a value with the response
-    if (data.value) {
+    if (data.value || data.value === false) {
       answer.value = data.value;
     }
 
-    // check if we need to add an timeout to the action
-    // TODO: we need to find a better way than using a timeout
-    // Problem: It seems that there is no function in marionette
-    // that indicates if we actually changed the url based on a previous action
-    var timeout = command.timeout ? command.timeout : 0;
-    setTimeout(function () {
-      res.status(200);
-      res.send(JSON.stringify(answer));
-    }, timeout);
+    res.status(200);
+    res.send(JSON.stringify(answer));
 
   }.bind(this));
 

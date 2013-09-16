@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">71.28</p>
+      <p class="stat">70.95</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">283</p>
+      <p class="stat">287</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">26.54</p>
+      <p class="stat">30.62</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.53</p>
+      <p class="stat">1.59</p>
     </div>
   </div>
 </div>
@@ -221,7 +221,11 @@ Marionette.prototype.addCommand = function (command) {
 
     // parse the command skeleton &amp; create a message with values
     Object.keys(command.request).forEach(function (key){
-      req[key] = this._parseRequestKey(command.request[key], params);
+      // cookie related hack
+      if (command.name === &#039;cookies&#039; &amp;&amp; this._parseRequestKey(command.request[key], params) === &#039;&#039;) {
+      } else {
+        req[key] = this._parseRequestKey(command.request[key], params);
+      }
     }.bind(this));
 
     // issue the command

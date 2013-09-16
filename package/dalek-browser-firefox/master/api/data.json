@@ -20,7 +20,9 @@
         "lib/commands/marionette/element.js": {
             "name": "lib/commands/marionette/element.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "FirefoxDriver.Commands.Marionette.Element": 1
+            },
             "fors": {},
             "namespaces": {
                 "FirefoxDriver.Commands.Marionette": 1
@@ -344,6 +346,7 @@
             "submodules": {},
             "classes": {
                 "FirefoxDriver.Commands.Marionette.Cookie": 1,
+                "FirefoxDriver.Commands.Marionette.Element": 1,
                 "FirefoxDriver.Commands.Marionette.Execute": 1,
                 "FirefoxDriver.Commands.Marionette.Frame": 1,
                 "FirefoxDriver.Commands.Marionette.IME": 1,
@@ -391,8 +394,8 @@
             },
             "tag": "module",
             "file": "index.js",
-            "line": 40,
-            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Mozilla Firefox.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-firefox --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browsers\": [\"firefox\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b firefox\n```\n\nBecause of the availability of the Firefox Marionette testing framework,\nDalek atm. can only drive the Firefox Nightly Debug builds.\n\nYou can get them from Mozillaʼs FTP server, for example the one from the 16th August [http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/08/2013-08-16-mozilla-central-debug/](http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/)\n\nDalek looks for the browser in the std. installation directory, if you installed the\nbrowser in a different place, you can add the location of the browser executable to you Dalekfile,\nbecause Dalek isnʼt capable of finding the executable yet on its own.\n\n```javascript\n\"browsers\": [{\n  \"firefox\": {\n    \"path\": \"~/Apps/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin\"\n  }\n}]\n```\n\nThe Firefox plugin only implements a subset of Dalekʼs assertions & actions,\nso if you run into any bugs, the issue is most probably related to missing commands.\nPlease report any issues you find, Thank you :)",
+            "line": 41,
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Mozilla Firefox &amp; Firefox OS.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-firefox --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browser\": [\"firefox\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b firefox\n```\n\nBecause of the availability of the Firefox Marionette testing framework,\nDalek atm. can only drive the Firefox Nightly Debug builds.\n\nYou can get them from Mozillaʼs FTP server, for example the one from the 16th August [http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/08/2013-08-16-mozilla-central-debug/](http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/)\n\nDalek looks for the browser in the std. installation directory, if you installed the\nbrowser in a different place, you can add the location of the browser executable to you Dalekfile,\nbecause Dalek isnʼt capable of finding the executable yet on its own.\n\n```javascript\n\"browsers\": [{\n  \"firefox\": {\n    \"path\": \"~/Apps/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin\"\n  }\n}]\n```\n\nThe Firefox plugin only implements a subset of Dalekʼs assertions & actions,\nso if you run into any bugs, the issue is most probably related to missing commands.\nPlease report any issues you find, Thank you :)\n\nThe Webdriver Server tries to open Port 9006 by default,\nif this port is blocked, it tries to use a port between 9007 & 9096\nYou can specifiy a different port from within your [Dalekfile](/pages/config.html) like so:\n\n```json\n\"browsers\": {\n  \"firefox\": {\n    \"port\": 5555 \n  }\n}\n```\n\nIt is also possible to specify a range of ports:\n\n```json\n\"browsers\": {\n  \"firefox\": {\n    \"portRange\": [6100, 6120] \n  }\n}\n```\n\nIf you would like to test Aurora oder Firefox OS releases, you can simply apply a snd. argument,\nwhich defines the browser type:\n\n```bash\n$ dalek mytest.js -b firefox:aurora\n```\n\nfor Firefox Aurora, and if you would like to use the Firefox OS, just append `:os`:\n\n```bash\n$ dalek mytest.js -b firefox:os\n```\n\nThis will only work if you installed your browser in the default locations,\nif the browsers binary is located in a non default location, you are able to specify\nits location in your [Dalekfile](/pages/config.html):\n\n```json\n\"browsers\": {\n  \"firefox\": {\n    \"binary\": \"/Applications/Custom Located Firefox.app/MacOS/Contents/firefox-bin\" \n  }\n}\n```\n\nThis also works for the aurora &amp; Firefox OS builds\n\n```json\n\"browsers\": {\n  \"firefox:aurora\": {\n    \"binary\": \"/Applications/Custom Located Firefox Aurora.app/MacOS/Contents/firefox-bin\" \n  }\n}\n```",
             "part": "Firefox",
             "api": ""
         }
@@ -411,6 +414,20 @@
             "file": "lib/commands/marionette/window.js",
             "line": 27,
             "description": "Cookie related Marionette commands\nsee [JsonProtocol](https://wiki.mozilla.org/Auto-tools/Projects/Marionette/JSON_Protocol)"
+        },
+        "FirefoxDriver.Commands.Marionette.Element": {
+            "name": "FirefoxDriver.Commands.Marionette.Element",
+            "shortname": "FirefoxDriver.Commands.Marionette.Element",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "FirefoxDriver",
+            "namespace": "FirefoxDriver.Commands.Marionette",
+            "file": "lib/commands/marionette/element.js",
+            "line": 27,
+            "description": "Element related Marionette commands\nsee [JsonProtocol](https://wiki.mozilla.org/Auto-tools/Projects/Marionette/JSON_Protocol)"
         },
         "FirefoxDriver.Commands.Marionette.Execute": {
             "name": "FirefoxDriver.Commands.Marionette.Execute",
@@ -745,8 +762,8 @@
             "module": "DalekJS",
             "namespace": "Browser",
             "file": "index.js",
-            "line": 40,
-            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Mozilla Firefox.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-firefox --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browsers\": [\"firefox\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b firefox\n```\n\nBecause of the availability of the Firefox Marionette testing framework,\nDalek atm. can only drive the Firefox Nightly Debug builds.\n\nYou can get them from Mozillaʼs FTP server, for example the one from the 16th August [http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/08/2013-08-16-mozilla-central-debug/](http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/)\n\nDalek looks for the browser in the std. installation directory, if you installed the\nbrowser in a different place, you can add the location of the browser executable to you Dalekfile,\nbecause Dalek isnʼt capable of finding the executable yet on its own.\n\n```javascript\n\"browsers\": [{\n  \"firefox\": {\n    \"path\": \"~/Apps/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin\"\n  }\n}]\n```\n\nThe Firefox plugin only implements a subset of Dalekʼs assertions & actions,\nso if you run into any bugs, the issue is most probably related to missing commands.\nPlease report any issues you find, Thank you :)"
+            "line": 41,
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Mozilla Firefox &amp; Firefox OS.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-firefox --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browser\": [\"firefox\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b firefox\n```\n\nBecause of the availability of the Firefox Marionette testing framework,\nDalek atm. can only drive the Firefox Nightly Debug builds.\n\nYou can get them from Mozillaʼs FTP server, for example the one from the 16th August [http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/08/2013-08-16-mozilla-central-debug/](http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/)\n\nDalek looks for the browser in the std. installation directory, if you installed the\nbrowser in a different place, you can add the location of the browser executable to you Dalekfile,\nbecause Dalek isnʼt capable of finding the executable yet on its own.\n\n```javascript\n\"browsers\": [{\n  \"firefox\": {\n    \"path\": \"~/Apps/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin\"\n  }\n}]\n```\n\nThe Firefox plugin only implements a subset of Dalekʼs assertions & actions,\nso if you run into any bugs, the issue is most probably related to missing commands.\nPlease report any issues you find, Thank you :)\n\nThe Webdriver Server tries to open Port 9006 by default,\nif this port is blocked, it tries to use a port between 9007 & 9096\nYou can specifiy a different port from within your [Dalekfile](/pages/config.html) like so:\n\n```json\n\"browsers\": {\n  \"firefox\": {\n    \"port\": 5555 \n  }\n}\n```\n\nIt is also possible to specify a range of ports:\n\n```json\n\"browsers\": {\n  \"firefox\": {\n    \"portRange\": [6100, 6120] \n  }\n}\n```\n\nIf you would like to test Aurora oder Firefox OS releases, you can simply apply a snd. argument,\nwhich defines the browser type:\n\n```bash\n$ dalek mytest.js -b firefox:aurora\n```\n\nfor Firefox Aurora, and if you would like to use the Firefox OS, just append `:os`:\n\n```bash\n$ dalek mytest.js -b firefox:os\n```\n\nThis will only work if you installed your browser in the default locations,\nif the browsers binary is located in a non default location, you are able to specify\nits location in your [Dalekfile](/pages/config.html):\n\n```json\n\"browsers\": {\n  \"firefox\": {\n    \"binary\": \"/Applications/Custom Located Firefox.app/MacOS/Contents/firefox-bin\" \n  }\n}\n```\n\nThis also works for the aurora &amp; Firefox OS builds\n\n```json\n\"browsers\": {\n  \"firefox:aurora\": {\n    \"binary\": \"/Applications/Custom Located Firefox Aurora.app/MacOS/Contents/firefox-bin\" \n  }\n}\n```"
         }
     },
     "classitems": [
@@ -793,63 +810,92 @@
         {
             "file": "lib/commands/marionette/element.js",
             "line": 38,
-            "class": "FirefoxDriver.Commands.Marionette.Cookie",
+            "class": "FirefoxDriver.Commands.Marionette.Element",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
         {
             "file": "lib/commands/marionette/element.js",
             "line": 54,
-            "class": "FirefoxDriver.Commands.Marionette.Cookie",
+            "class": "FirefoxDriver.Commands.Marionette.Element",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
         {
             "file": "lib/commands/marionette/element.js",
             "line": 70,
-            "class": "FirefoxDriver.Commands.Marionette.Cookie",
+            "class": "FirefoxDriver.Commands.Marionette.Element",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
         {
             "file": "lib/commands/marionette/element.js",
             "line": 85,
-            "class": "FirefoxDriver.Commands.Marionette.Cookie",
+            "class": "FirefoxDriver.Commands.Marionette.Element",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
         {
             "file": "lib/commands/marionette/element.js",
             "line": 100,
-            "class": "FirefoxDriver.Commands.Marionette.Cookie",
+            "class": "FirefoxDriver.Commands.Marionette.Element",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
         {
             "file": "lib/commands/marionette/element.js",
             "line": 115,
-            "class": "FirefoxDriver.Commands.Marionette.Cookie",
+            "class": "FirefoxDriver.Commands.Marionette.Element",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 131,
-            "class": "FirefoxDriver.Commands.Marionette.Cookie",
+            "line": 130,
+            "class": "FirefoxDriver.Commands.Marionette.Element",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
         {
             "file": "lib/commands/marionette/element.js",
             "line": 146,
-            "class": "FirefoxDriver.Commands.Marionette.Cookie",
+            "class": "FirefoxDriver.Commands.Marionette.Element",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
         {
             "file": "lib/commands/marionette/element.js",
             "line": 161,
-            "class": "FirefoxDriver.Commands.Marionette.Cookie",
+            "class": "FirefoxDriver.Commands.Marionette.Element",
+            "module": "FirefoxDriver",
+            "namespace": "FirefoxDriver.Commands.Marionette"
+        },
+        {
+            "file": "lib/commands/marionette/element.js",
+            "line": 177,
+            "class": "FirefoxDriver.Commands.Marionette.Element",
+            "module": "FirefoxDriver",
+            "namespace": "FirefoxDriver.Commands.Marionette"
+        },
+        {
+            "file": "lib/commands/marionette/element.js",
+            "line": 192,
+            "class": "FirefoxDriver.Commands.Marionette.Element",
+            "module": "FirefoxDriver",
+            "namespace": "FirefoxDriver.Commands.Marionette"
+        },
+        {
+            "file": "lib/commands/marionette/element.js",
+            "line": 207,
+            "description": "TODO: Find JS workaround (Marionette doesn't has a submit handler yet)",
+            "class": "FirefoxDriver.Commands.Marionette.Element",
+            "module": "FirefoxDriver",
+            "namespace": "FirefoxDriver.Commands.Marionette"
+        },
+        {
+            "file": "lib/commands/marionette/element.js",
+            "line": 224,
+            "class": "FirefoxDriver.Commands.Marionette.Element",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
@@ -865,7 +911,7 @@
         },
         {
             "file": "lib/commands/marionette/execute.js",
-            "line": 61,
+            "line": 62,
             "description": "Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame.\nThe executed script is assumed to be asynchronous and must signal that is done by invoking the provided callback,\nwhich is always provided as the final argument to the function. The value to this callback will be returned to the client.\nAsynchronous script commands may not span page loads.\nIf an unload event is fired while waiting for a script result, an error should be returned to the client.\n\nThe script argument defines the script to execute in teh form of a function body.\nThe function will be invoked with the provided args array and the values may be accessed\nvia the arguments object in the order specified.\nThe final argument will always be a callback function that must be invoked to signal that the script has finished.",
             "itemtype": "method",
             "name": "executeAsync",
@@ -1048,7 +1094,7 @@
         },
         {
             "file": "lib/commands/webdriver/cookie.js",
-            "line": 55,
+            "line": 69,
             "description": "Retrieve all cookies visible to the current page.",
             "itemtype": "method",
             "name": "getCookies",
@@ -1068,7 +1114,7 @@
         },
         {
             "file": "lib/commands/webdriver/cookie.js",
-            "line": 69,
+            "line": 83,
             "description": "Delete all cookies visible to the current page.",
             "itemtype": "method",
             "name": "deleteCookies",
@@ -1088,7 +1134,7 @@
         },
         {
             "file": "lib/commands/webdriver/cookie.js",
-            "line": 83,
+            "line": 97,
             "description": "Delete the cookie with the given name.\nThis command should be a no-op if there is no such cookie visible to the current page.",
             "itemtype": "method",
             "name": "deleteCookie",
@@ -1108,7 +1154,101 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 38,
+            "line": 46,
+            "description": "Parses an element return value",
+            "itemtype": "method",
+            "name": "parseElement",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "Marionette return value of an element call",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Webdriver compatible element response",
+                "type": "Object|number"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "FirefoxDriver.Commands.WebDriver.Element",
+            "module": "FirefoxDriver",
+            "namespace": "FirefoxDriver.Commands.WebDriver"
+        },
+        {
+            "file": "lib/commands/webdriver/element.js",
+            "line": 59,
+            "description": "Parses multi elements return value",
+            "itemtype": "method",
+            "name": "parseElements",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "Marionette return value of an elements call",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Webdriver compatible elements response",
+                "type": "Object|number"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "FirefoxDriver.Commands.WebDriver.Element",
+            "module": "FirefoxDriver",
+            "namespace": "FirefoxDriver.Commands.WebDriver"
+        },
+        {
+            "file": "lib/commands/webdriver/element.js",
+            "line": 81,
+            "description": "Generic multi elements response handler",
+            "itemtype": "method",
+            "name": "multiElementResponse",
+            "params": [
+                {
+                    "name": "req",
+                    "description": "Original request",
+                    "type": "Object"
+                },
+                {
+                    "name": "res",
+                    "description": "Original response",
+                    "type": "Object"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "FirefoxDriver.Commands.WebDriver.Element",
+            "module": "FirefoxDriver",
+            "namespace": "FirefoxDriver.Commands.WebDriver"
+        },
+        {
+            "file": "lib/commands/webdriver/element.js",
+            "line": 101,
+            "description": "Generic single element response handler",
+            "itemtype": "method",
+            "name": "singleElementResponse",
+            "params": [
+                {
+                    "name": "req",
+                    "description": "Original request",
+                    "type": "Object"
+                },
+                {
+                    "name": "res",
+                    "description": "Original response",
+                    "type": "Object"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "FirefoxDriver.Commands.WebDriver.Element",
+            "module": "FirefoxDriver",
+            "namespace": "FirefoxDriver.Commands.WebDriver"
+        },
+        {
+            "file": "lib/commands/webdriver/element.js",
+            "line": 121,
             "description": "Search for an element on the page, starting from the document root.\nThe located element will be returned as a WebElement JSON object.",
             "itemtype": "method",
             "name": "element",
@@ -1138,7 +1278,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 76,
+            "line": 143,
             "description": "Search for an element on the page, starting from the identified element.\nThe located element will be returned as a WebElement JSON object.\nThe table below lists the locator strategies that each server should support.\nEach locator must return the first matching element located in the DOM.",
             "itemtype": "method",
             "name": "childElement",
@@ -1173,7 +1313,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 117,
+            "line": 168,
             "description": "Search for multiple elements on the page, starting from the document root.\nThe located element will be returned as a WebElement JSON object.",
             "itemtype": "method",
             "name": "elements",
@@ -1203,7 +1343,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 158,
+            "line": 190,
             "description": "Search for multiple elements on the page, starting from the identified element.\nThe located elements will be returned as a WebElement JSON objects.\nThe table below lists the locator strategies that each server should support.\nElements should be returned in the order located in the DOM.",
             "itemtype": "method",
             "name": "childElements",
@@ -1238,7 +1378,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 202,
+            "line": 215,
             "description": "Click on an element.",
             "itemtype": "method",
             "name": "click",
@@ -1263,7 +1403,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 218,
+            "line": 231,
             "description": "Submit a FORM element.\nThe submit command may also be applied to any element that is a descendant of a FORM element.",
             "itemtype": "method",
             "name": "submit",
@@ -1288,7 +1428,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 235,
+            "line": 248,
             "description": "Send a sequence of key strokes to an element",
             "itemtype": "method",
             "name": "value",
@@ -1318,7 +1458,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 252,
+            "line": 265,
             "description": "Clears the contents of an element",
             "itemtype": "method",
             "name": "value",
@@ -1348,7 +1488,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 274,
+            "line": 287,
             "description": "Send a sequence of key strokes to the active element.\nThis command is similar to the send keys command in every aspect except the implicit termination:\nThe modifiers are not released at the end of the call.\nRather, the state of the modifier keys is kept between calls,\nso mouse interactions can be performed while modifier keys are depressed.",
             "itemtype": "method",
             "name": "keys",
@@ -1373,7 +1513,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 294,
+            "line": 307,
             "description": "Returns the visible text for the element.",
             "itemtype": "method",
             "name": "text",
@@ -1398,7 +1538,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 309,
+            "line": 322,
             "description": "Get the value of an element's attribute.",
             "itemtype": "method",
             "name": "attribute",
@@ -1428,7 +1568,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 325,
+            "line": 338,
             "description": "Determine an element's location on the page.\nThe point (0, 0) refers to the upper-left corner of the page.\nThe element's coordinates are returned as a JSON object with x and y properties.",
             "itemtype": "method",
             "name": "displayed",
@@ -1453,7 +1593,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 342,
+            "line": 355,
             "description": "Query for an element's tag name",
             "itemtype": "method",
             "name": "tagName",
@@ -1478,7 +1618,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 357,
+            "line": 370,
             "description": "Clear a TEXTAREA or text INPUT element's value",
             "itemtype": "method",
             "name": "clear",
@@ -1503,7 +1643,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 372,
+            "line": 385,
             "description": "Determine if an OPTION element, or an INPUT element of type checkbox or radiobutton is currently selected",
             "itemtype": "method",
             "name": "selected",
@@ -1528,7 +1668,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 387,
+            "line": 400,
             "description": "Determine if an element is currently enabled",
             "itemtype": "method",
             "name": "enabled",
@@ -1553,7 +1693,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 402,
+            "line": 415,
             "description": "Test if two element IDs refer to the same DOM element",
             "itemtype": "method",
             "name": "equals",
@@ -1583,7 +1723,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 418,
+            "line": 431,
             "description": "Determine an element's location on the page. The point (0, 0) refers to the upper-left corner of the page.\nThe element's coordinates are returned as a JSON object with x and y properties.",
             "itemtype": "method",
             "name": "location",
@@ -1608,7 +1748,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 434,
+            "line": 447,
             "description": "Determine an element's location on the screen once it has been scrolled into view.\nNote: This is considered an internal command and should only be used to determine an element's location for correctly generating native events.",
             "itemtype": "method",
             "name": "locationInView",
@@ -1633,7 +1773,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 450,
+            "line": 463,
             "description": "Determine an element's size in pixels.\nThe size will be returned as a JSON object with width and height properties.",
             "itemtype": "method",
             "name": "size",
@@ -1658,7 +1798,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 466,
+            "line": 479,
             "description": "Get the element on the page that currently has focus.\nThe element will be returned as a WebElement JSON object.",
             "itemtype": "method",
             "name": "active",
@@ -1683,7 +1823,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 482,
+            "line": 495,
             "description": "Get the element on the page that currently has focus.\nThe element will be returned as a WebElement JSON object.",
             "itemtype": "method",
             "name": "elementInfo",
@@ -1708,7 +1848,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 498,
+            "line": 511,
             "description": "Query the value of an element's computed CSS property.\nThe CSS property to query should be specified using the CSS property name,\nnot the JavaScript property name (e.g. background-color instead of backgroundColor).",
             "itemtype": "method",
             "name": "cssProperty",
@@ -1768,7 +1908,7 @@
         },
         {
             "file": "lib/commands/webdriver/execute.js",
-            "line": 60,
+            "line": 76,
             "description": "Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame.\nThe executed script is assumed to be asynchronous and must signal that is done by invoking the provided callback,\nwhich is always provided as the final argument to the function. The value to this callback will be returned to the client.\nAsynchronous script commands may not span page loads.\nIf an unload event is fired while waiting for a script result, an error should be returned to the client.\n\nThe script argument defines the script to execute in teh form of a function body.\nThe function will be invoked with the provided args array and the values may be accessed\nvia the arguments object in the order specified.\nThe final argument will always be a callback function that must be invoked to signal that the script has finished.",
             "itemtype": "method",
             "name": "executeAsync",
@@ -3448,7 +3588,7 @@
         },
         {
             "file": "lib/marionette.js",
-            "line": 144,
+            "line": 148,
             "description": "Loads the marionette commands from the commands library",
             "itemtype": "method",
             "name": "_loadCommands",
@@ -3461,7 +3601,7 @@
         },
         {
             "file": "lib/marionette.js",
-            "line": 160,
+            "line": 164,
             "description": "Templating function that replaces placeholders in commands\nwith their actual values",
             "itemtype": "method",
             "name": "_parseRequestKey",
@@ -3489,7 +3629,7 @@
         },
         {
             "file": "lib/marionette.js",
-            "line": 194,
+            "line": 198,
             "description": "Will be called if a socket error occurs",
             "itemtype": "method",
             "name": "_onError",
@@ -3509,7 +3649,7 @@
         },
         {
             "file": "lib/marionette.js",
-            "line": 210,
+            "line": 214,
             "description": "Handles the incoming data from the marionette sockets",
             "itemtype": "method",
             "name": "_onData",
@@ -3529,7 +3669,7 @@
         },
         {
             "file": "lib/marionette.js",
-            "line": 265,
+            "line": 269,
             "description": "Parses a marionette response message",
             "itemtype": "method",
             "name": "_parseMessage",
@@ -3552,7 +3692,7 @@
         },
         {
             "file": "lib/marionette.js",
-            "line": 281,
+            "line": 285,
             "description": "Issues a command to the marionette server\nGenerates a reference to the last called command,\nso that we are able to call the right receiver function for\nthe response from marionette",
             "itemtype": "method",
             "name": "_sendCommand",
@@ -3706,7 +3846,7 @@
         },
         {
             "file": "index.js",
-            "line": 92,
+            "line": 150,
             "description": "Verbose version of the browser name",
             "itemtype": "property",
             "name": "longName",
@@ -3718,7 +3858,7 @@
         },
         {
             "file": "index.js",
-            "line": 102,
+            "line": 160,
             "description": "Default port of the FirefoxWebDriverServer\nThe port may change, cause the port conflict resolution\ntool might pick another one, if the default one is blocked",
             "itemtype": "property",
             "name": "port",
@@ -3730,7 +3870,19 @@
         },
         {
             "file": "index.js",
-            "line": 114,
+            "line": 172,
+            "description": "Default maximum port of the WebDriverServer\nThe port is the highest port in the range that can be allocated\nby the WebDriverServer",
+            "itemtype": "property",
+            "name": "maxPort",
+            "type": "integer",
+            "default": "9096",
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 184,
             "description": "Default port of the Marionette TCP service\nThe port may change, cause the port conflict resolution\ntool might pick another one, if the default one is blocked",
             "itemtype": "property",
             "name": "marionettePort",
@@ -3742,7 +3894,7 @@
         },
         {
             "file": "index.js",
-            "line": 126,
+            "line": 196,
             "description": "Default host of the FirefoxWebDriverServer\nThe host may be overridden with\na user configured value",
             "itemtype": "property",
             "name": "host",
@@ -3754,7 +3906,29 @@
         },
         {
             "file": "index.js",
-            "line": 138,
+            "line": 208,
+            "description": "Default desired capabilities that should be\ntransferred when the browser session gets requested",
+            "itemtype": "property",
+            "name": "desiredCapabilities",
+            "type": "object",
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 220,
+            "description": "Driver defaults, what should the driver be able to access.",
+            "itemtype": "property",
+            "name": "driverDefaults",
+            "type": "object",
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 233,
             "description": "Root path of the FirefoxWebDriverServer",
             "itemtype": "property",
             "name": "path",
@@ -3766,7 +3940,7 @@
         },
         {
             "file": "index.js",
-            "line": 148,
+            "line": 243,
             "description": "Path to the Firefox binary file",
             "itemtype": "property",
             "name": "binary",
@@ -3778,8 +3952,8 @@
         },
         {
             "file": "index.js",
-            "line": 158,
-            "description": "Paths to the default Firefox binary files",
+            "line": 253,
+            "description": "Paths to the default Firefox binary files\n(Points to Nightly as long as Marionette isn't in std. Firefox)",
             "itemtype": "property",
             "name": "defaultBinaries",
             "type": "object",
@@ -3789,7 +3963,51 @@
         },
         {
             "file": "index.js",
-            "line": 171,
+            "line": 267,
+            "description": "Different browser types (Aurora / firefox OS) that can be controlled\nvia the Firefox driver",
+            "itemtype": "property",
+            "name": "browserTypes",
+            "type": "object",
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 277,
+            "description": "Nightly Firefox (Currently the default, as long as marionette is not in std. Firefox)",
+            "itemtype": "property",
+            "name": "nightly",
+            "type": "object",
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 291,
+            "description": "Firefox Aurora",
+            "itemtype": "property",
+            "name": "aurora",
+            "type": "object",
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 305,
+            "description": "Firefox OS",
+            "itemtype": "property",
+            "name": "os",
+            "type": "object",
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 320,
             "description": "Child process instance of the Firefox browser",
             "itemtype": "property",
             "name": "spawned",
@@ -3801,11 +4019,11 @@
         },
         {
             "file": "index.js",
-            "line": 181,
+            "line": 330,
             "description": "Collected data about the created profile,\npath, name, etc.",
             "itemtype": "property",
             "name": "profile",
-            "type": "null",
+            "type": "null|object",
             "default": "null",
             "class": "Browser.FirefoxDriver",
             "module": "DalekJS",
@@ -3813,7 +4031,7 @@
         },
         {
             "file": "index.js",
-            "line": 192,
+            "line": 341,
             "description": "Resolves the driver port",
             "itemtype": "method",
             "name": "getPort",
@@ -3827,7 +4045,21 @@
         },
         {
             "file": "index.js",
-            "line": 203,
+            "line": 352,
+            "description": "Resolves the maximum range for the driver port",
+            "itemtype": "method",
+            "name": "getMaxPort",
+            "return": {
+                "description": "port Max WebDriver server port range",
+                "type": "Integer"
+            },
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 363,
             "description": "Resolves the marionette port",
             "itemtype": "method",
             "name": "getMarionettePort",
@@ -3841,7 +4073,7 @@
         },
         {
             "file": "index.js",
-            "line": 214,
+            "line": 374,
             "description": "Returns the driver host",
             "itemtype": "method",
             "name": "getHost",
@@ -3855,10 +4087,27 @@
         },
         {
             "file": "index.js",
-            "line": 225,
-            "description": "Launches the FirefoxWebDriverServer & the browser",
+            "line": 385,
+            "description": "Launches the FirefoxWebDriverServer, \nthe marionette client, & the browser.\nCreates a user profile for the browser",
             "itemtype": "method",
             "name": "launch",
+            "params": [
+                {
+                    "name": "configuration",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "events",
+                    "description": "",
+                    "type": "EventEmitter2"
+                },
+                {
+                    "name": "config",
+                    "description": "",
+                    "type": "Dalek.Internal.Config"
+                }
+            ],
             "return": {
                 "description": "promise Browser promise",
                 "type": "Object"
@@ -3869,8 +4118,8 @@
         },
         {
             "file": "index.js",
-            "line": 254,
-            "description": "Kills the browser processes,\nshuts down the TCP (Marionette) & HTTP connection (Webdriver)\ndeletes the temp profile",
+            "line": 423,
+            "description": "Shuts down the TCP (Marionette) & HTTP connection (Webdriver),\nthen kills the browser process & cleans up the profiles",
             "itemtype": "method",
             "name": "kill",
             "chainable": 1,
@@ -3880,18 +4129,44 @@
         },
         {
             "file": "index.js",
-            "line": 274,
+            "line": 442,
+            "description": "Locates the browser binary",
             "itemtype": "method",
-            "name": "getBrowserBinary",
+            "name": "findBrowserBinary",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Config options",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Promise",
+                "type": "Object"
+            },
             "class": "Browser.FirefoxDriver",
             "module": "DalekJS",
             "namespace": "Browser"
         },
         {
             "file": "index.js",
-            "line": 315,
+            "line": 475,
+            "description": "Makes all needed modifications after we are sure if the\nbrowser binary has been found",
             "itemtype": "method",
-            "name": "_startBrowser",
+            "name": "_afterBinaryFound",
+            "params": [
+                {
+                    "name": "configuration",
+                    "description": "User configuration",
+                    "type": "Object"
+                },
+                {
+                    "name": "deferred",
+                    "description": "Promise",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
             "access": "private",
             "tagname": "",
             "class": "Browser.FirefoxDriver",
@@ -3900,22 +4175,280 @@
         },
         {
             "file": "index.js",
-            "line": 348,
+            "line": 502,
+            "description": "Modifies the verbose browser name",
+            "itemtype": "method",
+            "name": "_modifyVerboseBrowserName",
+            "params": [
+                {
+                    "name": "configuration",
+                    "description": "User configuration",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Verbose browser name",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 519,
+            "description": "Initiates the browser startup after the desktop binary has been found",
+            "itemtype": "method",
+            "name": "_afterDesktopBinaryFound",
+            "params": [
+                {
+                    "name": "deferred",
+                    "description": "Promise",
+                    "type": "Object"
+                },
+                {
+                    "name": "profile",
+                    "description": "Profile data",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 535,
+            "description": "Kills the currently running browser process",
+            "itemtype": "method",
+            "name": "_killProcess",
+            "chainable": 1,
+            "priavte": "",
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 556,
+            "description": "Initializes config & properties",
+            "itemtype": "method",
+            "name": "_initiaize",
+            "params": [
+                {
+                    "name": "opts",
+                    "description": "Config options",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Processed userr config",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 581,
+            "description": "Get the default binary location",
+            "itemtype": "method",
+            "name": "_getDefaultBinary",
+            "return": {
+                "description": "Path to binary",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 596,
+            "description": "Launches the browser",
+            "itemtype": "method",
+            "name": "_startBrowser",
+            "params": [
+                {
+                    "name": "profilePath",
+                    "description": "Directory that contains the profile",
+                    "type": "String"
+                },
+                {
+                    "name": "profileName",
+                    "description": "Name of the profile to use",
+                    "type": "String"
+                },
+                {
+                    "name": "deferred",
+                    "description": "Promise",
+                    "type": "Object"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "chainable": 1,
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 634,
+            "description": "Process user defined ports",
+            "itemtype": "method",
+            "name": "_checkUserDefinedPorts",
+            "params": [
+                {
+                    "name": "browser",
+                    "description": "Browser configuration",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 661,
+            "description": "Resolve the WebDriverServer port",
+            "itemtype": "method",
+            "name": "_resolvePort",
+            "params": [
+                {
+                    "name": "deferred",
+                    "description": "Promise",
+                    "type": "Object"
+                },
+                {
+                    "name": "profileName",
+                    "description": "Name of the profile",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 683,
+            "description": "Resolve the WebDriverServer port",
+            "itemtype": "method",
+            "name": "_resolvePort",
+            "params": [
+                {
+                    "name": "deferred",
+                    "description": "Promise",
+                    "type": "Object"
+                },
+                {
+                    "name": "profileName",
+                    "description": "Name of the profile",
+                    "type": "String"
+                },
+                {
+                    "name": "error",
+                    "description": "Error object if there is one",
+                    "type": "Object|null"
+                },
+                {
+                    "name": "port",
+                    "description": "Resolved port",
+                    "type": "Integer"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 717,
+            "description": "Callback that will be invoked after the marionette client has \nestablished a connection to the browser & after the webdriver server\nhas been launched correctly",
+            "itemtype": "method",
+            "name": "_afterConnectionHasBeenEstablished",
+            "params": [
+                {
+                    "name": "profileName",
+                    "description": "Name of the user profile",
+                    "type": "String"
+                },
+                {
+                    "name": "deferred",
+                    "description": "Promise",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 742,
             "description": "Consumes the console output when the browser is started",
             "itemtype": "method",
             "name": "_onBrowserStartup",
+            "params": [
+                {
+                    "name": "deferred",
+                    "description": "Promise",
+                    "type": "Object"
+                },
+                {
+                    "name": "data",
+                    "description": "Output from the spawned binary",
+                    "type": "String"
+                }
+            ],
             "access": "private",
             "tagname": "",
+            "chainable": 1,
             "class": "Browser.FirefoxDriver",
             "module": "DalekJS",
             "namespace": "Browser"
         },
         {
             "file": "index.js",
-            "line": 361,
+            "line": 759,
             "description": "Checks if the browser is ready for communication",
             "itemtype": "method",
             "name": "_browserIsReady",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Output from the spawned binary",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "true when ready, false when not",
+                "type": "Bool"
+            },
             "access": "private",
             "tagname": "",
             "class": "Browser.FirefoxDriver",
@@ -3924,7 +4457,7 @@
         },
         {
             "file": "index.js",
-            "line": 372,
+            "line": 779,
             "description": "Creates a new Firefox profile",
             "itemtype": "method",
             "name": "_createProfile",
@@ -3940,10 +4473,52 @@
         },
         {
             "file": "index.js",
-            "line": 411,
+            "line": 801,
+            "description": "Callback that will be executed after the profile has been created",
+            "itemtype": "method",
+            "name": "_afterCreatingProfile",
+            "params": [
+                {
+                    "name": "deferred",
+                    "description": "Promise",
+                    "type": "Object"
+                },
+                {
+                    "name": "data",
+                    "description": "Data stream from thr console",
+                    "type": "String"
+                },
+                {
+                    "name": "profileName",
+                    "description": "Name of the generated profile",
+                    "type": "String"
+                },
+                {
+                    "name": "code",
+                    "description": "Return code of the spawned browser binary",
+                    "type": "Integer"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "chainable": 1,
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 831,
             "description": "Creates user preferences for the profile\nSaves them in `user.js` in the newly created profile",
             "itemtype": "method",
             "name": "_createProfile",
+            "params": [
+                {
+                    "name": "profilePath",
+                    "description": "User profile directory",
+                    "type": "String"
+                }
+            ],
             "return": {
                 "description": "",
                 "type": "Q.promise"
@@ -3956,10 +4531,22 @@
         },
         {
             "file": "index.js",
-            "line": 444,
-            "description": "Deletes the user profile that has been created for this browser session",
+            "line": 858,
+            "description": "Callback that will be executed after the user preferences\nhave been created",
             "itemtype": "method",
-            "name": "_deleteProfile",
+            "name": "_afterCreatingUserPreferences",
+            "params": [
+                {
+                    "name": "deferred",
+                    "description": "Promise",
+                    "type": "Object"
+                },
+                {
+                    "name": "err",
+                    "description": "Error or null",
+                    "type": "Object|null"
+                }
+            ],
             "access": "private",
             "tagname": "",
             "chainable": 1,
@@ -3969,44 +4556,68 @@
         },
         {
             "file": "index.js",
-            "line": 457,
+            "line": 881,
+            "description": "Cleans up any previously generated user profiles from dalek",
+            "itemtype": "method",
+            "name": "_cleanupProfiles",
+            "access": "private",
+            "tagname": "",
+            "chainable": 1,
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 899,
+            "description": "Cleans up the generated profiles from dalek",
+            "itemtype": "method",
+            "name": "_deleteProfile",
+            "params": [
+                {
+                    "name": "profileDir",
+                    "description": "Directory of the user profile",
+                    "type": "String"
+                },
+                {
+                    "name": "currentProfile",
+                    "description": "Name of the current profile",
+                    "type": "String"
+                },
+                {
+                    "name": "profile",
+                    "description": "Profile data object",
+                    "type": "Object"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "chainable": 1,
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 922,
+            "description": "Checks if the binary exists,\nwhen set manually by the user",
             "itemtype": "method",
             "name": "_checkUserSetBinary",
+            "params": [
+                {
+                    "name": "userPath",
+                    "description": "Path to the browser binary",
+                    "type": "String"
+                },
+                {
+                    "name": "deferred",
+                    "description": "Promise",
+                    "type": "Object"
+                }
+            ],
             "access": "private",
             "tagname": "",
-            "class": "Browser.FirefoxDriver",
-            "module": "DalekJS",
-            "namespace": "Browser"
-        },
-        {
-            "file": "index.js",
-            "line": 513,
-            "itemtype": "method",
-            "name": "_checkBinarywin32",
-            "access": "private",
-            "tagname": "",
-            "class": "Browser.FirefoxDriver",
-            "module": "DalekJS",
-            "namespace": "Browser"
-        },
-        {
-            "file": "index.js",
-            "line": 524,
-            "itemtype": "method",
-            "name": "_checkBinarydarwin",
-            "access": "private",
-            "tagname": "",
-            "class": "Browser.FirefoxDriver",
-            "module": "DalekJS",
-            "namespace": "Browser"
-        },
-        {
-            "file": "index.js",
-            "line": 535,
-            "itemtype": "method",
-            "name": "_checkLinuxBinary",
-            "access": "private",
-            "tagname": "",
+            "chainable": 1,
             "class": "Browser.FirefoxDriver",
             "module": "DalekJS",
             "namespace": "Browser"
@@ -4015,11 +4626,15 @@
     "warnings": [
         {
             "message": "unknown tag: part",
-            "line": " index.js:40"
+            "line": " index.js:41"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:40"
+            "line": " index.js:41"
+        },
+        {
+            "message": "unknown tag: priavte",
+            "line": " index.js:535"
         },
         {
             "message": "Missing item type",
@@ -4047,7 +4662,7 @@
         },
         {
             "message": "Missing item type",
-            "line": " lib/commands/marionette/element.js:131"
+            "line": " lib/commands/marionette/element.js:130"
         },
         {
             "message": "Missing item type",
@@ -4056,6 +4671,22 @@
         {
             "message": "Missing item type",
             "line": " lib/commands/marionette/element.js:161"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/commands/marionette/element.js:177"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/commands/marionette/element.js:192"
+        },
+        {
+            "message": "Missing item type\nTODO: Find JS workaround (Marionette doesn't has a submit handler yet)",
+            "line": " lib/commands/marionette/element.js:207"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/commands/marionette/element.js:224"
         },
         {
             "message": "Missing item type",

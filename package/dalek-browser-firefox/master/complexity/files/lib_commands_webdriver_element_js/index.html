@@ -49,7 +49,7 @@
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">492</p>
+      <p class="stat">505</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">28.26</p>
+      <p class="stat">28.21</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.86</p>
+      <p class="stat">1.75</p>
     </div>
   </div>
 </div>
@@ -127,6 +127,89 @@
 
 module.exports = function (Driver) {
 
+  // check if the driver helper literal has been created yet
+  if (!Driver._helper) {
+    Driver._helper = {};
+  }
+
+  // Helper
+  // ------
+
+  /**
+   * Parses an element return value
+   *
+   * @method parseElement
+   * @param {object} element Marionette return value of an element call
+   * @return {object|number} Webdriver compatible element response
+   * @private
+   */
+
+  Driver._helper.parseElement = function (element) {
+    return (!element.value) ? -1 : {ELEMENT: element.value};
+  };
+
+  /**
+   * Parses multi elements return value
+   *
+   * @method parseElements
+   * @param {object} element Marionette return value of an elements call
+   * @return {object|number} Webdriver compatible elements response
+   * @private
+   */
+
+  Driver._helper.parseElements = function (elements) {
+    if (!elements.value) {
+      return -1;
+    }
+
+    var dt = [];
+    elements.value.forEach(function (el) {
+      dt.push({ELEMENT: el});
+    });
+
+    return dt;
+  };
+
+  /**
+   * Generic multi elements response handler
+   *
+   * @method multiElementResponse
+   * @param {object} req Original request
+   * @param {object} res Original response
+   * @private
+   */
+
+  Driver._helper.multiElementResponse = function (req, res, elements) {
+    var answer = {
+      sessionId: req.params.sessionId,
+      status: 0,
+      value: Driver._helper.parseElements(elements)
+    };
+
+    res.status(200);
+    res.send(JSON.stringify(answer));
+  };
+
+  /**
+   * Generic single element response handler
+   *
+   * @method singleElementResponse
+   * @param {object} req Original request
+   * @param {object} res Original response
+   * @private
+   */
+
+  Driver._helper.singleElementResponse = function (req, res, element) {
+    var answer = {
+      sessionId: req.params.sessionId,
+      status: 0,
+      value: Driver._helper.parseElement(element)
+    };
+
+    res.status(200);
+    res.send(JSON.stringify(answer));
+  };
+
   /**
    * Search for an element on the page, starting from the document root.
    * The located element will be returned as a WebElement JSON object.
@@ -145,23 +228,7 @@ module.exports = function (Driver) {
     onRequest: function (req, res) {
       // load the marionette connection id &amp; then request the session id
       this.events.emit(&#039;marionette:cmd:element&#039;, {&#039;sessionId&#039;: req.params.sessionId, &#039;selector&#039;: req.body.value});
-      this.events.on(&#039;marionette:cmd:element:response&#039;, function (element) {
-        var dt = null;
-        if (!element.value) {
-          dt = -1;
-        } else {
-          dt = {ELEMENT: element.value};
-        }
-
-        var answer = {
-          sessionId: req.params.sessionId,
-          status: 0,
-          value: dt
-        };
-
-        res.status(200);
-        res.send(JSON.stringify(answer));
-      }.bind(this));
+      this.events.on(&#039;marionette:cmd:element:response&#039;, Driver._helper.singleElementResponse.bind(this, req, res));
     }
   });
 
@@ -186,23 +253,7 @@ module.exports = function (Driver) {
     onRequest: function (req, res) {
       // load the marionette connection id &amp; then request the session id
       this.events.emit(&#039;marionette:cmd:childElement&#039;, {&#039;sessionId&#039;: req.params.sessionId, &#039;elementId&#039;: req.params.elementId, &#039;selector&#039;: req.body.value});
-      this.events.on(&#039;marionette:cmd:childElement:response&#039;, function (element) {
-        var dt = null;
-        if (!element.value) {
-          dt = -1;
-        } else {
-          dt = {ELEMENT: element.value};
-        }
-
-        var answer = {
-          sessionId: req.params.sessionId,
-          status: 0,
-          value: dt
-        };
-
-        res.status(200);
-        res.send(JSON.stringify(answer));
-      }.bind(this));
+      this.events.on(&#039;marionette:cmd:childElement:response&#039;, Driver._helper.singleElementResponse.bind(this, req, res));
     }
   });
 
@@ -224,26 +275,7 @@ module.exports = function (Driver) {
     onRequest: function (req, res) {
       // load the marionette connection id &amp; then request the session id
       this.events.emit(&#039;marionette:cmd:elements&#039;, {&#039;sessionId&#039;: req.params.sessionId, &#039;selector&#039;: req.body.value});
-      this.events.on(&#039;marionette:cmd:elements:response&#039;, function (elements) {
-        var dt = null;
-        if (!elements.value) {
-          dt = -1;
-        } else {
-          dt = [];
-          elements.value.forEach(function (el) {
-            dt.push({ELEMENT: el});
-          });
-        }
-
-        var answer = {
-          sessionId: req.params.sessionId,
-          status: 0,
-          value: dt
-        };
-
-        res.status(200);
-        res.send(JSON.stringify(answer));
-      }.bind(this));
+      this.events.on(&#039;marionette:cmd:elements:response&#039;, Driver._helper.multiElementResponse.bind(this, req, res));
     }
   });
 
@@ -268,26 +300,7 @@ module.exports = function (Driver) {
     onRequest: function (req, res) {
       // load the marionette connection id &amp; then request the session id
       this.events.emit(&#039;marionette:cmd:childElements&#039;, {&#039;sessionId&#039;: req.params.sessionId, &#039;elementId&#039;: req.params.elementId, &#039;selector&#039;: req.body.value});
-      this.events.on(&#039;marionette:cmd:childElements:response&#039;, function (elements) {
-        var dt = null;
-        if (!elements.value) {
-          dt = -1;
-        } else {
-          dt = [];
-          elements.value.forEach(function (el) {
-            dt.push({ELEMENT: el});
-          });
-        }
-
-        var answer = {
-          sessionId: req.params.sessionId,
-          status: 0,
-          value: dt
-        };
-
-        res.status(200);
-        res.send(JSON.stringify(answer));
-      }.bind(this));
+      this.events.on(&#039;marionette:cmd:childElements:response&#039;, Driver._helper.multiElementResponse.bind(this, req, res));
     }
   });
 
@@ -304,7 +317,7 @@ module.exports = function (Driver) {
     name: &#039;click&#039;,
     url: &#039;/session/:sessionId/element/:elementId/click&#039;,
     method: &#039;post&#039;,
-    timeout: 1000
+    timeout: 1500
   });
 
   /**
@@ -359,7 +372,7 @@ module.exports = function (Driver) {
 
   Driver.addCommand({
     name: &#039;submit&#039;,
-    url: &#039;/session/:sessionId/element/:id/submit&#039;,
+    url: &#039;/session/:sessionId/element/:elementId/submit&#039;,
     method: &#039;post&#039;
   });
 
@@ -457,7 +470,7 @@ module.exports = function (Driver) {
 
   Driver.addCommand({
     name: &#039;clear&#039;,
-    url: &#039;/session/:sessionId/element/:id/clear&#039;,
+    url: &#039;/session/:sessionId/element/:elementId/clear&#039;,
     method: &#039;post&#039;
   });
 
@@ -472,7 +485,7 @@ module.exports = function (Driver) {
 
   Driver.addCommand({
     name: &#039;selected&#039;,
-    url: &#039;/session/:sessionId/element/:id/selected&#039;,
+    url: &#039;/session/:sessionId/element/:elementId/selected&#039;,
     method: &#039;get&#039;
   });
 
@@ -487,7 +500,7 @@ module.exports = function (Driver) {
 
   Driver.addCommand({
     name: &#039;enabled&#039;,
-    url: &#039;/session/:sessionId/element/:id/enabled&#039;,
+    url: &#039;/session/:sessionId/element/:elementId/enabled&#039;,
     method: &#039;get&#039;
   });
 
@@ -503,7 +516,7 @@ module.exports = function (Driver) {
 
   Driver.addCommand({
     name: &#039;equals&#039;,
-    url: &#039;/session/:sessionId/element/:id/equals/:other&#039;,
+    url: &#039;/session/:sessionId/element/:elementId/equals/:other&#039;,
     method: &#039;get&#039;
   });
 
@@ -519,7 +532,7 @@ module.exports = function (Driver) {
 
   Driver.addCommand({
     name: &#039;location&#039;,
-    url: &#039;/session/:sessionId/element/:id/location&#039;,
+    url: &#039;/session/:sessionId/element/:elementId/location&#039;,
     method: &#039;get&#039;
   });
 
@@ -535,7 +548,7 @@ module.exports = function (Driver) {
 
   Driver.addCommand({
     name: &#039;locationInView&#039;,
-    url: &#039;/session/:sessionId/element/:id/location_in_view&#039;,
+    url: &#039;/session/:sessionId/element/:elementId/location_in_view&#039;,
     method: &#039;get&#039;
   });
 
@@ -551,7 +564,7 @@ module.exports = function (Driver) {
 
   Driver.addCommand({
     name: &#039;size&#039;,
-    url: &#039;/session/:sessionId/element/:id/size&#039;,
+    url: &#039;/session/:sessionId/element/:elementId/size&#039;,
     method: &#039;get&#039;
   });
 
@@ -567,7 +580,7 @@ module.exports = function (Driver) {
 
   Driver.addCommand({
     name: &#039;active&#039;,
-    url: &#039;/session/:sessionId/element/:id/active&#039;,
+    url: &#039;/session/:sessionId/element/:elementId/active&#039;,
     method: &#039;get&#039;
   });
 
@@ -583,7 +596,7 @@ module.exports = function (Driver) {
 
   Driver.addCommand({
     name: &#039;elementInfo&#039;,
-    url: &#039;/session/:sessionId/element/:id&#039;,
+    url: &#039;/session/:sessionId/element/:elementId&#039;,
     method: &#039;get&#039;
   });
 
@@ -601,7 +614,7 @@ module.exports = function (Driver) {
 
   Driver.addCommand({
     name: &#039;cssProperty&#039;,
-    url: &#039;/session/:sessionId/element/:id/css/:propertyName&#039;,
+    url: &#039;/session/:sessionId/element/:elementId/css/:propertyName&#039;,
     method: &#039;get&#039;
   });
 

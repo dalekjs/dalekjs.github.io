@@ -45,6 +45,8 @@
             
                 <li><a href="../classes/FirefoxDriver.Commands.Marionette.Cookie.html">FirefoxDriver.Commands.Marionette.Cookie</a></li>
             
+                <li><a href="../classes/FirefoxDriver.Commands.Marionette.Element.html">FirefoxDriver.Commands.Marionette.Element</a></li>
+            
                 <li><a href="../classes/FirefoxDriver.Commands.Marionette.Execute.html">FirefoxDriver.Commands.Marionette.Execute</a></li>
             
                 <li><a href="../classes/FirefoxDriver.Commands.Marionette.Frame.html">FirefoxDriver.Commands.Marionette.Frame</a></li>
@@ -189,7 +191,21 @@ module.exports = function (Driver) {
     name: &#x27;cookies&#x27;,
     url: &#x27;/session/:sessionId/cookie&#x27;,
     method: &#x27;post&#x27;,
-    params: {cookie: &#x27;cookie&#x27;}
+    params: {cookie: &#x27;cookie&#x27;},
+    onRequest: function (req, res) {
+      // load the marionette connection id &amp; then request the session id
+      this.events.emit(&#x27;marionette:cmd:cookies&#x27;, {&#x27;sessionId&#x27;: req.params.sessionId, &#x27;cookie&#x27;: {&#x27;name&#x27;: req.body.cookie.name, &#x27;value&#x27;: req.body.cookie.value}});
+      this.events.on(&#x27;marionette:cmd:cookies:response&#x27;, function (data) {
+        var answer = {
+          sessionId: req.params.sessionId,
+          status: 0,
+          value: data.value
+        };
+
+        res.status(200);
+        res.send(JSON.stringify(answer));
+      }.bind(this));
+    }
   });
 
   /**

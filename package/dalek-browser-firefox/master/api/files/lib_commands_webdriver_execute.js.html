@@ -45,6 +45,8 @@
             
                 <li><a href="../classes/FirefoxDriver.Commands.Marionette.Cookie.html">FirefoxDriver.Commands.Marionette.Cookie</a></li>
             
+                <li><a href="../classes/FirefoxDriver.Commands.Marionette.Element.html">FirefoxDriver.Commands.Marionette.Element</a></li>
+            
                 <li><a href="../classes/FirefoxDriver.Commands.Marionette.Execute.html">FirefoxDriver.Commands.Marionette.Execute</a></li>
             
                 <li><a href="../classes/FirefoxDriver.Commands.Marionette.Frame.html">FirefoxDriver.Commands.Marionette.Frame</a></li>
@@ -194,7 +196,23 @@ module.exports = function (Driver) {
     name: &#x27;execute&#x27;,
     url: &#x27;/session/:sessionId/execute&#x27;,
     method: &#x27;post&#x27;,
-    params: {script: &#x27;script&#x27;, args: &#x27;args&#x27;}
+    params: {value: &#x27;script&#x27;, args: &#x27;args&#x27;},
+    onRequest: function (req, res) {
+      console.log(req.body);
+      // load the marionette connection id &amp; then request the session id
+      this.events.emit(&#x27;marionette:cmd:execute&#x27;, {&#x27;sessionId&#x27;: req.params.sessionId, &#x27;value&#x27;: req.body.script, &#x27;args&#x27;: req.body.args});
+      this.events.on(&#x27;marionette:cmd:execute:response&#x27;, function (data) {
+        console.log(data);
+        var answer = {
+          sessionId: req.params.sessionId,
+          status: 0,
+          value: data.value
+        };
+
+        res.status(200);
+        res.send(JSON.stringify(answer));
+      }.bind(this));
+    }
   });
 
   /**

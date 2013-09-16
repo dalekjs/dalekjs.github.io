@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">61.50</p>
+      <p class="stat">64.82</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">62</p>
+      <p class="stat">78</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">5.53</p>
+      <p class="stat">7.16</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.09</p>
+      <p class="stat">0.29</p>
     </div>
   </div>
 </div>
@@ -146,7 +146,23 @@ module.exports = function (Driver) {
     name: &#039;execute&#039;,
     url: &#039;/session/:sessionId/execute&#039;,
     method: &#039;post&#039;,
-    params: {script: &#039;script&#039;, args: &#039;args&#039;}
+    params: {value: &#039;script&#039;, args: &#039;args&#039;},
+    onRequest: function (req, res) {
+      console.log(req.body);
+      // load the marionette connection id &amp; then request the session id
+      this.events.emit(&#039;marionette:cmd:execute&#039;, {&#039;sessionId&#039;: req.params.sessionId, &#039;value&#039;: req.body.script, &#039;args&#039;: req.body.args});
+      this.events.on(&#039;marionette:cmd:execute:response&#039;, function (data) {
+        console.log(data);
+        var answer = {
+          sessionId: req.params.sessionId,
+          status: 0,
+          value: data.value
+        };
+
+        res.status(200);
+        res.send(JSON.stringify(answer));
+      }.bind(this));
+    }
   });
 
   /**

@@ -45,6 +45,8 @@
             
                 <li><a href="../classes/FirefoxDriver.Commands.Marionette.Cookie.html">FirefoxDriver.Commands.Marionette.Cookie</a></li>
             
+                <li><a href="../classes/FirefoxDriver.Commands.Marionette.Element.html">FirefoxDriver.Commands.Marionette.Element</a></li>
+            
                 <li><a href="../classes/FirefoxDriver.Commands.Marionette.Execute.html">FirefoxDriver.Commands.Marionette.Execute</a></li>
             
                 <li><a href="../classes/FirefoxDriver.Commands.Marionette.Frame.html">FirefoxDriver.Commands.Marionette.Frame</a></li>
@@ -165,11 +167,11 @@
 &#x27;use strict&#x27;;
 
 /**
- * Cookie related Marionette commands
+ * Element related Marionette commands
  * see [JsonProtocol](https://wiki.mozilla.org/Auto-tools/Projects/Marionette/JSON_Protocol)
  *
  * @module FirefoxDriver
- * @class Cookie
+ * @class Element
  * @namespace FirefoxDriver.Commands.Marionette
  */
 
@@ -219,6 +221,21 @@ module.exports = function (Marionette) {
       session: &#x27;:sessionId&#x27;,
       element: &#x27;:elementId&#x27;,
       type: &#x27;clickElement&#x27;
+    }
+  });
+
+  /**
+   *
+   */
+
+  Marionette.addCommand({
+    name: &#x27;size&#x27;,
+    params: [&#x27;elementId&#x27;],
+    request: {
+      to: &#x27;:marionetteId&#x27;,
+      session: &#x27;:sessionId&#x27;,
+      element: &#x27;:elementId&#x27;,
+      type: &#x27;getElementSize&#x27;
     }
   });
 
@@ -288,13 +305,61 @@ module.exports = function (Marionette) {
    */
 
   Marionette.addCommand({
-    name: &#x27;submit&#x27;,
+    name: &#x27;cssProperty&#x27;,
     params: [&#x27;elementId&#x27;],
     request: {
       to: &#x27;:marionetteId&#x27;,
       session: &#x27;:sessionId&#x27;,
       element: &#x27;:elementId&#x27;,
-      type: &#x27;submitForm&#x27;
+      propertyName: &#x27;:propertyName&#x27;,
+      type: &#x27;getElementValueOfCssProperty&#x27;
+    }
+  });
+
+  /**
+   *
+   */
+
+  Marionette.addCommand({
+    name: &#x27;enabled&#x27;,
+    params: [&#x27;elementId&#x27;],
+    request: {
+      to: &#x27;:marionetteId&#x27;,
+      session: &#x27;:sessionId&#x27;,
+      element: &#x27;:elementId&#x27;,
+      type: &#x27;isElementEnabled&#x27;
+    }
+  });
+
+  /**
+   *
+   */
+
+  Marionette.addCommand({
+    name: &#x27;selected&#x27;,
+    params: [&#x27;elementId&#x27;],
+    request: {
+      to: &#x27;:marionetteId&#x27;,
+      session: &#x27;:sessionId&#x27;,
+      element: &#x27;:elementId&#x27;,
+      type: &#x27;isElementSelected&#x27;
+    }
+  });
+
+  /**
+   * TODO: Find JS workaround (Marionette doesn&#x27;t has a submit handler yet)
+   */
+
+  Marionette.addCommand({
+    name: &#x27;submit&#x27;,
+    params: [&#x27;elementId&#x27;],
+    request: {
+      to: &#x27;:marionetteId&#x27;,
+      session: &#x27;:sessionId&#x27;,
+      type: &#x27;executeScript&#x27;,
+      value: &#x27;document.form[0].submit()&#x27;,
+      newSandbox: true,
+      specialPowers: true
     }
   });
 

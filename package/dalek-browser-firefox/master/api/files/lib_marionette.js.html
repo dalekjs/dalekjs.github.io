@@ -45,6 +45,8 @@
             
                 <li><a href="../classes/FirefoxDriver.Commands.Marionette.Cookie.html">FirefoxDriver.Commands.Marionette.Cookie</a></li>
             
+                <li><a href="../classes/FirefoxDriver.Commands.Marionette.Element.html">FirefoxDriver.Commands.Marionette.Element</a></li>
+            
                 <li><a href="../classes/FirefoxDriver.Commands.Marionette.Execute.html">FirefoxDriver.Commands.Marionette.Execute</a></li>
             
                 <li><a href="../classes/FirefoxDriver.Commands.Marionette.Frame.html">FirefoxDriver.Commands.Marionette.Frame</a></li>
@@ -269,7 +271,11 @@ Marionette.prototype.addCommand = function (command) {
 
     // parse the command skeleton &amp; create a message with values
     Object.keys(command.request).forEach(function (key){
-      req[key] = this._parseRequestKey(command.request[key], params);
+      // cookie related hack
+      if (command.name === &#x27;cookies&#x27; &amp;&amp; this._parseRequestKey(command.request[key], params) === &#x27;&#x27;) {
+      } else {
+        req[key] = this._parseRequestKey(command.request[key], params);
+      }
     }.bind(this));
 
     // issue the command
