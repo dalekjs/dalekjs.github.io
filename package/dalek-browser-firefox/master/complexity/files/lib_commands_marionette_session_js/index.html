@@ -49,7 +49,7 @@
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">53</p>
+      <p class="stat">57</p>
     </div>
   </div>
   <div class="row historical">
@@ -128,7 +128,9 @@
 module.exports = function (Marionette) {
 
   /**
+   * Gets the marionette id for the current testing session
    *
+   * @method getMarionetteID
    */
 
   Marionette.addCommand({
@@ -140,7 +142,9 @@ module.exports = function (Marionette) {
   });
 
   /**
+   * Gets the session id for the current testing session
    *
+   * @method getSession
    */
 
   Marionette.addCommand({

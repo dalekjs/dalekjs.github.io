@@ -878,62 +878,79 @@
         {
             "file": "lib/commands/marionette/element.js",
             "line": 38,
+            "description": "Selects an element",
+            "itemtype": "method",
+            "name": "element",
             "class": "FirefoxDriver.Commands.Marionette.Element",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 54,
+            "line": 56,
+            "description": "Selects multiple elements",
+            "itemtype": "method",
+            "name": "elements",
             "class": "FirefoxDriver.Commands.Marionette.Element",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 70,
+            "line": 74,
+            "description": "Clicks an element",
+            "itemtype": "method",
+            "name": "click",
             "class": "FirefoxDriver.Commands.Marionette.Element",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 85,
+            "line": 91,
+            "description": "Gets the width & height of an element",
+            "itemtype": "method",
+            "name": "size",
             "class": "FirefoxDriver.Commands.Marionette.Element",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 100,
+            "line": 108,
+            "description": "Checks if an element is displayed",
+            "itemtype": "method",
+            "name": "displayed",
             "class": "FirefoxDriver.Commands.Marionette.Element",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 115,
+            "line": 125,
+            "description": "Gets the inner text of an element",
+            "itemtype": "method",
+            "name": "text",
             "class": "FirefoxDriver.Commands.Marionette.Element",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 130,
+            "line": 142,
+            "description": "Gets the value of an element",
+            "itemtype": "method",
+            "name": "val",
             "class": "FirefoxDriver.Commands.Marionette.Element",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 146,
-            "class": "FirefoxDriver.Commands.Marionette.Element",
-            "module": "FirefoxDriver",
-            "namespace": "FirefoxDriver.Commands.Marionette"
-        },
-        {
-            "file": "lib/commands/marionette/element.js",
-            "line": 161,
+            "line": 160,
+            "description": "Clears the contents of an input/text field",
+            "itemtype": "method",
+            "name": "clear",
             "class": "FirefoxDriver.Commands.Marionette.Element",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
@@ -941,28 +958,49 @@
         {
             "file": "lib/commands/marionette/element.js",
             "line": 177,
+            "description": "Gets the value of an css property",
+            "itemtype": "method",
+            "name": "cssProperty",
             "class": "FirefoxDriver.Commands.Marionette.Element",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 192,
+            "line": 195,
+            "description": "Checks if an element is enabled",
+            "itemtype": "method",
+            "name": "enabled",
             "class": "FirefoxDriver.Commands.Marionette.Element",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 207,
-            "description": "TODO: Find JS workaround (Marionette doesn't has a submit handler yet)",
+            "line": 212,
+            "description": "Checks if an element is selected",
+            "itemtype": "method",
+            "name": "selected",
             "class": "FirefoxDriver.Commands.Marionette.Element",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 224,
+            "line": 229,
+            "description": "TODO: Find JS workaround (Marionette doesn't has a submit handler yet)\nDOES NOT WORK YET!",
+            "itemtype": "method",
+            "name": "submit",
+            "class": "FirefoxDriver.Commands.Marionette.Element",
+            "module": "FirefoxDriver",
+            "namespace": "FirefoxDriver.Commands.Marionette"
+        },
+        {
+            "file": "lib/commands/marionette/element.js",
+            "line": 249,
+            "description": "Gets the value of an specific attribute",
+            "itemtype": "method",
+            "name": "attribute",
             "class": "FirefoxDriver.Commands.Marionette.Element",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
@@ -1050,6 +1088,9 @@
         {
             "file": "lib/commands/marionette/screenshot.js",
             "line": 38,
+            "description": "Returns the current visible screen as a base64 png",
+            "itemtype": "method",
+            "name": "screenshot",
             "class": "FirefoxDriver.Commands.Marionette.Screenshot",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
@@ -1057,20 +1098,26 @@
         {
             "file": "lib/commands/marionette/session.js",
             "line": 38,
+            "description": "Gets the marionette id for the current testing session",
+            "itemtype": "method",
+            "name": "getMarionetteID",
             "class": "FirefoxDriver.Commands.Marionette.Session",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
         {
             "file": "lib/commands/marionette/session.js",
-            "line": 50,
+            "line": 52,
+            "description": "Gets the session id for the current testing session",
+            "itemtype": "method",
+            "name": "getSession",
             "class": "FirefoxDriver.Commands.Marionette.Session",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
         {
             "file": "lib/commands/marionette/session.js",
-            "line": 62,
+            "line": 66,
             "description": "Retrieve the capabilities of the specified session.",
             "itemtype": "method",
             "name": "session",
@@ -1132,6 +1179,36 @@
             "itemtype": "method",
             "name": "refresh",
             "class": "FirefoxDriver.Commands.Marionette.Url",
+            "module": "FirefoxDriver",
+            "namespace": "FirefoxDriver.Commands.Marionette"
+        },
+        {
+            "file": "lib/commands/marionette/window.js",
+            "line": 38,
+            "description": "Gets the current window size",
+            "itemtype": "method",
+            "name": "windowSize",
+            "class": "FirefoxDriver.Commands.Marionette.Window",
+            "module": "FirefoxDriver",
+            "namespace": "FirefoxDriver.Commands.Marionette"
+        },
+        {
+            "file": "lib/commands/marionette/window.js",
+            "line": 55,
+            "description": "Returns the current window handle",
+            "itemtype": "method",
+            "name": "windowHandles",
+            "class": "FirefoxDriver.Commands.Marionette.Window",
+            "module": "FirefoxDriver",
+            "namespace": "FirefoxDriver.Commands.Marionette"
+        },
+        {
+            "file": "lib/commands/marionette/window.js",
+            "line": 70,
+            "description": "Switches the active window",
+            "itemtype": "method",
+            "name": "changeWindow",
+            "class": "FirefoxDriver.Commands.Marionette.Window",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
@@ -4703,70 +4780,6 @@
         {
             "message": "unknown tag: priavte",
             "line": " index.js:535"
-        },
-        {
-            "message": "Missing item type",
-            "line": " lib/commands/marionette/element.js:38"
-        },
-        {
-            "message": "Missing item type",
-            "line": " lib/commands/marionette/element.js:54"
-        },
-        {
-            "message": "Missing item type",
-            "line": " lib/commands/marionette/element.js:70"
-        },
-        {
-            "message": "Missing item type",
-            "line": " lib/commands/marionette/element.js:85"
-        },
-        {
-            "message": "Missing item type",
-            "line": " lib/commands/marionette/element.js:100"
-        },
-        {
-            "message": "Missing item type",
-            "line": " lib/commands/marionette/element.js:115"
-        },
-        {
-            "message": "Missing item type",
-            "line": " lib/commands/marionette/element.js:130"
-        },
-        {
-            "message": "Missing item type",
-            "line": " lib/commands/marionette/element.js:146"
-        },
-        {
-            "message": "Missing item type",
-            "line": " lib/commands/marionette/element.js:161"
-        },
-        {
-            "message": "Missing item type",
-            "line": " lib/commands/marionette/element.js:177"
-        },
-        {
-            "message": "Missing item type",
-            "line": " lib/commands/marionette/element.js:192"
-        },
-        {
-            "message": "Missing item type\nTODO: Find JS workaround (Marionette doesn't has a submit handler yet)",
-            "line": " lib/commands/marionette/element.js:207"
-        },
-        {
-            "message": "Missing item type",
-            "line": " lib/commands/marionette/element.js:224"
-        },
-        {
-            "message": "Missing item type",
-            "line": " lib/commands/marionette/screenshot.js:38"
-        },
-        {
-            "message": "Missing item type",
-            "line": " lib/commands/marionette/session.js:38"
-        },
-        {
-            "message": "Missing item type",
-            "line": " lib/commands/marionette/session.js:50"
         },
         {
             "message": "Missing item type",

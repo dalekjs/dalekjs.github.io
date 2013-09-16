@@ -185,6 +185,12 @@
 
 module.exports = function (Marionette) {
 
+  /**
+   * Gets the current window size
+   *
+   * @method windowSize
+   */
+
   Marionette.addCommand({
     name: &#x27;windowSize&#x27;,
     request: {
@@ -196,6 +202,12 @@ module.exports = function (Marionette) {
     }
   });
 
+  /**
+   * Returns the current window handle
+   *
+   * @method windowHandles
+   */
+
   Marionette.addCommand({
     name: &#x27;windowHandles&#x27;,
     request: {
@@ -204,6 +216,12 @@ module.exports = function (Marionette) {
       type: &#x27;getWindows&#x27;
     }
   });
+
+  /**
+   * Switches the active window
+   *
+   * @method changeWindow
+   */
 
   Marionette.addCommand({
     name: &#x27;changeWindow&#x27;,

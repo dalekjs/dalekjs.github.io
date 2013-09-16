@@ -49,7 +49,7 @@
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">44</p>
+      <p class="stat">62</p>
     </div>
   </div>
   <div class="row historical">
@@ -127,6 +127,12 @@
 
 module.exports = function (Marionette) {
 
+  /**
+   * Gets the current window size
+   *
+   * @method windowSize
+   */
+
   Marionette.addCommand({
     name: &#039;windowSize&#039;,
     request: {
@@ -138,6 +144,12 @@ module.exports = function (Marionette) {
     }
   });
 
+  /**
+   * Returns the current window handle
+   *
+   * @method windowHandles
+   */
+
   Marionette.addCommand({
     name: &#039;windowHandles&#039;,
     request: {
@@ -146,6 +158,12 @@ module.exports = function (Marionette) {
       type: &#039;getWindows&#039;
     }
   });
+
+  /**
+   * Switches the active window
+   *
+   * @method changeWindow
+   */
 
   Marionette.addCommand({
     name: &#039;changeWindow&#039;,

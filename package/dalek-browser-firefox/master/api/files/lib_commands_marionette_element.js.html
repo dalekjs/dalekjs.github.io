@@ -186,7 +186,9 @@
 module.exports = function (Marionette) {
 
   /**
+   * Selects an element
    *
+   * @method element
    */
 
   Marionette.addCommand({
@@ -202,7 +204,9 @@ module.exports = function (Marionette) {
   });
 
   /**
+   * Selects multiple elements
    *
+   * @method elements
    */
 
   Marionette.addCommand({
@@ -218,7 +222,9 @@ module.exports = function (Marionette) {
   });
 
   /**
+   * Clicks an element
    *
+   * @method click
    */
 
   Marionette.addCommand({
@@ -233,7 +239,9 @@ module.exports = function (Marionette) {
   });
 
   /**
+   * Gets the width &amp; height of an element
    *
+   * @method size
    */
 
   Marionette.addCommand({
@@ -248,7 +256,9 @@ module.exports = function (Marionette) {
   });
 
   /**
+   * Checks if an element is displayed
    *
+   * @method displayed
    */
 
   Marionette.addCommand({
@@ -263,7 +273,9 @@ module.exports = function (Marionette) {
   });
 
   /**
+   * Gets the inner text of an element
    *
+   * @method text
    */
 
   Marionette.addCommand({
@@ -278,7 +290,9 @@ module.exports = function (Marionette) {
   });
 
   /**
+   * Gets the value of an element
    *
+   * @method val
    */
 
   Marionette.addCommand({
@@ -294,7 +308,9 @@ module.exports = function (Marionette) {
   });
 
   /**
+   * Clears the contents of an input/text field
    *
+   * @method clear
    */
 
   Marionette.addCommand({
@@ -309,7 +325,9 @@ module.exports = function (Marionette) {
   });
 
   /**
+   * Gets the value of an css property
    *
+   * @method cssProperty
    */
 
   Marionette.addCommand({
@@ -325,7 +343,9 @@ module.exports = function (Marionette) {
   });
 
   /**
+   * Checks if an element is enabled
    *
+   * @method enabled
    */
 
   Marionette.addCommand({
@@ -340,7 +360,9 @@ module.exports = function (Marionette) {
   });
 
   /**
+   * Checks if an element is selected
    *
+   * @method selected
    */
 
   Marionette.addCommand({
@@ -356,6 +378,9 @@ module.exports = function (Marionette) {
 
   /**
    * TODO: Find JS workaround (Marionette doesn&#x27;t has a submit handler yet)
+   * DOES NOT WORK YET!
+   *
+   * @method submit
    */
 
   Marionette.addCommand({
@@ -372,7 +397,9 @@ module.exports = function (Marionette) {
   });
 
   /**
+   * Gets the value of an specific attribute
    *
+   * @method attribute
    */
 
   Marionette.addCommand({
