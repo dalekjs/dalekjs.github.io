@@ -40,8 +40,8 @@
             },
             "tag": "module",
             "file": "index.js",
-            "line": 32,
-            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides a browser launcher as well the PhantomJS browser itself.\n\nThe browser plugin comes bundled with the DalekJS base framework.\n\nYou can use the browser plugin beside others (it is the default)\nby adding a config option to the your Dalekfile:\n\n```javascript\n\"browsers\": [\"phantomjs\", \"chrome\"]\n```\n\nOr you can tell Dalek that it should test in this & another browser via the command line:\n\n```bash\n$ dalek mytest.js -b phantomjs,chrome\n```",
+            "line": 34,
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides a browser launcher as well the PhantomJS browser itself.\n\nThe browser plugin comes bundled with the DalekJS base framework.\n\nYou can use the browser plugin beside others (it is the default)\nby adding a config option to the your Dalekfile:\n\n```javascript\n\"browser\": [\"phantomjs\", \"chrome\"]\n```\n\nOr you can tell Dalek that it should test in this & another browser via the command line:\n\n```bash\n$ dalek mytest.js -b phantomjs,chrome\n```\n\nThe Webdriver Server tries to open Port 9001 by default,\nif this port is blocked, it tries to use a port between 9002 & 9091\nYou can specifiy a different port from within your [Dalekfile](/pages/config.html) like so:\n\n```javascript\n\"browsers\": {\n  \"phantomjs\": {\n    \"port\": 5555 \n  }\n}\n```\n\nIt is also possible to specify a range of ports:\n\n```javascript\n\"browsers\": {\n  \"phantomjs\": {\n    \"portRange\": [6100, 6120] \n  }\n}\n```\n\nIf you would like to use a different Phantom version than the one that comes bundled with the driver,\nyour are able to specify its location in your [Dalekfile](/pages/config.html):\n\n```javascript\n\"browsers\": {\n  \"phantomjs\": {\n    \"binary\": \"~/bin/phantomjs\" \n  }\n}\n```\n\nIf you would like to preserve the ability to use the bundled version,\nyou can also add an additional browser launcher in your [Dalekfile](/pages/config.html).\n\n```javascript\n\"browsers\": {\n  \"phantomjs:1.9.1\": {\n    \"binary\": \"~/bin/phantomjs\" \n  }\n}\n```\n\nAnd then launch it like this:\n\n```bash\n$ dalek mytest.js -b phantomjs:1.9.1\n```",
             "part": "PhantomJS",
             "api": ""
         }
@@ -58,8 +58,8 @@
             "module": "DalekJS",
             "namespace": "Browser",
             "file": "index.js",
-            "line": 32,
-            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides a browser launcher as well the PhantomJS browser itself.\n\nThe browser plugin comes bundled with the DalekJS base framework.\n\nYou can use the browser plugin beside others (it is the default)\nby adding a config option to the your Dalekfile:\n\n```javascript\n\"browsers\": [\"phantomjs\", \"chrome\"]\n```\n\nOr you can tell Dalek that it should test in this & another browser via the command line:\n\n```bash\n$ dalek mytest.js -b phantomjs,chrome\n```"
+            "line": 34,
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides a browser launcher as well the PhantomJS browser itself.\n\nThe browser plugin comes bundled with the DalekJS base framework.\n\nYou can use the browser plugin beside others (it is the default)\nby adding a config option to the your Dalekfile:\n\n```javascript\n\"browser\": [\"phantomjs\", \"chrome\"]\n```\n\nOr you can tell Dalek that it should test in this & another browser via the command line:\n\n```bash\n$ dalek mytest.js -b phantomjs,chrome\n```\n\nThe Webdriver Server tries to open Port 9001 by default,\nif this port is blocked, it tries to use a port between 9002 & 9091\nYou can specifiy a different port from within your [Dalekfile](/pages/config.html) like so:\n\n```javascript\n\"browsers\": {\n  \"phantomjs\": {\n    \"port\": 5555 \n  }\n}\n```\n\nIt is also possible to specify a range of ports:\n\n```javascript\n\"browsers\": {\n  \"phantomjs\": {\n    \"portRange\": [6100, 6120] \n  }\n}\n```\n\nIf you would like to use a different Phantom version than the one that comes bundled with the driver,\nyour are able to specify its location in your [Dalekfile](/pages/config.html):\n\n```javascript\n\"browsers\": {\n  \"phantomjs\": {\n    \"binary\": \"~/bin/phantomjs\" \n  }\n}\n```\n\nIf you would like to preserve the ability to use the bundled version,\nyou can also add an additional browser launcher in your [Dalekfile](/pages/config.html).\n\n```javascript\n\"browsers\": {\n  \"phantomjs:1.9.1\": {\n    \"binary\": \"~/bin/phantomjs\" \n  }\n}\n```\n\nAnd then launch it like this:\n\n```bash\n$ dalek mytest.js -b phantomjs:1.9.1\n```"
         }
     },
     "classitems": [
@@ -71,7 +71,7 @@
         },
         {
             "file": "index.js",
-            "line": 60,
+            "line": 112,
             "description": "Verbose version of the browser name",
             "itemtype": "property",
             "name": "",
@@ -83,7 +83,7 @@
         },
         {
             "file": "index.js",
-            "line": 70,
+            "line": 122,
             "description": "Default port of the PhantomJSDriver\nThe port may change, cause the port conflict resultion\ntool might pick another one, if the default one is blocked",
             "itemtype": "property",
             "name": "",
@@ -95,7 +95,19 @@
         },
         {
             "file": "index.js",
-            "line": 82,
+            "line": 134,
+            "description": "Default maximum port of the Ghostdriver Server\nThe port is the highest port in the range that can be allocated\nby the Ghostdriver Server",
+            "itemtype": "property",
+            "name": "maxPort",
+            "type": "integer",
+            "default": "9091",
+            "class": "Browser.PhantomJSDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 146,
             "description": "Default host of the PhantomJSDriver\nThe host may be overriden with\na user configured value",
             "itemtype": "property",
             "name": "",
@@ -107,7 +119,7 @@
         },
         {
             "file": "index.js",
-            "line": 94,
+            "line": 158,
             "description": "Root path of the PhantomJSDriver",
             "itemtype": "property",
             "name": "",
@@ -119,7 +131,29 @@
         },
         {
             "file": "index.js",
-            "line": 104,
+            "line": 168,
+            "description": "Default desired capabilities that should be\ntransferred when the browser session gets requested",
+            "itemtype": "property",
+            "name": "desiredCapabilities",
+            "type": "object",
+            "class": "Browser.PhantomJSDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 181,
+            "description": "Driver defaults, what should the driver be able to access.",
+            "itemtype": "property",
+            "name": "driverDefaults",
+            "type": "object",
+            "class": "Browser.PhantomJSDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 194,
             "description": "Child process instance of the PhantomJS browser",
             "itemtype": "property",
             "name": "",
@@ -130,7 +164,7 @@
         },
         {
             "file": "index.js",
-            "line": 113,
+            "line": 203,
             "description": "Resolves the driver port",
             "itemtype": "method",
             "name": "getPort",
@@ -143,7 +177,21 @@
         },
         {
             "file": "index.js",
-            "line": 124,
+            "line": 214,
+            "description": "Resolves the maximum range for the driver port",
+            "itemtype": "method",
+            "name": "getMaxPort",
+            "return": {
+                "description": "port Max WebDriver server port range",
+                "type": "Integer"
+            },
+            "class": "Browser.PhantomJSDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 225,
             "description": "Returns the driver host",
             "itemtype": "method",
             "name": "getHost",
@@ -154,12 +202,30 @@
         },
         {
             "file": "index.js",
-            "line": 135,
-            "description": "Launches the PhantomJSDriver",
+            "line": 236,
+            "description": "Launches PhantomJS, negoatiates a port & checks for a user set binary",
             "itemtype": "method",
             "name": "launch",
+            "params": [
+                {
+                    "name": "configuration",
+                    "description": "Browser configuration",
+                    "type": "Object"
+                },
+                {
+                    "name": "events",
+                    "description": "EventEmitter (Reporter Emitter instance)",
+                    "type": "EventEmitter2"
+                },
+                {
+                    "name": "config",
+                    "description": "Dalek configuration class",
+                    "type": "Dalek.Internal.Config"
+                }
+            ],
             "return": {
-                "description": "Q.promise"
+                "description": "promise Browser promise",
+                "type": "Object"
             },
             "class": "Browser.PhantomJSDriver",
             "module": "DalekJS",
@@ -167,11 +233,109 @@
         },
         {
             "file": "index.js",
-            "line": 160,
+            "line": 265,
             "description": "Kills the PhantomJSDriver processe",
             "itemtype": "method",
             "name": "kill",
             "chainable": 1,
+            "class": "Browser.PhantomJSDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 277,
+            "description": "Checks if the def. port is blocked & if we need to switch to another port\nKicks off the process manager (for closing the opened browsers after the run has been finished)\nAlso starts the chromedriver instance",
+            "itemtype": "method",
+            "name": "_checkPorts",
+            "params": [
+                {
+                    "name": "deferred",
+                    "description": "Promise",
+                    "type": "Object"
+                },
+                {
+                    "name": "error",
+                    "description": "Error object",
+                    "type": "Null|object"
+                },
+                {
+                    "name": "port",
+                    "description": "Found open port",
+                    "type": "Integer"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "chainable": 1,
+            "class": "Browser.PhantomJSDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 306,
+            "description": "Checks the data stream from the launched phantom process",
+            "itemtype": "method",
+            "name": "_launch",
+            "params": [
+                {
+                    "name": "deferred",
+                    "description": "Promise",
+                    "type": "Object"
+                },
+                {
+                    "name": "data",
+                    "description": "Console output from Ghostdriver",
+                    "type": "Buffer"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.PhantomJSDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 331,
+            "description": "Process user defined ports",
+            "itemtype": "method",
+            "name": "_checkUserDefinedPorts",
+            "params": [
+                {
+                    "name": "browser",
+                    "description": "Browser configuration",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.PhantomJSDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 358,
+            "description": "Checks if the binary exists,\nwhen set manually by the user",
+            "itemtype": "method",
+            "name": "_checkUserDefinedBinary",
+            "params": [
+                {
+                    "name": "binary",
+                    "description": "Path to the browser binary",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Binary path if binary exists, else false",
+                "type": "Bool|string"
+            },
+            "access": "private",
+            "tagname": "",
             "class": "Browser.PhantomJSDriver",
             "module": "DalekJS",
             "namespace": "Browser"
@@ -180,11 +344,11 @@
     "warnings": [
         {
             "message": "unknown tag: part",
-            "line": " index.js:32"
+            "line": " index.js:34"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:32"
+            "line": " index.js:34"
         },
         {
             "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",

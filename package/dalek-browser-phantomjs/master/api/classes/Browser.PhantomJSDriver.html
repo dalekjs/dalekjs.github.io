@@ -92,7 +92,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/index.js.html#l32"><code>index.js:32</code></a>
+            Defined in: <a href="../files/index.js.html#l34"><code>index.js:34</code></a>
         </div>
     
 
@@ -113,9 +113,39 @@ It provides a browser launcher as well the PhantomJS browser itself.</p>
 <p>The browser plugin comes bundled with the DalekJS base framework.</p>
 <p>You can use the browser plugin beside others (it is the default)
 by adding a config option to the your Dalekfile:</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: [&quot;phantomjs&quot;, &quot;chrome&quot;]</code></pre>
+<pre><code class="lang-javascript">&quot;browser&quot;: [&quot;phantomjs&quot;, &quot;chrome&quot;]</code></pre>
 <p>Or you can tell Dalek that it should test in this &amp; another browser via the command line:</p>
 <pre><code class="lang-bash">$ dalek mytest.js -b phantomjs,chrome</code></pre>
+<p>The Webdriver Server tries to open Port 9001 by default,
+if this port is blocked, it tries to use a port between 9002 &amp; 9091
+You can specifiy a different port from within your <a href="/pages/config.html">Dalekfile</a> like so:</p>
+<pre><code class="lang-javascript">&quot;browsers&quot;: {
+  &quot;phantomjs&quot;: {
+    &quot;port&quot;: 5555 
+  }
+}</code></pre>
+<p>It is also possible to specify a range of ports:</p>
+<pre><code class="lang-javascript">&quot;browsers&quot;: {
+  &quot;phantomjs&quot;: {
+    &quot;portRange&quot;: [6100, 6120] 
+  }
+}</code></pre>
+<p>If you would like to use a different Phantom version than the one that comes bundled with the driver,
+your are able to specify its location in your <a href="/pages/config.html">Dalekfile</a>:</p>
+<pre><code class="lang-javascript">&quot;browsers&quot;: {
+  &quot;phantomjs&quot;: {
+    &quot;binary&quot;: &quot;~/bin/phantomjs&quot; 
+  }
+}</code></pre>
+<p>If you would like to preserve the ability to use the bundled version,
+you can also add an additional browser launcher in your <a href="/pages/config.html">Dalekfile</a>.</p>
+<pre><code class="lang-javascript">&quot;browsers&quot;: {
+  &quot;phantomjs:1.9.1&quot;: {
+    &quot;binary&quot;: &quot;~/bin/phantomjs&quot; 
+  }
+}</code></pre>
+<p>And then launch it like this:</p>
+<pre><code class="lang-bash">$ dalek mytest.js -b phantomjs:1.9.1</code></pre>
 
 </div>
 
@@ -145,8 +175,43 @@ by adding a config option to the your Dalekfile:</p>
 
                     <ul class="index-list methods">
                         
+                            <li class="index-item method private">
+                                <a href="#method__checkPorts">_checkPorts</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__checkUserDefinedBinary">_checkUserDefinedBinary</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__checkUserDefinedPorts">_checkUserDefinedPorts</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__launch">_launch</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item method">
                                 <a href="#method_getHost">getHost</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getMaxPort">getMaxPort</a>
 
                                 
                                 
@@ -198,6 +263,13 @@ by adding a config option to the your Dalekfile:</p>
                             </li>
                         
                             <li class="index-item property">
+                                <a href="#property_maxPort">maxPort</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
                                 <a href="#property_"></a>
 
                                 
@@ -206,6 +278,20 @@ by adding a config option to the your Dalekfile:</p>
                         
                             <li class="index-item property">
                                 <a href="#property_"></a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_desiredCapabilities">desiredCapabilities</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_driverDefaults">driverDefaults</a>
 
                                 
                                 
@@ -230,6 +316,463 @@ by adding a config option to the your Dalekfile:</p>
         
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__checkPorts" class="method item private">
+    <h3 class="name"><code>_checkPorts</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>deferred</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>error</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>port</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/index.js.html#l277"><code>index.js:277</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Checks if the def. port is blocked &amp; if we need to switch to another port
+Kicks off the process manager (for closing the opened browsers after the run has been finished)
+Also starts the chromedriver instance</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">deferred</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Promise</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">error</code>
+                        <span class="type">Null | Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Error object</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">port</code>
+                        <span class="type">Integer</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Found open port</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__checkUserDefinedBinary" class="method item private">
+    <h3 class="name"><code>_checkUserDefinedBinary</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>binary</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Bool | String</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/index.js.html#l358"><code>index.js:358</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Checks if the binary exists,
+when set manually by the user</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">binary</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Path to the browser binary</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Bool | String</span>:
+                    
+                    <p>Binary path if binary exists, else false</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__checkUserDefinedPorts" class="method item private">
+    <h3 class="name"><code>_checkUserDefinedPorts</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>browser</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/index.js.html#l331"><code>index.js:331</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Process user defined ports</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">browser</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Browser configuration</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__launch" class="method item private">
+    <h3 class="name"><code>_launch</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>deferred</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>data</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/index.js.html#l306"><code>index.js:306</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Checks the data stream from the launched phantom process</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">deferred</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Promise</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">data</code>
+                        <span class="type">Buffer</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Console output from Ghostdriver</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
 
                 
                     <div id="method_getHost" class="method item">
@@ -264,7 +807,7 @@ by adding a config option to the your Dalekfile:</p>
             
         
         
-        <a href="../files/index.js.html#l124"><code>index.js:124</code></a>
+        <a href="../files/index.js.html#l225"><code>index.js:225</code></a>
         
         </p>
 
@@ -281,6 +824,79 @@ by adding a config option to the your Dalekfile:</p>
 
     
 
+    
+
+    
+</div>
+
+                
+                    <div id="method_getMaxPort" class="method item">
+    <h3 class="name"><code>getMaxPort</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Integer</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/index.js.html#l214"><code>index.js:214</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Resolves the maximum range for the driver port</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Integer</span>:
+                    
+                    <p>port Max WebDriver server port range</p>
+
+                
+            </div>
+        </div>
     
 
     
@@ -323,7 +939,7 @@ by adding a config option to the your Dalekfile:</p>
             
         
         
-        <a href="../files/index.js.html#l113"><code>index.js:113</code></a>
+        <a href="../files/index.js.html#l203"><code>index.js:203</code></a>
         
         </p>
 
@@ -392,7 +1008,7 @@ by adding a config option to the your Dalekfile:</p>
             
         
         
-        <a href="../files/index.js.html#l160"><code>index.js:160</code></a>
+        <a href="../files/index.js.html#l265"><code>index.js:265</code></a>
         
         </p>
 
@@ -419,12 +1035,34 @@ by adding a config option to the your Dalekfile:</p>
     <h3 class="name"><code>launch</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>configuration</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>events</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>config</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
         <span class="returns-inline">
-            <span class="type"></span>
+            <span class="type">Object</span>
         </span>
     
 
@@ -451,7 +1089,7 @@ by adding a config option to the your Dalekfile:</p>
             
         
         
-        <a href="../files/index.js.html#l135"><code>index.js:135</code></a>
+        <a href="../files/index.js.html#l236"><code>index.js:236</code></a>
         
         </p>
 
@@ -462,10 +1100,66 @@ by adding a config option to the your Dalekfile:</p>
     </div>
 
     <div class="description">
-        <p>Launches the PhantomJSDriver</p>
+        <p>Launches PhantomJS, negoatiates a port &amp; checks for a user set binary</p>
 
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">configuration</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Browser configuration</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">events</code>
+                        <span class="type">EventEmitter2</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>EventEmitter (Reporter Emitter instance)</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">config</code>
+                        <span class="type">Dalek.Internal.Config</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Dalek configuration class</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -475,7 +1169,9 @@ by adding a config option to the your Dalekfile:</p>
             <div class="returns-description">
                 
                     
-                    <p>Q.promise</p>
+                        <span class="type">Object</span>:
+                    
+                    <p>promise Browser promise</p>
 
                 
             </div>
@@ -517,7 +1213,7 @@ by adding a config option to the your Dalekfile:</p>
             
         
         
-        <a href="../files/index.js.html#l60"><code>index.js:60</code></a>
+        <a href="../files/index.js.html#l112"><code>index.js:112</code></a>
         
         </p>
 
@@ -564,7 +1260,7 @@ by adding a config option to the your Dalekfile:</p>
             
         
         
-        <a href="../files/index.js.html#l70"><code>index.js:70</code></a>
+        <a href="../files/index.js.html#l122"><code>index.js:122</code></a>
         
         </p>
 
@@ -582,6 +1278,55 @@ tool might pick another one, if the default one is blocked</p>
 
     
         <p><strong>Default:</strong> 9001</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_maxPort" class="property item">
+    <h3 class="name"><code>maxPort</code></h3>
+    <span class="type">Integer</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/index.js.html#l134"><code>index.js:134</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Default maximum port of the Ghostdriver Server
+The port is the highest port in the range that can be allocated
+by the Ghostdriver Server</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> 9091</p>
     
 
     
@@ -613,7 +1358,7 @@ tool might pick another one, if the default one is blocked</p>
             
         
         
-        <a href="../files/index.js.html#l82"><code>index.js:82</code></a>
+        <a href="../files/index.js.html#l146"><code>index.js:146</code></a>
         
         </p>
 
@@ -662,7 +1407,7 @@ a user configured value</p>
             
         
         
-        <a href="../files/index.js.html#l94"><code>index.js:94</code></a>
+        <a href="../files/index.js.html#l158"><code>index.js:158</code></a>
         
         </p>
 
@@ -678,6 +1423,97 @@ a user configured value</p>
 
     
         <p><strong>Default:</strong> /wd/hub</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_desiredCapabilities" class="property item">
+    <h3 class="name"><code>desiredCapabilities</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/index.js.html#l168"><code>index.js:168</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Default desired capabilities that should be
+transferred when the browser session gets requested</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_driverDefaults" class="property item">
+    <h3 class="name"><code>driverDefaults</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/index.js.html#l181"><code>index.js:181</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Driver defaults, what should the driver be able to access.</p>
+
+    </div>
+
     
 
     
@@ -709,7 +1545,7 @@ a user configured value</p>
             
         
         
-        <a href="../files/index.js.html#l104"><code>index.js:104</code></a>
+        <a href="../files/index.js.html#l194"><code>index.js:194</code></a>
         
         </p>
 

@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">77.24</p>
+      <p class="stat">68.71</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">148</p>
+      <p class="stat">369</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">13.83</p>
+      <p class="stat">23.12</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.31</p>
+      <p class="stat">1.22</p>
     </div>
   </div>
 </div>
@@ -118,8 +118,10 @@
 
 // ext. libs
 var Q = require(&#039;q&#039;);
-var spawn = require(&#039;child_process&#039;).spawn;
+var fs = require(&#039;fs&#039;);
 var phantomjs = require(&#039;phantomjs&#039;);
+var portscanner = require(&#039;portscanner&#039;);
+var spawn = require(&#039;child_process&#039;).spawn;
 
 /**
  * This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).
@@ -131,7 +133,7 @@ var phantomjs = require(&#039;phantomjs&#039;);
  * by adding a config option to the your Dalekfile:
  *
  * ```javascript
- * &quot;browsers&quot;: [&quot;phantomjs&quot;, &quot;chrome&quot;]
+ * &quot;browser&quot;: [&quot;phantomjs&quot;, &quot;chrome&quot;]
  * ```
  *
  * Or you can tell Dalek that it should test in this &amp; another browser via the command line:
@@ -140,6 +142,56 @@ var phantomjs = require(&#039;phantomjs&#039;);
  * $ dalek mytest.js -b phantomjs,chrome
  * ```
  *
+ * The Webdriver Server tries to open Port 9001 by default,
+ * if this port is blocked, it tries to use a port between 9002 &amp; 9091
+ * You can specifiy a different port from within your [Dalekfile](/pages/config.html) like so:
+ *
+ * ```javascript
+ * &quot;browsers&quot;: {
+ *   &quot;phantomjs&quot;: {
+ *     &quot;port&quot;: 5555 
+ *   }
+ * }
+ * ```
+ *
+ * It is also possible to specify a range of ports:
+ *
+ * ```javascript
+ * &quot;browsers&quot;: {
+ *   &quot;phantomjs&quot;: {
+ *     &quot;portRange&quot;: [6100, 6120] 
+ *   }
+ * }
+ * ```
+ *
+ * If you would like to use a different Phantom version than the one that comes bundled with the driver,
+ * your are able to specify its location in your [Dalekfile](/pages/config.html):
+ *
+ * ```javascript
+ * &quot;browsers&quot;: {
+ *   &quot;phantomjs&quot;: {
+ *     &quot;binary&quot;: &quot;~/bin/phantomjs&quot; 
+ *   }
+ * }
+ * ```
+ *
+ * If you would like to preserve the ability to use the bundled version,
+ * you can also add an additional browser launcher in your [Dalekfile](/pages/config.html).
+ *
+ * ```javascript
+ * &quot;browsers&quot;: {
+ *   &quot;phantomjs:1.9.1&quot;: {
+ *     &quot;binary&quot;: &quot;~/bin/phantomjs&quot; 
+ *   }
+ * }
+ * ```
+ *
+ * And then launch it like this:
+ * 
+ * ```bash
+ * $ dalek mytest.js -b phantomjs:1.9.1
+ * ```
+ * 
  * @module DalekJS
  * @class PhantomJSDriver
  * @namespace Browser
@@ -172,6 +224,18 @@ var PhantomJSDriver = {
   port: 9001,
 
   /**
+   * Default maximum port of the Ghostdriver Server
+   * The port is the highest port in the range that can be allocated
+   * by the Ghostdriver Server
+   *
+   * @property maxPort
+   * @type integer
+   * @default 9091
+   */
+
+  maxPort: 9091,
+
+  /**
    * Default host of the PhantomJSDriver
    * The host may be overriden with
    * a user configured value
@@ -194,6 +258,32 @@ var PhantomJSDriver = {
   path: &#039;/wd/hub&#039;,
 
   /**
+   * Default desired capabilities that should be
+   * transferred when the browser session gets requested
+   *
+   * @property desiredCapabilities
+   * @type object
+   */
+
+  desiredCapabilities: {
+    version: phantomjs.version,
+    browserName: &#039;phantomjs&#039;
+  },
+
+  /**
+   * Driver defaults, what should the driver be able to access.
+   *
+   * @property driverDefaults
+   * @type object
+   */
+
+  driverDefaults: {
+    viewport: true,
+    status: true,
+    sessionInfo: true
+  },
+
+  /**
    * Child process instance of the PhantomJS browser
    *
    * @property
@@ -214,6 +304,17 @@ var PhantomJSDriver = {
   },
 
   /**
+   * Resolves the maximum range for the driver port
+   *
+   * @method getMaxPort
+   * @return {integer} port Max WebDriver server port range
+   */
+
+  getMaxPort: function () {
+    return this.maxPort;
+  },
+
+  /**
    * Returns the driver host
    *
    * @method getHost
@@ -225,27 +326,31 @@ var PhantomJSDriver = {
   },
 
   /**
-   * Launches the PhantomJSDriver
+   * Launches PhantomJS, negoatiates a port &amp; checks for a user set binary
    *
    * @method launch
-   * @return Q.promise
+   * @param {object} configuration Browser configuration
+   * @param {EventEmitter2} events EventEmitter (Reporter Emitter instance)
+   * @param {Dalek.Internal.Config} config Dalek configuration class
+   * @return {object} promise Browser promise
    */
 
-  launch: function () {
+  launch: function (configuration, events, config) {
     var deferred = Q.defer();
-    var stream = &#039;&#039;;
-    this.spawned = spawn(phantomjs.path, [&#039;--webdriver&#039;, this.getPort()]);
 
-    this.spawned.stdout.on(&#039;data&#039;, function (data) {
-      var dataStr = data + &#039;&#039;;
-      stream += dataStr;
-      if (stream.search(&#039;GhostDriver - Main - running&#039;) !== -1) {
-        deferred.resolve();
-      }
-      else if (stream.search(&#039;Could not start Ghost Driver&#039;) !== -1) {
-        deferred.reject(&#039;Could not start Ghost Driver&#039;);
-      }
-    });
+    // store injected configuration/log event handlers
+    this.reporterEvents = events;
+    this.configuration = configuration;
+    this.config = config;
+
+    // check for a user set port
+    var browsers = this.config.get(&#039;browsers&#039;);
+    if (browsers &amp;&amp; Array.isArray(browsers)) {
+      browsers.forEach(this._checkUserDefinedPorts.bind(this));
+    }
+
+    // check if the current port is in use, if so, scan for free ports
+    portscanner.findAPortNotInUse(this.getPort(), this.getMaxPort(), this.getHost(), this._checkPorts.bind(this, deferred));
     return deferred.promise;
   },
 
@@ -258,7 +363,123 @@ var PhantomJSDriver = {
 
   kill: function () {
     this.spawned.kill(&#039;SIGTERM&#039;);
+    return this;
+  },
+
+  /**
+   * Checks if the def. port is blocked &amp; if we need to switch to another port
+   * Kicks off the process manager (for closing the opened browsers after the run has been finished)
+   * Also starts the chromedriver instance 
+   *
+   * @method _checkPorts
+   * @param {object} deferred Promise
+   * @param {null|object} error Error object
+   * @param {integer} port Found open port
+   * @private
+   * @chainable
+   */
+
+  _checkPorts: function (deferred, error, port) {
+    // check if the port was blocked &amp; if we need to switch to another port
+    if (this.port !== port) {
+      this.reporterEvents.emit(&#039;report:log:system&#039;, &#039;dalek-browser-phantomjs: Switching to port: &#039; + port);
+      this.port = port;
+    }
+
+    // check the binary
+    var binary = this._checkUserDefinedBinary(this.configuration, phantomjs.path);
+
+    // launch the browser process
+    this.spawned = spawn(binary, [&#039;--webdriver&#039;, this.getPort()]);
+    this.spawned.stdout.on(&#039;data&#039;, this._launch.bind(this, deferred));
+    return this;
+  },
+
+  /**
+   * Checks the data stream from the launched phantom process
+   *
+   * @method _launch
+   * @param {object} deferred Promise
+   * @param {buffer} data Console output from Ghostdriver
+   * @chainable
+   * @private
+   */
+
+  _launch: function (deferred, data) {
+    var stream = data + &#039;&#039;;
+    
+    // check if ghostdriver could be launched    
+    if (stream.search(&#039;GhostDriver - Main - running&#039;) !== -1) {
+      deferred.resolve();
+    } else if (stream.search(&#039;Could not start Ghost Driver&#039;) !== -1) {
+      this.reporterEvents.emit(&#039;error&#039;, &#039;dalek-browser-phantomjs: Could not start Ghost Driver&#039;);
+      deferred.reject(&#039;Could not start Ghost Driver&#039;);
+      process.exit(127);
+    }
+
+    return this;
+  },
+
+  /**
+   * Process user defined ports
+   *
+   * @method _checkUserDefinedPorts
+   * @param {object} browser Browser configuration
+   * @chainable
+   * @private
+   */
+
+  _checkUserDefinedPorts: function (browser) {
+    // check for a single defined port
+    if (browser.phantomjs &amp;&amp; browser.phantomjs.port) {
+      this.port = parseInt(browser.phantomjs.port, 10);
+      this.maxPort = this.port + 90;
+      this.reporterEvents.emit(&#039;report:log:system&#039;, &#039;dalek-browser-phantomjs: Switching to user defined port: &#039; + this.port);
+    }
+
+    // check for a port range
+    if (browser.phantomjs &amp;&amp; browser.phantomjs.portRange &amp;&amp; browser.phantomjs.portRange.length === 2) {
+      this.port = parseInt(browser.phantomjs.portRange[0], 10);
+      this.maxPort = parseInt(browser.phantomjs.portRange[1], 10);
+      this.reporterEvents.emit(&#039;report:log:system&#039;, &#039;dalek-browser-phantomjs: Switching to user defined port(s): &#039; + this.port + &#039; -&gt; &#039; + this.maxPort);
+    }
+
+    return this;
+  },
+
+  /**
+   * Checks if the binary exists,
+   * when set manually by the user
+   *
+   * @method _checkUserDefinedBinary
+   * @param {string} binary Path to the browser binary
+   * @return {bool|string} Binary path if binary exists, else false
+   * @private
+   */
+
+  _checkUserDefinedBinary: function (configuration, defaultBinary) {
+    var binary = defaultBinary;
+
+    // check if we have a user defined binary
+    if (configuration &amp;&amp; configuration.binary) {
+      binary = configuration.binary;
+    }
+
+    // check if we need to replace the users home directory
+    if (process.platform === &#039;darwin&#039; &amp;&amp; binary.trim()[0] === &#039;~&#039;) {
+      binary = binary.replace(&#039;~&#039;, process.env.HOME);
+    }
+
+    // check if the binary exists
+    if (!fs.existsSync(binary)) {
+      this.reporterEvents.emit(&#039;error&#039;, &#039;dalek-driver-phantomjs: Binary not found: &#039; + binary);
+      process.exit(127);
+      return false;
+    }
+
+    return binary;
   }
+
 };
 
 module.exports = PhantomJSDriver;</textarea>
