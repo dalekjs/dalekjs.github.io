@@ -235,7 +235,7 @@ var WebDriverServer = require(&#x27;./lib/webdriver&#x27;);
  * if this port is blocked, it tries to use a port between 9007 &amp; 9096
  * You can specifiy a different port from within your [Dalekfile](/pages/config.html) like so:
  *
- * &#x60;&#x60;&#x60;json
+ * &#x60;&#x60;&#x60;javascript
  * &quot;browsers&quot;: {
  *   &quot;firefox&quot;: {
  *     &quot;port&quot;: 5555 
@@ -245,7 +245,7 @@ var WebDriverServer = require(&#x27;./lib/webdriver&#x27;);
  *
  * It is also possible to specify a range of ports:
  *
- * &#x60;&#x60;&#x60;json
+ * &#x60;&#x60;&#x60;javascript
  * &quot;browsers&quot;: {
  *   &quot;firefox&quot;: {
  *     &quot;portRange&quot;: [6100, 6120] 
@@ -270,7 +270,7 @@ var WebDriverServer = require(&#x27;./lib/webdriver&#x27;);
  * if the browsers binary is located in a non default location, you are able to specify
  * its location in your [Dalekfile](/pages/config.html):
  *
- * &#x60;&#x60;&#x60;json
+ * &#x60;&#x60;&#x60;javascript
  * &quot;browsers&quot;: {
  *   &quot;firefox&quot;: {
  *     &quot;binary&quot;: &quot;/Applications/Custom Located Firefox.app/MacOS/Contents/firefox-bin&quot; 
@@ -280,7 +280,7 @@ var WebDriverServer = require(&#x27;./lib/webdriver&#x27;);
  *
  * This also works for the aurora &amp;amp; Firefox OS builds
  *
- * &#x60;&#x60;&#x60;json
+ * &#x60;&#x60;&#x60;javascript
  * &quot;browsers&quot;: {
  *   &quot;firefox:aurora&quot;: {
  *     &quot;binary&quot;: &quot;/Applications/Custom Located Firefox Aurora.app/MacOS/Contents/firefox-bin&quot; 
