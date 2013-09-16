@@ -13,13 +13,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
-            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
         "index.js": {
             "name": "index.js",
             "modules": {
@@ -47,8 +40,8 @@
             },
             "tag": "module",
             "file": "index.js",
-            "line": 34,
-            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Google Chrome.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-chrome --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browsers\": [\"chrome\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b chrome\n```",
+            "line": 36,
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Google Chrome.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-chrome --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your [Dalekfile](/pages/config.html)\n\n```javascript\n\"browser\": [\"chrome\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b chrome\n```\n\nThe Webdriver Server tries to open Port 9002 by default,\nif this port is blocked, it tries to use a port between 9003 & 9092\nYou can specifiy a different port from within your [Dalekfile](/pages/config.html) like so:\n\n```javascript\n\"browsers\": {\n  \"chrome\": {\n    \"port\": 5555 \n  }\n}\n```\n\nIt is also possible to specify a range of ports:\n\n```javascript\n\"browsers\": {\n  \"chrome\": {\n    \"portRange\": [6100, 6120] \n  }\n}\n```\n\nIf you would like to test Chrome Canary oder Chromium releases, you can simply apply a snd. argument,\nwhich defines the browser type:\n\n```bash\n$ dalek mytest.js -b chrome:canary\n```\n\nfor canary, and if you would like to use chromium, just append `:chromium`:\n\n```bash\n$ dalek mytest.js -b chrome:chromium\n```\n\nThis will only work if you installed your browser in the default locations,\nif the browsers binary is located in a non default location, you are able to specify\nits location in your [Dalekfile](/pages/config.html):\n\n```javascript\n\"browsers\": {\n  \"chrome\": {\n    \"binary\": \"/Applications/Custom Located Chrome.app/MacOS/Contents/Chrome\" \n  }\n}\n```\n\nThis also works for the canary &amp; chromium builds\n\n```javascript\n\"browsers\": {\n  \"chrome\": {\n    \"binary\": \"/Applications/Custom Located Chrome.app/MacOS/Contents/Chrome\" \n  }\n}\n```",
             "part": "Chrome",
             "api": ""
         }
@@ -65,8 +58,8 @@
             "module": "DalekJS",
             "namespace": "Browser",
             "file": "index.js",
-            "line": 34,
-            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Google Chrome.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-chrome --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browsers\": [\"chrome\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b chrome\n```"
+            "line": 36,
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Google Chrome.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-chrome --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your [Dalekfile](/pages/config.html)\n\n```javascript\n\"browser\": [\"chrome\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b chrome\n```\n\nThe Webdriver Server tries to open Port 9002 by default,\nif this port is blocked, it tries to use a port between 9003 & 9092\nYou can specifiy a different port from within your [Dalekfile](/pages/config.html) like so:\n\n```javascript\n\"browsers\": {\n  \"chrome\": {\n    \"port\": 5555 \n  }\n}\n```\n\nIt is also possible to specify a range of ports:\n\n```javascript\n\"browsers\": {\n  \"chrome\": {\n    \"portRange\": [6100, 6120] \n  }\n}\n```\n\nIf you would like to test Chrome Canary oder Chromium releases, you can simply apply a snd. argument,\nwhich defines the browser type:\n\n```bash\n$ dalek mytest.js -b chrome:canary\n```\n\nfor canary, and if you would like to use chromium, just append `:chromium`:\n\n```bash\n$ dalek mytest.js -b chrome:chromium\n```\n\nThis will only work if you installed your browser in the default locations,\nif the browsers binary is located in a non default location, you are able to specify\nits location in your [Dalekfile](/pages/config.html):\n\n```javascript\n\"browsers\": {\n  \"chrome\": {\n    \"binary\": \"/Applications/Custom Located Chrome.app/MacOS/Contents/Chrome\" \n  }\n}\n```\n\nThis also works for the canary &amp; chromium builds\n\n```javascript\n\"browsers\": {\n  \"chrome\": {\n    \"binary\": \"/Applications/Custom Located Chrome.app/MacOS/Contents/Chrome\" \n  }\n}\n```"
         }
     },
     "classitems": [
@@ -91,14 +84,8 @@
             "class": "Browser.ChromeDriver"
         },
         {
-            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
-            "line": 1,
-            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
-            "class": "Browser.ChromeDriver"
-        },
-        {
             "file": "index.js",
-            "line": 65,
+            "line": 124,
             "description": "Verbose version of the browser name",
             "itemtype": "property",
             "name": "longName",
@@ -110,7 +97,7 @@
         },
         {
             "file": "index.js",
-            "line": 75,
+            "line": 134,
             "description": "Default port of the ChromeWebDriverServer\nThe port may change, cause the port conflict resolution\ntool might pick another one, if the default one is blocked",
             "itemtype": "property",
             "name": "port",
@@ -122,7 +109,19 @@
         },
         {
             "file": "index.js",
-            "line": 87,
+            "line": 146,
+            "description": "Default maximum port of the ChromeWebDriverServer\nThe port is the highest port in the range that can be allocated\nby the ChromeWebDriverServer",
+            "itemtype": "property",
+            "name": "maxPort",
+            "type": "integer",
+            "default": "9092",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 158,
             "description": "Default host of the ChromeWebDriverServer\nThe host may be overridden with\na user configured value",
             "itemtype": "property",
             "name": "host",
@@ -134,30 +133,107 @@
         },
         {
             "file": "index.js",
-            "line": 99,
+            "line": 170,
+            "description": "Default desired capabilities that should be\ntransferred when the browser session gets requested",
+            "itemtype": "property",
+            "name": "desiredCapabilities",
+            "type": "object",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 182,
+            "description": "Driver defaults, what should the driver be able to access.",
+            "itemtype": "property",
+            "name": "driverDefaults",
+            "type": "object",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 195,
             "description": "Root path of the ChromeWebDriverServer",
             "itemtype": "property",
             "name": "path",
             "type": "string",
-            "default": "/",
+            "default": "/wd/hub",
             "class": "Browser.ChromeDriver",
             "module": "DalekJS",
             "namespace": "Browser"
         },
         {
             "file": "index.js",
-            "line": 109,
+            "line": 205,
             "description": "Child process instance of the Chrome browser",
             "itemtype": "property",
             "name": "spawned",
             "type": "null|Object",
+            "default": "null",
             "class": "Browser.ChromeDriver",
             "module": "DalekJS",
             "namespace": "Browser"
         },
         {
             "file": "index.js",
-            "line": 118,
+            "line": 215,
+            "description": "Chrome processes that are running on startup,\nand therefor shouldn`t be closed",
+            "itemtype": "property",
+            "name": "openProcesses",
+            "type": "array",
+            "default": "[]",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 226,
+            "description": "Name of the process (platform dependent)\nthat represents the browser itself",
+            "itemtype": "property",
+            "name": "processName",
+            "type": "string",
+            "default": "chrome.exe / Chrome",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 237,
+            "description": "Different browser types (Canary / Chromium) that can be controlled\nvia the Chromedriver",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 245,
+            "description": "Chrome Canary",
+            "itemtype": "property",
+            "name": "canary",
+            "type": "object",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 259,
+            "description": "Chromium",
+            "itemtype": "property",
+            "name": "chromium",
+            "type": "object",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 275,
             "description": "Resolves the driver port",
             "itemtype": "method",
             "name": "getPort",
@@ -171,7 +247,21 @@
         },
         {
             "file": "index.js",
-            "line": 129,
+            "line": 286,
+            "description": "Resolves the maximum range for the driver port",
+            "itemtype": "method",
+            "name": "getMaxPort",
+            "return": {
+                "description": "port Max WebDriver server port range",
+                "type": "Integer"
+            },
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 297,
             "description": "Returns the driver host",
             "itemtype": "method",
             "name": "getHost",
@@ -185,10 +275,27 @@
         },
         {
             "file": "index.js",
-            "line": 140,
-            "description": "Launches the ChromeWebDriverServer",
+            "line": 308,
+            "description": "Launches the ChromeWebDriverServer\n(which implicitly launches Chrome itself)\nand checks for an available port",
             "itemtype": "method",
             "name": "launch",
+            "params": [
+                {
+                    "name": "configuration",
+                    "description": "Browser configuration",
+                    "type": "Object"
+                },
+                {
+                    "name": "events",
+                    "description": "EventEmitter (Reporter Emitter instance)",
+                    "type": "EventEmitter2"
+                },
+                {
+                    "name": "config",
+                    "description": "Dalek configuration class",
+                    "type": "Dalek.Internal.Config"
+                }
+            ],
             "return": {
                 "description": "promise Browser promise",
                 "type": "Object"
@@ -199,11 +306,493 @@
         },
         {
             "file": "index.js",
-            "line": 162,
-            "description": "Kills the ChromeWebDriverServer process",
+            "line": 349,
+            "description": "Kills the ChromeWebDriverServer\n& Chrome browser processes",
             "itemtype": "method",
             "name": "kill",
             "chainable": 1,
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 362,
+            "description": "Modifies the verbose browser name",
+            "itemtype": "method",
+            "name": "_modifyVerboseBrowserName",
+            "params": [
+                {
+                    "name": "configuration",
+                    "description": "User configuration",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Verbose browser name",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 379,
+            "description": "Change the process name for browser instances like Canary &amp; Chromium",
+            "itemtype": "method",
+            "name": "_fetchProcessName",
+            "params": [
+                {
+                    "name": "configuration",
+                    "description": "User configuration",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Verbose browser name",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 397,
+            "description": "Process user defined ports",
+            "itemtype": "method",
+            "name": "_checkUserDefinedPorts",
+            "params": [
+                {
+                    "name": "browser",
+                    "description": "Browser configuration",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 424,
+            "description": "Checks if the binary exists,\nwhen set manually by the user",
+            "itemtype": "method",
+            "name": "_checkUserDefinedBinary",
+            "params": [
+                {
+                    "name": "binary",
+                    "description": "Path to the browser binary",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Binary exists",
+                "type": "Bool"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 450,
+            "description": "Checks if the def. port is blocked & if we need to switch to another port\nKicks off the process manager (for closing the opened browsers after the run has been finished)\nAlso starts the chromedriver instance",
+            "itemtype": "method",
+            "name": "_checkPorts",
+            "params": [
+                {
+                    "name": "deferred",
+                    "description": "Promise",
+                    "type": "Object"
+                },
+                {
+                    "name": "error",
+                    "description": "Error object",
+                    "type": "Null|object"
+                },
+                {
+                    "name": "port",
+                    "description": "Found open port",
+                    "type": "Integer"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "chainable": 1,
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 475,
+            "description": "Spawns an instance of Chromedriver",
+            "itemtype": "method",
+            "name": "_startChromedriver",
+            "params": [
+                {
+                    "name": "deferred",
+                    "description": "Promise",
+                    "type": "Object"
+                },
+                {
+                    "name": "error",
+                    "description": "Error object",
+                    "type": "Null|object"
+                },
+                {
+                    "name": "result",
+                    "description": "List of open chrome processes BEFORE the test browser has been launched",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "chainable": 1,
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 494,
+            "description": "Watches the chromedriver console output to capture the starting message",
+            "itemtype": "method",
+            "name": "_catchDriverLogs",
+            "params": [
+                {
+                    "name": "deferred",
+                    "description": "Promise",
+                    "type": "Object"
+                },
+                {
+                    "name": "data",
+                    "description": "Chromedriver console output",
+                    "type": "Buffer"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "chainable": 1,
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 524,
+            "description": "Remove the chromedriver log that is written to the current working directory",
+            "itemtype": "method",
+            "name": "_unlinkChromedriverLog",
+            "params": [
+                {
+                    "name": "retry",
+                    "description": "Delete has been tried min 1 time before",
+                    "type": "Bool"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "chainable": 1,
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 548,
+            "description": "Tracks running browser processes for chrome on mac & linux",
+            "itemtype": "method",
+            "name": "_processes",
+            "params": [
+                {
+                    "name": "platform",
+                    "description": "Current OS",
+                    "type": "String"
+                },
+                {
+                    "name": "fn",
+                    "description": "Callback",
+                    "type": "Function"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 568,
+            "description": "Kills all associated processes",
+            "itemtype": "method",
+            "name": "_checkProcesses",
+            "params": [
+                {
+                    "name": "err",
+                    "description": "Error object or null",
+                    "type": "Object|null"
+                },
+                {
+                    "name": "result",
+                    "description": "List of running processes",
+                    "type": "Array"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 593,
+            "description": "Kills a process",
+            "itemtype": "method",
+            "name": "_killNix",
+            "params": [
+                {
+                    "name": "processID",
+                    "description": "Process ID",
+                    "type": "Integer"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 618,
+            "description": "Lists all chrome processes on *NIX systems",
+            "itemtype": "method",
+            "name": "_processesNix",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "Calback",
+                    "type": "Function"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 633,
+            "description": "Deserializes a process list on nix",
+            "itemtype": "method",
+            "name": "_processListNix",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "Calback",
+                    "type": "Function"
+                },
+                {
+                    "name": "err",
+                    "description": "Error object",
+                    "type": "Object|null"
+                },
+                {
+                    "name": "stdout",
+                    "description": "Output of the process list shell command",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 651,
+            "description": "Reformats the process list output on *NIX systems",
+            "itemtype": "method",
+            "name": "_splitProcessListNix",
+            "params": [
+                {
+                    "name": "result",
+                    "description": "Reference to the process list",
+                    "type": "Array"
+                },
+                {
+                    "name": "line",
+                    "description": "Single process in text representation",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 671,
+            "description": "Filters empty process list entries on *NIX",
+            "itemtype": "method",
+            "name": "_filterProcessItemsNix",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "Item to check",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Item or falsy",
+                "type": "String|bool"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 690,
+            "description": "Lists all running processes (win only)",
+            "itemtype": "method",
+            "name": "_processesWin",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "Receives the process object as the only callback argument",
+                    "type": "Function"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 704,
+            "description": "Deserializes the process list on win",
+            "itemtype": "method",
+            "name": "_processListWin",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "Callback to be executed after the list has been transformed",
+                    "type": "Function"
+                },
+                {
+                    "name": "err",
+                    "description": "Error if error, else null",
+                    "type": "Object|null"
+                },
+                {
+                    "name": "stdout",
+                    "description": "Output of the process list command",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 737,
+            "description": "Processes (transforms) the list of processes",
+            "itemtype": "method",
+            "name": "_filterProcessItemsWin",
+            "params": [
+                {
+                    "name": "result",
+                    "description": "Reference to the result process list",
+                    "type": "Array"
+                },
+                {
+                    "name": "process",
+                    "description": "Single piece of process information",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 756,
+            "description": "Filters empty lines out of the process result",
+            "itemtype": "method",
+            "name": "_splitProcessListWin",
+            "params": [
+                {
+                    "name": "p",
+                    "description": "Reference to the process list",
+                    "type": "Array"
+                },
+                {
+                    "name": "line",
+                    "description": "Process item",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.ChromeDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 773,
+            "description": "Kills a process (based on a PID)\nthat was not opened BEFORE Dalek has\nbeen started",
+            "itemtype": "method",
+            "name": "_killWindows",
+            "params": [
+                {
+                    "name": "pid",
+                    "description": "Process id",
+                    "type": "Integer"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
             "class": "Browser.ChromeDriver",
             "module": "DalekJS",
             "namespace": "Browser"
@@ -216,11 +805,11 @@
         },
         {
             "message": "unknown tag: part",
-            "line": " index.js:34"
+            "line": " index.js:36"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:34"
+            "line": " index.js:36"
         },
         {
             "message": "Missing item type",
@@ -235,8 +824,8 @@
             "line": " lib/chromedriver.js:19"
         },
         {
-            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
-            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
+            "message": "Missing item type\nDifferent browser types (Canary / Chromium) that can be controlled\nvia the Chromedriver",
+            "line": " index.js:237"
         }
     ]
 }

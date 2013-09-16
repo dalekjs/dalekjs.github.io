@@ -112,16 +112,16 @@ var npmconf = require(&#039;npmconf&#039;);
 var util = require(&#039;util&#039;);
 
 var libPath = path.join(__dirname, &#039;lib&#039;, &#039;bin&#039;, &#039;chromedriver&#039;);
-var downloadUrl = &#039;http://chromedriver.googlecode.com/files/chromedriver2_&#039;;
+var downloadUrl = &#039;http://chromedriver.googlecode.com/files/chromedriver_&#039;;
 
 if (process.platform === &#039;linux&#039; &amp;&amp; process.arch === &#039;x64&#039;) {
-  downloadUrl += &#039;linux64_0.7.zip&#039;;
+  downloadUrl += &#039;linux64_2.3.zip&#039;;
 } else if (process.platform === &#039;linux&#039;) {
-  downloadUrl += &#039;linux32_0.7.zip&#039;;
+  downloadUrl += &#039;linux32_2.3.zip&#039;;
 } else if (process.platform === &#039;darwin&#039;) {
-  downloadUrl += &#039;mac32_0.7.zip&#039;;
+  downloadUrl += &#039;mac32_2.3.zip&#039;;
 } else if (process.platform === &#039;win32&#039;) {
-  downloadUrl += &#039;win32_0.7.zip&#039;;
+  downloadUrl += &#039;win32_2.3.zip&#039;;
 } else {
   console.log(&#039;Unexpected platform or architecture:&#039;, process.platform, process.arch);
   process.exit(1);

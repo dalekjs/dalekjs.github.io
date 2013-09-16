@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">79.30</p>
+      <p class="stat">71.63</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">152</p>
+      <p class="stat">781</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">12.53</p>
+      <p class="stat">38.63</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.28</p>
+      <p class="stat">3.26</p>
     </div>
   </div>
 </div>
@@ -118,7 +118,9 @@
 
 // ext. libs
 var Q = require(&#039;q&#039;);
-var spawn = require(&#039;child_process&#039;).spawn;
+var cp = require(&#039;child_process&#039;);
+var fs = require(&#039;fs&#039;);
+var portscanner = require(&#039;portscanner&#039;);
 
 // int. libs
 var chromedriver = require(&#039;./lib/chromedriver&#039;);
@@ -133,16 +135,73 @@ var chromedriver = require(&#039;./lib/chromedriver&#039;);
  * $ npm install dalek-browser-chrome --save-dev
  * ```
  *
- * You can use the browser plugin by adding a config option to the your Dalekfile
+ * You can use the browser plugin by adding a config option to the your [Dalekfile](/pages/config.html)
  *
  * ```javascript
- * &quot;browsers&quot;: [&quot;chrome&quot;]
+ * &quot;browser&quot;: [&quot;chrome&quot;]
  * ```
  *
  * Or you can tell Dalek that it should test in this browser via the command line:
  *
  * ```bash
  * $ dalek mytest.js -b chrome
+ * ```
+ *
+ * The Webdriver Server tries to open Port 9002 by default,
+ * if this port is blocked, it tries to use a port between 9003 &amp; 9092
+ * You can specifiy a different port from within your [Dalekfile](/pages/config.html) like so:
+ *
+ * ```javascript
+ * &quot;browsers&quot;: {
+ *   &quot;chrome&quot;: {
+ *     &quot;port&quot;: 5555 
+ *   }
+ * }
+ * ```
+ *
+ * It is also possible to specify a range of ports:
+ *
+ * ```javascript
+ * &quot;browsers&quot;: {
+ *   &quot;chrome&quot;: {
+ *     &quot;portRange&quot;: [6100, 6120] 
+ *   }
+ * }
+ * ```
+ *
+ * If you would like to test Chrome Canary oder Chromium releases, you can simply apply a snd. argument,
+ * which defines the browser type:
+ *
+ * ```bash
+ * $ dalek mytest.js -b chrome:canary
+ * ```
+ *
+ * for canary, and if you would like to use chromium, just append `:chromium`:
+ *
+ * ```bash
+ * $ dalek mytest.js -b chrome:chromium
+ * ```
+ *
+ * This will only work if you installed your browser in the default locations,
+ * if the browsers binary is located in a non default location, you are able to specify
+ * its location in your [Dalekfile](/pages/config.html):
+ *
+ * ```javascript
+ * &quot;browsers&quot;: {
+ *   &quot;chrome&quot;: {
+ *     &quot;binary&quot;: &quot;/Applications/Custom Located Chrome.app/MacOS/Contents/Chrome&quot; 
+ *   }
+ * }
+ * ```
+ *
+ * This also works for the canary &amp;amp; chromium builds
+ *
+ * ```javascript
+ * &quot;browsers&quot;: {
+ *   &quot;chrome&quot;: {
+ *     &quot;binary&quot;: &quot;/Applications/Custom Located Chrome.app/MacOS/Contents/Chrome&quot; 
+ *   }
+ * }
  * ```
  *
  * @module DalekJS
@@ -177,6 +236,18 @@ var ChromeDriver = {
   port: 9002,
 
   /**
+   * Default maximum port of the ChromeWebDriverServer
+   * The port is the highest port in the range that can be allocated
+   * by the ChromeWebDriverServer
+   *
+   * @property maxPort
+   * @type integer
+   * @default 9092
+   */
+
+  maxPort: 9092,
+
+  /**
    * Default host of the ChromeWebDriverServer
    * The host may be overridden with
    * a user configured value
@@ -189,23 +260,109 @@ var ChromeDriver = {
   host: &#039;localhost&#039;,
 
   /**
+   * Default desired capabilities that should be
+   * transferred when the browser session gets requested
+   *
+   * @property desiredCapabilities
+   * @type object
+   */
+
+  desiredCapabilities: {
+    browserName: &#039;chrome&#039;
+  },
+
+  /**
+   * Driver defaults, what should the driver be able to access.
+   *
+   * @property driverDefaults
+   * @type object
+   */
+
+  driverDefaults: {
+    viewport: true,
+    status: true,
+    sessionInfo: true
+  },
+
+  /**
    * Root path of the ChromeWebDriverServer
    *
    * @property path
    * @type string
-   * @default /
+   * @default /wd/hub
    */
 
-  path: &#039;/&#039;,
+  path: &#039;/wd/hub&#039;,
 
   /**
    * Child process instance of the Chrome browser
    *
    * @property spawned
    * @type null|Object
+   * @default null
    */
 
   spawned: null,
+
+  /**
+   * Chrome processes that are running on startup,
+   * and therefor shouldn`t be closed
+   *
+   * @property openProcesses
+   * @type array
+   * @default []   
+   */
+
+  openProcesses: [],
+
+  /**
+   * Name of the process (platform dependent)
+   * that represents the browser itself
+   *
+   * @property processName
+   * @type string
+   * @default chrome.exe / Chrome   
+   */
+
+  processName: (process.platform === &#039;win32&#039; ? &#039;chrome.exe&#039; : &#039;Chrome&#039;),
+
+  /**
+   * Different browser types (Canary / Chromium) that can be controlled
+   * via the Chromedriver
+   *
+   */
+
+  browserTypes: {
+
+    /**
+     * Chrome Canary
+     *
+     * @property canary
+     * @type object
+     */
+
+    canary: {
+      name: &#039;Chrome Canary&#039;,
+      linux: &#039;google-chrome-canary&#039;,
+      darwin: &#039;/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary&#039;,
+      win32: process.env.LOCALAPPDATA + &#039;\\Google\\Chrome SxS\\Application\\chrome.exe&#039;
+    },
+
+    /**
+     * Chromium
+     *
+     * @property chromium
+     * @type object
+     */
+
+    chromium: {
+      name: &#039;Chromium&#039;,
+      process: (process.platform === &#039;win32&#039; ? &#039;chromium.exe&#039; : &#039;Chromium&#039;),
+      linux: &#039;chromium-browser&#039;,
+      darwin: &#039;/Applications/Chromium.app/Contents/MacOS/Chromium&#039;,
+      win32: process.env.LOCALAPPDATA + &#039;\\Google\\Chrome SxS\\Application\\chrome.exe&#039;
+    }
+  },
 
   /**
    * Resolves the driver port
@@ -216,6 +373,17 @@ var ChromeDriver = {
 
   getPort: function () {
     return this.port;
+  },
+
+  /**
+   * Resolves the maximum range for the driver port
+   *
+   * @method getMaxPort
+   * @return {integer} port Max WebDriver server port range
+   */
+
+  getMaxPort: function () {
+    return this.maxPort;
   },
 
   /**
@@ -231,37 +399,498 @@ var ChromeDriver = {
 
   /**
    * Launches the ChromeWebDriverServer
+   * (which implicitly launches Chrome itself)
+   * and checks for an available port
    *
    * @method launch
+   * @param {object} configuration Browser configuration
+   * @param {EventEmitter2} events EventEmitter (Reporter Emitter instance)
+   * @param {Dalek.Internal.Config} config Dalek configuration class
    * @return {object} promise Browser promise
    */
 
-  launch: function () {
+  launch: function (configuration, events, config) {
     var deferred = Q.defer();
-    var stream = &#039;&#039;;
-    this.spawned = spawn(chromedriver.path, [&#039;--port=&#039; + this.getPort()]);
 
-    this.spawned.stdout.on(&#039;data&#039;, function (data) {
-      var dataStr = data + &#039;&#039;;
-      stream += dataStr;
-      if (stream.search(&#039;Started ChromeDriver&#039;) !== -1) {
-        deferred.resolve();
+    // store injected configuration/log event handlers
+    this.reporterEvents = events;
+    this.configuration = configuration;
+    this.config = config;
+
+    // check for a user set port
+    var browsers = this.config.get(&#039;browsers&#039;);
+    if (browsers &amp;&amp; Array.isArray(browsers)) {
+      browsers.forEach(this._checkUserDefinedPorts.bind(this));
+    }
+
+    // check for a user defined binary
+    if (configuration &amp;&amp; configuration.binary) {
+      var binaryExists = this._checkUserDefinedBinary(configuration.binary);
+      if (binaryExists) {
+        // check for new verbose &amp; process name
+        this.longName = this._modifyVerboseBrowserName(configuration);
+        this.processName = this._fetchProcessName(configuration);
       }
-    });
+    }
+
+    // check if the current port is in use, if so, scan for free ports
+    portscanner.findAPortNotInUse(this.getPort(), this.getMaxPort(), this.getHost(), this._checkPorts.bind(this, deferred));
     return deferred.promise;
   },
 
   /**
-   * Kills the ChromeWebDriverServer process
+   * Kills the ChromeWebDriverServer
+   * &amp; Chrome browser processes
    *
    * @method kill
    * @chainable
    */
 
   kill: function () {
+    this._processes(process.platform, this._checkProcesses.bind(this));
+    return this;
+  },
+
+  /**
+   * Modifies the verbose browser name
+   *
+   * @method _modifyVerboseBrowserName
+   * @param {object} configuration User configuration
+   * @return {string} Verbose browser name
+   * @private
+   */
+
+  _modifyVerboseBrowserName: function (configuration) {
+    if (configuration.type &amp;&amp; this.browserTypes[configuration.type]) {
+      return this.browserTypes[configuration.type].name + &#039; (&#039; + this.longName + &#039;)&#039;;
+    }
+
+    return this.longName;
+  },
+
+  /**
+   * Change the process name for browser instances like Canary &amp;amp; Chromium
+   *
+   * @method _fetchProcessName
+   * @param {object} configuration User configuration
+   * @return {string} Verbose browser name
+   * @private
+   */
+
+  _fetchProcessName: function (configuration) {
+    // check if the process name must be overridden (to shut down the browser)
+    if (this.browserTypes[configuration.type] &amp;&amp; this.browserTypes[configuration.type].process) {
+      return this.browserTypes[configuration.type].process;
+    }
+
+    return this.processName;
+  },
+
+  /**
+   * Process user defined ports
+   *
+   * @method _checkUserDefinedPorts
+   * @param {object} browser Browser configuration
+   * @chainable
+   * @private
+   */
+
+  _checkUserDefinedPorts: function (browser) {
+    // check for a single defined port
+    if (browser.chrome &amp;&amp; browser.chrome.port) {
+      this.port = parseInt(browser.chrome.port, 10);
+      this.maxPort = this.port + 90;
+      this.reporterEvents.emit(&#039;report:log:system&#039;, &#039;dalek-browser-chrome: Switching to user defined port: &#039; + this.port);
+    }
+
+    // check for a port range
+    if (browser.chrome &amp;&amp; browser.chrome.portRange &amp;&amp; browser.chrome.portRange.length === 2) {
+      this.port = parseInt(browser.chrome.portRange[0], 10);
+      this.maxPort = parseInt(browser.chrome.portRange[1], 10);
+      this.reporterEvents.emit(&#039;report:log:system&#039;, &#039;dalek-browser-chrome: Switching to user defined port(s): &#039; + this.port + &#039; -&gt; &#039; + this.maxPort);
+    }
+
+    return this;
+  },
+
+  /**
+   * Checks if the binary exists,
+   * when set manually by the user
+   *
+   * @method _checkUserDefinedBinary
+   * @param {string} binary Path to the browser binary
+   * @return {bool} Binary exists
+   * @private
+   */
+
+  _checkUserDefinedBinary: function (binary) {
+    // check if the binary exists
+    if (!fs.existsSync(binary)) {
+      this.reporterEvents.emit(&#039;error&#039;, &#039;dalek-driver-chrome: Binary not found: &#039; + binary);
+      process.exit(127);
+      return false;
+    }
+
+    // add the binary to the desired capabilities
+    this.desiredCapabilities.chromeOptions = {
+      binary: binary
+    };
+
+    return true;
+  },
+
+  /**
+   * Checks if the def. port is blocked &amp; if we need to switch to another port
+   * Kicks off the process manager (for closing the opened browsers after the run has been finished)
+   * Also starts the chromedriver instance 
+   *
+   * @method _checkPorts
+   * @param {object} deferred Promise
+   * @param {null|object} error Error object
+   * @param {integer} port Found open port
+   * @private
+   * @chainable
+   */
+
+  _checkPorts: function(deferred, error, port) {
+    // check if the port was blocked &amp; if we need to switch to another port
+    if (this.port !== port) {
+      this.reporterEvents.emit(&#039;report:log:system&#039;, &#039;dalek-browser-chrome: Switching to port: &#039; + port);
+      this.port = port;
+    }
+
+    // get the currently running processes &amp; invoke the chromedriver afterwards
+    this._processes(process.platform, this._startChromedriver.bind(this, deferred));
+    return this;
+  },
+
+  /**
+   * Spawns an instance of Chromedriver
+   * 
+   * @method _startChromedriver
+   * @param {object} deferred Promise
+   * @param {null|object} error Error object
+   * @param {string} result List of open chrome processes BEFORE the test browser has been launched
+   * @private
+   * @chainable
+   */
+
+  _startChromedriver: function (deferred, err, result) {
+    var args = [&#039;--port=&#039; + this.getPort(), &#039;--url-base=&#039; + this.path];
+    this.spawned = cp.spawn(chromedriver.path, args);
+    this.openProcesses = result;
+    this.spawned.stdout.on(&#039;data&#039;, this._catchDriverLogs.bind(this, deferred));
+    return this;
+  },
+
+  /**
+   * Watches the chromedriver console output to capture the starting message
+   * 
+   * @method _catchDriverLogs
+   * @param {object} deferred Promise
+   * @param {buffer} data Chromedriver console output
+   * @private
+   * @chainable
+   */
+
+  _catchDriverLogs: function (deferred, data) {
+    var dataStr = data + &#039;&#039;;
+
+    // timeout to catch if chromedriver couldnt be launched
+    var timeout = setTimeout(function () {
+      deferred.reject();
+      this.reporterEvents.emit(&#039;error&#039;, &#039;dalek-driver-chrome: Could not launch Chromedriver&#039;);
+      process.exit(127);
+    }.bind(this), 2000);
+
+    // look for the success message
+    if (dataStr.search(&#039;Starting ChromeDriver&#039;) !== -1) {
+      this.reporterEvents.emit(&#039;report:log:system&#039;, &#039;dalek-browser-chrome: Started ChromeDriver&#039;);
+      clearTimeout(timeout);
+      deferred.resolve();
+    }
+
+    return this;
+  },
+
+  /**
+   * Remove the chromedriver log that is written to the current working directory
+   * 
+   * @method _unlinkChromedriverLog
+   * @param {bool} retry Delete has been tried min 1 time before
+   * @private
+   * @chainable
+   */
+
+  _unlinkChromedriverLog: function (retry) {
+    var logfile = process.cwd() + &#039;/chromedriver.log&#039;;
+    try {
+      if (fs.existsSync(logfile)) {
+        fs.unlinkSync(logfile);
+      }
+    } catch (e) {
+      if (!retry) {
+        setTimeout(this._unlinkChromedriverLog.bind(this, true), 1000);
+      }
+    }
+    
+    return this;
+  },
+
+  /**
+   * Tracks running browser processes for chrome on mac &amp; linux
+   *
+   * @method _processes
+   * @param {string} platform Current OS
+   * @param {function} fn Callback
+   * @chainable
+   * @private
+   */
+
+  _processes: function (platform, fn) {
+    if (platform === &#039;win32&#039;) {
+      this._processesWin(fn);
+      return this;
+    }
+    
+    this._processesNix(fn);
+    return this;
+  },
+
+  /**
+   * Kills all associated processes
+   * 
+   * @method _checkProcesses
+   * @param {object|null} err Error object or null
+   * @param {array} result List of running processes
+   * @chainable
+   * @private
+   */
+
+  _checkProcesses: function (err, result) {
+    // log that the driver shutdown process has been initiated
+    this.reporterEvents.emit(&#039;report:log:system&#039;, &#039;dalek-browser-chrome: Shutting down ChromeDriver&#039;);
+    // kill leftover chrome browser processes
+    result.forEach(this[(process.platform === &#039;win32&#039; ? &#039;_killWindows&#039; : &#039;_killNix&#039;)].bind(this));
+    // kill chromedriver binary      
     this.spawned.kill(&#039;SIGTERM&#039;);
+    // clean up the file mess the chromedriver leaves us behind
+    this._unlinkChromedriverLog();
+    return this;
+  },
+
+  // UNIX ONLY
+  // ---------
+
+  /**
+   * Kills a process
+   * 
+   * @method _killNix
+   * @param {integer} processID Process ID
+   * @chainable
+   * @private
+   */
+
+  _killNix: function (processID) {
+    var kill = true;
+    this.openProcesses.forEach(function (pid) {
+      if (pid === processID) {
+        kill = false;
+      }
+    });
+
+    if (kill === true) {
+      var killer = cp.spawn;
+      killer(&#039;kill&#039;, [processID]);
+    }
+
+    return this;
+  },
+
+  /**
+   * Lists all chrome processes on *NIX systems
+   * 
+   * @method _processesNix
+   * @param {function} fn Calback
+   * @chainable
+   * @private
+   */
+
+  _processesNix: function (fn) {
+    var cmd = [&#039;ps -ax&#039;, &#039;|&#039;, &#039;grep &#039; + this.processName];
+    cp.exec(cmd.join(&#039; &#039;), this._processListNix.bind(this, fn));
+    return this;
+  },
+
+  /**
+   * Deserializes a process list on nix
+   * 
+   * @method _processListNix
+   * @param {function} fn Calback
+   * @param {object|null} err Error object
+   * @param {string} stdout Output of the process list shell command
+   * @chainable
+   * @private
+   */
+
+  _processListNix: function(fn, err, stdout) {
+    var result = [];
+    stdout.split(&#039;\n&#039;).forEach(this._splitProcessListNix.bind(this, result));
+    fn(err, result);
+    return this;
+  },
+
+  /**
+   * Reformats the process list output on *NIX systems
+   * 
+   * @method _splitProcessListNix
+   * @param {array} result Reference to the process list
+   * @param {string} line Single process in text representation
+   * @chainable
+   * @private
+   */
+
+  _splitProcessListNix: function(result, line) {
+    var data = line.split(&#039; &#039;);
+    data = data.filter(this._filterProcessItemsNix.bind(this));
+
+    if (data[1] !== &#039;??&#039;) {
+      result.push(data[0]);
+    }
+    return this;
+  },
+
+  /**
+   * Filters empty process list entries on *NIX
+   * 
+   * @method _filterProcessItemsNix
+   * @param {string} item Item to check
+   * @return {string|bool} Item or falsy
+   * @private
+   */
+
+  _filterProcessItemsNix: function (item) {
+    if (item !== &#039;&#039;) {
+      return item;
+    }
+    return false;
+  },
+
+  // WIN ONLY
+  // --------
+
+  /**
+   * Lists all running processes (win only)
+   *
+   * @method _processesWin
+   * @param {Function} callback Receives the process object as the only callback argument
+   * @chainable
+   * @private
+   */
+
+  _processesWin: function (callback) {
+    cp.exec(&#039;tasklist /FO CSV&#039;, this._processListWin.bind(this, callback));
+    return this;
+  },
+
+  /**
+   * Deserializes the process list on win
+   * 
+   * @method _processListWin
+   * @param {function} callback Callback to be executed after the list has been transformed
+   * @param {object|null} err Error if error, else null
+   * @param {string} stdout Output of the process list command
+   * @chainable
+   * @private
+   */
+
+  _processListWin: function (callback, err, stdout) {
+    var p = [];
+    stdout.split(&#039;\r\n&#039;).forEach(this._splitProcessListWin.bind(this, p));
+
+    var proc = [];
+    var head = null;
+    while (p.length &gt; 1) {
+      var rec = p.shift();
+      var tmp = {};
+      rec = rec.replace(/\&quot;\,/gi,&#039;&quot;;&#039;).replace(/\&quot;|\&#039;/gi,&#039;&#039;).split(&#039;;&#039;);
+      for (var j=0;j&lt;rec.length;j++){
+        tmp[head[j]] = rec[j].replace(/\&quot;|\&#039;/gi,&#039;&#039;);
+      }
+      proc.push(tmp);
+    }
+
+    var result = [];
+    proc.forEach(this._filterProcessItemsWin.bind(this, result));
+    callback(null, result);
+    return this;
+  },
+
+  /**
+   * Processes (transforms) the list of processes
+   * 
+   * @method _filterProcessItemsWin
+   * @param {array} result Reference to the result process list
+   * @param {object} process Single piece of process information
+   * @chainable
+   * @private
+   */
+
+  _filterProcessItemsWin: function (result, process) {
+    Object.keys(process).forEach(function (key) {
+      if (process[key] === this.processName) {
+        result.push(process.PID);
+      }
+    });
+    return this;
+  },
+
+  /**
+   * Filters empty lines out of the process result
+   * 
+   * @method _splitProcessListWin
+   * @param {array} p Reference to the process list
+   * @param {string} line Process item
+   * @chainable
+   * @private
+   */
+
+  _splitProcessListWin: function (p, line) {
+    if (line.trim().length !== 0) {
+      p.push(line);
+    }
+    return this;
+  },
+
+  /**
+   * Kills a process (based on a PID)
+   * that was not opened BEFORE Dalek has
+   * been started
+   *
+   * @method _killWindows
+   * @param {integer} pid Process id
+   * @chainable
+   * @private
+   */
+
+  _killWindows: function (pid) {
+    var kill = true;
+
+    // check if the process was running BEFORE we started dalek
+    this.openProcesses.forEach(function (opid) {
+      if (opid === pid) {
+        kill = false;
+      }
+    });
+
+    // kill the browser process
+    if (kill === true) {
+      cp.exec(&#039;taskkill /PID &#039; + pid + &#039; /f&#039;, function(){});
+    }
+
     return this;
   }
+
 };
 
 // expose the module
