@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib/commands/marionette/cookie.js - dalek-browser-firefox</title>
+    <title>FirefoxDriver.Commands.Marionette.Storage - dalek-browser-firefox</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -144,114 +144,68 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib/commands/marionette/cookie.js</h1>
+                        <h1>FirefoxDriver.Commands.Marionette.Storage Class</h1>
+<div class="box meta">
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-/*!
- *
- * Copyright (c) 2013 Sebastian Golasch
- *
- * Permission is hereby granted, free of charge, to any person obtaining a
- * copy of this software and associated documentation files (the &quot;Software&quot;),
- * to deal in the Software without restriction, including without limitation
- * the rights to use, copy, modify, merge, publish, distribute, sublicense,
- * and/or sell copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
- * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
- */
+    
 
-&#x27;use strict&#x27;;
+    
+        <div class="foundat">
+            Defined in: <a href="../files/lib_commands_marionette_storage.js.html#l27"><code>lib&#x2F;commands&#x2F;marionette&#x2F;storage.js:27</code></a>
+        </div>
+    
 
-/**
- * Cookie related Marionette commands
- * see [JsonProtocol](https://wiki.mozilla.org/Auto-tools/Projects/Marionette/JSON_Protocol)
- *
- * @module FirefoxDriver
- * @class Cookie
- * @namespace FirefoxDriver.Commands.Marionette
- */
+    
+        
+            Module: <a href="../modules/FirefoxDriver.html">FirefoxDriver</a>
+        
+    
 
-module.exports = function (Marionette) {
+    
+</div>
 
-  /**
-   * Retrieve all cookies visible to the current page.
-   *
-   * @method getCookies
-   */
 
-  Marionette.addCommand({
-    name: &#x27;getCookies&#x27;,
-    request: {
-      to: &#x27;:marionetteId&#x27;,
-      session: &#x27;:sessionId&#x27;,
-      type: &#x27;getAllCookies&#x27;
-    }
-  });
 
-  /**
-   * Delete all cookies visible to the current page.
-   *
-   * @method deleteCookies
-   */
+<div class="box intro">
+    <p>Storage related Marionette commands
+see <a href="https://wiki.mozilla.org/Auto-tools/Projects/Marionette/JSON_Protocol">JsonProtocol</a></p>
 
-  Marionette.addCommand({
-    name: &#x27;deleteCookies&#x27;,
-    request: {
-      to: &#x27;:marionetteId&#x27;,
-      session: &#x27;:sessionId&#x27;,
-      type: &#x27;deleteAllCookies&#x27;
-    }
-  });
+</div>
 
-  /**
-   * Delete the cookie with the given name.
-   * This command should be a no-op if there is no such cookie visible to the current page.
-   *
-   * @method deleteCookie
-   */
 
-  Marionette.addCommand({
-    name: &#x27;deleteCookie&#x27;,
-    request: {
-      to: &#x27;:marionetteId&#x27;,
-      session: &#x27;:sessionId&#x27;,
-      name: &#x27;:name&#x27;,
-      type: &#x27;deleteCookie&#x27;
-    }
-  });
 
-  /**
-   * Set a cookie. If the cookie path is not specified, it should be set to &quot;/&quot;.
-   * Likewise, if the domain is omitted, it should default to the current page&#x27;s domain.
-   *
-   * @method addCookie
-   */
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
 
-  Marionette.addCommand({
-    name: &#x27;cookies&#x27;,
-    request: {
-      to: &#x27;:marionetteId&#x27;,
-      session: &#x27;:sessionId&#x27;,
-      cookie: &#x27;:cookie&#x27;,
-      type: &#x27;addCookie&#x27;
-    }
-  });
+        
+        
+        
+        
+    </ul>
 
-};
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
 
-    </pre>
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+
+        
+
+        
+
+        
+    </div>
 </div>
 
                     </div>

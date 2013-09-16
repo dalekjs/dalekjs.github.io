@@ -11,7 +11,9 @@
             "modules": {
                 "FirefoxDriver": 1
             },
-            "classes": {},
+            "classes": {
+                "FirefoxDriver.Commands.Marionette.Cookie": 1
+            },
             "fors": {},
             "namespaces": {
                 "FirefoxDriver.Commands.Marionette": 1
@@ -64,7 +66,9 @@
         "lib/commands/marionette/interaction.js": {
             "name": "lib/commands/marionette/interaction.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "FirefoxDriver.Commands.Marionette.Interaction": 1
+            },
             "fors": {},
             "namespaces": {
                 "FirefoxDriver.Commands.Marionette": 1
@@ -84,7 +88,9 @@
         "lib/commands/marionette/screenshot.js": {
             "name": "lib/commands/marionette/screenshot.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "FirefoxDriver.Commands.Marionette.Screenshot": 1
+            },
             "fors": {},
             "namespaces": {
                 "FirefoxDriver.Commands.Marionette": 1
@@ -104,7 +110,9 @@
         "lib/commands/marionette/storage.js": {
             "name": "lib/commands/marionette/storage.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "FirefoxDriver.Commands.Marionette.Storage": 1
+            },
             "fors": {},
             "namespaces": {
                 "FirefoxDriver.Commands.Marionette": 1
@@ -136,7 +144,7 @@
             "name": "lib/commands/marionette/window.js",
             "modules": {},
             "classes": {
-                "FirefoxDriver.Commands.Marionette.Cookie": 1
+                "FirefoxDriver.Commands.Marionette.Window": 1
             },
             "fors": {},
             "namespaces": {
@@ -350,10 +358,14 @@
                 "FirefoxDriver.Commands.Marionette.Execute": 1,
                 "FirefoxDriver.Commands.Marionette.Frame": 1,
                 "FirefoxDriver.Commands.Marionette.IME": 1,
+                "FirefoxDriver.Commands.Marionette.Interaction": 1,
                 "FirefoxDriver.Commands.Marionette.Page": 1,
+                "FirefoxDriver.Commands.Marionette.Screenshot": 1,
                 "FirefoxDriver.Commands.Marionette.Session": 1,
+                "FirefoxDriver.Commands.Marionette.Storage": 1,
                 "FirefoxDriver.Commands.Marionette.Timeout": 1,
                 "FirefoxDriver.Commands.Marionette.Url": 1,
+                "FirefoxDriver.Commands.Marionette.Window": 1,
                 "FirefoxDriver.Commands.WebDriver.Cookie": 1,
                 "FirefoxDriver.Commands.WebDriver.Element": 1,
                 "FirefoxDriver.Commands.WebDriver.ScriptExecutor": 1,
@@ -411,7 +423,7 @@
             "extension_for": [],
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette",
-            "file": "lib/commands/marionette/window.js",
+            "file": "lib/commands/marionette/cookie.js",
             "line": 27,
             "description": "Cookie related Marionette commands\nsee [JsonProtocol](https://wiki.mozilla.org/Auto-tools/Projects/Marionette/JSON_Protocol)"
         },
@@ -471,6 +483,20 @@
             "line": 27,
             "description": "IME related Marionette commands\nsee [JsonProtocol](https://wiki.mozilla.org/Auto-tools/Projects/Marionette/JSON_Protocol)"
         },
+        "FirefoxDriver.Commands.Marionette.Interaction": {
+            "name": "FirefoxDriver.Commands.Marionette.Interaction",
+            "shortname": "FirefoxDriver.Commands.Marionette.Interaction",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "FirefoxDriver",
+            "namespace": "FirefoxDriver.Commands.Marionette",
+            "file": "lib/commands/marionette/interaction.js",
+            "line": 27,
+            "description": "Interaction related Marionette commands\nsee [JsonProtocol](https://wiki.mozilla.org/Auto-tools/Projects/Marionette/JSON_Protocol)"
+        },
         "FirefoxDriver.Commands.Marionette.Page": {
             "name": "FirefoxDriver.Commands.Marionette.Page",
             "shortname": "FirefoxDriver.Commands.Marionette.Page",
@@ -485,6 +511,20 @@
             "line": 27,
             "description": "Page related Marionette commands\nsee [JsonProtocol](https://wiki.mozilla.org/Auto-tools/Projects/Marionette/JSON_Protocol)"
         },
+        "FirefoxDriver.Commands.Marionette.Screenshot": {
+            "name": "FirefoxDriver.Commands.Marionette.Screenshot",
+            "shortname": "FirefoxDriver.Commands.Marionette.Screenshot",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "FirefoxDriver",
+            "namespace": "FirefoxDriver.Commands.Marionette",
+            "file": "lib/commands/marionette/screenshot.js",
+            "line": 27,
+            "description": "Screenshot related Marionette commands\nsee [JsonProtocol](https://wiki.mozilla.org/Auto-tools/Projects/Marionette/JSON_Protocol)"
+        },
         "FirefoxDriver.Commands.Marionette.Session": {
             "name": "FirefoxDriver.Commands.Marionette.Session",
             "shortname": "FirefoxDriver.Commands.Marionette.Session",
@@ -498,6 +538,20 @@
             "file": "lib/commands/marionette/session.js",
             "line": 27,
             "description": "Session related Marionette commands\nsee [JsonProtocol](https://wiki.mozilla.org/Auto-tools/Projects/Marionette/JSON_Protocol)"
+        },
+        "FirefoxDriver.Commands.Marionette.Storage": {
+            "name": "FirefoxDriver.Commands.Marionette.Storage",
+            "shortname": "FirefoxDriver.Commands.Marionette.Storage",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "FirefoxDriver",
+            "namespace": "FirefoxDriver.Commands.Marionette",
+            "file": "lib/commands/marionette/storage.js",
+            "line": 27,
+            "description": "Storage related Marionette commands\nsee [JsonProtocol](https://wiki.mozilla.org/Auto-tools/Projects/Marionette/JSON_Protocol)"
         },
         "FirefoxDriver.Commands.Marionette.Timeout": {
             "name": "FirefoxDriver.Commands.Marionette.Timeout",
@@ -526,6 +580,20 @@
             "file": "lib/commands/marionette/url.js",
             "line": 27,
             "description": "Url related Marionette commands\nsee [JsonProtocol](https://wiki.mozilla.org/Auto-tools/Projects/Marionette/JSON_Protocol)"
+        },
+        "FirefoxDriver.Commands.Marionette.Window": {
+            "name": "FirefoxDriver.Commands.Marionette.Window",
+            "shortname": "FirefoxDriver.Commands.Marionette.Window",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "FirefoxDriver",
+            "namespace": "FirefoxDriver.Commands.Marionette",
+            "file": "lib/commands/marionette/window.js",
+            "line": 27,
+            "description": "Window related Marionette commands\nsee [JsonProtocol](https://wiki.mozilla.org/Auto-tools/Projects/Marionette/JSON_Protocol)"
         },
         "FirefoxDriver.Commands.WebDriver.Cookie": {
             "name": "FirefoxDriver.Commands.WebDriver.Cookie",
@@ -982,7 +1050,7 @@
         {
             "file": "lib/commands/marionette/screenshot.js",
             "line": 38,
-            "class": "FirefoxDriver.Commands.Marionette.Cookie",
+            "class": "FirefoxDriver.Commands.Marionette.Screenshot",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver.Commands.Marionette"
         },
