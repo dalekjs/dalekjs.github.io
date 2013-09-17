@@ -176,9 +176,6 @@ It provides all a WebDriverServer &amp; browser launcher for Mozilla Firefox &am
 <pre><code class="lang-javascript">&quot;browser&quot;: [&quot;firefox&quot;]</code></pre>
 <p>Or you can tell Dalek that it should test in this browser via the command line:</p>
 <pre><code class="lang-bash">$ dalek mytest.js -b firefox</code></pre>
-<p>Because of the availability of the Firefox Marionette testing framework,
-Dalek atm. can only drive the Firefox Nightly Debug builds.</p>
-<p>You can get them from Mozillaʼs FTP server, for example the one from the 16th August <a href="http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/"><a href="http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/08/2013-08-16-mozilla-central-debug/">http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/08/2013-08-16-mozilla-central-debug/</a></a></p>
 <p>Dalek looks for the browser in the std. installation directory, if you installed the
 browser in a different place, you can add the location of the browser executable to you Dalekfile,
 because Dalek isnʼt capable of finding the executable yet on its own.</p>
@@ -204,7 +201,7 @@ You can specifiy a different port from within your <a href="/pages/config.html">
     &quot;portRange&quot;: [6100, 6120] 
   }
 }</code></pre>
-<p>If you would like to test Aurora oder Firefox OS releases, you can simply apply a snd. argument,
+<p>If you would like to test Nightly, Aurora oder Firefox OS releases, you can simply apply a snd. argument,
 which defines the browser type:</p>
 <pre><code class="lang-bash">$ dalek mytest.js -b firefox:aurora</code></pre>
 <p>for Firefox Aurora, and if you would like to use the Firefox OS, just append <code>:os</code>:</p>
@@ -267,13 +264,6 @@ its location in your <a href="/pages/config.html">Dalekfile</a>:</p>
                             </li>
                         
                             <li class="index-item method private">
-                                <a href="#method__afterCreatingProfile">_afterCreatingProfile</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
                                 <a href="#method__afterCreatingUserPreferences">_afterCreatingUserPreferences</a>
 
                                 
@@ -309,13 +299,6 @@ its location in your <a href="/pages/config.html">Dalekfile</a>:</p>
                             </li>
                         
                             <li class="index-item method private">
-                                <a href="#method__cleanupProfiles">_cleanupProfiles</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
                                 <a href="#method__createProfile">_createProfile</a>
 
                                 
@@ -324,13 +307,6 @@ its location in your <a href="/pages/config.html">Dalekfile</a>:</p>
                         
                             <li class="index-item method private">
                                 <a href="#method__createProfile">_createProfile</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__deleteProfile">_deleteProfile</a>
 
                                 
                                 
@@ -386,7 +362,21 @@ its location in your <a href="/pages/config.html">Dalekfile</a>:</p>
                             </li>
                         
                             <li class="index-item method private">
+                                <a href="#method__scanMarionettePort">_scanMarionettePort</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
                                 <a href="#method__startBrowser">_startBrowser</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__startByInterval">_startByInterval</a>
 
                                 
                                 
@@ -629,7 +619,7 @@ its location in your <a href="/pages/config.html">Dalekfile</a>:</p>
             
         
         
-        <a href="../files/index.js.html#l475"><code>index.js:475</code></a>
+        <a href="../files/index.js.html#l469"><code>index.js:469</code></a>
         
         </p>
 
@@ -745,7 +735,7 @@ browser binary has been found</p>
             
         
         
-        <a href="../files/index.js.html#l717"><code>index.js:717</code></a>
+        <a href="../files/index.js.html#l744"><code>index.js:744</code></a>
         
         </p>
 
@@ -794,165 +784,6 @@ has been launched correctly</p>
 
                     <div class="param-description">
                         <p>Promise</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__afterCreatingProfile" class="method item private">
-    <h3 class="name"><code>_afterCreatingProfile</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>deferred</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>data</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>profileName</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>code</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag chainable">chainable</span>
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/index.js.html#l801"><code>index.js:801</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Callback that will be executed after the profile has been created</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">deferred</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Promise</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">data</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Data stream from thr console</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">profileName</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Name of the generated profile</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">code</code>
-                        <span class="type">Integer</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Return code of the spawned browser binary</p>
 
                     </div>
 
@@ -1021,7 +852,7 @@ has been launched correctly</p>
             
         
         
-        <a href="../files/index.js.html#l858"><code>index.js:858</code></a>
+        <a href="../files/index.js.html#l857"><code>index.js:857</code></a>
         
         </p>
 
@@ -1137,7 +968,7 @@ have been created</p>
             
         
         
-        <a href="../files/index.js.html#l519"><code>index.js:519</code></a>
+        <a href="../files/index.js.html#l513"><code>index.js:513</code></a>
         
         </p>
 
@@ -1248,7 +1079,7 @@ have been created</p>
             
         
         
-        <a href="../files/index.js.html#l759"><code>index.js:759</code></a>
+        <a href="../files/index.js.html#l786"><code>index.js:786</code></a>
         
         </p>
 
@@ -1355,7 +1186,7 @@ have been created</p>
             
         
         
-        <a href="../files/index.js.html#l634"><code>index.js:634</code></a>
+        <a href="../files/index.js.html#l661"><code>index.js:661</code></a>
         
         </p>
 
@@ -1454,7 +1285,7 @@ have been created</p>
             
         
         
-        <a href="../files/index.js.html#l922"><code>index.js:922</code></a>
+        <a href="../files/index.js.html#l880"><code>index.js:880</code></a>
         
         </p>
 
@@ -1518,13 +1349,17 @@ when set manually by the user</p>
 </div>
 
                 
-                    <div id="method__cleanupProfiles" class="method item private">
-    <h3 class="name"><code>_cleanupProfiles</code></h3>
+                    <div id="method__createProfile" class="method item private">
+    <h3 class="name"><code>_createProfile</code></h3>
 
     
         <span class="paren">()</span>
     
 
+    
+        <span class="returns-inline">
+            <span class="type">Q.promise</span>
+        </span>
     
 
     
@@ -1537,8 +1372,6 @@ when set manually by the user</p>
 
     
 
-    
-        <span class="flag chainable">chainable</span>
     
 
     
@@ -1554,7 +1387,7 @@ when set manually by the user</p>
             
         
         
-        <a href="../files/index.js.html#l881"><code>index.js:881</code></a>
+        <a href="../files/index.js.html#l806"><code>index.js:806</code></a>
         
         </p>
 
@@ -1565,12 +1398,24 @@ when set manually by the user</p>
     </div>
 
     <div class="description">
-        <p>Cleans up any previously generated user profiles from dalek</p>
+        <p>Creates a new Firefox profile</p>
 
     </div>
 
     
 
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Q.promise</span>:
+                    
+                
+            </div>
+        </div>
     
 
     
@@ -1625,7 +1470,7 @@ when set manually by the user</p>
             
         
         
-        <a href="../files/index.js.html#l831"><code>index.js:831</code></a>
+        <a href="../files/index.js.html#l822"><code>index.js:822</code></a>
         
         </p>
 
@@ -1685,216 +1530,6 @@ Saves them in <code>user.js</code> in the newly created profile</p>
 </div>
 
                 
-                    <div id="method__createProfile" class="method item private">
-    <h3 class="name"><code>_createProfile</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Q.promise</span>
-        </span>
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/index.js.html#l779"><code>index.js:779</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Creates a new Firefox profile</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Q.promise</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method__deleteProfile" class="method item private">
-    <h3 class="name"><code>_deleteProfile</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>profileDir</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>currentProfile</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>profile</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag chainable">chainable</span>
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/index.js.html#l899"><code>index.js:899</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Cleans up the generated profiles from dalek</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">profileDir</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Directory of the user profile</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">currentProfile</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Name of the current profile</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">profile</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Profile data object</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="method__getDefaultBinary" class="method item private">
     <h3 class="name"><code>_getDefaultBinary</code></h3>
 
@@ -1933,7 +1568,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l581"><code>index.js:581</code></a>
+        <a href="../files/index.js.html#l574"><code>index.js:574</code></a>
         
         </p>
 
@@ -2018,7 +1653,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l556"><code>index.js:556</code></a>
+        <a href="../files/index.js.html#l549"><code>index.js:549</code></a>
         
         </p>
 
@@ -2113,7 +1748,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l535"><code>index.js:535</code></a>
+        <a href="../files/index.js.html#l528"><code>index.js:528</code></a>
         
         </p>
 
@@ -2184,7 +1819,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l502"><code>index.js:502</code></a>
+        <a href="../files/index.js.html#l496"><code>index.js:496</code></a>
         
         </p>
 
@@ -2297,7 +1932,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l742"><code>index.js:742</code></a>
+        <a href="../files/index.js.html#l769"><code>index.js:769</code></a>
         
         </p>
 
@@ -2424,7 +2059,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l683"><code>index.js:683</code></a>
+        <a href="../files/index.js.html#l710"><code>index.js:710</code></a>
         
         </p>
 
@@ -2571,7 +2206,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l661"><code>index.js:661</code></a>
+        <a href="../files/index.js.html#l688"><code>index.js:688</code></a>
         
         </p>
 
@@ -2618,6 +2253,99 @@ Saves them in <code>user.js</code> in the newly created profile</p>
 
                     <div class="param-description">
                         <p>Name of the profile</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__scanMarionettePort" class="method item private">
+    <h3 class="name"><code>_scanMarionettePort</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>df</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/index.js.html#l626"><code>index.js:626</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Repeatadly checks the status of the marionette port</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">df</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Promise</p>
 
                     </div>
 
@@ -2692,7 +2420,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l596"><code>index.js:596</code></a>
+        <a href="../files/index.js.html#l589"><code>index.js:589</code></a>
         
         </p>
 
@@ -2771,6 +2499,165 @@ Saves them in <code>user.js</code> in the newly created profile</p>
 </div>
 
                 
+                    <div id="method__startByInterval" class="method item private">
+    <h3 class="name"><code>_startByInterval</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>df</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>interval</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>err</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>status</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/index.js.html#l640"><code>index.js:640</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Checks if the browser is available by listening on the marionette socket</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">df</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Promise</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">interval</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Reference to the portchecker interval</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">err</code>
+                        <span class="type">Object | Null</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Error or null</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">status</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Status of the marionette port</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="method_findBrowserBinary" class="method item">
     <h3 class="name"><code>findBrowserBinary</code></h3>
 
@@ -2817,7 +2704,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l442"><code>index.js:442</code></a>
+        <a href="../files/index.js.html#l436"><code>index.js:436</code></a>
         
         </p>
 
@@ -2914,7 +2801,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l374"><code>index.js:374</code></a>
+        <a href="../files/index.js.html#l368"><code>index.js:368</code></a>
         
         </p>
 
@@ -2987,7 +2874,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l363"><code>index.js:363</code></a>
+        <a href="../files/index.js.html#l357"><code>index.js:357</code></a>
         
         </p>
 
@@ -3060,7 +2947,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l352"><code>index.js:352</code></a>
+        <a href="../files/index.js.html#l346"><code>index.js:346</code></a>
         
         </p>
 
@@ -3133,7 +3020,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l341"><code>index.js:341</code></a>
+        <a href="../files/index.js.html#l335"><code>index.js:335</code></a>
         
         </p>
 
@@ -3204,7 +3091,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l423"><code>index.js:423</code></a>
+        <a href="../files/index.js.html#l417"><code>index.js:417</code></a>
         
         </p>
 
@@ -3286,7 +3173,7 @@ then kills the browser process &amp; cleans up the profiles</p>
             
         
         
-        <a href="../files/index.js.html#l385"><code>index.js:385</code></a>
+        <a href="../files/index.js.html#l379"><code>index.js:379</code></a>
         
         </p>
 
@@ -3318,7 +3205,8 @@ Creates a user profile for the browser</p>
                     
 
                     <div class="param-description">
-                         
+                        <p>Browser configuration</p>
+
                     </div>
 
                     
@@ -3333,7 +3221,8 @@ Creates a user profile for the browser</p>
                     
 
                     <div class="param-description">
-                         
+                        <p>EventEmitter (Reporter Emitter instance)</p>
+
                     </div>
 
                     
@@ -3348,7 +3237,8 @@ Creates a user profile for the browser</p>
                     
 
                     <div class="param-description">
-                         
+                        <p>Dalek configuration class</p>
+
                     </div>
 
                     
@@ -3409,7 +3299,7 @@ Creates a user profile for the browser</p>
             
         
         
-        <a href="../files/index.js.html#l291"><code>index.js:291</code></a>
+        <a href="../files/index.js.html#l285"><code>index.js:285</code></a>
         
         </p>
 
@@ -3454,7 +3344,7 @@ Creates a user profile for the browser</p>
             
         
         
-        <a href="../files/index.js.html#l243"><code>index.js:243</code></a>
+        <a href="../files/index.js.html#l238"><code>index.js:238</code></a>
         
         </p>
 
@@ -3501,7 +3391,7 @@ Creates a user profile for the browser</p>
             
         
         
-        <a href="../files/index.js.html#l267"><code>index.js:267</code></a>
+        <a href="../files/index.js.html#l261"><code>index.js:261</code></a>
         
         </p>
 
@@ -3547,7 +3437,7 @@ via the Firefox driver</p>
             
         
         
-        <a href="../files/index.js.html#l253"><code>index.js:253</code></a>
+        <a href="../files/index.js.html#l248"><code>index.js:248</code></a>
         
         </p>
 
@@ -3557,8 +3447,7 @@ via the Firefox driver</p>
     </div>
 
     <div class="description">
-        <p>Paths to the default Firefox binary files
-(Points to Nightly as long as Marionette isn&#39;t in std. Firefox)</p>
+        <p>Paths to the default Firefox binary files</p>
 
     </div>
 
@@ -3593,7 +3482,7 @@ via the Firefox driver</p>
             
         
         
-        <a href="../files/index.js.html#l208"><code>index.js:208</code></a>
+        <a href="../files/index.js.html#l203"><code>index.js:203</code></a>
         
         </p>
 
@@ -3639,7 +3528,7 @@ transferred when the browser session gets requested</p>
             
         
         
-        <a href="../files/index.js.html#l220"><code>index.js:220</code></a>
+        <a href="../files/index.js.html#l215"><code>index.js:215</code></a>
         
         </p>
 
@@ -3684,7 +3573,7 @@ transferred when the browser session gets requested</p>
             
         
         
-        <a href="../files/index.js.html#l196"><code>index.js:196</code></a>
+        <a href="../files/index.js.html#l191"><code>index.js:191</code></a>
         
         </p>
 
@@ -3733,7 +3622,7 @@ a user configured value</p>
             
         
         
-        <a href="../files/index.js.html#l150"><code>index.js:150</code></a>
+        <a href="../files/index.js.html#l145"><code>index.js:145</code></a>
         
         </p>
 
@@ -3780,7 +3669,7 @@ a user configured value</p>
             
         
         
-        <a href="../files/index.js.html#l184"><code>index.js:184</code></a>
+        <a href="../files/index.js.html#l179"><code>index.js:179</code></a>
         
         </p>
 
@@ -3829,7 +3718,7 @@ tool might pick another one, if the default one is blocked</p>
             
         
         
-        <a href="../files/index.js.html#l172"><code>index.js:172</code></a>
+        <a href="../files/index.js.html#l167"><code>index.js:167</code></a>
         
         </p>
 
@@ -3878,7 +3767,7 @@ by the WebDriverServer</p>
             
         
         
-        <a href="../files/index.js.html#l277"><code>index.js:277</code></a>
+        <a href="../files/index.js.html#l271"><code>index.js:271</code></a>
         
         </p>
 
@@ -3888,7 +3777,7 @@ by the WebDriverServer</p>
     </div>
 
     <div class="description">
-        <p>Nightly Firefox (Currently the default, as long as marionette is not in std. Firefox)</p>
+        <p>Nightly Firefox</p>
 
     </div>
 
@@ -3923,7 +3812,7 @@ by the WebDriverServer</p>
             
         
         
-        <a href="../files/index.js.html#l305"><code>index.js:305</code></a>
+        <a href="../files/index.js.html#l299"><code>index.js:299</code></a>
         
         </p>
 
@@ -3968,7 +3857,7 @@ by the WebDriverServer</p>
             
         
         
-        <a href="../files/index.js.html#l233"><code>index.js:233</code></a>
+        <a href="../files/index.js.html#l228"><code>index.js:228</code></a>
         
         </p>
 
@@ -4015,7 +3904,7 @@ by the WebDriverServer</p>
             
         
         
-        <a href="../files/index.js.html#l160"><code>index.js:160</code></a>
+        <a href="../files/index.js.html#l155"><code>index.js:155</code></a>
         
         </p>
 
@@ -4064,7 +3953,7 @@ tool might pick another one, if the default one is blocked</p>
             
         
         
-        <a href="../files/index.js.html#l330"><code>index.js:330</code></a>
+        <a href="../files/index.js.html#l324"><code>index.js:324</code></a>
         
         </p>
 
@@ -4112,7 +4001,7 @@ path, name, etc.</p>
             
         
         
-        <a href="../files/index.js.html#l320"><code>index.js:320</code></a>
+        <a href="../files/index.js.html#l314"><code>index.js:314</code></a>
         
         </p>
 

@@ -400,7 +400,7 @@
             "tag": "module",
             "file": "index.js",
             "line": 41,
-            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Mozilla Firefox &amp; Firefox OS.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-firefox --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browser\": [\"firefox\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b firefox\n```\n\nBecause of the availability of the Firefox Marionette testing framework,\nDalek atm. can only drive the Firefox Nightly Debug builds.\n\nYou can get them from Mozillaʼs FTP server, for example the one from the 16th August [http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/08/2013-08-16-mozilla-central-debug/](http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/)\n\nDalek looks for the browser in the std. installation directory, if you installed the\nbrowser in a different place, you can add the location of the browser executable to you Dalekfile,\nbecause Dalek isnʼt capable of finding the executable yet on its own.\n\n```javascript\n\"browsers\": [{\n  \"firefox\": {\n    \"path\": \"~/Apps/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin\"\n  }\n}]\n```\n\nThe Firefox plugin only implements a subset of Dalekʼs assertions & actions,\nso if you run into any bugs, the issue is most probably related to missing commands.\nPlease report any issues you find, Thank you :)\n\nThe Webdriver Server tries to open Port 9006 by default,\nif this port is blocked, it tries to use a port between 9007 & 9096\nYou can specifiy a different port from within your [Dalekfile](/pages/config.html) like so:\n\n```javascript\n\"browsers\": {\n  \"firefox\": {\n    \"port\": 5555 \n  }\n}\n```\n\nIt is also possible to specify a range of ports:\n\n```javascript\n\"browsers\": {\n  \"firefox\": {\n    \"portRange\": [6100, 6120] \n  }\n}\n```\n\nIf you would like to test Aurora oder Firefox OS releases, you can simply apply a snd. argument,\nwhich defines the browser type:\n\n```bash\n$ dalek mytest.js -b firefox:aurora\n```\n\nfor Firefox Aurora, and if you would like to use the Firefox OS, just append `:os`:\n\n```bash\n$ dalek mytest.js -b firefox:os\n```\n\nThis will only work if you installed your browser in the default locations,\nif the browsers binary is located in a non default location, you are able to specify\nits location in your [Dalekfile](/pages/config.html):\n\n```javascript\n\"browsers\": {\n  \"firefox\": {\n    \"binary\": \"/Applications/Custom Located Firefox.app/MacOS/Contents/firefox-bin\" \n  }\n}\n```\n\nThis also works for the aurora &amp; Firefox OS builds\n\n```javascript\n\"browsers\": {\n  \"firefox:aurora\": {\n    \"binary\": \"/Applications/Custom Located Firefox Aurora.app/MacOS/Contents/firefox-bin\" \n  }\n}\n```",
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Mozilla Firefox &amp; Firefox OS.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-firefox --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browser\": [\"firefox\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b firefox\n```\n\nDalek looks for the browser in the std. installation directory, if you installed the\nbrowser in a different place, you can add the location of the browser executable to you Dalekfile,\nbecause Dalek isnʼt capable of finding the executable yet on its own.\n\n```javascript\n\"browsers\": [{\n  \"firefox\": {\n    \"path\": \"~/Apps/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin\"\n  }\n}]\n```\n\nThe Firefox plugin only implements a subset of Dalekʼs assertions & actions,\nso if you run into any bugs, the issue is most probably related to missing commands.\nPlease report any issues you find, Thank you :)\n\nThe Webdriver Server tries to open Port 9006 by default,\nif this port is blocked, it tries to use a port between 9007 & 9096\nYou can specifiy a different port from within your [Dalekfile](/pages/config.html) like so:\n\n```javascript\n\"browsers\": {\n  \"firefox\": {\n    \"port\": 5555 \n  }\n}\n```\n\nIt is also possible to specify a range of ports:\n\n```javascript\n\"browsers\": {\n  \"firefox\": {\n    \"portRange\": [6100, 6120] \n  }\n}\n```\n\nIf you would like to test Nightly, Aurora oder Firefox OS releases, you can simply apply a snd. argument,\nwhich defines the browser type:\n\n```bash\n$ dalek mytest.js -b firefox:aurora\n```\n\nfor Firefox Aurora, and if you would like to use the Firefox OS, just append `:os`:\n\n```bash\n$ dalek mytest.js -b firefox:os\n```\n\nThis will only work if you installed your browser in the default locations,\nif the browsers binary is located in a non default location, you are able to specify\nits location in your [Dalekfile](/pages/config.html):\n\n```javascript\n\"browsers\": {\n  \"firefox\": {\n    \"binary\": \"/Applications/Custom Located Firefox.app/MacOS/Contents/firefox-bin\" \n  }\n}\n```\n\nThis also works for the aurora &amp; Firefox OS builds\n\n```javascript\n\"browsers\": {\n  \"firefox:aurora\": {\n    \"binary\": \"/Applications/Custom Located Firefox Aurora.app/MacOS/Contents/firefox-bin\" \n  }\n}\n```",
             "part": "Firefox",
             "api": ""
         }
@@ -824,7 +824,7 @@
             "namespace": "Browser",
             "file": "index.js",
             "line": 41,
-            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Mozilla Firefox &amp; Firefox OS.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-firefox --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browser\": [\"firefox\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b firefox\n```\n\nBecause of the availability of the Firefox Marionette testing framework,\nDalek atm. can only drive the Firefox Nightly Debug builds.\n\nYou can get them from Mozillaʼs FTP server, for example the one from the 16th August [http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/08/2013-08-16-mozilla-central-debug/](http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/)\n\nDalek looks for the browser in the std. installation directory, if you installed the\nbrowser in a different place, you can add the location of the browser executable to you Dalekfile,\nbecause Dalek isnʼt capable of finding the executable yet on its own.\n\n```javascript\n\"browsers\": [{\n  \"firefox\": {\n    \"path\": \"~/Apps/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin\"\n  }\n}]\n```\n\nThe Firefox plugin only implements a subset of Dalekʼs assertions & actions,\nso if you run into any bugs, the issue is most probably related to missing commands.\nPlease report any issues you find, Thank you :)\n\nThe Webdriver Server tries to open Port 9006 by default,\nif this port is blocked, it tries to use a port between 9007 & 9096\nYou can specifiy a different port from within your [Dalekfile](/pages/config.html) like so:\n\n```javascript\n\"browsers\": {\n  \"firefox\": {\n    \"port\": 5555 \n  }\n}\n```\n\nIt is also possible to specify a range of ports:\n\n```javascript\n\"browsers\": {\n  \"firefox\": {\n    \"portRange\": [6100, 6120] \n  }\n}\n```\n\nIf you would like to test Aurora oder Firefox OS releases, you can simply apply a snd. argument,\nwhich defines the browser type:\n\n```bash\n$ dalek mytest.js -b firefox:aurora\n```\n\nfor Firefox Aurora, and if you would like to use the Firefox OS, just append `:os`:\n\n```bash\n$ dalek mytest.js -b firefox:os\n```\n\nThis will only work if you installed your browser in the default locations,\nif the browsers binary is located in a non default location, you are able to specify\nits location in your [Dalekfile](/pages/config.html):\n\n```javascript\n\"browsers\": {\n  \"firefox\": {\n    \"binary\": \"/Applications/Custom Located Firefox.app/MacOS/Contents/firefox-bin\" \n  }\n}\n```\n\nThis also works for the aurora &amp; Firefox OS builds\n\n```javascript\n\"browsers\": {\n  \"firefox:aurora\": {\n    \"binary\": \"/Applications/Custom Located Firefox Aurora.app/MacOS/Contents/firefox-bin\" \n  }\n}\n```"
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Mozilla Firefox &amp; Firefox OS.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-firefox --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browser\": [\"firefox\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b firefox\n```\n\nDalek looks for the browser in the std. installation directory, if you installed the\nbrowser in a different place, you can add the location of the browser executable to you Dalekfile,\nbecause Dalek isnʼt capable of finding the executable yet on its own.\n\n```javascript\n\"browsers\": [{\n  \"firefox\": {\n    \"path\": \"~/Apps/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin\"\n  }\n}]\n```\n\nThe Firefox plugin only implements a subset of Dalekʼs assertions & actions,\nso if you run into any bugs, the issue is most probably related to missing commands.\nPlease report any issues you find, Thank you :)\n\nThe Webdriver Server tries to open Port 9006 by default,\nif this port is blocked, it tries to use a port between 9007 & 9096\nYou can specifiy a different port from within your [Dalekfile](/pages/config.html) like so:\n\n```javascript\n\"browsers\": {\n  \"firefox\": {\n    \"port\": 5555 \n  }\n}\n```\n\nIt is also possible to specify a range of ports:\n\n```javascript\n\"browsers\": {\n  \"firefox\": {\n    \"portRange\": [6100, 6120] \n  }\n}\n```\n\nIf you would like to test Nightly, Aurora oder Firefox OS releases, you can simply apply a snd. argument,\nwhich defines the browser type:\n\n```bash\n$ dalek mytest.js -b firefox:aurora\n```\n\nfor Firefox Aurora, and if you would like to use the Firefox OS, just append `:os`:\n\n```bash\n$ dalek mytest.js -b firefox:os\n```\n\nThis will only work if you installed your browser in the default locations,\nif the browsers binary is located in a non default location, you are able to specify\nits location in your [Dalekfile](/pages/config.html):\n\n```javascript\n\"browsers\": {\n  \"firefox\": {\n    \"binary\": \"/Applications/Custom Located Firefox.app/MacOS/Contents/firefox-bin\" \n  }\n}\n```\n\nThis also works for the aurora &amp; Firefox OS builds\n\n```javascript\n\"browsers\": {\n  \"firefox:aurora\": {\n    \"binary\": \"/Applications/Custom Located Firefox Aurora.app/MacOS/Contents/firefox-bin\" \n  }\n}\n```"
         }
     },
     "classitems": [
@@ -3976,7 +3976,7 @@
         },
         {
             "file": "index.js",
-            "line": 150,
+            "line": 145,
             "description": "Verbose version of the browser name",
             "itemtype": "property",
             "name": "longName",
@@ -3988,7 +3988,7 @@
         },
         {
             "file": "index.js",
-            "line": 160,
+            "line": 155,
             "description": "Default port of the FirefoxWebDriverServer\nThe port may change, cause the port conflict resolution\ntool might pick another one, if the default one is blocked",
             "itemtype": "property",
             "name": "port",
@@ -4000,7 +4000,7 @@
         },
         {
             "file": "index.js",
-            "line": 172,
+            "line": 167,
             "description": "Default maximum port of the WebDriverServer\nThe port is the highest port in the range that can be allocated\nby the WebDriverServer",
             "itemtype": "property",
             "name": "maxPort",
@@ -4012,7 +4012,7 @@
         },
         {
             "file": "index.js",
-            "line": 184,
+            "line": 179,
             "description": "Default port of the Marionette TCP service\nThe port may change, cause the port conflict resolution\ntool might pick another one, if the default one is blocked",
             "itemtype": "property",
             "name": "marionettePort",
@@ -4024,7 +4024,7 @@
         },
         {
             "file": "index.js",
-            "line": 196,
+            "line": 191,
             "description": "Default host of the FirefoxWebDriverServer\nThe host may be overridden with\na user configured value",
             "itemtype": "property",
             "name": "host",
@@ -4036,7 +4036,7 @@
         },
         {
             "file": "index.js",
-            "line": 208,
+            "line": 203,
             "description": "Default desired capabilities that should be\ntransferred when the browser session gets requested",
             "itemtype": "property",
             "name": "desiredCapabilities",
@@ -4047,7 +4047,7 @@
         },
         {
             "file": "index.js",
-            "line": 220,
+            "line": 215,
             "description": "Driver defaults, what should the driver be able to access.",
             "itemtype": "property",
             "name": "driverDefaults",
@@ -4058,7 +4058,7 @@
         },
         {
             "file": "index.js",
-            "line": 233,
+            "line": 228,
             "description": "Root path of the FirefoxWebDriverServer",
             "itemtype": "property",
             "name": "path",
@@ -4070,7 +4070,7 @@
         },
         {
             "file": "index.js",
-            "line": 243,
+            "line": 238,
             "description": "Path to the Firefox binary file",
             "itemtype": "property",
             "name": "binary",
@@ -4082,8 +4082,8 @@
         },
         {
             "file": "index.js",
-            "line": 253,
-            "description": "Paths to the default Firefox binary files\n(Points to Nightly as long as Marionette isn't in std. Firefox)",
+            "line": 248,
+            "description": "Paths to the default Firefox binary files",
             "itemtype": "property",
             "name": "defaultBinaries",
             "type": "object",
@@ -4093,7 +4093,7 @@
         },
         {
             "file": "index.js",
-            "line": 267,
+            "line": 261,
             "description": "Different browser types (Aurora / firefox OS) that can be controlled\nvia the Firefox driver",
             "itemtype": "property",
             "name": "browserTypes",
@@ -4104,8 +4104,8 @@
         },
         {
             "file": "index.js",
-            "line": 277,
-            "description": "Nightly Firefox (Currently the default, as long as marionette is not in std. Firefox)",
+            "line": 271,
+            "description": "Nightly Firefox",
             "itemtype": "property",
             "name": "nightly",
             "type": "object",
@@ -4115,7 +4115,7 @@
         },
         {
             "file": "index.js",
-            "line": 291,
+            "line": 285,
             "description": "Firefox Aurora",
             "itemtype": "property",
             "name": "aurora",
@@ -4126,7 +4126,7 @@
         },
         {
             "file": "index.js",
-            "line": 305,
+            "line": 299,
             "description": "Firefox OS",
             "itemtype": "property",
             "name": "os",
@@ -4137,7 +4137,7 @@
         },
         {
             "file": "index.js",
-            "line": 320,
+            "line": 314,
             "description": "Child process instance of the Firefox browser",
             "itemtype": "property",
             "name": "spawned",
@@ -4149,7 +4149,7 @@
         },
         {
             "file": "index.js",
-            "line": 330,
+            "line": 324,
             "description": "Collected data about the created profile,\npath, name, etc.",
             "itemtype": "property",
             "name": "profile",
@@ -4161,7 +4161,7 @@
         },
         {
             "file": "index.js",
-            "line": 341,
+            "line": 335,
             "description": "Resolves the driver port",
             "itemtype": "method",
             "name": "getPort",
@@ -4175,7 +4175,7 @@
         },
         {
             "file": "index.js",
-            "line": 352,
+            "line": 346,
             "description": "Resolves the maximum range for the driver port",
             "itemtype": "method",
             "name": "getMaxPort",
@@ -4189,7 +4189,7 @@
         },
         {
             "file": "index.js",
-            "line": 363,
+            "line": 357,
             "description": "Resolves the marionette port",
             "itemtype": "method",
             "name": "getMarionettePort",
@@ -4203,7 +4203,7 @@
         },
         {
             "file": "index.js",
-            "line": 374,
+            "line": 368,
             "description": "Returns the driver host",
             "itemtype": "method",
             "name": "getHost",
@@ -4217,24 +4217,24 @@
         },
         {
             "file": "index.js",
-            "line": 385,
+            "line": 379,
             "description": "Launches the FirefoxWebDriverServer, \nthe marionette client, & the browser.\nCreates a user profile for the browser",
             "itemtype": "method",
             "name": "launch",
             "params": [
                 {
                     "name": "configuration",
-                    "description": "",
+                    "description": "Browser configuration",
                     "type": "Object"
                 },
                 {
                     "name": "events",
-                    "description": "",
+                    "description": "EventEmitter (Reporter Emitter instance)",
                     "type": "EventEmitter2"
                 },
                 {
                     "name": "config",
-                    "description": "",
+                    "description": "Dalek configuration class",
                     "type": "Dalek.Internal.Config"
                 }
             ],
@@ -4248,7 +4248,7 @@
         },
         {
             "file": "index.js",
-            "line": 423,
+            "line": 417,
             "description": "Shuts down the TCP (Marionette) & HTTP connection (Webdriver),\nthen kills the browser process & cleans up the profiles",
             "itemtype": "method",
             "name": "kill",
@@ -4259,7 +4259,7 @@
         },
         {
             "file": "index.js",
-            "line": 442,
+            "line": 436,
             "description": "Locates the browser binary",
             "itemtype": "method",
             "name": "findBrowserBinary",
@@ -4280,7 +4280,7 @@
         },
         {
             "file": "index.js",
-            "line": 475,
+            "line": 469,
             "description": "Makes all needed modifications after we are sure if the\nbrowser binary has been found",
             "itemtype": "method",
             "name": "_afterBinaryFound",
@@ -4305,7 +4305,7 @@
         },
         {
             "file": "index.js",
-            "line": 502,
+            "line": 496,
             "description": "Modifies the verbose browser name",
             "itemtype": "method",
             "name": "_modifyVerboseBrowserName",
@@ -4328,7 +4328,7 @@
         },
         {
             "file": "index.js",
-            "line": 519,
+            "line": 513,
             "description": "Initiates the browser startup after the desktop binary has been found",
             "itemtype": "method",
             "name": "_afterDesktopBinaryFound",
@@ -4353,7 +4353,7 @@
         },
         {
             "file": "index.js",
-            "line": 535,
+            "line": 528,
             "description": "Kills the currently running browser process",
             "itemtype": "method",
             "name": "_killProcess",
@@ -4365,7 +4365,7 @@
         },
         {
             "file": "index.js",
-            "line": 556,
+            "line": 549,
             "description": "Initializes config & properties",
             "itemtype": "method",
             "name": "_initiaize",
@@ -4388,7 +4388,7 @@
         },
         {
             "file": "index.js",
-            "line": 581,
+            "line": 574,
             "description": "Get the default binary location",
             "itemtype": "method",
             "name": "_getDefaultBinary",
@@ -4404,7 +4404,7 @@
         },
         {
             "file": "index.js",
-            "line": 596,
+            "line": 589,
             "description": "Launches the browser",
             "itemtype": "method",
             "name": "_startBrowser",
@@ -4434,7 +4434,62 @@
         },
         {
             "file": "index.js",
-            "line": 634,
+            "line": 626,
+            "description": "Repeatadly checks the status of the marionette port",
+            "itemtype": "method",
+            "name": "_scanMarionettePort",
+            "params": [
+                {
+                    "name": "df",
+                    "description": "Promise",
+                    "type": "Object"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "chainable": 1,
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 640,
+            "description": "Checks if the browser is available by listening on the marionette socket",
+            "itemtype": "method",
+            "name": "_startByInterval",
+            "params": [
+                {
+                    "name": "df",
+                    "description": "Promise",
+                    "type": "Object"
+                },
+                {
+                    "name": "interval",
+                    "description": "Reference to the portchecker interval",
+                    "type": "Object"
+                },
+                {
+                    "name": "err",
+                    "description": "Error or null",
+                    "type": "Object|null"
+                },
+                {
+                    "name": "status",
+                    "description": "Status of the marionette port",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "chainable": 1,
+            "class": "Browser.FirefoxDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 661,
             "description": "Process user defined ports",
             "itemtype": "method",
             "name": "_checkUserDefinedPorts",
@@ -4454,7 +4509,7 @@
         },
         {
             "file": "index.js",
-            "line": 661,
+            "line": 688,
             "description": "Resolve the WebDriverServer port",
             "itemtype": "method",
             "name": "_resolvePort",
@@ -4479,7 +4534,7 @@
         },
         {
             "file": "index.js",
-            "line": 683,
+            "line": 710,
             "description": "Resolve the WebDriverServer port",
             "itemtype": "method",
             "name": "_resolvePort",
@@ -4514,7 +4569,7 @@
         },
         {
             "file": "index.js",
-            "line": 717,
+            "line": 744,
             "description": "Callback that will be invoked after the marionette client has \nestablished a connection to the browser & after the webdriver server\nhas been launched correctly",
             "itemtype": "method",
             "name": "_afterConnectionHasBeenEstablished",
@@ -4539,7 +4594,7 @@
         },
         {
             "file": "index.js",
-            "line": 742,
+            "line": 769,
             "description": "Consumes the console output when the browser is started",
             "itemtype": "method",
             "name": "_onBrowserStartup",
@@ -4564,7 +4619,7 @@
         },
         {
             "file": "index.js",
-            "line": 759,
+            "line": 786,
             "description": "Checks if the browser is ready for communication",
             "itemtype": "method",
             "name": "_browserIsReady",
@@ -4587,7 +4642,7 @@
         },
         {
             "file": "index.js",
-            "line": 779,
+            "line": 806,
             "description": "Creates a new Firefox profile",
             "itemtype": "method",
             "name": "_createProfile",
@@ -4603,42 +4658,7 @@
         },
         {
             "file": "index.js",
-            "line": 801,
-            "description": "Callback that will be executed after the profile has been created",
-            "itemtype": "method",
-            "name": "_afterCreatingProfile",
-            "params": [
-                {
-                    "name": "deferred",
-                    "description": "Promise",
-                    "type": "Object"
-                },
-                {
-                    "name": "data",
-                    "description": "Data stream from thr console",
-                    "type": "String"
-                },
-                {
-                    "name": "profileName",
-                    "description": "Name of the generated profile",
-                    "type": "String"
-                },
-                {
-                    "name": "code",
-                    "description": "Return code of the spawned browser binary",
-                    "type": "Integer"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "chainable": 1,
-            "class": "Browser.FirefoxDriver",
-            "module": "DalekJS",
-            "namespace": "Browser"
-        },
-        {
-            "file": "index.js",
-            "line": 831,
+            "line": 822,
             "description": "Creates user preferences for the profile\nSaves them in `user.js` in the newly created profile",
             "itemtype": "method",
             "name": "_createProfile",
@@ -4661,7 +4681,7 @@
         },
         {
             "file": "index.js",
-            "line": 858,
+            "line": 857,
             "description": "Callback that will be executed after the user preferences\nhave been created",
             "itemtype": "method",
             "name": "_afterCreatingUserPreferences",
@@ -4686,50 +4706,7 @@
         },
         {
             "file": "index.js",
-            "line": 881,
-            "description": "Cleans up any previously generated user profiles from dalek",
-            "itemtype": "method",
-            "name": "_cleanupProfiles",
-            "access": "private",
-            "tagname": "",
-            "chainable": 1,
-            "class": "Browser.FirefoxDriver",
-            "module": "DalekJS",
-            "namespace": "Browser"
-        },
-        {
-            "file": "index.js",
-            "line": 899,
-            "description": "Cleans up the generated profiles from dalek",
-            "itemtype": "method",
-            "name": "_deleteProfile",
-            "params": [
-                {
-                    "name": "profileDir",
-                    "description": "Directory of the user profile",
-                    "type": "String"
-                },
-                {
-                    "name": "currentProfile",
-                    "description": "Name of the current profile",
-                    "type": "String"
-                },
-                {
-                    "name": "profile",
-                    "description": "Profile data object",
-                    "type": "Object"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "chainable": 1,
-            "class": "Browser.FirefoxDriver",
-            "module": "DalekJS",
-            "namespace": "Browser"
-        },
-        {
-            "file": "index.js",
-            "line": 922,
+            "line": 880,
             "description": "Checks if the binary exists,\nwhen set manually by the user",
             "itemtype": "method",
             "name": "_checkUserSetBinary",
@@ -4764,7 +4741,7 @@
         },
         {
             "message": "unknown tag: priavte",
-            "line": " index.js:535"
+            "line": " index.js:528"
         },
         {
             "message": "Missing item type",

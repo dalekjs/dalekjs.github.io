@@ -170,9 +170,6 @@ It provides all a WebDriverServer &amp; browser launcher for Mozilla Firefox &am
 <pre><code class="lang-javascript">&quot;browser&quot;: [&quot;firefox&quot;]</code></pre>
 <p>Or you can tell Dalek that it should test in this browser via the command line:</p>
 <pre><code class="lang-bash">$ dalek mytest.js -b firefox</code></pre>
-<p>Because of the availability of the Firefox Marionette testing framework,
-Dalek atm. can only drive the Firefox Nightly Debug builds.</p>
-<p>You can get them from Mozillaʼs FTP server, for example the one from the 16th August <a href="http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/06/2013-06-18-mozilla-central-debug/"><a href="http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/08/2013-08-16-mozilla-central-debug/">http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013/08/2013-08-16-mozilla-central-debug/</a></a></p>
 <p>Dalek looks for the browser in the std. installation directory, if you installed the
 browser in a different place, you can add the location of the browser executable to you Dalekfile,
 because Dalek isnʼt capable of finding the executable yet on its own.</p>
@@ -198,7 +195,7 @@ You can specifiy a different port from within your <a href="/pages/config.html">
     &quot;portRange&quot;: [6100, 6120] 
   }
 }</code></pre>
-<p>If you would like to test Aurora oder Firefox OS releases, you can simply apply a snd. argument,
+<p>If you would like to test Nightly, Aurora oder Firefox OS releases, you can simply apply a snd. argument,
 which defines the browser type:</p>
 <pre><code class="lang-bash">$ dalek mytest.js -b firefox:aurora</code></pre>
 <p>for Firefox Aurora, and if you would like to use the Firefox OS, just append <code>:os</code>:</p>
