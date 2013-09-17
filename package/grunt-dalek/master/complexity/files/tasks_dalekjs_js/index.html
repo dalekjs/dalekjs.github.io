@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>tasks/dalekjs.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">64.22</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">214</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="span6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="span6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
+      <p class="stat">49.13</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">2.28</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="span6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="span12">/*!
+ *
+ * Copyright (c) 2013 Peter Foerger &amp; Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
+
+/**
+ * &gt; Run browser tests with dalak
+ * 
+ * ## Getting Started
+ * This plugin requires Grunt `~0.4.1`
+ * 
+ * If you haven&#039;t used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you&#039;re familiar with that process, you may install this plugin with this command:
+ * 
+ * ```shell
+ * npm install grunt-dalek --save-dev
+ * ```
+ * 
+ * Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
+ * 
+ * ```js
+ * grunt.loadNpmTasks(&#039;grunt-dalek&#039;);
+ * ```
+ * 
+ * ## The &quot;dalek&quot; task
+ * 
+ * ### Overview
+ * In your project&#039;s Gruntfile, add a section named `dalek` to the data object passed into `grunt.initConfig()`.
+ * 
+ * ```js
+ * grunt.initConfig({
+ *   dalek: {
+ *     options: {
+ *       // Task-specific options go here.
+ *     },
+ *     your_target: {
+ *       // Target-specific file lists and/or options go here.
+ *     },
+ *   },
+ * })
+ * ```
+ * 
+ * ### Options
+ * 
+ * #### options.dalekfile
+ * Type: `Boolean`
+ * Default: `true`
+ * 
+ * Grunt should load the config options from your Dalekfile
+ * 
+ * #### options.browser
+ * Type: `Array`
+ * Default: `[&#039;phatnomjs&#039;]`
+ * 
+ * The browsers you would like to test
+ * Note: For other browsers than PhantomJS, you need to have the Dalek browser plugin installed.
+ * 
+ * #### options.reporter
+ * Type: `Array`
+ * Default: `null`
+ * 
+ * The reporters you would like to invoke
+ * Note: For other reporters than the grunt console output, you need to have the corresponding Dalek reporter plugin installed.
+ * 
+ * #### options.advanced
+ * Type: `Object`
+ * Default: `null`
+ * 
+ * All the options you else would define in your Dalekfile.
+ * This overwrites the contents of your Dalekfile.
+ * 
+ * ## Examples
+ * 
+ * ### Configuration Example
+ * 
+ * Basic example of a Grunt config containing the dalek task.
+ * ```js
+ * grunt.initConfig({
+ *   dalek: {
+ *     dist: {
+ *       src: [&#039;test/example/test-github.js&#039;]
+ *     }
+ *   }
+ * 
+ * });
+ * 
+ * // Loads tasks located in the tasks directory. 
+ * grunt.loadTasks(&#039;tasks&#039;);
+ * 
+ * grunt.registerTask(&#039;default&#039;, [&#039;dalek&#039;]);
+ * ```
+ * 
+ * ### Multiple Files
+ * 
+ * Running dalekjs against multiple files.
+ * ```js
+ * dalek: {
+ *   dist: {
+ *     src: [&#039;test/example/test-dkd.js&#039;,&#039;test/example/test-github.js&#039;]
+ *   }
+ * }
+ * ```
+ * 
+ * ### Specifying Options
+ * 
+ * ```js
+ * dalek: {
+ *     options: {
+ *       // invoke phantomjs, chrome &amp; chrome canary
+ *       browser: [&#039;phantomjs&#039;, &#039;chrome&#039;, &#039;chrome:canary&#039;],
+ *       // generate an html &amp; an jUnit report
+ *       reporter: [&#039;html&#039;, &#039;junit&#039;],
+ *       // don&#039;t load config from an Dalekfile
+ *       dalekfile: false,
+ *       // specify advanced options (that else would be in your Dalekfile)
+ *       advanced: {
+ *         // specify a port for chrome
+ *         browsers: [{
+ *           chrome: {
+ *             port: 4000
+ *           }
+ *         }]
+ *       }
+ *     }
+ * }
+ * ```
+ *
+ * @part Grunt
+ * @api
+ */
+
+module.exports = function(grunt) {
+  &#039;use strict&#039;;
+
+  grunt.registerMultiTask(&#039;dalek&#039;, &#039;dalekjs browser tests&#039;, function () {
+    // tagging this task as async
+    var done = this.async();
+
+    // load dalek
+    var Dalek = require(&#039;dalekjs&#039;);
+
+    // yeah, globals, but stored for a good reason
+    var currentTest;
+    var currentBrowser;
+    var failedAssertions = [];
+
+    // setting defaults for user set options
+    var options = this.options();
+    var driver = [];
+    var reporter = [];
+    var browser = [];
+
+    // setting defaults for advanced &amp; plugin options
+    var loadDalekfile = true;
+    var advanced = {};
+
+    // check if options are available,
+    // else use daleks defaults
+    if (options) {
+      driver = options.driver &amp;&amp; Array.isArray(options.driver) ? options.driver : driver;
+      reporter = options.reporter &amp;&amp; Array.isArray(options.reporter) ? options.reporter : reporter;
+      browser = options.browser &amp;&amp; Array.isArray(options.browser) ? options.browser : browser;
+    }
+
+    // check if advanced options are available
+    if (options) {
+      loadDalekfile = (options.dalekfile || options.dalekfile === false) ? options.dalekfile : loadDalekfile;
+      if (options.advanced &amp;&amp; typeof options.advanced === &#039;object&#039;) {
+        advanced = options.advanced;
+      }
+
+      advanced.dalekfile = loadDalekfile;
+    }
+
+    // instanciate dalek with obligatory options
+    var dalek = new Dalek({
+      tests: this.filesSrc,
+      driver: driver,
+      reporter: reporter,
+      browser: browser,
+      logLevel: -1,
+      noColors: true,
+      noSymbols: true,
+      advanced: advanced
+    });
+
+    // grunt logging
+    // -------------
+
+    // If options.force then log an error, otherwise exit with a warning
+    var warnUnlessForced = function (message) {
+      if (options &amp;&amp; options.force) {
+        grunt.log.error(message);
+      } else {
+        grunt.warn(message);
+      }
+    };
+
+    // Log failed assertions
+    var logFailedAssertions = function() {
+      var assertion;
+      // Print each assertion error.
+      while (assertion = failedAssertions.shift()) {
+        grunt.verbose.or.error(assertion.testName);
+        grunt.log.error(&#039;Message: &#039; + formatMessage(assertion.message));
+        if (assertion.actual !== assertion.expected) {
+          grunt.log.error(&#039;Actual: &#039; + formatMessage(assertion.actual));
+          grunt.log.error(&#039;Expected: &#039; + formatMessage(assertion.expected));
+        }
+        if (assertion.source) {
+          grunt.log.error(&#039;Source:&#039; + formatMessage(assertion.source.replace(/ {4}(at)/g, &#039;  $1&#039;)));
+        }
+        grunt.log.error(&#039;Browser: &#039; + formatMessage(assertion.browserName));
+        grunt.log.writeln();
+      }
+    };
+
+    // Allow an error message to retain its color when split across multiple lines.
+    var formatMessage = function(str) {
+      return String(str).split(&#039;\n&#039;).map(function(s) { return s.magenta; }).join(&#039;\n&#039;);
+    };
+
+    // register browser launcher event
+    dalek.reporterEvents.on(&#039;report:run:browser&#039;, function(browserName) {
+      currentBrowser = browserName;
+    });
+
+    // register logging for runner finished
+    dalek.reporterEvents.on(&#039;report:runner:finished&#039;, function(data) {
+      var message = &#039;&#039;;
+      // Print assertion errors here, if verbose mode is disabled.
+      if (!data.status) {
+        message = data.assertionsPassed + &#039;/&#039; + data.assertions + &#039; assertions passed (&#039;;
+        message += data.elapsedTime.hours ? data.elapsedTime.hours + &#039; hours&#039; : &#039;&#039;;
+        message += data.elapsedTime.minutes ? data.elapsedTime.minutes + &#039; min&#039; : &#039;&#039;;
+        message += data.elapsedTime.seconds ? Math.round(data.elapsedTime.seconds * Math.pow(10, 2)) / Math.pow(10, 2) + &#039; sec&#039; : &#039;&#039;;
+        message += &#039;)&#039;;
+        
+        if (!grunt.option(&#039;verbose&#039;)) {
+          grunt.log.writeln();
+          logFailedAssertions();
+        }
+
+        grunt.log.writeln();
+        warnUnlessForced(message);
+
+        setTimeout(function () {
+          done(false);
+        }, 250);
+      } else if (data.assertions === 0) {
+        // create 0 assertions message
+        message = &#039;0/0 assertions ran (&#039;;
+        message += data.elapsedTime.hours ? data.elapsedTime.hours + &#039; hours&#039; : &#039;&#039;;
+        message += data.elapsedTime.minutes ? data.elapsedTime.minutes + &#039; min&#039; : &#039;&#039;;
+        message += data.elapsedTime.seconds ? Math.round(data.elapsedTime.seconds * Math.pow(10, 2)) / Math.pow(10, 2) + &#039; sec&#039; : &#039;&#039;;
+        message += &#039;)&#039;;
+
+        // timeout hack to enable shutdown of 3rd party processes
+        setTimeout(function () {
+          warnUnlessForced(message);
+          done(false);
+        }, 250);
+      } else {
+        // create passed assertions message
+        message = data.assertions + &#039;/&#039; + data.assertions + &#039; assertions passed (&#039;;
+        message += data.elapsedTime.hours ? data.elapsedTime.hours + &#039; hours&#039; : &#039;&#039;;
+        message += data.elapsedTime.minutes ? data.elapsedTime.minutes + &#039; min&#039; : &#039;&#039;;
+        message += data.elapsedTime.seconds ? Math.round(data.elapsedTime.seconds * Math.pow(10, 2)) / Math.pow(10, 2) + &#039; sec&#039; : &#039;&#039;;
+        message += &#039;)&#039;;
+
+        setTimeout(function () {
+          grunt.log.writeln(&#039;&#039;);
+          grunt.log.ok(message);
+          done(true);
+        }, 250);
+      }
+    });
+
+    // log assertion
+    dalek.reporterEvents.on(&#039;report:assertion&#039;, function(data) {
+      if (!data.success) {
+        failedAssertions.push({
+          actual: data.value,
+          expected: data.expected,
+          message: (data.message || &#039;No message&#039;),
+          source: data.type,
+          testName: currentTest,
+          browserName: currentBrowser
+        });
+      }
+    });
+
+    // log test started
+    dalek.reporterEvents.on(&#039;report:test:started&#039;, function(data) {
+      currentTest = data.name;
+      grunt.verbose.write(currentTest + &#039;...&#039;);
+    });
+
+    // log test finished
+    dalek.reporterEvents.on(&#039;report:test:finished&#039;, function(data) {
+      // Log errors if necessary, otherwise success.
+      if (!data.status) {
+        // list assertions
+        if (grunt.option(&#039;verbose&#039;)) {
+          grunt.log.error();
+          logFailedAssertions();
+        } else {
+          grunt.log.write(&#039;F&#039;.red);
+        }
+      } else {
+        grunt.verbose.ok().or.write(&#039;.&#039;);
+      }
+    });
+
+    // All tests have been run.
+
+    // log error
+    dalek.reporterEvents.on(&#039;error&#039;, function(message) {
+      setTimeout(function () {
+        if (options &amp;&amp; options.force) {
+          grunt.log.error(message);
+        } else {
+          grunt.warn(message);
+        }
+
+        done(false);
+      }, 250);
+    });
+
+    // log warning
+    dalek.reporterEvents.on(&#039;warning&#039;, function(message) {
+      grunt.log.write(&#039;&gt;&gt; Warning: &#039;.yellow + message + &#039;\n&#039;);
+    });
+
+    // Re-broadcast dalek events on grunt.event.
+    dalek.reporterEvents.onAny(function() {
+      var args = [this.event].concat(grunt.util.toArray(arguments));
+      args[0] = &#039;dalek:&#039; + args[0];
+      grunt.event.emit.apply(grunt.event, args);
+    });
+
+    // start dalek
+    dalek.run();
+  });
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

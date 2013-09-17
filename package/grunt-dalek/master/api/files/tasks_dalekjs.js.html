@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>tasks/dalekjs.js - grunt-dalek</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="grunt-dalek"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.1.1</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: tasks/dalekjs.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*!
+ *
+ * Copyright (c) 2013 Peter Foerger &amp; Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
+
+/**
+ * &gt; Run browser tests with dalak
+ * 
+ * ## Getting Started
+ * This plugin requires Grunt &#x60;~0.4.1&#x60;
+ * 
+ * If you haven&#x27;t used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you&#x27;re familiar with that process, you may install this plugin with this command:
+ * 
+ * &#x60;&#x60;&#x60;shell
+ * npm install grunt-dalek --save-dev
+ * &#x60;&#x60;&#x60;
+ * 
+ * Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
+ * 
+ * &#x60;&#x60;&#x60;js
+ * grunt.loadNpmTasks(&#x27;grunt-dalek&#x27;);
+ * &#x60;&#x60;&#x60;
+ * 
+ * ## The &quot;dalek&quot; task
+ * 
+ * ### Overview
+ * In your project&#x27;s Gruntfile, add a section named &#x60;dalek&#x60; to the data object passed into &#x60;grunt.initConfig()&#x60;.
+ * 
+ * &#x60;&#x60;&#x60;js
+ * grunt.initConfig({
+ *   dalek: {
+ *     options: {
+ *       // Task-specific options go here.
+ *     },
+ *     your_target: {
+ *       // Target-specific file lists and/or options go here.
+ *     },
+ *   },
+ * })
+ * &#x60;&#x60;&#x60;
+ * 
+ * ### Options
+ * 
+ * #### options.dalekfile
+ * Type: &#x60;Boolean&#x60;
+ * Default: &#x60;true&#x60;
+ * 
+ * Grunt should load the config options from your Dalekfile
+ * 
+ * #### options.browser
+ * Type: &#x60;Array&#x60;
+ * Default: &#x60;[&#x27;phatnomjs&#x27;]&#x60;
+ * 
+ * The browsers you would like to test
+ * Note: For other browsers than PhantomJS, you need to have the Dalek browser plugin installed.
+ * 
+ * #### options.reporter
+ * Type: &#x60;Array&#x60;
+ * Default: &#x60;null&#x60;
+ * 
+ * The reporters you would like to invoke
+ * Note: For other reporters than the grunt console output, you need to have the corresponding Dalek reporter plugin installed.
+ * 
+ * #### options.advanced
+ * Type: &#x60;Object&#x60;
+ * Default: &#x60;null&#x60;
+ * 
+ * All the options you else would define in your Dalekfile.
+ * This overwrites the contents of your Dalekfile.
+ * 
+ * ## Examples
+ * 
+ * ### Configuration Example
+ * 
+ * Basic example of a Grunt config containing the dalek task.
+ * &#x60;&#x60;&#x60;js
+ * grunt.initConfig({
+ *   dalek: {
+ *     dist: {
+ *       src: [&#x27;test/example/test-github.js&#x27;]
+ *     }
+ *   }
+ * 
+ * });
+ * 
+ * // Loads tasks located in the tasks directory. 
+ * grunt.loadTasks(&#x27;tasks&#x27;);
+ * 
+ * grunt.registerTask(&#x27;default&#x27;, [&#x27;dalek&#x27;]);
+ * &#x60;&#x60;&#x60;
+ * 
+ * ### Multiple Files
+ * 
+ * Running dalekjs against multiple files.
+ * &#x60;&#x60;&#x60;js
+ * dalek: {
+ *   dist: {
+ *     src: [&#x27;test/example/test-dkd.js&#x27;,&#x27;test/example/test-github.js&#x27;]
+ *   }
+ * }
+ * &#x60;&#x60;&#x60;
+ * 
+ * ### Specifying Options
+ * 
+ * &#x60;&#x60;&#x60;js
+ * dalek: {
+ *     options: {
+ *       // invoke phantomjs, chrome &amp; chrome canary
+ *       browser: [&#x27;phantomjs&#x27;, &#x27;chrome&#x27;, &#x27;chrome:canary&#x27;],
+ *       // generate an html &amp; an jUnit report
+ *       reporter: [&#x27;html&#x27;, &#x27;junit&#x27;],
+ *       // don&#x27;t load config from an Dalekfile
+ *       dalekfile: false,
+ *       // specify advanced options (that else would be in your Dalekfile)
+ *       advanced: {
+ *         // specify a port for chrome
+ *         browsers: [{
+ *           chrome: {
+ *             port: 4000
+ *           }
+ *         }]
+ *       }
+ *     }
+ * }
+ * &#x60;&#x60;&#x60;
+ *
+ * @part Grunt
+ * @api
+ */
+
+module.exports = function(grunt) {
+  &#x27;use strict&#x27;;
+
+  grunt.registerMultiTask(&#x27;dalek&#x27;, &#x27;dalekjs browser tests&#x27;, function () {
+    // tagging this task as async
+    var done = this.async();
+
+    // load dalek
+    var Dalek = require(&#x27;dalekjs&#x27;);
+
+    // yeah, globals, but stored for a good reason
+    var currentTest;
+    var currentBrowser;
+    var failedAssertions = [];
+
+    // setting defaults for user set options
+    var options = this.options();
+    var driver = [];
+    var reporter = [];
+    var browser = [];
+
+    // setting defaults for advanced &amp; plugin options
+    var loadDalekfile = true;
+    var advanced = {};
+
+    // check if options are available,
+    // else use daleks defaults
+    if (options) {
+      driver = options.driver &amp;&amp; Array.isArray(options.driver) ? options.driver : driver;
+      reporter = options.reporter &amp;&amp; Array.isArray(options.reporter) ? options.reporter : reporter;
+      browser = options.browser &amp;&amp; Array.isArray(options.browser) ? options.browser : browser;
+    }
+
+    // check if advanced options are available
+    if (options) {
+      loadDalekfile = (options.dalekfile || options.dalekfile === false) ? options.dalekfile : loadDalekfile;
+      if (options.advanced &amp;&amp; typeof options.advanced === &#x27;object&#x27;) {
+        advanced = options.advanced;
+      }
+
+      advanced.dalekfile = loadDalekfile;
+    }
+
+    // instanciate dalek with obligatory options
+    var dalek = new Dalek({
+      tests: this.filesSrc,
+      driver: driver,
+      reporter: reporter,
+      browser: browser,
+      logLevel: -1,
+      noColors: true,
+      noSymbols: true,
+      advanced: advanced
+    });
+
+    // grunt logging
+    // -------------
+
+    // If options.force then log an error, otherwise exit with a warning
+    var warnUnlessForced = function (message) {
+      if (options &amp;&amp; options.force) {
+        grunt.log.error(message);
+      } else {
+        grunt.warn(message);
+      }
+    };
+
+    // Log failed assertions
+    var logFailedAssertions = function() {
+      var assertion;
+      // Print each assertion error.
+      while (assertion = failedAssertions.shift()) {
+        grunt.verbose.or.error(assertion.testName);
+        grunt.log.error(&#x27;Message: &#x27; + formatMessage(assertion.message));
+        if (assertion.actual !== assertion.expected) {
+          grunt.log.error(&#x27;Actual: &#x27; + formatMessage(assertion.actual));
+          grunt.log.error(&#x27;Expected: &#x27; + formatMessage(assertion.expected));
+        }
+        if (assertion.source) {
+          grunt.log.error(&#x27;Source:&#x27; + formatMessage(assertion.source.replace(/ {4}(at)/g, &#x27;  $1&#x27;)));
+        }
+        grunt.log.error(&#x27;Browser: &#x27; + formatMessage(assertion.browserName));
+        grunt.log.writeln();
+      }
+    };
+
+    // Allow an error message to retain its color when split across multiple lines.
+    var formatMessage = function(str) {
+      return String(str).split(&#x27;\n&#x27;).map(function(s) { return s.magenta; }).join(&#x27;\n&#x27;);
+    };
+
+    // register browser launcher event
+    dalek.reporterEvents.on(&#x27;report:run:browser&#x27;, function(browserName) {
+      currentBrowser = browserName;
+    });
+
+    // register logging for runner finished
+    dalek.reporterEvents.on(&#x27;report:runner:finished&#x27;, function(data) {
+      var message = &#x27;&#x27;;
+      // Print assertion errors here, if verbose mode is disabled.
+      if (!data.status) {
+        message = data.assertionsPassed + &#x27;/&#x27; + data.assertions + &#x27; assertions passed (&#x27;;
+        message += data.elapsedTime.hours ? data.elapsedTime.hours + &#x27; hours&#x27; : &#x27;&#x27;;
+        message += data.elapsedTime.minutes ? data.elapsedTime.minutes + &#x27; min&#x27; : &#x27;&#x27;;
+        message += data.elapsedTime.seconds ? Math.round(data.elapsedTime.seconds * Math.pow(10, 2)) / Math.pow(10, 2) + &#x27; sec&#x27; : &#x27;&#x27;;
+        message += &#x27;)&#x27;;
+        
+        if (!grunt.option(&#x27;verbose&#x27;)) {
+          grunt.log.writeln();
+          logFailedAssertions();
+        }
+
+        grunt.log.writeln();
+        warnUnlessForced(message);
+
+        setTimeout(function () {
+          done(false);
+        }, 250);
+      } else if (data.assertions === 0) {
+        // create 0 assertions message
+        message = &#x27;0/0 assertions ran (&#x27;;
+        message += data.elapsedTime.hours ? data.elapsedTime.hours + &#x27; hours&#x27; : &#x27;&#x27;;
+        message += data.elapsedTime.minutes ? data.elapsedTime.minutes + &#x27; min&#x27; : &#x27;&#x27;;
+        message += data.elapsedTime.seconds ? Math.round(data.elapsedTime.seconds * Math.pow(10, 2)) / Math.pow(10, 2) + &#x27; sec&#x27; : &#x27;&#x27;;
+        message += &#x27;)&#x27;;
+
+        // timeout hack to enable shutdown of 3rd party processes
+        setTimeout(function () {
+          warnUnlessForced(message);
+          done(false);
+        }, 250);
+      } else {
+        // create passed assertions message
+        message = data.assertions + &#x27;/&#x27; + data.assertions + &#x27; assertions passed (&#x27;;
+        message += data.elapsedTime.hours ? data.elapsedTime.hours + &#x27; hours&#x27; : &#x27;&#x27;;
+        message += data.elapsedTime.minutes ? data.elapsedTime.minutes + &#x27; min&#x27; : &#x27;&#x27;;
+        message += data.elapsedTime.seconds ? Math.round(data.elapsedTime.seconds * Math.pow(10, 2)) / Math.pow(10, 2) + &#x27; sec&#x27; : &#x27;&#x27;;
+        message += &#x27;)&#x27;;
+
+        setTimeout(function () {
+          grunt.log.writeln(&#x27;&#x27;);
+          grunt.log.ok(message);
+          done(true);
+        }, 250);
+      }
+    });
+
+    // log assertion
+    dalek.reporterEvents.on(&#x27;report:assertion&#x27;, function(data) {
+      if (!data.success) {
+        failedAssertions.push({
+          actual: data.value,
+          expected: data.expected,
+          message: (data.message || &#x27;No message&#x27;),
+          source: data.type,
+          testName: currentTest,
+          browserName: currentBrowser
+        });
+      }
+    });
+
+    // log test started
+    dalek.reporterEvents.on(&#x27;report:test:started&#x27;, function(data) {
+      currentTest = data.name;
+      grunt.verbose.write(currentTest + &#x27;...&#x27;);
+    });
+
+    // log test finished
+    dalek.reporterEvents.on(&#x27;report:test:finished&#x27;, function(data) {
+      // Log errors if necessary, otherwise success.
+      if (!data.status) {
+        // list assertions
+        if (grunt.option(&#x27;verbose&#x27;)) {
+          grunt.log.error();
+          logFailedAssertions();
+        } else {
+          grunt.log.write(&#x27;F&#x27;.red);
+        }
+      } else {
+        grunt.verbose.ok().or.write(&#x27;.&#x27;);
+      }
+    });
+
+    // All tests have been run.
+
+    // log error
+    dalek.reporterEvents.on(&#x27;error&#x27;, function(message) {
+      setTimeout(function () {
+        if (options &amp;&amp; options.force) {
+          grunt.log.error(message);
+        } else {
+          grunt.warn(message);
+        }
+
+        done(false);
+      }, 250);
+    });
+
+    // log warning
+    dalek.reporterEvents.on(&#x27;warning&#x27;, function(message) {
+      grunt.log.write(&#x27;&gt;&gt; Warning: &#x27;.yellow + message + &#x27;\n&#x27;);
+    });
+
+    // Re-broadcast dalek events on grunt.event.
+    dalek.reporterEvents.onAny(function() {
+      var args = [this.event].concat(grunt.util.toArray(arguments));
+      args[0] = &#x27;dalek:&#x27; + args[0];
+      grunt.event.emit.apply(grunt.event, args);
+    });
+
+    // start dalek
+    dalek.run();
+  });
+};
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
