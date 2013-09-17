@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>index.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">73.28</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">651</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="span6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="span6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
+      <p class="stat">23.59</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">2.66</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="span6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="span12">/*!
+ *
+ * Copyright (c) 2013 Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ *
+ */
+
+&#039;use strict&#039;;
+
+// ext. libs
+var Q = require(&#039;q&#039;);
+var os = require(&#039;os&#039;);
+var cp = require(&#039;child_process&#039;);
+var appium = require(&#039;appium/server&#039;);
+var portscanner = require(&#039;portscanner&#039;);
+
+/**
+ * This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).
+ * It provides all a WebDriverServer &amp; browser launcher for Safari on iOS.
+ * 
+ * At the moment this only works with the IPhone 
+ *
+ * The browser plugin can be installed with the following command:
+ *
+ * ```bash
+ * $ npm install dalek-browser-ios --save-dev
+ * ```
+ *
+ * You can use the browser plugin by adding a config option to the your Dalekfile
+ *
+ * ```javascript
+ * &quot;browsers&quot;: [&quot;ios&quot;]
+ * ```
+ *
+ * Or you can tell Dalek that it should test in this browser via the command line:
+ *
+ * ```bash
+ * $ dalek mytest.js -b ios
+ * ```
+ *
+ * The Webdriver Server tries to open Port 9003 by default,
+ * if this port is blocked, it tries to use a port between 9004 &amp; 9093
+ * You can specifiy a different port from within your [Dalekfile](/pages/config.html) like so:
+ *
+ * ```javascript
+ * &quot;browsers&quot;: {
+ *   &quot;ios&quot;: {
+ *     &quot;port&quot;: 5555 
+ *   }
+ * }
+ * ```
+ *
+ * It is also possible to specify a range of ports:
+ *
+ * ```javascript
+ * &quot;browsers&quot;: {
+ *   &quot;ios&quot;: {
+ *     &quot;portRange&quot;: [6100, 6120] 
+ *   }
+ * }
+ * ```
+ *
+ * If you would like to test on the IPad (IPhone) emulator, you can simply apply a snd. argument,
+ * which defines the browser type:
+ *
+ * ```bash
+ * $ dalek mytest.js -b ios:ipad
+ * ```
+ * 
+ * @module DalekJS
+ * @class IosDriver
+ * @namespace Browser
+ * @part iOS
+ * @api
+ */
+
+var IosDriver = {
+
+  /**
+   * Verbose version of the browser name
+   *
+   * @property longName
+   * @type string
+   * @default Mobile Safari iOS
+   */
+
+  longName: &#039;Mobile Safari iOS (iPhone)&#039;,
+
+  /**
+   * Default port of the Appium WebDriverServer
+   * The port may change, cause the port conflict resolution
+   * tool might pick another one, if the default one is blocked
+   *
+   * @property port
+   * @type integer
+   * @default 4723
+   */
+
+  port: 4723,
+
+  /**
+   * WebHook port
+   *
+   * @property webhookPort
+   * @type integer
+   * @default 9003
+   */
+
+  webhookPort: 9003,
+
+  /**
+   * Default host of the Appium WebDriverServer
+   * The host may be overridden with
+   * a user configured value
+   *
+   * @property host
+   * @type string
+   * @default localhost
+   */
+
+  host: &#039;localhost&#039;,
+
+  /**
+   * Root path of the appium webdriver server
+   *
+   * @property path
+   * @type string
+   * @default /wd/hub
+   */
+
+  path: &#039;/wd/hub&#039;,
+
+  /**
+   * Default desired capabilities that should be
+   * transferred when the browser session gets requested
+   *
+   * @property desiredCapabilities
+   * @type object
+   */
+
+  desiredCapabilities: {
+    device: &#039;iPhone Emulator&#039;,
+    name: &#039;Safari remote via WD&#039;,
+    app: &#039;safari&#039;,
+    version: &#039;6.1&#039;,
+    browserName: &#039;&#039;
+  },
+
+  /**
+   * Driver defaults, what should the driver be able to access.
+   *
+   * @property driverDefaults
+   * @type object
+   */
+
+  driverDefaults: {
+    viewport: true,
+    status: {
+      os: {
+        arch: os.arch(),
+        version: os.release(),
+        name: &#039;Mac OSX&#039;
+      }
+    },
+    sessionInfo: true
+  },
+
+  /**
+   * Special arguments that are needed to invoke
+   * appium. These are the defaults, they need to be modified later on 
+   *
+   * @property appiumArgs
+   * @type object
+   */
+
+  appiumArgs: {
+    app: null,
+    ipa: null,
+    quiet: true,
+    udid: null,
+    keepArtifacts: false,
+    noSessionOverride: false,
+    fullReset: false,
+    noReset: false,
+    launch: false,
+    log: false,
+    nativeInstrumentsLib: false,
+    safari: false,
+    forceIphone: false,
+    forceIpad: false,
+    orientation: null,
+    useKeystore: false,
+    address: &#039;0.0.0.0&#039;,
+    nodeconfig: null,
+    port: null,
+    webhook: null
+  },
+
+  /**
+   * Different browser types (iPhone / iPad)
+   *
+   * @property browserTypes
+   * @type object
+   */
+
+  browserTypes: {
+
+    /**
+     * IPad emulator
+     *
+     * @property ipad
+     * @type object
+     */
+
+    ipad: {
+      name: &#039;iPad&#039;
+    }
+
+  },
+
+  /**
+   * Resolves the driver port
+   *
+   * @method getPort
+   * @return {integer} port WebDriver server port
+   */
+
+  getPort: function () {
+    return this.port;
+  },
+
+  /**
+   * Resolves the maximum range for the driver port
+   *
+   * @method getMaxPort
+   * @return {integer} port Max WebDriver server port range
+   */
+
+  getMaxPort: function () {
+    return this.maxPort;
+  },
+
+  /**
+   * Resolves the webhook port
+   *
+   * @method getWebhookPort
+   * @return {integer} WebHook server port
+   */
+
+  getWebhookPort: function () {
+    return this.webhookPort;
+  },
+
+  /**
+   * Resolves the maximum range for the webhook port
+   *
+   * @method getWebhookPort
+   * @return {integer} WebHook Max WebHook port
+   */
+
+  getMaxWebhookPort: function () {
+    return this.maxWebhookPort;
+  },
+
+  /**
+   * Returns the driver host
+   *
+   * @method getHost
+   * @return {string} host WebDriver server hostname
+   */
+
+  getHost: function () {
+    return this.host;
+  },
+
+  /**
+   * Launches appium &amp; corresponding emulator or device,
+   * kicks off the portscanner
+   *
+   * @method launch
+   * @param {object} configuration Browser configuration
+   * @param {EventEmitter2} events EventEmitter (Reporter Emitter instance)
+   * @param {Dalek.Internal.Config} config Dalek configuration class
+   * @return {object} promise Browser promise
+   */
+
+  launch: function (configuration, events, config) {
+    var deferred = Q.defer();
+
+    // store injected configuration/log event handlers
+    this.reporterEvents = events;
+    this.configuration = configuration;
+    this.config = config;
+
+    // check if the user wants to run the iPad emulator
+    if (configuration &amp;&amp; configuration.type === &#039;ipad&#039;) {
+      this.longName = this.longName.replace(&#039;iPhone&#039;, &#039;iPad&#039;);
+      this.appiumArgs.forceIpad = true;
+    }
+
+    // check for a user set port
+    var browsers = this.config.get(&#039;browsers&#039;);
+    if (browsers &amp;&amp; Array.isArray(browsers)) {
+      browsers.forEach(this._checkUserDefinedPorts.bind(this));
+    }
+
+    // check if the current port is in use, if so, scan for free ports
+    portscanner.findAPortNotInUse(this.getPort(), this.getMaxPort(), this.getHost(), this._checkPorts.bind(this, deferred));
+    return deferred.promise;
+  },
+
+  /**
+   * Kills the Appium Server process,
+   * kills simulator processses
+   * with a slight timeout to prevent 
+   * appium from throwing errors
+   * 
+   * @method kill
+   * @chainable
+   */
+
+  kill: function () {
+    // kill appium servers
+    this.appiumServer.webSocket.server.close();
+    this.appiumServer.rest.listen().close();
+    // slight timeout for process killing
+    setTimeout(this._processes.bind(this, this._kill.bind(this)), 1000);
+    return this;
+  },
+
+  /**
+   * Kills the non blacklisted simulator processes &amp; restores
+   * the stderr handler
+   *
+   * @method _kill
+   * @param {object|null} err Error or null
+   * @param {array} result List of currently running simulator processes
+   * @chainable
+   * @private
+   */
+
+  _kill: function (err, result) {
+    // kill simulator processes
+    result.forEach(this._killProcess.bind(this));
+    // (re)establish stderr stream
+    process.stderr.write = this.oldWriteErr;
+    return this;
+  },
+
+  /**
+   * Checks a blacklist &amp; kills the process when
+   * not found
+   *
+   * @method _killProcess
+   * @param {integer} processID Process ID
+   * @chainable
+   * @private
+   */
+
+  _killProcess: function (processID) {
+    var kill = true;
+
+    // walk through the list of processes that are
+    // open before the driver started
+    this.openProcesses.forEach(function (pid) {
+      if (pid === processID) {
+        kill = false;
+      }
+    });
+
+    if (kill === true) {
+      cp.spawn(&#039;kill&#039;, [processID]);
+    }
+
+    return this;
+  },
+
+  /**
+   * Checks &amp; switches the appium server port,
+   * scans the range for the webhook port
+   *
+   * @method _listProcesses
+   * @param {object} deferred Promise
+   * @param {object|null} err Error or null
+   * @param {integer} port Appium server port to use
+   * @chainable
+   * @private
+   */
+
+  _checkPorts: function (deferred, error, port) {
+    // check if the port was blocked &amp; if we need to switch to another port
+    if (this.port !== port) {
+      this.reporterEvents.emit(&#039;report:log:system&#039;, &#039;dalek-browser-ios: Switching to port: &#039; + port);
+      this.port = port;
+    }
+
+    // check if the current webhook port is in use, if so, scan for free ports
+    portscanner.findAPortNotInUse(this.getWebhookPort(), this.getMaxWebhookPort(), this.getHost(), this._launch.bind(this, deferred));
+    return this;
+  },
+
+  /**
+   * Checks &amp; switches the webhook port,
+   * loads a list of running simulator processes
+   *
+   * @method _listProcesses
+   * @param {object} deferred Promise
+   * @param {object|null} err Error or null
+   * @param {integer} port Webhook port to use
+   * @chainable
+   * @private
+   */
+
+  _launch: function (deferred, error, port) {
+    // check if the port was blocked &amp; if we need to switch to another port
+    if (this.webhookPort !== port) {
+      this.reporterEvents.emit(&#039;report:log:system&#039;, &#039;dalek-browser-ios: Switching to webhook port: &#039; + port);
+      this.webhookPort = port;
+    }
+
+    // launch appium &amp; the emulator
+    this._processes(this._listProcesses.bind(this, deferred));
+    return this;
+  },
+
+  /**
+   * Stores open processes,
+   * suppresses stdout logs,
+   * starts appium
+   *
+   * @method _listProcesses
+   * @param {object} deferred Promise
+   * @param {object|null} err Error or null
+   * @param {array} result List of currently running simulator processes
+   * @chainable
+   * @private
+   */
+
+  _listProcesses: function (deferred, err, result) {
+    // save list of open emulator processes, before we launched it
+    this.openProcesses = result;
+    // nasty hack to surpress socket.io debug reports from appium
+    this._suppressAppiumLogs();
+    // run appium
+    appium.run(this._loadAppiumArgs(this.appiumArgs), this._afterAppiumStarted.bind(this, deferred));
+    return this;
+  },
+
+  /**
+   * Stores the appium server reference,
+   * restores the stdout logs
+   *
+   * @method _afterAppiumStarted
+   * @param {object} deferred Promise
+   * @param {object} appiumServer Appium server instance
+   * @chainable
+   * @private
+   */
+
+  _afterAppiumStarted: function (deferred, appiumServer) {
+    this.appiumServer = appiumServer;
+    this._reinstantiateLog();
+    deferred.resolve();
+    return this;
+  },
+
+  /**
+   * Configures appium
+   *
+   * @method _loadAppiumArgs
+   * @param {object} appiumArgs Appium specific configuration
+   * @return {object} Modified appium configuration
+   * @private
+   */
+
+  _loadAppiumArgs: function (appiumArgs) {
+    appiumArgs.port = this.getPort();
+    appiumArgs.webhook = this.getHost() + &#039;:&#039; + this.getWebhookPort();
+    return appiumArgs;
+  },
+
+  /**
+   * Process user defined ports
+   *
+   * @method _checkUserDefinedPorts
+   * @param {object} browser Browser configuration
+   * @chainable
+   * @private
+   */
+
+  _checkUserDefinedPorts: function (browser) {
+    this._checkAppiumPorts(browser);
+    this._checkWebhookPorts(browser);
+    return this;
+  },
+
+  /**
+   * Process user defined appium ports
+   *
+   * @method _checkAppiumPorts
+   * @param {object} browser Browser configuration
+   * @chainable
+   * @private
+   */
+
+  _checkAppiumPorts: function (browser) {
+    // check for a single defined port
+    if (browser.ios &amp;&amp; browser.ios.port) {
+      this.port = parseInt(browser.ios.port, 10);
+      this.maxPort = this.port + 90;
+      this.reporterEvents.emit(&#039;report:log:system&#039;, &#039;dalek-browser-ios: Switching to user defined port: &#039; + this.port);
+    }
+
+    // check for a port range
+    if (browser.ios &amp;&amp; browser.ios.portRange &amp;&amp; browser.ios.portRange.length === 2) {
+      this.port = parseInt(browser.ios.portRange[0], 10);
+      this.maxPort = parseInt(browser.ios.portRange[1], 10);
+      this.reporterEvents.emit(&#039;report:log:system&#039;, &#039;dalek-browser-ios: Switching to user defined port(s): &#039; + this.port + &#039; -&gt; &#039; + this.maxPort);
+    }
+
+    return this;
+  },
+
+  /**
+   * Process user defined webhook ports
+   *
+   * @method _checkWebhookPorts
+   * @param {object} browser Browser configuration
+   * @chainable
+   * @private
+   */
+
+  _checkWebhookPorts: function (browser) {
+    // check for a single defined webhook port
+    if (browser.ios &amp;&amp; browser.ios.webhookPort) {
+      this.webhookPort = parseInt(browser.ios.webhookPort, 10);
+      this.maxWebhookPort = this.webhookPort + 90;
+      this.reporterEvents.emit(&#039;report:log:system&#039;, &#039;dalek-browser-ios: Switching to user defined webhook port: &#039; + this.webhookPort);
+    }
+
+    // check for a webhook port range
+    if (browser.ios &amp;&amp; browser.ios.webhookPortRange &amp;&amp; browser.ios.webhookPortRange.length === 2) {
+      this.webhookPort = parseInt(browser.ios.webhookPortRange[0], 10);
+      this.maxWebhookPort = parseInt(browser.ios.webhookPortRange[1], 10);
+      this.reporterEvents.emit(&#039;report:log:system&#039;, &#039;dalek-browser-ios: Switching to user defined webhook port(s): &#039; + this.webhookPort + &#039; -&gt; &#039; + this.maxWebhookPort);
+    }
+
+    return this;
+  },
+
+  /**
+   * Tracks running simulator processes
+   *
+   * @method _processes
+   * @param {function} fn Callback
+   * @chainable
+   * @private
+   */
+
+  _processes: function (fn) {
+    var cmd = [&#039;ps -ax&#039;, &#039;|&#039;, &#039;grep &quot;iPhone Simulator.app&quot;&#039;];
+    cp.exec(cmd.join(&#039; &#039;), this._transformProcesses.bind(this, fn));
+    return this;
+  },
+
+  /**
+   * Transforms the process list output into
+   * a json structure
+   * 
+   * @method _transformProcesses
+   * @param {function} fn Callback
+   * @param {null|object} err Error if error, null if not
+   * @param {string} stdout Terminal output
+   * @chainable
+   * @private
+   */
+
+  _transformProcesses: function(fn, err, stdout){
+    var result = [];
+    stdout.split(&#039;\n&#039;).forEach(this._scanProcess.bind(this, result));
+    fn(err, result);
+    return this;
+  },
+
+  /**
+   * Scans and transforms the process list
+   *
+   * @method _scanProcess
+   * @param {array} result Transformed result
+   * @param {string} line Process list entry
+   * @chainable
+   * @private
+   */
+
+  _scanProcess: function (result, line){
+    var data = line.split(&#039; &#039;);
+    data = data.filter(this._filterProcessItem);
+
+    if (data[1] === &#039;??&#039;) {
+      result.push(data[0]);
+    }
+
+    return this;
+  },
+
+  /**
+   * Filters process list items
+   *
+   * @method _filterProcessItem
+   * @param {string} item Process list entry
+   * @return {bool|string} Process item or false
+   * @private
+   */
+
+  _filterProcessItem: function (item) {
+    if (item !== &#039;&#039;) {
+      return item;
+    }
+
+    return false;
+  },
+
+  /**
+   * Overwrite default stdout &amp; stderr handler
+   * to suppress some appium logs 
+   *
+   * @method _suppressAppiumLogs
+   * @chainable
+   * @private
+   */
+
+  _suppressAppiumLogs: function () {
+    var noop = function () {};
+    this.oldWrite = process.stdout.write;
+    this.oldWriteErr = process.stderr.write;
+    process.stdout.write = noop;
+    process.stderr.write = noop;
+    return this;
+  },
+
+  /**
+   * Reinstantiate stdout handler after appium has
+   * been started
+   *
+   * @method _reinstantiateLog
+   * @chainable
+   * @private
+   */
+
+  _reinstantiateLog: function () {
+    process.stdout.write = this.oldWrite;
+    return this;
+  }
+
+};
+
+// expose the module
+module.exports = IosDriver;</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

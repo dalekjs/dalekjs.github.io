@@ -1,0 +1,681 @@
+{
+    "project": {
+        "name": "dalek-browser-ios",
+        "description": "iOS Safari bindings for DalekJS",
+        "version": "0.0.1",
+        "url": "http://dalekjs.com"
+    },
+    "files": {
+        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
+            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "index.js": {
+            "name": "index.js",
+            "modules": {
+                "DalekJS": 1
+            },
+            "classes": {
+                "Browser.IosDriver": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Browser": 1
+            }
+        }
+    },
+    "modules": {
+        "DalekJS": {
+            "name": "DalekJS",
+            "submodules": {},
+            "classes": {
+                "Browser.IosDriver": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Browser": 1
+            },
+            "tag": "module",
+            "file": "index.js",
+            "line": 34,
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Safari on iOS.\n\nAt the moment this only works with the IPhone \n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-ios --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browsers\": [\"ios\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b ios\n```\n\nThe Webdriver Server tries to open Port 9003 by default,\nif this port is blocked, it tries to use a port between 9004 & 9093\nYou can specifiy a different port from within your [Dalekfile](/pages/config.html) like so:\n\n```javascript\n\"browsers\": {\n  \"ios\": {\n    \"port\": 5555 \n  }\n}\n```\n\nIt is also possible to specify a range of ports:\n\n```javascript\n\"browsers\": {\n  \"ios\": {\n    \"portRange\": [6100, 6120] \n  }\n}\n```\n\nIf you would like to test on the IPad (IPhone) emulator, you can simply apply a snd. argument,\nwhich defines the browser type:\n\n```bash\n$ dalek mytest.js -b ios:ipad\n```",
+            "part": "iOS",
+            "api": ""
+        }
+    },
+    "classes": {
+        "Browser.IosDriver": {
+            "name": "Browser.IosDriver",
+            "shortname": "Browser.IosDriver",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DalekJS",
+            "namespace": "Browser",
+            "file": "index.js",
+            "line": 34,
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Safari on iOS.\n\nAt the moment this only works with the IPhone \n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-ios --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browsers\": [\"ios\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b ios\n```\n\nThe Webdriver Server tries to open Port 9003 by default,\nif this port is blocked, it tries to use a port between 9004 & 9093\nYou can specifiy a different port from within your [Dalekfile](/pages/config.html) like so:\n\n```javascript\n\"browsers\": {\n  \"ios\": {\n    \"port\": 5555 \n  }\n}\n```\n\nIt is also possible to specify a range of ports:\n\n```javascript\n\"browsers\": {\n  \"ios\": {\n    \"portRange\": [6100, 6120] \n  }\n}\n```\n\nIf you would like to test on the IPad (IPhone) emulator, you can simply apply a snd. argument,\nwhich defines the browser type:\n\n```bash\n$ dalek mytest.js -b ios:ipad\n```"
+        }
+    },
+    "classitems": [
+        {
+            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "line": 1,
+            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "class": "Browser.IosDriver"
+        },
+        {
+            "file": "index.js",
+            "line": 96,
+            "description": "Verbose version of the browser name",
+            "itemtype": "property",
+            "name": "longName",
+            "type": "string",
+            "default": "Mobile Safari iOS",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 106,
+            "description": "Default port of the Appium WebDriverServer\nThe port may change, cause the port conflict resolution\ntool might pick another one, if the default one is blocked",
+            "itemtype": "property",
+            "name": "port",
+            "type": "integer",
+            "default": "4723",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 118,
+            "description": "WebHook port",
+            "itemtype": "property",
+            "name": "webhookPort",
+            "type": "integer",
+            "default": "9003",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 128,
+            "description": "Default host of the Appium WebDriverServer\nThe host may be overridden with\na user configured value",
+            "itemtype": "property",
+            "name": "host",
+            "type": "string",
+            "default": "localhost",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 140,
+            "description": "Root path of the appium webdriver server",
+            "itemtype": "property",
+            "name": "path",
+            "type": "string",
+            "default": "/wd/hub",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 150,
+            "description": "Default desired capabilities that should be\ntransferred when the browser session gets requested",
+            "itemtype": "property",
+            "name": "desiredCapabilities",
+            "type": "object",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 166,
+            "description": "Driver defaults, what should the driver be able to access.",
+            "itemtype": "property",
+            "name": "driverDefaults",
+            "type": "object",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 185,
+            "description": "Special arguments that are needed to invoke\nappium. These are the defaults, they need to be modified later on",
+            "itemtype": "property",
+            "name": "appiumArgs",
+            "type": "object",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 216,
+            "description": "Different browser types (iPhone / iPad)",
+            "itemtype": "property",
+            "name": "browserTypes",
+            "type": "object",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 225,
+            "description": "IPad emulator",
+            "itemtype": "property",
+            "name": "ipad",
+            "type": "object",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 238,
+            "description": "Resolves the driver port",
+            "itemtype": "method",
+            "name": "getPort",
+            "return": {
+                "description": "port WebDriver server port",
+                "type": "Integer"
+            },
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 249,
+            "description": "Resolves the maximum range for the driver port",
+            "itemtype": "method",
+            "name": "getMaxPort",
+            "return": {
+                "description": "port Max WebDriver server port range",
+                "type": "Integer"
+            },
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 260,
+            "description": "Resolves the webhook port",
+            "itemtype": "method",
+            "name": "getWebhookPort",
+            "return": {
+                "description": "WebHook server port",
+                "type": "Integer"
+            },
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 271,
+            "description": "Resolves the maximum range for the webhook port",
+            "itemtype": "method",
+            "name": "getWebhookPort",
+            "return": {
+                "description": "WebHook Max WebHook port",
+                "type": "Integer"
+            },
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 282,
+            "description": "Returns the driver host",
+            "itemtype": "method",
+            "name": "getHost",
+            "return": {
+                "description": "host WebDriver server hostname",
+                "type": "String"
+            },
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 293,
+            "description": "Launches appium & corresponding emulator or device,\nkicks off the portscanner",
+            "itemtype": "method",
+            "name": "launch",
+            "params": [
+                {
+                    "name": "configuration",
+                    "description": "Browser configuration",
+                    "type": "Object"
+                },
+                {
+                    "name": "events",
+                    "description": "EventEmitter (Reporter Emitter instance)",
+                    "type": "EventEmitter2"
+                },
+                {
+                    "name": "config",
+                    "description": "Dalek configuration class",
+                    "type": "Dalek.Internal.Config"
+                }
+            ],
+            "return": {
+                "description": "promise Browser promise",
+                "type": "Object"
+            },
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 329,
+            "description": "Kills the Appium Server process,\nkills simulator processses\nwith a slight timeout to prevent \nappium from throwing errors",
+            "itemtype": "method",
+            "name": "kill",
+            "chainable": 1,
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 348,
+            "description": "Kills the non blacklisted simulator processes & restores\nthe stderr handler",
+            "itemtype": "method",
+            "name": "_kill",
+            "params": [
+                {
+                    "name": "err",
+                    "description": "Error or null",
+                    "type": "Object|null"
+                },
+                {
+                    "name": "result",
+                    "description": "List of currently running simulator processes",
+                    "type": "Array"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 367,
+            "description": "Checks a blacklist & kills the process when\nnot found",
+            "itemtype": "method",
+            "name": "_killProcess",
+            "params": [
+                {
+                    "name": "processID",
+                    "description": "Process ID",
+                    "type": "Integer"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 395,
+            "description": "Checks & switches the appium server port,\nscans the range for the webhook port",
+            "itemtype": "method",
+            "name": "_listProcesses",
+            "params": [
+                {
+                    "name": "deferred",
+                    "description": "Promise",
+                    "type": "Object"
+                },
+                {
+                    "name": "err",
+                    "description": "Error or null",
+                    "type": "Object|null"
+                },
+                {
+                    "name": "port",
+                    "description": "Appium server port to use",
+                    "type": "Integer"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 419,
+            "description": "Checks & switches the webhook port,\nloads a list of running simulator processes",
+            "itemtype": "method",
+            "name": "_listProcesses",
+            "params": [
+                {
+                    "name": "deferred",
+                    "description": "Promise",
+                    "type": "Object"
+                },
+                {
+                    "name": "err",
+                    "description": "Error or null",
+                    "type": "Object|null"
+                },
+                {
+                    "name": "port",
+                    "description": "Webhook port to use",
+                    "type": "Integer"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 443,
+            "description": "Stores open processes,\nsuppresses stdout logs,\nstarts appium",
+            "itemtype": "method",
+            "name": "_listProcesses",
+            "params": [
+                {
+                    "name": "deferred",
+                    "description": "Promise",
+                    "type": "Object"
+                },
+                {
+                    "name": "err",
+                    "description": "Error or null",
+                    "type": "Object|null"
+                },
+                {
+                    "name": "result",
+                    "description": "List of currently running simulator processes",
+                    "type": "Array"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 466,
+            "description": "Stores the appium server reference,\nrestores the stdout logs",
+            "itemtype": "method",
+            "name": "_afterAppiumStarted",
+            "params": [
+                {
+                    "name": "deferred",
+                    "description": "Promise",
+                    "type": "Object"
+                },
+                {
+                    "name": "appiumServer",
+                    "description": "Appium server instance",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 484,
+            "description": "Configures appium",
+            "itemtype": "method",
+            "name": "_loadAppiumArgs",
+            "params": [
+                {
+                    "name": "appiumArgs",
+                    "description": "Appium specific configuration",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Modified appium configuration",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 499,
+            "description": "Process user defined ports",
+            "itemtype": "method",
+            "name": "_checkUserDefinedPorts",
+            "params": [
+                {
+                    "name": "browser",
+                    "description": "Browser configuration",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 514,
+            "description": "Process user defined appium ports",
+            "itemtype": "method",
+            "name": "_checkAppiumPorts",
+            "params": [
+                {
+                    "name": "browser",
+                    "description": "Browser configuration",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 541,
+            "description": "Process user defined webhook ports",
+            "itemtype": "method",
+            "name": "_checkWebhookPorts",
+            "params": [
+                {
+                    "name": "browser",
+                    "description": "Browser configuration",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 568,
+            "description": "Tracks running simulator processes",
+            "itemtype": "method",
+            "name": "_processes",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "Callback",
+                    "type": "Function"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 583,
+            "description": "Transforms the process list output into\na json structure",
+            "itemtype": "method",
+            "name": "_transformProcesses",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "Callback",
+                    "type": "Function"
+                },
+                {
+                    "name": "err",
+                    "description": "Error if error, null if not",
+                    "type": "Null|object"
+                },
+                {
+                    "name": "stdout",
+                    "description": "Terminal output",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 602,
+            "description": "Scans and transforms the process list",
+            "itemtype": "method",
+            "name": "_scanProcess",
+            "params": [
+                {
+                    "name": "result",
+                    "description": "Transformed result",
+                    "type": "Array"
+                },
+                {
+                    "name": "line",
+                    "description": "Process list entry",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 623,
+            "description": "Filters process list items",
+            "itemtype": "method",
+            "name": "_filterProcessItem",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "Process list entry",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Process item or false",
+                "type": "Bool|string"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 640,
+            "description": "Overwrite default stdout & stderr handler\nto suppress some appium logs",
+            "itemtype": "method",
+            "name": "_suppressAppiumLogs",
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 658,
+            "description": "Reinstantiate stdout handler after appium has\nbeen started",
+            "itemtype": "method",
+            "name": "_reinstantiateLog",
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.IosDriver",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: part",
+            "line": " index.js:34"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:34"
+        },
+        {
+            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
+        }
+    ]
+}
