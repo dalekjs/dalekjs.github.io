@@ -115,13 +115,13 @@
  * 
  * If you haven&#x27;t used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you&#x27;re familiar with that process, you may install this plugin with this command:
  * 
- * &#x60;&#x60;&#x60;shell
+ * &#x60;&#x60;&#x60;bash
  * npm install grunt-dalek --save-dev
  * &#x60;&#x60;&#x60;
  * 
  * Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
  * 
- * &#x60;&#x60;&#x60;js
+ * &#x60;&#x60;&#x60;javascript
  * grunt.loadNpmTasks(&#x27;grunt-dalek&#x27;);
  * &#x60;&#x60;&#x60;
  * 
@@ -130,7 +130,7 @@
  * ### Overview
  * In your project&#x27;s Gruntfile, add a section named &#x60;dalek&#x60; to the data object passed into &#x60;grunt.initConfig()&#x60;.
  * 
- * &#x60;&#x60;&#x60;js
+ * &#x60;&#x60;&#x60;javascript
  * grunt.initConfig({
  *   dalek: {
  *     options: {
@@ -177,7 +177,7 @@
  * ### Configuration Example
  * 
  * Basic example of a Grunt config containing the dalek task.
- * &#x60;&#x60;&#x60;js
+ * &#x60;&#x60;&#x60;javascript
  * grunt.initConfig({
  *   dalek: {
  *     dist: {
@@ -196,7 +196,7 @@
  * ### Multiple Files
  * 
  * Running dalekjs against multiple files.
- * &#x60;&#x60;&#x60;js
+ * &#x60;&#x60;&#x60;javascript
  * dalek: {
  *   dist: {
  *     src: [&#x27;test/example/test-dkd.js&#x27;,&#x27;test/example/test-github.js&#x27;]
@@ -206,7 +206,7 @@
  * 
  * ### Specifying Options
  * 
- * &#x60;&#x60;&#x60;js
+ * &#x60;&#x60;&#x60;javascript
  * dalek: {
  *     options: {
  *       // invoke phantomjs, chrome &amp; chrome canary
