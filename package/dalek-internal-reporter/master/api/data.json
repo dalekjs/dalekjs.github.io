@@ -72,6 +72,20 @@
         {
             "file": "index.js",
             "line": 39,
+            "description": "Reporters from the canary channel",
+            "params": [
+                {
+                    "name": "isCanary",
+                    "description": ""
+                }
+            ],
+            "class": "Dalek.Reporter",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 47,
             "description": "Checks if the requested reporter exists",
             "itemtype": "method",
             "name": "isReporter",
@@ -92,7 +106,7 @@
         },
         {
             "file": "index.js",
-            "line": 67,
+            "line": 71,
             "description": "Loads a requested reporter",
             "itemtype": "method",
             "name": "loadReporter",
@@ -129,6 +143,10 @@
         {
             "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
             "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
+        },
+        {
+            "message": "Missing item type\nReporters from the canary channel",
+            "line": " index.js:39"
         }
     ]
 }
