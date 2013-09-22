@@ -1012,7 +1012,7 @@
         },
         {
             "file": "index.js",
-            "line": 1425,
+            "line": 1429,
             "description": "Adds a method to the queue of actions/assertions to execute",
             "itemtype": "method",
             "name": "_addToActionQueue",
@@ -1042,7 +1042,7 @@
         },
         {
             "file": "index.js",
-            "line": 1448,
+            "line": 1452,
             "description": "Generates a function that can be used",
             "itemtype": "method",
             "name": "generateTestHelper",
@@ -1071,7 +1071,7 @@
         },
         {
             "file": "index.js",
-            "line": 1504,
+            "line": 1508,
             "description": "Assert if a given value shallow equals a second given value",
             "itemtype": "method",
             "name": "_testShallowEquals",
@@ -1099,7 +1099,7 @@
         },
         {
             "file": "index.js",
-            "line": 1524,
+            "line": 1528,
             "description": "Assert if a given value shallow does not equal a second given value",
             "itemtype": "method",
             "name": "_testShallowUnequals",
@@ -1127,7 +1127,7 @@
         },
         {
             "file": "index.js",
-            "line": 1544,
+            "line": 1548,
             "description": "Assert if a given value matches a range",
             "itemtype": "method",
             "name": "_testBetween",
@@ -1155,7 +1155,7 @@
         },
         {
             "file": "index.js",
-            "line": 1564,
+            "line": 1568,
             "description": "Assert if a given value is greater than the value to compare",
             "itemtype": "method",
             "name": "_testGreaterThan",
@@ -1183,7 +1183,7 @@
         },
         {
             "file": "index.js",
-            "line": 1584,
+            "line": 1588,
             "description": "Assert if a given value is greater or equal than the value to compare",
             "itemtype": "method",
             "name": "_testGreaterThanEqual",
@@ -1211,7 +1211,7 @@
         },
         {
             "file": "index.js",
-            "line": 1598,
+            "line": 1602,
             "description": "Assert if a given value is lower than the value to compare",
             "itemtype": "method",
             "name": "_testLowerThan",
@@ -1239,7 +1239,7 @@
         },
         {
             "file": "index.js",
-            "line": 1618,
+            "line": 1622,
             "description": "Assert if a given value contain another value",
             "itemtype": "method",
             "name": "_contain",
@@ -1267,7 +1267,7 @@
         },
         {
             "file": "index.js",
-            "line": 1638,
+            "line": 1642,
             "description": "Assert if a given value is lower or equal than the value to compare",
             "itemtype": "method",
             "name": "_testLowerThanEqual",
@@ -1295,7 +1295,7 @@
         },
         {
             "file": "index.js",
-            "line": 1652,
+            "line": 1656,
             "description": "Assert if a given value is boolean 'true'",
             "itemtype": "method",
             "name": "_testTruthy",
@@ -1318,7 +1318,7 @@
         },
         {
             "file": "index.js",
-            "line": 1665,
+            "line": 1669,
             "description": "Assert if a given value is boolean 'false'",
             "itemtype": "method",
             "name": "_testFalsy",
@@ -1341,7 +1341,7 @@
         },
         {
             "file": "index.js",
-            "line": 1678,
+            "line": 1682,
             "description": "Assert a given value matches a RegEx",
             "itemtype": "method",
             "name": "_contain",
