@@ -40,7 +40,7 @@
             },
             "tag": "module",
             "file": "index.js",
-            "line": 57,
+            "line": 65,
             "description": "Generates an test instance",
             "part": "test",
             "api": ""
@@ -58,7 +58,7 @@
             "module": "DalekJS",
             "namespace": "Dalek",
             "file": "index.js",
-            "line": 57,
+            "line": 65,
             "description": "Generates an test instance"
         }
     },
@@ -85,7 +85,7 @@
         },
         {
             "file": "index.js",
-            "line": 69,
+            "line": 77,
             "description": "Specify how many assertions are expected to run within a test.\nVery useful for ensuring that all your callbacks and assertions are run.",
             "itemtype": "method",
             "name": "expect",
@@ -103,7 +103,7 @@
         },
         {
             "file": "index.js",
-            "line": 83,
+            "line": 100,
             "description": "Increment the number of executed assertions",
             "itemtype": "method",
             "name": "incrementExpectations",
@@ -114,7 +114,7 @@
         },
         {
             "file": "index.js",
-            "line": 95,
+            "line": 112,
             "description": "Increment the number of failed assertions",
             "itemtype": "method",
             "name": "incrementFailedAssertions",
@@ -125,7 +125,7 @@
         },
         {
             "file": "index.js",
-            "line": 107,
+            "line": 124,
             "description": "Checks if the runned tests fullfill the set expectations\nor if no expectations were raised",
             "itemtype": "method",
             "name": "checkExpectations",
@@ -139,7 +139,7 @@
         },
         {
             "file": "index.js",
-            "line": 119,
+            "line": 136,
             "description": "Checks if all runned assertions passed",
             "itemtype": "method",
             "name": "checkAssertions",
@@ -153,10 +153,10 @@
         },
         {
             "file": "index.js",
-            "line": 130,
+            "line": 147,
             "description": "Sets up all the bindings needed for a test to run",
             "itemtype": "method",
-            "name": "_testFin",
+            "name": "done",
             "return": {
                 "description": "result A promise",
                 "type": "Object"
@@ -169,7 +169,7 @@
         },
         {
             "file": "index.js",
-            "line": 147,
+            "line": 166,
             "description": "Emits the test finished events & resolves all promises\nwhen its done",
             "itemtype": "method",
             "name": "_testFinished",
@@ -192,7 +192,7 @@
         },
         {
             "file": "index.js",
-            "line": 178,
+            "line": 197,
             "description": "Emits the test started event",
             "itemtype": "method",
             "name": "_reportTestStarted",
@@ -212,7 +212,7 @@
         },
         {
             "file": "index.js",
-            "line": 192,
+            "line": 211,
             "description": "Checks if the test run is complete & emits/resolves\nall the needed events/promises when the run is complete",
             "itemtype": "method",
             "name": "_onDriverMessage",
@@ -232,7 +232,7 @@
         },
         {
             "file": "index.js",
-            "line": 215,
+            "line": 234,
             "description": "Emits an event, that the current test run has been finished",
             "itemtype": "method",
             "name": "_emitConcreteTestFinished",
@@ -245,7 +245,7 @@
         },
         {
             "file": "index.js",
-            "line": 228,
+            "line": 247,
             "description": "Emits an event that describes the current state of all assertions",
             "itemtype": "method",
             "name": "_emitAssertionStatus",
@@ -258,7 +258,7 @@
         },
         {
             "file": "index.js",
-            "line": 245,
+            "line": 264,
             "description": "Get the overall test status (assertions & expectation)",
             "itemtype": "method",
             "name": "_testStatus",
@@ -275,7 +275,7 @@
         },
         {
             "file": "index.js",
-            "line": 258,
+            "line": 277,
             "description": "Emits an event that describes the current state of all assertions.\nThe event should be fired when a test is finished",
             "itemtype": "method",
             "name": "_emitTestFinished",
@@ -288,7 +288,7 @@
         },
         {
             "file": "index.js",
-            "line": 281,
+            "line": 300,
             "description": "Kicks off the test & binds all promises/events",
             "itemtype": "method",
             "name": "_testFin",
@@ -304,7 +304,7 @@
         },
         {
             "file": "index.js",
-            "line": 304,
+            "line": 323,
             "description": "Copies assertion methods",
             "itemtype": "method",
             "name": "_inheritAssertions",
@@ -324,7 +324,7 @@
         },
         {
             "file": "index.js",
-            "line": 320,
+            "line": 339,
             "description": "Copies assertion helper methods",
             "itemtype": "method",
             "name": "_inheritAssertions",
@@ -344,7 +344,7 @@
         },
         {
             "file": "index.js",
-            "line": 344,
+            "line": 363,
             "description": "Set up the instance",
             "itemtype": "method",
             "name": "_inheritAssertions",
@@ -371,11 +371,11 @@
     "warnings": [
         {
             "message": "unknown tag: part",
-            "line": " index.js:57"
+            "line": " index.js:65"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:57"
+            "line": " index.js:65"
         },
         {
             "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
