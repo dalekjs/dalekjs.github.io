@@ -2,17 +2,10 @@
     "project": {
         "name": "dalekjs",
         "description": "A node based cross browser testing tool",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "url": ""
     },
     "files": {
-        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
-            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
         "index.js": {
             "name": "index.js",
             "modules": {
@@ -57,12 +50,6 @@
         }
     },
     "classitems": [
-        {
-            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
-            "line": 1,
-            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
-            "class": "Dalek"
-        },
         {
             "file": "index.js",
             "line": 37,
@@ -234,10 +221,6 @@
         }
     ],
     "warnings": [
-        {
-            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
-            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
-        },
         {
             "message": "Missing item type\nDefault options",
             "line": " index.js:37"
