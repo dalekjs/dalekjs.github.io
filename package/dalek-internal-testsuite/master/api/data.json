@@ -40,7 +40,7 @@
             },
             "tag": "module",
             "file": "index.js",
-            "line": 45,
+            "line": 46,
             "description": "Testsuite",
             "part": "Testsuite",
             "api": ""
@@ -58,7 +58,7 @@
             "module": "DalekJS",
             "namespace": "Dalek",
             "file": "index.js",
-            "line": 45,
+            "line": 46,
             "description": "Testsuite"
         }
     },
@@ -71,7 +71,7 @@
         },
         {
             "file": "index.js",
-            "line": 34,
+            "line": 35,
             "is_constructor": 1,
             "params": [
                 {
@@ -84,7 +84,7 @@
         },
         {
             "file": "index.js",
-            "line": 57,
+            "line": 58,
             "description": "Assigns the initial options\ndriverEmitter -> the drivers event dispatcher\nreporterEmitter -> the reporters event dispatcher\ndriver -> the driver instance (e.g. native webdriver, selenium, etc.)\nname -> the suites filename (default suite name)",
             "itemtype": "method",
             "name": "initialize",
@@ -102,7 +102,7 @@
         },
         {
             "file": "index.js",
-            "line": 77,
+            "line": 80,
             "description": "Loads the testsuite that should be executed",
             "itemtype": "method",
             "name": "loadTestsuite",
@@ -123,7 +123,7 @@
         },
         {
             "file": "index.js",
-            "line": 91,
+            "line": 108,
             "description": "Checks if all tests from the testsuite are executed.\nRuns the next test if not.\nTriggers `asyncs` callback if the suite is finished.\nDecrements the `testsToBeExecuted` counter",
             "itemtype": "method",
             "name": "testFinished",
@@ -156,7 +156,7 @@
         },
         {
             "file": "index.js",
-            "line": 121,
+            "line": 148,
             "description": "Decrements number of tests that should be executed in this suite",
             "itemtype": "method",
             "name": "decrementTestsToBeExecuted",
@@ -170,7 +170,7 @@
         },
         {
             "file": "index.js",
-            "line": 132,
+            "line": 159,
             "description": "Returns the name of the testsuite\nIf the suite has no name, it will return the testsuites filename",
             "itemtype": "method",
             "name": "getName",
@@ -184,13 +184,13 @@
         },
         {
             "file": "index.js",
-            "line": 150,
-            "description": "Returns the options of the testsuite\nIf the suite has no options, it will return `null`",
+            "line": 177,
+            "description": "Returns the options of the testsuite\nIf the suite has no options, it will return an empty object",
             "itemtype": "method",
             "name": "getOptions",
             "return": {
-                "description": "options",
-                "type": "Object|null"
+                "description": "options Suite options",
+                "type": "Object"
             },
             "class": "Dalek.Testsuite",
             "module": "DalekJS",
@@ -198,7 +198,7 @@
         },
         {
             "file": "index.js",
-            "line": 168,
+            "line": 195,
             "description": "Returns all names (aka. object keys) the tests that should be executed",
             "itemtype": "method",
             "name": "getTests",
@@ -212,7 +212,7 @@
         },
         {
             "file": "index.js",
-            "line": 179,
+            "line": 206,
             "description": "Returns the number of tests to be executed",
             "itemtype": "method",
             "name": "getNumberOfTests",
@@ -233,7 +233,7 @@
         },
         {
             "file": "index.js",
-            "line": 191,
+            "line": 218,
             "description": "Returns the next test, that should be executed",
             "itemtype": "method",
             "name": "getNextTest",
@@ -247,7 +247,7 @@
         },
         {
             "file": "index.js",
-            "line": 202,
+            "line": 229,
             "description": "Executes the next test in the sequence",
             "itemtype": "method",
             "name": "executeNextTest",
@@ -268,7 +268,7 @@
         },
         {
             "file": "index.js",
-            "line": 219,
+            "line": 250,
             "description": "Generates a new test instance",
             "itemtype": "method",
             "name": "getTestInstance",
@@ -289,7 +289,7 @@
         },
         {
             "file": "index.js",
-            "line": 231,
+            "line": 262,
             "description": "Returns a test function by its name",
             "itemtype": "method",
             "name": "getTest",
@@ -310,7 +310,7 @@
         },
         {
             "file": "index.js",
-            "line": 243,
+            "line": 274,
             "description": "Will be executed if a test is started, that does not exist",
             "itemtype": "method",
             "name": "testDoesNotExist",
@@ -327,7 +327,7 @@
         },
         {
             "file": "index.js",
-            "line": 255,
+            "line": 288,
             "description": "Runs any tests from this testsuite in sequence",
             "itemtype": "method",
             "name": "run",
@@ -347,11 +347,11 @@
     "warnings": [
         {
             "message": "unknown tag: part",
-            "line": " index.js:45"
+            "line": " index.js:46"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:45"
+            "line": " index.js:46"
         },
         {
             "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
@@ -359,7 +359,7 @@
         },
         {
             "message": "Missing item type",
-            "line": " index.js:34"
+            "line": " index.js:35"
         }
     ]
 }
