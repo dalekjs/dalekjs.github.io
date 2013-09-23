@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-internal-reporter",
         "description": "DalekJS internal helper library for 3rd party reporters",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "url": "http://dalekjs.com"
     },
     "files": {
