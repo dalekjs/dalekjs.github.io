@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-browser-chrome",
         "description": "Google Chrome bindings for DalekJS",
-        "version": "0.0.2",
+        "version": "0.0.3",
         "url": "http://dalekjs.com"
     },
     "files": {
