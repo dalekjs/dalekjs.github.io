@@ -2,17 +2,10 @@
     "project": {
         "name": "dalek-internal-test",
         "description": "DalekJS internal test helper library",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "url": "http://dalekjs.com"
     },
     "files": {
-        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
-            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
         "index.js": {
             "name": "index.js",
             "modules": {
@@ -64,12 +57,6 @@
     },
     "classitems": [
         {
-            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
-            "line": 1,
-            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
-            "class": "Dalek.Test"
-        },
-        {
             "file": "index.js",
             "line": 35,
             "description": "Prepares the test instance values",
@@ -103,7 +90,34 @@
         },
         {
             "file": "index.js",
-            "line": 100,
+            "line": 91,
+            "description": "Global data store (works between the node & browser envs)",
+            "itemtype": "method",
+            "name": "expect",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "Key to store or fetch data",
+                    "type": "String|number"
+                },
+                {
+                    "name": "value",
+                    "description": "*optional* Data that should be stored",
+                    "type": "Mixed"
+                }
+            ],
+            "return": {
+                "description": "Data that has been stored",
+                "type": "Mixed"
+            },
+            "chainable": 1,
+            "class": "Dalek.Test",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 110,
             "description": "Increment the number of executed assertions",
             "itemtype": "method",
             "name": "incrementExpectations",
@@ -114,7 +128,7 @@
         },
         {
             "file": "index.js",
-            "line": 112,
+            "line": 122,
             "description": "Increment the number of failed assertions",
             "itemtype": "method",
             "name": "incrementFailedAssertions",
@@ -125,7 +139,7 @@
         },
         {
             "file": "index.js",
-            "line": 124,
+            "line": 134,
             "description": "Checks if the runned tests fullfill the set expectations\nor if no expectations were raised",
             "itemtype": "method",
             "name": "checkExpectations",
@@ -139,7 +153,7 @@
         },
         {
             "file": "index.js",
-            "line": 136,
+            "line": 146,
             "description": "Checks if all runned assertions passed",
             "itemtype": "method",
             "name": "checkAssertions",
@@ -153,7 +167,7 @@
         },
         {
             "file": "index.js",
-            "line": 147,
+            "line": 157,
             "description": "Sets up all the bindings needed for a test to run",
             "itemtype": "method",
             "name": "done",
@@ -169,7 +183,7 @@
         },
         {
             "file": "index.js",
-            "line": 166,
+            "line": 176,
             "description": "Emits the test finished events & resolves all promises\nwhen its done",
             "itemtype": "method",
             "name": "_testFinished",
@@ -192,7 +206,7 @@
         },
         {
             "file": "index.js",
-            "line": 197,
+            "line": 207,
             "description": "Emits the test started event",
             "itemtype": "method",
             "name": "_reportTestStarted",
@@ -212,7 +226,7 @@
         },
         {
             "file": "index.js",
-            "line": 211,
+            "line": 221,
             "description": "Checks if the test run is complete & emits/resolves\nall the needed events/promises when the run is complete",
             "itemtype": "method",
             "name": "_onDriverMessage",
@@ -232,7 +246,7 @@
         },
         {
             "file": "index.js",
-            "line": 234,
+            "line": 244,
             "description": "Emits an event, that the current test run has been finished",
             "itemtype": "method",
             "name": "_emitConcreteTestFinished",
@@ -245,7 +259,7 @@
         },
         {
             "file": "index.js",
-            "line": 247,
+            "line": 257,
             "description": "Emits an event that describes the current state of all assertions",
             "itemtype": "method",
             "name": "_emitAssertionStatus",
@@ -258,7 +272,7 @@
         },
         {
             "file": "index.js",
-            "line": 264,
+            "line": 274,
             "description": "Get the overall test status (assertions & expectation)",
             "itemtype": "method",
             "name": "_testStatus",
@@ -275,7 +289,7 @@
         },
         {
             "file": "index.js",
-            "line": 277,
+            "line": 287,
             "description": "Emits an event that describes the current state of all assertions.\nThe event should be fired when a test is finished",
             "itemtype": "method",
             "name": "_emitTestFinished",
@@ -288,7 +302,7 @@
         },
         {
             "file": "index.js",
-            "line": 300,
+            "line": 310,
             "description": "Kicks off the test & binds all promises/events",
             "itemtype": "method",
             "name": "_testFin",
@@ -304,7 +318,7 @@
         },
         {
             "file": "index.js",
-            "line": 323,
+            "line": 333,
             "description": "Copies assertion methods",
             "itemtype": "method",
             "name": "_inheritAssertions",
@@ -324,7 +338,7 @@
         },
         {
             "file": "index.js",
-            "line": 339,
+            "line": 349,
             "description": "Copies assertion helper methods",
             "itemtype": "method",
             "name": "_inheritAssertions",
@@ -344,7 +358,7 @@
         },
         {
             "file": "index.js",
-            "line": 363,
+            "line": 373,
             "description": "Set up the instance",
             "itemtype": "method",
             "name": "_inheritAssertions",
@@ -376,10 +390,6 @@
         {
             "message": "unknown tag: api",
             "line": " index.js:65"
-        },
-        {
-            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
-            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
         },
         {
             "message": "Missing item type\nPrepares the test instance values",
