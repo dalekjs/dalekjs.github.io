@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-browser-phantomjs",
         "description": "PhantomJS binding for DalekJS",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "url": ""
     },
     "files": {
