@@ -365,6 +365,13 @@ a certain amount of elements.</p>
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_doesntHaveTitle">doesntHaveTitle</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_doesntHaveUrl">doesntHaveUrl</a>
 
                                 
@@ -506,13 +513,6 @@ a certain amount of elements.</p>
                         
                             <li class="index-item method">
                                 <a href="#method_text">text</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_title">title</a>
 
                                 
                                 
@@ -3663,6 +3663,122 @@ exists within the remote DOM environment.</p>
 </div>
 
                 
+                    <div id="method_doesntHaveTitle" class="method item">
+    <h3 class="name"><code>doesntHaveTitle</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>expected</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>message</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/index.js.html#l1121"><code>index.js:1121</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Asserts that given title does not match the given expectations.</p>
+<pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
+    .assert.doesntHaveTitle(&#39;Dalek Emperor TV&#39;, &#39;Not your Daleks TV&#39;)
+    .done();</code></pre>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">expected</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Expected test result</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">message</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Message for the test reporter</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="method_doesntHaveUrl" class="method item">
     <h3 class="name"><code>doesntHaveUrl</code></h3>
 
@@ -6342,122 +6458,6 @@ you can still use the not() assertion helper</p>
 <p>and the not() helper is available too:</p>
 <pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
     .assert.title().is.not(&#39;Dalek Emperor TV&#39;, &#39;Not your Daleks TV&#39;)
-    .done();</code></pre>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">expected</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Expected test result</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">message</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Message for the test reporter</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_title" class="method item">
-    <h3 class="name"><code>title</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>expected</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>message</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <span class="flag chainable">chainable</span>
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/index.js.html#l1121"><code>index.js:1121</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Asserts that given title does not match the given expectations.</p>
-<pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
-    .assert.doesntHaveTitle(&#39;Dalek Emperor TV&#39;, &#39;Not your Daleks TV&#39;)
     .done();</code></pre>
 
     </div>
