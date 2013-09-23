@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">71.09</p>
+      <p class="stat">70.50</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">1090</p>
+      <p class="stat">1124</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">67.76</p>
+      <p class="stat">63.25</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">3.78</p>
+      <p class="stat">4.29</p>
     </div>
   </div>
 </div>
@@ -408,25 +408,6 @@ Actions.prototype.toParentWindow = function () {
   var hash = uuid.v4();
   var cb = this._generateCallbackAssertion(&#039;toWindow&#039;, &#039;toWindow&#039;, null, hash);
   this._addToActionQueue([null, hash], &#039;toWindow&#039;, cb);
-  return this;
-};
-
-/**
- * Waits until a function returns true to process any next step.
- *
- * You can also set a callback on timeout using the onTimeout argument,
- * and set the timeout using the timeout one, in milliseconds. The default timeout is set to 5000ms.
- *
- * @method waitFor
- * @param {function} fn Async function that resolves an promise when ready
- * @param {number} timeout Timeout in miliseconds
- * @chainable
- */
-
-Actions.prototype.waitFor = function (fn, timeout) {
-  var hash = uuid.v4();
-  var cb = this._generateCallbackAssertion(&#039;waitFor&#039;, &#039;waitFor&#039;, fn, timeout, hash);
-  this._addToActionQueue([fn, (timeout ? parseInt(timeout, 10) : 5000), hash], &#039;waitFor&#039;, cb);
   return this;
 };
 
@@ -890,6 +871,34 @@ Actions.prototype.answer = function (keystrokes) {
   return this;
 };
 
+Actions.prototype.execute = function (script) {
+  var hash = uuid.v4();
+  var args = [this.contextVars].concat(Array.prototype.slice.call(arguments, 1) || []);
+  var cb = this._generateCallbackAssertion(&#039;execute&#039;, &#039;execute&#039;, script, args, hash);
+  this._addToActionQueue([script, args, hash], &#039;execute&#039;, cb);
+  return this;
+};
+
+/**
+ * Waits until a function returns true to process any next step.
+ *
+ * You can also set a callback on timeout using the onTimeout argument,
+ * and set the timeout using the timeout one, in milliseconds. The default timeout is set to 5000ms.
+ *
+ * @method waitFor
+ * @param {function} fn Async function that resolves an promise when ready
+ * @param {number} timeout Timeout in miliseconds
+ * @chainable
+ */
+
+Actions.prototype.waitFor = function (script, args, timeout) {
+  var hash = uuid.v4();
+  timeout = timeout || 5000;
+  var cb = this._generateCallbackAssertion(&#039;waitFor&#039;, &#039;waitFor&#039;, script, args, timeout, hash);
+  this._addToActionQueue([script, args, timeout, hash], &#039;waitFor&#039;, cb);
+  return this;
+};
+
 /**
  * Accepts an alert/prompt/confirm dialog. This is basically the same actions as when
  * you are clicking okay or hitting return in one of that dialogs.
@@ -1116,6 +1125,31 @@ Actions.prototype._generateCallbackAssertion = function (key, type) {
   var cb = function (data) {
     if (data &amp;&amp; data.key === key &amp;&amp; !this.uuids[data.uuid]) {
       if (!data || (data.value &amp;&amp; data.value === null)) {
+        data.value = &#039;&#039;;
+      }
+
+
+      if (key === &#039;execute&#039;) {
+        Object.keys(data.value.dalek).forEach(function (key) {
+          this.contextVars[key] = data.value.dalek[key];
+        }.bind(this));
+
+        data.value.test.forEach(function (test) {
+          this.reporter.emit(&#039;report:assertion&#039;, {
+            success: test.ok,
+            expected: true,
+            value: test.ok,
+            message: test.message,
+            type: &#039;OK&#039;
+          });
+
+          this.incrementExpectations();
+
+          if (!test.ok) {
+            this.incrementFailedAssertions();
+          }
+        }.bind(this));
+
         data.value = &#039;&#039;;
       }
 

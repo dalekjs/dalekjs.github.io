@@ -410,25 +410,6 @@ Actions.prototype.toParentWindow = function () {
 };
 
 /**
- * Waits until a function returns true to process any next step.
- *
- * You can also set a callback on timeout using the onTimeout argument,
- * and set the timeout using the timeout one, in milliseconds. The default timeout is set to 5000ms.
- *
- * @method waitFor
- * @param {function} fn Async function that resolves an promise when ready
- * @param {number} timeout Timeout in miliseconds
- * @chainable
- */
-
-Actions.prototype.waitFor = function (fn, timeout) {
-  var hash = uuid.v4();
-  var cb = this._generateCallbackAssertion(&#x27;waitFor&#x27;, &#x27;waitFor&#x27;, fn, timeout, hash);
-  this._addToActionQueue([fn, (timeout ? parseInt(timeout, 10) : 5000), hash], &#x27;waitFor&#x27;, cb);
-  return this;
-};
-
-/**
  * Wait until a resource that matches the given testFx is loaded to process a next step.
  *
  * @method waitForResource
@@ -888,6 +869,34 @@ Actions.prototype.answer = function (keystrokes) {
   return this;
 };
 
+Actions.prototype.execute = function (script) {
+  var hash = uuid.v4();
+  var args = [this.contextVars].concat(Array.prototype.slice.call(arguments, 1) || []);
+  var cb = this._generateCallbackAssertion(&#x27;execute&#x27;, &#x27;execute&#x27;, script, args, hash);
+  this._addToActionQueue([script, args, hash], &#x27;execute&#x27;, cb);
+  return this;
+};
+
+/**
+ * Waits until a function returns true to process any next step.
+ *
+ * You can also set a callback on timeout using the onTimeout argument,
+ * and set the timeout using the timeout one, in milliseconds. The default timeout is set to 5000ms.
+ *
+ * @method waitFor
+ * @param {function} fn Async function that resolves an promise when ready
+ * @param {number} timeout Timeout in miliseconds
+ * @chainable
+ */
+
+Actions.prototype.waitFor = function (script, args, timeout) {
+  var hash = uuid.v4();
+  timeout = timeout || 5000;
+  var cb = this._generateCallbackAssertion(&#x27;waitFor&#x27;, &#x27;waitFor&#x27;, script, args, timeout, hash);
+  this._addToActionQueue([script, args, timeout, hash], &#x27;waitFor&#x27;, cb);
+  return this;
+};
+
 /**
  * Accepts an alert/prompt/confirm dialog. This is basically the same actions as when
  * you are clicking okay or hitting return in one of that dialogs.
@@ -1114,6 +1123,31 @@ Actions.prototype._generateCallbackAssertion = function (key, type) {
   var cb = function (data) {
     if (data &amp;&amp; data.key === key &amp;&amp; !this.uuids[data.uuid]) {
       if (!data || (data.value &amp;&amp; data.value === null)) {
+        data.value = &#x27;&#x27;;
+      }
+
+
+      if (key === &#x27;execute&#x27;) {
+        Object.keys(data.value.dalek).forEach(function (key) {
+          this.contextVars[key] = data.value.dalek[key];
+        }.bind(this));
+
+        data.value.test.forEach(function (test) {
+          this.reporter.emit(&#x27;report:assertion&#x27;, {
+            success: test.ok,
+            expected: true,
+            value: test.ok,
+            message: test.message,
+            type: &#x27;OK&#x27;
+          });
+
+          this.incrementExpectations();
+
+          if (!test.ok) {
+            this.incrementFailedAssertions();
+          }
+        }.bind(this));
+
         data.value = &#x27;&#x27;;
       }
 
