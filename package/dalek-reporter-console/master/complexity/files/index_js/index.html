@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">68.08</p>
+      <p class="stat">65.99</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">107</p>
+      <p class="stat">116</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">25.16</p>
+      <p class="stat">29.91</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.72</p>
+      <p class="stat">0.86</p>
     </div>
   </div>
 </div>
@@ -144,7 +144,7 @@ var reporter = null;
 
 var Reporter = function (opts) {
   var loglevel = opts &amp;&amp; opts.logLevel ? parseInt(opts.logLevel, 10) : 1;
-  this.level = (loglevel &gt;= 0 &amp;&amp; loglevel &lt;= 4) ? loglevel : 1;
+  this.level = (loglevel &gt;= -1 &amp;&amp; loglevel &lt;= 5) ? loglevel : 1;
   this.events = opts.events;
   this.importLogModule();
   this.startListening();
@@ -173,7 +173,11 @@ Reporter.prototype = {
    */
 
   importLogModule: function () {
-    var logModule = require(&#039;./lib/loglevel/level&#039; + this.level);
+    var logModule = require(&#039;./lib/levelbase&#039;);
+    if (this.level !== -1) {
+      logModule = require(&#039;./lib/loglevel/level&#039; + this.level);
+    }
+
     var methods = Object.keys(logModule.prototype);
 
     methods.forEach(function (method) {
@@ -214,8 +218,13 @@ Reporter.prototype = {
     this.events.on(&#039;report:log:driver&#039;, this.outputLogUser.bind(this, &#039;driver&#039;));
     this.events.on(&#039;report:log:browser&#039;, this.outputLogUser.bind(this, &#039;browser&#039;));
     this.events.on(&#039;report:log:user&#039;, this.outputLogUser.bind(this, &#039;user&#039;));
+    this.events.on(&#039;report:log:system:webdriver&#039;, this.outputLogUser.bind(this, &#039;webdriver&#039;));
 
-    // written reports
+    // errors &amp; warnings
+    this.events.on(&#039;error&#039;, this.outputError.bind(this));
+    this.events.on(&#039;warning&#039;, this.outputWarning.bind(this));
+
+    // reports
     this.events.on(&#039;report:written&#039;, this.outputReportWritten.bind(this));
 
     return this;

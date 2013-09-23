@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>LogLevel1 - dalek-reporter-console</title>
+    <title>lib/loglevel/level5.js - dalek-reporter-console</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -112,49 +112,68 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>LogLevel1 Module</h1>
-<div class="box clearfix meta">
-    
+                        <h1 class="file-heading">File: lib/loglevel/level5.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*!
+ *
+ * Copyright (c) 2013 Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ *
+ */
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/lib_loglevel_level1.js.html#l30"><code>lib&#x2F;loglevel&#x2F;level1.js:30</code></a>
-        </div>
-    
+&#x27;use strict&#x27;;
 
-    
-</div>
+// int. libs
+var Log = require(&#x27;./level4&#x27;);
 
+/**
+ * @class LogLevel5
+ */
 
+var LogLevel5 = Log;
 
-<div class="box intro">
-    
-</div>
+/**
+ * @module LogLevel5
+ */
 
+module.exports = LogLevel5;
 
+/**
+ * Outputs a system/driver/browser/user log message
+ *
+ * @method outputLogUser
+ * @param {string} type
+ * @param {string} message
+ * @chainable
+ */
 
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-        
-            <p>This module provides the following classes:</p>
+LogLevel5.prototype.outputLogUser = function (type, message) {
+  this.echo(this.symbol(&#x27;&lt;&gt;&#x27;), {nl: false, ec: true, foreground: &#x27;cyan&#x27;});
+  this.echo(&#x27;[&#x27; + type.toUpperCase() + &#x27;]&#x27;, {nl: false, foreground: &#x27;whiteBright&#x27;, background: &#x27;bgCyanBright&#x27;});
+  this.echo(&#x27; &#x27; + message, {foreground: &#x27;cyan&#x27;});
+  return this;
+};
 
-            <ul class="module-classes">
-            
-                <li class="module-class">
-                    <a href="../classes/LogLevel1.html">
-                        LogLevel1
-                    </a>
-                </li>
-            
-            </ul>
-        
-    </div>
-
-    <div class="yui3-u-1-2">
-        
-    </div>
+    </pre>
 </div>
 
                     </div>

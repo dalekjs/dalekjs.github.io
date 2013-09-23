@@ -53,6 +53,8 @@
             
                 <li><a href="../classes/LogLevel4.html">LogLevel4</a></li>
             
+                <li><a href="../classes/LogLevel5.html">LogLevel5</a></li>
+            
                 <li><a href="../classes/Reporter.html">Reporter</a></li>
             
             </ul>
@@ -70,6 +72,8 @@
                 <li><a href="../modules/LogLevel3.html">LogLevel3</a></li>
             
                 <li><a href="../modules/LogLevel4.html">LogLevel4</a></li>
+            
+                <li><a href="../modules/LogLevel5.html">LogLevel5</a></li>
             
                 <li><a href="../modules/Reporter.html">Reporter</a></li>
             
@@ -163,9 +167,11 @@ module.exports = LogLevel4;
  */
 
 LogLevel4.prototype.outputLogUser = function (type, message) {
-  this.echo(this.symbol(&#x27;&lt;&gt;&#x27;), {nl: false, ec: true, foreground: &#x27;cyan&#x27;});
-  this.echo(&#x27;[&#x27; + type.toUpperCase() + &#x27;]&#x27;, {nl: false, foreground: &#x27;whiteBright&#x27;, background: &#x27;bgCyanBright&#x27;});
-  this.echo(&#x27; &#x27; + message, {foreground: &#x27;cyan&#x27;});
+  if (type === &#x27;browser&#x27; &amp;&amp; type === &#x27;user&#x27;) {
+    this.echo(this.symbol(&#x27;&lt;&gt;&#x27;), {nl: false, ec: true, foreground: &#x27;cyan&#x27;});
+    this.echo(&#x27;[&#x27; + type.toUpperCase() + &#x27;]&#x27;, {nl: false, foreground: &#x27;whiteBright&#x27;, background: &#x27;bgCyanBright&#x27;});
+    this.echo(&#x27; &#x27; + message, {foreground: &#x27;cyan&#x27;});
+  }
   return this;
 };
 

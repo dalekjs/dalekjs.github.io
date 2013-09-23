@@ -53,6 +53,8 @@
             
                 <li><a href="../classes/LogLevel4.html">LogLevel4</a></li>
             
+                <li><a href="../classes/LogLevel5.html">LogLevel5</a></li>
+            
                 <li><a href="../classes/Reporter.html">Reporter</a></li>
             
             </ul>
@@ -70,6 +72,8 @@
                 <li><a href="../modules/LogLevel3.html">LogLevel3</a></li>
             
                 <li><a href="../modules/LogLevel4.html">LogLevel4</a></li>
+            
+                <li><a href="../modules/LogLevel5.html">LogLevel5</a></li>
             
                 <li><a href="../modules/Reporter.html">Reporter</a></li>
             
@@ -166,7 +170,7 @@ var reporter = null;
 
 var Reporter = function (opts) {
   var loglevel = opts &amp;&amp; opts.logLevel ? parseInt(opts.logLevel, 10) : 1;
-  this.level = (loglevel &gt;= 0 &amp;&amp; loglevel &lt;= 4) ? loglevel : 1;
+  this.level = (loglevel &gt;= -1 &amp;&amp; loglevel &lt;= 5) ? loglevel : 1;
   this.events = opts.events;
   this.importLogModule();
   this.startListening();
@@ -195,7 +199,11 @@ Reporter.prototype = {
    */
 
   importLogModule: function () {
-    var logModule = require(&#x27;./lib/loglevel/level&#x27; + this.level);
+    var logModule = require(&#x27;./lib/levelbase&#x27;);
+    if (this.level !== -1) {
+      logModule = require(&#x27;./lib/loglevel/level&#x27; + this.level);
+    }
+
     var methods = Object.keys(logModule.prototype);
 
     methods.forEach(function (method) {
@@ -236,8 +244,13 @@ Reporter.prototype = {
     this.events.on(&#x27;report:log:driver&#x27;, this.outputLogUser.bind(this, &#x27;driver&#x27;));
     this.events.on(&#x27;report:log:browser&#x27;, this.outputLogUser.bind(this, &#x27;browser&#x27;));
     this.events.on(&#x27;report:log:user&#x27;, this.outputLogUser.bind(this, &#x27;user&#x27;));
+    this.events.on(&#x27;report:log:system:webdriver&#x27;, this.outputLogUser.bind(this, &#x27;webdriver&#x27;));
 
-    // written reports
+    // errors &amp; warnings
+    this.events.on(&#x27;error&#x27;, this.outputError.bind(this));
+    this.events.on(&#x27;warning&#x27;, this.outputWarning.bind(this));
+
+    // reports
     this.events.on(&#x27;report:written&#x27;, this.outputReportWritten.bind(this));
 
     return this;

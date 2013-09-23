@@ -37,7 +37,7 @@
 
 <div class="jumbotron">
   <div class="container">
-    <h1>lib/levelbase.js</h1>
+    <h1>lib/loglevel/level5.js</h1>
   </div>
 </div>
 
@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">74.70</p>
+      <p class="stat">62.72</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">293</p>
+      <p class="stat">32</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">32.98</p>
+      <p class="stat">7.45</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.83</p>
+      <p class="stat">0.15</p>
     </div>
   </div>
 </div>
@@ -116,295 +116,34 @@
 
 &#039;use strict&#039;;
 
-// ext. libs
-var clc = require(&#039;cli-color&#039;);
-var util = require(&#039;util&#039;);
+// int. libs
+var Log = require(&#039;./level4&#039;);
 
 /**
- * @class LevelBase
- * @constructor
- * @param {object} opts
+ * @class LogLevel5
  */
 
-var LevelBase = function (opts) {
-  this.noColor = !!(opts &amp;&amp; opts.noColor);
-  this.noSymbols = !!(opts &amp;&amp; opts.noSymbols);
-};
+var LogLevel5 = Log;
 
 /**
- * @module LevelBase
+ * @module LogLevel5
  */
 
-module.exports = LevelBase;
+module.exports = LogLevel5;
 
 /**
- * Outputs a string
- *
- * @method outputTestStarted
- * @param {object} data
- * @chainable
- */
-
-LevelBase.prototype.echo = function (message, options) {
-  options = options || {};
-  var echo = options.nl === false ? util.print : util.puts;
-  var coloredOutput = clc;
-  message = options.ec === true ? message + &#039; &#039; : message;
-
-  // should a newline be outputted before the current message
-  if (options.pnl) {
-    util.puts(&#039;&#039;);
-  }
-
-  // output a message without any colors
-  if (this.noColor) {
-    echo(message);
-    return this;
-  }
-
-  // check if we have a foreground color, then apply
-  if (options.foreground) {
-    coloredOutput = coloredOutput[options.foreground];
-  }
-
-  // check if we have a font style, then apply
-  if (options.style) {
-    coloredOutput = coloredOutput[options.style];
-  }
-
-  // check if we have a background color, then apply
-  if (options.background) {
-    coloredOutput = coloredOutput[options.background];
-  }
-
-  // check if we need to indent the string
-  if (options.indent) {
-    var indention = 0;
-    for (var i = 0; i &lt;= indention; i++) {
-      indention += &#039; &#039;;
-    }
-    message = indention + message;
-  }
-
-  // output the message
-  echo(coloredOutput(message));
-  return this;
-};
-
-/**
- * Outputs a symbol
- *
- * @method outputTestStarted
- * @param {object} data
- * @return {string} symbol
- */
-
-LevelBase.prototype.symbol = function (symbol) {
-  if (this.noSymbols || process.platform === &#039;win32&#039;) {
-    return symbol;
-  }
-
-  // switch to a nicer UTF-8 symbol
-  switch (symbol) {
-  case &#039;*&#039;:
-    symbol = &#039;✔&#039;;
-    break;
-  case &#039;x&#039;:
-    symbol = &#039;✘&#039;;
-    break;
-  case &#039;&gt;&#039;:
-    symbol = &#039;▶&#039;;
-    break;
-  case &#039;-&gt;&#039;:
-    symbol = &#039;↝&#039;;
-    break;
-  case &#039;&gt;&gt;&#039;:
-    symbol = &#039;&gt;&gt;&#039;;
-    break;
-  case &#039;&lt;&gt;&#039;:
-    symbol = &#039;☁&#039;;
-    break;
-  }
-
-  return symbol;
-};
-
-/**
- * Does nothing
- *
- * @method outputRunnerStarted
- * @param {object} data
- * @chainable
- */
-
-LevelBase.prototype.outputRunnerStarted = function () {
-  return this;
-};
-
-/**
- * Does nothing
- *
- * @method outputTestFinished
- * @param {object} data
- * @chainable
- */
-
-LevelBase.prototype.outputTestFinished = function () {
-  return this;
-};
-
-/**
- * Does nothing
- *
- * @method outputRunnerFinished
- * @param {object} data
- * @chainable
- */
-
-LevelBase.prototype.outputRunnerFinished = function () {
-  return this;
-};
-
-/**
- * Does nothing
- *
- * @method outputAssertionResult
- * @param {object} data
- * @chainable
- */
-
-LevelBase.prototype.outputAssertionResult = function () {
-  return this;
-};
-
-/**
- * Does nothing
- *
- * @method outputRunBrowser
- * @param {object} browser
- * @chainable
- */
-
-LevelBase.prototype.outputRunBrowser = function () {
-  return this;
-};
-
-/**
- * Does nothing
- *
- * @method outputAction
- * @chainable
- */
-
-LevelBase.prototype.outputAction = function () {
-  return this;
-};
-
-/**
- * Does nothing
- *
- * @method outputAssertionExpecation
- * @param {object} data
- * @chainable
- */
-
-LevelBase.prototype.outputAssertionExpecation = function () {
-  return this;
-};
-
-/**
- * Does nothing
- *
- * @method outputAction
- * @param {object} data
- * @chainable
- */
-
-LevelBase.prototype.outputAction = function () {
-  return this;
-};
-
-/**
- * Does nothing
- *
- * @method outputTestStarted
- * @param {object} data
- * @chainable
- */
-
-LevelBase.prototype.outputTestStarted = function () {
-  return this;
-};
-
-/**
- * Does nothing
+ * Outputs a system/driver/browser/user log message
  *
  * @method outputLogUser
- * @param {object} data
+ * @param {string} type
+ * @param {string} message
  * @chainable
  */
 
-LevelBase.prototype.outputLogUser = function () {
-  return this;
-};
-
-/**
- * Does nothing
- *
- * @method outputBrowserVersion
- * @param {object} data
- * @chainable
- */
-
-LevelBase.prototype.outputBrowserVersion = function () {
-  return this;
-};
-
-/**
- * Does nothing
- *
- * @method outputOSVersion
- * @param {object} data
- * @chainable
- */
-
-LevelBase.prototype.outputOSVersion = function () {
-  return this;
-};
-
-/**
- * Does nothing
- *
- * @method outputReportWritten
- * @param {object} data
- * @chainable
- */
-
-LevelBase.prototype.outputReportWritten = function () {
-  return this;
-};
-
-/**
- * Does nothing
- *
- * @method outputWarning
- * @param {object} data
- * @chainable
- */
-
-LevelBase.prototype.outputWarning = function () {
-  return this;
-};
-
-/**
- * Does nothing
- *
- * @method outputError
- * @param {object} data
- * @chainable
- */
-
-LevelBase.prototype.outputError = function () {
+LogLevel5.prototype.outputLogUser = function (type, message) {
+  this.echo(this.symbol(&#039;&lt;&gt;&#039;), {nl: false, ec: true, foreground: &#039;cyan&#039;});
+  this.echo(&#039;[&#039; + type.toUpperCase() + &#039;]&#039;, {nl: false, foreground: &#039;whiteBright&#039;, background: &#039;bgCyanBright&#039;});
+  this.echo(&#039; &#039; + message, {foreground: &#039;cyan&#039;});
   return this;
 };</textarea>
   </div>

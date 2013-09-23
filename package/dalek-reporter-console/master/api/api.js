@@ -7,6 +7,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "LogLevel2",
         "LogLevel3",
         "LogLevel4",
+        "LogLevel5",
         "Reporter"
     ],
     "modules": [
@@ -16,6 +17,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "LogLevel2",
         "LogLevel3",
         "LogLevel4",
+        "LogLevel5",
         "Reporter"
     ],
     "allModules": [
@@ -42,6 +44,10 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "LogLevel4",
             "name": "LogLevel4"
+        },
+        {
+            "displayName": "LogLevel5",
+            "name": "LogLevel5"
         },
         {
             "displayName": "Reporter",

@@ -61,6 +61,17 @@
             "fors": {},
             "namespaces": {}
         },
+        "lib/loglevel/level5.js": {
+            "name": "lib/loglevel/level5.js",
+            "modules": {
+                "LogLevel5": 1
+            },
+            "classes": {
+                "LogLevel5": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "lib/levelbase.js": {
             "name": "lib/levelbase.js",
             "modules": {
@@ -69,13 +80,6 @@
             "classes": {
                 "LevelBase": 1
             },
-            "fors": {},
-            "namespaces": {}
-        },
-        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
-            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
-            "modules": {},
-            "classes": {},
             "fors": {},
             "namespaces": {}
         },
@@ -150,6 +154,18 @@
             "namespaces": {},
             "tag": "module",
             "file": "lib/loglevel/level4.js",
+            "line": 30
+        },
+        "LogLevel5": {
+            "name": "LogLevel5",
+            "submodules": {},
+            "classes": {
+                "LogLevel5": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "lib/loglevel/level5.js",
             "line": 30
         },
         "LevelBase": {
@@ -274,6 +290,19 @@
             "file": "lib/loglevel/level4.js",
             "line": 30
         },
+        "LogLevel5": {
+            "name": "LogLevel5",
+            "shortname": "LogLevel5",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "LogLevel5",
+            "namespace": "",
+            "file": "lib/loglevel/level5.js",
+            "line": 30
+        },
         "LevelBase": {
             "name": "LevelBase",
             "shortname": "LevelBase",
@@ -350,6 +379,46 @@
         {
             "file": "lib/loglevel/level1.js",
             "line": 69,
+            "description": "Outputs a message when an error occurs",
+            "itemtype": "method",
+            "name": "outputError",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "LogLevel1"
+            },
+            "class": "LogLevel1",
+            "module": "LogLevel1"
+        },
+        {
+            "file": "lib/loglevel/level1.js",
+            "line": 83,
+            "description": "Outputs a message when a warning occurs",
+            "itemtype": "method",
+            "name": "outputWarning",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "LogLevel1"
+            },
+            "class": "LogLevel1",
+            "module": "LogLevel1"
+        },
+        {
+            "file": "lib/loglevel/level1.js",
+            "line": 97,
             "description": "Outputs a message when the testrunner has been finished",
             "itemtype": "method",
             "name": "outputRunnerFinished",
@@ -561,6 +630,28 @@
             "module": "LogLevel4"
         },
         {
+            "file": "lib/loglevel/level5.js",
+            "line": 42,
+            "description": "Outputs a system/driver/browser/user log message",
+            "itemtype": "method",
+            "name": "outputLogUser",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "message",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "LogLevel5",
+            "module": "LogLevel5"
+        },
+        {
             "file": "lib/levelbase.js",
             "line": 48,
             "description": "Outputs a string",
@@ -599,7 +690,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 137,
+            "line": 140,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputRunnerStarted",
@@ -616,7 +707,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 149,
+            "line": 152,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputTestFinished",
@@ -633,7 +724,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 161,
+            "line": 164,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputRunnerFinished",
@@ -650,7 +741,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 173,
+            "line": 176,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputAssertionResult",
@@ -667,7 +758,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 185,
+            "line": 188,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputRunBrowser",
@@ -684,7 +775,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 197,
+            "line": 200,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputAction",
@@ -694,7 +785,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 208,
+            "line": 211,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputAssertionExpecation",
@@ -711,7 +802,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 220,
+            "line": 223,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputAction",
@@ -728,7 +819,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 232,
+            "line": 235,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputTestStarted",
@@ -745,7 +836,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 244,
+            "line": 247,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputLogUser",
@@ -762,7 +853,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 256,
+            "line": 259,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputBrowserVersion",
@@ -779,7 +870,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 268,
+            "line": 271,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputOSVersion",
@@ -796,7 +887,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 280,
+            "line": 283,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputReportWritten",
@@ -812,10 +903,37 @@
             "module": "LevelBase"
         },
         {
-            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
-            "line": 1,
-            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
-            "class": "Reporter",
+            "file": "lib/levelbase.js",
+            "line": 295,
+            "description": "Does nothing",
+            "itemtype": "method",
+            "name": "outputWarning",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "LevelBase",
+            "module": "LevelBase"
+        },
+        {
+            "file": "lib/levelbase.js",
+            "line": 307,
+            "description": "Does nothing",
+            "itemtype": "method",
+            "name": "outputError",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "LevelBase",
             "module": "LevelBase"
         },
         {
@@ -837,7 +955,7 @@
         },
         {
             "file": "index.js",
-            "line": 93,
+            "line": 97,
             "description": "Connects to all the event listeners",
             "itemtype": "method",
             "name": "startListening",
@@ -861,10 +979,6 @@
         {
             "message": "unknown tag: api",
             "line": " index.js:30"
-        },
-        {
-            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
-            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
         }
     ]
 }

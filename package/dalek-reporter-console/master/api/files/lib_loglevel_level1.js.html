@@ -53,6 +53,8 @@
             
                 <li><a href="../classes/LogLevel4.html">LogLevel4</a></li>
             
+                <li><a href="../classes/LogLevel5.html">LogLevel5</a></li>
+            
                 <li><a href="../classes/Reporter.html">Reporter</a></li>
             
             </ul>
@@ -70,6 +72,8 @@
                 <li><a href="../modules/LogLevel3.html">LogLevel3</a></li>
             
                 <li><a href="../modules/LogLevel4.html">LogLevel4</a></li>
+            
+                <li><a href="../modules/LogLevel5.html">LogLevel5</a></li>
             
                 <li><a href="../modules/Reporter.html">Reporter</a></li>
             
@@ -177,6 +181,34 @@ LogLevel1.prototype.outputRunnerStarted = function () {
 
 LogLevel1.prototype.outputTestFinished = function (data) {
   this.echo(&#x27;.&#x27;, {nl: false, foreground: (data.status ? &#x27;greenBright&#x27; : &#x27;redBright&#x27;)});
+  return this;
+};
+
+/**
+ * Outputs a message when an error occurs
+ *
+ * @method outputError
+ * @param {object} data
+ * @return {LogLevel1}
+ */
+
+LogLevel1.prototype.outputError = function (data) {
+  this.echo(this.symbol(&#x27;&gt;&gt;&#x27;) + &#x27; ERROR:&#x27;, {nl: false, ec: true, foreground: &#x27;redBright&#x27;});
+  this.echo(String(data), {nl: true, foreground: &#x27;redBright&#x27;});
+  return this;
+};
+
+/**
+ * Outputs a message when a warning occurs
+ *
+ * @method outputWarning
+ * @param {object} data
+ * @return {LogLevel1}
+ */
+
+LogLevel1.prototype.outputWarning = function (data) {
+  this.echo(this.symbol(&#x27;&gt;&gt;&#x27;) + &#x27; WARNING:&#x27;, {nl: false, ec: true, foreground: &#x27;yellowBright&#x27;});
+  this.echo(String(data), {nl: true, foreground: &#x27;yellowBright&#x27;});
   return this;
 };
 

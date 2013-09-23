@@ -53,6 +53,8 @@
             
                 <li><a href="../classes/LogLevel4.html">LogLevel4</a></li>
             
+                <li><a href="../classes/LogLevel5.html">LogLevel5</a></li>
+            
                 <li><a href="../classes/Reporter.html">Reporter</a></li>
             
             </ul>
@@ -70,6 +72,8 @@
                 <li><a href="../modules/LogLevel3.html">LogLevel3</a></li>
             
                 <li><a href="../modules/LogLevel4.html">LogLevel4</a></li>
+            
+                <li><a href="../modules/LogLevel5.html">LogLevel5</a></li>
             
                 <li><a href="../modules/Reporter.html">Reporter</a></li>
             
@@ -240,6 +244,9 @@ LevelBase.prototype.symbol = function (symbol) {
   case &#x27;-&gt;&#x27;:
     symbol = &#x27;↝&#x27;;
     break;
+  case &#x27;&gt;&gt;&#x27;:
+    symbol = &#x27;&gt;&gt;&#x27;;
+    break;
   case &#x27;&lt;&gt;&#x27;:
     symbol = &#x27;☁&#x27;;
     break;
@@ -400,6 +407,30 @@ LevelBase.prototype.outputOSVersion = function () {
  */
 
 LevelBase.prototype.outputReportWritten = function () {
+  return this;
+};
+
+/**
+ * Does nothing
+ *
+ * @method outputWarning
+ * @param {object} data
+ * @chainable
+ */
+
+LevelBase.prototype.outputWarning = function () {
+  return this;
+};
+
+/**
+ * Does nothing
+ *
+ * @method outputError
+ * @param {object} data
+ * @chainable
+ */
+
+LevelBase.prototype.outputError = function () {
   return this;
 };
 
