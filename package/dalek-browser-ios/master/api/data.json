@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-browser-ios",
         "description": "iOS Safari bindings for DalekJS",
-        "version": "0.0.1",
+        "version": "0.0.3",
         "url": "http://dalekjs.com"
     },
     "files": {
