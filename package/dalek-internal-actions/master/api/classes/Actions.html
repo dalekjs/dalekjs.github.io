@@ -251,6 +251,13 @@ like clicking elements, open urls, filling out input fields, etc.</p>
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_execute">execute</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_forward">forward</a>
 
                                 
@@ -590,7 +597,7 @@ like clicking elements, open urls, filling out input fields, etc.</p>
             
         
         
-        <a href="../files/index.js.html#l1108"><code>index.js:1108</code></a>
+        <a href="../files/index.js.html#l1203"><code>index.js:1203</code></a>
         
         </p>
 
@@ -723,7 +730,7 @@ like clicking elements, open urls, filling out input fields, etc.</p>
             
         
         
-        <a href="../files/index.js.html#l1020"><code>index.js:1020</code></a>
+        <a href="../files/index.js.html#l1115"><code>index.js:1115</code></a>
         
         </p>
 
@@ -838,7 +845,7 @@ that the action has been successfully executed.</p>
             
         
         
-        <a href="../files/index.js.html#l810"><code>index.js:810</code></a>
+        <a href="../files/index.js.html#l895"><code>index.js:895</code></a>
         
         </p>
 
@@ -860,6 +867,9 @@ you are clicking okay or hitting return in one of that dialogs.</p>
     // alert is gone
     .accept()
     .done();</code></pre>
+<blockquote>
+<p>Note: Does not work in Firefox &amp; PhantomJS</p>
+</blockquote>
 
     </div>
 
@@ -929,7 +939,7 @@ you are clicking okay or hitting return in one of that dialogs.</p>
             
         
         
-        <a href="../files/index.js.html#l751"><code>index.js:751</code></a>
+        <a href="../files/index.js.html#l780"><code>index.js:780</code></a>
         
         </p>
 
@@ -950,6 +960,9 @@ Like you would do when using your keyboard.</p>
     .answer(&#39;Rose&#39;)
     .assert.text(&#39;#aquestion&#39;).is(&#39;Rose&#39;, &#39;Awesome she was!&#39;)
     .done();</code></pre>
+<blockquote>
+<p>Note: Does not work in Firefox &amp; PhantomJS</p>
+</blockquote>
 
     </div>
 
@@ -1031,7 +1044,7 @@ Like you would do when using your keyboard.</p>
             
         
         
-        <a href="../files/index.js.html#l538"><code>index.js:538</code></a>
+        <a href="../files/index.js.html#l556"><code>index.js:556</code></a>
         
         </p>
 
@@ -1107,7 +1120,7 @@ Like you would do when using your keyboard.</p>
             
         
         
-        <a href="../files/index.js.html#l566"><code>index.js:566</code></a>
+        <a href="../files/index.js.html#l584"><code>index.js:584</code></a>
         
         </p>
 
@@ -1134,6 +1147,9 @@ the HTML looks something like this (it does not really, but hey, lets assume thi
     .done();</code></pre>
 <p>By default, this performs a left click.
 In the future it might become the ability to also execute a &quot;right button&quot; click.</p>
+<blockquote>
+<p>Note: Does not work correctly in Firefox when used on <code>&lt;select&gt;</code> &amp; <code>&lt;option&gt;</code> elements</p>
+</blockquote>
 
     </div>
 
@@ -1205,7 +1221,7 @@ In the future it might become the ability to also execute a &quot;right button&q
             
         
         
-        <a href="../files/index.js.html#l840"><code>index.js:840</code></a>
+        <a href="../files/index.js.html#l928"><code>index.js:928</code></a>
         
         </p>
 
@@ -1228,9 +1244,133 @@ you are clicking cancel in one of that dialogs.</p>
     .dismiss()
     .assert.text(&#39;#nonono&#39;).is(&#39;:(&#39;, &#39;So sad&#39;)
     .done();</code></pre>
+<blockquote>
+<p>Note: Does not work in Firefox &amp; PhantomJS</p>
+</blockquote>
 
     </div>
 
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    <p>chainable</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_execute" class="method item">
+    <h3 class="name"><code>execute</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>script</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/index.js.html#l814"><code>index.js:814</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Executes a JavaScript function within the browser context</p>
+<pre><code class="lang-javascript"> test.open(&#39;http://adomain.com&#39;)
+    .execute(function () {
+      window.myFramework.addRow(&#39;foo&#39;);
+      window.myFramework.addRow(&#39;bar&#39;);
+    })
+    .done();</code></pre>
+<p>You can also apply arguments to the function</p>
+<pre><code class="lang-javascript"> test.open(&#39;http://adomain.com&#39;)
+    .execute(function (paramFoo, aBar) {
+      window.myFramework.addRow(paramFoo);
+      window.myFramework.addRow(aBar);
+    }, &#39;foo&#39;, &#39;bar&#39;)
+    .done();</code></pre>
+<blockquote>
+<p>Note: Buggy in Firefox</p>
+</blockquote>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">script</code>
+                        <span class="type">Function</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>JavaScript function that should be executed</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -1285,7 +1425,7 @@ you are clicking cancel in one of that dialogs.</p>
             
         
         
-        <a href="../files/index.js.html#l510"><code>index.js:510</code></a>
+        <a href="../files/index.js.html#l528"><code>index.js:528</code></a>
         
         </p>
 
@@ -1351,7 +1491,7 @@ you are clicking cancel in one of that dialogs.</p>
             
         
         
-        <a href="../files/index.js.html#l915"><code>index.js:915</code></a>
+        <a href="../files/index.js.html#l1008"><code>index.js:1008</code></a>
         
         </p>
 
@@ -1538,7 +1678,7 @@ TODO: IMPLEMENT</p>
             
         
         
-        <a href="../files/index.js.html#l645"><code>index.js:645</code></a>
+        <a href="../files/index.js.html#l667"><code>index.js:667</code></a>
         
         </p>
 
@@ -1736,7 +1876,7 @@ selector once instead of repeating it all over the place.</p>
             
         
         
-        <a href="../files/index.js.html#l487"><code>index.js:487</code></a>
+        <a href="../files/index.js.html#l505"><code>index.js:505</code></a>
         
         </p>
 
@@ -1807,7 +1947,7 @@ selector once instead of repeating it all over the place.</p>
             
         
         
-        <a href="../files/index.js.html#l871"><code>index.js:871</code></a>
+        <a href="../files/index.js.html#l962"><code>index.js:962</code></a>
         
         </p>
 
@@ -1824,10 +1964,22 @@ and a height of 1024px. You can specify your own default in the configuration.</
 <pre><code class="lang-html">&lt;div&gt;
   &lt;span id=&quot;magicspan&quot;&gt;The span in the fireplace&lt;/span&gt;
 &lt;/div&gt;</code></pre>
-<p><code>&#x60;</code>css</p>
-<h1>magicspan {</h1>
-<p>  display: inline;
-}</p>
+<pre><code class="lang-css">#magicspan {
+  display: inline;
+}
+
+// @media all and (max-width: 500px) and (min-width: 300px)
+#magicspan {
+  display: none;
+}</code></pre>
+<pre><code class="lang-javascript"> test.open(&#39;http://adomain.com&#39;)
+    .assert.visible(&#39;#magicspan&#39;, &#39;Big screen, visible span&#39;)
+    .resize({width: 400, height: 500})
+    .assert.notVisible(&#39;#magicspan&#39;, &#39;Small screen, no visible span magic!&#39;)
+    .done();</code></pre>
+<blockquote>
+<p>Note: Does not work in Firefox</p>
+</blockquote>
 
     </div>
 
@@ -1909,7 +2061,7 @@ and a height of 1024px. You can specify your own default in the configuration.</
             
         
         
-        <a href="../files/index.js.html#l398"><code>index.js:398</code></a>
+        <a href="../files/index.js.html#l416"><code>index.js:416</code></a>
         
         </p>
 
@@ -2048,7 +2200,7 @@ test.screenshot(&#39;my/page/in_time/:datetime/homepage&#39;);</code></pre>
             
         
         
-        <a href="../files/index.js.html#l721"><code>index.js:721</code></a>
+        <a href="../files/index.js.html#l745"><code>index.js:745</code></a>
         
         </p>
 
@@ -2059,11 +2211,16 @@ test.screenshot(&#39;my/page/in_time/:datetime/homepage&#39;);</code></pre>
     </div>
 
     <div class="description">
-        <p>This acts just like .type() with a key difference.  This action can be used on non-input elements (useful for test site wide keyboard shortcuts and the like).  So assumeing we have a keyboard shortcut that display an alert box, we could test that with something like this:</p>
+        <p>This acts just like .type() with a key difference.
+This action can be used on non-input elements (useful for test site wide keyboard shortcuts and the like).
+So assumeing we have a keyboard shortcut that display an alert box, we could test that with something like this:</p>
 <pre><code class="lang-javascript">test.open(&#39;http://home.dalek.com&#39;)
     .sendKeys(&#39;body&#39;, &#39;\uE00C&#39;)
     .assert.dialogText(&#39;press the escape key give this alert text&#39;)
     .done();</code></pre>
+<blockquote>
+<p>Note: Does not work correctly in Firefox with special keys</p>
+</blockquote>
 
     </div>
 
@@ -2149,7 +2306,7 @@ test.screenshot(&#39;my/page/in_time/:datetime/homepage&#39;);</code></pre>
             
         
         
-        <a href="../files/index.js.html#l957"><code>index.js:957</code></a>
+        <a href="../files/index.js.html#l1052"><code>index.js:1052</code></a>
         
         </p>
 
@@ -2261,6 +2418,7 @@ $ dalek</code></pre>
     .open(&#39;http://admin.therift.com&#39;);</code></pre>
 <p>If both, dalek variables &amp; env variables are set, the dalek variables win.
 For more information about this, I recommend to check out the <a href="/docs/config.html">configuration docs</a></p>
+<p>TODO: IMPLEMENT</p>
 
     </div>
 
@@ -2374,7 +2532,7 @@ For more information about this, I recommend to check out the <a href="/docs/con
             
         
         
-        <a href="../files/index.js.html#l1075"><code>index.js:1075</code></a>
+        <a href="../files/index.js.html#l1170"><code>index.js:1170</code></a>
         
         </p>
 
@@ -2495,7 +2653,7 @@ For more information about this, I recommend to check out the <a href="/docs/con
             
         
         
-        <a href="../files/index.js.html#l610"><code>index.js:610</code></a>
+        <a href="../files/index.js.html#l630"><code>index.js:630</code></a>
         
         </p>
 
@@ -2515,6 +2673,9 @@ For more information about this, I recommend to check out the <a href="/docs/con
     .type(&#39;#truth&#39;, &#39;out there is&#39;)
     .submit(&#39;#skaaro&#39;)
     .done();</code></pre>
+<blockquote>
+<p>Note: Does not work in Firefox yet</p>
+</blockquote>
 
     </div>
 
@@ -2594,7 +2755,7 @@ For more information about this, I recommend to check out the <a href="/docs/con
             
         
         
-        <a href="../files/index.js.html#l177"><code>index.js:177</code></a>
+        <a href="../files/index.js.html#l179"><code>index.js:179</code></a>
         
         </p>
 
@@ -2616,10 +2777,13 @@ Btw.: The domain of the IFrame can be whatever you want, this method has no same
 &lt;/div&gt;</code></pre>
 <pre><code class="lang-javascript"> test.open(&#39;http://adomain.withiframe.com&#39;)
    .assert.title().is(&#39;Title of a page that embeds an iframe&#39;)
-   .toIFrame(&#39;#login&#39;)
+   .toFrame(&#39;#login&#39;)
      .assert.title().is(&#39;Title of a page that can be embedded as an iframe&#39;)
    .toParent()
    .done();</code></pre>
+<blockquote>
+<p>NOTE: Buggy in Firefox</p>
+</blockquote>
 
     </div>
 
@@ -2689,7 +2853,7 @@ Btw.: The domain of the IFrame can be whatever you want, this method has no same
             
         
         
-        <a href="../files/index.js.html#l220"><code>index.js:220</code></a>
+        <a href="../files/index.js.html#l224"><code>index.js:224</code></a>
         
         </p>
 
@@ -2707,11 +2871,14 @@ switched to an iFrame context</p>
 &lt;/div&gt;</code></pre>
 <pre><code class="lang-javascript"> test.open(&#39;http://adomain.withiframe.com&#39;)
    .assert.title().is(&#39;Title of a page that embeds an iframe&#39;)
-   .toIFrame(&#39;#login&#39;)
+   .toFrame(&#39;#login&#39;)
      .assert.title().is(&#39;Title of a page that can be embedded as an iframe&#39;)
    .toParent()
    .assert.title().is(&#39;Title of a page that embeds an iframe&#39;)
    .done();</code></pre>
+<blockquote>
+<p>NOTE: Buggy in Firefox</p>
+</blockquote>
 
     </div>
 
@@ -2757,7 +2924,7 @@ switched to an iFrame context</p>
             
         
         
-        <a href="../files/index.js.html#l290"><code>index.js:290</code></a>
+        <a href="../files/index.js.html#l298"><code>index.js:298</code></a>
         
         </p>
 
@@ -2780,6 +2947,9 @@ switched to a different windoe context</p>
    .toParentWindow()
    .assert.title().is(&#39;Title of a page that can open a popup window&#39;)
    .done();</code></pre>
+<blockquote>
+<p>NOTE: Buggy in Firefox</p>
+</blockquote>
 
     </div>
 
@@ -2835,7 +3005,7 @@ switched to a different windoe context</p>
             
         
         
-        <a href="../files/index.js.html#l252"><code>index.js:252</code></a>
+        <a href="../files/index.js.html#l258"><code>index.js:258</code></a>
         
         </p>
 
@@ -2861,6 +3031,9 @@ Btw.: The domain of the window can be whatever you want, this method has no same
      .assert.title().is(&#39;Google&#39;)
    .toParentWindow()
    .done();</code></pre>
+<blockquote>
+<p>NOTE: Buggy in Firefox</p>
+</blockquote>
 
     </div>
 
@@ -2946,7 +3119,7 @@ Btw.: The domain of the window can be whatever you want, this method has no same
             
         
         
-        <a href="../files/index.js.html#l671"><code>index.js:671</code></a>
+        <a href="../files/index.js.html#l693"><code>index.js:693</code></a>
         
         </p>
 
@@ -2976,6 +3149,9 @@ do when using your keyboard.</p>
  .done();</code></pre>
 You can go <a href="https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element/:id/value">here</a> to read up on special keys and unicodes for them (note that a code of U+EXXX is actually written in code as \uEXXX).</li>
 </ul>
+<blockquote>
+<p>Note: Does not work correctly in Firefox with special keys</p>
+</blockquote>
 
     </div>
 
@@ -3071,7 +3247,7 @@ You can go <a href="https://code.google.com/p/selenium/wiki/JsonWireProtocol#/se
             
         
         
-        <a href="../files/index.js.html#l447"><code>index.js:447</code></a>
+        <a href="../files/index.js.html#l465"><code>index.js:465</code></a>
         
         </p>
 
@@ -3150,6 +3326,12 @@ You can go <a href="https://code.google.com/p/selenium/wiki/JsonWireProtocol#/se
             
                 <li class="arg">
                     
+                        <code>args</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
                         <code>timeout</code>
                     
                 </li>
@@ -3185,7 +3367,7 @@ You can go <a href="https://code.google.com/p/selenium/wiki/JsonWireProtocol#/se
             
         
         
-        <a href="../files/index.js.html#l790"><code>index.js:790</code></a>
+        <a href="../files/index.js.html#l853"><code>index.js:853</code></a>
         
         </p>
 
@@ -3199,6 +3381,20 @@ You can go <a href="https://code.google.com/p/selenium/wiki/JsonWireProtocol#/se
         <p>Waits until a function returns true to process any next step.</p>
 <p>You can also set a callback on timeout using the onTimeout argument,
 and set the timeout using the timeout one, in milliseconds. The default timeout is set to 5000ms.</p>
+<pre><code class="lang-javascript"> test.open(&#39;http://adomain.com&#39;)
+    .waitFor(function () {
+      return window.myCheck === true;
+    })
+    .done();</code></pre>
+<p>You can also apply arguments to the function, as well as a timeout</p>
+<pre><code class="lang-javascript"> test.open(&#39;http://adomain.com&#39;)
+    .waitFor(function (aCheck) {
+      return window.myThing === aCheck;
+    }, &#39;aValue&#39;, 10000)
+    .done();</code></pre>
+<blockquote>
+<p>Note: Buggy in Firefox</p>
+</blockquote>
 
     </div>
 
@@ -3218,6 +3414,22 @@ and set the timeout using the timeout one, in milliseconds. The default timeout 
 
                     <div class="param-description">
                         <p>Async function that resolves an promise when ready</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">args</code>
+                        <span class="type">Array</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Additional arguments</p>
 
                     </div>
 
@@ -3300,7 +3512,7 @@ and set the timeout using the timeout one, in milliseconds. The default timeout 
             
         
         
-        <a href="../files/index.js.html#l981"><code>index.js:981</code></a>
+        <a href="../files/index.js.html#l1076"><code>index.js:1076</code></a>
         
         </p>
 
@@ -3425,7 +3637,7 @@ and appends new elements, when the call has been successfully answered:</p>
             
         
         
-        <a href="../files/index.js.html#l322"><code>index.js:322</code></a>
+        <a href="../files/index.js.html#l332"><code>index.js:332</code></a>
         
         </p>
 
@@ -3437,6 +3649,7 @@ and appends new elements, when the call has been successfully answered:</p>
 
     <div class="description">
         <p>Wait until a resource that matches the given testFx is loaded to process a next step.</p>
+<p>TODO: IMPLEMENT</p>
 
     </div>
 
@@ -3538,7 +3751,7 @@ and appends new elements, when the call has been successfully answered:</p>
             
         
         
-        <a href="../files/index.js.html#l338"><code>index.js:338</code></a>
+        <a href="../files/index.js.html#l350"><code>index.js:350</code></a>
         
         </p>
 
@@ -3550,6 +3763,7 @@ and appends new elements, when the call has been successfully answered:</p>
 
     <div class="description">
         <p>Waits until the passed text is present in the page contents before processing the immediate next step.</p>
+<p>TODO: IMPLEMENT</p>
 
     </div>
 
@@ -3651,7 +3865,7 @@ and appends new elements, when the call has been successfully answered:</p>
             
         
         
-        <a href="../files/index.js.html#l354"><code>index.js:354</code></a>
+        <a href="../files/index.js.html#l368"><code>index.js:368</code></a>
         
         </p>
 
@@ -3663,6 +3877,7 @@ and appends new elements, when the call has been successfully answered:</p>
 
     <div class="description">
         <p>Waits until an element matching the provided selector expression is visible in the remote DOM to process a next step.</p>
+<p>TODO: IMPLEMENT</p>
 
     </div>
 
@@ -3764,7 +3979,7 @@ and appends new elements, when the call has been successfully answered:</p>
             
         
         
-        <a href="../files/index.js.html#l376"><code>index.js:376</code></a>
+        <a href="../files/index.js.html#l392"><code>index.js:392</code></a>
         
         </p>
 
@@ -3776,6 +3991,7 @@ and appends new elements, when the call has been successfully answered:</p>
 
     <div class="description">
         <p>Waits until an element matching the provided selector expression is no longer visible in remote DOM to process a next step.</p>
+<p>TODO: IMPLEMENT</p>
 
     </div>
 
