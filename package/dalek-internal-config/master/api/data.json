@@ -6,13 +6,6 @@
         "url": "http://dalekjs.com"
     },
     "files": {
-        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
-            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
         "index.js": {
             "name": "index.js",
             "modules": {
@@ -40,7 +33,7 @@
             },
             "tag": "module",
             "file": "index.js",
-            "line": 49,
+            "line": 51,
             "description": "Parses config data & loads config files",
             "part": "Config",
             "api": ""
@@ -58,17 +51,11 @@
             "module": "DalekJS",
             "namespace": "Dalek",
             "file": "index.js",
-            "line": 49,
+            "line": 51,
             "description": "Parses config data & loads config files"
         }
     },
     "classitems": [
-        {
-            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
-            "line": 1,
-            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
-            "class": "Dalek.Config"
-        },
         {
             "file": "index.js",
             "line": 35,
@@ -90,7 +77,7 @@
         },
         {
             "file": "index.js",
-            "line": 61,
+            "line": 63,
             "description": "Checks if a config file is available",
             "itemtype": "method",
             "name": "checkAvailabilityOfConfigFile",
@@ -111,7 +98,7 @@
         },
         {
             "file": "index.js",
-            "line": 80,
+            "line": 82,
             "description": "Iterator function that checks the existance of a given file",
             "itemtype": "method",
             "name": "_checkFile",
@@ -125,6 +112,16 @@
                     "name": "ext",
                     "description": "File extension to check",
                     "type": "String"
+                },
+                {
+                    "name": "idx",
+                    "description": "Iteration index",
+                    "type": "Integer"
+                },
+                {
+                    "name": "data",
+                    "description": "File data",
+                    "type": "Object"
                 }
             ],
             "return": {
@@ -139,7 +136,35 @@
         },
         {
             "file": "index.js",
-            "line": 99,
+            "line": 107,
+            "description": "Iterator function that checks the existance of a the default file",
+            "itemtype": "method",
+            "name": "_checkDefaultFile",
+            "params": [
+                {
+                    "name": "ext",
+                    "description": "File extension to check",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "File data",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "config File path",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Config",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 128,
             "description": "Loads a file & merges the results with the\ncommandline options & the default config",
             "itemtype": "method",
             "name": "load",
@@ -170,7 +195,7 @@
         },
         {
             "file": "index.js",
-            "line": 122,
+            "line": 155,
             "description": "Loads a config file & parses it based on the file extension",
             "itemtype": "method",
             "name": "loadFile",
@@ -191,7 +216,7 @@
         },
         {
             "file": "index.js",
-            "line": 135,
+            "line": 168,
             "description": "Fetches & returns a config item",
             "itemtype": "method",
             "name": "get",
@@ -212,7 +237,7 @@
         },
         {
             "file": "index.js",
-            "line": 147,
+            "line": 180,
             "description": "Loads a json config file",
             "itemtype": "method",
             "name": "readjson",
@@ -226,7 +251,7 @@
         },
         {
             "file": "index.js",
-            "line": 159,
+            "line": 192,
             "description": "Loads a json5 config file",
             "itemtype": "method",
             "name": "readJson5",
@@ -240,7 +265,7 @@
         },
         {
             "file": "index.js",
-            "line": 171,
+            "line": 204,
             "description": "Loads a yaml config file",
             "itemtype": "method",
             "name": "readyaml",
@@ -254,7 +279,7 @@
         },
         {
             "file": "index.js",
-            "line": 183,
+            "line": 216,
             "description": "Loads a javascript config file",
             "itemtype": "method",
             "name": "readjs",
@@ -268,7 +293,7 @@
         },
         {
             "file": "index.js",
-            "line": 195,
+            "line": 227,
             "description": "Loads a coffescript config file",
             "itemtype": "method",
             "name": "readcoffee",
@@ -282,7 +307,7 @@
         },
         {
             "file": "index.js",
-            "line": 207,
+            "line": 238,
             "description": "Verifies if a reporter is given, exists & is valid",
             "itemtype": "method",
             "name": "verifyReporters",
@@ -296,7 +321,7 @@
         },
         {
             "file": "index.js",
-            "line": 218,
+            "line": 249,
             "description": "Verifies if a driver is given, exists & is valid",
             "itemtype": "method",
             "name": "verifyDrivers",
@@ -310,7 +335,7 @@
         },
         {
             "file": "index.js",
-            "line": 229,
+            "line": 260,
             "description": "Verifies if a driver is given, exists & is valid",
             "itemtype": "method",
             "name": "_verify",
@@ -343,7 +368,7 @@
         },
         {
             "file": "index.js",
-            "line": 244,
+            "line": 275,
             "description": "Verifies if a driver is given, exists & is valid",
             "itemtype": "method",
             "name": "_verifyIterator",
@@ -377,19 +402,15 @@
     "warnings": [
         {
             "message": "unknown tag: part",
-            "line": " index.js:49"
+            "line": " index.js:51"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:49"
+            "line": " index.js:51"
         },
         {
             "message": "unknown tag: priavte",
-            "line": " index.js:244"
-        },
-        {
-            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
-            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
+            "line": " index.js:275"
         },
         {
             "message": "Missing item type\nConfigures the config instance",

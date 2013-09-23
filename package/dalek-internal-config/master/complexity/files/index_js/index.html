@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">81.22</p>
+      <p class="stat">78.25</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">237</p>
+      <p class="stat">268</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">21.27</p>
+      <p class="stat">29.89</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.91</p>
+      <p class="stat">1.14</p>
     </div>
   </div>
 </div>
@@ -132,9 +132,11 @@ require(&#039;coffee-script&#039;);
  * @constructor
  */
 
-var Config = function (defaults, opts) {
+var Config = function (defaults, opts, advOpts) {
+  this.customFilename = null;
   this.defaultFilename = &#039;Dalekfile&#039;;
   this.supportedExtensions = [&#039;yml&#039;, &#039;json5&#039;, &#039;json&#039;, &#039;js&#039;, &#039;coffee&#039;];
+  this.advancedOptions = advOpts;
   this.config = this.load(defaults, opts.config, opts);
 };
 
@@ -175,17 +177,44 @@ Config.prototype = {
    * @method _checkFile
    * @param {String} previousValue Last iterations result
    * @param {String} ext File extension to check
+   * @param {integer} idx Iteration index 
+   * @param {object} data File data
    * @return {String} config File path
    * @private
    */
 
-  _checkFile: function (previousValue, ext) {
-    var fileToCheck = this.defaultFilename + &#039;.&#039; + ext;
+  _checkFile: function (previousValue, ext, idx, data) {
+    if (previousValue.length &gt; 6) {
+      return previousValue;
+    }
+
+    var fileToCheck = this.defaultFilename + &#039;.&#039; + previousValue;
     if (fs.existsSync(fileToCheck)) {
       return fs.realpathSync(fileToCheck);
     }
 
-    return previousValue;
+    return this._checkDefaultFile(ext, data);
+  },
+
+  /**
+   * Iterator function that checks the existance of a the default file
+   *
+   * @method _checkDefaultFile
+   * @param {String} ext File extension to check
+   * @param {object} data File data
+   * @return {String} config File path
+   * @private
+   */
+
+  _checkDefaultFile: function (ext, data) {
+    if (ext === data[data.length - 1]) {
+      var fileToCheck = this.defaultFilename + &#039;.&#039; + ext;
+      if (fs.existsSync(fileToCheck)) {
+        return fs.realpathSync(fileToCheck);
+      }
+    }
+
+    return ext;
   },
 
   /**
@@ -201,14 +230,18 @@ Config.prototype = {
 
   load: function (defaults, pathname, opts) {
     var file = this.checkAvailabilityOfConfigFile(pathname);
-    var data = this.loadFile(file);
+    var data = {};
+
+    if (!this.advancedOptions || this.advancedOptions.dalekfile !== false) {
+      data = this.loadFile(file);
+    }
 
     // remove the tests property if the array length is 0
     if (opts.tests.length === 0) {
       delete opts.tests;
     }
 
-    return _.merge(defaults, data, opts);
+    return _.merge(defaults, data, opts, (this.advancedOptions || {}));
   },
 
   /**
@@ -243,8 +276,8 @@ Config.prototype = {
    * @return {object} data Parsed config data
    */
 
-  readjson: function () {
-    var contents = fs.readFileSync(this.defaultFilename + &#039;.json&#039;, &#039;utf8&#039;);
+  readjson: function (pathname) {
+    var contents = fs.readFileSync((pathname || this.defaultFilename + &#039;.json&#039;), &#039;utf8&#039;);
     return JSON.parse(contents);
   },
 
@@ -255,8 +288,8 @@ Config.prototype = {
    * @return {object} data Parsed config data
    */
 
-  readjson5: function () {
-    var contents = fs.readFileSync(this.defaultFilename + &#039;.json5&#039;, &#039;utf8&#039;);
+  readjson5: function (pathname) {
+    var contents = fs.readFileSync((pathname || this.defaultFilename + &#039;.json5&#039;), &#039;utf8&#039;);
     return JSON5.parse(contents);
   },
 
@@ -267,8 +300,8 @@ Config.prototype = {
    * @return {object} data Parsed config data
    */
 
-  readyaml: function () {
-    var contents = fs.readFileSync(this.defaultFilename + &#039;.yml&#039;, &#039;utf8&#039;);
+  readyml: function (pathname) {
+    var contents = fs.readFileSync((pathname || this.defaultFilename + &#039;.yml&#039;), &#039;utf8&#039;);
     return yaml.load(contents);
   },
 
@@ -279,9 +312,8 @@ Config.prototype = {
    * @return {object} data Parsed config data
    */
 
-  readjs: function () {
-    var fn = require(this.defaultFilename, &#039;utf8&#039;);
-    return fn();
+  readjs: function (pathname) {
+    return require((pathname || this.defaultFilename));
   },
 
   /**
@@ -291,9 +323,8 @@ Config.prototype = {
    * @return {object} data Parsed config data
    */
 
-  readcoffee: function () {
-    var fn = require(this.defaultFilename, &#039;utf8&#039;);
-    return fn();
+  readcoffee: function (pathname) {
+    return require((pathname || this.defaultFilename));
   },
 
   /**

@@ -130,9 +130,11 @@ require(&#x27;coffee-script&#x27;);
  * @constructor
  */
 
-var Config = function (defaults, opts) {
+var Config = function (defaults, opts, advOpts) {
+  this.customFilename = null;
   this.defaultFilename = &#x27;Dalekfile&#x27;;
   this.supportedExtensions = [&#x27;yml&#x27;, &#x27;json5&#x27;, &#x27;json&#x27;, &#x27;js&#x27;, &#x27;coffee&#x27;];
+  this.advancedOptions = advOpts;
   this.config = this.load(defaults, opts.config, opts);
 };
 
@@ -173,17 +175,44 @@ Config.prototype = {
    * @method _checkFile
    * @param {String} previousValue Last iterations result
    * @param {String} ext File extension to check
+   * @param {integer} idx Iteration index 
+   * @param {object} data File data
    * @return {String} config File path
    * @private
    */
 
-  _checkFile: function (previousValue, ext) {
-    var fileToCheck = this.defaultFilename + &#x27;.&#x27; + ext;
+  _checkFile: function (previousValue, ext, idx, data) {
+    if (previousValue.length &gt; 6) {
+      return previousValue;
+    }
+
+    var fileToCheck = this.defaultFilename + &#x27;.&#x27; + previousValue;
     if (fs.existsSync(fileToCheck)) {
       return fs.realpathSync(fileToCheck);
     }
 
-    return previousValue;
+    return this._checkDefaultFile(ext, data);
+  },
+
+  /**
+   * Iterator function that checks the existance of a the default file
+   *
+   * @method _checkDefaultFile
+   * @param {String} ext File extension to check
+   * @param {object} data File data
+   * @return {String} config File path
+   * @private
+   */
+
+  _checkDefaultFile: function (ext, data) {
+    if (ext === data[data.length - 1]) {
+      var fileToCheck = this.defaultFilename + &#x27;.&#x27; + ext;
+      if (fs.existsSync(fileToCheck)) {
+        return fs.realpathSync(fileToCheck);
+      }
+    }
+
+    return ext;
   },
 
   /**
@@ -199,14 +228,18 @@ Config.prototype = {
 
   load: function (defaults, pathname, opts) {
     var file = this.checkAvailabilityOfConfigFile(pathname);
-    var data = this.loadFile(file);
+    var data = {};
+
+    if (!this.advancedOptions || this.advancedOptions.dalekfile !== false) {
+      data = this.loadFile(file);
+    }
 
     // remove the tests property if the array length is 0
     if (opts.tests.length === 0) {
       delete opts.tests;
     }
 
-    return _.merge(defaults, data, opts);
+    return _.merge(defaults, data, opts, (this.advancedOptions || {}));
   },
 
   /**
@@ -241,8 +274,8 @@ Config.prototype = {
    * @return {object} data Parsed config data
    */
 
-  readjson: function () {
-    var contents = fs.readFileSync(this.defaultFilename + &#x27;.json&#x27;, &#x27;utf8&#x27;);
+  readjson: function (pathname) {
+    var contents = fs.readFileSync((pathname || this.defaultFilename + &#x27;.json&#x27;), &#x27;utf8&#x27;);
     return JSON.parse(contents);
   },
 
@@ -253,8 +286,8 @@ Config.prototype = {
    * @return {object} data Parsed config data
    */
 
-  readjson5: function () {
-    var contents = fs.readFileSync(this.defaultFilename + &#x27;.json5&#x27;, &#x27;utf8&#x27;);
+  readjson5: function (pathname) {
+    var contents = fs.readFileSync((pathname || this.defaultFilename + &#x27;.json5&#x27;), &#x27;utf8&#x27;);
     return JSON5.parse(contents);
   },
 
@@ -265,8 +298,8 @@ Config.prototype = {
    * @return {object} data Parsed config data
    */
 
-  readyaml: function () {
-    var contents = fs.readFileSync(this.defaultFilename + &#x27;.yml&#x27;, &#x27;utf8&#x27;);
+  readyml: function (pathname) {
+    var contents = fs.readFileSync((pathname || this.defaultFilename + &#x27;.yml&#x27;), &#x27;utf8&#x27;);
     return yaml.load(contents);
   },
 
@@ -277,9 +310,8 @@ Config.prototype = {
    * @return {object} data Parsed config data
    */
 
-  readjs: function () {
-    var fn = require(this.defaultFilename, &#x27;utf8&#x27;);
-    return fn();
+  readjs: function (pathname) {
+    return require((pathname || this.defaultFilename));
   },
 
   /**
@@ -289,9 +321,8 @@ Config.prototype = {
    * @return {object} data Parsed config data
    */
 
-  readcoffee: function () {
-    var fn = require(this.defaultFilename, &#x27;utf8&#x27;);
-    return fn();
+  readcoffee: function (pathname) {
+    return require((pathname || this.defaultFilename));
   },
 
   /**
