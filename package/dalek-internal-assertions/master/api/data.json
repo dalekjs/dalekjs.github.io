@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-internal-assertions",
         "description": "DalekJS internal assertion library",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "url": "http://dalekjs.com"
     },
     "files": {
@@ -148,7 +148,7 @@
         {
             "file": "index.js",
             "line": 253,
-            "description": "Asserts that a given element is visible n times in the current viewport.\n\nGiven this portion of HTML, you would like to assure that all of these elements\n are ending up in your rendered markup on your page.\n```html\n <section id=\"blog-overview\">\n   <article class=\"teaser\"></article>\n   <article class=\"teaser\"></article>\n   <article class=\"teaser\"></article>\n   <article class=\"teaser\"></article>\n </section>\n ```\nThe simple solution is to check if all these elements are visible\n```javascript\n test.assert.numberOfVisibleElements('#blog-overview .teaser', 4, '4 blog teasers are visible')\n ```\n The alternate syntax for this is:\n```javascript\n test.assert.numberOfVisibleElements('#blog-overview .teaser')\n     .is(4, '4 blog teasers are visible')\n ```\nIf you are not sure how many elements will exactly be shown in the current viewport,\n you could use the between assertion handler\n```javascript\n test.assert.numberOfVisibleElements('#blog-overview .teaser')\n     .is.between(2, 6, 'Between 2 and 6 blog teasers are visible')\n ```\nIf you dealing with the situation that you have a minimum of elements,\n you expect, use this helper:\n```javascript\n test.assert.numberOfVisibleElements('#blog-overview .teaser')\n     .is.gt(2, 'At least 3 blog teasers are visible')\n ```\n If you want to know if its 'greater than equal', you can use this one\n```javascript\n test.assert.numberOfVisibleElements('#blog-overview .teaser')\n     .is.gte(2, 'At least 2 blog teasers are visible')\n ```\n as well as their 'lower than' and 'lower than equal' equivalents.\n```javascript\n test.assert.numberOfVisibleElements('#blog-overview .teaser')\n     .is.lt(5, 'Less than 5 blog teasers are visible')\n ```\n```javascript\n test.assert.numberOfVisibleElements('#blog-overview .teaser')\n     .is.lte(5, 'Less than, or 5 blog teasers are visible')\n ```\n And if you just want to know, if a certain amount of teasers isnʼt visible,\n you can still use the ':not(): assertion helper\n```javascript\n test.assert.numberOfVisibleElements('#blog-overview .teaser')\n     .is.not(5, 'There are more or less than 5 teasers visible')\n ```",
+            "description": "Asserts that a given element is visible n times in the current viewport.\n\nGiven this portion of HTML, you would like to assure that all of these elements\n are ending up in your rendered markup on your page.\n```html\n <section id=\"blog-overview\">\n   <article class=\"teaser\"></article>\n   <article class=\"teaser\"></article>\n   <article class=\"teaser\"></article>\n   <article class=\"teaser\"></article>\n </section>\n ```\nThe simple solution is to check if all these elements are visible\n```javascript\n test.assert.numberOfVisibleElements('#blog-overview .teaser', 4, '4 blog teasers are visible')\n ```\n The alternate syntax for this is:\n```javascript\n test.assert.numberOfVisibleElements('#blog-overview .teaser')\n     .is(4, '4 blog teasers are visible')\n ```\nIf you are not sure how many elements will exactly be shown in the current viewport,\n you could use the between assertion handler\n```javascript\n test.assert.numberOfVisibleElements('#blog-overview .teaser')\n     .is.between(2, 6, 'Between 2 and 6 blog teasers are visible')\n ```\nIf you dealing with the situation that you have a minimum of elements,\n you expect, use this helper:\n```javascript\n test.assert.numberOfVisibleElements('#blog-overview .teaser')\n     .is.gt(2, 'At least 3 blog teasers are visible')\n ```\n If you want to know if its 'greater than equal', you can use this one\n```javascript\n test.assert.numberOfVisibleElements('#blog-overview .teaser')\n     .is.gte(2, 'At least 2 blog teasers are visible')\n ```\n as well as their 'lower than' and 'lower than equal' equivalents.\n```javascript\n test.assert.numberOfVisibleElements('#blog-overview .teaser')\n     .is.lt(5, 'Less than 5 blog teasers are visible')\n ```\n```javascript\n test.assert.numberOfVisibleElements('#blog-overview .teaser')\n     .is.lte(5, 'Less than, or 5 blog teasers are visible')\n ```\n And if you just want to know, if a certain amount of teasers isnʼt visible,\n you can still use the ':not(): assertion helper\n```javascript\n test.assert.numberOfVisibleElements('#blog-overview .teaser')\n     .is.not(5, 'There are more or less than 5 teasers visible')\n ```\n> NOTE: Buggy on all browsers",
             "api": "",
             "itemtype": "method",
             "name": "numberOfVisibleElements",
@@ -176,7 +176,7 @@
         },
         {
             "file": "index.js",
-            "line": 344,
+            "line": 346,
             "description": "Asserts that a given form field has the provided value.\n\nGiven this portion of HTML, we would like to get the information which option element\nis currently selected.\n\n```html\n<form name=\"fav-doctor\" id=\"fav-doctor\">\n  <select id=\"the-doctors\">\n    <option value=\"9\">Eccleston</option>\n    <option selected value=\"10\">Tennant</option>\n    <option value=\"11\">Smith</option>\n  </select>\n</form>\n```\n\n```javascript\ntest\n  .assert.val('#the-doctors', 10, 'David is the favourite')\n  // lets change the favourite by selection the last option\n .click('#the-doctors option:last')\n .assert.val('#the-doctors', 11, 'Matt is now my favourite, bow ties are cool')\n```\n\nThis assertion is capable of getting the values from every form element\nthat holds a value attribute\n\nGetting texts out of normal input fields is pretty straight forward\n\n```html\n<label for=\"fav-enemy\">Tell my your favourity Who enemy:</label>\n<input id=\"fav-enemy\" name=\"fav-enemy\" type=\"text\" value=\"Daleks\" />\n```\n\n```javascript\ntest\n  .assert.val('#fav-enemy', 'Daleks', 'Daleks are so cute')\n  // lets change the favourite by typing smth. new\n .type('#fav-enemy', 'Cyberman')\n .assert.val('#fav-enemy', 'Cyberman', 'Cyberman are so cyber')\n```",
             "api": "",
             "itemtype": "method",
@@ -205,7 +205,7 @@
         },
         {
             "file": "index.js",
-            "line": 408,
+            "line": 410,
             "description": "Checks the computed style.\n\n```html\n<div id=\"superColoredElement\">Rose</div>\n```\n\n```css\n#superColoredElement {\n  background-color: rgba(255, 0, 0, 1);\n  color: rgba(0, 128, 0, 1);\n}\n```\n\n```javascript\n test\n   .open('http://unicorns.rainbows.io')\n   .assert.css('#superColoredElement', 'background-color', 'rgba(255, 0, 0, 1)')\n   .assert.css('#superColoredElement', 'color', 'rgba(0, 128, 0, 1)')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -239,7 +239,7 @@
         },
         {
             "file": "index.js",
-            "line": 454,
+            "line": 456,
             "description": "Checks the actual width of an element.\n\n```html\n  <div id=\"fixed-dimensions\" style=\"width: 100px\"></div>\n```\n\n```javascript\n test\n   .open('http://localhost:5000/index.html')\n   // all true, all pixel\n   .assert.width('#fixed-dimensions', 100)\n   .assert.width('#fixed-dimensions').is(100)\n   .assert.width('#fixed-dimensions').is.not(100)\n   .assert.width('#fixed-dimensions').is.gt(90)\n   .assert.width('#fixed-dimensions').is.gte(97)\n   .assert.width('#fixed-dimensions').is.lt(120)\n   .assert.width('#fixed-dimensions').is.lte(110)\n   .assert.width('#fixed-dimensions').is.between([90, 110])\n   .done();\n\n```",
             "api": "",
             "itemtype": "method",
@@ -268,7 +268,7 @@
         },
         {
             "file": "index.js",
-            "line": 499,
+            "line": 501,
             "description": "Checks the actual height of an element.\n\n```html\n  <div id=\"fixed-dimensions\" style=\"height: 100px\"></div>\n```\n\n```javascript\n test\n   .open('http://localhost:5000/index.html')\n   // all true, all pixel\n   .assert.height('#fixed-dimensions', 100)\n   .assert.height('#fixed-dimensions').is(100)\n   .assert.height('#fixed-dimensions').is.not(100)\n   .assert.height('#fixed-dimensions').is.gt(90)\n   .assert.height('#fixed-dimensions').is.gte(97)\n   .assert.height('#fixed-dimensions').is.lt(120)\n   .assert.height('#fixed-dimensions').is.lte(110)\n   .assert.height('#fixed-dimensions').is.between([90, 110])\n   .done();\n\n```",
             "api": "",
             "itemtype": "method",
@@ -297,7 +297,7 @@
         },
         {
             "file": "index.js",
-            "line": 544,
+            "line": 546,
             "description": "Determine if an <option> element, or an <input> element of type checkbox or radio is currently selected.\n\n```html\n<input type=\"checkbox\" id=\"unchecked_checkbox\" name=\"unchecked_checkbox\"/>\n<input type=\"checkbox\" id=\"checked_checkbox\" name=\"checked_checkbox\" checked=\"checked\"/>\n<select id=\"select_elm\" name=\"select_elm\">\n  <option value=\"9\">Eccleston</option>\n  <option selected value=\"10\">Tennant</option>\n  <option value=\"11\">Smith</option>\n</select>\n```\n\nChecking radio and checkboxes:\n\n```javascript\n test\n   .open('http://selectables.org')\n   .assert.selected('#checked_checkbox')\n   .done();\n```\n\nChecking option elements:\n\n```javascript\n test\n   .open('http://selectables.org')\n   .assert.selected('#select_elm option:nth-child(2)')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -321,7 +321,7 @@
         },
         {
             "file": "index.js",
-            "line": 595,
+            "line": 597,
             "description": "Determine if an <option> element, or an <input> element of type\ncheckbox or radio is currently not selected.\n\n```html\n<input type=\"checkbox\" id=\"unchecked_checkbox\" name=\"unchecked_checkbox\"/>\n<input type=\"checkbox\" id=\"checked_checkbox\" name=\"checked_checkbox\" checked=\"checked\"/>\n<select id=\"select_elm\" name=\"select_elm\">\n  <option value=\"9\">Eccleston</option>\n  <option selected value=\"10\">Tennant</option>\n  <option value=\"11\">Smith</option>\n</select>\n```\n\nChecking radio and checkboxes:\n\n```javascript\n test\n   .open('http://selectables.org')\n   .assert.notSelected('#unchecked_checkbox')\n   .done();\n```\n\nChecking option elements:\n\n```javascript\n test\n   .open('http://selectables.org')\n   .assert.notSelected('#select_elm option:last-child')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -345,7 +345,7 @@
         },
         {
             "file": "index.js",
-            "line": 647,
+            "line": 649,
             "description": "Determine if an element is currently enabled.\n\n```html\n<input id=\"onmars\" type=\"text\" size=\"50\" name=\"onmars\" placeholder=\"State your name, rank and intention!\"></input>\n```\n\n```javascript\ntest\n  .open('http://doctor.thedoctor.com/doctor')\n  .assert.enabled('#onmars', 'Is enabled!')\n  .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -369,7 +369,7 @@
         },
         {
             "file": "index.js",
-            "line": 681,
+            "line": 683,
             "description": "Determine if an element is currently disabled.\n\n```html\n<input disabled id=\"onearth\" type=\"text\" size=\"50\" name=\"onearth\" placeholder=\"State your name, rank and intention!\"></input>\n```\n\n```javascript\ntest\n  .open('http://doctor.thedoctor.com/doctor')\n  .assert.disabled('#onearth', 'Is disabled!')\n  .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -393,7 +393,7 @@
         },
         {
             "file": "index.js",
-            "line": 715,
+            "line": 717,
             "description": "Checks the contents of a cookie.\n\n```javascript\n test\n   .open('http://cookiejar.io/not_your_mothers_javascript.html')\n   .setCookie('atestcookie', 'foobar=baz')\n   .assert.cookie('atestcookie', 'foobar=baz')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -422,7 +422,7 @@
         },
         {
             "file": "index.js",
-            "line": 741,
+            "line": 743,
             "description": "Asserts that current HTTP status code is the same as the one passed as argument.\nTODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method for this)",
             "itemtype": "method",
             "name": "httpStatus",
@@ -445,7 +445,7 @@
         },
         {
             "file": "index.js",
-            "line": 758,
+            "line": 760,
             "description": "Asserts that an element matching the provided selector expression exists in remote DOM environment.\n\n```html\n<body>\n  <p id=\"so-lonely\">Last of the timelords</p>\n</body>\n```\n\n```javascript\ntest\n  .open('http://doctor.thedoctor.com/doctor')\n  .assert.exists('#so-lonely', 'The loneliest element in the universe exists')\n  .done()\n```",
             "api": "",
             "itemtype": "method",
@@ -469,7 +469,7 @@
         },
         {
             "file": "index.js",
-            "line": 794,
+            "line": 796,
             "description": "Asserts that an element matching the provided selector expression doesnʼt\nexists within the remote DOM environment.\n\n```html\n<body>\n  <p id=\"so-lonely\">Last of the time lords</p>\n</body>\n```\n\n```javascript\ntest\n  .open('http://doctor.thedoctor.com/doctor')\n  .assert.doesntExist('#the-master', 'The master element has not been seen')\n  .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -493,8 +493,8 @@
         },
         {
             "file": "index.js",
-            "line": 831,
-            "description": "Asserts that the element matching the provided selector expression is not visible.\n\n```html\n<body>\n  <h1 style=\"display: none\">Me? So hidden …</h1>\n  <h2>Me? So in viewport...</h2>\n</body>\n```\n\n```javascript\n test\n   .open('http://allyourviewportsbelongto.us')\n   .assert.notVisible('h1', 'Element is not visible')\n   .done();\n```",
+            "line": 833,
+            "description": "Asserts that the element matching the provided selector expression is not visible.\n\n```html\n<body>\n  <h1 style=\"display: none\">Me? So hidden …</h1>\n  <h2>Me? So in viewport...</h2>\n</body>\n```\n\n```javascript\n test\n   .open('http://allyourviewportsbelongto.us')\n   .assert.notVisible('h1', 'Element is not visible')\n   .done();\n```\n\n\n> NOTE: Buggy on all browsers",
             "api": "",
             "itemtype": "method",
             "name": "notVisible",
@@ -517,8 +517,8 @@
         },
         {
             "file": "index.js",
-            "line": 868,
-            "description": "Asserts that the element matching the provided selector expression is visible.\n\n```html\n<body>\n  <h1>Me? So in viewport …</h1>\n</body>\n```\n\n```javascript\n test\n   .open('http://allyourviewportsbelongto.us')\n   .assert.visible('h1', 'Element is visible')\n   .done();\n```",
+            "line": 873,
+            "description": "Asserts that the element matching the provided selector expression is visible.\n\n```html\n<body>\n  <h1>Me? So in viewport …</h1>\n</body>\n```\n\n```javascript\n test\n   .open('http://allyourviewportsbelongto.us')\n   .assert.visible('h1', 'Element is visible')\n   .done();\n```\n\n> NOTE: Buggy on all browsers",
             "api": "",
             "itemtype": "method",
             "name": "visible",
@@ -541,7 +541,7 @@
         },
         {
             "file": "index.js",
-            "line": 904,
+            "line": 911,
             "description": "Asserts that given text does not exist in the provided selector.\n\n```html\n<body>\n  <h1>This is a CasperJS sandbox</h1>\n</body>\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.doesntHaveText('h1', 'This page is a Dalek sandbox', 'It´s a sandbox!')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -570,8 +570,8 @@
         },
         {
             "file": "index.js",
-            "line": 941,
-            "description": "Asserts that given text does not exist in the current alert/prompt/confirm dialog.\n\n```html\n<a href=\"#\" id=\"alert_confirm\" onclick=\"confirm('Confirm me!')\">I make confirm</a>\n```\n\n```javascript\n test\n   .open('http://skaaro.com/index.html')\n   .click('#alert_confirm')\n   .assert.dialogDoesntHaveText('I am an alert')\n   .accept()\n   .done();\n```",
+            "line": 948,
+            "description": "Asserts that given text does not exist in the current alert/prompt/confirm dialog.\n\n```html\n<a href=\"#\" id=\"alert_confirm\" onclick=\"confirm('Confirm me!')\">I make confirm</a>\n```\n\n```javascript\n test\n   .open('http://skaaro.com/index.html')\n   .click('#alert_confirm')\n   .assert.dialogDoesntHaveText('I am an alert')\n   .accept()\n   .done();\n```\n\n> NOTE: Does not work in Firefox & PhantomJS",
             "api": "",
             "itemtype": "method",
             "name": "dialogDoesntHaveText",
@@ -594,7 +594,7 @@
         },
         {
             "file": "index.js",
-            "line": 971,
+            "line": 980,
             "description": "Asserts that given text does exist in the provided selector.\n\n```html\n<body>\n  <h1>This is a Dalek sandbox</h1>\n</body>\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.text('h1', 'This page is a Dalek sandbox', 'Exterminate!')\n   .done();\n```\n\nof course, text works also with the assertion helpers is() and not()\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.text('h1').is('This page is a Dalek sandbox', 'Exterminate!')\n   .done();\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.text('h1').is.not('This page is a CasperJS sandbox', 'Exterminate!')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -623,8 +623,8 @@
         },
         {
             "file": "index.js",
-            "line": 1024,
-            "description": "Asserts that given alertText does exist in the provided alert/confirm or prompt dialog.\n\n```html\n<a href=\"#\" id=\"alert\" onclick=\"alert('I am an alert')\">I make alerts!</a>\n```\n\n```javascript\n test\n   .open('http://skaaro.com/index.html')\n   .click('#alert_confirm')\n   .assert.dialogText('I am an alert')\n   .accept()\n   .done();\n```\n\nof course, text works also with the assertion helpers is() and not()\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.dialogText().is('I am an alert', 'Exterminate!')\n   .done();\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.dialogText().is.not('I am an prompt', 'Exterminate!')\n   .done();\n```",
+            "line": 1033,
+            "description": "Asserts that given alertText does exist in the provided alert/confirm or prompt dialog.\n\n```html\n<a href=\"#\" id=\"alert\" onclick=\"alert('I am an alert')\">I make alerts!</a>\n```\n\n```javascript\n test\n   .open('http://skaaro.com/index.html')\n   .click('#alert_confirm')\n   .assert.dialogText('I am an alert')\n   .accept()\n   .done();\n```\n\nof course, text works also with the assertion helpers is() and not()\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.dialogText().is('I am an alert', 'Exterminate!')\n   .done();\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.dialogText().is.not('I am an prompt', 'Exterminate!')\n   .done();\n```\n\n\n> NOTE: Does not work in Firefox & PhantomJS",
             "api": "",
             "itemtype": "method",
             "name": "dialogText",
@@ -647,7 +647,7 @@
         },
         {
             "file": "index.js",
-            "line": 1070,
+            "line": 1082,
             "description": "Asserts that the page title is as expected.\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.title('Doctor Who TV', 'Not your Daleks TV')\n    .done();\n```\n\nYep, using assertion helpers is also possible:\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.title().is('Doctor Who TV', 'Not your Daleks TV')\n    .done();\n```\n\nand the not() helper is available too:\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.title().is.not('Dalek Emperor TV', 'Not your Daleks TV')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -671,7 +671,7 @@
         },
         {
             "file": "index.js",
-            "line": 1109,
+            "line": 1121,
             "description": "Asserts that given title does not match the given expectations.\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.doesntHaveTitle('Dalek Emperor TV', 'Not your Daleks TV')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -695,7 +695,7 @@
         },
         {
             "file": "index.js",
-            "line": 1132,
+            "line": 1144,
             "description": "Asserts that the pages url is as expected.\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.url('http://doctorwhotv.co.uk/', 'URL is as expected')\n    .done();\n```\n\nYou can also check if the protocol changed,\nnice to see when you open GitHub with 'http' instead of 'https'\n\n```javascript\n  test.open('http://github.com')\n    .assert.url('https://github.com/', 'Changed prototcols')\n    .done();\n```\n\nYep, using assertion helpers is also possible:\n\n```javascript\n  test.open('http://github.com')\n    .assert.url().is('http://doctorwhotv.co.uk/', 'URL is as expected')\n    .done();\n```\n\nand the not() helper is available too:\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.url().is.not('http://doctorwhotv.co.uk/', 'URL is as expected')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -719,7 +719,7 @@
         },
         {
             "file": "index.js",
-            "line": 1180,
+            "line": 1192,
             "description": "Asserts that the pages URL does not match the expectation.\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.doesntHaveUrl('http://doctorwhotv.co.uk/', 'URL is not expected')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -743,7 +743,7 @@
         },
         {
             "file": "index.js",
-            "line": 1203,
+            "line": 1215,
             "description": "Asserts that an elements attribute is as expected.\n\n```html\n<form>\n  <button class=\"jumpButton\" type=\"submit\">Fire</button>\n</form>\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.attr('.jumpButton', 'type', 'submit')\n   .done();\n```\n\n```html\n<div id=\"dataDiv\" data-spot=\"cat\"></div>\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.attr('#dataDiv').is('data-spot', 'cat', 'We found Dataʼs cat!')\n   .done();\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.attr('#dataDiv').is.not('data-spot', 'doc', 'Spot is not a dog!')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -777,7 +777,7 @@
         },
         {
             "file": "index.js",
-            "line": 1264,
+            "line": 1276,
             "description": "Is helper",
             "itemtype": "method",
             "name": "is",
@@ -800,7 +800,7 @@
         },
         {
             "file": "index.js",
-            "line": 1277,
+            "line": 1289,
             "description": "Not helper",
             "itemtype": "method",
             "name": "not",
@@ -823,7 +823,7 @@
         },
         {
             "file": "index.js",
-            "line": 1290,
+            "line": 1302,
             "description": "Between helper",
             "itemtype": "method",
             "name": "between",
@@ -846,7 +846,7 @@
         },
         {
             "file": "index.js",
-            "line": 1303,
+            "line": 1315,
             "description": "Gt helper",
             "itemtype": "method",
             "name": "gt",
@@ -869,7 +869,7 @@
         },
         {
             "file": "index.js",
-            "line": 1316,
+            "line": 1328,
             "description": "Gte helper",
             "itemtype": "method",
             "name": "gte",
@@ -892,7 +892,7 @@
         },
         {
             "file": "index.js",
-            "line": 1329,
+            "line": 1341,
             "description": "Lt helper",
             "itemtype": "method",
             "name": "lt",
@@ -915,7 +915,7 @@
         },
         {
             "file": "index.js",
-            "line": 1342,
+            "line": 1354,
             "description": "Lte helper",
             "itemtype": "method",
             "name": "lte",
@@ -938,7 +938,7 @@
         },
         {
             "file": "index.js",
-            "line": 1355,
+            "line": 1367,
             "description": "Contain helper",
             "itemtype": "method",
             "name": "contain",
@@ -961,7 +961,7 @@
         },
         {
             "file": "index.js",
-            "line": 1368,
+            "line": 1380,
             "description": "Match helper",
             "itemtype": "method",
             "name": "match",
@@ -984,7 +984,7 @@
         },
         {
             "file": "index.js",
-            "line": 1384,
+            "line": 1396,
             "description": "Generates a callback that will be fired when the action has been completed.\nThe callback itself will then validate the answer and will also emit an event\nthat the action has been successfully executed.",
             "itemtype": "method",
             "name": "_generateCallbackAssertion",
@@ -1012,7 +1012,7 @@
         },
         {
             "file": "index.js",
-            "line": 1429,
+            "line": 1441,
             "description": "Adds a method to the queue of actions/assertions to execute",
             "itemtype": "method",
             "name": "_addToActionQueue",
@@ -1042,7 +1042,7 @@
         },
         {
             "file": "index.js",
-            "line": 1452,
+            "line": 1464,
             "description": "Generates a function that can be used",
             "itemtype": "method",
             "name": "generateTestHelper",
@@ -1071,7 +1071,7 @@
         },
         {
             "file": "index.js",
-            "line": 1508,
+            "line": 1520,
             "description": "Assert if a given value shallow equals a second given value",
             "itemtype": "method",
             "name": "_testShallowEquals",
@@ -1099,7 +1099,7 @@
         },
         {
             "file": "index.js",
-            "line": 1528,
+            "line": 1540,
             "description": "Assert if a given value shallow does not equal a second given value",
             "itemtype": "method",
             "name": "_testShallowUnequals",
@@ -1127,7 +1127,7 @@
         },
         {
             "file": "index.js",
-            "line": 1548,
+            "line": 1560,
             "description": "Assert if a given value matches a range",
             "itemtype": "method",
             "name": "_testBetween",
@@ -1155,7 +1155,7 @@
         },
         {
             "file": "index.js",
-            "line": 1568,
+            "line": 1580,
             "description": "Assert if a given value is greater than the value to compare",
             "itemtype": "method",
             "name": "_testGreaterThan",
@@ -1183,7 +1183,7 @@
         },
         {
             "file": "index.js",
-            "line": 1588,
+            "line": 1600,
             "description": "Assert if a given value is greater or equal than the value to compare",
             "itemtype": "method",
             "name": "_testGreaterThanEqual",
@@ -1211,7 +1211,7 @@
         },
         {
             "file": "index.js",
-            "line": 1602,
+            "line": 1614,
             "description": "Assert if a given value is lower than the value to compare",
             "itemtype": "method",
             "name": "_testLowerThan",
@@ -1239,7 +1239,7 @@
         },
         {
             "file": "index.js",
-            "line": 1622,
+            "line": 1634,
             "description": "Assert if a given value contain another value",
             "itemtype": "method",
             "name": "_contain",
@@ -1267,7 +1267,7 @@
         },
         {
             "file": "index.js",
-            "line": 1642,
+            "line": 1654,
             "description": "Assert if a given value is lower or equal than the value to compare",
             "itemtype": "method",
             "name": "_testLowerThanEqual",
@@ -1295,7 +1295,7 @@
         },
         {
             "file": "index.js",
-            "line": 1656,
+            "line": 1668,
             "description": "Assert if a given value is boolean 'true'",
             "itemtype": "method",
             "name": "_testTruthy",
@@ -1318,7 +1318,7 @@
         },
         {
             "file": "index.js",
-            "line": 1669,
+            "line": 1681,
             "description": "Assert if a given value is boolean 'false'",
             "itemtype": "method",
             "name": "_testFalsy",
@@ -1341,7 +1341,7 @@
         },
         {
             "file": "index.js",
-            "line": 1682,
+            "line": 1694,
             "description": "Assert a given value matches a RegEx",
             "itemtype": "method",
             "name": "_contain",
@@ -1395,91 +1395,91 @@
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:344"
+            "line": " index.js:346"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:408"
+            "line": " index.js:410"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:454"
+            "line": " index.js:456"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:499"
+            "line": " index.js:501"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:544"
+            "line": " index.js:546"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:595"
+            "line": " index.js:597"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:647"
+            "line": " index.js:649"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:681"
+            "line": " index.js:683"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:715"
+            "line": " index.js:717"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:758"
+            "line": " index.js:760"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:794"
+            "line": " index.js:796"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:831"
+            "line": " index.js:833"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:868"
+            "line": " index.js:873"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:904"
+            "line": " index.js:911"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:941"
+            "line": " index.js:948"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:971"
+            "line": " index.js:980"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:1024"
+            "line": " index.js:1033"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:1070"
+            "line": " index.js:1082"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:1109"
+            "line": " index.js:1121"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:1132"
+            "line": " index.js:1144"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:1180"
+            "line": " index.js:1192"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:1203"
+            "line": " index.js:1215"
         },
         {
             "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",

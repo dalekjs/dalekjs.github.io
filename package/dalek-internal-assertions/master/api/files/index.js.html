@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1</em>
+            <em>API Docs for: 0.0.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -409,6 +409,8 @@ Assertions.prototype.numberOfElements = function (selector, expected, message) {
  *     .is.not(5, &#x27;There are more or less than 5 teasers visible&#x27;)
  * &#x60;&#x60;&#x60;
  *
+ * &gt; NOTE: Buggy on all browsers
+ * 
  * @api
  * @method numberOfVisibleElements
  * @param {string} selector Selector that matches the elements to test
@@ -935,6 +937,9 @@ Assertions.prototype.doesntExist = function (selector, message) {
  *    .done();
  * &#x60;&#x60;&#x60;
  *
+ *
+ * &gt; NOTE: Buggy on all browsers
+ * 
  * @api
  * @method notVisible
  * @param {string} selector Selector that matches the elements to test
@@ -971,6 +976,8 @@ Assertions.prototype.notVisible = function (selector, message) {
  *    .done();
  * &#x60;&#x60;&#x60;
  *
+ * &gt; NOTE: Buggy on all browsers
+ * 
  * @api
  * @method visible
  * @param {string} selector Selector that matches the elements to test
@@ -1006,7 +1013,7 @@ Assertions.prototype.visible = function (selector, message) {
  *    .assert.doesntHaveText(&#x27;h1&#x27;, &#x27;This page is a Dalek sandbox&#x27;, &#x27;It´s a sandbox!&#x27;)
  *    .done();
  * &#x60;&#x60;&#x60;
- *
+ * 
  * @api
  * @method doesntHaveText
  * @param {string} selector Selector that matches the elements to test
@@ -1044,6 +1051,8 @@ Assertions.prototype.doesntHaveText = function (selector, expected, message) {
  *    .done();
  * &#x60;&#x60;&#x60;
  *
+ * &gt; NOTE: Does not work in Firefox &amp; PhantomJS
+ * 
  * @api
  * @method dialogDoesntHaveText
  * @param {string} expected Expected test result
@@ -1143,6 +1152,9 @@ Assertions.prototype.text = function (selector, expected, message) {
  *    .done();
  * &#x60;&#x60;&#x60;
  *
+ *
+ * &gt; NOTE: Does not work in Firefox &amp; PhantomJS
+ * 
  * @api
  * @method dialogText
  * @param {string} expected Expected testresult
