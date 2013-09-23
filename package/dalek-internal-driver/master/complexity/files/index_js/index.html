@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">70.50</p>
+      <p class="stat">67.57</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">297</p>
+      <p class="stat">325</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">33.66</p>
+      <p class="stat">38.41</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.43</p>
+      <p class="stat">1.98</p>
     </div>
   </div>
 </div>
@@ -189,7 +189,7 @@ Driver.prototype = {
    */
 
   loadDriver: function (driver) {
-    this.reporterEvents.emit(&#039;report:log:system&#039;, &#039;Loading driver: &quot;&#039; + driver + &#039;&quot;&#039;);
+    this.reporterEvents.emit(&#039;report:log:system&#039;, &#039;dalek-internal-driver: Loading driver: &quot;&#039; + driver + &#039;&quot;&#039;);
     return require(&#039;dalek-driver-&#039; + driver + (this.driverIsCanary ? &#039;-canary&#039; : &#039;&#039;));
   },
 
@@ -261,6 +261,7 @@ Driver.prototype = {
 
   getDefaultBrowserConfiguration: function (browser, browsers) {
     var browserConfiguration = {configuration: null, module: null};
+
     try {
       browserConfiguration.module = require(&#039;dalek-browser-&#039; + browser);
     } catch (e) {
@@ -284,11 +285,27 @@ Driver.prototype = {
 
   getUserBrowserConfiguration: function (browser, browsers) {
     var browserConfiguration = {configuration: null, module: null};
-    if (browsers[browser] &amp;&amp; browsers[browser].actAs) {
+
+    if (browsers &amp;&amp; browsers[browser] &amp;&amp; browsers[browser].actAs) {
       browserConfiguration.module = require(&#039;dalek-browser-&#039; + browsers[browser].actAs);
       browserConfiguration.configuration = browsers[browser];
     }
 
+    if (!browserConfiguration.module &amp;&amp; browser.search(&#039;:&#039;) !== -1) {
+      var args = browser.split(&#039;:&#039;);
+      var extractedBrowser = args[0].trim();
+      var browserType = args[1].trim().toLowerCase();
+      browserConfiguration.module = require(&#039;dalek-browser-&#039; + extractedBrowser);
+
+      if (browserConfiguration.module &amp;&amp; browserConfiguration.module.browserTypes &amp;&amp; browserConfiguration.module.browserTypes[browserType]) {
+        var binary = (process.platform === &#039;win32&#039; ? browserConfiguration.module.browserTypes[browserType].win32 : browserConfiguration.module.browserTypes[browserType].darwin);
+        browserConfiguration.configuration = {
+          binary: binary,
+          type: browserType
+        };
+      }
+    }
+    
     return browserConfiguration;
   },
 
@@ -329,7 +346,7 @@ Driver.prototype = {
    */
 
   createTestsuiteInstance: function (driverInstance, file) {
-    var suite = new Testsuite({file: file, driver: driverInstance, driverEmitter: this.driverEmitter, reporterEmitter: this.reporterEvents});
+    var suite = new Testsuite({numberOfSuites: this.files.length, file: file, driver: driverInstance, driverEmitter: this.driverEmitter, reporterEmitter: this.reporterEvents});
     return suite.run.bind(suite);
   },
 
@@ -350,7 +367,7 @@ Driver.prototype = {
   _onDriverReady: function (browser, driverName, callback, driverInstance) {
     // generate testsuite instance from test files
     var testsuites = this.getTestsuiteInstances(driverInstance);
-    this.reporterEvents.emit(&#039;report:run:browser&#039;, browser.charAt(0).toUpperCase() + browser.slice(1));
+    this.reporterEvents.emit(&#039;report:run:browser&#039;, driverInstance.webdriverClient.opts.longName);
     async.series(testsuites, this._onTestsuiteComplete.bind(this, callback, driverName, browser));
     return this;
   },
@@ -397,10 +414,21 @@ Driver.prototype = {
     }
 
     var browserConfiguration = this.loadBrowserConfiguration(browser, browsers);
-    var driverInstance = driverModule.create({events: this.driverEmitter, browser: browser, config: this.config, browserMo: browserConfiguration.module, browserConf: browserConfiguration.configuration});
+    var driverInstance = driverModule.create({events: this.driverEmitter, reporter: this.reporterEvents, browser: browser, config: this.config, browserMo: browserConfiguration.module, browserConf: browserConfiguration.configuration});
 
     // couple driver &amp; session status events for the reporter
     this.coupleReporterEvents(driverName, browser);
+
+    // register shutdown handler
+    if (driverInstance.webdriverClient.opts.kill) {
+      this.driverEmitter.on(&#039;killAll&#039;, driverInstance.webdriverClient.opts.kill.bind(driverInstance.webdriverClient.opts));
+    }
+
+    // dispatch some (web)driver events to the reporter
+    this.driverEmitter.on(&#039;driver:webdriver:response&#039;, function (res) {
+      this.reporterEvents.emit(&#039;report:log:system:webdriver&#039;, &#039;webdriver: &#039; + res.statusCode + &#039; &#039; + res.method + &#039; &#039; + res.path);
+      this.reporterEvents.emit(&#039;report:log:system:webdriver&#039;, &#039;webdriver: &#039; + res.data);
+    }.bind(this));
 
     // run the tests in the browser, when the driver is ready
     // emit the tests:complete event, when all tests have been run
