@@ -47,6 +47,8 @@
             
                 <li><a href="../classes/Dalek.DriverNative.Commands.Element.html">Dalek.DriverNative.Commands.Element</a></li>
             
+                <li><a href="../classes/Dalek.DriverNative.Commands.Execute.html">Dalek.DriverNative.Commands.Execute</a></li>
+            
                 <li><a href="../classes/Dalek.DriverNative.Commands.Frame.html">Dalek.DriverNative.Commands.Frame</a></li>
             
                 <li><a href="../classes/Dalek.DriverNative.Commands.Page.html">Dalek.DriverNative.Commands.Page</a></li>
@@ -169,7 +171,7 @@ var Element = {
 
   _existsCb: function (selector, hash, result) {
     var deferred = Q.defer();
-    this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;exists&#x27;, selector: selector, hash: hash, value: (JSON.parse(result).value === -1 ? &#x27;false&#x27; : &#x27;true&#x27;)});
+    this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;exists&#x27;, selector: selector, hash: hash, value: (JSON.parse(result).value === -1 || JSON.parse(result).status === 7 ? &#x27;false&#x27; : &#x27;true&#x27;)});
     deferred.resolve();
     return deferred.promise;
   },
@@ -445,6 +447,43 @@ var Element = {
   _clickCb: function (selector, hash, uuid) {
     var deferred = Q.defer();
     this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;click&#x27;, value: selector, uuid: uuid, hash: hash});
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Scrolls from an element to a location defined in pixels
+   *
+   * @method scroll
+   * @param {string} selector Selector expression to find the element
+   * @param {object} options X offset, Y offset, Speed
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} uuid Unique hash of that fn call
+   * @chainable
+   */
+
+  scroll: function (selector, options, hash, uuid) {
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector, options));
+    this.actionQueue.push(this.webdriverClient.scroll.bind(this.webdriverClient));
+    this.actionQueue.push(this._clickCb.bind(this, selector, options, hash, uuid));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the &#x60;scroll&#x60; call
+   *
+   * @method _scrollCb
+   * @param {string} selector Selector expression to find the element
+   * @param {object} options X offset, Y offset, Speed
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} uuid Unique hash of that fn call
+   * @return {object} promise Scroll promise
+   * @private
+   */
+
+  _scrollCb: function (selector, options, hash, uuid) {
+    var deferred = Q.defer();
+    this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;scroll&#x27;, value: selector, uuid: uuid, hash: hash});
     deferred.resolve();
     return deferred.promise;
   },

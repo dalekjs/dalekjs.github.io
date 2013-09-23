@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib/commands/frame.js - dalek-driver-native</title>
+    <title>lib/commands/execute.js - dalek-driver-native</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -100,7 +100,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib/commands/frame.js</h1>
+                        <h1 class="file-heading">File: lib/commands/execute.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -134,54 +134,67 @@
 var Q = require(&#x27;q&#x27;);
 
 /**
- * Frame related methods
+ * Execute related methods
  *
  * @module Driver
- * @class Frame
+ * @class Execute
  * @namespace Dalek.DriverNative.Commands
  */
 
-var Frame = {
+var Execute = {
 
-  /**
-   * Switches to frame context
-   *
-   * @method toFrame
-   * @param {string} selector Selector expression to find the element
-   * @param {string} hash Unique hash of that fn call
-   * @chainable
-   */
-
-  toFrame: function (selector, hash) {
-    if (selector !== null) {
-      this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
-    }
-    this.actionQueue.push(this.webdriverClient.frame.bind(this.webdriverClient));
-    this.actionQueue.push(this._frameCb.bind(this, selector, hash));
+  execute: function (script, args, hash) {
+    this.actionQueue.push(this.webdriverClient.execute.bind(this.webdriverClient, {script: script.toString(), arguments: args}));
+    this.actionQueue.push(this._setExecuteCb.bind(this, script.toString(), args, hash));
     return this;
   },
 
-  /**
-   * Sends out an event with the results of the &#x60;toFrame&#x60; call
-   *
-   * @method _frameCb
-   * @param {string} selector Selector expression to find the element
-   * @param {string} hash Unique hash of that fn call
-   * @param {string} result Serialized JSON with the reuslts of the toFrame call
-   * @return {object} promise Exists promise
-   * @private
-   */
-
-  _frameCb: function (selector, hash) {
+  _setExecuteCb: function (script, args, hash, data) {
     var deferred = Q.defer();
-    this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;toFrame&#x27;, selector: selector, hash: hash, value: true});
+    this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;execute&#x27;, value: JSON.parse(data).value, uuid: hash, hash: hash});
     deferred.resolve();
     return deferred.promise;
-  }
+  },
+
+  waitFor: function (script, args, timeout, hash) {
+    this.actionQueue.push(this.webdriverClient.execute.bind(this.webdriverClient, {script: script.toString(), arguments: args}));
+    this.actionQueue.push(this._waitForCb.bind(this, script.toString(), args, timeout, hash));
+    return this;
+  },
+
+  _waitForCb: function (script, args, timeout, hash, data) {
+    var deferred = Q.defer();
+    var ret = JSON.parse(data);
+    var checker = function (yData) {
+      if (JSON.parse(yData).value.userRet === true) {
+        this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;waitFor&#x27;, value: &#x27;&#x27;, uuid: hash, hash: hash});
+        deferred.resolve();
+      } else {
+        Q.when(this.webdriverClient.execute.bind(this.webdriverClient, {script: script, arguments: args})())
+          .then(checker);
+      }
+    }.bind(this);
+
+    setTimeout(function () {
+      this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;waitFor&#x27;, value: &#x27;Interrupted by timeout&#x27;, uuid: hash, hash: hash});
+      deferred.resolve();
+    }.bind(this), timeout);
+
+    if (ret.value.userRet === true) {
+      this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;waitFor&#x27;, value: &#x27;&#x27;, uuid: hash, hash: hash});
+      deferred.resolve();
+    } else {
+      Q.when(this.webdriverClient.execute.bind(this.webdriverClient, {script: script, arguments: args})())
+        .then(checker);
+    }
+
+    return deferred.promise;
+  },
+
 };
 
 /**
- * Mixes in element methods
+ * Mixes in the script execute methods
  *
  * @param {Dalek.DriverNative} DalekNative Native driver base class
  * @return {Dalek.DriverNative} DalekNative Native driver base class
@@ -189,8 +202,8 @@ var Frame = {
 
 module.exports = function (DalekNative) {
   // mixin methods
-  Object.keys(Frame).forEach(function (fn) {
-    DalekNative.prototype[fn] = Frame[fn];
+  Object.keys(Execute).forEach(function (fn) {
+    DalekNative.prototype[fn] = Execute[fn];
   });
 
   return DalekNative;

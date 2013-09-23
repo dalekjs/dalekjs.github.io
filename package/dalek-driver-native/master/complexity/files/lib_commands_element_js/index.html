@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">67.83</p>
+      <p class="stat">67.86</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">551</p>
+      <p class="stat">588</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">79.40</p>
+      <p class="stat">86.47</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">4.96</p>
+      <p class="stat">5.28</p>
     </div>
   </div>
 </div>
@@ -157,7 +157,7 @@ var Element = {
 
   _existsCb: function (selector, hash, result) {
     var deferred = Q.defer();
-    this.events.emit(&#039;driver:message&#039;, {key: &#039;exists&#039;, selector: selector, hash: hash, value: (JSON.parse(result).value === -1 ? &#039;false&#039; : &#039;true&#039;)});
+    this.events.emit(&#039;driver:message&#039;, {key: &#039;exists&#039;, selector: selector, hash: hash, value: (JSON.parse(result).value === -1 || JSON.parse(result).status === 7 ? &#039;false&#039; : &#039;true&#039;)});
     deferred.resolve();
     return deferred.promise;
   },
@@ -433,6 +433,43 @@ var Element = {
   _clickCb: function (selector, hash, uuid) {
     var deferred = Q.defer();
     this.events.emit(&#039;driver:message&#039;, {key: &#039;click&#039;, value: selector, uuid: uuid, hash: hash});
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Scrolls from an element to a location defined in pixels
+   *
+   * @method scroll
+   * @param {string} selector Selector expression to find the element
+   * @param {object} options X offset, Y offset, Speed
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} uuid Unique hash of that fn call
+   * @chainable
+   */
+
+  scroll: function (selector, options, hash, uuid) {
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector, options));
+    this.actionQueue.push(this.webdriverClient.scroll.bind(this.webdriverClient));
+    this.actionQueue.push(this._clickCb.bind(this, selector, options, hash, uuid));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the `scroll` call
+   *
+   * @method _scrollCb
+   * @param {string} selector Selector expression to find the element
+   * @param {object} options X offset, Y offset, Speed
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} uuid Unique hash of that fn call
+   * @return {object} promise Scroll promise
+   * @private
+   */
+
+  _scrollCb: function (selector, options, hash, uuid) {
+    var deferred = Q.defer();
+    this.events.emit(&#039;driver:message&#039;, {key: &#039;scroll&#039;, value: selector, uuid: uuid, hash: hash});
     deferred.resolve();
     return deferred.promise;
   },

@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">74.46</p>
+      <p class="stat">70.47</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">310</p>
+      <p class="stat">336</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">23.58</p>
+      <p class="stat">30.71</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.38</p>
+      <p class="stat">1.69</p>
     </div>
   </div>
 </div>
@@ -142,17 +142,21 @@ var DriverNative = function (opts) {
   this._initializeProperties(opts);
 
   // create a new webdriver client instance
-  this.webdriverClient = new WD(browser);
+  this.webdriverClient = new WD(browser, this.events);
 
   // listen on browser events
   this._startBrowserEventListeners(browser);
+
+  // store desired capabilities of this session
+  this.desiredCapabilities = browser.desiredCapabilities;
+  this.browserDefaults = browser.driverDefaults;
 
   // launch the browser &amp; when the browser launch
   // promise is fullfilled, issue the driver:ready event
   // for the particular browser
   browser
-    .launch(browserConf)
-    .then(this.events.emit.bind(this.events, &#039;driver:ready:native:&#039; + this.browserName));
+    .launch(browserConf, this.reporterEvents, this.config)
+    .then(this.events.emit.bind(this.events, &#039;driver:ready:native:&#039; + this.browserName, browser));
 };
 
 /**
@@ -186,6 +190,7 @@ DriverNative.prototype = {
     this.sessionStatus = {};
     // store injcted options in object properties
     this.events = opts.events;
+    this.reporterEvents = opts.reporter;
     this.browserName = opts.browser;
     return this;
   },
@@ -226,7 +231,7 @@ DriverNative.prototype = {
     }
 
     // start a browser session
-    this._startBrowserSession(deferred);
+    this._startBrowserSession(deferred, this.desiredCapabilities, this.browserDefaults);
 
     return deferred.promise;
   },
@@ -243,16 +248,37 @@ DriverNative.prototype = {
    * @private
    */
 
-  _startBrowserSession: function (deferred) {
+  _startBrowserSession: function (deferred, desiredCapabilities, defaults) {
     var viewport = this.config.get(&#039;viewport&#039;);
-    this.webdriverClient
-      .createSession()
-      .then(this.webdriverClient.setWindowSize.bind(this.webdriverClient, viewport.width, viewport.height))
-      .then(this.webdriverClient.status.bind(this.webdriverClient))
-      .then(this._driverStatus.bind(this))
-      .then(this.webdriverClient.sessionInfo.bind(this.webdriverClient))
-      .then(this._sessionStatus.bind(this))
-      .then(deferred.resolve);
+
+    // start a session, transmit the desired capabilities
+    var promise = this.webdriverClient.createSession({desiredCapabilities: desiredCapabilities});
+
+    // set the default viewport if supported by the browser
+    if (defaults.viewport) {
+      promise = promise.then(this.webdriverClient.setWindowSize.bind(this.webdriverClient, viewport.width, viewport.height));
+    }
+
+    // get the driver status if supported by the browser
+    if (defaults.status === true) {
+      promise = promise
+        .then(this.webdriverClient.status.bind(this.webdriverClient))
+        .then(this._driverStatus.bind(this));
+    } else {
+      promise = promise.then(this._driverStatus.bind(this, JSON.stringify({value: defaults.status})));
+    }
+
+    // get the session info if supported by the browser
+    if (defaults.sessionInfo === true) {
+      promise = promise
+        .then(this.webdriverClient.sessionInfo.bind(this.webdriverClient))
+        .then(this._sessionStatus.bind(this));
+    } else {
+      promise = promise.then(this._driverStatus.bind(this, JSON.stringify({value: defaults.sessionInfo})));
+    }
+
+    // finally resolve the deferred
+    promise.then(deferred.resolve);
     return this;
   },
 

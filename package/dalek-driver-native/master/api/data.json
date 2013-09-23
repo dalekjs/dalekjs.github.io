@@ -30,6 +30,17 @@
                 "Dalek.DriverNative.Commands": 1
             }
         },
+        "lib/commands/execute.js": {
+            "name": "lib/commands/execute.js",
+            "modules": {},
+            "classes": {
+                "Dalek.DriverNative.Commands.Execute": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek.DriverNative.Commands": 1
+            }
+        },
         "lib/commands/frame.js": {
             "name": "lib/commands/frame.js",
             "modules": {},
@@ -85,13 +96,6 @@
                 "Dalek.DriverNative.Commands": 1
             }
         },
-        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
-            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
         "index.js": {
             "name": "index.js",
             "modules": {},
@@ -111,6 +115,7 @@
             "classes": {
                 "Dalek.DriverNative.Commands.Cookie": 1,
                 "Dalek.DriverNative.Commands.Element": 1,
+                "Dalek.DriverNative.Commands.Execute": 1,
                 "Dalek.DriverNative.Commands.Frame": 1,
                 "Dalek.DriverNative.Commands.Page": 1,
                 "Dalek.DriverNative.Commands.Screenshot": 1,
@@ -125,7 +130,7 @@
             },
             "tag": "module",
             "file": "index.js",
-            "line": 66,
+            "line": 70,
             "description": "Cookie related methods",
             "part": "DriverNative",
             "api": ""
@@ -159,6 +164,20 @@
             "file": "lib/commands/element.js",
             "line": 30,
             "description": "Element related methods"
+        },
+        "Dalek.DriverNative.Commands.Execute": {
+            "name": "Dalek.DriverNative.Commands.Execute",
+            "shortname": "Dalek.DriverNative.Commands.Execute",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands",
+            "file": "lib/commands/execute.js",
+            "line": 30,
+            "description": "Execute related methods"
         },
         "Dalek.DriverNative.Commands.Frame": {
             "name": "Dalek.DriverNative.Commands.Frame",
@@ -241,7 +260,7 @@
             "module": "Driver",
             "namespace": "Dalek",
             "file": "index.js",
-            "line": 66,
+            "line": 70,
             "description": "Launches the browsers to test\nand handles the webdriver requests & responses"
         }
     },
@@ -644,6 +663,77 @@
         {
             "file": "lib/commands/element.js",
             "line": 348,
+            "description": "Scrolls from an element to a location defined in pixels",
+            "itemtype": "method",
+            "name": "scroll",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "options",
+                    "description": "X offset, Y offset, Speed",
+                    "type": "Object"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 366,
+            "description": "Sends out an event with the results of the `scroll` call",
+            "itemtype": "method",
+            "name": "_scrollCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "options",
+                    "description": "X offset, Y offset, Speed",
+                    "type": "Object"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Scroll promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 385,
             "description": "Clicks an element",
             "itemtype": "method",
             "name": "click",
@@ -666,7 +756,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 365,
+            "line": 402,
             "description": "Sends out an event with the results of the `type` call",
             "itemtype": "method",
             "name": "_typeCb",
@@ -694,7 +784,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 382,
+            "line": 419,
             "description": "Sends keys to an element (whether or not it is an input)",
             "itemtype": "method",
             "name": "sendKeys",
@@ -717,7 +807,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 398,
+            "line": 435,
             "description": "Sends out an event with the results of the `sendKeys` call",
             "itemtype": "method",
             "name": "_sendKeysCb",
@@ -745,7 +835,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 415,
+            "line": 452,
             "description": "Wait for an element for a specific amount of time",
             "itemtype": "method",
             "name": "waitForElement",
@@ -778,7 +868,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 432,
+            "line": 469,
             "description": "Sends out an event with the results of the `waitForElement` call",
             "itemtype": "method",
             "name": "_waitForElementCb",
@@ -811,7 +901,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 450,
+            "line": 487,
             "description": "Returns the number of elements matched by the selector",
             "itemtype": "method",
             "name": "getNumberOfElements",
@@ -839,7 +929,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 466,
+            "line": 503,
             "description": "Sends out an event with the results of the `getNumberOfElements` call",
             "itemtype": "method",
             "name": "_getNumberOfElementsCb",
@@ -877,7 +967,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 493,
+            "line": 530,
             "description": "Returns the number of visible elements matched by the selector",
             "itemtype": "method",
             "name": "getNumberOfVisibleElements",
@@ -905,7 +995,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 532,
+            "line": 569,
             "description": "Sends out an event with the results of the `getNumberOfVisibleElements` call",
             "itemtype": "method",
             "name": "_getNumberOfElementsCb",
@@ -943,7 +1033,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 561,
+            "line": 598,
             "description": "Mixes in element methods",
             "params": [
                 {
@@ -957,6 +1047,25 @@
                 "type": "Dalek.DriverNative"
             },
             "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/execute.js",
+            "line": 90,
+            "description": "Mixes in the script execute methods",
+            "params": [
+                {
+                    "name": "DalekNative",
+                    "description": "Native driver base class",
+                    "type": "Dalek.DriverNative"
+                }
+            ],
+            "return": {
+                "description": "DalekNative Native driver base class",
+                "type": "Dalek.DriverNative"
+            },
+            "class": "Dalek.DriverNative.Commands.Execute",
             "module": "Driver",
             "namespace": "Dalek.DriverNative.Commands"
         },
@@ -1909,14 +2018,6 @@
             "namespace": "Dalek.DriverNative.Commands"
         },
         {
-            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
-            "line": 1,
-            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
-            "class": "Dalek.DriverNative",
-            "module": "Driver",
-            "namespace": "Dalek.DriverNative.Commands"
-        },
-        {
             "file": "index.js",
             "line": 34,
             "description": "Loads the webdriver client,\nlaunches the browser,\ninitializes al object properties,\nbinds to browser events",
@@ -1934,7 +2035,7 @@
         },
         {
             "file": "index.js",
-            "line": 79,
+            "line": 83,
             "description": "Initializes the driver properties",
             "itemtype": "method",
             "name": "_initializeProperties",
@@ -1954,7 +2055,7 @@
         },
         {
             "file": "index.js",
-            "line": 101,
+            "line": 106,
             "description": "Binds listeners on browser events",
             "itemtype": "method",
             "name": "_initializeProperties",
@@ -1974,7 +2075,7 @@
         },
         {
             "file": "index.js",
-            "line": 118,
+            "line": 123,
             "description": "Checks if a webdriver session has already been established,\nif not, create a new one",
             "itemtype": "method",
             "name": "start",
@@ -1988,7 +2089,7 @@
         },
         {
             "file": "index.js",
-            "line": 142,
+            "line": 147,
             "description": "Creates a new webdriver session\nGets the driver status\nGets the session status\nResolves the promise (e.g. let them tests run)",
             "itemtype": "method",
             "name": "_startBrowserSession",
@@ -2008,7 +2109,7 @@
         },
         {
             "file": "index.js",
-            "line": 167,
+            "line": 193,
             "description": "Starts to execution of a batch of tests",
             "itemtype": "method",
             "name": "end",
@@ -2019,7 +2120,7 @@
         },
         {
             "file": "index.js",
-            "line": 190,
+            "line": 216,
             "description": "Flushes the action queue (e.g. commands that should be send to the wbdriver server)",
             "itemtype": "method",
             "name": "flushQueue",
@@ -2030,7 +2131,7 @@
         },
         {
             "file": "index.js",
-            "line": 205,
+            "line": 231,
             "description": "Loads the browser session status",
             "itemtype": "method",
             "name": "_sessionStatus",
@@ -2053,7 +2154,7 @@
         },
         {
             "file": "index.js",
-            "line": 222,
+            "line": 248,
             "description": "Loads the browser driver status",
             "itemtype": "method",
             "name": "_driverStatus",
@@ -2076,7 +2177,7 @@
         },
         {
             "file": "index.js",
-            "line": 239,
+            "line": 265,
             "description": "Creates an anonymus function that calls a webdriver\nmethod that has no return value, emits an empty result event\nif the function has been run\nTODO: Name is weird, should be saner",
             "itemtype": "method",
             "name": "_createNonReturnee",
@@ -2099,7 +2200,7 @@
         },
         {
             "file": "index.js",
-            "line": 255,
+            "line": 281,
             "description": "Generates a chain of webdriver calls for webdriver\nmethods that don't have a return value\nTODO: Name is weird, should be saner",
             "itemtype": "method",
             "name": "_actionQueueNonReturneeTemplate",
@@ -2129,7 +2230,7 @@
         },
         {
             "file": "index.js",
-            "line": 274,
+            "line": 300,
             "description": "Creates a driver notification with an empty value\nTODO: Name is weird, should be saner",
             "itemtype": "method",
             "name": "_generateDummyDriverMessageFn",
@@ -2162,7 +2263,7 @@
         },
         {
             "file": "index.js",
-            "line": 294,
+            "line": 320,
             "description": "Determines if the driver is a \"multi\" browser driver,\ne.g. can handle more than one browser",
             "itemtype": "method",
             "name": "isMultiBrowser",
@@ -2176,7 +2277,7 @@
         },
         {
             "file": "index.js",
-            "line": 306,
+            "line": 332,
             "description": "Verifies a browser request\nTODO: Still a noop, need to add \"verify the browser\" logic",
             "itemtype": "method",
             "name": "verifyBrowser",
@@ -2190,7 +2291,7 @@
         },
         {
             "file": "index.js",
-            "line": 318,
+            "line": 344,
             "description": "Creates a new driver instance",
             "itemtype": "method",
             "name": "create",
@@ -2213,11 +2314,11 @@
     "warnings": [
         {
             "message": "unknown tag: part",
-            "line": " index.js:66"
+            "line": " index.js:70"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:66"
+            "line": " index.js:70"
         },
         {
             "message": "Missing item type\nMixes in cookie methods",
@@ -2225,7 +2326,11 @@
         },
         {
             "message": "Missing item type\nMixes in element methods",
-            "line": " lib/commands/element.js:561"
+            "line": " lib/commands/element.js:598"
+        },
+        {
+            "message": "Missing item type\nMixes in the script execute methods",
+            "line": " lib/commands/execute.js:90"
         },
         {
             "message": "Missing item type\nMixes in element methods",
@@ -2278,10 +2383,6 @@
         {
             "message": "Missing item type\nMixes in element methods",
             "line": " lib/commands/window.js:148"
-        },
-        {
-            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
-            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
         },
         {
             "message": "Missing item type\nLoads the webdriver client,\nlaunches the browser,\ninitializes al object properties,\nbinds to browser events",
