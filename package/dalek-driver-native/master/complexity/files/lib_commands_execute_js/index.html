@@ -49,7 +49,7 @@
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">80</p>
+      <p class="stat">127</p>
     </div>
   </div>
   <div class="row historical">
@@ -129,11 +129,33 @@ var Q = require(&#039;q&#039;);
 
 var Execute = {
 
+  /**
+   * Executes a JavaScript function 
+   *
+   * @method execute
+   * @param {function} script Script to execute
+   * @param {array} args Arguments to pass to the function
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
   execute: function (script, args, hash) {
     this.actionQueue.push(this.webdriverClient.execute.bind(this.webdriverClient, {script: script.toString(), arguments: args}));
     this.actionQueue.push(this._setExecuteCb.bind(this, script.toString(), args, hash));
     return this;
   },
+
+  /**
+   * Sends out an event with the results of the `execute` call
+   *
+   * @method _setExecuteCb
+   * @param {function} script Script to execute
+   * @param {array} args Arguments to pass to the function
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} result Serialized JSON with the results of the call
+   * @return {object} promise Exists promise
+   * @private
+   */
 
   _setExecuteCb: function (script, args, hash, data) {
     var deferred = Q.defer();
@@ -142,11 +164,36 @@ var Execute = {
     return deferred.promise;
   },
 
+  /**
+   * Executes a JavaScript function until the timeout rans out or
+   * the function returns true
+   *
+   * @method execute
+   * @param {function} script Script to execute
+   * @param {array} args Arguments to pass to the function
+   * @param {integer} timeout Timeout of the function
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
   waitFor: function (script, args, timeout, hash) {
     this.actionQueue.push(this.webdriverClient.execute.bind(this.webdriverClient, {script: script.toString(), arguments: args}));
     this.actionQueue.push(this._waitForCb.bind(this, script.toString(), args, timeout, hash));
     return this;
   },
+
+  /**
+   * Sends out an event with the results of the `waitFor` call
+   *
+   * @method _setExecuteCb
+   * @param {function} script Script to execute
+   * @param {array} args Arguments to pass to the function
+   * @param {integer} timeout Timeout of the function
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} data Serialized JSON with the reuslts of the toFrame call
+   * @return {object} Promise
+   * @private
+   */
 
   _waitForCb: function (script, args, timeout, hash, data) {
     var deferred = Q.defer();

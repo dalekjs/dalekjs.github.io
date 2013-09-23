@@ -49,7 +49,7 @@
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">588</p>
+      <p class="stat">709</p>
     </div>
   </div>
   <div class="row historical">
@@ -221,7 +221,7 @@ var Element = {
    * @param {string} hash Unique hash of that fn call
    * @param {string} expected The expected text content
    * @param {string} result Serialized JSON with the reuslts of the text call
-   * @return {object} promise Text promise
+   * @return {object} Promise
    * @private
    */
 
@@ -232,6 +232,17 @@ var Element = {
     return deferred.promise;
   },
 
+  /**
+   * Checks if an element has the expected css property/value pairs
+   *
+   * @method css
+   * @param {string} selector Selector expression to find the element
+   * @param {string} property The css property to check
+   * @param {string} expected The expected css value
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
   css: function (selector, property, expected, hash) {
     this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
     this.actionQueue.push(this.webdriverClient.cssProperty.bind(this.webdriverClient, property));
@@ -239,13 +250,35 @@ var Element = {
     return this;
   },
 
-
+  /**
+   * Sends out an event with the results of the `css` call
+   *
+   * @method _cssCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} property The css property to check
+   * @param {string} expected The expected css value
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} result Serialized JSON with the reuslts of the text call
+   * @return {object} Promise
+   * @private
+   */
+  
   _cssCb: function (selector, property, hash, expected, result) {
     var deferred = Q.defer();
     this.events.emit(&#039;driver:message&#039;, {key: &#039;css&#039;, hash: hash, property: property, expected: expected, selector: selector, value: JSON.parse(result).value});
     deferred.resolve();
     return deferred.promise;
   },
+
+  /**
+   * Checks th width of an element
+   *
+   * @method width
+   * @param {string} selector Selector expression to find the element
+   * @param {string} expected The expected width value
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
 
   width: function (selector, expected, hash) {
     this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
@@ -254,6 +287,17 @@ var Element = {
     return this;
   },
 
+  /**
+   * Sends out an event with the results of the `width` call
+   *
+   * @method _widthCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} expected The expected width value
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} result Serialized JSON with the reuslts of the text call
+   * @return {object} Promise
+   * @private
+   */
 
   _widthCb: function (selector, hash, expected, result) {
     var deferred = Q.defer();
@@ -262,6 +306,16 @@ var Element = {
     return deferred.promise;
   },
 
+  /**
+   * Checks th height of an element
+   *
+   * @method height
+   * @param {string} selector Selector expression to find the element
+   * @param {string} expected The expected height value
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
   height: function (selector, expected, hash) {
     this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
     this.actionQueue.push(this.webdriverClient.size.bind(this.webdriverClient));
@@ -269,6 +323,17 @@ var Element = {
     return this;
   },
 
+  /**
+   * Sends out an event with the results of the `height` call
+   *
+   * @method _heightCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} expected The expected height value
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} result Serialized JSON with the reuslts of the text call
+   * @return {object} Promise
+   * @private
+   */
 
   _heightCb: function (selector, hash, expected, result) {
     var deferred = Q.defer();
@@ -303,27 +368,27 @@ var Element = {
    * @param {string} hash Unique hash of that fn call
    * @param {string} attribute The attribute that should be checked
    * @param {string} expected The expected attribute content
-   * @param {string} result Serialized JSON with the reuslts of the attribute call
+   * @param {string} result Serialized JSON with the results of the attribute call
    * @return {object} promise Attribute promise
    * @private
    */
 
   _attributeCb: function (selector, hash, attribute, expected, result) {
     var deferred = Q.defer();
-    // check if we deal with an hashed anchor expression
-    //if (attribute === &#039;href&#039; &amp;&amp; expected[0] === &#039;#&#039;) {
-      //var res = JSON.parse(result);
-      //var val = res.value.substring(res.value.lastIndexOf(&#039;#&#039;));
-      //console.log(res, val);
-
-      //this.events.emit(&#039;driver:message&#039;, {key: &#039;attribute&#039;, selector: selector, hash: hash, expected: expected, value: val});
-    //} else {
     this.events.emit(&#039;driver:message&#039;, {key: &#039;attribute&#039;, selector: selector, hash: hash, expected: expected, value: JSON.parse(result).value });
-    //}
-
     deferred.resolve();
     return deferred.promise;
   },
+
+  /**
+   * Checks if an element has the expected value
+   *
+   * @method val
+   * @param {string} selector Selector expression to find the element
+   * @param {string} expected The expected content
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
 
   val: function (selector, expected, hash) {
     this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
@@ -332,12 +397,34 @@ var Element = {
     return this;
   },
 
+  /**
+   * Sends out an event with the results of the `val` call
+   *
+   * @method _valCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} expected The expected content
+   * @param {string} result Serialized JSON with the results of the val call
+   * @return {object} Promise
+   * @private
+   */
+
   _valCb: function (selector, hash, expected, result) {
     var deferred = Q.defer();
     this.events.emit(&#039;driver:message&#039;, {key: &#039;val&#039;, selector: selector, hash: hash, expected: expected, value: JSON.parse(result).value });
     deferred.resolve();
     return deferred.promise;
   },
+
+  /**
+   * Checks if an element is selected
+   *
+   * @method selected
+   * @param {string} selector Selector expression to find the element
+   * @param {string} expected The expected content
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
 
   selected: function (selector, expected, hash) {
     this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
@@ -346,6 +433,18 @@ var Element = {
     return this;
   },
 
+  /**
+   * Sends out an event with the results of the `selected` call
+   *
+   * @method _selectedCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} expected The expected content
+   * @param {string} result Serialized JSON with the results of the selected call
+   * @return {object} Promise
+   * @private
+   */
+
   _selectedCb: function (selector, hash, expected, result) {
     var deferred = Q.defer();
     this.events.emit(&#039;driver:message&#039;, {key: &#039;selected&#039;, selector: selector, hash: hash, expected: expected, value: JSON.parse(result).value });
@@ -353,12 +452,34 @@ var Element = {
     return deferred.promise;
   },
 
+  /**
+   * Checks if an element is enabled
+   *
+   * @method enabled
+   * @param {string} selector Selector expression to find the element
+   * @param {string} expected The expected content
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
   enabled: function (selector, expected, hash) {
     this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
     this.actionQueue.push(this.webdriverClient.enabled.bind(this.webdriverClient));
     this.actionQueue.push(this._enabledCb.bind(this, selector, hash, expected));
     return this;
   },
+
+  /**
+   * Sends out an event with the results of the `enabled` call
+   *
+   * @method _enabledCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} expected The expected content
+   * @param {string} result Serialized JSON with the results of the selected call
+   * @return {object} Promise
+   * @private
+   */
 
   _enabledCb: function (selector, hash, expected, result) {
     var deferred = Q.defer();

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1</em>
+            <em>API Docs for: 0.0.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -191,7 +191,11 @@ var Screenshot = {
   },
 
   /**
+   * Recursige mkdir helper
    *
+   * @method _recursiveMakeDirSync
+   * @param {string} path Path to create
+   * @private
    */
 
   _recursiveMakeDirSync: function (path) {
@@ -212,7 +216,12 @@ var Screenshot = {
   },
 
   /**
+   * Return the formatted os name
    *
+   * @method _parseOS
+   * @param {string} Pathname 
+   * @return {string} Formatted pathname
+   * @private
    */
 
   _replacePathPlaceholder: function (pathname) {
@@ -228,7 +237,11 @@ var Screenshot = {
   },
 
   /**
+   * Return the formatted os name
    *
+   * @method _parseOS
+   * @return {string} OS name
+   * @private
    */
 
   _parseOS: function (os) {
@@ -240,7 +253,11 @@ var Screenshot = {
   },
 
   /**
+   * Return the formatted os version
    *
+   * @method _parseOSVersion
+   * @return {string} OS version
+   * @private
    */
 
   _parseOSVersion: function (version) {
@@ -250,15 +267,23 @@ var Screenshot = {
   },
 
   /**
+   * Return the formatted browser version
    *
+   * @method _parseBrowserVersion
+   * @return {string} Browser version
+   * @private
    */
-
+  
   _parseBrowserVersion: function (version) {
     return version.replace(/\./g, &#x27;_&#x27;);
   },
 
   /**
+   * Return the formatted date
    *
+   * @method _parseDate
+   * @return {string} Date
+   * @private
    */
 
   _parseDate: function () {
@@ -278,7 +303,11 @@ var Screenshot = {
   },
 
   /**
+   * Return the formatted datetime
    *
+   * @method _parseDatetime
+   * @return {string} Datetime
+   * @private
    */
 
   _parseDatetime: function () {
@@ -300,7 +329,11 @@ var Screenshot = {
   },
 
   /**
+   * Return the formatted viewport
    *
+   * @method _parseViewport
+   * @return {string} Viewport
+   * @private
    */
 
   _parseViewport: function () {

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1</em>
+            <em>API Docs for: 0.0.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -143,11 +143,32 @@ var Q = require(&#x27;q&#x27;);
 
 var Cookie = {
 
+  /**
+   * Sets an cookie
+   *
+   * @method setCookie
+   * @param {string} name Name of the cookie
+   * @param {string} contents Contents of the cookie
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
   setCookie: function (name, contents, hash) {
     this.actionQueue.push(this.webdriverClient.setCookie.bind(this.webdriverClient, {name: name, value: contents}));
     this.actionQueue.push(this._setCookieCb.bind(this, name, contents, hash));
     return this;
   },
+
+  /**
+   * Sends out an event with the results of the &#x60;setCookie&#x60; call
+   *
+   * @method _setCookieCb
+   * @param {string} name Name of the cookie
+   * @param {string} contents Contents of the cookie
+   * @param {string} hash Unique hash of that fn call
+   * @return {object} promise Exists promise
+   * @private
+   */
 
   _setCookieCb: function (name, contents, hash) {
     var deferred = Q.defer();
@@ -156,11 +177,33 @@ var Cookie = {
     return deferred.promise;
   },
 
-  cookie: function (name, expected, hash) {
+  /**
+   * Retrieves an cookie
+   *
+   * @method cookie
+   * @param {string} name Name of the cookie
+   * @param {string} cookie Expected contents of the cookie
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
+  cookie: function (name, cookie, hash) {
     this.actionQueue.push(this.webdriverClient.getCookie.bind(this.webdriverClient, name));
-    this.actionQueue.push(this._cookieCb.bind(this, name, expected, hash));
+    this.actionQueue.push(this._cookieCb.bind(this, name, hash));
     return this;
   },
+
+  /**
+   * Sends out an event with the results of the &#x60;setCookie&#x60; call
+   *
+   * @method _cookieCb
+   * @param {string} name Name of the cookie
+   * @param {string} expected Expected contents of the cookie
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} result Serialized JSON with the reuslts of the exists call
+   * @return {object} promise Exists promise
+   * @private
+   */
 
   _cookieCb: function (name, expected, hash, res) {
     var deferred = Q.defer();

@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">71.61</p>
+      <p class="stat">71.62</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">65</p>
+      <p class="stat">108</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,7 +63,7 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">16.52</p>
+      <p class="stat">16.41</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
@@ -129,11 +129,32 @@ var Q = require(&#039;q&#039;);
 
 var Cookie = {
 
+  /**
+   * Sets an cookie
+   *
+   * @method setCookie
+   * @param {string} name Name of the cookie
+   * @param {string} contents Contents of the cookie
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
   setCookie: function (name, contents, hash) {
     this.actionQueue.push(this.webdriverClient.setCookie.bind(this.webdriverClient, {name: name, value: contents}));
     this.actionQueue.push(this._setCookieCb.bind(this, name, contents, hash));
     return this;
   },
+
+  /**
+   * Sends out an event with the results of the `setCookie` call
+   *
+   * @method _setCookieCb
+   * @param {string} name Name of the cookie
+   * @param {string} contents Contents of the cookie
+   * @param {string} hash Unique hash of that fn call
+   * @return {object} promise Exists promise
+   * @private
+   */
 
   _setCookieCb: function (name, contents, hash) {
     var deferred = Q.defer();
@@ -142,11 +163,33 @@ var Cookie = {
     return deferred.promise;
   },
 
-  cookie: function (name, expected, hash) {
+  /**
+   * Retrieves an cookie
+   *
+   * @method cookie
+   * @param {string} name Name of the cookie
+   * @param {string} cookie Expected contents of the cookie
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
+  cookie: function (name, cookie, hash) {
     this.actionQueue.push(this.webdriverClient.getCookie.bind(this.webdriverClient, name));
-    this.actionQueue.push(this._cookieCb.bind(this, name, expected, hash));
+    this.actionQueue.push(this._cookieCb.bind(this, name, hash));
     return this;
   },
+
+  /**
+   * Sends out an event with the results of the `setCookie` call
+   *
+   * @method _cookieCb
+   * @param {string} name Name of the cookie
+   * @param {string} expected Expected contents of the cookie
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} result Serialized JSON with the reuslts of the exists call
+   * @return {object} promise Exists promise
+   * @private
+   */
 
   _cookieCb: function (name, expected, hash, res) {
     var deferred = Q.defer();
