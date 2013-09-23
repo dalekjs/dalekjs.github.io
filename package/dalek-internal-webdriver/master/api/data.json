@@ -150,7 +150,7 @@
             },
             "tag": "module",
             "file": "lib/webdriver.js",
-            "line": 38,
+            "line": 39,
             "description": "Native Webdriver base class"
         }
     },
@@ -180,7 +180,7 @@
             "module": "DalekJS",
             "namespace": "Internal",
             "file": "lib/webdriver.js",
-            "line": 38,
+            "line": 39,
             "description": "Webdriver base class"
         }
     },
@@ -881,7 +881,7 @@
         },
         {
             "file": "lib/commands/execute.js",
-            "line": 57,
+            "line": 66,
             "description": "Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame.\nThe executed script is assumed to be asynchronous and must signal that is done by invoking the provided callback,\nwhich is always provided as the final argument to the function. The value to this callback will be returned to the client.\nAsynchronous script commands may not span page loads.\nIf an unload event is fired while waiting for a script result, an error should be returned to the client.\n\nThe script argument defines the script to execute in teh form of a function body.\nThe function will be invoked with the provided args array and the values may be accessed\nvia the arguments object in the order specified.\nThe final argument will always be a callback function that must be invoked to signal that the script has finished.",
             "itemtype": "method",
             "name": "executeAsync",
@@ -1628,7 +1628,7 @@
         },
         {
             "file": "lib/commands/session.js",
-            "line": 56,
+            "line": 65,
             "description": "Returns a list of the currently active sessions",
             "itemtype": "method",
             "name": "sessions",
@@ -1639,7 +1639,7 @@
         },
         {
             "file": "lib/commands/session.js",
-            "line": 69,
+            "line": 78,
             "description": "Retrieve the capabilities of the specified session.",
             "itemtype": "method",
             "name": "session",
@@ -1657,7 +1657,7 @@
         },
         {
             "file": "lib/commands/session.js",
-            "line": 83,
+            "line": 92,
             "description": "Delete the session.",
             "itemtype": "method",
             "name": "session",
@@ -2419,7 +2419,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 158,
+            "line": 156,
             "description": "Generates a new webdriver client command\nTakes a skeleton of obtions that will be converted\ninto a new function that can be invoked & will issue\na webdriver command to the webdriver server",
             "itemtype": "method",
             "name": "addCommand",
@@ -2437,7 +2437,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 175,
+            "line": 173,
             "description": "Generates the webdriver callback function",
             "itemtype": "method",
             "name": "_generateWebdriverCommand",
@@ -2465,7 +2465,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 203,
+            "line": 200,
             "description": "Response callback function",
             "itemtype": "method",
             "name": "_onResponse",
@@ -2505,7 +2505,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 223,
+            "line": 220,
             "description": "Concatenates chunks of strings",
             "itemtype": "method",
             "name": "_concatDataChunks",
@@ -2528,7 +2528,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 236,
+            "line": 233,
             "description": "Response end callback function",
             "itemtype": "method",
             "name": "_onResponseEnd",
@@ -2567,7 +2567,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 253,
+            "line": 250,
             "description": "On error callback function",
             "itemtype": "method",
             "name": "_onError",
@@ -2607,7 +2607,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 273,
+            "line": 270,
             "description": "On success callback function",
             "itemtype": "method",
             "name": "_onSuccess",
@@ -2663,7 +2663,7 @@
         },
         {
             "file": "lib/webdriver.js",
-            "line": 48,
+            "line": 49,
             "description": "Local options, used to store data\nlike the current sessionId or similar",
             "class": "Internal.Webdriver",
             "module": "DalekJS",
@@ -2671,7 +2671,7 @@
         },
         {
             "file": "lib/webdriver.js",
-            "line": 55,
+            "line": 56,
             "description": "Checks if we have a valid webdriver session",
             "itemtype": "method",
             "name": "hasSession",
@@ -2685,7 +2685,7 @@
         },
         {
             "file": "lib/webdriver.js",
-            "line": 66,
+            "line": 67,
             "description": "Closes the current webdriver session",
             "itemtype": "method",
             "name": "hasSession",
@@ -2716,7 +2716,7 @@
     "warnings": [
         {
             "message": "unknown tag: priavte",
-            "line": " lib/driver.js:236"
+            "line": " lib/driver.js:233"
         },
         {
             "message": "unknown tag: part",
@@ -2784,7 +2784,7 @@
         },
         {
             "message": "Missing item type\nLocal options, used to store data\nlike the current sessionId or similar",
-            "line": " lib/webdriver.js:48"
+            "line": " lib/webdriver.js:49"
         },
         {
             "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",

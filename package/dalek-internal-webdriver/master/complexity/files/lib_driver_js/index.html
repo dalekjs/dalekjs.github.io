@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">72.17</p>
+      <p class="stat">72.54</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">273</p>
+      <p class="stat">278</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">27.88</p>
+      <p class="stat">28.09</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.22</p>
+      <p class="stat">1.19</p>
     </div>
   </div>
 </div>
@@ -209,7 +209,7 @@ module.exports = function exportDriverBase(WebDriver) {
         if (Object.keys(params).length &gt; 0) {
           return JSON.stringify(params);
         }
-        return JSON.stringify({desiredCapabilities: {browserName: &#039;chrome&#039;, version: &#039;&#039;, platform: &#039;ANY&#039;}});
+        return &#039;&#039;;
       }
 
       // invoke the given callback &amp; stringify
@@ -236,13 +236,11 @@ module.exports = function exportDriverBase(WebDriver) {
         port: port,
         path: prefix + url,
         method: method,
-        headers: {}
+        headers: {
+          &#039;Content-Type&#039;: &#039;application/json;charset=utf-8&#039;,
+          &#039;Content-Length&#039;: Buffer.byteLength(body, &#039;utf8&#039;)
+        }
       };
-
-      if(method === &#039;POST&#039; || method === &#039;PUT&#039;) {
-        options.headers[&#039;Content-Type&#039;] = &#039;application/json;charset=utf-8&#039;;
-        options.headers[&#039;Content-Length&#039;] = Buffer.byteLength(body, &#039;utf8&#039;);
-      }
 
       return options;
     },
@@ -283,7 +281,6 @@ module.exports = function exportDriverBase(WebDriver) {
         var options = Driver.generateRequestOptions(this.opts.host, this.opts.port, this.opts.path, Driver.parseUrl(remote.url, this.options), remote.method, body);
 
         // generate the request, wait for response &amp; fire the request
-        console.log(options);
         var req = new http.ClientRequest(options);
         req.on(&#039;response&#039;, driver._onResponse.bind(this, driver, remote, options, deferred));
         req.end(body);
@@ -376,6 +373,14 @@ module.exports = function exportDriverBase(WebDriver) {
      */
 
     _onSuccess: function (driver, response, remote, options, deferred) {
+      // log response data
+      this.events.emit(&#039;driver:webdriver:response&#039;, {
+        statusCode: response.statusCode,
+        method: response.req.method,
+        path: response.req.path,
+        data: this.data
+      });
+      
       if (remote.onResponse) {
         remote.onResponse.call(this, response, remote, options, deferred, this.data);
       } else {

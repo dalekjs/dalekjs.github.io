@@ -143,7 +143,16 @@ module.exports = function (Driver) {
     name: &#x27;execute&#x27;,
     url: &#x27;/session/:sessionId/execute&#x27;,
     method: &#x27;POST&#x27;,
-    params: [&#x27;script&#x27;, &#x27;arguments&#x27;]
+    params: [&#x27;script&#x27;, &#x27;arguments&#x27;],
+    onRequest: function (raw) {
+      var script = raw.script.script.replace(/\\n/g, &#x27; &#x27;).replace(/\\t/g, &#x27; &#x27;);
+      var userArgs = script.substring(script.indexOf(&#x27;(&#x27;) + 1, script.indexOf(&#x27;)&#x27;));
+      
+      script = script.substring(script.indexOf(&#x27;{&#x27;) + 1, script.lastIndexOf(&#x27;}&#x27;));
+      script = &#x27;var args = Array.prototype.slice.call(arguments, 0); var shifted = args.shift(); var dalek = {store: {}, test: [], assert: {}, _assert: { ok: function (isOk, message) { this.test.push({ok: isOk, message: message}); }}, data: function (key, value) { if(value) { this.store[key] = value; return this; } return this.store[key] || null; }}; dalek.store = shifted; dalek.assert.ok = function () { return dalek._assert.ok.apply(dalek, Array.prototype.slice.call(arguments)); }; var userRet = function(&#x27; + userArgs + &#x27;) {&#x27; + script + &#x27;}.apply(dalek, args); return {dalek: dalek.store, test: dalek.test, userRet: userRet}&#x27;;
+      
+      return {script: script, args: raw.script.arguments};
+    }
   });
 
   /**

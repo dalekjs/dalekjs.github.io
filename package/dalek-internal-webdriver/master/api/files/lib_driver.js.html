@@ -209,7 +209,7 @@ module.exports = function exportDriverBase(WebDriver) {
         if (Object.keys(params).length &gt; 0) {
           return JSON.stringify(params);
         }
-        return JSON.stringify({desiredCapabilities: {browserName: &#x27;chrome&#x27;, version: &#x27;&#x27;, platform: &#x27;ANY&#x27;}});
+        return &#x27;&#x27;;
       }
 
       // invoke the given callback &amp; stringify
@@ -236,13 +236,11 @@ module.exports = function exportDriverBase(WebDriver) {
         port: port,
         path: prefix + url,
         method: method,
-        headers: {}
+        headers: {
+          &#x27;Content-Type&#x27;: &#x27;application/json;charset=utf-8&#x27;,
+          &#x27;Content-Length&#x27;: Buffer.byteLength(body, &#x27;utf8&#x27;)
+        }
       };
-
-      if(method === &#x27;POST&#x27; || method === &#x27;PUT&#x27;) {
-        options.headers[&#x27;Content-Type&#x27;] = &#x27;application/json;charset=utf-8&#x27;;
-        options.headers[&#x27;Content-Length&#x27;] = Buffer.byteLength(body, &#x27;utf8&#x27;);
-      }
 
       return options;
     },
@@ -283,7 +281,6 @@ module.exports = function exportDriverBase(WebDriver) {
         var options = Driver.generateRequestOptions(this.opts.host, this.opts.port, this.opts.path, Driver.parseUrl(remote.url, this.options), remote.method, body);
 
         // generate the request, wait for response &amp; fire the request
-        console.log(options);
         var req = new http.ClientRequest(options);
         req.on(&#x27;response&#x27;, driver._onResponse.bind(this, driver, remote, options, deferred));
         req.end(body);
@@ -376,6 +373,14 @@ module.exports = function exportDriverBase(WebDriver) {
      */
 
     _onSuccess: function (driver, response, remote, options, deferred) {
+      // log response data
+      this.events.emit(&#x27;driver:webdriver:response&#x27;, {
+        statusCode: response.statusCode,
+        method: response.req.method,
+        path: response.req.path,
+        data: this.data
+      });
+      
       if (remote.onResponse) {
         remote.onResponse.call(this, response, remote, options, deferred, this.data);
       } else {

@@ -139,8 +139,17 @@ module.exports = function (Driver) {
     name: &#x27;createSession&#x27;,
     url: &#x27;/session&#x27;,
     method: &#x27;POST&#x27;,
-    onResponse: function (request, remote, options, deferred) {
-      this.options.sessionId = request.headers.location.replace(&#x27;http://&#x27; + options.hostname + &#x27;:&#x27; + options.port + options.path + &#x27;/&#x27;, &#x27;&#x27;).replace(&#x27;/session/&#x27;, &#x27;&#x27;);
+    params: [&#x27;desiredCapabilities&#x27;],
+    onRequest: function (params) {
+      return params.desiredCapabilities;
+    },
+    onResponse: function (request, remote, options, deferred, rawData) {
+      if (!request.headers.location) {
+        this.options.sessionId = JSON.parse(rawData).sessionId;
+      } else {
+        this.options.sessionId = request.headers.location.replace(&#x27;http://&#x27; + options.hostname + &#x27;:&#x27; + options.port + options.path + &#x27;/&#x27;, &#x27;&#x27;).replace(&#x27;/session/&#x27;, &#x27;&#x27;).replace(&#x27;/wd/hub&#x27;, &#x27;&#x27;);
+      }
+
       deferred.resolve(this);
     }
   });

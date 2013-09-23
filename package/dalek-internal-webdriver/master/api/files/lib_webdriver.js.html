@@ -123,7 +123,8 @@
  * @constructor
  */
 
-var WebDriver = function (opts) {
+var WebDriver = function (opts, events) {
+  this.events = events;
   this.opts = opts;
 };
 

@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">63.71</p>
+      <p class="stat">63.25</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">52</p>
+      <p class="stat">61</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">6.38</p>
+      <p class="stat">10.13</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.08</p>
+      <p class="stat">0.25</p>
     </div>
   </div>
 </div>
@@ -143,7 +143,16 @@ module.exports = function (Driver) {
     name: &#039;execute&#039;,
     url: &#039;/session/:sessionId/execute&#039;,
     method: &#039;POST&#039;,
-    params: [&#039;script&#039;, &#039;arguments&#039;]
+    params: [&#039;script&#039;, &#039;arguments&#039;],
+    onRequest: function (raw) {
+      var script = raw.script.script.replace(/\\n/g, &#039; &#039;).replace(/\\t/g, &#039; &#039;);
+      var userArgs = script.substring(script.indexOf(&#039;(&#039;) + 1, script.indexOf(&#039;)&#039;));
+      
+      script = script.substring(script.indexOf(&#039;{&#039;) + 1, script.lastIndexOf(&#039;}&#039;));
+      script = &#039;var args = Array.prototype.slice.call(arguments, 0); var shifted = args.shift(); var dalek = {store: {}, test: [], assert: {}, _assert: { ok: function (isOk, message) { this.test.push({ok: isOk, message: message}); }}, data: function (key, value) { if(value) { this.store[key] = value; return this; } return this.store[key] || null; }}; dalek.store = shifted; dalek.assert.ok = function () { return dalek._assert.ok.apply(dalek, Array.prototype.slice.call(arguments)); }; var userRet = function(&#039; + userArgs + &#039;) {&#039; + script + &#039;}.apply(dalek, args); return {dalek: dalek.store, test: dalek.test, userRet: userRet}&#039;;
+      
+      return {script: script, args: raw.script.arguments};
+    }
   });
 
   /**
