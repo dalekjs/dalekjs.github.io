@@ -13,13 +13,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
-            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
         "index.js": {
             "name": "index.js",
             "modules": {
@@ -88,12 +81,6 @@
             "line": 19,
             "description": "The version of chromedriver installed by this package.",
             "type": "{number}",
-            "class": "Browser.ChromeDriver"
-        },
-        {
-            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
-            "line": 1,
-            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
             "class": "Browser.ChromeDriver"
         },
         {
@@ -218,13 +205,16 @@
             "file": "index.js",
             "line": 237,
             "description": "Different browser types (Canary / Chromium) that can be controlled\nvia the Chromedriver",
+            "itemtype": "property",
+            "name": "browserTypes",
+            "type": "object",
             "class": "Browser.ChromeDriver",
             "module": "DalekJS",
             "namespace": "Browser"
         },
         {
             "file": "index.js",
-            "line": 245,
+            "line": 247,
             "description": "Chrome Canary",
             "itemtype": "property",
             "name": "canary",
@@ -235,7 +225,7 @@
         },
         {
             "file": "index.js",
-            "line": 259,
+            "line": 261,
             "description": "Chromium",
             "itemtype": "property",
             "name": "chromium",
@@ -246,7 +236,7 @@
         },
         {
             "file": "index.js",
-            "line": 275,
+            "line": 277,
             "description": "Resolves the driver port",
             "itemtype": "method",
             "name": "getPort",
@@ -260,7 +250,7 @@
         },
         {
             "file": "index.js",
-            "line": 286,
+            "line": 288,
             "description": "Resolves the maximum range for the driver port",
             "itemtype": "method",
             "name": "getMaxPort",
@@ -274,7 +264,7 @@
         },
         {
             "file": "index.js",
-            "line": 297,
+            "line": 299,
             "description": "Returns the driver host",
             "itemtype": "method",
             "name": "getHost",
@@ -288,7 +278,7 @@
         },
         {
             "file": "index.js",
-            "line": 308,
+            "line": 310,
             "description": "Launches the ChromeWebDriverServer\n(which implicitly launches Chrome itself)\nand checks for an available port",
             "itemtype": "method",
             "name": "launch",
@@ -319,7 +309,7 @@
         },
         {
             "file": "index.js",
-            "line": 349,
+            "line": 351,
             "description": "Kills the ChromeWebDriverServer\n& Chrome browser processes",
             "itemtype": "method",
             "name": "kill",
@@ -330,7 +320,7 @@
         },
         {
             "file": "index.js",
-            "line": 362,
+            "line": 364,
             "description": "Modifies the verbose browser name",
             "itemtype": "method",
             "name": "_modifyVerboseBrowserName",
@@ -353,7 +343,7 @@
         },
         {
             "file": "index.js",
-            "line": 379,
+            "line": 381,
             "description": "Change the process name for browser instances like Canary &amp; Chromium",
             "itemtype": "method",
             "name": "_fetchProcessName",
@@ -376,7 +366,7 @@
         },
         {
             "file": "index.js",
-            "line": 397,
+            "line": 399,
             "description": "Process user defined ports",
             "itemtype": "method",
             "name": "_checkUserDefinedPorts",
@@ -396,7 +386,7 @@
         },
         {
             "file": "index.js",
-            "line": 424,
+            "line": 426,
             "description": "Checks if the binary exists,\nwhen set manually by the user",
             "itemtype": "method",
             "name": "_checkUserDefinedBinary",
@@ -419,7 +409,7 @@
         },
         {
             "file": "index.js",
-            "line": 450,
+            "line": 457,
             "description": "Checks if the def. port is blocked & if we need to switch to another port\nKicks off the process manager (for closing the opened browsers after the run has been finished)\nAlso starts the chromedriver instance",
             "itemtype": "method",
             "name": "_checkPorts",
@@ -449,7 +439,7 @@
         },
         {
             "file": "index.js",
-            "line": 475,
+            "line": 482,
             "description": "Spawns an instance of Chromedriver",
             "itemtype": "method",
             "name": "_startChromedriver",
@@ -479,7 +469,7 @@
         },
         {
             "file": "index.js",
-            "line": 494,
+            "line": 501,
             "description": "Watches the chromedriver console output to capture the starting message",
             "itemtype": "method",
             "name": "_catchDriverLogs",
@@ -504,7 +494,7 @@
         },
         {
             "file": "index.js",
-            "line": 524,
+            "line": 536,
             "description": "Remove the chromedriver log that is written to the current working directory",
             "itemtype": "method",
             "name": "_unlinkChromedriverLog",
@@ -524,7 +514,7 @@
         },
         {
             "file": "index.js",
-            "line": 548,
+            "line": 560,
             "description": "Tracks running browser processes for chrome on mac & linux",
             "itemtype": "method",
             "name": "_processes",
@@ -549,7 +539,7 @@
         },
         {
             "file": "index.js",
-            "line": 568,
+            "line": 580,
             "description": "Kills all associated processes",
             "itemtype": "method",
             "name": "_checkProcesses",
@@ -574,7 +564,7 @@
         },
         {
             "file": "index.js",
-            "line": 593,
+            "line": 605,
             "description": "Kills a process",
             "itemtype": "method",
             "name": "_killNix",
@@ -594,7 +584,7 @@
         },
         {
             "file": "index.js",
-            "line": 618,
+            "line": 630,
             "description": "Lists all chrome processes on *NIX systems",
             "itemtype": "method",
             "name": "_processesNix",
@@ -614,7 +604,7 @@
         },
         {
             "file": "index.js",
-            "line": 633,
+            "line": 645,
             "description": "Deserializes a process list on nix",
             "itemtype": "method",
             "name": "_processListNix",
@@ -644,7 +634,7 @@
         },
         {
             "file": "index.js",
-            "line": 651,
+            "line": 663,
             "description": "Reformats the process list output on *NIX systems",
             "itemtype": "method",
             "name": "_splitProcessListNix",
@@ -669,7 +659,7 @@
         },
         {
             "file": "index.js",
-            "line": 671,
+            "line": 683,
             "description": "Filters empty process list entries on *NIX",
             "itemtype": "method",
             "name": "_filterProcessItemsNix",
@@ -692,7 +682,7 @@
         },
         {
             "file": "index.js",
-            "line": 690,
+            "line": 702,
             "description": "Lists all running processes (win only)",
             "itemtype": "method",
             "name": "_processesWin",
@@ -712,7 +702,7 @@
         },
         {
             "file": "index.js",
-            "line": 704,
+            "line": 716,
             "description": "Deserializes the process list on win",
             "itemtype": "method",
             "name": "_processListWin",
@@ -742,7 +732,7 @@
         },
         {
             "file": "index.js",
-            "line": 737,
+            "line": 749,
             "description": "Processes (transforms) the list of processes",
             "itemtype": "method",
             "name": "_filterProcessItemsWin",
@@ -767,7 +757,7 @@
         },
         {
             "file": "index.js",
-            "line": 756,
+            "line": 768,
             "description": "Filters empty lines out of the process result",
             "itemtype": "method",
             "name": "_splitProcessListWin",
@@ -792,7 +782,7 @@
         },
         {
             "file": "index.js",
-            "line": 773,
+            "line": 785,
             "description": "Kills a process (based on a PID)\nthat was not opened BEFORE Dalek has\nbeen started",
             "itemtype": "method",
             "name": "_killWindows",
@@ -835,14 +825,6 @@
         {
             "message": "Missing item type\nThe version of chromedriver installed by this package.",
             "line": " lib/chromedriver.js:19"
-        },
-        {
-            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
-            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
-        },
-        {
-            "message": "Missing item type\nDifferent browser types (Canary / Chromium) that can be controlled\nvia the Chromedriver",
-            "line": " index.js:237"
         }
     ]
 }

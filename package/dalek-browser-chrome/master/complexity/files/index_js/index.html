@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">71.63</p>
+      <p class="stat">71.12</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">781</p>
+      <p class="stat">793</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">38.63</p>
+      <p class="stat">39.10</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">3.26</p>
+      <p class="stat">3.38</p>
     </div>
   </div>
 </div>
@@ -330,6 +330,8 @@ var ChromeDriver = {
    * Different browser types (Canary / Chromium) that can be controlled
    * via the Chromedriver
    *
+   * @property browserTypes
+   * @type object
    */
 
   browserTypes: {
@@ -524,6 +526,11 @@ var ChromeDriver = {
    */
 
   _checkUserDefinedBinary: function (binary) {
+    // check if we need to replace the users home directory
+    if (process.platform === &#039;darwin&#039; &amp;&amp; binary.trim()[0] === &#039;~&#039;) {
+      binary = binary.replace(&#039;~&#039;, process.env.HOME);
+    }
+    
     // check if the binary exists
     if (!fs.existsSync(binary)) {
       this.reporterEvents.emit(&#039;error&#039;, &#039;dalek-driver-chrome: Binary not found: &#039; + binary);
@@ -595,18 +602,23 @@ var ChromeDriver = {
 
   _catchDriverLogs: function (deferred, data) {
     var dataStr = data + &#039;&#039;;
+    var timeout = null;
 
     // timeout to catch if chromedriver couldnt be launched
-    var timeout = setTimeout(function () {
-      deferred.reject();
-      this.reporterEvents.emit(&#039;error&#039;, &#039;dalek-driver-chrome: Could not launch Chromedriver&#039;);
-      process.exit(127);
-    }.bind(this), 2000);
+    if (dataStr.search(&#039;DVFreeThread&#039;) === -1) {
+      timeout = setTimeout(function () {
+        deferred.reject();
+        this.reporterEvents.emit(&#039;error&#039;, &#039;dalek-driver-chrome: Could not launch Chromedriver&#039;);
+        process.exit(127);
+      }.bind(this), 2000);
+    }
 
     // look for the success message
     if (dataStr.search(&#039;Starting ChromeDriver&#039;) !== -1) {
       this.reporterEvents.emit(&#039;report:log:system&#039;, &#039;dalek-browser-chrome: Started ChromeDriver&#039;);
-      clearTimeout(timeout);
+      if (timeout !== null) {
+        clearTimeout(timeout);
+      }
       deferred.resolve();
     }
 
