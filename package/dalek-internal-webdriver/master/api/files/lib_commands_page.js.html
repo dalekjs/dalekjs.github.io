@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1</em>
+            <em>API Docs for: 0.0.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -152,16 +152,41 @@ module.exports = function (Driver) {
     method: &#x27;GET&#x27;
   });
 
+  /**
+   * Checks the device orientation
+   *
+   * @method orientation
+   * @see https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/orientation
+   * @param {GET} sessionId ID of the session to route the command to
+   */
+
   Driver.addCommand({
     url: &#x27;/session/:sessionId/orientation&#x27;,
     method: &#x27;GET&#x27;
   });
+
+  /**
+   * Checks a prompt text
+   *
+   * @method alertText
+   * @see https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/alert_text
+   * @param {GET} sessionId ID of the session to route the command to
+   */
 
   Driver.addCommand({
     name: &#x27;alertText&#x27;,
     url: &#x27;/session/:sessionId/alert_text&#x27;,
     method: &#x27;GET&#x27;
   });
+
+  /**
+   * Sets a prompt text
+   *
+   * @method promptText
+   * @see https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/alert_text
+   * @param {GET} sessionId ID of the session to route the command to
+   * @param {POST} text Text to set
+   */
 
   Driver.addCommand({
     name: &#x27;promptText&#x27;,
@@ -170,11 +195,27 @@ module.exports = function (Driver) {
     params: [&#x27;text&#x27;]
   });
 
+  /**
+   * Accept an dialog box
+   *
+   * @method acceptAlert
+   * @see https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/accept_alert
+   * @param {GET} sessionId ID of the session to route the command to
+   */
+
   Driver.addCommand({
     name: &#x27;acceptAlert&#x27;,
     url: &#x27;/session/:sessionId/accept_alert&#x27;,
     method: &#x27;POST&#x27;
   });
+
+  /**
+   * Cancel an dialog box
+   *
+   * @method dismissAlert
+   * @see https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/dismiss_alert
+   * @param {GET} sessionId ID of the session to route the command to
+   */
 
   Driver.addCommand({
     name: &#x27;dismissAlert&#x27;,

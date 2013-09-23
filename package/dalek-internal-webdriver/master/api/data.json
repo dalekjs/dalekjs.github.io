@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-internal-webdriver",
         "description": "JavaScript Webdriver Client for DalekJS",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "url": ""
     },
     "files": {
@@ -120,13 +120,6 @@
             "namespaces": {
                 "Internal": 1
             }
-        },
-        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
-            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
         },
         "index.js": {
             "name": "index.js",
@@ -1466,7 +1459,102 @@
         },
         {
             "file": "lib/commands/page.js",
-            "line": 93,
+            "line": 63,
+            "description": "Checks the device orientation",
+            "itemtype": "method",
+            "name": "orientation",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/orientation"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 76,
+            "description": "Checks a prompt text",
+            "itemtype": "method",
+            "name": "alertText",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/alert_text"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 90,
+            "description": "Sets a prompt text",
+            "itemtype": "method",
+            "name": "promptText",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/alert_text"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                },
+                {
+                    "name": "text",
+                    "description": "Text to set",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 106,
+            "description": "Accept an dialog box",
+            "itemtype": "method",
+            "name": "acceptAlert",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/accept_alert"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 120,
+            "description": "Cancel an dialog box",
+            "itemtype": "method",
+            "name": "dismissAlert",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/dismiss_alert"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "GET"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 134,
             "description": "Get the current geo location",
             "itemtype": "method",
             "name": "geoLocation",
@@ -1484,7 +1572,7 @@
         },
         {
             "file": "lib/commands/page.js",
-            "line": 107,
+            "line": 148,
             "description": "Set the geo location",
             "itemtype": "method",
             "name": "setGeoLocation",
@@ -1517,7 +1605,7 @@
         },
         {
             "file": "lib/commands/page.js",
-            "line": 125,
+            "line": 166,
             "description": "Get the log for a given log type.\nLog buffer is reset after each request.",
             "itemtype": "method",
             "name": "log",
@@ -1535,7 +1623,7 @@
         },
         {
             "file": "lib/commands/page.js",
-            "line": 140,
+            "line": 181,
             "description": "Get available log types",
             "itemtype": "method",
             "name": "logTypes",
@@ -2695,14 +2783,6 @@
             "namespace": "Internal"
         },
         {
-            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
-            "line": 1,
-            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
-            "class": "",
-            "module": "DalekJS",
-            "namespace": "Internal"
-        },
-        {
             "file": "index.js",
             "line": 27,
             "description": "Its a webdriver client",
@@ -2785,10 +2865,6 @@
         {
             "message": "Missing item type\nLocal options, used to store data\nlike the current sessionId or similar",
             "line": " lib/webdriver.js:49"
-        },
-        {
-            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
-            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
         },
         {
             "message": "Missing item type\nIts a webdriver client",

@@ -49,7 +49,7 @@
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">123</p>
+      <p class="stat">164</p>
     </div>
   </div>
   <div class="row historical">
@@ -152,16 +152,41 @@ module.exports = function (Driver) {
     method: &#039;GET&#039;
   });
 
+  /**
+   * Checks the device orientation
+   *
+   * @method orientation
+   * @see https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/orientation
+   * @param {GET} sessionId ID of the session to route the command to
+   */
+
   Driver.addCommand({
     url: &#039;/session/:sessionId/orientation&#039;,
     method: &#039;GET&#039;
   });
+
+  /**
+   * Checks a prompt text
+   *
+   * @method alertText
+   * @see https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/alert_text
+   * @param {GET} sessionId ID of the session to route the command to
+   */
 
   Driver.addCommand({
     name: &#039;alertText&#039;,
     url: &#039;/session/:sessionId/alert_text&#039;,
     method: &#039;GET&#039;
   });
+
+  /**
+   * Sets a prompt text
+   *
+   * @method promptText
+   * @see https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/alert_text
+   * @param {GET} sessionId ID of the session to route the command to
+   * @param {POST} text Text to set
+   */
 
   Driver.addCommand({
     name: &#039;promptText&#039;,
@@ -170,11 +195,27 @@ module.exports = function (Driver) {
     params: [&#039;text&#039;]
   });
 
+  /**
+   * Accept an dialog box
+   *
+   * @method acceptAlert
+   * @see https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/accept_alert
+   * @param {GET} sessionId ID of the session to route the command to
+   */
+
   Driver.addCommand({
     name: &#039;acceptAlert&#039;,
     url: &#039;/session/:sessionId/accept_alert&#039;,
     method: &#039;POST&#039;
   });
+
+  /**
+   * Cancel an dialog box
+   *
+   * @method dismissAlert
+   * @see https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/dismiss_alert
+   * @param {GET} sessionId ID of the session to route the command to
+   */
 
   Driver.addCommand({
     name: &#039;dismissAlert&#039;,
