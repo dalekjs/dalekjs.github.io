@@ -36,7 +36,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "index.js",
-            "line": 89,
+            "line": 98,
             "description": "Daleks base module\nUsed to configure all the things\nand to start off the tests"
         }
     },
@@ -52,7 +52,7 @@
             "module": "DalekJS",
             "namespace": "",
             "file": "index.js",
-            "line": 89,
+            "line": 98,
             "description": "Daleks base module\nUsed to configure all the things\nand to start off the tests"
         }
     },
@@ -86,7 +86,7 @@
         },
         {
             "file": "index.js",
-            "line": 100,
+            "line": 109,
             "description": "Runs the configured testsuites",
             "itemtype": "method",
             "name": "run",
@@ -96,7 +96,7 @@
         },
         {
             "file": "index.js",
-            "line": 120,
+            "line": 129,
             "description": "Reports the all testuites executed event",
             "itemtype": "method",
             "name": "testsuitesFinished",
@@ -106,7 +106,7 @@
         },
         {
             "file": "index.js",
-            "line": 133,
+            "line": 142,
             "description": "Reports the all testuites executed event",
             "itemtype": "method",
             "name": "reportRunFinished",
@@ -116,7 +116,7 @@
         },
         {
             "file": "index.js",
-            "line": 151,
+            "line": 160,
             "description": "Normalizes options",
             "itemtype": "method",
             "name": "normalizeOptions",
@@ -136,71 +136,7 @@
         },
         {
             "file": "index.js",
-            "line": 169,
-            "description": "Reports a system warning",
-            "itemtype": "method",
-            "name": "setWarning",
-            "params": [
-                {
-                    "name": "type",
-                    "description": "Type of the warning",
-                    "type": "String"
-                },
-                {
-                    "name": "message",
-                    "description": "Verbose message of the warning",
-                    "type": "String"
-                },
-                {
-                    "name": "code",
-                    "description": "Error code of the warning",
-                    "type": "Integer"
-                },
-                {
-                    "name": "value",
-                    "description": "Custom error message",
-                    "type": "String"
-                }
-            ],
-            "chainable": 1,
-            "class": "Dalek",
-            "module": "DalekJS"
-        },
-        {
-            "file": "index.js",
-            "line": 185,
-            "description": "Reports a system error",
-            "itemtype": "method",
-            "name": "setError",
-            "params": [
-                {
-                    "name": "type",
-                    "description": "Type of the error",
-                    "type": "String"
-                },
-                {
-                    "name": "message",
-                    "description": "Verbose message of the error",
-                    "type": "String"
-                },
-                {
-                    "name": "code",
-                    "description": "Error code of the error",
-                    "type": "Integer"
-                },
-                {
-                    "name": "value",
-                    "description": "Custom error message",
-                    "type": "String"
-                }
-            ],
-            "chainable": 1,
-            "class": "Dalek",
-            "module": "DalekJS"
-        },
-        {
-            "file": "index.js",
-            "line": 201,
+            "line": 178,
             "description": "Sets up system env properties",
             "itemtype": "method",
             "name": "_initialize",
@@ -212,7 +148,7 @@
         },
         {
             "file": "index.js",
-            "line": 222,
+            "line": 199,
             "description": "Sets up all the reporters",
             "itemtype": "method",
             "name": "_setupReporters",
@@ -224,7 +160,7 @@
         },
         {
             "file": "index.js",
-            "line": 238,
+            "line": 215,
             "description": "Adds a reporter",
             "itemtype": "method",
             "name": "_addReporter",
@@ -243,7 +179,7 @@
         },
         {
             "file": "index.js",
-            "line": 252,
+            "line": 229,
             "description": "Updates the assertion state",
             "itemtype": "method",
             "name": "_onReportAssertion",
@@ -262,7 +198,7 @@
         },
         {
             "file": "index.js",
-            "line": 271,
+            "line": 248,
             "description": "Initizializes the driver instances",
             "itemtype": "method",
             "name": "_initDriver",
@@ -274,13 +210,25 @@
         },
         {
             "file": "index.js",
-            "line": 290,
+            "line": 267,
             "description": "Sets up the event dispatcher for driver events",
             "itemtype": "method",
             "name": "_setupDriverEmitter",
             "chainable": 1,
             "access": "private",
             "tagname": "",
+            "class": "Dalek",
+            "module": "DalekJS"
+        },
+        {
+            "file": "index.js",
+            "line": 282,
+            "description": "Make sure to shutdown dalek & its spawned\ncomponents, webservers gracefully if a\nruntimew error pops up",
+            "itemtype": "method",
+            "name": "_registerExceptionHandler",
+            "access": "private",
+            "tagname": "",
+            "chainable": 1,
             "class": "Dalek",
             "module": "DalekJS"
         }

@@ -45,7 +45,7 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">71.42</p>
+      <p class="stat">71.21</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">22.50</p>
+      <p class="stat">27.00</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.41</p>
+      <p class="stat">1.47</p>
     </div>
   </div>
 </div>
@@ -150,17 +150,19 @@ var Dalek = function (opts) {
   // setup instance
   this._initialize();
 
+  // register exception handler
+  this._registerExceptionHandler();
+
   // normalize options
   this.options = this.normalizeOptions(opts);
 
-  // initiate config
-  this.config = new Config(defaults, this.options);
-
-  // check for file option, throw error if none is given
-  if (!Array.isArray(this.config.get(&#039;tests&#039;))) {
-    console.error(&#039;No test files given&#039;);
-    process.exit(0);
+  // getting advanced options
+  if (opts &amp;&amp; opts.advanced) {
+    this.advancedOptions = opts.advanced;
   }
+
+  // initiate config
+  this.config = new Config(defaults, this.options, this.advancedOptions);
 
   // prepare and load reporter(s)
   this._setupReporters();
@@ -173,6 +175,13 @@ var Dalek = function (opts) {
 
   // prepare driver event emitter instance
   this._setupDriverEmitter();
+
+  // check for file option, throw error if none is given
+  if (!Array.isArray(this.config.get(&#039;tests&#039;))) {
+    this.reporterEvents.emit(&#039;error&#039;, &#039;No test files given!&#039;);
+    this.driverEmitter.emit(&#039;killAll&#039;);
+    process.exit(127);
+  }
 
   // init the driver instance
   this._initDriver();
@@ -256,38 +265,6 @@ Dalek.prototype = {
     });
 
     return options;
-  },
-
-  /**
-   * Reports a system warning
-   *
-   * @method setWarning
-   * @param {string} type Type of the warning
-   * @param {string} message Verbose message of the warning
-   * @param {integer} code Error code of the warning
-   * @param {string} value Custom error message
-   * @chainable
-   */
-
-  setWarning: function (type, message, code, value) {
-    this.warnings.push({type: type, message: message, code: code, value: value});
-    return this;
-  },
-
-  /**
-   * Reports a system error
-   *
-   * @method setError
-   * @param {string} type Type of the error
-   * @param {string} message Verbose message of the error
-   * @param {integer} code Error code of the error
-   * @param {string} value Custom error message
-   * @chainable
-   */
-
-  setError: function (type, message, code, value) {
-    this.errors.push({type: type, message: message, code: code, value: value});
-    return this;
   },
 
   /**
@@ -389,8 +366,31 @@ Dalek.prototype = {
 
   _setupDriverEmitter: function () {
     var driverEmitter = new EventEmitter2();
-    driverEmitter.setMaxListeners(1000);
+    driverEmitter.setMaxListeners(0);
     this.driverEmitter = driverEmitter;
+    return this;
+  },
+
+  /**
+   * Make sure to shutdown dalek &amp; its spawned
+   * components, webservers gracefully if a
+   * runtimew error pops up
+   *
+   * @method _registerExceptionHandler
+   * @private
+   * @chainable
+   */
+
+  _registerExceptionHandler: function () {
+    process.on(&#039;uncaughtException&#039;, function (exception) {
+      // ios emulator hack, needs to go in the future
+      if (exception.message &amp;&amp; exception.message.search(&#039;This socket has been ended by the other party&#039;) !== -1) {
+        return false;
+      }
+      
+      this.driverEmitter.emit(&#039;killAll&#039;);
+      this.reporterEvents.emit(&#039;error&#039;, exception);
+    }.bind(this));
     return this;
   }
 };
