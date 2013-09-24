@@ -251,7 +251,7 @@ test.open(&#39;http://home.dalek.com&#39;)
  </code></pre></p><a class="nav-helper" data-name="meth-waitForElement"></a><h2 class="method">.waitForElement</h2><p>Waits until an element matching the provided selector expression exists in remote DOM to process any next step.</p><p>Lets assume we have a ticker that loads its contents via AJAX, and appends new elements, when the call has been successfully answered:</p><p><pre><code class="language-javascript">
  test.open(&#39;http://myticker.org&#39;)
    .assert.text(&#39;.ticker-element:first-child&#39;, &#39;First!&#39;, &#39;First ticker element is visible&#39;)
-   // now we load the next ticker element, defsult timeout is 5 seconds
+   // now we load the next ticker element, default timeout is 5 seconds
    .waitForElement(&#39;.ticker-element:nth-child(2)&#39;)
    .assert.text(&#39;.ticker-element:nth-child(2)&#39;, &#39;Me snd. one&#39;, &#39;Snd. ticker element is visible&#39;)
    // Lets assume that this AJAX call can take longer, so we raise the default timeout to 10 seconds
