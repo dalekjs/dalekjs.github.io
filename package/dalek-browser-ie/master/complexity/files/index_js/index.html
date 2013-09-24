@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">71.79</p>
+      <p class="stat">70.73</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">241</p>
+      <p class="stat">378</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">33.19</p>
+      <p class="stat">39.91</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.01</p>
+      <p class="stat">1.70</p>
     </div>
   </div>
 </div>
@@ -118,8 +118,8 @@
 
 // ext. libs
 var Q = require(&#039;q&#039;);
-var spawn = require(&#039;child_process&#039;).spawn;
-var exec = require(&#039;child_process&#039;).exec;
+var cp = require(&#039;child_process&#039;);
+var portscanner = require(&#039;portscanner&#039;);
 
 // int. libs
 var iedriver = require(&#039;./lib/iedriver&#039;);
@@ -146,6 +146,28 @@ var iedriver = require(&#039;./lib/iedriver&#039;);
  * $ dalek mytest.js -b IE
  * ```
  *
+ * The Webdriver Server tries to open Port 5555 by default,
+ * if this port is blocked, it tries to use a port between 5555 &amp; 5564
+ * You can specifiy a different port from within your [Dalekfile](/pages/config.html) like so:
+ *
+ * ```javascript
+ * &quot;browsers&quot;: {
+ *   &quot;ie&quot;: {
+ *     &quot;port&quot;: 6555 
+ *   }
+ * }
+ * ```
+ *
+ * It is also possible to specify a range of ports:
+ *
+ * ```javascript
+ * &quot;browsers&quot;: {
+ *   &quot;ie&quot;: {
+ *     &quot;portRange&quot;: [6100, 6120] 
+ *   }
+ * }
+ * ```
+ * 
  * @module DalekJS
  * @class InternetExplorer
  * @namespace Browser
@@ -179,8 +201,20 @@ var InternetExplorer = {
   port: 5555,
 
   /**
+   * Default maximum port of the IEDriverServer
+   * The port is the highest port in the range that can be allocated
+   * by the IEDriverServer
+   *
+   * @property maxPort
+   * @type integer
+   * @default 5654
+   */
+
+  maxPort: 5654,
+
+  /**
    * Default host of the IEDriverServer
-   * The host may be overriden with
+   * The host may be overridden with
    * a user configured value
    *
    * @property host
@@ -189,6 +223,31 @@ var InternetExplorer = {
    */
 
   host: &#039;localhost&#039;,
+
+  /**
+   * Default desired capabilities that should be
+   * transferred when the browser session gets requested
+   *
+   * @property desiredCapabilities
+   * @type object
+   */
+
+  desiredCapabilities: {
+    browserName: &#039;InternetExplorer&#039;
+  },
+
+  /**
+   * Driver defaults, what should the driver be able to access.
+   *
+   * @property driverDefaults
+   * @type object
+   */
+
+  driverDefaults: {
+    viewport: true,
+    status: true,
+    sessionInfo: true
+  },
 
   /**
    * Path to the IEDriverServer.exe file
@@ -208,6 +267,17 @@ var InternetExplorer = {
    */
 
   spawned: null,
+
+  /**
+   * IE processes that are running on startup,
+   * and therefor shouldn`t be closed
+   *
+   * @property openProcesses
+   * @type array
+   * @default []   
+   */
+
+  openProcesses: [],
 
   /**
    * Resolves the driver port
@@ -232,6 +302,17 @@ var InternetExplorer = {
   },
 
   /**
+   * Resolves the maximum range for the driver port
+   *
+   * @method getMaxPort
+   * @return {integer} port Max WebDriver server port range
+   */
+
+  getMaxPort: function () {
+    return this.maxPort;
+  },
+
+  /**
    * Launches the driver
    * (the driver takes care of launching the browser)
    *
@@ -239,18 +320,22 @@ var InternetExplorer = {
    * @return {object} promise Browser promise
    */
 
-  launch: function () {
+  launch: function (configuration, events, config) {
     var deferred = Q.defer();
-    var stream = &#039;&#039;;
-    this.spawned = spawn(iedriver.path, [&#039;--port=&#039; + this.getPort()]);
 
-    this.spawned.stdout.on(&#039;data&#039;, function (data) {
-      var dataStr = data + &#039;&#039;;
-      stream += dataStr;
-      if (stream.search(&#039;Listening on port&#039;) !== -1) {
-        deferred.resolve();
-      }
-    });
+    // store injected configuration/log event handlers
+    this.reporterEvents = events;
+    this.configuration = configuration;
+    this.config = config;
+
+    // check for a user set port
+    var browsers = this.config.get(&#039;browsers&#039;);
+    if (browsers &amp;&amp; Array.isArray(browsers)) {
+      browsers.forEach(this._checkUserDefinedPorts.bind(this));
+    }
+
+    // check if the current port is in use, if so, scan for free ports
+    portscanner.findAPortNotInUse(this.getPort(), this.getMaxPort(), this.getHost(), this._checkPorts.bind(this, deferred));
     return deferred.promise;
   },
 
@@ -269,7 +354,6 @@ var InternetExplorer = {
         Object.keys(item).forEach(function (key) {
           if(svc[idx][key] === &#039;iexplore.exe&#039;) {
             // kill the browser process
-            console.log(svc[idx]);
             this._kill(svc[idx].PID);
           }
         }.bind(this));
@@ -278,6 +362,59 @@ var InternetExplorer = {
 
     // kill the driver process
     this.spawned.kill(&#039;SIGTERM&#039;);
+    return this;
+  },
+
+  _checkPorts: function (deferred, err, port) {
+    // check if the port was blocked &amp; if we need to switch to another port
+    if (this.port !== port) {
+      this.reporterEvents.emit(&#039;report:log:system&#039;, &#039;dalek-browser-ie: Switching to port: &#039; + port);
+      this.port = port;
+    }
+
+    // invoke the ie driver afterwards
+    this._startIEdriver(deferred);
+    return this;
+  },
+
+  _startIEdriver: function (deferred) {
+    var stream = &#039;&#039;;
+    this.spawned = cp.spawn(iedriver.path, [&#039;--port=&#039; + this.getPort()]);
+
+    this.spawned.stdout.on(&#039;data&#039;, function (data) {
+      var dataStr = data + &#039;&#039;;
+      stream += dataStr;
+      if (stream.search(&#039;Listening on port&#039;) !== -1) {
+        deferred.resolve();
+      }
+    });
+    return this;
+  },
+
+  /**
+   * Process user defined ports
+   *
+   * @method _checkUserDefinedPorts
+   * @param {object} browser Browser configuration
+   * @chainable
+   * @private
+   */
+
+  _checkUserDefinedPorts: function (browser) {
+    // check for a single defined port
+    if (browser.ie &amp;&amp; browser.ie.port) {
+      this.port = parseInt(browser.ie.port, 10);
+      this.maxPort = this.port + 90;
+      this.reporterEvents.emit(&#039;report:log:system&#039;, &#039;dalek-browser-ie: Switching to user defined port: &#039; + this.port);
+    }
+
+    // check for a port range
+    if (browser.ie &amp;&amp; browser.ie.portRange &amp;&amp; browser.ie.portRange.length === 2) {
+      this.port = parseInt(browser.ie.portRange[0], 10);
+      this.maxPort = parseInt(browser.ie.portRange[1], 10);
+      this.reporterEvents.emit(&#039;report:log:system&#039;, &#039;dalek-browser-ie: Switching to user defined port(s): &#039; + this.port + &#039; -&gt; &#039; + this.maxPort);
+    }
+
     return this;
   },
 
@@ -293,7 +430,7 @@ var InternetExplorer = {
 
   _list: function(callback, verbose) {
     verbose = typeof verbose === &#039;boolean&#039; ? verbose : false;
-    exec(&#039;tasklist /FO CSV&#039; + (verbose === true ? &#039; /V&#039; : &#039;&#039;), function (err, stdout) {
+    cp.exec(&#039;tasklist /FO CSV&#039; + (verbose === true ? &#039; /V&#039; : &#039;&#039;), function (err, stdout) {
       var pi = stdout.split(&#039;\r\n&#039;);
       var p = [];
 
@@ -347,7 +484,7 @@ var InternetExplorer = {
       callback = force;
       force = false;
     }
-    exec(&#039;taskkill /PID &#039; + pid + (force === true ? &#039; /f&#039; : &#039;&#039;),callback);
+    cp.exec(&#039;taskkill /PID &#039; + pid + (force === true ? &#039; /f&#039; : &#039;&#039;),callback);
     return this;
   }
 

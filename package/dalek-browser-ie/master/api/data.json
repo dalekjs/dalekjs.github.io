@@ -48,7 +48,7 @@
             "tag": "module",
             "file": "index.js",
             "line": 35,
-            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Internet Explorer.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-ie --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browsers\": [\"IE\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b IE\n```",
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Internet Explorer.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-ie --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browsers\": [\"IE\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b IE\n```\n\nThe Webdriver Server tries to open Port 5555 by default,\nif this port is blocked, it tries to use a port between 5555 & 5564\nYou can specifiy a different port from within your [Dalekfile](/pages/config.html) like so:\n\n```javascript\n\"browsers\": {\n  \"ie\": {\n    \"port\": 6555 \n  }\n}\n```\n\nIt is also possible to specify a range of ports:\n\n```javascript\n\"browsers\": {\n  \"ie\": {\n    \"portRange\": [6100, 6120] \n  }\n}\n```",
             "part": "InternetExplorer",
             "api": ""
         }
@@ -66,7 +66,7 @@
             "namespace": "Browser",
             "file": "index.js",
             "line": 35,
-            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Internet Explorer.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-ie --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browsers\": [\"IE\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b IE\n```"
+            "description": "This module is a browser plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt provides all a WebDriverServer & browser launcher for Internet Explorer.\n\nThe browser plugin can be installed with the following command:\n\n```bash\n$ npm install dalek-browser-ie --save-dev\n```\n\nYou can use the browser plugin by adding a config option to the your Dalekfile\n\n```javascript\n\"browsers\": [\"IE\"]\n```\n\nOr you can tell Dalek that it should test in this browser via the command line:\n\n```bash\n$ dalek mytest.js -b IE\n```\n\nThe Webdriver Server tries to open Port 5555 by default,\nif this port is blocked, it tries to use a port between 5555 & 5564\nYou can specifiy a different port from within your [Dalekfile](/pages/config.html) like so:\n\n```javascript\n\"browsers\": {\n  \"ie\": {\n    \"port\": 6555 \n  }\n}\n```\n\nIt is also possible to specify a range of ports:\n\n```javascript\n\"browsers\": {\n  \"ie\": {\n    \"portRange\": [6100, 6120] \n  }\n}\n```"
         }
     },
     "classitems": [
@@ -98,7 +98,7 @@
         },
         {
             "file": "index.js",
-            "line": 66,
+            "line": 88,
             "description": "Verbose version of the browser name",
             "itemtype": "property",
             "name": "longName",
@@ -111,7 +111,7 @@
         },
         {
             "file": "index.js",
-            "line": 77,
+            "line": 99,
             "description": "Default port of the IEDriverServer\nThe port may change, cause the port conflict resultion\ntool might pick another one, if the default one is blocked",
             "itemtype": "property",
             "name": "port",
@@ -123,8 +123,20 @@
         },
         {
             "file": "index.js",
-            "line": 89,
-            "description": "Default host of the IEDriverServer\nThe host may be overriden with\na user configured value",
+            "line": 111,
+            "description": "Default maximum port of the IEDriverServer\nThe port is the highest port in the range that can be allocated\nby the IEDriverServer",
+            "itemtype": "property",
+            "name": "maxPort",
+            "type": "integer",
+            "default": "5654",
+            "class": "Browser.InternetExplorer",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 123,
+            "description": "Default host of the IEDriverServer\nThe host may be overridden with\na user configured value",
             "itemtype": "property",
             "name": "host",
             "type": "string",
@@ -135,7 +147,29 @@
         },
         {
             "file": "index.js",
-            "line": 101,
+            "line": 135,
+            "description": "Default desired capabilities that should be\ntransferred when the browser session gets requested",
+            "itemtype": "property",
+            "name": "desiredCapabilities",
+            "type": "object",
+            "class": "Browser.InternetExplorer",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 147,
+            "description": "Driver defaults, what should the driver be able to access.",
+            "itemtype": "property",
+            "name": "driverDefaults",
+            "type": "object",
+            "class": "Browser.InternetExplorer",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 160,
             "description": "Path to the IEDriverServer.exe file",
             "itemtype": "property",
             "name": "path",
@@ -147,7 +181,7 @@
         },
         {
             "file": "index.js",
-            "line": 111,
+            "line": 170,
             "description": "Child process instance of the IEDriverServer",
             "itemtype": "property",
             "name": "spawned",
@@ -158,7 +192,19 @@
         },
         {
             "file": "index.js",
-            "line": 120,
+            "line": 179,
+            "description": "IE processes that are running on startup,\nand therefor shouldn`t be closed",
+            "itemtype": "property",
+            "name": "openProcesses",
+            "type": "array",
+            "default": "[]",
+            "class": "Browser.InternetExplorer",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 190,
             "description": "Resolves the driver port",
             "itemtype": "method",
             "name": "getPort",
@@ -172,7 +218,7 @@
         },
         {
             "file": "index.js",
-            "line": 131,
+            "line": 201,
             "description": "Returns the driver host",
             "itemtype": "method",
             "name": "getHost",
@@ -186,7 +232,21 @@
         },
         {
             "file": "index.js",
-            "line": 142,
+            "line": 212,
+            "description": "Resolves the maximum range for the driver port",
+            "itemtype": "method",
+            "name": "getMaxPort",
+            "return": {
+                "description": "port Max WebDriver server port range",
+                "type": "Integer"
+            },
+            "class": "Browser.InternetExplorer",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 223,
             "description": "Launches the driver\n(the driver takes care of launching the browser)",
             "itemtype": "method",
             "name": "launch",
@@ -200,7 +260,7 @@
         },
         {
             "file": "index.js",
-            "line": 165,
+            "line": 250,
             "description": "Kills the driver & browser processes",
             "itemtype": "method",
             "name": "kill",
@@ -211,7 +271,27 @@
         },
         {
             "file": "index.js",
-            "line": 192,
+            "line": 302,
+            "description": "Process user defined ports",
+            "itemtype": "method",
+            "name": "_checkUserDefinedPorts",
+            "params": [
+                {
+                    "name": "browser",
+                    "description": "Browser configuration",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Browser.InternetExplorer",
+            "module": "DalekJS",
+            "namespace": "Browser"
+        },
+        {
+            "file": "index.js",
+            "line": 329,
             "description": "Lists all running processes (win only)",
             "itemtype": "method",
             "name": "_list",
@@ -238,7 +318,7 @@
         },
         {
             "file": "index.js",
-            "line": 238,
+            "line": 375,
             "description": "Kill a specific process (win only)",
             "itemtype": "method",
             "name": "_kill",
@@ -285,7 +365,7 @@
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:66"
+            "line": " index.js:88"
         },
         {
             "message": "Missing item type",

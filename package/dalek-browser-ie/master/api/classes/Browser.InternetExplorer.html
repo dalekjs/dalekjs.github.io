@@ -116,6 +116,20 @@ It provides all a WebDriverServer &amp; browser launcher for Internet Explorer.<
 <pre><code class="lang-javascript">&quot;browsers&quot;: [&quot;IE&quot;]</code></pre>
 <p>Or you can tell Dalek that it should test in this browser via the command line:</p>
 <pre><code class="lang-bash">$ dalek mytest.js -b IE</code></pre>
+<p>The Webdriver Server tries to open Port 5555 by default,
+if this port is blocked, it tries to use a port between 5555 &amp; 5564
+You can specifiy a different port from within your <a href="/pages/config.html">Dalekfile</a> like so:</p>
+<pre><code class="lang-javascript">&quot;browsers&quot;: {
+  &quot;ie&quot;: {
+    &quot;port&quot;: 6555 
+  }
+}</code></pre>
+<p>It is also possible to specify a range of ports:</p>
+<pre><code class="lang-javascript">&quot;browsers&quot;: {
+  &quot;ie&quot;: {
+    &quot;portRange&quot;: [6100, 6120] 
+  }
+}</code></pre>
 
 </div>
 
@@ -146,6 +160,13 @@ It provides all a WebDriverServer &amp; browser launcher for Internet Explorer.<
                     <ul class="index-list methods">
                         
                             <li class="index-item method private">
+                                <a href="#method__checkUserDefinedPorts">_checkUserDefinedPorts</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
                                 <a href="#method__kill">_kill</a>
 
                                 
@@ -161,6 +182,13 @@ It provides all a WebDriverServer &amp; browser launcher for Internet Explorer.<
                         
                             <li class="index-item method">
                                 <a href="#method_getHost">getHost</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getMaxPort">getMaxPort</a>
 
                                 
                                 
@@ -198,6 +226,20 @@ It provides all a WebDriverServer &amp; browser launcher for Internet Explorer.<
                     <ul class="index-list properties">
                         
                             <li class="index-item property">
+                                <a href="#property_desiredCapabilities">desiredCapabilities</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_driverDefaults">driverDefaults</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
                                 <a href="#property_host">host</a>
 
                                 
@@ -206,6 +248,20 @@ It provides all a WebDriverServer &amp; browser launcher for Internet Explorer.<
                         
                             <li class="index-item property">
                                 <a href="#property_longName">longName</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_maxPort">maxPort</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_openProcesses">openProcesses</a>
 
                                 
                                 
@@ -244,6 +300,99 @@ It provides all a WebDriverServer &amp; browser launcher for Internet Explorer.<
         
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__checkUserDefinedPorts" class="method item private">
+    <h3 class="name"><code>_checkUserDefinedPorts</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>browser</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/index.js.html#l302"><code>index.js:302</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Process user defined ports</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">browser</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Browser configuration</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
 
                 
                     <div id="method__kill" class="method item private">
@@ -304,7 +453,7 @@ It provides all a WebDriverServer &amp; browser launcher for Internet Explorer.<
             
         
         
-        <a href="../files/index.js.html#l238"><code>index.js:238</code></a>
+        <a href="../files/index.js.html#l375"><code>index.js:375</code></a>
         
         </p>
 
@@ -437,7 +586,7 @@ It provides all a WebDriverServer &amp; browser launcher for Internet Explorer.<
             
         
         
-        <a href="../files/index.js.html#l192"><code>index.js:192</code></a>
+        <a href="../files/index.js.html#l329"><code>index.js:329</code></a>
         
         </p>
 
@@ -537,7 +686,7 @@ It provides all a WebDriverServer &amp; browser launcher for Internet Explorer.<
             
         
         
-        <a href="../files/index.js.html#l131"><code>index.js:131</code></a>
+        <a href="../files/index.js.html#l201"><code>index.js:201</code></a>
         
         </p>
 
@@ -564,6 +713,79 @@ It provides all a WebDriverServer &amp; browser launcher for Internet Explorer.<
                         <span class="type">String</span>:
                     
                     <p>host WebDriver server hostname</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getMaxPort" class="method item">
+    <h3 class="name"><code>getMaxPort</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Integer</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/index.js.html#l212"><code>index.js:212</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Resolves the maximum range for the driver port</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Integer</span>:
+                    
+                    <p>port Max WebDriver server port range</p>
 
                 
             </div>
@@ -610,7 +832,7 @@ It provides all a WebDriverServer &amp; browser launcher for Internet Explorer.<
             
         
         
-        <a href="../files/index.js.html#l120"><code>index.js:120</code></a>
+        <a href="../files/index.js.html#l190"><code>index.js:190</code></a>
         
         </p>
 
@@ -681,7 +903,7 @@ It provides all a WebDriverServer &amp; browser launcher for Internet Explorer.<
             
         
         
-        <a href="../files/index.js.html#l165"><code>index.js:165</code></a>
+        <a href="../files/index.js.html#l250"><code>index.js:250</code></a>
         
         </p>
 
@@ -740,7 +962,7 @@ It provides all a WebDriverServer &amp; browser launcher for Internet Explorer.<
             
         
         
-        <a href="../files/index.js.html#l142"><code>index.js:142</code></a>
+        <a href="../files/index.js.html#l223"><code>index.js:223</code></a>
         
         </p>
 
@@ -786,6 +1008,97 @@ It provides all a WebDriverServer &amp; browser launcher for Internet Explorer.<
                 <h2 class="off-left">Properties</h2>
 
                 
+                    <div id="property_desiredCapabilities" class="property item">
+    <h3 class="name"><code>desiredCapabilities</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/index.js.html#l135"><code>index.js:135</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Default desired capabilities that should be
+transferred when the browser session gets requested</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_driverDefaults" class="property item">
+    <h3 class="name"><code>driverDefaults</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/index.js.html#l147"><code>index.js:147</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Driver defaults, what should the driver be able to access.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="property_host" class="property item">
     <h3 class="name"><code>host</code></h3>
     <span class="type">String</span>
@@ -809,7 +1122,7 @@ It provides all a WebDriverServer &amp; browser launcher for Internet Explorer.<
             
         
         
-        <a href="../files/index.js.html#l89"><code>index.js:89</code></a>
+        <a href="../files/index.js.html#l123"><code>index.js:123</code></a>
         
         </p>
 
@@ -820,7 +1133,7 @@ It provides all a WebDriverServer &amp; browser launcher for Internet Explorer.<
 
     <div class="description">
         <p>Default host of the IEDriverServer
-The host may be overriden with
+The host may be overridden with
 a user configured value</p>
 
     </div>
@@ -858,7 +1171,7 @@ a user configured value</p>
             
         
         
-        <a href="../files/index.js.html#l66"><code>index.js:66</code></a>
+        <a href="../files/index.js.html#l88"><code>index.js:88</code></a>
         
         </p>
 
@@ -874,6 +1187,103 @@ a user configured value</p>
 
     
         <p><strong>Default:</strong> Internet Explorer</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_maxPort" class="property item">
+    <h3 class="name"><code>maxPort</code></h3>
+    <span class="type">Integer</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/index.js.html#l111"><code>index.js:111</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Default maximum port of the IEDriverServer
+The port is the highest port in the range that can be allocated
+by the IEDriverServer</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> 5654</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_openProcesses" class="property item">
+    <h3 class="name"><code>openProcesses</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/index.js.html#l179"><code>index.js:179</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>IE processes that are running on startup,
+and therefor shouldn`t be closed</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> []</p>
     
 
     
@@ -905,7 +1315,7 @@ a user configured value</p>
             
         
         
-        <a href="../files/index.js.html#l101"><code>index.js:101</code></a>
+        <a href="../files/index.js.html#l160"><code>index.js:160</code></a>
         
         </p>
 
@@ -952,7 +1362,7 @@ a user configured value</p>
             
         
         
-        <a href="../files/index.js.html#l77"><code>index.js:77</code></a>
+        <a href="../files/index.js.html#l99"><code>index.js:99</code></a>
         
         </p>
 
@@ -1001,7 +1411,7 @@ tool might pick another one, if the default one is blocked</p>
             
         
         
-        <a href="../files/index.js.html#l111"><code>index.js:111</code></a>
+        <a href="../files/index.js.html#l170"><code>index.js:170</code></a>
         
         </p>
 
