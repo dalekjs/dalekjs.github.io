@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-browser-ie",
         "description": "Internet Explorer bindings for DalekJS",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "url": "http://dalekjs.com"
     },
     "files": {
