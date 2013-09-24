@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.3</em>
+            <em>API Docs for: 0.0.4</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -817,17 +817,23 @@ var ChromeDriver = {
   _processListWin: function (callback, err, stdout) {
     var p = [];
     stdout.split(&#x27;\r\n&#x27;).forEach(this._splitProcessListWin.bind(this, p));
-
     var proc = [];
     var head = null;
     while (p.length &gt; 1) {
       var rec = p.shift();
-      var tmp = {};
       rec = rec.replace(/\&quot;\,/gi,&#x27;&quot;;&#x27;).replace(/\&quot;|\&#x27;/gi,&#x27;&#x27;).split(&#x27;;&#x27;);
-      for (var j=0;j&lt;rec.length;j++){
-        tmp[head[j]] = rec[j].replace(/\&quot;|\&#x27;/gi,&#x27;&#x27;);
+      if (head === null){
+        head = rec;
+        for (var i=0;i&lt;head.length;i++){
+          head[i] = head[i].replace(/ /gi,&#x27;&#x27;);
+        }
+      } else {
+        var tmp = {};
+        for (var j=0;j&lt;rec.length;j++){
+          tmp[head[j]] = rec[j].replace(/\&quot;|\&#x27;/gi,&#x27;&#x27;);
+        }
+        proc.push(tmp);
       }
-      proc.push(tmp);
     }
 
     var result = [];
@@ -851,7 +857,7 @@ var ChromeDriver = {
       if (process[key] === this.processName) {
         result.push(process.PID);
       }
-    });
+    }.bind(this));
     return this;
   },
 
