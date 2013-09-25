@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-reporter-console",
         "description": "Console reporter for the Dalekjs testing framework",
-        "version": "0.0.3",
+        "version": "0.0.4",
         "url": "http://dalekjs.com"
     },
     "files": {
@@ -938,7 +938,7 @@
         },
         {
             "file": "index.js",
-            "line": 75,
+            "line": 80,
             "description": "Imports an output module with the correct log state",
             "itemtype": "method",
             "name": "importLogModule",
@@ -955,7 +955,7 @@
         },
         {
             "file": "index.js",
-            "line": 97,
+            "line": 102,
             "description": "Connects to all the event listeners",
             "itemtype": "method",
             "name": "startListening",

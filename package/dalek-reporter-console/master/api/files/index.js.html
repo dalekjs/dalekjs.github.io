@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.3</em>
+            <em>API Docs for: 0.0.4</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -172,6 +172,11 @@ var Reporter = function (opts) {
   var loglevel = opts &amp;&amp; opts.logLevel ? parseInt(opts.logLevel, 10) : 1;
   this.level = (loglevel &gt;= -1 &amp;&amp; loglevel &lt;= 5) ? loglevel : 1;
   this.events = opts.events;
+
+  // set color &amp; symbols flags
+  this.noColor = opts.config.config.noColors;
+  this.noSymbols = opts.config.config.noSymbols;
+
   this.importLogModule();
   this.startListening();
 };
