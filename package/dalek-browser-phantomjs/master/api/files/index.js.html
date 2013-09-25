@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.2</em>
+            <em>API Docs for: 0.0.3</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -388,7 +388,7 @@ var PhantomJSDriver = {
     var binary = this._checkUserDefinedBinary(this.configuration, phantomjs.path);
 
     // launch the browser process
-    this.spawned = spawn(binary, [&#x27;--webdriver&#x27;, this.getPort()]);
+    this.spawned = spawn(binary, [&#x27;--webdriver&#x27;, this.getPort(), &#x27;--ignore-ssl-errors=true&#x27;]);
     this.spawned.stdout.on(&#x27;data&#x27;, this._launch.bind(this, deferred));
     return this;
   },

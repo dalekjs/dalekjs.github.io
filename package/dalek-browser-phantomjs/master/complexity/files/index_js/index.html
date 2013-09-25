@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">23.12</p>
+      <p class="stat">22.98</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.22</p>
+      <p class="stat">1.23</p>
     </div>
   </div>
 </div>
@@ -390,7 +390,7 @@ var PhantomJSDriver = {
     var binary = this._checkUserDefinedBinary(this.configuration, phantomjs.path);
 
     // launch the browser process
-    this.spawned = spawn(binary, [&#039;--webdriver&#039;, this.getPort()]);
+    this.spawned = spawn(binary, [&#039;--webdriver&#039;, this.getPort(), &#039;--ignore-ssl-errors=true&#039;]);
     this.spawned.stdout.on(&#039;data&#039;, this._launch.bind(this, deferred));
     return this;
   },
