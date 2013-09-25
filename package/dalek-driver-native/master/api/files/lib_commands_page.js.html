@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.2</em>
+            <em>API Docs for: 0.0.3</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -142,6 +142,68 @@ var Q = require(&#x27;q&#x27;);
  */
 
 var Page = {
+
+  /**
+   * This function is non operational
+   *
+   * @method noop
+   * @param {mixed} message Whatever yu like
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
+  noop: function (message, hash) {
+    this.actionQueue.push(this._noopCb.bind(this, message, hash));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the &#x60;noop&#x60; call
+   *
+   * @method _noopCb
+   * @param {mixed} message Whatever yu like
+   * @param {string} hash Unique hash of that fn call
+   * @return {object} Promise
+   * @private
+   */
+
+  _noopCb: function (message, hash) {
+    var deferred = Q.defer();
+    this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;noop&#x27;, uuid: hash, hash: hash, value: message});
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Gets the HTML source of a page
+   *
+   * @method source
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
+  source: function (hash) {
+    this.actionQueue.push(this.webdriverClient.source.bind(this.webdriverClient));
+    this.actionQueue.push(this._sourceCb.bind(this, hash));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the &#x60;source&#x60; call
+   *
+   * @method _sourceCb
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} source Serialized JSON with the results of the source call
+   * @return {object} Promise
+   * @private
+   */
+
+  _sourceCb: function (hash, source) {
+    var deferred = Q.defer();
+    this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;source&#x27;, uuid: hash, hash: hash, value: JSON.parse(source).value});
+    deferred.resolve();
+    return deferred.promise;
+  },
 
   /**
    * Checks the document title of a page

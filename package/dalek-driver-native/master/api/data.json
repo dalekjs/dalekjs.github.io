@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-driver-native",
         "description": "Native driver for DalekJS",
-        "version": "0.0.2",
+        "version": "0.0.3",
         "url": "http://dalekjs.com"
     },
     "files": {
@@ -95,6 +95,13 @@
             "namespaces": {
                 "Dalek.DriverNative.Commands": 1
             }
+        },
+        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
+            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
         },
         "index.js": {
             "name": "index.js",
@@ -1822,6 +1829,103 @@
         {
             "file": "lib/commands/page.js",
             "line": 40,
+            "description": "This function is non operational",
+            "itemtype": "method",
+            "name": "noop",
+            "params": [
+                {
+                    "name": "message",
+                    "description": "Whatever yu like",
+                    "type": "Mixed"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 54,
+            "description": "Sends out an event with the results of the `noop` call",
+            "itemtype": "method",
+            "name": "_noopCb",
+            "params": [
+                {
+                    "name": "message",
+                    "description": "Whatever yu like",
+                    "type": "Mixed"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 71,
+            "description": "Gets the HTML source of a page",
+            "itemtype": "method",
+            "name": "source",
+            "params": [
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 85,
+            "description": "Sends out an event with the results of the `source` call",
+            "itemtype": "method",
+            "name": "_sourceCb",
+            "params": [
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "source",
+                    "description": "Serialized JSON with the results of the source call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 102,
             "description": "Checks the document title of a page",
             "itemtype": "method",
             "name": "title",
@@ -1844,7 +1948,7 @@
         },
         {
             "file": "lib/commands/page.js",
-            "line": 55,
+            "line": 117,
             "description": "Sends out an event with the results of the `title` call",
             "itemtype": "method",
             "name": "_titleCb",
@@ -1877,7 +1981,7 @@
         },
         {
             "file": "lib/commands/page.js",
-            "line": 73,
+            "line": 135,
             "description": "Checks the text of an alaert, prompt or confirm dialog",
             "itemtype": "method",
             "name": "alertText",
@@ -1900,7 +2004,7 @@
         },
         {
             "file": "lib/commands/page.js",
-            "line": 88,
+            "line": 150,
             "description": "Sends out an event with the results of the `alertText` call",
             "itemtype": "method",
             "name": "_alertTextCb",
@@ -1933,7 +2037,7 @@
         },
         {
             "file": "lib/commands/page.js",
-            "line": 106,
+            "line": 168,
             "description": "Sends text to a javascript prompt dialog box",
             "itemtype": "method",
             "name": "promptText",
@@ -1956,7 +2060,7 @@
         },
         {
             "file": "lib/commands/page.js",
-            "line": 121,
+            "line": 183,
             "description": "Sends out an event with the results of the `promptText` call",
             "itemtype": "method",
             "name": "_promptTextCb",
@@ -1989,7 +2093,7 @@
         },
         {
             "file": "lib/commands/page.js",
-            "line": 139,
+            "line": 201,
             "description": "Accepts (e.g. oressing the OK button) an javascript alert, prompt or confirm dialog",
             "itemtype": "method",
             "name": "acceptAlert",
@@ -2007,7 +2111,7 @@
         },
         {
             "file": "lib/commands/page.js",
-            "line": 153,
+            "line": 215,
             "description": "Sends out an event with the results of the `acceptAlert` call",
             "itemtype": "method",
             "name": "_acceptAlertCb",
@@ -2035,7 +2139,7 @@
         },
         {
             "file": "lib/commands/page.js",
-            "line": 170,
+            "line": 232,
             "description": "Accepts (e.g. oressing the OK button) an javascript alert, prompt or confirm dialog",
             "itemtype": "method",
             "name": "dismissAlert",
@@ -2053,7 +2157,7 @@
         },
         {
             "file": "lib/commands/page.js",
-            "line": 184,
+            "line": 246,
             "description": "Sends out an event with the results of the `dismissAlert` call",
             "itemtype": "method",
             "name": "_dismissAlertCb",
@@ -2081,7 +2185,7 @@
         },
         {
             "file": "lib/commands/page.js",
-            "line": 201,
+            "line": 263,
             "description": "Wait for a specific amount of time",
             "itemtype": "method",
             "name": "wait",
@@ -2109,7 +2213,7 @@
         },
         {
             "file": "lib/commands/page.js",
-            "line": 217,
+            "line": 279,
             "description": "Sends out an event with the results of the `wait` call",
             "itemtype": "method",
             "name": "_waitCb",
@@ -2142,7 +2246,7 @@
         },
         {
             "file": "lib/commands/page.js",
-            "line": 239,
+            "line": 301,
             "description": "Mixes in page methods",
             "params": [
                 {
@@ -2775,6 +2879,14 @@
             "namespace": "Dalek.DriverNative.Commands"
         },
         {
+            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "line": 1,
+            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "class": "Dalek.DriverNative",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
             "file": "index.js",
             "line": 34,
             "description": "Loads the webdriver client,\nlaunches the browser,\ninitializes al object properties,\nbinds to browser events",
@@ -3095,7 +3207,7 @@
         },
         {
             "message": "Missing item type\nMixes in page methods",
-            "line": " lib/commands/page.js:239"
+            "line": " lib/commands/page.js:301"
         },
         {
             "message": "Missing item type\nMixes in screenshot methods",
@@ -3108,6 +3220,10 @@
         {
             "message": "Missing item type\nMixes in element methods",
             "line": " lib/commands/window.js:148"
+        },
+        {
+            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
         },
         {
             "message": "Missing item type\nLoads the webdriver client,\nlaunches the browser,\ninitializes al object properties,\nbinds to browser events",
