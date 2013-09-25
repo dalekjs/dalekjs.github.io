@@ -380,17 +380,28 @@ Dalek.prototype = {
    */
 
   _registerExceptionHandler: function () {
-    process.on(&#x27;uncaughtException&#x27;, function (exception) {
-      // ios emulator hack, needs to go in the future
-      if (exception.message &amp;&amp; exception.message.search(&#x27;This socket has been ended by the other party&#x27;) !== -1) {
-        return false;
-      }
-      
-      this.driverEmitter.emit(&#x27;killAll&#x27;);
-      this.reporterEvents.emit(&#x27;error&#x27;, exception);
-    }.bind(this));
+    process.on(&#x27;uncaughtException&#x27;, this._shutdown.bind(this));
     return this;
+  },
+
+  /**
+   * Shutdown on uncaught exception
+   *
+   * @method _shutdown
+   * @param {object} exception Runtime exception
+   * @private
+   */
+
+  _shutdown: function (exception) {
+    // ios emulator hack, needs to go in the future
+    if (exception.message &amp;&amp; exception.message.search(&#x27;This socket has been ended by the other party&#x27;) !== -1) {
+      return false;
+    }
+    
+    this.driverEmitter.emit(&#x27;killAll&#x27;);
+    this.reporterEvents.emit(&#x27;error&#x27;, exception);
   }
+
 };
 
 // export dalek as a module

@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">71.21</p>
+      <p class="stat">71.34</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">283</p>
+      <p class="stat">294</p>
     </div>
   </div>
   <div class="row historical">
@@ -67,7 +67,7 @@
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.47</p>
+      <p class="stat">1.48</p>
     </div>
   </div>
 </div>
@@ -382,17 +382,28 @@ Dalek.prototype = {
    */
 
   _registerExceptionHandler: function () {
-    process.on(&#039;uncaughtException&#039;, function (exception) {
-      // ios emulator hack, needs to go in the future
-      if (exception.message &amp;&amp; exception.message.search(&#039;This socket has been ended by the other party&#039;) !== -1) {
-        return false;
-      }
-      
-      this.driverEmitter.emit(&#039;killAll&#039;);
-      this.reporterEvents.emit(&#039;error&#039;, exception);
-    }.bind(this));
+    process.on(&#039;uncaughtException&#039;, this._shutdown.bind(this));
     return this;
+  },
+
+  /**
+   * Shutdown on uncaught exception
+   *
+   * @method _shutdown
+   * @param {object} exception Runtime exception
+   * @private
+   */
+
+  _shutdown: function (exception) {
+    // ios emulator hack, needs to go in the future
+    if (exception.message &amp;&amp; exception.message.search(&#039;This socket has been ended by the other party&#039;) !== -1) {
+      return false;
+    }
+    
+    this.driverEmitter.emit(&#039;killAll&#039;);
+    this.reporterEvents.emit(&#039;error&#039;, exception);
   }
+
 };
 
 // export dalek as a module

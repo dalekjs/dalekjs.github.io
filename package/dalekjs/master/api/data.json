@@ -218,6 +218,24 @@
             "chainable": 1,
             "class": "Dalek",
             "module": "DalekJS"
+        },
+        {
+            "file": "index.js",
+            "line": 297,
+            "description": "Shutdown on uncaught exception",
+            "itemtype": "method",
+            "name": "_shutdown",
+            "params": [
+                {
+                    "name": "exception",
+                    "description": "Runtime exception",
+                    "type": "Object"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek",
+            "module": "DalekJS"
         }
     ],
     "warnings": [
