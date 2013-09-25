@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.2</em>
+            <em>API Docs for: 0.0.3</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -167,7 +167,7 @@ module.exports = LogLevel4;
  */
 
 LogLevel4.prototype.outputLogUser = function (type, message) {
-  if (type === &#x27;browser&#x27; &amp;&amp; type === &#x27;user&#x27;) {
+  if (type === &#x27;browser&#x27; || type === &#x27;user&#x27;) {
     this.echo(this.symbol(&#x27;&lt;&gt;&#x27;), {nl: false, ec: true, foreground: &#x27;cyan&#x27;});
     this.echo(&#x27;[&#x27; + type.toUpperCase() + &#x27;]&#x27;, {nl: false, foreground: &#x27;whiteBright&#x27;, background: &#x27;bgCyanBright&#x27;});
     this.echo(&#x27; &#x27; + message, {foreground: &#x27;cyan&#x27;});

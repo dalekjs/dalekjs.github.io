@@ -141,7 +141,7 @@ module.exports = LogLevel4;
  */
 
 LogLevel4.prototype.outputLogUser = function (type, message) {
-  if (type === &#039;browser&#039; &amp;&amp; type === &#039;user&#039;) {
+  if (type === &#039;browser&#039; || type === &#039;user&#039;) {
     this.echo(this.symbol(&#039;&lt;&gt;&#039;), {nl: false, ec: true, foreground: &#039;cyan&#039;});
     this.echo(&#039;[&#039; + type.toUpperCase() + &#039;]&#039;, {nl: false, foreground: &#039;whiteBright&#039;, background: &#039;bgCyanBright&#039;});
     this.echo(&#039; &#039; + message, {foreground: &#039;cyan&#039;});
