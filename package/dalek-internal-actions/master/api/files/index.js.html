@@ -116,6 +116,7 @@
 // ext. libs
 var Q = require(&#x27;q&#x27;);
 var uuid = require(&#x27;node-uuid&#x27;);
+var cheerio = require(&#x27;cheerio&#x27;);
 
 // int. global
 var reporter = null;
@@ -1203,6 +1204,135 @@ Actions.prototype.waitForElement = function (selector, timeout) {
 };
 
 /**
+ * Fills the fields of a form with given values.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;input type=&quot;hidden&quot; value=&quot;not really a value&quot; id=&quot;ijustwannahaveavalue&quot;/&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.open(&#x27;http://dalekjs.com&#x27;)
+ *     .setValue(&#x27;#ijustwannahaveavalue&#x27;, &#x27;a value&#x27;)
+ *     .title().is(&#x27;DalekJS - Frequently asked questions&#x27;, &#x27;What the F.A.Q.&#x27;);
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method setValue
+ * @param {string} selector
+ * @param {string} value
+ * @return {Actions}
+ */
+
+Actions.prototype.setValue = function (selector, value) {
+  var hash = uuid.v4();
+
+  if (this.querying === true) {
+    value = selector;
+    selector = this.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;setValue&#x27;, &#x27;setValue&#x27;, selector + &#x27; : &#x27; + value, hash);
+  this._addToActionQueue([selector, value, hash], &#x27;setValue&#x27;, cb);
+  return this;
+};
+
+// LOG (May should live in its own module)
+// ---------------------------------------
+
+Actions.prototype.logger = {};
+
+/**
+ * Logs a part of the remote dom
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;body&gt;
+ *   &lt;div id=&quot;smth&quot;&gt;
+ *     &lt;input type=&quot;hidden&quot; value=&quot;not really a value&quot; id=&quot;ijustwannahaveavalue&quot;/&gt;
+ *   &lt;/div&gt;
+ * &lt;/body&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.open(&#x27;http://dalekjs.com/guineapig&#x27;)
+ *     .log.dom(&#x27;#smth&#x27;)
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * Will output this:
+ *
+ * &#x60;&#x60;&#x60;html
+ *  DOM: #smth &lt;input type=&quot;hidden&quot; value=&quot;not really a value&quot; id=&quot;ijustwannahaveavalue&quot;/&gt;
+ * &#x60;&#x60;&#x60;
+
+ * 
+ * @api
+ * @method log.dom
+ * @param {string} selector CSS selector
+ * @chainable
+ */
+
+Actions.prototype.logger.dom = function (selector) {
+  var hash = uuid.v4();
+
+  var cb = function logDomCb (data) {
+    if (data &amp;&amp; data.key === &#x27;source&#x27; &amp;&amp; !this.uuids[data.uuid]) {
+      this.uuids[data.uuid] = true;
+      var $ = cheerio.load(data.value);
+      var result = selector ? $(selector).html() : $.html();
+      selector = selector ? selector : &#x27; &#x27;;
+      result = !result ? &#x27; Not found&#x27; : result;
+      this.reporter.emit(&#x27;report:log:user&#x27;, &#x27;DOM: &#x27; + selector + &#x27; &#x27; + result);
+    }
+  }.bind(this);
+
+  this._addToActionQueue([hash], &#x27;source&#x27;, cb);
+  return this;
+};
+
+/**
+ * Logs a user defined message
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.open(&#x27;http://dalekjs.com/guineapig&#x27;)
+ *     .execute(function () {
+ *       this.data(&#x27;aKey&#x27;, &#x27;aValue&#x27;);
+ *     })
+ *     .log.message(function () {
+ *       return test.data(&#x27;aKey&#x27;); // outputs MESSAGE: &#x27;aValue&#x27;
+ *     })
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x27;Normal&#x27; messages can be logged too:
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.open(&#x27;http://dalekjs.com/guineapig&#x27;)
+ *     .log.message(&#x27;FooBar&#x27;) // outputs MESSAGE: FooBar
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ * 
+ * @api
+ * @method log.message
+ * @param {function|string} message
+ * @chainable
+ */
+
+Actions.prototype.logger.message = function (message) {
+  var hash = uuid.v4();
+
+  var cb = function logMessageCb (data) {
+    if (data &amp;&amp; data.key === &#x27;noop&#x27; &amp;&amp; !this.uuids[data.hash]) {
+      this.uuids[data.hash] = true;
+      var result = (typeof(data.value) === &#x27;function&#x27;) ? data.value.bind(this)() : data.value;
+      this.reporter.emit(&#x27;report:log:user&#x27;, &#x27;MESSAGE: &#x27; + result);
+    }
+  }.bind(this);
+
+  this._addToActionQueue([message, hash], &#x27;noop&#x27;, cb);
+  return this;
+};
+
+/**
  * Generates a callback that will be fired when the action has been completed.
  * The callback itself will then validate the answer and will also emit an event
  * that the action has been successfully executed.
@@ -1220,7 +1350,6 @@ Actions.prototype._generateCallbackAssertion = function (key, type) {
       if (!data || (data.value &amp;&amp; data.value === null)) {
         data.value = &#x27;&#x27;;
       }
-
 
       if (key === &#x27;execute&#x27;) {
         Object.keys(data.value.dalek).forEach(function (key) {
@@ -1255,39 +1384,6 @@ Actions.prototype._generateCallbackAssertion = function (key, type) {
     }
   }.bind(this);
   return cb;
-};
-
-/**
- * Fills the fields of a form with given values.
- *
- * &#x60;&#x60;&#x60;html
- * &lt;input type=&quot;hidden&quot; value=&quot;not really a value&quot; id=&quot;ijustwannahaveavalue&quot;/&gt;
- * &#x60;&#x60;&#x60;
- *
- * &#x60;&#x60;&#x60;javascript
- * test.open(&#x27;http://dalekjs.com&#x27;)
- *     .setValue(&#x27;#ijustwannahaveavalue&#x27;, &#x27;a value&#x27;)
- *     .title().is(&#x27;DalekJS - Frequently asked questions&#x27;, &#x27;What the F.A.Q.&#x27;);
- * &#x60;&#x60;&#x60;
- *
- * @api
- * @method setValue
- * @param {string} selector
- * @param {string} value
- * @return {Actions}
- */
-
-Actions.prototype.setValue = function (selector, value) {
-  var hash = uuid.v4();
-
-  if (this.querying === true) {
-    value = selector;
-    selector = this.selector;
-  }
-
-  var cb = this._generateCallbackAssertion(&#x27;setValue&#x27;, &#x27;setValue&#x27;, selector + &#x27; : &#x27; + value, hash);
-  this._addToActionQueue([selector, value, hash], &#x27;setValue&#x27;, cb);
-  return this;
 };
 
 /**

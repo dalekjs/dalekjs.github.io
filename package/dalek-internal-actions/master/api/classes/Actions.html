@@ -92,7 +92,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/index.js.html#l33"><code>index.js:33</code></a>
+            Defined in: <a href="../files/index.js.html#l34"><code>index.js:34</code></a>
         </div>
     
 
@@ -148,7 +148,7 @@ like clicking elements, open urls, filling out input fields, etc.</p>
             
         
         
-        <a href="../files/index.js.html#l33"><code>index.js:33</code></a>
+        <a href="../files/index.js.html#l34"><code>index.js:34</code></a>
         
         </p>
 
@@ -259,6 +259,20 @@ like clicking elements, open urls, filling out input fields, etc.</p>
                         
                             <li class="index-item method">
                                 <a href="#method_forward">forward</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_log.dom">log.dom</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_log.message">log.message</a>
 
                                 
                                 
@@ -492,7 +506,7 @@ like clicking elements, open urls, filling out input fields, etc.</p>
             
         
         
-        <a href="../files/index.js.html#l93"><code>index.js:93</code></a>
+        <a href="../files/index.js.html#l94"><code>index.js:94</code></a>
         
         </p>
 
@@ -597,7 +611,7 @@ like clicking elements, open urls, filling out input fields, etc.</p>
             
         
         
-        <a href="../files/index.js.html#l1203"><code>index.js:1203</code></a>
+        <a href="../files/index.js.html#l1299"><code>index.js:1299</code></a>
         
         </p>
 
@@ -730,7 +744,7 @@ like clicking elements, open urls, filling out input fields, etc.</p>
             
         
         
-        <a href="../files/index.js.html#l1115"><code>index.js:1115</code></a>
+        <a href="../files/index.js.html#l1245"><code>index.js:1245</code></a>
         
         </p>
 
@@ -845,7 +859,7 @@ that the action has been successfully executed.</p>
             
         
         
-        <a href="../files/index.js.html#l895"><code>index.js:895</code></a>
+        <a href="../files/index.js.html#l896"><code>index.js:896</code></a>
         
         </p>
 
@@ -939,7 +953,7 @@ you are clicking okay or hitting return in one of that dialogs.</p>
             
         
         
-        <a href="../files/index.js.html#l780"><code>index.js:780</code></a>
+        <a href="../files/index.js.html#l781"><code>index.js:781</code></a>
         
         </p>
 
@@ -1044,7 +1058,7 @@ Like you would do when using your keyboard.</p>
             
         
         
-        <a href="../files/index.js.html#l556"><code>index.js:556</code></a>
+        <a href="../files/index.js.html#l557"><code>index.js:557</code></a>
         
         </p>
 
@@ -1120,7 +1134,7 @@ Like you would do when using your keyboard.</p>
             
         
         
-        <a href="../files/index.js.html#l584"><code>index.js:584</code></a>
+        <a href="../files/index.js.html#l585"><code>index.js:585</code></a>
         
         </p>
 
@@ -1221,7 +1235,7 @@ In the future it might become the ability to also execute a &quot;right button&q
             
         
         
-        <a href="../files/index.js.html#l928"><code>index.js:928</code></a>
+        <a href="../files/index.js.html#l929"><code>index.js:929</code></a>
         
         </p>
 
@@ -1316,7 +1330,7 @@ you are clicking cancel in one of that dialogs.</p>
             
         
         
-        <a href="../files/index.js.html#l814"><code>index.js:814</code></a>
+        <a href="../files/index.js.html#l815"><code>index.js:815</code></a>
         
         </p>
 
@@ -1425,7 +1439,7 @@ you are clicking cancel in one of that dialogs.</p>
             
         
         
-        <a href="../files/index.js.html#l528"><code>index.js:528</code></a>
+        <a href="../files/index.js.html#l529"><code>index.js:529</code></a>
         
         </p>
 
@@ -1449,6 +1463,209 @@ you are clicking cancel in one of that dialogs.</p>
 
     </div>
 
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_log.dom" class="method item">
+    <h3 class="name"><code>log.dom</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>selector</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/index.js.html#l1154"><code>index.js:1154</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Logs a part of the remote dom</p>
+<pre><code class="lang-html">&lt;body&gt;
+  &lt;div id=&quot;smth&quot;&gt;
+    &lt;input type=&quot;hidden&quot; value=&quot;not really a value&quot; id=&quot;ijustwannahaveavalue&quot;/&gt;
+  &lt;/div&gt;
+&lt;/body&gt;</code></pre>
+<pre><code class="lang-javascript">test.open(&#39;http://dalekjs.com/guineapig&#39;)
+    .log.dom(&#39;#smth&#39;)
+    .done();</code></pre>
+<p>Will output this:</p>
+<pre><code class="lang-html"> DOM: #smth &lt;input type=&quot;hidden&quot; value=&quot;not really a value&quot; id=&quot;ijustwannahaveavalue&quot;/&gt;</code></pre>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">selector</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>CSS selector</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_log.message" class="method item">
+    <h3 class="name"><code>log.message</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>message</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/index.js.html#l1202"><code>index.js:1202</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Logs a user defined message</p>
+<pre><code class="lang-javascript">test.open(&#39;http://dalekjs.com/guineapig&#39;)
+    .execute(function () {
+      this.data(&#39;aKey&#39;, &#39;aValue&#39;);
+    })
+    .log.message(function () {
+      return test.data(&#39;aKey&#39;); // outputs MESSAGE: &#39;aValue&#39;
+    })
+    .done();</code></pre>
+<p>&#39;Normal&#39; messages can be logged too:</p>
+<pre><code class="lang-javascript">test.open(&#39;http://dalekjs.com/guineapig&#39;)
+    .log.message(&#39;FooBar&#39;) // outputs MESSAGE: FooBar
+    .done();</code></pre>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">message</code>
+                        <span class="type">Function | String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -1491,7 +1708,7 @@ you are clicking cancel in one of that dialogs.</p>
             
         
         
-        <a href="../files/index.js.html#l1008"><code>index.js:1008</code></a>
+        <a href="../files/index.js.html#l1009"><code>index.js:1009</code></a>
         
         </p>
 
@@ -1571,7 +1788,7 @@ you are clicking cancel in one of that dialogs.</p>
             
         
         
-        <a href="../files/index.js.html#l104"><code>index.js:104</code></a>
+        <a href="../files/index.js.html#l105"><code>index.js:105</code></a>
         
         </p>
 
@@ -1678,7 +1895,7 @@ TODO: IMPLEMENT</p>
             
         
         
-        <a href="../files/index.js.html#l667"><code>index.js:667</code></a>
+        <a href="../files/index.js.html#l668"><code>index.js:668</code></a>
         
         </p>
 
@@ -1775,7 +1992,7 @@ hitting return.</p>
             
         
         
-        <a href="../files/index.js.html#l47"><code>index.js:47</code></a>
+        <a href="../files/index.js.html#l48"><code>index.js:48</code></a>
         
         </p>
 
@@ -1876,7 +2093,7 @@ selector once instead of repeating it all over the place.</p>
             
         
         
-        <a href="../files/index.js.html#l505"><code>index.js:505</code></a>
+        <a href="../files/index.js.html#l506"><code>index.js:506</code></a>
         
         </p>
 
@@ -1947,7 +2164,7 @@ selector once instead of repeating it all over the place.</p>
             
         
         
-        <a href="../files/index.js.html#l962"><code>index.js:962</code></a>
+        <a href="../files/index.js.html#l963"><code>index.js:963</code></a>
         
         </p>
 
@@ -2061,7 +2278,7 @@ and a height of 1024px. You can specify your own default in the configuration.</
             
         
         
-        <a href="../files/index.js.html#l416"><code>index.js:416</code></a>
+        <a href="../files/index.js.html#l417"><code>index.js:417</code></a>
         
         </p>
 
@@ -2200,7 +2417,7 @@ test.screenshot(&#39;my/page/in_time/:datetime/homepage&#39;);</code></pre>
             
         
         
-        <a href="../files/index.js.html#l745"><code>index.js:745</code></a>
+        <a href="../files/index.js.html#l746"><code>index.js:746</code></a>
         
         </p>
 
@@ -2306,7 +2523,7 @@ So assumeing we have a keyboard shortcut that display an alert box, we could tes
             
         
         
-        <a href="../files/index.js.html#l1052"><code>index.js:1052</code></a>
+        <a href="../files/index.js.html#l1053"><code>index.js:1053</code></a>
         
         </p>
 
@@ -2387,7 +2604,7 @@ This will be a domain wide set cookie.</p>
             
         
         
-        <a href="../files/index.js.html#l122"><code>index.js:122</code></a>
+        <a href="../files/index.js.html#l123"><code>index.js:123</code></a>
         
         </p>
 
@@ -2532,7 +2749,7 @@ For more information about this, I recommend to check out the <a href="/docs/con
             
         
         
-        <a href="../files/index.js.html#l1170"><code>index.js:1170</code></a>
+        <a href="../files/index.js.html#l1116"><code>index.js:1116</code></a>
         
         </p>
 
@@ -2653,7 +2870,7 @@ For more information about this, I recommend to check out the <a href="/docs/con
             
         
         
-        <a href="../files/index.js.html#l630"><code>index.js:630</code></a>
+        <a href="../files/index.js.html#l631"><code>index.js:631</code></a>
         
         </p>
 
@@ -2755,7 +2972,7 @@ For more information about this, I recommend to check out the <a href="/docs/con
             
         
         
-        <a href="../files/index.js.html#l179"><code>index.js:179</code></a>
+        <a href="../files/index.js.html#l180"><code>index.js:180</code></a>
         
         </p>
 
@@ -2853,7 +3070,7 @@ Btw.: The domain of the IFrame can be whatever you want, this method has no same
             
         
         
-        <a href="../files/index.js.html#l224"><code>index.js:224</code></a>
+        <a href="../files/index.js.html#l225"><code>index.js:225</code></a>
         
         </p>
 
@@ -2924,7 +3141,7 @@ switched to an iFrame context</p>
             
         
         
-        <a href="../files/index.js.html#l298"><code>index.js:298</code></a>
+        <a href="../files/index.js.html#l299"><code>index.js:299</code></a>
         
         </p>
 
@@ -3005,7 +3222,7 @@ switched to a different windoe context</p>
             
         
         
-        <a href="../files/index.js.html#l258"><code>index.js:258</code></a>
+        <a href="../files/index.js.html#l259"><code>index.js:259</code></a>
         
         </p>
 
@@ -3119,7 +3336,7 @@ Btw.: The domain of the window can be whatever you want, this method has no same
             
         
         
-        <a href="../files/index.js.html#l693"><code>index.js:693</code></a>
+        <a href="../files/index.js.html#l694"><code>index.js:694</code></a>
         
         </p>
 
@@ -3247,7 +3464,7 @@ You can go <a href="https://code.google.com/p/selenium/wiki/JsonWireProtocol#/se
             
         
         
-        <a href="../files/index.js.html#l465"><code>index.js:465</code></a>
+        <a href="../files/index.js.html#l466"><code>index.js:466</code></a>
         
         </p>
 
@@ -3367,7 +3584,7 @@ You can go <a href="https://code.google.com/p/selenium/wiki/JsonWireProtocol#/se
             
         
         
-        <a href="../files/index.js.html#l853"><code>index.js:853</code></a>
+        <a href="../files/index.js.html#l854"><code>index.js:854</code></a>
         
         </p>
 
@@ -3512,7 +3729,7 @@ and set the timeout using the timeout one, in milliseconds. The default timeout 
             
         
         
-        <a href="../files/index.js.html#l1076"><code>index.js:1076</code></a>
+        <a href="../files/index.js.html#l1077"><code>index.js:1077</code></a>
         
         </p>
 
@@ -3637,7 +3854,7 @@ and appends new elements, when the call has been successfully answered:</p>
             
         
         
-        <a href="../files/index.js.html#l332"><code>index.js:332</code></a>
+        <a href="../files/index.js.html#l333"><code>index.js:333</code></a>
         
         </p>
 
@@ -3751,7 +3968,7 @@ and appends new elements, when the call has been successfully answered:</p>
             
         
         
-        <a href="../files/index.js.html#l350"><code>index.js:350</code></a>
+        <a href="../files/index.js.html#l351"><code>index.js:351</code></a>
         
         </p>
 
@@ -3865,7 +4082,7 @@ and appends new elements, when the call has been successfully answered:</p>
             
         
         
-        <a href="../files/index.js.html#l368"><code>index.js:368</code></a>
+        <a href="../files/index.js.html#l369"><code>index.js:369</code></a>
         
         </p>
 
@@ -3979,7 +4196,7 @@ and appends new elements, when the call has been successfully answered:</p>
             
         
         
-        <a href="../files/index.js.html#l392"><code>index.js:392</code></a>
+        <a href="../files/index.js.html#l393"><code>index.js:393</code></a>
         
         </p>
 
