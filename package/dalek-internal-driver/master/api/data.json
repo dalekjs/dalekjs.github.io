@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-internal-driver",
         "description": "DalekJS internal driver helper library",
-        "version": "0.0.2",
+        "version": "0.0.3",
         "url": "http://dalekjs.com"
     },
     "files": {
