@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.2</em>
+            <em>API Docs for: 0.0.3</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -490,6 +490,11 @@ module.exports = function (opts) {
   test.assert.query = test.query.bind(test.assert);
   test.assert.$ = test.query.bind(test.assert);
   test.end = test.assert.end.bind(test.assert);
+
+  // copy log methods
+  test.log = {};
+  test.log.dom = test.logger.dom.bind(test);
+  test.log.message = test.logger.message.bind(test);
 
   // copy assertions methods
   test = test._inheritAssertions(test);
