@@ -611,8 +611,8 @@ Actions.prototype.wait = function (timeout) {
 
 Actions.prototype.reload = function () {
   var hash = uuid.v4();
-  var cb = this._generateCallbackAssertion(&#x27;reload&#x27;, &#x27;reload&#x27;, &#x27;&#x27;, hash);
-  this._addToActionQueue([hash], &#x27;reload&#x27;, cb);
+  var cb = this._generateCallbackAssertion(&#x27;refresh&#x27;, &#x27;refresh&#x27;, &#x27;&#x27;, hash);
+  this._addToActionQueue([hash], &#x27;refresh&#x27;, cb);
   return this;
 };
 
