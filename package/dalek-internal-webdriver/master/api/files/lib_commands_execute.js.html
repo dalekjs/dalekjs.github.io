@@ -114,6 +114,9 @@
  *
  */
 
+// ext. modules
+var fs = require(&#x27;fs&#x27;);
+
 /**
  * Script execution related Webdriver endpoints
  *
@@ -147,10 +150,11 @@ module.exports = function (Driver) {
     onRequest: function (raw) {
       var script = raw.script.script.replace(/\\n/g, &#x27; &#x27;).replace(/\\t/g, &#x27; &#x27;);
       var userArgs = script.substring(script.indexOf(&#x27;(&#x27;) + 1, script.indexOf(&#x27;)&#x27;));
-      
+      var dalekScript = String(fs.readFileSync(fs.realpathSync(__dirname + &#x27;/../browser/script.js&#x27;)));
+
       script = script.substring(script.indexOf(&#x27;{&#x27;) + 1, script.lastIndexOf(&#x27;}&#x27;));
-      script = &#x27;var args = Array.prototype.slice.call(arguments, 0); var shifted = args.shift(); var dalek = {store: {}, test: [], assert: {}, _assert: { ok: function (isOk, message) { this.test.push({ok: isOk, message: message}); }}, data: function (key, value) { if(value) { this.store[key] = value; return this; } return this.store[key] || null; }}; dalek.store = shifted; dalek.assert.ok = function () { return dalek._assert.ok.apply(dalek, Array.prototype.slice.call(arguments)); }; var userRet = function(&#x27; + userArgs + &#x27;) {&#x27; + script + &#x27;}.apply(dalek, args); return {dalek: dalek.store, test: dalek.test, userRet: userRet}&#x27;;
-      
+      script = dalekScript.replace(&#x27;__USERARGUMENTS&#x27;, userArgs).replace(&#x27;__SCRIPT&#x27;, script);
+
       return {script: script, args: raw.script.arguments};
     }
   });

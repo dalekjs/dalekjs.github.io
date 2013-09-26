@@ -829,7 +829,7 @@
         },
         {
             "file": "lib/commands/execute.js",
-            "line": 25,
+            "line": 28,
             "description": "Script execution related Webdriver endpoints",
             "params": [
                 {
@@ -846,7 +846,7 @@
         },
         {
             "file": "lib/commands/execute.js",
-            "line": 35,
+            "line": 38,
             "description": "Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame.\nThe executed script is assumed to be synchronous and the result of evaluating the script is returned to the client.\nThe script argument defines the script to execute in the form of a function body.\nThe value returned by that function will be returned to the client.\nThe function will be invoked with the provided args array and the values may be accessed\nvia the arguments object in the order specified.",
             "itemtype": "method",
             "name": "execute",
@@ -874,7 +874,7 @@
         },
         {
             "file": "lib/commands/execute.js",
-            "line": 66,
+            "line": 70,
             "description": "Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame.\nThe executed script is assumed to be asynchronous and must signal that is done by invoking the provided callback,\nwhich is always provided as the final argument to the function. The value to this callback will be returned to the client.\nAsynchronous script commands may not span page loads.\nIf an unload event is fired while waiting for a script result, an error should be returned to the client.\n\nThe script argument defines the script to execute in teh form of a function body.\nThe function will be invoked with the provided args array and the values may be accessed\nvia the arguments object in the order specified.\nThe final argument will always be a callback function that must be invoked to signal that the script has finished.",
             "itemtype": "method",
             "name": "executeAsync",
@@ -2816,7 +2816,7 @@
         },
         {
             "message": "Missing item type\nScript execution related Webdriver endpoints",
-            "line": " lib/commands/execute.js:25"
+            "line": " lib/commands/execute.js:28"
         },
         {
             "message": "Missing item type\nFrame execution related Webdriver endpoints",
