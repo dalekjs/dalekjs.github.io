@@ -6,6 +6,13 @@
         "url": ""
     },
     "files": {
+        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
+            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "index.js": {
             "name": "index.js",
             "modules": {
@@ -29,7 +36,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "index.js",
-            "line": 98,
+            "line": 103,
             "description": "Daleks base module\nUsed to configure all the things\nand to start off the tests"
         }
     },
@@ -45,11 +52,17 @@
             "module": "DalekJS",
             "namespace": "",
             "file": "index.js",
-            "line": 98,
+            "line": 103,
             "description": "Daleks base module\nUsed to configure all the things\nand to start off the tests"
         }
     },
     "classitems": [
+        {
+            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "line": 1,
+            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "class": "Dalek"
+        },
         {
             "file": "index.js",
             "line": 37,
@@ -73,7 +86,7 @@
         },
         {
             "file": "index.js",
-            "line": 109,
+            "line": 114,
             "description": "Runs the configured testsuites",
             "itemtype": "method",
             "name": "run",
@@ -83,7 +96,7 @@
         },
         {
             "file": "index.js",
-            "line": 129,
+            "line": 134,
             "description": "Reports the all testuites executed event",
             "itemtype": "method",
             "name": "testsuitesFinished",
@@ -93,7 +106,7 @@
         },
         {
             "file": "index.js",
-            "line": 142,
+            "line": 147,
             "description": "Reports the all testuites executed event",
             "itemtype": "method",
             "name": "reportRunFinished",
@@ -103,7 +116,7 @@
         },
         {
             "file": "index.js",
-            "line": 160,
+            "line": 165,
             "description": "Normalizes options",
             "itemtype": "method",
             "name": "normalizeOptions",
@@ -123,7 +136,7 @@
         },
         {
             "file": "index.js",
-            "line": 178,
+            "line": 183,
             "description": "Sets up system env properties",
             "itemtype": "method",
             "name": "_initialize",
@@ -135,7 +148,7 @@
         },
         {
             "file": "index.js",
-            "line": 199,
+            "line": 204,
             "description": "Sets up all the reporters",
             "itemtype": "method",
             "name": "_setupReporters",
@@ -147,7 +160,7 @@
         },
         {
             "file": "index.js",
-            "line": 215,
+            "line": 220,
             "description": "Adds a reporter",
             "itemtype": "method",
             "name": "_addReporter",
@@ -166,7 +179,7 @@
         },
         {
             "file": "index.js",
-            "line": 229,
+            "line": 234,
             "description": "Updates the assertion state",
             "itemtype": "method",
             "name": "_onReportAssertion",
@@ -185,7 +198,7 @@
         },
         {
             "file": "index.js",
-            "line": 248,
+            "line": 253,
             "description": "Initizializes the driver instances",
             "itemtype": "method",
             "name": "_initDriver",
@@ -197,7 +210,7 @@
         },
         {
             "file": "index.js",
-            "line": 267,
+            "line": 272,
             "description": "Sets up the event dispatcher for driver events",
             "itemtype": "method",
             "name": "_setupDriverEmitter",
@@ -209,7 +222,7 @@
         },
         {
             "file": "index.js",
-            "line": 282,
+            "line": 287,
             "description": "Make sure to shutdown dalek & its spawned\ncomponents, webservers gracefully if a\nruntimew error pops up",
             "itemtype": "method",
             "name": "_registerExceptionHandler",
@@ -221,7 +234,7 @@
         },
         {
             "file": "index.js",
-            "line": 297,
+            "line": 302,
             "description": "Shutdown on uncaught exception",
             "itemtype": "method",
             "name": "_shutdown",
@@ -239,6 +252,10 @@
         }
     ],
     "warnings": [
+        {
+            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
+        },
         {
             "message": "Missing item type\nDefault options",
             "line": " index.js:37"
