@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-reporter-console",
         "description": "Console reporter for the Dalekjs testing framework",
-        "version": "0.0.4",
+        "version": "0.0.5",
         "url": "http://dalekjs.com"
     },
     "files": {
