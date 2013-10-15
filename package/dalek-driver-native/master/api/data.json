@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-driver-native",
         "description": "Native driver for DalekJS",
-        "version": "0.0.3",
+        "version": "0.0.4",
         "url": "http://dalekjs.com"
     },
     "files": {
