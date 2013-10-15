@@ -121,6 +121,13 @@
                 "Internal": 1
             }
         },
+        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
+            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "index.js": {
             "name": "index.js",
             "modules": {},
@@ -874,7 +881,7 @@
         },
         {
             "file": "lib/commands/execute.js",
-            "line": 70,
+            "line": 71,
             "description": "Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame.\nThe executed script is assumed to be asynchronous and must signal that is done by invoking the provided callback,\nwhich is always provided as the final argument to the function. The value to this callback will be returned to the client.\nAsynchronous script commands may not span page loads.\nIf an unload event is fired while waiting for a script result, an error should be returned to the client.\n\nThe script argument defines the script to execute in teh form of a function body.\nThe function will be invoked with the provided args array and the values may be accessed\nvia the arguments object in the order specified.\nThe final argument will always be a callback function that must be invoked to signal that the script has finished.",
             "itemtype": "method",
             "name": "executeAsync",
@@ -1716,7 +1723,7 @@
         },
         {
             "file": "lib/commands/session.js",
-            "line": 65,
+            "line": 70,
             "description": "Returns a list of the currently active sessions",
             "itemtype": "method",
             "name": "sessions",
@@ -1727,7 +1734,7 @@
         },
         {
             "file": "lib/commands/session.js",
-            "line": 78,
+            "line": 83,
             "description": "Retrieve the capabilities of the specified session.",
             "itemtype": "method",
             "name": "session",
@@ -1745,7 +1752,7 @@
         },
         {
             "file": "lib/commands/session.js",
-            "line": 92,
+            "line": 97,
             "description": "Delete the session.",
             "itemtype": "method",
             "name": "session",
@@ -2507,7 +2514,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 156,
+            "line": 161,
             "description": "Generates a new webdriver client command\nTakes a skeleton of obtions that will be converted\ninto a new function that can be invoked & will issue\na webdriver command to the webdriver server",
             "itemtype": "method",
             "name": "addCommand",
@@ -2525,7 +2532,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 173,
+            "line": 178,
             "description": "Generates the webdriver callback function",
             "itemtype": "method",
             "name": "_generateWebdriverCommand",
@@ -2553,7 +2560,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 200,
+            "line": 205,
             "description": "Response callback function",
             "itemtype": "method",
             "name": "_onResponse",
@@ -2593,7 +2600,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 220,
+            "line": 225,
             "description": "Concatenates chunks of strings",
             "itemtype": "method",
             "name": "_concatDataChunks",
@@ -2616,7 +2623,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 233,
+            "line": 238,
             "description": "Response end callback function",
             "itemtype": "method",
             "name": "_onResponseEnd",
@@ -2655,7 +2662,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 250,
+            "line": 255,
             "description": "On error callback function",
             "itemtype": "method",
             "name": "_onError",
@@ -2695,7 +2702,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 270,
+            "line": 275,
             "description": "On success callback function",
             "itemtype": "method",
             "name": "_onSuccess",
@@ -2783,6 +2790,14 @@
             "namespace": "Internal"
         },
         {
+            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "line": 1,
+            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "class": "",
+            "module": "DalekJS",
+            "namespace": "Internal"
+        },
+        {
             "file": "index.js",
             "line": 27,
             "description": "Its a webdriver client",
@@ -2796,7 +2811,7 @@
     "warnings": [
         {
             "message": "unknown tag: priavte",
-            "line": " lib/driver.js:233"
+            "line": " lib/driver.js:238"
         },
         {
             "message": "unknown tag: part",
@@ -2865,6 +2880,10 @@
         {
             "message": "Missing item type\nLocal options, used to store data\nlike the current sessionId or similar",
             "line": " lib/webdriver.js:49"
+        },
+        {
+            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
         },
         {
             "message": "Missing item type\nIts a webdriver client",

@@ -148,6 +148,11 @@ module.exports = function (Driver) {
         this.options.sessionId = JSON.parse(rawData).sessionId;
       } else {
         this.options.sessionId = request.headers.location.replace(&#x27;http://&#x27; + options.hostname + &#x27;:&#x27; + options.port + options.path + &#x27;/&#x27;, &#x27;&#x27;).replace(&#x27;/session/&#x27;, &#x27;&#x27;).replace(&#x27;/wd/hub&#x27;, &#x27;&#x27;);
+        
+        // fix for sauce (no port in url)
+        if (this.options.sessionId.search(&#x27;http://&#x27;) !== -1) {
+          this.options.sessionId = request.headers.location.replace(&#x27;http://&#x27; + options.hostname + options.path + &#x27;/&#x27;, &#x27;&#x27;).replace(&#x27;/session/&#x27;, &#x27;&#x27;).replace(&#x27;/wd/hub&#x27;, &#x27;&#x27;);
+        }
       }
 
       deferred.resolve(this);

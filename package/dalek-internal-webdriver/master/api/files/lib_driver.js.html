@@ -230,7 +230,7 @@ module.exports = function exportDriverBase(WebDriver) {
      * @return {object} options Request options
      */
 
-    generateRequestOptions: function (hostname, port, prefix, url, method, body) {
+    generateRequestOptions: function (hostname, port, prefix, url, method, body, auth) {
       var options = {
         hostname: hostname,
         port: port,
@@ -241,6 +241,11 @@ module.exports = function exportDriverBase(WebDriver) {
           &#x27;Content-Length&#x27;: Buffer.byteLength(body, &#x27;utf8&#x27;)
         }
       };
+
+      // check if auth information is available
+      if (auth) {
+        options.auth = auth;
+      }
 
       return options;
     },
@@ -278,7 +283,7 @@ module.exports = function exportDriverBase(WebDriver) {
         // the request meta data
         var params = Driver.generateParamset(remote.params, arguments);
         var body = Driver.generateBody({}, remote.onRequest, this, params);
-        var options = Driver.generateRequestOptions(this.opts.host, this.opts.port, this.opts.path, Driver.parseUrl(remote.url, this.options), remote.method, body);
+        var options = Driver.generateRequestOptions(this.opts.host, this.opts.port, this.opts.path, Driver.parseUrl(remote.url, this.options), remote.method, body, this.opts.auth);
 
         // generate the request, wait for response &amp; fire the request
         var req = new http.ClientRequest(options);

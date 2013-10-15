@@ -152,8 +152,9 @@ module.exports = function (Driver) {
       var userArgs = script.substring(script.indexOf(&#x27;(&#x27;) + 1, script.indexOf(&#x27;)&#x27;));
       var dalekScript = String(fs.readFileSync(fs.realpathSync(__dirname + &#x27;/../browser/script.js&#x27;)));
 
-      script = script.substring(script.indexOf(&#x27;{&#x27;) + 1, script.lastIndexOf(&#x27;}&#x27;));
-      script = dalekScript.replace(&#x27;__USERARGUMENTS&#x27;, userArgs).replace(&#x27;__SCRIPT&#x27;, script);
+      var userscript = script.substring(script.indexOf(&#x27;{&#x27;) + 1, script.lastIndexOf(&#x27;}&#x27;));
+      script = dalekScript.replace(&#x27;__USERARGUMENTS&#x27;, userArgs);
+      script = script.replace(&#x27;__SCRIPT;&#x27;, userscript);
 
       return {script: script, args: raw.script.arguments};
     }
