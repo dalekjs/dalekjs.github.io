@@ -199,7 +199,7 @@
         },
         {
             "file": "index.js",
-            "line": 161,
+            "line": 166,
             "description": "Loads the default browser driver",
             "itemtype": "method",
             "name": "getDefaultBrowserConfiguration",
@@ -225,7 +225,7 @@
         },
         {
             "file": "index.js",
-            "line": 185,
+            "line": 190,
             "description": "Loads a user configured browser driver",
             "itemtype": "method",
             "name": "getUserBrowserConfiguration",
@@ -251,7 +251,7 @@
         },
         {
             "file": "index.js",
-            "line": 220,
+            "line": 225,
             "description": "Couple driver & session status events for the reporter",
             "itemtype": "method",
             "name": "coupleReporterEvents",
@@ -274,7 +274,7 @@
         },
         {
             "file": "index.js",
-            "line": 235,
+            "line": 240,
             "description": "Returns a list of testsuite runner functions",
             "itemtype": "method",
             "name": "getTestsuiteInstances",
@@ -295,7 +295,7 @@
         },
         {
             "file": "index.js",
-            "line": 247,
+            "line": 252,
             "description": "Creates a testsuite runner function",
             "itemtype": "method",
             "name": "createTestsuiteInstance",
@@ -321,7 +321,7 @@
         },
         {
             "file": "index.js",
-            "line": 261,
+            "line": 266,
             "description": "Generates a testsuite instance, emits the\nbrowser running event & starts a new async() sesries execution\nWill be called when the driver is ready",
             "itemtype": "method",
             "name": "_onDriverReadyclear",
@@ -356,7 +356,7 @@
         },
         {
             "file": "index.js",
-            "line": 283,
+            "line": 288,
             "description": "Emits a 'tests complete' event & calls asyncs next() callback",
             "itemtype": "method",
             "name": "_onTestsuiteComplete",
@@ -386,7 +386,7 @@
         },
         {
             "file": "index.js",
-            "line": 300,
+            "line": 305,
             "description": "Driver runner function.\nRegisters event handlers for this run,\nloads browser & driver configuration & instances,\nemits the 'driver ready' event for the browser/driver combination",
             "itemtype": "method",
             "name": "run",
