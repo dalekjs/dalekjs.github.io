@@ -130,13 +130,13 @@
 It connects Daleks testsuite with the remote testing environment of <a href="https://saucelabs.com">Sauce Labs</a>.</p>
 <p>The driver can be installed with the following command:</p>
 <pre><code class="lang-bash">$ npm install dalek-driver-sauce --save-dev</code></pre>
-<p>You can use the driver by adding a config option to the your <a href="/pages/config.html">Dalekfile</a></p>
+<p>You can use the driver by adding a config option to the your <a href="/docs/config.html">Dalekfile</a></p>
 <pre><code class="lang-javascript">&quot;driver&quot;: [&quot;sauce&quot;]</code></pre>
 <p>Or you can tell Dalek that it should run your tests via sauces service via the command line:</p>
 <pre><code class="lang-bash">$ dalek mytest.js -d sauce</code></pre>
 <p>In order to run your tests within the Sauce Labs infrastructure, you must add your sauce username &amp; key 
 to your dalek configuration. Those two parameters must be set in order to get this driver up &amp; running.
-You can specifiy them within your <a href="/pages/config.html">Dalekfile</a> like so:</p>
+You can specifiy them within your <a href="/docs/config.html">Dalekfile</a> like so:</p>
 <pre><code class="lang-javascript">&quot;driver.sauce&quot;: {
   &quot;user&quot;: &quot;dalekjs&quot;,
   &quot;key&quot;: &quot;aaaaaa-1234-567a-1abc-1br6d9f68689&quot;
