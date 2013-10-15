@@ -1,0 +1,3667 @@
+{
+    "project": {
+        "name": "dalek-driver-sauce",
+        "description": "Sauce Labs driver for DalekJS",
+        "version": "0.0.1",
+        "url": "http://dalekjs.com"
+    },
+    "files": {
+        "lib/commands/cookie.js": {
+            "name": "lib/commands/cookie.js",
+            "modules": {
+                "Driver": 1
+            },
+            "classes": {
+                "Dalek.DriverNative.Commands.Cookie": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek.DriverNative.Commands": 1
+            }
+        },
+        "lib/commands/element.js": {
+            "name": "lib/commands/element.js",
+            "modules": {},
+            "classes": {
+                "Dalek.DriverNative.Commands.Element": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek.DriverNative.Commands": 1
+            }
+        },
+        "lib/commands/execute.js": {
+            "name": "lib/commands/execute.js",
+            "modules": {},
+            "classes": {
+                "Dalek.DriverNative.Commands.Execute": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek.DriverNative.Commands": 1
+            }
+        },
+        "lib/commands/frame.js": {
+            "name": "lib/commands/frame.js",
+            "modules": {},
+            "classes": {
+                "Dalek.DriverNative.Commands.Frame": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek.DriverNative.Commands": 1
+            }
+        },
+        "lib/commands/page.js": {
+            "name": "lib/commands/page.js",
+            "modules": {},
+            "classes": {
+                "Dalek.DriverNative.Commands.Page": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek.DriverNative.Commands": 1
+            }
+        },
+        "lib/commands/screenshot.js": {
+            "name": "lib/commands/screenshot.js",
+            "modules": {},
+            "classes": {
+                "Dalek.DriverNative.Commands.Screenshot": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek.DriverNative.Commands": 1
+            }
+        },
+        "lib/commands/url.js": {
+            "name": "lib/commands/url.js",
+            "modules": {},
+            "classes": {
+                "Dalek.DriverNative.Commands.Url": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek.DriverNative.Commands": 1
+            }
+        },
+        "lib/commands/window.js": {
+            "name": "lib/commands/window.js",
+            "modules": {},
+            "classes": {
+                "Dalek.DriverNative.Commands.Window": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek.DriverNative.Commands": 1
+            }
+        },
+        "lib/browser.js": {
+            "name": "lib/browser.js",
+            "modules": {},
+            "classes": {
+                "Dalek.Browser": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek": 1
+            }
+        },
+        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
+            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "index.js": {
+            "name": "index.js",
+            "modules": {},
+            "classes": {
+                "Dalek.Sauce": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek": 1
+            }
+        }
+    },
+    "modules": {
+        "Driver": {
+            "name": "Driver",
+            "submodules": {},
+            "classes": {
+                "Dalek.DriverNative.Commands.Cookie": 1,
+                "Dalek.DriverNative.Commands.Element": 1,
+                "Dalek.DriverNative.Commands.Execute": 1,
+                "Dalek.DriverNative.Commands.Frame": 1,
+                "Dalek.DriverNative.Commands.Page": 1,
+                "Dalek.DriverNative.Commands.Screenshot": 1,
+                "Dalek.DriverNative.Commands.Url": 1,
+                "Dalek.DriverNative.Commands.Window": 1,
+                "Dalek.Browser": 1,
+                "Dalek.Sauce": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek.DriverNative.Commands": 1,
+                "Dalek": 1
+            },
+            "tag": "module",
+            "file": "index.js",
+            "line": 77,
+            "description": "Cookie related methods",
+            "part": "Sauce",
+            "api": ""
+        }
+    },
+    "classes": {
+        "Dalek.DriverNative.Commands.Cookie": {
+            "name": "Dalek.DriverNative.Commands.Cookie",
+            "shortname": "Dalek.DriverNative.Commands.Cookie",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands",
+            "file": "lib/commands/cookie.js",
+            "line": 30,
+            "description": "Cookie related methods"
+        },
+        "Dalek.DriverNative.Commands.Element": {
+            "name": "Dalek.DriverNative.Commands.Element",
+            "shortname": "Dalek.DriverNative.Commands.Element",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands",
+            "file": "lib/commands/element.js",
+            "line": 30,
+            "description": "Element related methods"
+        },
+        "Dalek.DriverNative.Commands.Execute": {
+            "name": "Dalek.DriverNative.Commands.Execute",
+            "shortname": "Dalek.DriverNative.Commands.Execute",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands",
+            "file": "lib/commands/execute.js",
+            "line": 30,
+            "description": "Execute related methods"
+        },
+        "Dalek.DriverNative.Commands.Frame": {
+            "name": "Dalek.DriverNative.Commands.Frame",
+            "shortname": "Dalek.DriverNative.Commands.Frame",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands",
+            "file": "lib/commands/frame.js",
+            "line": 30,
+            "description": "Frame related methods"
+        },
+        "Dalek.DriverNative.Commands.Page": {
+            "name": "Dalek.DriverNative.Commands.Page",
+            "shortname": "Dalek.DriverNative.Commands.Page",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands",
+            "file": "lib/commands/page.js",
+            "line": 30,
+            "description": "Page related methods"
+        },
+        "Dalek.DriverNative.Commands.Screenshot": {
+            "name": "Dalek.DriverNative.Commands.Screenshot",
+            "shortname": "Dalek.DriverNative.Commands.Screenshot",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands",
+            "file": "lib/commands/screenshot.js",
+            "line": 31,
+            "description": "Screenshot related methods"
+        },
+        "Dalek.DriverNative.Commands.Url": {
+            "name": "Dalek.DriverNative.Commands.Url",
+            "shortname": "Dalek.DriverNative.Commands.Url",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands",
+            "file": "lib/commands/url.js",
+            "line": 30,
+            "description": "Url related methods"
+        },
+        "Dalek.DriverNative.Commands.Window": {
+            "name": "Dalek.DriverNative.Commands.Window",
+            "shortname": "Dalek.DriverNative.Commands.Window",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands",
+            "file": "lib/commands/window.js",
+            "line": 30,
+            "description": "Window related methods"
+        },
+        "Dalek.Browser": {
+            "name": "Dalek.Browser",
+            "shortname": "Dalek.Browser",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Driver",
+            "namespace": "Dalek",
+            "file": "lib/browser.js",
+            "line": 44,
+            "description": "Verfies a given browser config & mimics a\nreal browser while using the Sauce infrstructure"
+        },
+        "Dalek.Sauce": {
+            "name": "Dalek.Sauce",
+            "shortname": "Dalek.Sauce",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Driver",
+            "namespace": "Dalek",
+            "file": "index.js",
+            "line": 77,
+            "description": "This module is a driver plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt connects Daleks testsuite with the remote testing environment of [Sauce Labs](https://saucelabs.com).\n\nThe driver can be installed with the following command:\n\n```bash\n$ npm install dalek-driver-sauce --save-dev\n```\n\nYou can use the driver by adding a config option to the your [Dalekfile](/pages/config.html)\n\n```javascript\n\"driver\": [\"sauce\"]\n```\n\nOr you can tell Dalek that it should run your tests via sauces service via the command line:\n\n```bash\n$ dalek mytest.js -d sauce\n```\n\nIn order to run your tests within the Sauce Labs infrastructure, you must add your sauce username & key \nto your dalek configuration. Those two parameters must be set in order to get this driver up & running.\nYou can specifiy them within your [Dalekfile](/pages/config.html) like so:\n\n```javascript\n\"driver.sauce\": {\n  \"user\": \"dalekjs\",\n  \"key\": \"aaaaaa-1234-567a-1abc-1br6d9f68689\"\n}\n```\n\nIt is also possible to specify a set of other extra saucy parameters like `name` & `tags`:\n\n```javascript\n\"driver.sauce\": {\n  \"user\": \"dalekjs\",\n  \"key\": \"aaaaaa-1234-567a-1abc-1br6d9f68689\",\n  \"name\": \"Guineapig\",\n  \"tags\": [\"dalek\", \"testproject\"]\n}\n```\n\nIf you would like to have a more control over the browser/OS combinations that are available, you are able \nto configure you custom combinations:\n\n```javascript\n\"browsers\": [{\n  \"chrome\": {\n    \"platform\": \"OS X 10.6\",\n    \"actAs\": \"chrome\",\n    \"version\": 27\n  },\n  \"chromeWin\": {\n    \"platform\": \"Windows 7\",\n    \"actAs\": \"chrome\",\n    \"version\": 27\n  },\n  \"chromeLinux\": {\n    \"platform\": \"Linux\",\n    \"actAs\": \"chrome\",\n    \"version\": 26\n  }\n```\n\nYou can then call your custom browsers like so:\n\n```bash\n$ dalek mytest.js -d sauce -b chrome,chromeWin,chromeLinux\n```\n\nor you can define them in your Dalekfile:\n\n```javascript\n\"browser\": [\"chrome\", \"chromeWin\", \"chromeLinux\"]\n```\n\nA list of all available browser/OS combinations, can be found [here](https://saucelabs.com/docs/platforms)."
+        }
+    },
+    "classitems": [
+        {
+            "file": "lib/commands/cookie.js",
+            "line": 40,
+            "description": "Sets an cookie",
+            "itemtype": "method",
+            "name": "setCookie",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the cookie",
+                    "type": "String"
+                },
+                {
+                    "name": "contents",
+                    "description": "Contents of the cookie",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Cookie",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/cookie.js",
+            "line": 56,
+            "description": "Sends out an event with the results of the `setCookie` call",
+            "itemtype": "method",
+            "name": "_setCookieCb",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the cookie",
+                    "type": "String"
+                },
+                {
+                    "name": "contents",
+                    "description": "Contents of the cookie",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Exists promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Cookie",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/cookie.js",
+            "line": 74,
+            "description": "Retrieves an cookie",
+            "itemtype": "method",
+            "name": "cookie",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the cookie",
+                    "type": "String"
+                },
+                {
+                    "name": "cookie",
+                    "description": "Expected contents of the cookie",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Cookie",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/cookie.js",
+            "line": 90,
+            "description": "Sends out an event with the results of the `setCookie` call",
+            "itemtype": "method",
+            "name": "_cookieCb",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the cookie",
+                    "type": "String"
+                },
+                {
+                    "name": "expected",
+                    "description": "Expected contents of the cookie",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "result",
+                    "description": "Serialized JSON with the reuslts of the exists call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Exists promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Cookie",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/cookie.js",
+            "line": 118,
+            "description": "Mixes in cookie methods",
+            "params": [
+                {
+                    "name": "DalekNative",
+                    "description": "Native driver base class",
+                    "type": "Dalek.DriverNative"
+                }
+            ],
+            "return": {
+                "description": "DalekNative Native driver base class",
+                "type": "Dalek.DriverNative"
+            },
+            "class": "Dalek.DriverNative.Commands.Cookie",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 40,
+            "description": "Checks if an element exists",
+            "itemtype": "method",
+            "name": "exists",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 55,
+            "description": "Sends out an event with the results of the `exists` call",
+            "itemtype": "method",
+            "name": "_existsCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "result",
+                    "description": "Serialized JSON with the reuslts of the exists call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Exists promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 73,
+            "description": "Checks if an element is visible",
+            "itemtype": "method",
+            "name": "visible",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 89,
+            "description": "Sends out an event with the results of the `visible` call",
+            "itemtype": "method",
+            "name": "_visibleCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "result",
+                    "description": "Serialized JSON with the reuslts of the visible call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Visible promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 107,
+            "description": "Checks if an element has the expected text",
+            "itemtype": "method",
+            "name": "text",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "expected",
+                    "description": "The expected text content",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 124,
+            "description": "Sends out an event with the results of the `text` call",
+            "itemtype": "method",
+            "name": "_textCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "expected",
+                    "description": "The expected text content",
+                    "type": "String"
+                },
+                {
+                    "name": "result",
+                    "description": "Serialized JSON with the reuslts of the text call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 143,
+            "description": "Checks if an element has the expected css property/value pairs",
+            "itemtype": "method",
+            "name": "css",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "property",
+                    "description": "The css property to check",
+                    "type": "String"
+                },
+                {
+                    "name": "expected",
+                    "description": "The expected css value",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 161,
+            "description": "Sends out an event with the results of the `css` call",
+            "itemtype": "method",
+            "name": "_cssCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "property",
+                    "description": "The css property to check",
+                    "type": "String"
+                },
+                {
+                    "name": "expected",
+                    "description": "The expected css value",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "result",
+                    "description": "Serialized JSON with the reuslts of the text call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 181,
+            "description": "Checks th width of an element",
+            "itemtype": "method",
+            "name": "width",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "expected",
+                    "description": "The expected width value",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 198,
+            "description": "Sends out an event with the results of the `width` call",
+            "itemtype": "method",
+            "name": "_widthCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "expected",
+                    "description": "The expected width value",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "result",
+                    "description": "Serialized JSON with the reuslts of the text call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 217,
+            "description": "Checks th height of an element",
+            "itemtype": "method",
+            "name": "height",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "expected",
+                    "description": "The expected height value",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 234,
+            "description": "Sends out an event with the results of the `height` call",
+            "itemtype": "method",
+            "name": "_heightCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "expected",
+                    "description": "The expected height value",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "result",
+                    "description": "Serialized JSON with the reuslts of the text call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 253,
+            "description": "Checks if an element has an attribute with the expected value",
+            "itemtype": "method",
+            "name": "attribute",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "attribute",
+                    "description": "The attribute that should be checked",
+                    "type": "String"
+                },
+                {
+                    "name": "expected",
+                    "description": "The expected text content",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 271,
+            "description": "Sends out an event with the results of the `attribute` call",
+            "itemtype": "method",
+            "name": "_attributeCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "attribute",
+                    "description": "The attribute that should be checked",
+                    "type": "String"
+                },
+                {
+                    "name": "expected",
+                    "description": "The expected attribute content",
+                    "type": "String"
+                },
+                {
+                    "name": "result",
+                    "description": "Serialized JSON with the results of the attribute call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Attribute promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 291,
+            "description": "Checks if an element has the expected value",
+            "itemtype": "method",
+            "name": "val",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "expected",
+                    "description": "The expected content",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 308,
+            "description": "Sends out an event with the results of the `val` call",
+            "itemtype": "method",
+            "name": "_valCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "expected",
+                    "description": "The expected content",
+                    "type": "String"
+                },
+                {
+                    "name": "result",
+                    "description": "Serialized JSON with the results of the val call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 327,
+            "description": "Checks if an element is selected",
+            "itemtype": "method",
+            "name": "selected",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "expected",
+                    "description": "The expected content",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 344,
+            "description": "Sends out an event with the results of the `selected` call",
+            "itemtype": "method",
+            "name": "_selectedCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "expected",
+                    "description": "The expected content",
+                    "type": "String"
+                },
+                {
+                    "name": "result",
+                    "description": "Serialized JSON with the results of the selected call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 363,
+            "description": "Checks if an element is enabled",
+            "itemtype": "method",
+            "name": "enabled",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "expected",
+                    "description": "The expected content",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 380,
+            "description": "Sends out an event with the results of the `enabled` call",
+            "itemtype": "method",
+            "name": "_enabledCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "expected",
+                    "description": "The expected content",
+                    "type": "String"
+                },
+                {
+                    "name": "result",
+                    "description": "Serialized JSON with the results of the selected call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 399,
+            "description": "Submits a form",
+            "itemtype": "method",
+            "name": "submit",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 416,
+            "description": "Sends out an event with the results of the `submit` call",
+            "itemtype": "method",
+            "name": "_submitCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Click promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 434,
+            "description": "Clicks an element",
+            "itemtype": "method",
+            "name": "click",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 451,
+            "description": "Sends out an event with the results of the `click` call",
+            "itemtype": "method",
+            "name": "_clickCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Click promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 469,
+            "description": "Scrolls from an element to a location defined in pixels",
+            "itemtype": "method",
+            "name": "scroll",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "options",
+                    "description": "X offset, Y offset, Speed",
+                    "type": "Object"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 487,
+            "description": "Sends out an event with the results of the `scroll` call",
+            "itemtype": "method",
+            "name": "_scrollCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "options",
+                    "description": "X offset, Y offset, Speed",
+                    "type": "Object"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Scroll promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 506,
+            "description": "Clicks an element",
+            "itemtype": "method",
+            "name": "click",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 523,
+            "description": "Sends out an event with the results of the `type` call",
+            "itemtype": "method",
+            "name": "_typeCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Type promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 540,
+            "description": "Sends keys to an element (whether or not it is an input)",
+            "itemtype": "method",
+            "name": "sendKeys",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 556,
+            "description": "Sends out an event with the results of the `sendKeys` call",
+            "itemtype": "method",
+            "name": "_sendKeysCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Type promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 573,
+            "description": "Wait for an element for a specific amount of time",
+            "itemtype": "method",
+            "name": "waitForElement",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "timeout",
+                    "description": "Time to wait in ms",
+                    "type": "Integer"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 590,
+            "description": "Sends out an event with the results of the `waitForElement` call",
+            "itemtype": "method",
+            "name": "_waitForElementCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise WaitForElement promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 608,
+            "description": "Returns the number of elements matched by the selector",
+            "itemtype": "method",
+            "name": "getNumberOfElements",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the elements",
+                    "type": "String"
+                },
+                {
+                    "name": "expected",
+                    "description": "Expected number of matched elements",
+                    "type": "Integer"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 624,
+            "description": "Sends out an event with the results of the `getNumberOfElements` call",
+            "itemtype": "method",
+            "name": "_getNumberOfElementsCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "expected",
+                    "description": "Expected number of matched elements",
+                    "type": "Integer"
+                },
+                {
+                    "name": "res",
+                    "description": "Serialized JSON with the results of the getNumberOfElements call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise GetNumberOfElements promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 651,
+            "description": "Returns the number of visible elements matched by the selector",
+            "itemtype": "method",
+            "name": "getNumberOfVisibleElements",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the elements",
+                    "type": "String"
+                },
+                {
+                    "name": "expected",
+                    "description": "Expected number of matched elements",
+                    "type": "Integer"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 690,
+            "description": "Sends out an event with the results of the `getNumberOfVisibleElements` call",
+            "itemtype": "method",
+            "name": "_getNumberOfElementsCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "expected",
+                    "description": "Expected number of matched elements",
+                    "type": "Integer"
+                },
+                {
+                    "name": "res",
+                    "description": "Serialized JSON with the results of the getNumberOfVisibleElements call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise GetNumberOfElements promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 719,
+            "description": "Mixes in element methods",
+            "params": [
+                {
+                    "name": "DalekNative",
+                    "description": "Native driver base class",
+                    "type": "Dalek.DriverNative"
+                }
+            ],
+            "return": {
+                "description": "DalekNative Native driver base class",
+                "type": "Dalek.DriverNative"
+            },
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/execute.js",
+            "line": 40,
+            "description": "Executes a JavaScript function",
+            "itemtype": "method",
+            "name": "execute",
+            "params": [
+                {
+                    "name": "script",
+                    "description": "Script to execute",
+                    "type": "Function"
+                },
+                {
+                    "name": "args",
+                    "description": "Arguments to pass to the function",
+                    "type": "Array"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Execute",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/execute.js",
+            "line": 56,
+            "description": "Sends out an event with the results of the `execute` call",
+            "itemtype": "method",
+            "name": "_setExecuteCb",
+            "params": [
+                {
+                    "name": "script",
+                    "description": "Script to execute",
+                    "type": "Function"
+                },
+                {
+                    "name": "args",
+                    "description": "Arguments to pass to the function",
+                    "type": "Array"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "result",
+                    "description": "Serialized JSON with the results of the call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Exists promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Execute",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/execute.js",
+            "line": 75,
+            "description": "Executes a JavaScript function until the timeout rans out or\nthe function returns true",
+            "itemtype": "method",
+            "name": "execute",
+            "params": [
+                {
+                    "name": "script",
+                    "description": "Script to execute",
+                    "type": "Function"
+                },
+                {
+                    "name": "args",
+                    "description": "Arguments to pass to the function",
+                    "type": "Array"
+                },
+                {
+                    "name": "timeout",
+                    "description": "Timeout of the function",
+                    "type": "Integer"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Execute",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/execute.js",
+            "line": 93,
+            "description": "Sends out an event with the results of the `waitFor` call",
+            "itemtype": "method",
+            "name": "_setExecuteCb",
+            "params": [
+                {
+                    "name": "script",
+                    "description": "Script to execute",
+                    "type": "Function"
+                },
+                {
+                    "name": "args",
+                    "description": "Arguments to pass to the function",
+                    "type": "Array"
+                },
+                {
+                    "name": "timeout",
+                    "description": "Timeout of the function",
+                    "type": "Integer"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "Serialized JSON with the reuslts of the toFrame call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Execute",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/execute.js",
+            "line": 137,
+            "description": "Mixes in the script execute methods",
+            "params": [
+                {
+                    "name": "DalekNative",
+                    "description": "Native driver base class",
+                    "type": "Dalek.DriverNative"
+                }
+            ],
+            "return": {
+                "description": "DalekNative Native driver base class",
+                "type": "Dalek.DriverNative"
+            },
+            "class": "Dalek.DriverNative.Commands.Execute",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/frame.js",
+            "line": 40,
+            "description": "Switches to frame context",
+            "itemtype": "method",
+            "name": "toFrame",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Frame",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/frame.js",
+            "line": 58,
+            "description": "Sends out an event with the results of the `toFrame` call",
+            "itemtype": "method",
+            "name": "_frameCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "result",
+                    "description": "Serialized JSON with the reuslts of the toFrame call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Exists promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Frame",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/frame.js",
+            "line": 77,
+            "description": "Mixes in element methods",
+            "params": [
+                {
+                    "name": "DalekNative",
+                    "description": "Native driver base class",
+                    "type": "Dalek.DriverNative"
+                }
+            ],
+            "return": {
+                "description": "DalekNative Native driver base class",
+                "type": "Dalek.DriverNative"
+            },
+            "class": "Dalek.DriverNative.Commands.Frame",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 40,
+            "description": "This function is non operational",
+            "itemtype": "method",
+            "name": "noop",
+            "params": [
+                {
+                    "name": "message",
+                    "description": "Whatever yu like",
+                    "type": "Mixed"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 54,
+            "description": "Sends out an event with the results of the `noop` call",
+            "itemtype": "method",
+            "name": "_noopCb",
+            "params": [
+                {
+                    "name": "message",
+                    "description": "Whatever yu like",
+                    "type": "Mixed"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 71,
+            "description": "Gets the HTML source of a page",
+            "itemtype": "method",
+            "name": "source",
+            "params": [
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 85,
+            "description": "Sends out an event with the results of the `source` call",
+            "itemtype": "method",
+            "name": "_sourceCb",
+            "params": [
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "source",
+                    "description": "Serialized JSON with the results of the source call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 102,
+            "description": "Checks the document title of a page",
+            "itemtype": "method",
+            "name": "title",
+            "params": [
+                {
+                    "name": "expected",
+                    "description": "Expected page title",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 117,
+            "description": "Sends out an event with the results of the `title` call",
+            "itemtype": "method",
+            "name": "_titleCb",
+            "params": [
+                {
+                    "name": "expected",
+                    "description": "Expected page title",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "title",
+                    "description": "Serialized JSON with the results of the title call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Title promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 135,
+            "description": "Checks the text of an alaert, prompt or confirm dialog",
+            "itemtype": "method",
+            "name": "alertText",
+            "params": [
+                {
+                    "name": "expected",
+                    "description": "Expected alert text",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 150,
+            "description": "Sends out an event with the results of the `alertText` call",
+            "itemtype": "method",
+            "name": "_alertTextCb",
+            "params": [
+                {
+                    "name": "expected",
+                    "description": "Expected alert text",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "alertText",
+                    "description": "Serialized JSON with the results of the alertText call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise alertText promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 168,
+            "description": "Sends text to a javascript prompt dialog box",
+            "itemtype": "method",
+            "name": "promptText",
+            "params": [
+                {
+                    "name": "dimensions",
+                    "description": "New window width & height",
+                    "type": "Object"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 183,
+            "description": "Sends out an event with the results of the `promptText` call",
+            "itemtype": "method",
+            "name": "_promptTextCb",
+            "params": [
+                {
+                    "name": "dimensions",
+                    "description": "New window width & height",
+                    "type": "Object"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "result",
+                    "description": "Serialized JSON with the reuslts of the toFrame call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Exists promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 201,
+            "description": "Accepts (e.g. oressing the OK button) an javascript alert, prompt or confirm dialog",
+            "itemtype": "method",
+            "name": "acceptAlert",
+            "params": [
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 215,
+            "description": "Sends out an event with the results of the `acceptAlert` call",
+            "itemtype": "method",
+            "name": "_acceptAlertCb",
+            "params": [
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "result",
+                    "description": "Serialized JSON with the reuslts of the toFrame call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Exists promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 232,
+            "description": "Accepts (e.g. oressing the OK button) an javascript alert, prompt or confirm dialog",
+            "itemtype": "method",
+            "name": "dismissAlert",
+            "params": [
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 246,
+            "description": "Sends out an event with the results of the `dismissAlert` call",
+            "itemtype": "method",
+            "name": "_dismissAlertCb",
+            "params": [
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "result",
+                    "description": "Serialized JSON with the reuslts of the toFrame call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Exists promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 263,
+            "description": "Wait for a specific amount of time",
+            "itemtype": "method",
+            "name": "wait",
+            "params": [
+                {
+                    "name": "timeout",
+                    "description": "Time to wait in ms",
+                    "type": "Integer"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 279,
+            "description": "Sends out an event with the results of the `wait` call",
+            "itemtype": "method",
+            "name": "_waitCb",
+            "params": [
+                {
+                    "name": "timeout",
+                    "description": "Time to wait in ms",
+                    "type": "Integer"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise WaitForElement promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/page.js",
+            "line": 301,
+            "description": "Mixes in page methods",
+            "params": [
+                {
+                    "name": "DalekNative",
+                    "description": "Native driver base class",
+                    "type": "Dalek.DriverNative"
+                }
+            ],
+            "return": {
+                "description": "DalekNative Native driver base class",
+                "type": "Dalek.DriverNative"
+            },
+            "class": "Dalek.DriverNative.Commands.Page",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/screenshot.js",
+            "line": 41,
+            "description": "Makes an screenshot of the current page",
+            "itemtype": "method",
+            "name": "screenshot",
+            "params": [
+                {
+                    "name": "path",
+                    "description": "Root directory path",
+                    "type": "String"
+                },
+                {
+                    "name": "pathname",
+                    "description": "Pathname of the screenshot path",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Screenshot",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/screenshot.js",
+            "line": 58,
+            "description": "Sends out an event with the results of the `screenshot` call\nand stores the screenshot in the filesystem",
+            "itemtype": "method",
+            "name": "_screenshotCb",
+            "params": [
+                {
+                    "name": "path",
+                    "description": "Root directory path",
+                    "type": "String"
+                },
+                {
+                    "name": "pathname",
+                    "description": "Pathname of the screenshot path",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "result",
+                    "description": "Serialized JSON result of the screenshot call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Screenshot promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Screenshot",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/screenshot.js",
+            "line": 87,
+            "description": "Recursige mkdir helper",
+            "itemtype": "method",
+            "name": "_recursiveMakeDirSync",
+            "params": [
+                {
+                    "name": "path",
+                    "description": "Path to create",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Screenshot",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/screenshot.js",
+            "line": 112,
+            "description": "Return the formatted os name",
+            "itemtype": "method",
+            "name": "_parseOS",
+            "params": [
+                {
+                    "name": "Pathname",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Formatted pathname",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Screenshot",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/screenshot.js",
+            "line": 133,
+            "description": "Return the formatted os name",
+            "itemtype": "method",
+            "name": "_parseOS",
+            "return": {
+                "description": "OS name",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Screenshot",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/screenshot.js",
+            "line": 149,
+            "description": "Return the formatted os version",
+            "itemtype": "method",
+            "name": "_parseOSVersion",
+            "return": {
+                "description": "OS version",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Screenshot",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/screenshot.js",
+            "line": 163,
+            "description": "Return the formatted browser version",
+            "itemtype": "method",
+            "name": "_parseBrowserVersion",
+            "return": {
+                "description": "Browser version",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Screenshot",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/screenshot.js",
+            "line": 175,
+            "description": "Return the formatted date",
+            "itemtype": "method",
+            "name": "_parseDate",
+            "return": {
+                "description": "Date",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Screenshot",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/screenshot.js",
+            "line": 199,
+            "description": "Return the formatted datetime",
+            "itemtype": "method",
+            "name": "_parseDatetime",
+            "return": {
+                "description": "Datetime",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Screenshot",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/screenshot.js",
+            "line": 225,
+            "description": "Return the formatted viewport",
+            "itemtype": "method",
+            "name": "_parseViewport",
+            "return": {
+                "description": "Viewport",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Screenshot",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/screenshot.js",
+            "line": 240,
+            "description": "Mixes in screenshot methods",
+            "params": [
+                {
+                    "name": "DalekNative",
+                    "description": "Native driver base class",
+                    "type": "Dalek.DriverNative"
+                }
+            ],
+            "return": {
+                "description": "DalekNative Native driver base class",
+                "type": "Dalek.DriverNative"
+            },
+            "class": "Dalek.DriverNative.Commands.Screenshot",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/url.js",
+            "line": 40,
+            "description": "Navigate to a new URL",
+            "itemtype": "method",
+            "name": "open",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "Url to navigate to",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Url",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/url.js",
+            "line": 57,
+            "description": "Sends out an event with the results of the `open` call",
+            "itemtype": "method",
+            "name": "_openCb",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "Url to navigate to",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Open promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Url",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/url.js",
+            "line": 75,
+            "description": "Fetches the current url",
+            "itemtype": "method",
+            "name": "url",
+            "params": [
+                {
+                    "name": "expected",
+                    "description": "Expected url",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Url",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/url.js",
+            "line": 90,
+            "description": "Sends out an event with the results of the `url` call",
+            "itemtype": "method",
+            "name": "_urlCb",
+            "params": [
+                {
+                    "name": "expected",
+                    "description": "Expected url",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "url",
+                    "description": "Serialized JSON result of url call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Url promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Url",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/url.js",
+            "line": 108,
+            "description": "Navigate backwards in the browser history, if possible.",
+            "itemtype": "method",
+            "name": "back",
+            "params": [
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Url",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/url.js",
+            "line": 122,
+            "description": "Navigate forwards in the browser history, if possible.",
+            "itemtype": "method",
+            "name": "forward",
+            "params": [
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Url",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/url.js",
+            "line": 136,
+            "description": "Refresh the current page",
+            "itemtype": "method",
+            "name": "refresh",
+            "params": [
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Url",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/url.js",
+            "line": 151,
+            "description": "Mixes in url methods",
+            "params": [
+                {
+                    "name": "DalekNative",
+                    "description": "Native driver base class",
+                    "type": "Dalek.DriverNative"
+                }
+            ],
+            "return": {
+                "description": "DalekNative Native driver base class",
+                "type": "Dalek.DriverNative"
+            },
+            "class": "Dalek.DriverNative.Commands.Url",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/window.js",
+            "line": 40,
+            "description": "Switches to another window context",
+            "itemtype": "method",
+            "name": "toFrame",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the window to switch to",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Window",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/window.js",
+            "line": 64,
+            "description": "Sends out an event with the results of the `toWindow` call",
+            "itemtype": "method",
+            "name": "_windowCb",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the window to switch to",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "result",
+                    "description": "Serialized JSON with the reuslts of the toFrame call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Exists promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Window",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/window.js",
+            "line": 82,
+            "description": "Resizes the current window",
+            "itemtype": "method",
+            "name": "resize",
+            "params": [
+                {
+                    "name": "dimensions",
+                    "description": "New window width & height",
+                    "type": "Object"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Window",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/window.js",
+            "line": 97,
+            "description": "Sends out an event with the results of the `resize` call",
+            "itemtype": "method",
+            "name": "_windowCb",
+            "params": [
+                {
+                    "name": "dimensions",
+                    "description": "New window width & height",
+                    "type": "Object"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "result",
+                    "description": "Serialized JSON with the reuslts of the toFrame call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Exists promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Window",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/window.js",
+            "line": 115,
+            "description": "Maximizes the current window",
+            "itemtype": "method",
+            "name": "maximize",
+            "params": [
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Window",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/window.js",
+            "line": 129,
+            "description": "Sends out an event with the results of the `maximize` call",
+            "itemtype": "method",
+            "name": "_maximizeCb",
+            "params": [
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "result",
+                    "description": "Serialized JSON with the reuslts of the toFrame call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Exists promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Window",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/window.js",
+            "line": 148,
+            "description": "Mixes in element methods",
+            "params": [
+                {
+                    "name": "DalekNative",
+                    "description": "Native driver base class",
+                    "type": "Dalek.DriverNative"
+                }
+            ],
+            "return": {
+                "description": "DalekNative Native driver base class",
+                "type": "Dalek.DriverNative"
+            },
+            "class": "Dalek.DriverNative.Commands.Window",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/browser.js",
+            "line": 30,
+            "description": "Loads the webdriver client,\nlaunches the browser,\ninitializes al object properties,\nbinds to browser events",
+            "params": [
+                {
+                    "name": "opts",
+                    "description": "Options needed to kick off the driver",
+                    "type": "Object"
+                }
+            ],
+            "is_constructor": 1,
+            "class": "Dalek.Browser",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/browser.js",
+            "line": 55,
+            "description": "Sauce labs authentication realm (user:key)",
+            "itemtype": "property",
+            "name": "auth",
+            "type": "{string|null}",
+            "class": "Dalek.Browser",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/browser.js",
+            "line": 64,
+            "description": "Browser session config",
+            "itemtype": "property",
+            "name": "sessionConfig",
+            "type": "{object}",
+            "class": "Dalek.Browser",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/browser.js",
+            "line": 73,
+            "description": "Saucelabs remote webdriver path",
+            "itemtype": "property",
+            "name": "path",
+            "type": "{string}",
+            "default": "/wd/hub",
+            "class": "Dalek.Browser",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/browser.js",
+            "line": 83,
+            "description": "Saucelabs remote port",
+            "itemtype": "property",
+            "name": "port",
+            "type": "{integer}",
+            "default": "80",
+            "class": "Dalek.Browser",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/browser.js",
+            "line": 93,
+            "description": "Saucelabs remote host",
+            "itemtype": "property",
+            "name": "host",
+            "type": "{string}",
+            "default": "host",
+            "class": "Dalek.Browser",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/browser.js",
+            "line": 103,
+            "description": "Available browsers with their default capabilities",
+            "itemtype": "property",
+            "name": "browsers",
+            "type": "{object}",
+            "class": "Dalek.Browser",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/browser.js",
+            "line": 121,
+            "description": "Default verbose browser name",
+            "itemtype": "property",
+            "name": "longName",
+            "type": "{string}",
+            "class": "Dalek.Browser",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/browser.js",
+            "line": 130,
+            "description": "Default desired capabilities",
+            "itemtype": "property",
+            "name": "desiredCapabilities",
+            "type": "{object}",
+            "class": "Dalek.Browser",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/browser.js",
+            "line": 144,
+            "description": "Driver defaults",
+            "itemtype": "property",
+            "name": "driverDefaults",
+            "type": "{object}",
+            "class": "Dalek.Browser",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/browser.js",
+            "line": 163,
+            "description": "Available platforms",
+            "itemtype": "property",
+            "name": "platforms",
+            "type": "{array}",
+            "class": "Dalek.Browser",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/browser.js",
+            "line": 172,
+            "description": "Stores & validates the incoming browser config",
+            "itemtype": "method",
+            "name": "launch",
+            "params": [
+                {
+                    "name": "configuration",
+                    "description": "Browser configuration",
+                    "type": "Object"
+                },
+                {
+                    "name": "events",
+                    "description": "EventEmitter (Reporter Emitter instance)",
+                    "type": "EventEmitter2"
+                },
+                {
+                    "name": "config",
+                    "description": "Dalek configuration class",
+                    "type": "Dalek.Internal.Config"
+                }
+            ],
+            "return": {
+                "description": "Browser promise",
+                "type": "Object"
+            },
+            "class": "Dalek.Browser",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/browser.js",
+            "line": 200,
+            "description": "Kills the remote browser\nTODO: Close the remote session",
+            "itemtype": "method",
+            "name": "kill",
+            "return": {
+                "description": "Promise",
+                "type": "Object"
+            },
+            "class": "Dalek.Browser",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/browser.js",
+            "line": 214,
+            "description": "Generates the status defaults for the OS configuration",
+            "itemtype": "method",
+            "name": "getStatusDefaults",
+            "params": [
+                {
+                    "name": "desiredCapabilities",
+                    "description": "Desired capabilities",
+                    "type": "Object"
+                },
+                {
+                    "name": "desiredCapabilities",
+                    "description": "Desired capabilities",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "OS status information",
+                "type": "Object"
+            },
+            "class": "Dalek.Browser",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/browser.js",
+            "line": 227,
+            "description": "Generates the status defaults for the OS configuration",
+            "itemtype": "method",
+            "name": "getStatusDefaults",
+            "params": [
+                {
+                    "name": "desiredCapabilities",
+                    "description": "Desired capabilities",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "OS status information",
+                "type": "Object"
+            },
+            "class": "Dalek.Browser",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/browser.js",
+            "line": 239,
+            "description": "Sets the sauce authentication token",
+            "itemtype": "method",
+            "name": "setAuth",
+            "params": [
+                {
+                    "name": "user",
+                    "description": "Sauce labs username",
+                    "type": "String"
+                },
+                {
+                    "name": "key",
+                    "description": "Sauce labs key",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.Browser",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/browser.js",
+            "line": 253,
+            "description": "Verifies the browser config",
+            "itemtype": "method",
+            "name": "_verfiyBrowserConfig",
+            "params": [
+                {
+                    "name": "browserName",
+                    "description": "Name of the browser to verify",
+                    "type": "String"
+                },
+                {
+                    "name": "config",
+                    "description": "Daleks internal config helper",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Browser config",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Browser",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/browser.js",
+            "line": 287,
+            "description": "Verfies the OS platform config",
+            "itemtype": "method",
+            "name": "_verfiyPlatformConfig",
+            "params": [
+                {
+                    "name": "browser",
+                    "description": "Browser information",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Platform",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Browser",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/browser.js",
+            "line": 312,
+            "description": "Generates the desired capabilities for this session",
+            "itemtype": "method",
+            "name": "_generateDesiredCaps",
+            "params": [
+                {
+                    "name": "browserName",
+                    "description": "The browser name",
+                    "type": "String"
+                },
+                {
+                    "name": "config",
+                    "description": "Daleks internal config helper",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The sessions desired capabilities",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Browser",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/browser.js",
+            "line": 346,
+            "description": "Generates OS status information",
+            "itemtype": "method",
+            "name": "_generateStatusInfo",
+            "params": [
+                {
+                    "name": "desiredCaps",
+                    "description": "The sessions desired capabilities",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "OS status information",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Browser",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/browser.js",
+            "line": 359,
+            "description": "Generates the verbose name of the current remote browser in use",
+            "itemtype": "method",
+            "name": "_generateLongName",
+            "params": [
+                {
+                    "name": "desiredCaps",
+                    "description": "The sessions desired capabilities",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Verbose browser name",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Browser",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "line": 1,
+            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "class": "Dalek.Sauce",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 35,
+            "description": "Initializes the sauce labs driver & the remote browser instance",
+            "params": [
+                {
+                    "name": "opts",
+                    "description": "Initializer options",
+                    "type": "Object"
+                }
+            ],
+            "is_constructor": 1,
+            "class": "Dalek.Sauce",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 166,
+            "description": "Initializes the driver properties",
+            "itemtype": "method",
+            "name": "_initializeProperties",
+            "params": [
+                {
+                    "name": "opts",
+                    "description": "Options needed to kick off the driver",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Sauce",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 189,
+            "description": "Binds listeners on browser events",
+            "itemtype": "method",
+            "name": "_initializeProperties",
+            "params": [
+                {
+                    "name": "browser",
+                    "description": "Browser module",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Sauce",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 206,
+            "description": "Checks if a webdriver session has already been established,\nif not, create a new one",
+            "itemtype": "method",
+            "name": "start",
+            "return": {
+                "description": "promise Driver promise",
+                "type": "Object"
+            },
+            "class": "Dalek.Sauce",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 235,
+            "description": "Creates a new webdriver session\nGets the driver status\nGets the session status\nResolves the promise (e.g. let them tests run)",
+            "itemtype": "method",
+            "name": "_startBrowserSession",
+            "params": [
+                {
+                    "name": "deferred",
+                    "description": "Browser session deferred",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Sauce",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 281,
+            "description": "Starts to execution of a batch of tests",
+            "itemtype": "method",
+            "name": "end",
+            "chainable": 1,
+            "class": "Dalek.Sauce",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 304,
+            "description": "Flushes the action queue (e.g. commands that should be send to the wbdriver server)",
+            "itemtype": "method",
+            "name": "flushQueue",
+            "chainable": 1,
+            "class": "Dalek.Sauce",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 326,
+            "description": "Loads the browser session status",
+            "itemtype": "method",
+            "name": "_sessionStatus",
+            "params": [
+                {
+                    "name": "sessionInfo",
+                    "description": "Session information",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "promise Browser session promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Sauce",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 343,
+            "description": "Loads the browser driver status",
+            "itemtype": "method",
+            "name": "_driverStatus",
+            "params": [
+                {
+                    "name": "statusInfo",
+                    "description": "Driver status information",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "promise Driver status promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Sauce",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 360,
+            "description": "Creates an anonymus function that calls a webdriver\nmethod that has no return value, emits an empty result event\nif the function has been run\nTODO: Name is weird, should be saner",
+            "itemtype": "method",
+            "name": "_createNonReturnee",
+            "params": [
+                {
+                    "name": "fnName",
+                    "description": "Name of the webdriver function that should be called",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "fn",
+                "type": "Function"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Sauce",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 376,
+            "description": "Generates a chain of webdriver calls for webdriver\nmethods that don't have a return value\nTODO: Name is weird, should be saner",
+            "itemtype": "method",
+            "name": "_actionQueueNonReturneeTemplate",
+            "params": [
+                {
+                    "name": "fnName",
+                    "description": "Name of the webdriver function that should be called",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique action hash",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique action hash",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Sauce",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 395,
+            "description": "Creates a driver notification with an empty value\nTODO: Name is weird, should be saner",
+            "itemtype": "method",
+            "name": "_generateDummyDriverMessageFn",
+            "params": [
+                {
+                    "name": "fnName",
+                    "description": "Name of the webdriver function that should be called",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique action hash",
+                    "type": "String"
+                },
+                {
+                    "name": "uuid",
+                    "description": "Unique action hash",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Driver message promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Sauce",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 415,
+            "description": "Determines if the driver is a \"multi\" browser driver,\ne.g. can handle more than one browser",
+            "itemtype": "method",
+            "name": "isMultiBrowser",
+            "return": {
+                "description": "isMultiBrowser Driver can handle more than one browser",
+                "type": "Bool"
+            },
+            "class": "Dalek.Sauce",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 427,
+            "description": "Verifies a browser request\nTODO: Still a noop, need to add \"verify the browser\" logic",
+            "itemtype": "method",
+            "name": "verifyBrowser",
+            "return": {
+                "description": "isVerifiedBrowser Driver can handle this browser",
+                "type": "Bool"
+            },
+            "class": "Dalek.Sauce",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 439,
+            "description": "Determines if the driver comes with its own browsers bundled",
+            "itemtype": "method",
+            "name": "dummyBrowser",
+            "return": {
+                "description": "isDummyBrowser Driver does not rely on Dalek browser modules",
+                "type": "Bool"
+            },
+            "class": "Dalek.Sauce",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 450,
+            "description": "Returnes the browser that comes bundled with the driver",
+            "itemtype": "method",
+            "name": "getBrowser",
+            "params": [
+                {
+                    "name": "driver",
+                    "description": "Driver instance",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Browser module",
+                "type": "Object"
+            },
+            "class": "Dalek.Sauce",
+            "module": "Driver",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "index.js",
+            "line": 462,
+            "description": "Creates a new driver instance",
+            "itemtype": "method",
+            "name": "create",
+            "params": [
+                {
+                    "name": "opts",
+                    "description": "Options needed to kick off the driver",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "driver",
+                "type": "Sauce"
+            },
+            "class": "Dalek.Sauce",
+            "module": "Driver",
+            "namespace": "Dalek"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: part",
+            "line": " index.js:77"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " index.js:77"
+        },
+        {
+            "message": "Missing item type\nMixes in cookie methods",
+            "line": " lib/commands/cookie.js:118"
+        },
+        {
+            "message": "Missing item type\nMixes in element methods",
+            "line": " lib/commands/element.js:719"
+        },
+        {
+            "message": "Missing item type\nMixes in the script execute methods",
+            "line": " lib/commands/execute.js:137"
+        },
+        {
+            "message": "Missing item type\nMixes in element methods",
+            "line": " lib/commands/frame.js:77"
+        },
+        {
+            "message": "Missing item type\nMixes in page methods",
+            "line": " lib/commands/page.js:301"
+        },
+        {
+            "message": "Missing item type\nMixes in screenshot methods",
+            "line": " lib/commands/screenshot.js:240"
+        },
+        {
+            "message": "Missing item type\nMixes in url methods",
+            "line": " lib/commands/url.js:151"
+        },
+        {
+            "message": "Missing item type\nMixes in element methods",
+            "line": " lib/commands/window.js:148"
+        },
+        {
+            "message": "Missing item type\nLoads the webdriver client,\nlaunches the browser,\ninitializes al object properties,\nbinds to browser events",
+            "line": " lib/browser.js:30"
+        },
+        {
+            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
+        },
+        {
+            "message": "Missing item type\nInitializes the sauce labs driver & the remote browser instance",
+            "line": " index.js:35"
+        }
+    ]
+}

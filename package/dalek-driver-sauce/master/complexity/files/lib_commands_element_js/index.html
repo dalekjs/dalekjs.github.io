@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>lib/commands/element.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">67.86</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">709</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
+      <p class="stat">86.47</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">5.28</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">/*!
+ *
+ * Copyright (c) 2013 Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ *
+ */
+
+&#039;use strict&#039;;
+
+// ext. libs
+var Q = require(&#039;q&#039;);
+
+/**
+ * Element related methods
+ *
+ * @module Driver
+ * @class Element
+ * @namespace Dalek.DriverNative.Commands
+ */
+
+var Element = {
+
+  /**
+   * Checks if an element exists
+   *
+   * @method exists
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
+  exists: function (selector, hash) {
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this._existsCb.bind(this, selector, hash));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the `exists` call
+   *
+   * @method _existsCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} result Serialized JSON with the reuslts of the exists call
+   * @return {object} promise Exists promise
+   * @private
+   */
+
+  _existsCb: function (selector, hash, result) {
+    var deferred = Q.defer();
+    this.events.emit(&#039;driver:message&#039;, {key: &#039;exists&#039;, selector: selector, hash: hash, value: (JSON.parse(result).value === -1 || JSON.parse(result).status === 7 ? &#039;false&#039; : &#039;true&#039;)});
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Checks if an element is visible
+   *
+   * @method visible
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
+  visible: function (selector, hash) {
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this.webdriverClient.displayed.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this._visibleCb.bind(this, selector, hash));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the `visible` call
+   *
+   * @method _visibleCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} result Serialized JSON with the reuslts of the visible call
+   * @return {object} promise Visible promise
+   * @private
+   */
+
+  _visibleCb: function (selector, hash, result) {
+    var deferred = Q.defer();
+    this.events.emit(&#039;driver:message&#039;, {key: &#039;visible&#039;, selector: selector, hash: hash, value: JSON.parse(result).value});
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Checks if an element has the expected text
+   *
+   * @method text
+   * @param {string} selector Selector expression to find the element
+   * @param {string} expected The expected text content
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
+  text: function (selector, expected, hash) {
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this.webdriverClient.text.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this._textCb.bind(this, selector, hash, expected));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the `text` call
+   *
+   * @method _textCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} expected The expected text content
+   * @param {string} result Serialized JSON with the reuslts of the text call
+   * @return {object} Promise
+   * @private
+   */
+
+  _textCb: function (selector, hash, expected, result) {
+    var deferred = Q.defer();
+    this.events.emit(&#039;driver:message&#039;, {key: &#039;text&#039;, hash: hash, expected: expected, selector: selector, value: JSON.parse(result).value});
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Checks if an element has the expected css property/value pairs
+   *
+   * @method css
+   * @param {string} selector Selector expression to find the element
+   * @param {string} property The css property to check
+   * @param {string} expected The expected css value
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
+  css: function (selector, property, expected, hash) {
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this.webdriverClient.cssProperty.bind(this.webdriverClient, property));
+    this.actionQueue.push(this._cssCb.bind(this, selector, property, hash, expected));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the `css` call
+   *
+   * @method _cssCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} property The css property to check
+   * @param {string} expected The expected css value
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} result Serialized JSON with the reuslts of the text call
+   * @return {object} Promise
+   * @private
+   */
+  
+  _cssCb: function (selector, property, hash, expected, result) {
+    var deferred = Q.defer();
+    this.events.emit(&#039;driver:message&#039;, {key: &#039;css&#039;, hash: hash, property: property, expected: expected, selector: selector, value: JSON.parse(result).value});
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Checks th width of an element
+   *
+   * @method width
+   * @param {string} selector Selector expression to find the element
+   * @param {string} expected The expected width value
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
+  width: function (selector, expected, hash) {
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this.webdriverClient.size.bind(this.webdriverClient));
+    this.actionQueue.push(this._widthCb.bind(this, selector, hash, expected));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the `width` call
+   *
+   * @method _widthCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} expected The expected width value
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} result Serialized JSON with the reuslts of the text call
+   * @return {object} Promise
+   * @private
+   */
+
+  _widthCb: function (selector, hash, expected, result) {
+    var deferred = Q.defer();
+    this.events.emit(&#039;driver:message&#039;, {key: &#039;width&#039;, hash: hash, expected: expected, selector: selector, value: JSON.parse(result).value.width});
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Checks th height of an element
+   *
+   * @method height
+   * @param {string} selector Selector expression to find the element
+   * @param {string} expected The expected height value
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
+  height: function (selector, expected, hash) {
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this.webdriverClient.size.bind(this.webdriverClient));
+    this.actionQueue.push(this._heightCb.bind(this, selector, hash, expected));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the `height` call
+   *
+   * @method _heightCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} expected The expected height value
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} result Serialized JSON with the reuslts of the text call
+   * @return {object} Promise
+   * @private
+   */
+
+  _heightCb: function (selector, hash, expected, result) {
+    var deferred = Q.defer();
+    this.events.emit(&#039;driver:message&#039;, {key: &#039;height&#039;, hash: hash, expected: expected, selector: selector, value: JSON.parse(result).value.height});
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Checks if an element has an attribute with the expected value
+   *
+   * @method attribute
+   * @param {string} selector Selector expression to find the element
+   * @param {string} attribute The attribute that should be checked
+   * @param {string} expected The expected text content
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
+  attribute: function (selector, attribute, expected, hash) {
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this.webdriverClient.getAttribute.bind(this.webdriverClient, attribute));
+    this.actionQueue.push(this._attributeCb.bind(this, selector, hash, attribute, expected));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the `attribute` call
+   *
+   * @method _attributeCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} attribute The attribute that should be checked
+   * @param {string} expected The expected attribute content
+   * @param {string} result Serialized JSON with the results of the attribute call
+   * @return {object} promise Attribute promise
+   * @private
+   */
+
+  _attributeCb: function (selector, hash, attribute, expected, result) {
+    var deferred = Q.defer();
+    this.events.emit(&#039;driver:message&#039;, {key: &#039;attribute&#039;, selector: selector, hash: hash, expected: expected, value: JSON.parse(result).value });
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Checks if an element has the expected value
+   *
+   * @method val
+   * @param {string} selector Selector expression to find the element
+   * @param {string} expected The expected content
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
+  val: function (selector, expected, hash) {
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this.webdriverClient.getAttribute.bind(this.webdriverClient, &#039;value&#039;));
+    this.actionQueue.push(this._valCb.bind(this, selector, hash, expected));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the `val` call
+   *
+   * @method _valCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} expected The expected content
+   * @param {string} result Serialized JSON with the results of the val call
+   * @return {object} Promise
+   * @private
+   */
+
+  _valCb: function (selector, hash, expected, result) {
+    var deferred = Q.defer();
+    this.events.emit(&#039;driver:message&#039;, {key: &#039;val&#039;, selector: selector, hash: hash, expected: expected, value: JSON.parse(result).value });
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Checks if an element is selected
+   *
+   * @method selected
+   * @param {string} selector Selector expression to find the element
+   * @param {string} expected The expected content
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
+  selected: function (selector, expected, hash) {
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this.webdriverClient.selected.bind(this.webdriverClient));
+    this.actionQueue.push(this._selectedCb.bind(this, selector, hash, expected));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the `selected` call
+   *
+   * @method _selectedCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} expected The expected content
+   * @param {string} result Serialized JSON with the results of the selected call
+   * @return {object} Promise
+   * @private
+   */
+
+  _selectedCb: function (selector, hash, expected, result) {
+    var deferred = Q.defer();
+    this.events.emit(&#039;driver:message&#039;, {key: &#039;selected&#039;, selector: selector, hash: hash, expected: expected, value: JSON.parse(result).value });
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Checks if an element is enabled
+   *
+   * @method enabled
+   * @param {string} selector Selector expression to find the element
+   * @param {string} expected The expected content
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
+  enabled: function (selector, expected, hash) {
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this.webdriverClient.enabled.bind(this.webdriverClient));
+    this.actionQueue.push(this._enabledCb.bind(this, selector, hash, expected));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the `enabled` call
+   *
+   * @method _enabledCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} expected The expected content
+   * @param {string} result Serialized JSON with the results of the selected call
+   * @return {object} Promise
+   * @private
+   */
+
+  _enabledCb: function (selector, hash, expected, result) {
+    var deferred = Q.defer();
+    this.events.emit(&#039;driver:message&#039;, {key: &#039;enabled&#039;, selector: selector, hash: hash, expected: expected, value: JSON.parse(result).value });
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Submits a form
+   *
+   * @method submit
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} uuid Unique hash of that fn call
+   * @chainable
+   */
+
+  submit: function (selector, hash, uuid) {
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this.webdriverClient.submit.bind(this.webdriverClient));
+    this.actionQueue.push(this._submitCb.bind(this, selector, hash, uuid));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the `submit` call
+   *
+   * @method _submitCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} uuid Unique hash of that fn call
+   * @return {object} promise Click promise
+   * @private
+   */
+
+  _submitCb: function (selector, hash, uuid) {
+    var deferred = Q.defer();
+    this.events.emit(&#039;driver:message&#039;, {key: &#039;submit&#039;, value: selector, uuid: uuid, hash: hash});
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Clicks an element
+   *
+   * @method click
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} uuid Unique hash of that fn call
+   * @chainable
+   */
+
+  click: function (selector, hash, uuid) {
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this.webdriverClient.click.bind(this.webdriverClient));
+    this.actionQueue.push(this._clickCb.bind(this, selector, hash, uuid));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the `click` call
+   *
+   * @method _clickCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} uuid Unique hash of that fn call
+   * @return {object} promise Click promise
+   * @private
+   */
+
+  _clickCb: function (selector, hash, uuid) {
+    var deferred = Q.defer();
+    this.events.emit(&#039;driver:message&#039;, {key: &#039;click&#039;, value: selector, uuid: uuid, hash: hash});
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Scrolls from an element to a location defined in pixels
+   *
+   * @method scroll
+   * @param {string} selector Selector expression to find the element
+   * @param {object} options X offset, Y offset, Speed
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} uuid Unique hash of that fn call
+   * @chainable
+   */
+
+  scroll: function (selector, options, hash, uuid) {
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector, options));
+    this.actionQueue.push(this.webdriverClient.scroll.bind(this.webdriverClient));
+    this.actionQueue.push(this._clickCb.bind(this, selector, options, hash, uuid));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the `scroll` call
+   *
+   * @method _scrollCb
+   * @param {string} selector Selector expression to find the element
+   * @param {object} options X offset, Y offset, Speed
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} uuid Unique hash of that fn call
+   * @return {object} promise Scroll promise
+   * @private
+   */
+
+  _scrollCb: function (selector, options, hash, uuid) {
+    var deferred = Q.defer();
+    this.events.emit(&#039;driver:message&#039;, {key: &#039;scroll&#039;, value: selector, uuid: uuid, hash: hash});
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Clicks an element
+   *
+   * @method click
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
+  type: function (selector, keystrokes, hash) {
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this.webdriverClient.val.bind(this.webdriverClient, keystrokes));
+    this.actionQueue.push(this._typeCb.bind(this, selector, keystrokes, hash));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the `type` call
+   *
+   * @method _typeCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @return {object} promise Type promise
+   * @private
+   */
+
+  _typeCb: function (selector, keystrokes, hash) {
+    var deferred = Q.defer();
+    this.events.emit(&#039;driver:message&#039;, {key: &#039;type&#039;, value: selector, keystrokes: keystrokes, uuid: hash, hash: hash});
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Sends keys to an element (whether or not it is an input)
+   *
+   * @method sendKeys
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
+  sendKeys: function (selector, keystrokes, hash) {
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this.webdriverClient.sendKeys.bind(this.webdriverClient, keystrokes));
+    this.actionQueue.push(this._sendKeysCb.bind(this, selector, keystrokes, hash));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the `sendKeys` call
+   *
+   * @method _sendKeysCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @return {object} promise Type promise
+   * @private
+   */
+
+  _sendKeysCb: function (selector, keystrokes, hash) {
+    var deferred = Q.defer();
+    this.events.emit(&#039;driver:message&#039;, {key: &#039;sendKeys&#039;, value: selector, keystrokes: keystrokes, uuid: hash, hash: hash});
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Wait for an element for a specific amount of time
+   *
+   * @method waitForElement
+   * @param {string} selector Selector expression to find the element
+   * @param {integer} timeout Time to wait in ms
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} uuid Unique hash of that fn call
+   * @chainable
+   */
+
+  waitForElement: function (selector, timeout, hash, uuid) {
+    this.actionQueue.push(this.webdriverClient.implicitWait.bind(this.webdriverClient, timeout));
+    this.actionQueue.push(this._waitForElementCb.bind(this, selector, hash, uuid));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the `waitForElement` call
+   *
+   * @method _waitForElementCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} uuid Unique hash of that fn call
+   * @return {object} promise WaitForElement promise
+   * @private
+   */
+
+  _waitForElementCb: function (selector, hash, uuid) {
+    var deferred = Q.defer();
+    this.events.emit(&#039;driver:message&#039;, {key: &#039;waitForElement&#039;, selector: selector, uuid: uuid, hash: hash});
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Returns the number of elements matched by the selector
+   *
+   * @method getNumberOfElements
+   * @param {string} selector Selector expression to find the elements
+   * @param {integer} expected Expected number of matched elements
+   * @param {string} uuid Unique hash of that fn call
+   * @chainable
+   */
+
+  getNumberOfElements: function (selector, expected, hash) {
+    this.actionQueue.push(this.webdriverClient.elements.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this._getNumberOfElementsCb.bind(this, selector, hash, expected));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the `getNumberOfElements` call
+   *
+   * @method _getNumberOfElementsCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @param {integer} expected Expected number of matched elements
+   * @param {string} res Serialized JSON with the results of the getNumberOfElements call
+   * @return {object} promise GetNumberOfElements promise
+   * @private
+   */
+
+  _getNumberOfElementsCb: function (selector, hash, expected, res) {
+    var deferred = Q.defer();
+    var result = JSON.parse(res);
+    // check if the expression matched any element
+    if (result.value === -1) {
+      this.events.emit(&#039;driver:message&#039;, {key: &#039;numberOfElements&#039;, hash: hash, selector: selector, expected: expected, value: 0});
+    } else {
+      this.events.emit(&#039;driver:message&#039;, {key: &#039;numberOfElements&#039;, selector: selector, expected: expected, hash: hash, value: result.value.length});
+    }
+
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+
+  /**
+   * Returns the number of visible elements matched by the selector
+   *
+   * @method getNumberOfVisibleElements
+   * @param {string} selector Selector expression to find the elements
+   * @param {integer} expected Expected number of matched elements
+   * @param {string} uuid Unique hash of that fn call
+   * @chainable
+   */
+
+  getNumberOfVisibleElements: function (selector, expected, hash) {
+    this.actionQueue.push(this.webdriverClient.elements.bind(this.webdriverClient, selector));
+    this.actionQueue.push(function (result) {
+      var deferred = Q.defer();
+      var res = JSON.parse(result);
+      var resLength = res.value.length;
+      var curLength = 0;
+      var visibleElement = [];
+
+      res.value.forEach(function (element) {
+        var fakeResponse = JSON.stringify({sessionId: res.sessionId, status: 0, value: element.ELEMENT});
+        this.webdriverClient.options.id = element.ELEMENT;
+        this.webdriverClient.displayed.bind(this.webdriverClient, selector)(fakeResponse).then(function (visRes) {
+          curLength++;
+          if (JSON.parse(visRes).value === true) {
+            visibleElement.push(element);
+          }
+          if (curLength === resLength) {
+            deferred.resolve(JSON.stringify({sessionId: res.sessionId, status: 0, value: visibleElement}));
+          }
+        });
+      }.bind(this));
+
+      return deferred.promise;
+    }.bind(this));
+    this.actionQueue.push(this._getNumberOfVisibleElementsCb.bind(this, selector, hash, expected));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the `getNumberOfVisibleElements` call
+   *
+   * @method _getNumberOfElementsCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @param {integer} expected Expected number of matched elements
+   * @param {string} res Serialized JSON with the results of the getNumberOfVisibleElements call
+   * @return {object} promise GetNumberOfElements promise
+   * @private
+   */
+
+  _getNumberOfVisibleElementsCb: function (selector, hash, expected, res) {
+    var deferred = Q.defer();
+    var result = JSON.parse(res);
+
+    // check if the expression matched any element
+    if (result.value === -1) {
+      this.events.emit(&#039;driver:message&#039;, {key: &#039;numberOfVisibleElements&#039;, hash: hash, selector: selector, expected: expected, value: 0});
+    } else {
+      this.events.emit(&#039;driver:message&#039;, {key: &#039;numberOfVisibleElements&#039;, selector: selector, expected: expected, hash: hash, value: result.value.length});
+    }
+
+    deferred.resolve();
+    return deferred.promise;
+  }
+
+};
+
+/**
+ * Mixes in element methods
+ *
+ * @param {Dalek.DriverNative} DalekNative Native driver base class
+ * @return {Dalek.DriverNative} DalekNative Native driver base class
+ */
+
+module.exports = function (DalekNative) {
+  // mixin methods
+  Object.keys(Element).forEach(function (fn) {
+    DalekNative.prototype[fn] = Element[fn];
+  });
+
+  return DalekNative;
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

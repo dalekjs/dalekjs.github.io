@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lib/commands/screenshot.js - dalek-driver-sauce</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="dalek-driver-sauce"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.0.1</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Dalek.Browser.html">Dalek.Browser</a></li>
+            
+                <li><a href="../classes/Dalek.DriverNative.Commands.Cookie.html">Dalek.DriverNative.Commands.Cookie</a></li>
+            
+                <li><a href="../classes/Dalek.DriverNative.Commands.Element.html">Dalek.DriverNative.Commands.Element</a></li>
+            
+                <li><a href="../classes/Dalek.DriverNative.Commands.Execute.html">Dalek.DriverNative.Commands.Execute</a></li>
+            
+                <li><a href="../classes/Dalek.DriverNative.Commands.Frame.html">Dalek.DriverNative.Commands.Frame</a></li>
+            
+                <li><a href="../classes/Dalek.DriverNative.Commands.Page.html">Dalek.DriverNative.Commands.Page</a></li>
+            
+                <li><a href="../classes/Dalek.DriverNative.Commands.Screenshot.html">Dalek.DriverNative.Commands.Screenshot</a></li>
+            
+                <li><a href="../classes/Dalek.DriverNative.Commands.Url.html">Dalek.DriverNative.Commands.Url</a></li>
+            
+                <li><a href="../classes/Dalek.DriverNative.Commands.Window.html">Dalek.DriverNative.Commands.Window</a></li>
+            
+                <li><a href="../classes/Dalek.Sauce.html">Dalek.Sauce</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Driver.html">Driver</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: lib/commands/screenshot.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*!
+ *
+ * Copyright (c) 2013 Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ *
+ */
+
+&#x27;use strict&#x27;;
+
+// ext. libs
+var Q = require(&#x27;q&#x27;);
+var fs = require(&#x27;fs&#x27;);
+
+/**
+ * Screenshot related methods
+ *
+ * @module Driver
+ * @class Screenshot
+ * @namespace Dalek.DriverNative.Commands
+ */
+
+var Screenshot = {
+
+  /**
+   * Makes an screenshot of the current page
+   *
+   * @method screenshot
+   * @param {string} path Root directory path
+   * @param {string} pathname Pathname of the screenshot path
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} uuid Unique hash of that fn call
+   * @chainable
+   */
+
+  screenshot: function (path, pathname, hash, uuid) {
+    this.actionQueue.push(this.webdriverClient.screenshot.bind(this.webdriverClient));
+    this.actionQueue.push(this._screenshotCb.bind(this, path, pathname, hash, uuid));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the &#x60;screenshot&#x60; call
+   * and stores the screenshot in the filesystem
+   *
+   * @method _screenshotCb
+   * @param {string} path Root directory path
+   * @param {string} pathname Pathname of the screenshot path
+   * @param {string} hash Unique hash of that fn call
+   * @param {string} uuid Unique hash of that fn call
+   * @param {string} result Serialized JSON result of the screenshot call
+   * @return {object} promise Screenshot promise
+   * @private
+   */
+
+  _screenshotCb: function (path, pathname, hash, uuid, result) {
+    var deferred = Q.defer();
+    // replace base64 metadata
+    var base64Data = JSON.parse(result).value.replace(/^data:image\/png;base64,/,&#x27;&#x27;);
+    // replace placeholders
+    var realpath = this._replacePathPlaceholder(path + pathname);
+    // check if we need to add a new directory
+    this._recursiveMakeDirSync(realpath.substring(0, realpath.lastIndexOf(&#x27;/&#x27;)));
+    // write the screenshot
+    fs.writeFileSync(realpath, base64Data, &#x27;base64&#x27;);
+    this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;screenshot&#x27;, value: realpath, uuid: hash, hash: hash});
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Recursige mkdir helper
+   *
+   * @method _recursiveMakeDirSync
+   * @param {string} path Path to create
+   * @private
+   */
+
+  _recursiveMakeDirSync: function (path) {
+    var pathSep = require(&#x27;path&#x27;).sep;
+    var dirs = path.split(pathSep);
+    var root = &#x27;&#x27;;
+
+    while (dirs.length &gt; 0) {
+      var dir = dirs.shift();
+      if (dir === &#x27;&#x27;) {
+        root = pathSep;
+      }
+      if (!fs.existsSync(root + dir)) {
+        fs.mkdirSync(root + dir);
+      }
+      root += dir + pathSep;
+    }
+  },
+
+  /**
+   * Return the formatted os name
+   *
+   * @method _parseOS
+   * @param {string} Pathname 
+   * @return {string} Formatted pathname
+   * @private
+   */
+
+  _replacePathPlaceholder: function (pathname) {
+    pathname = pathname.replace(&#x27;:browser&#x27;, this.browserName);
+    pathname = pathname.replace(&#x27;:version&#x27;, this._parseBrowserVersion(this.sessionStatus.version));
+    pathname = pathname.replace(&#x27;:timestamp&#x27;, Math.round(new Date().getTime() / 1000));
+    pathname = pathname.replace(&#x27;:osVersion&#x27;, this._parseOSVersion(this.driverStatus.os.version));
+    pathname = pathname.replace(&#x27;:os&#x27;, this._parseOS(this.driverStatus.os.name));
+    pathname = pathname.replace(&#x27;:datetime&#x27;, this._parseDatetime());
+    pathname = pathname.replace(&#x27;:date&#x27;, this._parseDate());
+    pathname = pathname.replace(&#x27;:viewport&#x27;, this._parseViewport());
+    return pathname;
+  },
+
+  /**
+   * Return the formatted os name
+   *
+   * @method _parseOS
+   * @return {string} OS name
+   * @private
+   */
+
+  _parseOS: function (os) {
+    var mappings = {
+      &#x27;mac&#x27;: &#x27;OSX&#x27;,
+      &#x27;Mac OS X&#x27;: &#x27;OSX&#x27;
+    };
+    return mappings[os] || &#x27;unknown&#x27;;
+  },
+
+  /**
+   * Return the formatted os version
+   *
+   * @method _parseOSVersion
+   * @return {string} OS version
+   * @private
+   */
+
+  _parseOSVersion: function (version) {
+    var vs = version.replace(/[^0-9\\.]/g, &#x27;&#x27;);
+    vs = vs.replace(/\./g, &#x27;_&#x27;);
+    return vs;
+  },
+
+  /**
+   * Return the formatted browser version
+   *
+   * @method _parseBrowserVersion
+   * @return {string} Browser version
+   * @private
+   */
+  
+  _parseBrowserVersion: function (version) {
+    return version.replace(/\./g, &#x27;_&#x27;);
+  },
+
+  /**
+   * Return the formatted date
+   *
+   * @method _parseDate
+   * @return {string} Date
+   * @private
+   */
+
+  _parseDate: function () {
+    var date = new Date();
+    var dateStr = &#x27;&#x27;;
+    var day = date.getDate();
+    var month = date.getMonth();
+
+    month = (month+&#x27;&#x27;).length === 1 ? &#x27;0&#x27; + month : month;
+    day = (day+&#x27;&#x27;).length === 1 ? &#x27;0&#x27; + day : day;
+
+    dateStr += month + &#x27;_&#x27;;
+    dateStr += day + &#x27;_&#x27;;
+    dateStr += date.getFullYear();
+
+    return dateStr;
+  },
+
+  /**
+   * Return the formatted datetime
+   *
+   * @method _parseDatetime
+   * @return {string} Datetime
+   * @private
+   */
+
+  _parseDatetime: function () {
+    var date = new Date();
+    var dateStr = this._parseDate();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+
+    hours = (hours+&#x27;&#x27;).length === 1 ? &#x27;0&#x27; + hours : hours;
+    minutes = (minutes+&#x27;&#x27;).length === 1 ? &#x27;0&#x27; + minutes : minutes;
+    seconds = (seconds+&#x27;&#x27;).length === 1 ? &#x27;0&#x27; + seconds : seconds;
+
+    dateStr = dateStr + &#x27;_&#x27; + hours;
+    dateStr = dateStr + &#x27;_&#x27; + minutes;
+    dateStr = dateStr + &#x27;_&#x27; + seconds;
+
+    return dateStr;
+  },
+
+  /**
+   * Return the formatted viewport
+   *
+   * @method _parseViewport
+   * @return {string} Viewport
+   * @private
+   */
+
+  _parseViewport: function () {
+    var viewport = this.config.get(&#x27;viewport&#x27;);
+    return &#x27;w&#x27; + viewport.width + &#x27;_h&#x27; + viewport.height;
+  }
+
+};
+
+/**
+ * Mixes in screenshot methods
+ *
+ * @param {Dalek.DriverNative} DalekNative Native driver base class
+ * @return {Dalek.DriverNative} DalekNative Native driver base class
+ */
+
+module.exports = function (DalekNative) {
+  // mixin methods
+  Object.keys(Screenshot).forEach(function (fn) {
+    DalekNative.prototype[fn] = Screenshot[fn];
+  });
+
+  return DalekNative;
+};
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>index.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">70.23</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">454</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
+      <p class="stat">31.63</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">2.08</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">/*!
+ *
+ * Copyright (c) 2013 Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ *
+ */
+
+&#039;use strict&#039;;
+
+// ext. libs
+var fs = require(&#039;fs&#039;);
+var Q = require(&#039;q&#039;);
+
+// int. libs
+var WD = require(&#039;dalek-internal-webdriver&#039;);
+var Browser = require(&#039;./lib/browser&#039;);
+
+/**
+ * Initializes the sauce labs driver &amp; the remote browser instance
+ *
+ * @param {object} opts Initializer options
+ * @constructor
+ */
+
+var Sauce = function (opts) {
+  // get the browser configuration &amp; the browser module
+  var browserConf = {name: null};
+  var browser = opts.browserMo;
+
+  // prepare properties
+  this._initializeProperties(opts);
+
+  // create a new webdriver client instance
+  this.webdriverClient = new WD(browser, this.events);
+
+  // listen on browser events
+  this._startBrowserEventListeners(browser);
+
+  // assign the current browser name
+  browserConf.name = this.browserName;
+
+  // store desired capabilities of this session
+  this.desiredCapabilities = browser.getDesiredCapabilities(this.browserName, this.config);
+  this.browserDefaults = browser.driverDefaults;
+  this.browserDefaults.status = browser.getStatusDefaults(this.desiredCapabilities);
+  this.browserData = browser;
+
+  // set auth data
+  var driverConfig = this.config.get(&#039;driver.sauce&#039;);
+  browser.setAuth(driverConfig.user, driverConfig.key);
+
+  // launch the browser &amp; when the browser launch
+  // promise is fullfilled, issue the driver:ready event
+  // for the particular browser
+  browser
+    .launch(browserConf, this.reporterEvents, this.config)
+    .then(this.events.emit.bind(this.events, &#039;driver:ready:sauce:&#039; + this.browserName, browser));
+};
+
+/**
+ * This module is a driver plugin for [DalekJS](//github.com/dalekjs/dalek).
+ * It connects Daleks testsuite with the remote testing environment of [Sauce Labs](https://saucelabs.com).
+ *
+ * The driver can be installed with the following command:
+ *
+ * ```bash
+ * $ npm install dalek-driver-sauce --save-dev
+ * ```
+ *
+ * You can use the driver by adding a config option to the your [Dalekfile](/pages/config.html)
+ *
+ * ```javascript
+ * &quot;driver&quot;: [&quot;sauce&quot;]
+ * ```
+ *
+ * Or you can tell Dalek that it should run your tests via sauces service via the command line:
+ *
+ * ```bash
+ * $ dalek mytest.js -d sauce
+ * ```
+ *
+ * In order to run your tests within the Sauce Labs infrastructure, you must add your sauce username &amp; key 
+ * to your dalek configuration. Those two parameters must be set in order to get this driver up &amp; running.
+ * You can specifiy them within your [Dalekfile](/pages/config.html) like so:
+ *
+ * ```javascript
+ * &quot;driver.sauce&quot;: {
+ *   &quot;user&quot;: &quot;dalekjs&quot;,
+ *   &quot;key&quot;: &quot;aaaaaa-1234-567a-1abc-1br6d9f68689&quot;
+ * }
+ * ```
+ *
+ * It is also possible to specify a set of other extra saucy parameters like `name` &amp; `tags`:
+ *
+ * ```javascript
+ * &quot;driver.sauce&quot;: {
+ *   &quot;user&quot;: &quot;dalekjs&quot;,
+ *   &quot;key&quot;: &quot;aaaaaa-1234-567a-1abc-1br6d9f68689&quot;,
+ *   &quot;name&quot;: &quot;Guineapig&quot;,
+ *   &quot;tags&quot;: [&quot;dalek&quot;, &quot;testproject&quot;]
+ * }
+ * ```
+ *
+ * If you would like to have a more control over the browser/OS combinations that are available, you are able 
+ * to configure you custom combinations:
+ *
+ * ```javascript
+ * &quot;browsers&quot;: [{
+ *   &quot;chrome&quot;: {
+ *     &quot;platform&quot;: &quot;OS X 10.6&quot;,
+ *     &quot;actAs&quot;: &quot;chrome&quot;,
+ *     &quot;version&quot;: 27
+ *   },
+ *   &quot;chromeWin&quot;: {
+ *     &quot;platform&quot;: &quot;Windows 7&quot;,
+ *     &quot;actAs&quot;: &quot;chrome&quot;,
+ *     &quot;version&quot;: 27
+ *   },
+ *   &quot;chromeLinux&quot;: {
+ *     &quot;platform&quot;: &quot;Linux&quot;,
+ *     &quot;actAs&quot;: &quot;chrome&quot;,
+ *     &quot;version&quot;: 26
+ *   }
+ * ```
+ * 
+ * You can then call your custom browsers like so:
+ *
+ * ```bash
+ * $ dalek mytest.js -d sauce -b chrome,chromeWin,chromeLinux
+ * ```
+ *
+ * or you can define them in your Dalekfile:
+ *
+ * ```javascript
+ * &quot;browser&quot;: [&quot;chrome&quot;, &quot;chromeWin&quot;, &quot;chromeLinux&quot;]
+ * ```
+ *
+ * A list of all available browser/OS combinations, can be found [here](https://saucelabs.com/docs/platforms).
+ * 
+ * @module Driver
+ * @class Sauce
+ * @namespace Dalek
+ * @part Sauce
+ * @api
+ */
+
+Sauce.prototype = {
+
+  /**
+   * Initializes the driver properties
+   *
+   * @method _initializeProperties
+   * @param {object} opts Options needed to kick off the driver
+   * @chainable
+   * @private
+   */
+
+  _initializeProperties: function (opts) {
+    // prepare properties
+    this.actionQueue = [];
+    this.config = opts.config;
+    this.lastCalledUrl = null;
+    this.driverStatus = {};
+    this.sessionStatus = {};
+    // store injcted options in object properties
+    this.events = opts.events;
+    this.reporterEvents = opts.reporter;
+    this.browserName = opts.browser;
+    return this;
+  },
+
+  /**
+   * Binds listeners on browser events
+   *
+   * @method _initializeProperties
+   * @param {object} browser Browser module
+   * @chainable
+   * @private
+   */
+
+  _startBrowserEventListeners: function (browser) {
+    // issue the kill command to the browser, when all tests are completed
+    this.events.on(&#039;tests:complete:sauce:&#039; + this.browserName, browser.kill.bind(browser));
+    // clear the webdriver session, when all tests are completed
+    this.events.on(&#039;tests:complete:sauce:&#039; + this.browserName, this.webdriverClient.closeSession.bind(this.webdriverClient));
+    return this;
+  },
+
+  /**
+   * Checks if a webdriver session has already been established,
+   * if not, create a new one
+   *
+   * @method start
+   * @return {object} promise Driver promise
+   */
+
+  start: function () {
+    var deferred = Q.defer();
+
+    // store desired capabilities of this session
+    this.desiredCapabilities = this.browserData.getDesiredCapabilities(this.browserName, this.config);
+    this.browserDefaults = this.browserData.driverDefaults;
+    this.browserDefaults.status = this.browserData.getStatusDefaults(this.desiredCapabilities);
+
+    // check if a session is already active,
+    // if so, reuse that one
+    if(this.webdriverClient.hasSession()) {
+      deferred.resolve();
+      return deferred.promise;
+    }
+
+    // start a browser session
+    this._startBrowserSession(deferred, this.desiredCapabilities, this.browserDefaults);
+
+    return deferred.promise;
+  },
+
+  /**
+   * Creates a new webdriver session
+   * Gets the driver status
+   * Gets the session status
+   * Resolves the promise (e.g. let them tests run)
+   *
+   * @method _startBrowserSession
+   * @param {object} deferred Browser session deferred
+   * @chainable
+   * @private
+   */
+
+  _startBrowserSession: function (deferred, desiredCapabilities, defaults) {
+    var viewport = this.config.get(&#039;viewport&#039;);
+
+    // start a session, transmit the desired capabilities
+    var promise = this.webdriverClient.createSession({desiredCapabilities: desiredCapabilities});
+    
+    // set the default viewport if supported by the browser
+    if (defaults.viewport) {
+      promise = promise.then(this.webdriverClient.setWindowSize.bind(this.webdriverClient, viewport.width, viewport.height));
+    }
+
+    // get the driver status if supported by the browser
+    if (defaults.status === true) {
+      promise = promise
+        .then(this.webdriverClient.status.bind(this.webdriverClient))
+        .then(this._driverStatus.bind(this));
+    } else {
+      promise = promise.then(this._driverStatus.bind(this, JSON.stringify({value: defaults.status})));
+    }
+
+    // get the session info if supported by the browser
+    if (defaults.sessionInfo === true) {
+      promise = promise
+        .then(this.webdriverClient.sessionInfo.bind(this.webdriverClient))
+        .then(this._sessionStatus.bind(this));
+    } else {
+      promise = promise.then(this._driverStatus.bind(this, JSON.stringify({value: defaults.sessionInfo})));
+    }
+
+    // finally resolve the deferred
+    promise.then(deferred.resolve);
+    return this;
+  },
+
+  /**
+   * Starts to execution of a batch of tests
+   *
+   * @method end
+   * @chainable
+   */
+
+  end: function () {
+    var result = Q.resolve();
+
+    // loop through all promises created by the remote methods
+    // this is synchronous, so it waits if a method is finished before
+    // the next one will be executed
+    this.actionQueue.forEach(function (f) {
+      result = result.then(f);
+    });
+
+    // flush the queue &amp; fire an event
+    // when the queue finished its executions
+    result.then(this.flushQueue.bind(this));
+    return this;
+  },
+
+  /**
+   * Flushes the action queue (e.g. commands that should be send to the wbdriver server)
+   *
+   * @method flushQueue
+   * @chainable
+   */
+
+  flushQueue: function () {
+    // clear the action queue
+    this.actionQueue = [];
+    
+    // kill the session
+    var promise = this.webdriverClient.deleteSession();
+
+    // emit the run.complete event
+    promise.then(function () {
+      this.events.emit(&#039;driver:message&#039;, {key: &#039;run.complete&#039;, value: null});
+    }.bind(this));
+
+    return this;
+  },
+
+  /**
+   * Loads the browser session status
+   *
+   * @method _sessionStatus
+   * @param {object} sessionInfo Session information
+   * @return {object} promise Browser session promise
+   * @private
+   */
+
+  _sessionStatus: function (sessionInfo) {
+    var defer = Q.defer();
+    this.sessionStatus = JSON.parse(sessionInfo).value;
+    this.events.emit(&#039;driver:sessionStatus:sauce:&#039; + this.browserName, this.sessionStatus);
+    defer.resolve();
+    return defer.promise;
+  },
+
+  /**
+   * Loads the browser driver status
+   *
+   * @method _driverStatus
+   * @param {object} statusInfo Driver status information
+   * @return {object} promise Driver status promise
+   * @private
+   */
+
+  _driverStatus: function (statusInfo) {
+    var defer = Q.defer();
+    this.driverStatus = JSON.parse(statusInfo).value;
+    this.events.emit(&#039;driver:status:sauce:&#039; + this.browserName, this.driverStatus);
+    defer.resolve();
+    return defer.promise;
+  },
+
+  /**
+   * Creates an anonymus function that calls a webdriver
+   * method that has no return value, emits an empty result event
+   * if the function has been run
+   * TODO: Name is weird, should be saner
+   *
+   * @method _createNonReturnee
+   * @param {string} fnName Name of the webdriver function that should be called
+   * @return {function} fn
+   * @private
+   */
+
+  _createNonReturnee: function (fnName) {
+    return this._actionQueueNonReturneeTemplate.bind(this, fnName);
+  },
+
+  /**
+   * Generates a chain of webdriver calls for webdriver
+   * methods that don&#039;t have a return value
+   * TODO: Name is weird, should be saner
+   *
+   * @method _actionQueueNonReturneeTemplate
+   * @param {string} fnName Name of the webdriver function that should be called
+   * @param {string} hash Unique action hash
+   * @param {string} uuid Unique action hash
+   * @chainable
+   * @private
+   */
+
+  _actionQueueNonReturneeTemplate:function (fnName, hash, uuid) {
+    this.actionQueue.push(this.webdriverClient[fnName].bind(this.webdriverClient));
+    this.actionQueue.push(this._generateDummyDriverMessageFn.bind(this, fnName, hash, uuid));
+    return this;
+  },
+
+  /**
+   * Creates a driver notification with an empty value
+   * TODO: Name is weird, should be saner
+   *
+   * @method _generateDummyDriverMessageFn
+   * @param {string} fnName Name of the webdriver function that should be called
+   * @param {string} hash Unique action hash
+   * @param {string} uuid Unique action hash
+   * @return {object} promise Driver message promise
+   * @private
+   */
+
+  _generateDummyDriverMessageFn: function (fnName, hash, uuid) {
+    var deferred = Q.defer();
+    this.events.emit(&#039;driver:message&#039;, {key: fnName, value: null, uuid: uuid, hash: hash});
+    deferred.resolve();
+    return deferred.promise;
+  }
+};
+
+/**
+ * Determines if the driver is a &quot;multi&quot; browser driver,
+ * e.g. can handle more than one browser
+ *
+ * @method isMultiBrowser
+ * @return {bool} isMultiBrowser Driver can handle more than one browser
+ */
+
+module.exports.isMultiBrowser = function () {
+  return true;
+};
+
+/**
+ * Verifies a browser request
+ * TODO: Still a noop, need to add &quot;verify the browser&quot; logic
+ *
+ * @method verifyBrowser
+ * @return {bool} isVerifiedBrowser Driver can handle this browser
+ */
+
+module.exports.verifyBrowser = function () {
+  return true;
+};
+
+/**
+ * Determines if the driver comes with its own browsers bundled
+ *
+ * @method dummyBrowser
+ * @return {bool} isDummyBrowser Driver does not rely on Dalek browser modules
+ */
+
+module.exports.dummyBrowser = function () {
+  return true;
+};
+
+/**
+ * Returnes the browser that comes bundled with the driver
+ *
+ * @method getBrowser
+ * @param {object} driver Driver instance
+ * @return {object} Browser module
+ */
+
+module.exports.getBrowser = function (driver) {
+  return {configuration: null, module: new Browser(driver)};
+};
+
+/**
+ * Creates a new driver instance
+ *
+ * @method create
+ * @param {object} opts Options needed to kick off the driver
+ * @return {Sauce} driver
+ */
+
+module.exports.create = function (opts) {
+  // load the remote command helper methods
+  var dir = __dirname + &#039;/lib/commands/&#039;;
+  fs.readdirSync(dir).forEach(function (file) {
+    require(dir + file)(Sauce);
+  });
+
+  return new Sauce(opts);
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

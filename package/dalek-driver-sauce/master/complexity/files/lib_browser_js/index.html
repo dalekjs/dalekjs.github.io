@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>lib/browser.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">71.66</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">349</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
+      <p class="stat">24.78</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">1.36</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">/*!
+ *
+ * Copyright (c) 2013 Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ *
+ */
+
+&#039;use strict&#039;;
+
+// ext. libs
+var Q = require(&#039;q&#039;);
+
+/**
+ * Loads the webdriver client,
+ * launches the browser,
+ * initializes al object properties,
+ * binds to browser events
+ *
+ * @param {object} opts Options needed to kick off the driver
+ * @constructor
+ */
+
+var DummyBrowser = function (driver) {
+  this.driver = driver;
+};
+
+/**
+ * Verfies a given browser config &amp; mimics a
+ * real browser while using the Sauce infrstructure
+ *
+ * @module Driver
+ * @class Browser
+ * @namespace Dalek
+ */
+
+DummyBrowser.prototype = {
+
+  /**
+   * Sauce labs authentication realm (user:key)
+   *
+   * @property auth
+   * @type {string|null}
+   */
+
+  auth: null,
+
+  /**
+   * Browser session config
+   *
+   * @property sessionConfig
+   * @type {object}
+   */
+
+  sessionConfig: {},
+
+  /**
+   * Saucelabs remote webdriver path
+   *
+   * @property path
+   * @type {string}
+   * @default /wd/hub
+   */
+
+  path: &#039;/wd/hub&#039;,
+
+  /**
+   * Saucelabs remote port
+   *
+   * @property port
+   * @type {integer}
+   * @default 80
+   */
+
+  port: 80,
+
+  /**
+   * Saucelabs remote host
+   *
+   * @property host
+   * @type {string} 
+   * @default host
+   */
+
+  host: &#039;ondemand.saucelabs.com&#039;,
+
+  /**
+   * Available browsers with their default capabilities
+   *
+   * @property browsers
+   * @type {object}
+   */
+
+  browsers: {
+    &#039;iphone&#039;: {platform: &#039;OS X 10.8&#039;, version: &#039;6&#039;, longName: &#039;iOS Safari (iPhone)&#039;},
+    &#039;ipad&#039;: {platform: &#039;OS X 10.8&#039;, version: &#039;6&#039;, longName: &#039;iOS Safari (iPad)&#039;},
+    &#039;android&#039;: {platform: &#039;Linux&#039;, version: &#039;4.0&#039;, longName: &#039;Chrome on Android&#039;},
+    &#039;firefox&#039;: {platform: &#039;OS X 10.6&#039;, version: &#039;25&#039;, longName: &#039;Mozilla Firefox&#039;},
+    &#039;internet explorer&#039;: {platform: &#039;Windows 8&#039;, version: &#039;10&#039;, longName: &#039;Internet Explorer&#039;},
+    &#039;chrome&#039;: {platform: &#039;OS X 10.6&#039;, version: &#039;28&#039;, longName: &#039;Google Chrome&#039;},
+    &#039;opera&#039;: {platform: &#039;Windows 7&#039;, version: &#039;12&#039;, longName: &#039;Opera&#039;},
+    &#039;safari&#039;: {platform: &#039;OS X 10.8&#039;, version: &#039;6&#039;, longName: &#039;Safari&#039;}
+  },
+
+  /**
+   * Default verbose browser name
+   *
+   * @property longName
+   * @type {string}
+   */
+  
+  longName: &#039;Mozilla Firefox&#039;,
+  
+  /**
+   * Default desired capabilities
+   *
+   * @property desiredCapabilities
+   * @type {object}
+   */
+
+  desiredCapabilities: {
+    platform: &#039;OS X 10.8&#039;,
+    browserName: &#039;chrome&#039;,
+    &#039;browser-version&#039;: &#039;latest&#039;,
+    name: &#039;Dalek Testsuite&#039;
+  },
+
+  /**
+   * Driver defaults
+   *
+   * @property driverDefaults
+   * @type {object}
+   */
+
+  driverDefaults: {
+    viewport: true,
+    status: {
+      os: {
+        name: &#039;Linux&#039;,
+        version: null,
+        arch: null
+      }
+    },
+    sessionInfo: true
+  },
+
+  /**
+   * Available platforms
+   *
+   * @property platforms
+   * @type {array}
+   */
+
+  platforms: [&#039;Windows 8&#039;, &#039;Windows 7&#039;, &#039;Windows XP&#039;, &#039;OS X 10.8&#039;, &#039;OS X 10.7&#039;, &#039;OS X 10.6&#039;, &#039;Linux&#039;],
+
+  /**
+   * Stores &amp; validates the incoming browser config
+   *
+   * @method launch
+   * @param {object} configuration Browser configuration
+   * @param {EventEmitter2} events EventEmitter (Reporter Emitter instance)
+   * @param {Dalek.Internal.Config} config Dalek configuration class
+   * @return {object} Browser promise
+   */
+
+  launch: function (configuration, events, config) {
+    var deferred = Q.defer();
+
+    // override desired capabilities, status &amp; browser longname
+    this.desiredCapabilities = this._generateDesiredCaps(configuration.name, config);
+    this.driverDefaults.status = this._generateStatusInfo(this.desiredCapabilities);
+    this.longName = this._generateLongName(this.desiredCapabilities);
+
+    // store injected configuration/log event handlers
+    this.reporterEvents = events;
+    this.configuration = configuration;
+    this.config = config;
+    
+    // immediatly resolve the deferred
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Kills the remote browser
+   * TODO: Close the remote session
+   *
+   * @method kill
+   * @return {object} Promise
+   */
+
+  kill: function () {
+    var deferred = Q.defer();
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+   * Generates the status defaults for the OS configuration
+   *
+   * @method getStatusDefaults
+   * @param {object} desiredCapabilities Desired capabilities 
+   * @param {object} desiredCapabilities Desired capabilities 
+   * @return {object} OS status information
+   */
+
+  getDesiredCapabilities: function (browserName, config) {
+    return this._generateDesiredCaps(browserName, config);
+  },
+
+  /**
+   * Generates the status defaults for the OS configuration
+   *
+   * @method getStatusDefaults
+   * @param {object} desiredCapabilities Desired capabilities 
+   * @return {object} OS status information
+   */
+
+  getStatusDefaults: function (desiredCapabilities) {
+    return this._generateStatusInfo(desiredCapabilities);
+  },
+
+  /**
+   * Sets the sauce authentication token
+   *
+   * @method setAuth
+   * @param {string} user Sauce labs username
+   * @param {string} key Sauce labs key
+   * @chainable
+   */
+
+  setAuth: function (user, key) {
+    this.auth = user + &#039;:&#039; + key;
+    return this;
+  },
+
+  /**
+   * Verifies the browser config
+   * 
+   * @method _verfiyBrowserConfig
+   * @param {string} browserName Name of the browser to verify
+   * @param {object} config Daleks internal config helper
+   * @return {object} Browser config
+   * @private
+   */
+
+  _verfiyBrowserConfig: function (browserName, config) {
+    var browsers = config.get(&#039;browsers&#039;);
+    var browser = browsers[0][browserName] || null;
+
+    // check if we couldnt find a configured alias,
+    // check and apply if there is a default config
+    if (!browser &amp;&amp; this.browsers[browserName]) {
+      browser = this.browsers[browserName];
+    }
+    // check if we couldnt find a configured alias,
+    // set to defaults otherwise
+    if (!browser) {
+      return {actAs: this.desiredCapabilities.browserName, version: this.desiredCapabilities[&#039;browser-version&#039;]};
+    }
+
+    // check if the actas property has been set, if not
+    // use the given browser name
+    if (!browser.actAs) {
+      browser.actAs = browserName;
+    }
+
+    return browser;
+  },
+
+  /**
+   * Verfies the OS platform config
+   * 
+   * @method _verfiyPlatformConfig
+   * @param {object} browser Browser information
+   * @return {string} Platform
+   * @private
+   */
+  
+  _verfiyPlatformConfig: function (browser) {
+    var bp = null;
+    var isValid = this.platforms.reduce(function (previousValue, platform) {
+      if (bp) {
+        return bp;
+      }
+
+      if (platform === browser.platform) {
+        bp = browser.platform;
+        return browser.platform;
+      }
+    });
+
+    return isValid || this.desiredCapabilities.platform;
+  },
+
+  /**
+   * Generates the desired capabilities for this session
+   * 
+   * @method _generateDesiredCaps
+   * @param {string} browserName The browser name
+   * @param {object} config Daleks internal config helper
+   * @return {object} The sessions desired capabilities
+   * @private
+   */
+
+  _generateDesiredCaps: function (browserName, config) {
+    var browser = this._verfiyBrowserConfig(browserName, config);
+    var platform = this._verfiyPlatformConfig(browser);
+    var driverConfig = config.get(&#039;driver.sauce&#039;);
+    var desiredCaps = {
+      browserName: browser.actAs,
+      platform: platform,
+      &#039;browser-version&#039;: (browser.version || this.desiredCapabilities[&#039;browser-version&#039;]),
+      name: driverConfig.name || this.desiredCapabilities.name
+    };
+
+    // check if the user added tags
+    if (driverConfig.tags) {
+      desiredCaps.tags = driverConfig.tags;
+    }
+
+    // check if the user added a build id
+    if (driverConfig.build) {
+      desiredCaps.build = driverConfig.build;
+    }
+
+    return desiredCaps;
+  },
+
+  /**
+   * Generates OS status information
+   * 
+   * @method _generateStatusInfo
+   * @param {object} desiredCaps The sessions desired capabilities
+   * @return {object} OS status information
+   * @private
+   */
+
+  _generateStatusInfo: function (desiredCaps) {
+    return {os: {name: desiredCaps.platform, arch: null, version: null}};
+  },
+
+  /**
+   * Generates the verbose name of the current remote browser in use
+   * 
+   * @method _generateLongName
+   * @param {object} desiredCaps The sessions desired capabilities
+   * @return {string} Verbose browser name
+   * @private
+   */
+
+  _generateLongName: function (desiredCaps) {
+    return this.browsers[desiredCaps.browserName].longName || null;
+  }
+};
+
+module.exports = DummyBrowser;</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>
