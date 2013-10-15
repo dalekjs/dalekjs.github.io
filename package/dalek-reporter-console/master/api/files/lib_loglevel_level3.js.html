@@ -202,7 +202,7 @@ LogLevel3.prototype.outputBrowserVersion = function (data) {
 
 LogLevel3.prototype.outputOSVersion = function (data) {
   this.echo(&#x27;OS:&#x27;, {nl: false, ec: true, foreground: &#x27;white&#x27;});
-  this.echo(data.os.name + &#x27; &#x27; + data.os.version + &#x27; &#x27; + data.os.arch, {foreground: &#x27;yellowBright&#x27;});
+  this.echo(data.os.name + &#x27; &#x27; + (data.os.version || &#x27;&#x27;) + &#x27; &#x27; + (data.os.arch || &#x27;&#x27;), {foreground: &#x27;yellowBright&#x27;});
   return this;
 };
 
