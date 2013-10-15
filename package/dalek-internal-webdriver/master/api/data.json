@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-internal-webdriver",
         "description": "JavaScript Webdriver Client for DalekJS",
-        "version": "0.0.2",
+        "version": "0.0.3",
         "url": ""
     },
     "files": {
