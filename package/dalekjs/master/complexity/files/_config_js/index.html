@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>/config.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">78.25</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">347</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
+      <p class="stat">29.89</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">1.14</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">/*!
+ *
+ * Copyright (c) 2013 Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ *
+ */
+
+&#039;use strict&#039;;
+
+// ext. libs
+var path = require(&#039;path&#039;);
+var fs = require(&#039;fs&#039;);
+var _ = require(&#039;lodash&#039;);
+var yaml = require(&#039;js-yaml&#039;);
+var JSON5 = require(&#039;json5&#039;);
+require(&#039;coffee-script&#039;);
+
+/**
+ * Configures the config instance
+ *
+ * @param {object} defaults Default parameter options
+ * @param {object} opts Command line options
+ * @constructor
+ */
+
+var Config = function (defaults, opts, advOpts) {
+  this.customFilename = null;
+  this.defaultFilename = &#039;Dalekfile&#039;;
+  this.supportedExtensions = [&#039;yml&#039;, &#039;json5&#039;, &#039;json&#039;, &#039;js&#039;, &#039;coffee&#039;];
+  this.advancedOptions = advOpts;
+  this.config = this.load(defaults, opts.config, opts);
+};
+
+/**
+ * Parses config data &amp; loads config files for [DalekJS](//github.com/dalekjs/dalek) tests.
+ *
+ * This module is a driver plugin for [DalekJS](//github.com/dalekjs/dalek).
+ * It connects Daleks testsuite with the remote testing environment of [Sauce Labs](https://saucelabs.com).
+ *
+ * The driver can be installed with the following command:
+ *
+ * ```bash
+ * $ npm install dalek-driver-sauce --save-dev
+ * ```
+ *
+ * You can use the driver by adding a config option to the your [Dalekfile](/docs/config.html)
+ *
+ * ```javascript
+ * &quot;driver&quot;: [&quot;sauce&quot;]
+ * ```
+ *
+ * Or you can tell Dalek that it should run your tests via sauces service via the command line:
+ *
+ * ```bash
+ * $ dalek mytest.js -d sauce
+ * ```
+ *
+ * In order to run your tests within the Sauce Labs infrastructure, you must add your sauce username &amp; key 
+ * to your dalek configuration. Those two parameters must be set in order to get this driver up &amp; running.
+ * You can specifiy them within your [Dalekfile](/docs/config.html) like so:
+ *
+ * ```javascript
+ * &quot;driver.sauce&quot;: {
+ *   &quot;user&quot;: &quot;dalekjs&quot;,
+ *   &quot;key&quot;: &quot;aaaaaa-1234-567a-1abc-1br6d9f68689&quot;
+ * }
+ * ```
+ *
+ * It is also possible to specify a set of other extra saucy parameters like `name` &amp; `tags`:
+ *
+ * ```javascript
+ * &quot;driver.sauce&quot;: {
+ *   &quot;user&quot;: &quot;dalekjs&quot;,
+ *   &quot;key&quot;: &quot;aaaaaa-1234-567a-1abc-1br6d9f68689&quot;,
+ *   &quot;name&quot;: &quot;Guineapig&quot;,
+ *   &quot;tags&quot;: [&quot;dalek&quot;, &quot;testproject&quot;]
+ * }
+ * ```
+ *
+ * If you would like to have a more control over the browser/OS combinations that are available, you are able 
+ * to configure you custom combinations:
+ *
+ * ```javascript
+ * &quot;browsers&quot;: [{
+ *   &quot;chrome&quot;: {
+ *     &quot;platform&quot;: &quot;OS X 10.6&quot;,
+ *     &quot;actAs&quot;: &quot;chrome&quot;,
+ *     &quot;version&quot;: 27
+ *   },
+ *   &quot;chromeWin&quot;: {
+ *     &quot;platform&quot;: &quot;Windows 7&quot;,
+ *     &quot;actAs&quot;: &quot;chrome&quot;,
+ *     &quot;version&quot;: 27
+ *   },
+ *   &quot;chromeLinux&quot;: {
+ *     &quot;platform&quot;: &quot;Linux&quot;,
+ *     &quot;actAs&quot;: &quot;chrome&quot;,
+ *     &quot;version&quot;: 26
+ *   }
+ * ```
+ * 
+ * You can then call your custom browsers like so:
+ *
+ * ```bash
+ * $ dalek mytest.js -d sauce -b chrome,chromeWin,chromeLinux
+ * ```
+ *
+ * or you can define them in your Dalekfile:
+ *
+ * ```javascript
+ * &quot;browser&quot;: [&quot;chrome&quot;, &quot;chromeWin&quot;, &quot;chromeLinux&quot;]
+ * ```
+ *
+ * A list of all available browser/OS combinations, can be found [here](https://saucelabs.com/docs/platforms).
+ *
+ * @module DalekJS
+ * @class Config
+ * @namespace Dalek
+ * @part Config
+ * @api
+ */
+
+Config.prototype = {
+
+  /**
+   * Checks if a config file is available
+   *
+   * @method checkAvailabilityOfConfigFile
+   * @param {String} pathname
+   * @return {String} config File path
+   */
+
+  checkAvailabilityOfConfigFile: function (pathname) {
+    // check if a pathname is given,
+    // then check if the file is available
+    if (pathname &amp;&amp; fs.existsSync(pathname)) {
+      return fs.realpathSync(pathname);
+    }
+
+    // check if any of the default configuration files is available
+    return this.supportedExtensions.reduce(this._checkFile.bind(this));
+  },
+
+  /**
+   * Iterator function that checks the existance of a given file
+   *
+   * @method _checkFile
+   * @param {String} previousValue Last iterations result
+   * @param {String} ext File extension to check
+   * @param {integer} idx Iteration index 
+   * @param {object} data File data
+   * @return {String} config File path
+   * @private
+   */
+
+  _checkFile: function (previousValue, ext, idx, data) {
+    if (previousValue.length &gt; 6) {
+      return previousValue;
+    }
+
+    var fileToCheck = this.defaultFilename + &#039;.&#039; + previousValue;
+    if (fs.existsSync(fileToCheck)) {
+      return fs.realpathSync(fileToCheck);
+    }
+
+    return this._checkDefaultFile(ext, data);
+  },
+
+  /**
+   * Iterator function that checks the existance of a the default file
+   *
+   * @method _checkDefaultFile
+   * @param {String} ext File extension to check
+   * @param {object} data File data
+   * @return {String} config File path
+   * @private
+   */
+
+  _checkDefaultFile: function (ext, data) {
+    if (ext === data[data.length - 1]) {
+      var fileToCheck = this.defaultFilename + &#039;.&#039; + ext;
+      if (fs.existsSync(fileToCheck)) {
+        return fs.realpathSync(fileToCheck);
+      }
+    }
+
+    return ext;
+  },
+
+  /**
+   * Loads a file &amp; merges the results with the
+   * commandline options &amp; the default config
+   *
+   * @method load
+   * @param {object} defaults Default config
+   * @param {String} pathname Filename of the config file to load
+   * @param {object} opts Command line options
+   * @return {object} config Merged config data
+   */
+
+  load: function (defaults, pathname, opts) {
+    var file = this.checkAvailabilityOfConfigFile(pathname);
+    var data = {};
+
+    if (!this.advancedOptions || this.advancedOptions.dalekfile !== false) {
+      data = this.loadFile(file);
+    }
+
+    // remove the tests property if the array length is 0
+    if (opts.tests.length === 0) {
+      delete opts.tests;
+    }
+
+    return _.merge(defaults, data, opts, (this.advancedOptions || {}));
+  },
+
+  /**
+   * Loads a config file &amp; parses it based on the file extension
+   *
+   * @method loadFile
+   * @param {String} pathname Filename of the config file to load
+   * @return {object} data Config data
+   */
+
+  loadFile: function (pathname) {
+    var ext = path.extname(pathname).replace(&#039;.&#039;, &#039;&#039;);
+    return this[&#039;read&#039; + ext] ? this[&#039;read&#039; + ext](pathname) : {};
+  },
+
+  /**
+   * Fetches &amp; returns a config item
+   *
+   * @method get
+   * @param {String} item Key of the item to load
+   * @return {mixed|null} data Requested config data
+   */
+
+  get: function (item) {
+    return this.config[item] || null;
+  },
+
+  /**
+   * Loads a json config file
+   *
+   * @method readjson
+   * @return {object} data Parsed config data
+   */
+
+  readjson: function (pathname) {
+    var contents = fs.readFileSync((pathname || this.defaultFilename + &#039;.json&#039;), &#039;utf8&#039;);
+    return JSON.parse(contents);
+  },
+
+  /**
+   * Loads a json5 config file
+   *
+   * @method readJson5
+   * @return {object} data Parsed config data
+   */
+
+  readjson5: function (pathname) {
+    var contents = fs.readFileSync((pathname || this.defaultFilename + &#039;.json5&#039;), &#039;utf8&#039;);
+    return JSON5.parse(contents);
+  },
+
+  /**
+   * Loads a yaml config file
+   *
+   * @method readyaml
+   * @return {object} data Parsed config data
+   */
+
+  readyml: function (pathname) {
+    var contents = fs.readFileSync((pathname || this.defaultFilename + &#039;.yml&#039;), &#039;utf8&#039;);
+    return yaml.load(contents);
+  },
+
+  /**
+   * Loads a javascript config file
+   *
+   * @method readjs
+   * @return {object} data Parsed config data
+   */
+
+  readjs: function (pathname) {
+    return require((pathname || this.defaultFilename));
+  },
+
+  /**
+   * Loads a coffescript config file
+   *
+   * @method readcoffee
+   * @return {object} data Parsed config data
+   */
+
+  readcoffee: function (pathname) {
+    return require((pathname || this.defaultFilename));
+  },
+
+  /**
+   * Verifies if a reporter is given, exists &amp; is valid
+   *
+   * @method verifyReporters
+   * @return {array} data List of verified reporters
+   */
+
+  verifyReporters: function (reporters, reporter) {
+    return _.compact(this._verify(reporters, &#039;isReporter&#039;, reporter));
+  },
+
+  /**
+   * Verifies if a driver is given, exists &amp; is valid
+   *
+   * @method verifyDrivers
+   * @return {array} data List of verified drivers
+   */
+
+  verifyDrivers: function (drivers, driver) {
+    return _.compact(this._verify(drivers, &#039;isDriver&#039;, driver));
+  },
+
+  /**
+   * Verifies if a driver is given, exists &amp; is valid
+   *
+   * @method _verify
+   * @param {array} check Data that shoudl be mapped
+   * @param {string} fn Name of the function that should be invoked on the veryify object
+   * @param {object} instance Object instance where the verify function should be invoked
+   * @return {array} data List of verified items
+   * @private
+   */
+
+  _verify: function (check, fn, instance) {
+    return check.map(this._verifyIterator.bind(this, fn, instance));
+  },
+
+  /**
+   * Verifies if a driver is given, exists &amp; is valid
+   *
+   * @method _verifyIterator
+   * @param {string} fn Name of the function that should be invoked on the veryify object
+   * @param {object} instance Object instance where the verify function should be invoked
+   * @param {string} elm Name of the element that should be checked
+   * @return {string|null} element name of the verified element or false if checked failed
+   * @priavte
+   */
+
+  _verifyIterator: function (fn, instance, elm) {
+    return instance[fn](elm) ? elm : false;
+  }
+};
+
+// export the module
+module.exports = Config;</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

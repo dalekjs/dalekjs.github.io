@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>/actions.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">70.33</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">1315</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
+      <p class="stat">63.67</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">4.94</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">/*!
+ *
+ * Copyright (c) 2013 Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
+
+&#039;use strict&#039;;
+
+// ext. libs
+var Q = require(&#039;q&#039;);
+var uuid = require(&#039;node-uuid&#039;);
+var cheerio = require(&#039;cheerio&#039;);
+
+// int. global
+var reporter = null;
+
+/**
+ * Actions are a way to control your browsers, e.g. simulate user interactions
+ * like clicking elements, open urls, filling out input fields, etc.
+ *
+ * @class Actions
+ * @constructor
+ * @part Actions
+ * @api
+ */
+
+var Actions = function () {
+  this.uuids = {};
+};
+
+/**
+ * It can be really cumbersome to repeat selectors all over when performing
+ * multiple actions or assertions on the same element(s).
+ * When you use the query method (or its alias $), you&#039;re able to specify a
+ * selector once instead of repeating it all over the place.
+ *
+ * So, instead of writing this:
+ *
+ * ```javascript
+ * test.open(&#039;http://doctorwhotv.co.uk/&#039;)
+ *     .assert.text(&#039;#nav&#039;).is(&#039;Navigation&#039;)
+ *     .assert.visible(&#039;#nav&#039;)
+ *     .assert.attr(&#039;#nav&#039;, &#039;data-nav&#039;, &#039;true&#039;)
+ *     .click(&#039;#nav&#039;)
+ *     .done();
+ * ```
+ *
+ * you can write this:
+ *
+ * ```javascript
+ * test.open(&#039;http://doctorwhotv.co.uk/&#039;)
+ *     .query(&#039;#nav&#039;)
+ *       .assert.text().is(&#039;Navigation&#039;)
+ *       .assert.visible()
+ *       .assert.attr(&#039;data-nav&#039;, &#039;true&#039;)
+ *       .click()
+ *     .end()
+ *     .done();
+ * ```
+ *
+ * Always make sure, you terminate it with the [assertions.html#meth-end](end) method!
+ *
+ * @api
+ * @method query
+ * @param {string} selector Selector of the element to query
+ * @chainable
+ */
+
+Actions.prototype.query = function (selector) {
+  var that = !this.test ? this : this.test;
+  that.lastChain.push(&#039;querying&#039;);
+  that.selector = selector;
+  that.querying = true;
+  return this.test ? this : that;
+};
+
+/**
+ * Alias of query
+ *
+ * @api
+ * @method $
+ * @param {string} selector Selector of the element to query
+ * @chainable
+ */
+
+Actions.prototype.$ = Actions.prototype.query;
+
+/**
+ * Triggers a mouse event on the first element found matching the provided selector.
+ * Supported events are mouseup, mousedown, click, mousemove, mouseover and mouseout.
+ * TODO: IMPLEMENT
+ *
+ * @method mouseEvent
+ * @param {string} type
+ * @param {string} selector
+ * @chainable
+ */
+
+Actions.prototype.mouseEvent = function (type, selector) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;mouseEvent&#039;, &#039;mouseEvent&#039;, type, selector, hash);
+  this._addToActionQueue([type, selector, hash], &#039;mouseEvent&#039;, cb);
+  return this;
+};
+
+/**
+ * Sets HTTP_AUTH_USER and HTTP_AUTH_PW values for HTTP based authentication systems.
+ *
+ * If your site is behind a HTTP basic auth, you&#039;re able to set the username and the password
+ *
+ * ```javascript
+ * test.setHttpAuth(&#039;OSWIN&#039;, &#039;rycbrar&#039;)
+ *     .open(&#039;http://admin.therift.com&#039;);
+ * ```
+ *
+ * Most of the time, you`re not storing your passwords within files that will be checked
+ * in your vcs, for this scenario, you have two options:
+ *
+ * The first option is, to use daleks cli capabilities to generate config variables
+ * from the command line, like this
+ *
+ * ```batch
+ * $ dalek --vars USER=OSWIN,PASS=rycbrar
+ * ```
+ *
+ * ```javascript
+ * test.setHttpAuth(test.config.get(&#039;USER&#039;), test.config.get(&#039;PASS&#039;))
+ *     .open(&#039;http://admin.therift.com&#039;);
+ * ```
+ *
+ * The second option is, to use env variables to generate config variables
+ * from the command line, like this
+ *
+ * ```batch
+ * $ SET USER=OSWIN
+ * $ SET PASS=rycbrar
+ * $ dalek
+ * ```
+ *
+ * ```javascript
+ * test.setHttpAuth(test.config.get(&#039;USER&#039;), test.config.get(&#039;PASS&#039;))
+ *     .open(&#039;http://admin.therift.com&#039;);
+ * ```
+ *
+ * If both, dalek variables &amp; env variables are set, the dalek variables win.
+ * For more information about this, I recommend to check out the [configuration docs](/docs/config.html)
+ *
+ * TODO: IMPLEMENT
+ * 
+ * @method setHttpAuth
+ * @param {string} username
+ * @param {string} password
+ * @return {Actions}
+ */
+
+Actions.prototype.setHttpAuth = function (username, password) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;setHttpAuth&#039;, &#039;setHttpAuth&#039;, username, password, hash);
+  this._addToActionQueue([username, password, hash], &#039;setHttpAuth&#039;, cb);
+  return this;
+};
+
+/**
+ * Switches to an iFrame context
+ *
+ * Sometimes you encounter situations, where you need to drive/access an iFrame sitting in your page.
+ * You can access such frames with this mehtod, but be aware of the fact, that the complete test context
+ * than switches to the iframe context, every action and assertion will be executed within the iFrame context.
+ * Btw.: The domain of the IFrame can be whatever you want, this method has no same origin policy restrictions.
+ *
+ * If you wan&#039;t to get back to the parents context, you have to use the [toParent](#meth-toParent) method.
+ *
+ * ```html
+ * &lt;div&gt;
+ *   &lt;iframe id=&quot;login&quot; src=&quot;/login.html&quot;/&gt;
+ * &lt;/div&gt;
+ * ```
+ *
+ * ```javascript
+ *  test.open(&#039;http://adomain.withiframe.com&#039;)
+ *    .assert.title().is(&#039;Title of a page that embeds an iframe&#039;)
+ *    .toFrame(&#039;#login&#039;)
+ *      .assert.title().is(&#039;Title of a page that can be embedded as an iframe&#039;)
+ *    .toParent()
+ *    .done();
+ * ```
+ *
+ * &gt; NOTE: Buggy in Firefox
+ * 
+ * @api
+ * @method toFrame
+ * @param {string} selector Selector of the frame to switch to
+ * @chainable
+ */
+
+Actions.prototype.toFrame = function (selector) {
+  var hash = uuid.v4();
+
+  if (this.querying === true) {
+    selector = this.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;toFrame&#039;, &#039;toFrame&#039;, selector, hash);
+  this._addToActionQueue([selector, hash], &#039;toFrame&#039;, cb);
+  return this;
+};
+
+/**
+ * Switches back to the parent page context when the test context has been
+ * switched to an iFrame context
+ *
+ * ```html
+ * &lt;div&gt;
+ *   &lt;iframe id=&quot;login&quot; src=&quot;/login.html&quot;/&gt;
+ * &lt;/div&gt;
+ * ```
+ *
+ * ```javascript
+ *  test.open(&#039;http://adomain.withiframe.com&#039;)
+ *    .assert.title().is(&#039;Title of a page that embeds an iframe&#039;)
+ *    .toFrame(&#039;#login&#039;)
+ *      .assert.title().is(&#039;Title of a page that can be embedded as an iframe&#039;)
+ *    .toParent()
+ *    .assert.title().is(&#039;Title of a page that embeds an iframe&#039;)
+ *    .done();
+ * ```
+ *
+ * &gt; NOTE: Buggy in Firefox
+ * 
+ * @api
+ * @method toParent
+ * @chainable
+ */
+
+Actions.prototype.toParent = function () {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;toFrame&#039;, &#039;toFrame&#039;, null, hash);
+  this._addToActionQueue([null, hash], &#039;toFrame&#039;, cb);
+  return this;
+};
+
+/**
+ * Switches to a different window context
+ *
+ * Sometimes you encounter situations, where you need to access a .
+ * You can access such frames with this mehtod, but be aware of the fact, that the complete test context
+ * than switches to the window context, every action and assertion will be executed within the chosen window context.
+ * Btw.: The domain of the window can be whatever you want, this method has no same origin policy restrictions.
+ *
+ * If you want to get back to the parents context, you have to use the [toParentWindow](#meth-toParentWindow) method.
+ *
+ * ```html
+ * &lt;div&gt;
+ *   &lt;a onclick=&quot;window.open(&#039;http://google.com&#039;,&#039;goog&#039;,&#039;width=480, height=300&#039;)&quot;&gt;Open Google&lt;/a&gt;
+ * &lt;/div&gt;
+ * ```
+ *
+ * ```javascript
+ *  test.open(&#039;http://adomain.com&#039;)
+ *    .assert.title().is(&#039;Title of a page that can open a popup window&#039;)
+ *    .toWindow(&#039;goog&#039;)
+ *      .assert.title().is(&#039;Google&#039;)
+ *    .toParentWindow()
+ *    .done();
+ * ```
+ *
+ * &gt; NOTE: Buggy in Firefox
+ * 
+ * @api
+ * @method toWindow
+ * @param {string} name Name of the window to switch to
+ * @chainable
+ */
+
+Actions.prototype.toWindow = function (name) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;toWindow&#039;, &#039;toWindow&#039;, name, hash);
+  this._addToActionQueue([name, hash], &#039;toWindow&#039;, cb);
+  return this;
+};
+
+/**
+ * Switches back to the parent windoe context when the test context has been
+ * switched to a different windoe context
+ *
+ * ```html
+ * &lt;div&gt;
+ *   &lt;a onclick=&quot;window.open(&#039;http://google.com&#039;,&#039;goog&#039;,&#039;width=480, height=300&#039;)&quot;&gt;Open Google&lt;/a&gt;
+ * &lt;/div&gt;
+ * ```
+ *
+ * ```javascript
+ *  test.open(&#039;http://adomain.com&#039;)
+ *    .assert.title().is(&#039;Title of a page that can open a popup window&#039;)
+ *    .toWindow(&#039;goog&#039;)
+ *      .assert.title().is(&#039;Google&#039;)
+ *    .toParentWindow()
+ *    .assert.title().is(&#039;Title of a page that can open a popup window&#039;)
+ *    .done();
+ * ```
+ *
+ * &gt; NOTE: Buggy in Firefox
+ * 
+ * @api
+ * @method toParentWindow
+ * @chainable
+ */
+
+Actions.prototype.toParentWindow = function () {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;toWindow&#039;, &#039;toWindow&#039;, null, hash);
+  this._addToActionQueue([null, hash], &#039;toWindow&#039;, cb);
+  return this;
+};
+
+/**
+ * Wait until a resource that matches the given testFx is loaded to process a next step.
+ *
+ * TODO: IMPLEMENT
+ * 
+ * @method waitForResource
+ * @param {string} ressource URL of the ressource that should be waited for
+ * @param {number} timeout Timeout in miliseconds
+ * @chainable
+ */
+
+Actions.prototype.waitForResource = function (ressource, timeout) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;waitForResource&#039;, &#039;waitForResource&#039;, ressource, timeout, hash);
+  this._addToActionQueue([ressource, (timeout ? parseInt(timeout, 10) : 5000), hash], &#039;waitForResource&#039;, cb);
+  return this;
+};
+
+/**
+ * Waits until the passed text is present in the page contents before processing the immediate next step.
+ *
+ * TODO: IMPLEMENT
+ * 
+ * @method waitForText
+ * @param {string} text Text to be waited for
+ * @param {number} timeout Timeout in miliseconds
+ * @chainable
+ */
+
+Actions.prototype.waitForText = function (text, timeout) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;waitForText&#039;, &#039;waitForText&#039;, text, timeout, hash);
+  this._addToActionQueue([text, (timeout ? parseInt(timeout, 10) : 5000), hash], &#039;waitForText&#039;, cb);
+  return this;
+};
+
+/**
+ * Waits until an element matching the provided selector expression is visible in the remote DOM to process a next step.
+ *
+ * TODO: IMPLEMENT
+ * 
+ * @method waitUntilVisible
+ * @param {string} selector Selector of the element that should be waited to become invisible
+ * @param {number} timeout Timeout in miliseconds
+ * @chainable
+ */
+
+Actions.prototype.waitUntilVisible = function (selector, timeout) {
+  var hash = uuid.v4();
+
+  if (this.querying === true) {
+    timeout = selector;
+    selector = this.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;waitUntilVisible&#039;, &#039;waitUntilVisible&#039;, selector, timeout, hash);
+  this._addToActionQueue([selector, (timeout ? parseInt(timeout, 10) : 5000), hash], &#039;waitUntilVisible&#039;, cb);
+  return this;
+};
+
+/**
+ * Waits until an element matching the provided selector expression is no longer visible in remote DOM to process a next step.
+ *
+ * TODO: IMPLEMENT
+ * 
+ * @method waitWhileVisible
+ * @param {string} selector Selector of the element that should be waited to become visible
+ * @param {number} timeout Timeout in miliseconds
+ * @chainable
+ */
+
+Actions.prototype.waitWhileVisible = function (selector, timeout) {
+  var hash = uuid.v4();
+
+  if (this.querying === true) {
+    timeout = selector;
+    selector = this.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;waitWhileVisible&#039;, &#039;waitWhileVisible&#039;, selector, timeout, hash);
+  this._addToActionQueue([selector, (timeout ? parseInt(timeout, 10) : 5000), hash], &#039;waitWhileVisible&#039;, cb);
+  return this;
+};
+
+/**
+ * Take a screenshot of the current page.
+ *
+ * The pathname argument takes some placeholders that will be replaced
+ * Placeholder:
+ *
+ *   - `:browser` - The browser name (e.g. ‘Chrome‘, ‘Safari‘, ‘Firefox‘, etc.)
+ *   - `:version` -  The browser version (e.g. ‘10_0‘, ‘23_11_5‘, etc.)
+ *   - `:os` - The operating system (e.g. `OSX`, `Windows`, `Linux`)
+ *   - `:osVersion` - The operating system version (e.g `XP`, `7`, `10_8`, etc.)
+ *   - `:viewport` - The current viewport in pixels (e.g. `w1024_h768`)
+ *   - `:timestamp` - UNIX like timestapm (e.g. `637657345`)
+ *   - `:date` - Current date in format MM_DD_YYYY (e.g. `12_24_2013`)
+ *   - `:datetime` - Current datetime in format MM_DD_YYYY_HH_mm_ss (e.g. `12_24_2013_14_55_23`)
+ *
+ * ```javascript
+ * // creates &#039;my/folder/my_file.png&#039;
+ * test.screenshot(&#039;my/folder/my_file&#039;);
+ * // creates &#039;my/page/in/safari/homepage.png&#039;
+ * test.screenshot(&#039;my/page/in/:browser/homepage&#039;);
+ * // creates &#039;my/page/in/safari_6_0_1/homepage.png&#039;
+ * test.screenshot(&#039;my/page/in/:browser_:version/homepage&#039;);
+ * // creates &#039;my/page/in/safari_6_0_1/on/osx/homepage.png&#039;
+ * test.screenshot(&#039;my/page/in/:browser_:version/on/:os/homepage&#039;);
+ * // creates &#039;my/page/in/safari_6_0_1/on/osx_10_8/homepage.png&#039;
+ * test.screenshot(&#039;my/page/in/:browser_:version/on/:os_:osVersion/homepage&#039;);
+ * // creates &#039;my/page/at/w1024_h768/homepage.png&#039;
+ * test.screenshot(&#039;my/page/at/:viewport/homepage&#039;);
+ * // creates &#039;my/page/at/637657345/homepage.png&#039;
+ * test.screenshot(&#039;my/page/in_time/:timestamp/homepage&#039;);
+ * // creates &#039;my/page/at/12_24_2013/homepage.png&#039;
+ * test.screenshot(&#039;my/page/in_time/:date/homepage&#039;);
+ * // creates &#039;my/page/at/12_24_2013_14_55_23/homepage.png&#039;
+ * test.screenshot(&#039;my/page/in_time/:datetime/homepage&#039;);
+ * ```
+ *
+ * @api
+ * @method screenshot
+ * @param {string} pathname Name of the folder and file the screenshot should be saved to
+ * @return chainable
+ */
+
+Actions.prototype.screenshot = function (pathname) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;screenshot&#039;, &#039;screenshot&#039;, pathname, hash);
+  this._addToActionQueue([&#039;&#039;, pathname, hash], &#039;screenshot&#039;, cb);
+  return this;
+};
+
+/**
+ * Pause steps suite execution for a given amount of time, and optionally execute a step on done.
+ *
+ * This makes sense, if you have a ticker for example, tht scrolls like every ten seconds
+ * &amp; you want to assure that the visible content changes every ten seconds
+ *
+ * ```javascript
+ * test.open(&#039;http://myticker.org&#039;)
+ *   .assert.visible(&#039;.ticker-element:first-child&#039;, &#039;First ticker element is visible&#039;)
+ *   .wait(10000)
+ *   .assert.visible(&#039;.ticker-element:nth-child(2)&#039;, &#039;Snd. ticker element is visible&#039;)
+ *   .wait(10000)
+ *   .assert.visible(&#039;.ticker-element:last-child&#039;, &#039;Third ticker element is visible&#039;)
+ *   .done();
+ * ```
+ * If no timeout argument is given, a default timeout of 5 seconds will be used
+ *
+ * ```javascript
+ * test.open(&#039;http://myticker.org&#039;)
+ *   .assert.visible(&#039;.ticker-element:first-child&#039;, &#039;First ticker element is visible&#039;)
+ *   .wait()
+ *   .assert.visible(&#039;.ticker-element:nth-child(2)&#039;, &#039;Snd. ticker element is visible&#039;)
+ *   .wait()
+ *   .assert.visible(&#039;.ticker-element:last-child&#039;, &#039;Third ticker element is visible&#039;)
+ *   .done();
+ * ```
+ *
+ * @api
+ * @method wait
+ * @param {number} timeout in milliseconds
+ * @chainable
+ */
+
+Actions.prototype.wait = function (timeout) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;wait&#039;, &#039;wait&#039;, timeout, hash);
+  this._addToActionQueue([(timeout ? parseInt(timeout, 10) : 5000), hash], &#039;wait&#039;, cb);
+  return this;
+};
+
+/**
+ * Reloads current page location.
+ *
+ * This is basically the same as hitting F5/refresh in your browser
+ *
+ * ```javascript
+ * test.open(&#039;http://google.com&#039;)
+ *   .reload()
+ *   .done();
+ * ```
+ *
+ * @api
+ * @method reload
+ * @chainable
+ */
+
+Actions.prototype.reload = function () {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;refresh&#039;, &#039;refresh&#039;, &#039;&#039;, hash);
+  this._addToActionQueue([hash], &#039;refresh&#039;, cb);
+  return this;
+};
+
+/**
+ * Moves a step forward in browser&#039;s history.
+ *
+ * This is basically the same as hitting the forward button in your browser
+ *
+ * ```javascript
+ * test.open(&#039;http://google.com&#039;)
+ *   .open(&#039;https://github.com&#039;)
+ *   .assert.url.is(&#039;https://github.com/&#039;, &#039;We are at GitHub&#039;)
+ *   .back()
+ *   .assert.url.is(&#039;http://google.com&#039;, &#039;We are at Google!&#039;)
+ *   .forward()
+ *   .assert.url.is(&#039;https://github.com/&#039;, &#039;Back at GitHub! Timetravel FTW&#039;)
+ *   .done();
+ * ```
+ *
+ * @api
+ * @method forward
+ * @chainable
+ */
+
+Actions.prototype.forward = function () {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;forward&#039;, &#039;forward&#039;, &#039;&#039;, hash);
+  this._addToActionQueue([hash], &#039;forward&#039;, cb);
+  return this;
+};
+
+/**
+ * Moves back a step in browser&#039;s history.
+ *
+ * This is basically the same as hitting the back button in your browser
+ *
+ * ```javascript
+ * test.open(&#039;http://google.com&#039;)
+ *   .open(&#039;https://github.com&#039;)
+ *   .assert.url.is(&#039;https://github.com/&#039;, &#039;We are at GitHub&#039;)
+ *   .back()
+ *   .assert.url.is(&#039;http://google.com&#039;, &#039;We are at Google!&#039;)
+ *   .forward()
+ *   .assert.url.is(&#039;https://github.com/&#039;, &#039;Back at GitHub! Timetravel FTW&#039;);
+ *   .done();
+ * ```
+ *
+ * @api
+ * @method back
+ * @chainable
+ */
+
+Actions.prototype.back = function () {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;back&#039;, &#039;back&#039;, &#039;&#039;, hash);
+  this._addToActionQueue([hash], &#039;back&#039;, cb);
+  return this;
+};
+
+/**
+ * Performs a click on the element matching the provided selector expression.
+ *
+ * If we take Daleks homepage (the one you&#039;re probably visiting right now),
+ * the HTML looks something like this (it does not really, but hey, lets assume this for a second)
+ *
+ * ```html
+ * &lt;nav&gt;
+ *   &lt;ul&gt;
+ *     &lt;li&gt;&lt;a id=&quot;homeapge&quot; href=&quot;/index.html&quot;&gt;DalekJS&lt;/a&gt;&lt;/li&gt;
+ *     &lt;li&gt;&lt;a id=&quot;docs&quot; href=&quot;/docs.html&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+ *     &lt;li&gt;&lt;a id=&quot;faq&quot; href=&quot;/faq.html&quot;&gt;F.A.Q&lt;/a&gt;&lt;/li&gt;
+ *   &lt;/ul&gt;
+ * &lt;/nav&gt;
+ * ```
+ *
+ * ```javascript
+ * test.open(&#039;http://dalekjs.com&#039;)
+ *     .click(&#039;#faq&#039;)
+ *     .assert.title().is(&#039;DalekJS - Frequently asked questions&#039;, &#039;What the F.A.Q.&#039;)
+ *     .done();
+ * ```
+ *
+ * By default, this performs a left click.
+ * In the future it might become the ability to also execute a &quot;right button&quot; click.
+ *
+ * &gt; Note: Does not work correctly in Firefox when used on `&lt;select&gt;` &amp; `&lt;option&gt;` elements
+ * 
+ * @api
+ * @method click
+ * @param {string} selector Selector of the element to be clicked
+ * @chainable
+ */
+
+Actions.prototype.click = function (selector) {
+  var hash = uuid.v4();
+
+  if (this.querying === true) {
+    selector = this.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;click&#039;, &#039;click&#039;, selector, hash);
+  this._addToActionQueue([selector, hash], &#039;click&#039;, cb);
+  return this;
+};
+
+/**
+ * Submits a form.
+ *
+ * ```html
+ * &lt;form id=&quot;skaaro&quot; action=&quot;skaaro.php&quot; method=&quot;GET&quot;&gt;
+ *   &lt;input type=&quot;hidden&quot; name=&quot;intheshadows&quot; value=&quot;itis&quot;/&gt;
+ *   &lt;input type=&quot;text&quot; name=&quot;truth&quot; id=&quot;truth&quot; value=&quot;&quot;/&gt;
+ * &lt;/form&gt;
+ * ```
+ *
+ * ```javascript
+ * test.open(&#039;http://home.dalek.com&#039;)
+ *     .type(&#039;#truth&#039;, &#039;out there is&#039;)
+ *     .submit(&#039;#skaaro&#039;)
+ *     .done();
+ * ```
+ *
+ * &gt; Note: Does not work in Firefox yet
+ * 
+ * @api
+ * @method submit
+ * @param {string} selector Selector of the form to be submitted
+ * @chainable
+ */
+
+Actions.prototype.submit = function (selector) {
+  var hash = uuid.v4();
+
+  if (this.querying === true) {
+    selector = this.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;submit&#039;, &#039;submit&#039;, selector, hash);
+  this._addToActionQueue([selector, hash], &#039;submit&#039;, cb);
+  return this;
+};
+
+/**
+ * Performs an HTTP request for opening a given location.
+ * You can forge GET, POST, PUT, DELETE and HEAD requests.
+ *
+ * Basically the same as typing a location into your browsers URL bar and
+ * hitting return.
+ *
+ * ```javascript
+ * test.open(&#039;http://dalekjs.com&#039;)
+ *     .assert.url().is(&#039;http://dalekjs.com&#039;, &#039;DalekJS I&#039;m in you&#039;)
+ *     .done();
+ * ```
+ *
+ * @api
+ * @method open
+ * @param {string} location URL of the page to open
+ * @chainable
+ */
+
+Actions.prototype.open = function (location) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;open&#039;, &#039;open&#039;, location, hash);
+  this._addToActionQueue([location, hash], &#039;open&#039;, cb);
+  return this;
+};
+
+/**
+ * Types a text into an input field or text area.
+ * And yes, it really types, character for character, like you would
+ * do when using your keyboard.
+ *
+ *
+ * ```html
+ * &lt;form id=&quot;skaaro&quot; action=&quot;skaaro.php&quot; method=&quot;GET&quot;&gt;
+ *   &lt;input type=&quot;hidden&quot; name=&quot;intheshadows&quot; value=&quot;itis&quot;/&gt;
+ *   &lt;input type=&quot;text&quot; name=&quot;truth&quot; id=&quot;truth&quot; value=&quot;&quot;/&gt;
+ * &lt;/form&gt;
+ * ```
+ *
+ * ```javascript
+ * test.open(&#039;http://home.dalek.com&#039;)
+ *     .type(&#039;#truth&#039;, &#039;out there is&#039;)
+ *     .assert.val(&#039;#truth&#039;, &#039;out there is&#039;, &#039;Text has been set&#039;)
+ *     .done();
+ * ```
+ *
+ * You can also send special keys using unicode.
+ *
+ *  * ```javascript
+ * test.open(&#039;http://home.dalek.com&#039;)
+ *     .type(&#039;#truth&#039;, &#039;out \uE008there\uE008 is&#039;)
+ *     .assert.val(&#039;#truth&#039;, &#039;out THERE is&#039;, &#039;Text has been set&#039;)
+ *     .done();
+ * ```
+ * You can go [here](https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element/:id/value) to read up on special keys and unicodes for them (note that a code of U+EXXX is actually written in code as \uEXXX).
+ *
+ * &gt; Note: Does not work correctly in Firefox with special keys
+ * 
+ * @api
+ * @method type
+ * @param {string} selector Selector of the form field to be filled
+ * @param {string} keystrokes Text to be applied to the element
+ * @chainable
+ */
+
+Actions.prototype.type = function (selector, keystrokes) {
+  var hash = uuid.v4();
+
+  if (this.querying === true) {
+    keystrokes = selector;
+    selector = this.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;type&#039;, &#039;type&#039;, selector, keystrokes, hash);
+  this._addToActionQueue([selector, keystrokes], &#039;type&#039;, cb);
+  return this;
+};
+
+/**
+ * This acts just like .type() with a key difference.
+ * This action can be used on non-input elements (useful for test site wide keyboard shortcuts and the like).
+ * So assumeing we have a keyboard shortcut that display an alert box, we could test that with something like this:
+ *
+ * ```javascript
+ * test.open(&#039;http://home.dalek.com&#039;)
+ *     .sendKeys(&#039;body&#039;, &#039;\uE00C&#039;)
+ *     .assert.dialogText(&#039;press the escape key give this alert text&#039;)
+ *     .done();
+ * ```
+ *
+ *
+ * &gt; Note: Does not work correctly in Firefox with special keys
+ * 
+ * @api
+ * @method sendKeys
+ * @param {string} selector Selector of the form field to be filled
+ * @param {string} keystrokes Text to be applied to the element
+ * @chainable
+ */
+
+Actions.prototype.sendKeys = function (selector, keystrokes) {
+  var hash = uuid.v4();
+
+  if (this.querying === true) {
+    keystrokes = selector;
+    selector = this.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;sendKeys&#039;, &#039;sendKeys&#039;, selector, keystrokes, hash);
+  this._addToActionQueue([selector, keystrokes], &#039;sendKeys&#039;, cb);
+  return this;
+};
+
+/**
+ * Types a text into the text inout field of a prompt dialog.
+ * Like you would do when using your keyboard.
+ *
+ * ```html
+ * &lt;div&gt;
+ *   &lt;a id=&quot;aquestion&quot; onclick=&quot;this.innerText = window.prompt(&#039;Your favourite companion:&#039;)&quot;&gt;????&lt;/a&gt;
+ * &lt;/div&gt;
+ * ```
+ *
+ * ```javascript
+ *  test.open(&#039;http://adomain.com&#039;)
+ *     .click(&#039;#aquestion&#039;)
+ *     .answer(&#039;Rose&#039;)
+ *     .assert.text(&#039;#aquestion&#039;).is(&#039;Rose&#039;, &#039;Awesome she was!&#039;)
+ *     .done();
+ * ```
+ *
+ *
+ * &gt; Note: Does not work in Firefox &amp; PhantomJS
+ * 
+ * @api
+ * @method answer
+ * @param {string} keystrokes Text to be applied to the element
+ * @return chainable
+ */
+
+Actions.prototype.answer = function (keystrokes) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;promptText&#039;, &#039;promptText&#039;, keystrokes, hash);
+  this._addToActionQueue([keystrokes, hash], &#039;promptText&#039;, cb);
+  return this;
+};
+
+/**
+ * Executes a JavaScript function within the browser context
+ * 
+ * ```javascript
+ *  test.open(&#039;http://adomain.com&#039;)
+ *     .execute(function () {
+ *       window.myFramework.addRow(&#039;foo&#039;);
+ *       window.myFramework.addRow(&#039;bar&#039;);
+ *     })
+ *     .done();
+ * ```
+ *
+ * You can also apply arguments to the function
+ *
+ * ```javascript
+ *  test.open(&#039;http://adomain.com&#039;)
+ *     .execute(function (paramFoo, aBar) {
+ *       window.myFramework.addRow(paramFoo);
+ *       window.myFramework.addRow(aBar);
+ *     }, &#039;foo&#039;, &#039;bar&#039;)
+ *     .done();
+ * ```
+ *
+ * &gt; Note: Buggy in Firefox
+ * 
+ * @api
+ * @method execute
+ * @param {function} script JavaScript function that should be executed
+ * @return chainable
+ */
+
+Actions.prototype.execute = function (script) {
+  var hash = uuid.v4();
+  var args = [this.contextVars].concat(Array.prototype.slice.call(arguments, 1) || []);
+  var cb = this._generateCallbackAssertion(&#039;execute&#039;, &#039;execute&#039;, script, args, hash);
+  this._addToActionQueue([script, args, hash], &#039;execute&#039;, cb);
+  return this;
+};
+
+/**
+ * Waits until a function returns true to process any next step.
+ *
+ * You can also set a callback on timeout using the onTimeout argument,
+ * and set the timeout using the timeout one, in milliseconds. The default timeout is set to 5000ms.
+ *
+ * ```javascript
+ *  test.open(&#039;http://adomain.com&#039;)
+ *     .waitFor(function () {
+ *       return window.myCheck === true;
+ *     })
+ *     .done();
+ * ```
+ *
+ * You can also apply arguments to the function, as well as a timeout
+ *
+ * ```javascript
+ *  test.open(&#039;http://adomain.com&#039;)
+ *     .waitFor(function (aCheck) {
+ *       return window.myThing === aCheck;
+ *     }, &#039;aValue&#039;, 10000)
+ *     .done();
+ * ```
+ *
+ * &gt; Note: Buggy in Firefox
+ * 
+ * @method waitFor
+ * @param {function} fn Async function that resolves an promise when ready
+ * @param {array} args Additional arguments
+ * @param {number} timeout Timeout in miliseconds
+ * @chainable
+ * @api
+ */
+
+Actions.prototype.waitFor = function (script, args, timeout) {
+  var hash = uuid.v4();
+  timeout = timeout || 5000;
+  var cb = this._generateCallbackAssertion(&#039;waitFor&#039;, &#039;waitFor&#039;, script, args, timeout, hash);
+  this._addToActionQueue([script, args, timeout, hash], &#039;waitFor&#039;, cb);
+  return this;
+};
+
+/**
+ * Accepts an alert/prompt/confirm dialog. This is basically the same actions as when
+ * you are clicking okay or hitting return in one of that dialogs.
+ *
+ * ```html
+ * &lt;div&gt;
+ *   &lt;a id=&quot;attentione&quot; onclick=&quot;window.alert(&#039;Alonsy!&#039;)&quot;&gt;ALERT!ALERT!&lt;/a&gt;
+ * &lt;/div&gt;
+ * ```
+ *
+ * ```javascript
+ *  test.open(&#039;http://adomain.com&#039;)
+ *     // alert appears
+ *     .click(&#039;#attentione&#039;)
+ *     // alert is gone
+ *     .accept()
+ *     .done();
+ * ```
+ *
+ * &gt; Note: Does not work in Firefox &amp; PhantomJS
+ * 
+ * @api
+ * @method accept
+ * @return chainable
+ */
+
+Actions.prototype.accept = function () {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;acceptAlert&#039;, &#039;acceptAlert&#039;, hash);
+  this._addToActionQueue([hash], &#039;acceptAlert&#039;, cb);
+  return this;
+};
+
+/**
+ * Dismisses an prompt/confirm dialog. This is basically the same actions as when
+ * you are clicking cancel in one of that dialogs.
+ *
+ * ```html
+ * &lt;div&gt;
+ *   &lt;a id=&quot;nonono&quot; onclick=&quot;(this.innerText = window.confirm(&#039;No classic doctors in the 50th?&#039;) ? &#039;Buh!&#039; : &#039;:(&#039;) &quot;&gt;What!&lt;/a&gt;
+ * &lt;/div&gt;
+ * ```
+ *
+ * ```javascript
+ *  test.open(&#039;http://adomain.com&#039;)
+ *     // prompt appears
+ *     .click(&#039;#nonono&#039;)
+ *     // prompt is gone
+ *     .dismiss()
+ *     .assert.text(&#039;#nonono&#039;).is(&#039;:(&#039;, &#039;So sad&#039;)
+ *     .done();
+ * ```
+ *
+ * &gt; Note: Does not work in Firefox &amp; PhantomJS
+ * 
+ * @api
+ * @method dismiss
+ * @return chainable
+ */
+
+Actions.prototype.dismiss = function () {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;dismissAlert&#039;, &#039;dismissAlert&#039;, hash);
+  this._addToActionQueue([hash], &#039;dismissAlert&#039;, cb);
+  return this;
+};
+
+/**
+ * Resizes the browser window to a set of given dimensions (in px).
+ * The default configuration of dalek opening pages is a width of 1280px
+ * and a height of 1024px. You can specify your own default in the configuration.
+ *
+ * ```html
+ * &lt;div&gt;
+ *   &lt;span id=&quot;magicspan&quot;&gt;The span in the fireplace&lt;/span&gt;
+ * &lt;/div&gt;
+ * ```
+ *
+ * ```css
+ * #magicspan {
+ *   display: inline;
+ * }
+ *
+ * // @media all and (max-width: 500px) and (min-width: 300px)
+ * #magicspan {
+ *   display: none;
+ * }
+ * ```
+ *
+ * ```javascript
+ *  test.open(&#039;http://adomain.com&#039;)
+ *     .assert.visible(&#039;#magicspan&#039;, &#039;Big screen, visible span&#039;)
+ *     .resize({width: 400, height: 500})
+ *     .assert.notVisible(&#039;#magicspan&#039;, &#039;Small screen, no visible span magic!&#039;)
+ *     .done();
+ * ```
+ *
+ *
+ * &gt; Note: Does not work in Firefox
+ * 
+ * @api
+ * @method resize
+ * @param {object} dimensions Width and height as properties to apply
+ * @chainable
+ */
+
+Actions.prototype.resize = function (dimensions) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;resize&#039;, &#039;resize&#039;, dimensions, hash);
+  this._addToActionQueue([dimensions, hash], &#039;resize&#039;, cb);
+  return this;
+};
+
+/**
+ * Maximizes the browser window.
+ *
+ * ```html
+ * &lt;div&gt;
+ *   &lt;span id=&quot;magicspan&quot;&gt;The span in the fireplace&lt;/span&gt;
+ * &lt;/div&gt;
+ * ```
+ *
+ * ```css
+ * #magicspan {
+ *   display: inline;
+ * }
+ *
+ * @media all and (max-width: 500px) and (min-width: 300px) {
+ *   #magicspan {
+ *     display: none;
+ *   }
+ * }
+ * ```
+ *
+ * ```javascript
+ *  test.open(&#039;http://adomain.com&#039;)
+ *     .resize({width: 400, height: 500})
+ *     .assert.notVisible(&#039;#magicspan&#039;, &#039;Small screen, no visible span magic!&#039;)
+ *     .maximize()
+ *     .assert.visible(&#039;#magicspan&#039;, &#039;Big screen, visible span&#039;)
+ *     .done();
+ * ```
+ *
+ * &gt; Note: Does not work in Firefox and PhantomJS
+ * 
+ * @api
+ * @method maximize
+ * @chainable
+ */
+
+Actions.prototype.maximize = function () {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;maximize&#039;, &#039;maximize&#039;, hash);
+  this._addToActionQueue([hash], &#039;maximize&#039;, cb);
+  return this;
+};
+
+/**
+ * Sets a cookie.
+ * More configuration options will be implemented in the future,
+ * by now, you can only set a cookie with a specific name and contents.
+ * This will be a domain wide set cookie.
+ *
+ * ```javascript
+ *  test.open(&#039;http://adomain.com&#039;)
+ *      .setCookie(&#039;my_cookie_name&#039;, &#039;my=content&#039;)
+ *     .done();
+ * ```
+ *
+ * @api
+ * @method setCookie
+ * @chainable
+ */
+
+Actions.prototype.setCookie = function (name, contents) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#039;setCookie&#039;, &#039;setCookie&#039;, name, contents, hash);
+  this._addToActionQueue([name, contents, hash], &#039;setCookie&#039;, cb);
+  return this;
+};
+
+/**
+ * Waits until an element matching the provided
+ * selector expression exists in remote DOM to process any next step.
+ *
+ * Lets assume we have a ticker that loads its contents via AJAX,
+ * and appends new elements, when the call has been successfully answered:
+ *
+ * ```javascript
+ * test.open(&#039;http://myticker.org&#039;)
+ *   .assert.text(&#039;.ticker-element:first-child&#039;, &#039;First!&#039;, &#039;First ticker element is visible&#039;)
+ *   // now we load the next ticker element, defsult timeout is 5 seconds
+ *   .waitForElement(&#039;.ticker-element:nth-child(2)&#039;)
+ *   .assert.text(&#039;.ticker-element:nth-child(2)&#039;, &#039;Me snd. one&#039;, &#039;Snd. ticker element is visible&#039;)
+ *   // Lets assume that this AJAX call can take longer, so we raise the default timeout to 10 seconds
+ *   .waitForElement(&#039;.ticker-element:last-child&#039;, 10000)
+ *   .assert.text(&#039;.ticker-element:last-child&#039;, &#039;Me, third one!&#039;, &#039;Third ticker element is visible&#039;)
+ *   .done();
+ * ```
+ *
+ * @api
+ * @method waitForElement
+ * @param {string} selector Selector that matches the element to wait for
+ * @param {number} timeout Timeout in milliseconds
+ * @chainable
+ */
+
+Actions.prototype.waitForElement = function (selector, timeout) {
+  var hash = uuid.v4();
+
+  if (this.querying === true) {
+    timeout = selector;
+    selector = this.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;waitForElement&#039;, &#039;waitForElement&#039;, selector + &#039; : &#039; + timeout, hash);
+  this._addToActionQueue([selector, (timeout ? parseInt(timeout, 10) : 5000), hash], &#039;waitForElement&#039;, cb);
+  return this;
+};
+
+/**
+ * Fills the fields of a form with given values.
+ *
+ * ```html
+ * &lt;input type=&quot;hidden&quot; value=&quot;not really a value&quot; id=&quot;ijustwannahaveavalue&quot;/&gt;
+ * ```
+ *
+ * ```javascript
+ * test.open(&#039;http://dalekjs.com&#039;)
+ *     .setValue(&#039;#ijustwannahaveavalue&#039;, &#039;a value&#039;)
+ *     .title().is(&#039;DalekJS - Frequently asked questions&#039;, &#039;What the F.A.Q.&#039;);
+ * ```
+ *
+ * @api
+ * @method setValue
+ * @param {string} selector
+ * @param {string} value
+ * @return {Actions}
+ */
+
+Actions.prototype.setValue = function (selector, value) {
+  var hash = uuid.v4();
+
+  if (this.querying === true) {
+    value = selector;
+    selector = this.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#039;setValue&#039;, &#039;setValue&#039;, selector + &#039; : &#039; + value, hash);
+  this._addToActionQueue([selector, value, hash], &#039;setValue&#039;, cb);
+  return this;
+};
+
+// LOG (May should live in its own module)
+// ---------------------------------------
+
+Actions.prototype.logger = {};
+
+/**
+ * Logs a part of the remote dom
+ *
+ * ```html
+ * &lt;body&gt;
+ *   &lt;div id=&quot;smth&quot;&gt;
+ *     &lt;input type=&quot;hidden&quot; value=&quot;not really a value&quot; id=&quot;ijustwannahaveavalue&quot;/&gt;
+ *   &lt;/div&gt;
+ * &lt;/body&gt;
+ * ```
+ *
+ * ```javascript
+ * test.open(&#039;http://dalekjs.com/guineapig&#039;)
+ *     .log.dom(&#039;#smth&#039;)
+ *     .done();
+ * ```
+ *
+ * Will output this:
+ *
+ * ```html
+ *  DOM: #smth &lt;input type=&quot;hidden&quot; value=&quot;not really a value&quot; id=&quot;ijustwannahaveavalue&quot;/&gt;
+ * ```
+
+ * 
+ * @api
+ * @method log.dom
+ * @param {string} selector CSS selector
+ * @chainable
+ */
+
+Actions.prototype.logger.dom = function (selector) {
+  var hash = uuid.v4();
+
+  var cb = function logDomCb (data) {
+    if (data &amp;&amp; data.key === &#039;source&#039; &amp;&amp; !this.uuids[data.uuid]) {
+      this.uuids[data.uuid] = true;
+      var $ = cheerio.load(data.value);
+      var result = selector ? $(selector).html() : $.html();
+      selector = selector ? selector : &#039; &#039;;
+      result = !result ? &#039; Not found&#039; : result;
+      this.reporter.emit(&#039;report:log:user&#039;, &#039;DOM: &#039; + selector + &#039; &#039; + result);
+    }
+  }.bind(this);
+
+  this._addToActionQueue([hash], &#039;source&#039;, cb);
+  return this;
+};
+
+/**
+ * Logs a user defined message
+ *
+ * ```javascript
+ * test.open(&#039;http://dalekjs.com/guineapig&#039;)
+ *     .execute(function () {
+ *       this.data(&#039;aKey&#039;, &#039;aValue&#039;);
+ *     })
+ *     .log.message(function () {
+ *       return test.data(&#039;aKey&#039;); // outputs MESSAGE: &#039;aValue&#039;
+ *     })
+ *     .done();
+ * ```
+ *
+ * &#039;Normal&#039; messages can be logged too:
+ *
+ * ```javascript
+ * test.open(&#039;http://dalekjs.com/guineapig&#039;)
+ *     .log.message(&#039;FooBar&#039;) // outputs MESSAGE: FooBar
+ *     .done();
+ * ```
+ * 
+ * @api
+ * @method log.message
+ * @param {function|string} message
+ * @chainable
+ */
+
+Actions.prototype.logger.message = function (message) {
+  var hash = uuid.v4();
+
+  var cb = function logMessageCb (data) {
+    if (data &amp;&amp; data.key === &#039;noop&#039; &amp;&amp; !this.uuids[data.hash]) {
+      this.uuids[data.hash] = true;
+      var result = (typeof(data.value) === &#039;function&#039;) ? data.value.bind(this)() : data.value;
+      this.reporter.emit(&#039;report:log:user&#039;, &#039;MESSAGE: &#039; + result);
+    }
+  }.bind(this);
+
+  this._addToActionQueue([message, hash], &#039;noop&#039;, cb);
+  return this;
+};
+
+/**
+ * Generates a callback that will be fired when the action has been completed.
+ * The callback itself will then validate the answer and will also emit an event
+ * that the action has been successfully executed.
+ *
+ * @method _generateCallbackAssertion
+ * @param {string} key Unique key of the action
+ * @param {string} type Type of the action (normalle the actions name)
+ * @return {function} The generated callback function
+ * @private
+ */
+
+Actions.prototype._generateCallbackAssertion = function (key, type) {
+  var cb = function (data) {
+    if (data &amp;&amp; data.key === key &amp;&amp; !this.uuids[data.uuid]) {
+      if (!data || (data.value &amp;&amp; data.value === null)) {
+        data.value = &#039;&#039;;
+      }
+
+      if (key === &#039;execute&#039;) {
+        Object.keys(data.value.dalek).forEach(function (key) {
+          this.contextVars[key] = data.value.dalek[key];
+        }.bind(this));
+
+        data.value.test.forEach(function (test) {
+          this.reporter.emit(&#039;report:assertion&#039;, {
+            success: test.ok,
+            expected: true,
+            value: test.ok,
+            message: test.message,
+            type: &#039;OK&#039;
+          });
+
+          this.incrementExpectations();
+
+          if (!test.ok) {
+            this.incrementFailedAssertions();
+          }
+        }.bind(this));
+
+        data.value = &#039;&#039;;
+      }
+
+      this.uuids[data.uuid] = true;
+      reporter.emit(&#039;report:action&#039;, {
+        value: data.value,
+        type: type,
+        uuid: data.uuid
+      });
+    }
+  }.bind(this);
+  return cb;
+};
+
+/**
+ * Adds a method to the queue of actions/assertions to execute
+ *
+ * @method _addToActionQueue
+ * @param {object} opts Options of the action to invoke
+ * @param {string} driverMethod Name of the method to call on the driver
+ * @param {function} A callback function that will be executed when the action has been executed
+ * @private
+ * @chainable
+ */
+
+Actions.prototype._addToActionQueue = function (opts, driverMethod, cb) {
+  this.actionPromiseQueue.push(function () {
+    var deferred = Q.defer();
+    // add a generic identifier as the last argument to any action method call
+    opts.push(uuid.v4());
+    // check the method on the driver object &amp;&amp; the callback function
+    if (typeof(this.driver[driverMethod]) === &#039;function&#039; &amp;&amp; typeof(cb) === &#039;function&#039;) {
+      // call the method on the driver object
+      this.driver[driverMethod].apply(this.driver, opts);
+      deferred.resolve();
+    } else {
+      deferred.reject();
+    }
+
+    // listen to driver message events &amp; apply the callback argument
+    this.driver.events.on(&#039;driver:message&#039;, cb);
+    return deferred.promise;
+  }.bind(this));
+  return this;
+};
+
+/**
+ * @module DalekJS
+ */
+
+module.exports = function (opts) {
+  reporter = opts.reporter;
+  return Actions;
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lib/dalek.js - dalekjs</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="dalekjs"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.0.7</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Actions.html">Actions</a></li>
+            
+                <li><a href="../classes/Dalek.html">Dalek</a></li>
+            
+                <li><a href="../classes/Dalek.Config.html">Dalek.Config</a></li>
+            
+                <li><a href="../classes/Dalek.Driver.html">Dalek.Driver</a></li>
+            
+                <li><a href="../classes/Dalek.Internal.Assertions.html">Dalek.Internal.Assertions</a></li>
+            
+                <li><a href="../classes/Dalek.Reporter.html">Dalek.Reporter</a></li>
+            
+                <li><a href="../classes/Dalek.Suite.html">Dalek.Suite</a></li>
+            
+                <li><a href="../classes/Dalek.Timer.html">Dalek.Timer</a></li>
+            
+                <li><a href="../classes/Dalek.Unit.html">Dalek.Unit</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Assertions.html">Assertions</a></li>
+            
+                <li><a href="../modules/DalekJS.html">DalekJS</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: lib/dalek.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*!
+ *
+ * Copyright (c) 2013 Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ *
+ */
+
+&#x27;use strict&#x27;;
+
+// ext. libs
+var async = require(&#x27;async&#x27;);
+var EventEmitter2 = require(&#x27;eventemitter2&#x27;).EventEmitter2;
+
+// int. libs
+var Driver = require(&#x27;./dalek/driver&#x27;);
+var Reporter = require(&#x27;./dalek/reporter&#x27;);
+var Timer = require(&#x27;./dalek/timer&#x27;);
+var Config = require(&#x27;./dalek/config&#x27;);
+
+/**
+ * Default options
+ * @type {Object}
+ */
+
+var defaults = {
+  reporter: [&#x27;console&#x27;],
+  driver: [&#x27;native&#x27;],
+  browser: [&#x27;phantomjs&#x27;],
+  viewport: {width: 1280, height: 1024},
+  logLevel: 3
+};
+
+/**
+ * Setup all the options needed to configure dalek
+ *
+ * @param {options} opts Configuration options
+ * @constructor
+ */
+
+var Dalek = function (opts) {
+  // setup instance
+  this._initialize();
+
+  // register exception handler
+  this._registerExceptionHandler();
+
+  // normalize options
+  this.options = this.normalizeOptions(opts);
+
+  // getting advanced options
+  if (opts &amp;&amp; opts.advanced) {
+    this.advancedOptions = opts.advanced;
+  }
+
+  // initiate config
+  this.config = new Config(defaults, this.options, this.advancedOptions);
+
+  // override tests if provided on the commandline
+  if (this.options.tests) {
+    this.config.config.tests = this.options.tests;
+  }
+
+  // prepare and load reporter(s)
+  this._setupReporters();
+
+  // count all passed &amp; failed assertions
+  this.reporterEvents.on(&#x27;report:assertion&#x27;, this._onReportAssertion.bind(this));
+
+  // init the timer instance
+  this.timer = new Timer();
+
+  // prepare driver event emitter instance
+  this._setupDriverEmitter();
+
+  // check for file option, throw error if none is given
+  if (!Array.isArray(this.config.get(&#x27;tests&#x27;))) {
+    this.reporterEvents.emit(&#x27;error&#x27;, &#x27;No test files given!&#x27;);
+    this.driverEmitter.emit(&#x27;killAll&#x27;);
+    process.exit(127);
+  }
+
+  // init the driver instance
+  this._initDriver();
+};
+
+/**
+ * Daleks base module
+ * Used to configure all the things
+ * and to start off the tests
+ *
+ * @module DalekJS
+ * @class Dalek
+ */
+
+Dalek.prototype = {
+
+  /**
+   * Runs the configured testsuites
+   *
+   * @method run
+   * @chainable
+   */
+
+  run: function () {
+    // start the timer to measure the execution time
+    this.timer.start();
+
+    // emit the runner started event
+    this.reporterEvents.emit(&#x27;report:runner:started&#x27;);
+
+    // execute all given drivers sequentially
+    var drivers = this.driver.getDrivers();
+    async.series(drivers, this.testsuitesFinished.bind(this));
+    return this;
+  },
+
+  /**
+   * Reports the all testuites executed event
+   *
+   * @method testsuitesFinished
+   * @chainable
+   */
+
+  testsuitesFinished: function () {
+    this.driverEmitter.emit(&#x27;tests:complete&#x27;);
+    setTimeout(this.reportRunFinished.bind(this), 0);
+    return this;
+  },
+
+  /**
+   * Reports the all testuites executed event
+   *
+   * @method reportRunFinished
+   * @chainable
+   */
+
+  reportRunFinished: function () {
+    this.reporterEvents.emit(&#x27;report:runner:finished&#x27;, {
+      elapsedTime: this.timer.stop().getElapsedTimeFormatted(),
+      assertions: this.assertionsFailed + this.assertionsPassed,
+      assertionsFailed: this.assertionsFailed,
+      assertionsPassed: this.assertionsPassed,
+      status: this.runnerStatus
+    });
+    return this;
+  },
+
+  /**
+   * Normalizes options
+   *
+   * @method normalizeOptions
+   * @param {object} options Raw options
+   * @return {object} Normalized options
+   */
+
+  normalizeOptions: function (options) {
+    Object.keys(options).forEach(function (key) {
+      if ({reporter: 1, driver: 1}[key]) {
+        options[key] = options[key].map(function (input) { return input.trim(); });
+      }
+    });
+
+    return options;
+  },
+
+  /**
+   * Sets up system env properties
+   *
+   * @method _initialize
+   * @chainable
+   * @private
+   */
+
+  _initialize: function () {
+    // prepare error data
+    this.warnings = [];
+    this.errors = [];
+
+    // prepare state data for the complete test run
+    this.runnerStatus = true;
+    this.assertionsFailed = 0;
+    this.assertionsPassed = 0;
+
+    return this;
+  },
+
+  /**
+   * Sets up all the reporters
+   *
+   * @method _setupReporters
+   * @chainable
+   * @private
+   */
+
+  _setupReporters: function () {
+    this.reporters = [];
+    this.reporterEvents = new EventEmitter2();
+    this.reporterEvents.setMaxListeners(Infinity);
+    this.options.reporter = this.config.verifyReporters(this.config.get(&#x27;reporter&#x27;), Reporter);
+    this.options.reporter.forEach(this._addReporter, this);
+    return this;
+  },
+
+  /**
+   * Adds a reporter
+   *
+   * @method _addReporter
+   * @param {string} reporter Name of the reporter to add
+   * @chainable
+   * @private
+   */
+
+  _addReporter: function (reporter) {
+    this.reporters.push(Reporter.loadReporter(reporter, {events: this.reporterEvents, config: this.config, logLevel: this.config.get(&#x27;logLevel&#x27;)}));
+    return this;
+  },
+
+  /**
+   * Updates the assertion state
+   *
+   * @method _onReportAssertion
+   * @param {object} assertion Informations aout the runned assertions
+   * @chainable
+   * @private
+   */
+
+  _onReportAssertion: function (assertion) {
+    if (assertion.success) {
+      this.assertionsPassed++;
+    } else {
+      this.runnerStatus = false;
+      this.assertionsFailed++;
+    }
+    return this;
+  },
+
+  /**
+   * Initizializes the driver instances
+   *
+   * @method _initDriver
+   * @chainable
+   * @private
+   */
+
+  _initDriver: function () {
+    this.driver = new Driver({
+      config: this.config,
+      driverEmitter: this.driverEmitter,
+      reporterEvents: this.reporterEvents
+    });
+
+    this.options.driver = this.config.verifyDrivers(this.config.get(&#x27;driver&#x27;), this.driver);
+    return this;
+  },
+
+  /**
+   * Sets up the event dispatcher for driver events
+   *
+   * @method _setupDriverEmitter
+   * @chainable
+   * @private
+   */
+
+  _setupDriverEmitter: function () {
+    var driverEmitter = new EventEmitter2();
+    driverEmitter.setMaxListeners(Infinity);
+    this.driverEmitter = driverEmitter;
+    return this;
+  },
+
+  /**
+   * Make sure to shutdown dalek &amp; its spawned
+   * components, webservers gracefully if a
+   * runtimew error pops up
+   *
+   * @method _registerExceptionHandler
+   * @private
+   * @chainable
+   */
+
+  _registerExceptionHandler: function () {
+    process.setMaxListeners(Infinity);
+    process.on(&#x27;uncaughtException&#x27;, this._shutdown.bind(this));
+    return this;
+  },
+
+  /**
+   * Shutdown on uncaught exception
+   *
+   * @method _shutdown
+   * @param {object} exception Runtime exception
+   * @private
+   */
+
+  _shutdown: function (exception) {
+    // ios emulator hack, needs to go in the future
+    if (exception.message &amp;&amp; exception.message.search(&#x27;This socket has been ended by the other party&#x27;) !== -1) {
+      return false;
+    }
+    
+    this.driverEmitter.emit(&#x27;killAll&#x27;);
+    this.reporterEvents.emit(&#x27;error&#x27;, exception);
+  }
+
+};
+
+// export dalek as a module
+module.exports = Dalek;
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

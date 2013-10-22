@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lib/dalek/driver.js - dalekjs</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="dalekjs"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.0.7</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Actions.html">Actions</a></li>
+            
+                <li><a href="../classes/Dalek.html">Dalek</a></li>
+            
+                <li><a href="../classes/Dalek.Config.html">Dalek.Config</a></li>
+            
+                <li><a href="../classes/Dalek.Driver.html">Dalek.Driver</a></li>
+            
+                <li><a href="../classes/Dalek.Internal.Assertions.html">Dalek.Internal.Assertions</a></li>
+            
+                <li><a href="../classes/Dalek.Reporter.html">Dalek.Reporter</a></li>
+            
+                <li><a href="../classes/Dalek.Suite.html">Dalek.Suite</a></li>
+            
+                <li><a href="../classes/Dalek.Timer.html">Dalek.Timer</a></li>
+            
+                <li><a href="../classes/Dalek.Unit.html">Dalek.Unit</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Assertions.html">Assertions</a></li>
+            
+                <li><a href="../modules/DalekJS.html">DalekJS</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: lib/dalek/driver.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*!
+ *
+ * Copyright (c) 2013 Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ *
+ */
+
+&#x27;use strict&#x27;;
+
+// ext. libs
+var async = require(&#x27;async&#x27;);
+
+// int. libs
+var Suite = require(&#x27;./suite&#x27;);
+
+/**
+ * Configures the driver instance
+ *
+ * @constructor
+ */
+
+var Driver = function (options) {
+  // add configuration data to the driver instance
+  this.config = options.config;
+  this.browser = this.config.get(&#x27;browser&#x27;);
+  this.files = this.config.get(&#x27;tests&#x27;);
+  this.drivers = this.config.get(&#x27;driver&#x27;);
+
+  // flag if we use the canary driver builds
+  this.driverIsCanary = false;
+
+  // link driver events
+  this.driverEmitter = options.driverEmitter;
+  this.reporterEvents = options.reporterEvents;
+};
+
+/**
+ * Generates &amp; starts drivers &amp; browsers
+ * the tests will be run in
+ *
+ * @module DalekJS
+ * @class Driver
+ * @namespace Dalek
+ * @part Driver
+ * @api
+ */
+
+Driver.prototype = {
+
+  /**
+   * Checks if the requested driver is available
+   *
+   * @method isDriver
+   * @param {string} driver Name of the requested driver
+   * @return {bool} isDriver Driver is availavle
+   */
+
+  isDriver: function (driver) {
+    try {
+      require.resolve(&#x27;dalek-driver-&#x27; + driver);
+    } catch (e) {
+      try {
+        require.resolve(&#x27;dalek-driver-&#x27; + driver + &#x27;-canary&#x27;);
+      } catch (e) {
+        return false;
+      }
+      this.driverIsCanary = true;
+      return true;
+    }
+    return true;
+  },
+
+  /**
+   * Loads the requested driver
+   * Emits an event to the reporter
+   *
+   * @method loadDriver
+   * @param {string} driver Name of the requested driver
+   * @return {object} driverModule Instance of the driver module
+   */
+
+  loadDriver: function (driver) {
+    this.reporterEvents.emit(&#x27;report:log:system&#x27;, &#x27;dalek-internal-driver: Loading driver: &quot;&#x27; + driver + &#x27;&quot;&#x27;);
+    return require(&#x27;dalek-driver-&#x27; + driver + (this.driverIsCanary ? &#x27;-canary&#x27; : &#x27;&#x27;));
+  },
+
+  /**
+   * Returns a list with browser driver instances
+   *
+   * @method getDrivers
+   * @return {array} verifiedDrivers
+   */
+
+  getDrivers: function () {
+    return this.drivers.map(this.getVerifiedBrowser, this)[0];
+  },
+
+  /**
+   * Returns a list with browser driver instances
+   *
+   * @method getVerifiedBrowser
+   * @param {string} driver Name of the requested driver
+   * @return {array} verifiedDrivers Array of dribver &#x27;run&#x27; functions
+   */
+
+  getVerifiedBrowser: function (driver) {
+    return this.browser.map(this.getVerifiedDriver.bind(this, this.loadDriver(driver), driver));
+  },
+
+  /**
+   * Returns a scoped version of the driver run function
+   *
+   * @method getVerifiedDriver
+   * @param {object} driverModule Instance of the used driver
+   * @param {string} driver Name of ther used driver
+   * @param {string} browser Name of the used browser
+   * @return {function} run Function that kicks off execution of a testsuite chain in a browser
+   */
+
+  getVerifiedDriver: function (driverModule, driver, browser) {
+    return this.run.bind(this, driver, driverModule, browser);
+  },
+
+  /**
+   * Loads a browser driver
+   *
+   * @method loadBrowserConfiguration
+   * @param {string} browser Name of the requested browser driver
+   * @param {object} browsers Configuration options for the requested browser
+   * @return {object} browserConfiguration Browser driver isntance and configuration meta data
+   */
+
+  loadBrowserConfiguration: function (browser, browsers, driver) {
+    var browserConfiguration;
+
+    if (driver.dummyBrowser &amp;&amp; driver.dummyBrowser()) {
+      return driver.getBrowser(driver);
+    }
+
+    try {
+      browserConfiguration = this.getDefaultBrowserConfiguration(browser, browsers);
+    } catch (e) {
+      browserConfiguration = this.getUserBrowserConfiguration(browser, browsers);
+    }
+
+    return browserConfiguration;
+  },
+
+  /**
+   * Loads the default browser driver
+   *
+   * @method getDefaultBrowserConfiguration
+   * @param {string} browser Name of the requested browser driver
+   * @param {object} browsers Configuration options for the requested browser
+   * @return {object} browserConfiguration Browser driver isntance and configuration meta data
+   */
+
+  getDefaultBrowserConfiguration: function (browser, browsers) {
+    var browserConfiguration = {configuration: null, module: null};
+
+    try {
+      browserConfiguration.module = require(&#x27;dalek-browser-&#x27; + browser);
+    } catch (e) {
+      browserConfiguration.module = require(&#x27;dalek-browser-&#x27; + browser + &#x27;-canary&#x27;);
+    }
+    if (browsers[browser]) {
+      browserConfiguration.configuration = browsers[browser];
+    }
+
+    return browserConfiguration;
+  },
+
+  /**
+   * Loads a user configured browser driver
+   *
+   * @method getUserBrowserConfiguration
+   * @param {string} browser Name of the requested browser driver
+   * @param {object} browsers Configuration options for the requested browser
+   * @return {object} browserConfiguration Browser driver isntance and configuration meta data
+   */
+
+  getUserBrowserConfiguration: function (browser, browsers) {
+    var browserConfiguration = {configuration: null, module: null};
+
+    if (browsers &amp;&amp; browsers[browser] &amp;&amp; browsers[browser].actAs) {
+      browserConfiguration.module = require(&#x27;dalek-browser-&#x27; + browsers[browser].actAs);
+      browserConfiguration.configuration = browsers[browser];
+    }
+
+    if (!browserConfiguration.module &amp;&amp; browser.search(&#x27;:&#x27;) !== -1) {
+      var args = browser.split(&#x27;:&#x27;);
+      var extractedBrowser = args[0].trim();
+      var browserType = args[1].trim().toLowerCase();
+      browserConfiguration.module = require(&#x27;dalek-browser-&#x27; + extractedBrowser);
+
+      if (browserConfiguration.module &amp;&amp; browserConfiguration.module.browserTypes &amp;&amp; browserConfiguration.module.browserTypes[browserType]) {
+        var binary = (process.platform === &#x27;win32&#x27; ? browserConfiguration.module.browserTypes[browserType].win32 : browserConfiguration.module.browserTypes[browserType].darwin);
+        browserConfiguration.configuration = {
+          binary: binary,
+          type: browserType
+        };
+      }
+    }
+    
+    return browserConfiguration;
+  },
+
+  /**
+   * Couple driver &amp; session status events for the reporter
+   *
+   * @method coupleReporterEvents
+   * @param {string} driverName Name of the requested driver
+   * @param {string} browser Name of the requested browser
+   * @chainable
+   */
+
+  coupleReporterEvents: function (driverName, browser) {
+    this.driverEmitter.on(&#x27;driver:sessionStatus:&#x27; + driverName + &#x27;:&#x27; + browser, this.reporterEvents.emit.bind(this.reporterEvents, &#x27;report:driver:session&#x27;));
+    this.driverEmitter.on(&#x27;driver:status:&#x27; + driverName + &#x27;:&#x27; + browser, this.reporterEvents.emit.bind(this.reporterEvents, &#x27;report:driver:status&#x27;));
+    return this;
+  },
+
+  /**
+   * Returns a list of testsuite runner functions
+   *
+   * @method getTestsuiteInstances
+   * @param {object} driverInstance Instance of the requested driver
+   * @return {array} testsuiteRunners List of testsuites that should be run
+   */
+
+  getTestsuiteInstances: function (driverInstance) {
+    return this.files.map(this.createTestsuiteInstance.bind(this, driverInstance));
+  },
+
+  /**
+   * Creates a testsuite runner function
+   *
+   * @method createTestsuiteInstance
+   * @param {object} driverInstance Instance of the requested driver
+   * @param {string} file Filename of the testsuite
+   * @return {function} testsuiteRunner Runner function from the testsuite
+   */
+
+  createTestsuiteInstance: function (driverInstance, file) {
+    var suite = new Suite({numberOfSuites: this.files.length, file: file, driver: driverInstance, driverEmitter: this.driverEmitter, reporterEmitter: this.reporterEvents});
+    return suite.run.bind(suite);
+  },
+
+  /**
+   * Generates a testsuite instance, emits the
+   * browser running event &amp; starts a new async() sesries execution
+   * Will be called when the driver is ready
+   *
+   * @method _onDriverReadyclear
+   * @param {string} browser Name of the requested browser
+   * @param {string} driverName Name of the requested driver
+   * @param {function} callback Asyncs next() callback function
+   * @param {object} driverInstance Instance of the requested driver
+   * @chainable
+   * @private
+   */
+
+  _onDriverReady: function (browser, driverName, callback, driverInstance) {
+    // generate testsuite instance from test files
+    var testsuites = this.getTestsuiteInstances(driverInstance);
+    this.reporterEvents.emit(&#x27;report:run:browser&#x27;, driverInstance.webdriverClient.opts.longName);
+    async.series(testsuites, this._onTestsuiteComplete.bind(this, callback, driverName, browser));
+    return this;
+  },
+
+  /**
+   * Emits a &#x27;tests complete&#x27; event &amp; calls asyncs next() callback
+   *
+   * @method _onTestsuiteComplete
+   * @param {function} callback Asyncs next() callback function
+   * @param {string} driverName Name of the requested driver
+   * @param {string} browser Name of the requested browser
+   * @chainable
+   * @private
+   */
+
+  _onTestsuiteComplete: function (callback, driverName, browser) {
+    this.driverEmitter.emit(&#x27;tests:complete:&#x27; + driverName + &#x27;:&#x27; + browser);
+    callback();
+    return this;
+  },
+
+  /**
+   * Driver runner function.
+   * Registers event handlers for this run,
+   * loads browser &amp; driver configuration &amp; instances,
+   * emits the &#x27;driver ready&#x27; event for the browser/driver combination
+   *
+   * @method run
+   * @param {string} driverName Name of the requested driver
+   * @param {object} driverModule Instance of the used driver module
+   * @param {string} browser Name of the requested browser
+   * @param {function} callback Asyncs next() callback function
+   * @chainable
+   */
+
+  run: function (driverName, driverModule, browser, callback) {
+    // load browser configuration
+    var browsersRaw = this.config.get(&#x27;browsers&#x27;);
+    var browsers = [];
+
+    // Check if we have a valid browser conf, then get the data out
+    if (browsersRaw !== null) {
+      browsers = browsersRaw[0];
+    }
+
+    var browserConfiguration = this.loadBrowserConfiguration(browser, browsers, driverModule);
+    var driverInstance = driverModule.create({events: this.driverEmitter, reporter: this.reporterEvents, browser: browser, config: this.config, browserMo: browserConfiguration.module, browserConf: browserConfiguration.configuration});
+    // couple driver &amp; session status events for the reporter
+    this.coupleReporterEvents(driverName, browser);
+
+    // register shutdown handler
+    if (driverInstance.webdriverClient.opts.kill) {
+      this.driverEmitter.on(&#x27;killAll&#x27;, driverInstance.webdriverClient.opts.kill.bind(driverInstance.webdriverClient.opts));
+    }
+
+    // dispatch some (web)driver events to the reporter
+    this.driverEmitter.on(&#x27;driver:webdriver:response&#x27;, function (res) {
+      this.reporterEvents.emit(&#x27;report:log:system:webdriver&#x27;, &#x27;webdriver: &#x27; + res.statusCode + &#x27; &#x27; + res.method + &#x27; &#x27; + res.path);
+      this.reporterEvents.emit(&#x27;report:log:system:webdriver&#x27;, &#x27;webdriver: &#x27; + res.data);
+    }.bind(this));
+
+    // run the tests in the browser, when the driver is ready
+    // emit the tests:complete event, when all tests have been run
+    this.driverEmitter.on(&#x27;driver:ready:&#x27; + driverName + &#x27;:&#x27; + browser, this._onDriverReady.bind(this, browser, driverName, callback, driverInstance));
+    return this;
+  }
+};
+
+// export driver module
+module.exports = Driver;
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

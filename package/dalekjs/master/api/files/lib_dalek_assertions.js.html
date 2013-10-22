@@ -1,0 +1,1877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lib/dalek/assertions.js - dalekjs</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="dalekjs"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.0.7</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Actions.html">Actions</a></li>
+            
+                <li><a href="../classes/Dalek.html">Dalek</a></li>
+            
+                <li><a href="../classes/Dalek.Config.html">Dalek.Config</a></li>
+            
+                <li><a href="../classes/Dalek.Driver.html">Dalek.Driver</a></li>
+            
+                <li><a href="../classes/Dalek.Internal.Assertions.html">Dalek.Internal.Assertions</a></li>
+            
+                <li><a href="../classes/Dalek.Reporter.html">Dalek.Reporter</a></li>
+            
+                <li><a href="../classes/Dalek.Suite.html">Dalek.Suite</a></li>
+            
+                <li><a href="../classes/Dalek.Timer.html">Dalek.Timer</a></li>
+            
+                <li><a href="../classes/Dalek.Unit.html">Dalek.Unit</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Assertions.html">Assertions</a></li>
+            
+                <li><a href="../modules/DalekJS.html">DalekJS</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: lib/dalek/assertions.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*!
+ *
+ * Copyright (c) 2013 Sebastian Golasch
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the &quot;Software&quot;),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
+
+&#x27;use strict&#x27;;
+
+// ext. libs
+var Q = require(&#x27;q&#x27;);
+var uuid = require(&#x27;node-uuid&#x27;);
+var chai = require(&#x27;chai&#x27;);
+
+// Module variable
+var Assertions;
+
+/**
+ * @module Assertions
+ * @namespace Dalek.Internal
+ */
+
+module.exports = function () {
+  return Assertions;
+};
+
+/**
+ * Assertions check if the assumptions you made about a website are correct.
+ * For example they might check if the title of a page or the content text of
+ * an element is as expected, or if your mobile website version only displays
+ * a certain amount of elements.
+ *
+ * @class Assertions
+ * @constructor
+ * @part Assertions
+ * @api
+ */
+
+Assertions = function (opts) {
+  this.test = opts.test;
+  this.proceeded = [];
+  this.chaining = false;
+};
+
+/**
+ * It can be really cumbersome to always write assert, assert &amp; assert
+ * all over the place when your doing multiple assertions.
+ * To avoid this, open an assertion context in your test which allows
+ * you to write (n) assertions without having to write &#x27;assert&#x27; before each.
+ *
+ * So, instead of writing this:
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
+ *     .assert.text(&#x27;#nav&#x27;).is(&#x27;Navigation&#x27;)
+ *     .assert.visible(&#x27;#nav&#x27;)
+ *     .assert.attr(&#x27;#nav&#x27;, &#x27;data-nav&#x27;, &#x27;true&#x27;)
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * you can write this:
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
+ *     .assert.chain()
+ *       .text(&#x27;#nav&#x27;).is(&#x27;Navigation&#x27;)
+ *       .visible(&#x27;#nav&#x27;)
+ *       .attr(&#x27;#nav&#x27;, &#x27;data-nav&#x27;, &#x27;true&#x27;)
+ *     .end()
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * to make it even more concise, you can combine this with the [query](actions.html#meth-query) method:
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
+ *     .assert.chain()
+ *       .query(&#x27;#nav&#x27;)
+ *           .text().is(&#x27;Navigation&#x27;)
+ *           .visible()
+ *           .attr(&#x27;data-nav&#x27;, &#x27;true&#x27;)
+ *         .end()
+ *     .end()
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * Always make sure, you terminate it with the [end](#meth-end) method!
+ *
+ * @api
+ * @method chain
+ * @chainable
+ */
+
+Assertions.prototype.chain = function () {
+  this.test.lastChain.push(&#x27;chaining&#x27;);
+  this.chaining = true;
+  return this;
+};
+
+/**
+ * Terminates an assertion chain or a query
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
+ *     .assert.chain()
+ *       .query(&#x27;#nav&#x27;)
+ *           .text().is(&#x27;Navigation&#x27;)
+ *           .visible()
+ *           .attr(&#x27;data-nav&#x27;, &#x27;true&#x27;)
+ *         .end()
+ *     .end()
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method end
+ * @chainable
+ */
+
+Assertions.prototype.end = function () {
+  var lastAction = this.test.lastChain.pop();
+  if (lastAction === &#x27;chaining&#x27;) {
+    this.chaining = false;
+  }
+
+  if (lastAction  === &#x27;querying&#x27;) {
+    this.test.querying = false;
+  }
+  return this.test;
+};
+
+/**
+ * Asserts that a given resource does exist in the environment.
+ *
+ * @method resourceExists
+ * @param {string} url URL of the resource to check
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.resourceExists = function (url, message) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#x27;resourceExists&#x27;, &#x27;resourceExists&#x27;, this._testTruthy, hash, {url: url, message: message}).bind(this.test);
+  this._addToActionQueue([url, hash], &#x27;resourceExists&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that a given element appears n times on the page.
+ *
+ * Given this portion of HTML, you would like to assure that all of these elements
+ * are ending up in your rendered markup on your page.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;section id=&quot;blog-overview&quot;&gt;
+ *   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+ *   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+ *   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+ *   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+ * &lt;/section&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * The simple solution is to check if all these elements are present
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.assert.numberOfElements(&#x27;#blog-overview .teaser&#x27;, 4, &#x27;4 blog teasers are present&#x27;)
+ * &#x60;&#x60;&#x60;
+ * The alternate syntax for this is:
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.assert.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
+ *     .is(4, &#x27;4 blog teasers are present&#x27;)
+ * &#x60;&#x60;&#x60;
+ *
+ * If you are not sure how many elements will exactly end up in your markup,
+ * you could use the between assertion handler
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.assert.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
+ *     .is.between([2, 6], &#x27;Between 2 and 6 blog teasers are present&#x27;)
+ * &#x60;&#x60;&#x60;
+ *
+ * If you dealing with the situation that you have a minimum of elements,
+ * you expect, you can use this helper:
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.assert.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
+ *     .is.gt(2, &#x27;At least 3 blog teasers are present&#x27;)
+ * &#x60;&#x60;&#x60;
+ * If you want to know if its &#x27;greater than equal&#x27;, use this one
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.assert.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
+ *     .is.gte(2, &#x27;At least 2 blog teasers are present&#x27;)
+ * &#x60;&#x60;&#x60;
+ * as well as their &#x27;lower than&#x27; and &#x27;lower than equal&#x27; equivalents.
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.assert.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
+ *     .is.lt(5, &#x27;Less than 5 blog teasers are present&#x27;)
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.assert.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
+ *     .is.lte(5, &#x27;Less than, or 5 blog teasers are present&#x27;)
+ * &#x60;&#x60;&#x60;
+ * And if you just want to know, if a certain amount of teasers isnʼt present,
+ * you can still use the not() assertion helper
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.assert.numberOfElements(&#x27;#blog-overview .teaser&#x27;)
+ *     .is.not(5, &#x27;There are more or less than 5 teasers present&#x27;)
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method numberOfElements
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} expected Expected test result
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.numberOfElements = function (selector, expected, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = expected;
+    expected = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;numberOfElements&#x27;, &#x27;numberOfElements&#x27;, this._testShallowEquals, hash, {expected: expected, selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, expected, hash], &#x27;getNumberOfElements&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ *
+ * Asserts that a given element is visible n times in the current viewport.
+ *
+ *
+ * Given this portion of HTML, you would like to assure that all of these elements
+ * are ending up in your rendered markup on your page.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;section id=&quot;blog-overview&quot;&gt;
+ *   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+ *   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+ *   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+ *   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
+ * &lt;/section&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * The simple solution is to check if all these elements are visible
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.assert.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;, 4, &#x27;4 blog teasers are visible&#x27;)
+ * &#x60;&#x60;&#x60;
+ * The alternate syntax for this is:
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.assert.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
+ *     .is(4, &#x27;4 blog teasers are visible&#x27;)
+ * &#x60;&#x60;&#x60;
+ *
+ * If you are not sure how many elements will exactly be shown in the current viewport,
+ * you could use the between assertion handler
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.assert.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
+ *     .is.between(2, 6, &#x27;Between 2 and 6 blog teasers are visible&#x27;)
+ * &#x60;&#x60;&#x60;
+ *
+ * If you dealing with the situation that you have a minimum of elements,
+ * you expect, use this helper:
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.assert.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
+ *     .is.gt(2, &#x27;At least 3 blog teasers are visible&#x27;)
+ * &#x60;&#x60;&#x60;
+ * If you want to know if its &#x27;greater than equal&#x27;, you can use this one
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.assert.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
+ *     .is.gte(2, &#x27;At least 2 blog teasers are visible&#x27;)
+ * &#x60;&#x60;&#x60;
+ * as well as their &#x27;lower than&#x27; and &#x27;lower than equal&#x27; equivalents.
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.assert.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
+ *     .is.lt(5, &#x27;Less than 5 blog teasers are visible&#x27;)
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.assert.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
+ *     .is.lte(5, &#x27;Less than, or 5 blog teasers are visible&#x27;)
+ * &#x60;&#x60;&#x60;
+ * And if you just want to know, if a certain amount of teasers isnʼt visible,
+ * you can still use the &#x27;:not(): assertion helper
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test.assert.numberOfVisibleElements(&#x27;#blog-overview .teaser&#x27;)
+ *     .is.not(5, &#x27;There are more or less than 5 teasers visible&#x27;)
+ * &#x60;&#x60;&#x60;
+ *
+ * &gt; NOTE: Buggy on all browsers
+ * 
+ * @api
+ * @method numberOfVisibleElements
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} expected Expected test result
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.numberOfVisibleElements = function (selector, expected, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = expected;
+    expected = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;numberOfVisibleElements&#x27;, &#x27;numberOfVisibleElements&#x27;, this._testShallowEquals, hash, {expected: expected, selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, expected, hash], &#x27;getNumberOfVisibleElements&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that a given form field has the provided value.
+ *
+ * Given this portion of HTML, we would like to get the information which option element
+ * is currently selected.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;form name=&quot;fav-doctor&quot; id=&quot;fav-doctor&quot;&gt;
+ *   &lt;select id=&quot;the-doctors&quot;&gt;
+ *     &lt;option value=&quot;9&quot;&gt;Eccleston&lt;/option&gt;
+ *     &lt;option selected value=&quot;10&quot;&gt;Tennant&lt;/option&gt;
+ *     &lt;option value=&quot;11&quot;&gt;Smith&lt;/option&gt;
+ *   &lt;/select&gt;
+ * &lt;/form&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test
+ *   .assert.val(&#x27;#the-doctors&#x27;, 10, &#x27;David is the favourite&#x27;)
+ *   // lets change the favourite by selection the last option
+ *  .click(&#x27;#the-doctors option:last&#x27;)
+ *  .assert.val(&#x27;#the-doctors&#x27;, 11, &#x27;Matt is now my favourite, bow ties are cool&#x27;)
+ * &#x60;&#x60;&#x60;
+ *
+ * This assertion is capable of getting the values from every form element
+ * that holds a value attribute
+ *
+ * Getting texts out of normal input fields is pretty straight forward
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;label for=&quot;fav-enemy&quot;&gt;Tell my your favourity Who enemy:&lt;/label&gt;
+ * &lt;input id=&quot;fav-enemy&quot; name=&quot;fav-enemy&quot; type=&quot;text&quot; value=&quot;Daleks&quot; /&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test
+ *   .assert.val(&#x27;#fav-enemy&#x27;, &#x27;Daleks&#x27;, &#x27;Daleks are so cute&#x27;)
+ *   // lets change the favourite by typing smth. new
+ *  .type(&#x27;#fav-enemy&#x27;, &#x27;Cyberman&#x27;)
+ *  .assert.val(&#x27;#fav-enemy&#x27;, &#x27;Cyberman&#x27;, &#x27;Cyberman are so cyber&#x27;)
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method val
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} expected Expected test result
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.val = function (selector, expected, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = expected;
+    expected = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;val&#x27;, &#x27;val&#x27;, this._testShallowEquals, hash, {expected: expected, selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, expected, hash], &#x27;val&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Checks the computed style.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;div id=&quot;superColoredElement&quot;&gt;Rose&lt;/div&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;css
+ * #superColoredElement {
+ *   background-color: rgba(255, 0, 0, 1);
+ *   color: rgba(0, 128, 0, 1);
+ * }
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://unicorns.rainbows.io&#x27;)
+ *    .assert.css(&#x27;#superColoredElement&#x27;, &#x27;background-color&#x27;, &#x27;rgba(255, 0, 0, 1)&#x27;)
+ *    .assert.css(&#x27;#superColoredElement&#x27;, &#x27;color&#x27;, &#x27;rgba(0, 128, 0, 1)&#x27;)
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method css
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} property CSS property to check
+ * @param {string} expected Expected test result
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.css = function (selector, property, expected, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = expected;
+    expected = property;
+    property = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;css&#x27;, &#x27;css&#x27;, this._testShallowEquals, hash, {expected: expected, selector: selector, porperty: property, message: message}).bind(this.test);
+  this._addToActionQueue([selector, property, expected, hash], &#x27;css&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Checks the actual width of an element.
+ *
+ * &#x60;&#x60;&#x60;html
+ *   &lt;div id=&quot;fixed-dimensions&quot; style=&quot;width: 100px&quot;&gt;&lt;/div&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://localhost:5000/index.html&#x27;)
+ *    // all true, all pixel
+ *    .assert.width(&#x27;#fixed-dimensions&#x27;, 100)
+ *    .assert.width(&#x27;#fixed-dimensions&#x27;).is(100)
+ *    .assert.width(&#x27;#fixed-dimensions&#x27;).is.not(100)
+ *    .assert.width(&#x27;#fixed-dimensions&#x27;).is.gt(90)
+ *    .assert.width(&#x27;#fixed-dimensions&#x27;).is.gte(97)
+ *    .assert.width(&#x27;#fixed-dimensions&#x27;).is.lt(120)
+ *    .assert.width(&#x27;#fixed-dimensions&#x27;).is.lte(110)
+ *    .assert.width(&#x27;#fixed-dimensions&#x27;).is.between([90, 110])
+ *    .done();
+ *
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method width
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} expected Expected test result
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.width = function (selector, expected, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = expected;
+    expected = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;width&#x27;, &#x27;width&#x27;, this._testShallowEquals, hash, {expected: expected, selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, expected, hash], &#x27;width&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Checks the actual height of an element.
+ *
+ * &#x60;&#x60;&#x60;html
+ *   &lt;div id=&quot;fixed-dimensions&quot; style=&quot;height: 100px&quot;&gt;&lt;/div&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://localhost:5000/index.html&#x27;)
+ *    // all true, all pixel
+ *    .assert.height(&#x27;#fixed-dimensions&#x27;, 100)
+ *    .assert.height(&#x27;#fixed-dimensions&#x27;).is(100)
+ *    .assert.height(&#x27;#fixed-dimensions&#x27;).is.not(100)
+ *    .assert.height(&#x27;#fixed-dimensions&#x27;).is.gt(90)
+ *    .assert.height(&#x27;#fixed-dimensions&#x27;).is.gte(97)
+ *    .assert.height(&#x27;#fixed-dimensions&#x27;).is.lt(120)
+ *    .assert.height(&#x27;#fixed-dimensions&#x27;).is.lte(110)
+ *    .assert.height(&#x27;#fixed-dimensions&#x27;).is.between([90, 110])
+ *    .done();
+ *
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method height
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} expected Expected test result
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.height = function (selector, expected, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = expected;
+    expected = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;height&#x27;, &#x27;height&#x27;, this._testShallowEquals, hash, {expected: expected, selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, expected, hash], &#x27;height&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Determine if an &lt;option&gt; element, or an &lt;input&gt; element of type checkbox or radio is currently selected.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;input type=&quot;checkbox&quot; id=&quot;unchecked_checkbox&quot; name=&quot;unchecked_checkbox&quot;/&gt;
+ * &lt;input type=&quot;checkbox&quot; id=&quot;checked_checkbox&quot; name=&quot;checked_checkbox&quot; checked=&quot;checked&quot;/&gt;
+ * &lt;select id=&quot;select_elm&quot; name=&quot;select_elm&quot;&gt;
+ *   &lt;option value=&quot;9&quot;&gt;Eccleston&lt;/option&gt;
+ *   &lt;option selected value=&quot;10&quot;&gt;Tennant&lt;/option&gt;
+ *   &lt;option value=&quot;11&quot;&gt;Smith&lt;/option&gt;
+ * &lt;/select&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * Checking radio and checkboxes:
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://selectables.org&#x27;)
+ *    .assert.selected(&#x27;#checked_checkbox&#x27;)
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * Checking option elements:
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://selectables.org&#x27;)
+ *    .assert.selected(&#x27;#select_elm option:nth-child(2)&#x27;)
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method selected
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.selected = function (selector, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;selected&#x27;, &#x27;selected&#x27;, this._testShallowEquals, hash, {expected: true, selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, true, hash], &#x27;selected&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Determine if an &lt;option&gt; element, or an &lt;input&gt; element of type
+ * checkbox or radio is currently not selected.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;input type=&quot;checkbox&quot; id=&quot;unchecked_checkbox&quot; name=&quot;unchecked_checkbox&quot;/&gt;
+ * &lt;input type=&quot;checkbox&quot; id=&quot;checked_checkbox&quot; name=&quot;checked_checkbox&quot; checked=&quot;checked&quot;/&gt;
+ * &lt;select id=&quot;select_elm&quot; name=&quot;select_elm&quot;&gt;
+ *   &lt;option value=&quot;9&quot;&gt;Eccleston&lt;/option&gt;
+ *   &lt;option selected value=&quot;10&quot;&gt;Tennant&lt;/option&gt;
+ *   &lt;option value=&quot;11&quot;&gt;Smith&lt;/option&gt;
+ * &lt;/select&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * Checking radio and checkboxes:
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://selectables.org&#x27;)
+ *    .assert.notSelected(&#x27;#unchecked_checkbox&#x27;)
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * Checking option elements:
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://selectables.org&#x27;)
+ *    .assert.notSelected(&#x27;#select_elm option:last-child&#x27;)
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method notSelected
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.notSelected = function (selector, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;selected&#x27;, &#x27;selected&#x27;, this._testShallowEquals, hash, {expected: false, selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, false, hash], &#x27;selected&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Determine if an element is currently enabled.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;input id=&quot;onmars&quot; type=&quot;text&quot; size=&quot;50&quot; name=&quot;onmars&quot; placeholder=&quot;State your name, rank and intention!&quot;&gt;&lt;/input&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test
+ *   .open(&#x27;http://doctor.thedoctor.com/doctor&#x27;)
+ *   .assert.enabled(&#x27;#onmars&#x27;, &#x27;Is enabled!&#x27;)
+ *   .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method enabled
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.enabled = function (selector, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;enabled&#x27;, &#x27;enabled&#x27;, this._testShallowEquals, hash, {expected: true, selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, true, hash], &#x27;enabled&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Determine if an element is currently disabled.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;input disabled id=&quot;onearth&quot; type=&quot;text&quot; size=&quot;50&quot; name=&quot;onearth&quot; placeholder=&quot;State your name, rank and intention!&quot;&gt;&lt;/input&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test
+ *   .open(&#x27;http://doctor.thedoctor.com/doctor&#x27;)
+ *   .assert.disabled(&#x27;#onearth&#x27;, &#x27;Is disabled!&#x27;)
+ *   .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method disabled
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.disabled = function (selector, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;enabled&#x27;, &#x27;enabled&#x27;, this._testShallowEquals, hash, {expected: false, selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, false, hash], &#x27;enabled&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Checks the contents of a cookie.
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://cookiejar.io/not_your_mothers_javascript.html&#x27;)
+ *    .setCookie(&#x27;atestcookie&#x27;, &#x27;foobar=baz&#x27;)
+ *    .assert.cookie(&#x27;atestcookie&#x27;, &#x27;foobar=baz&#x27;)
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method cookie
+ * @param {string} name Name of the cookie
+ * @param {string} expect Expected testresult
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.cookie = function (name, expected, message) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#x27;cookie&#x27;, &#x27;cookie&#x27;, this._testShallowEquals, hash, {expected: expected, name: name, message: message}).bind(this.test);
+  this._addToActionQueue([name, expected, hash], &#x27;cookie&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that current HTTP status code is the same as the one passed as argument.
+ * TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method for this)
+ *
+ * @method httpStatus
+ * @param {integer} status HTTP status code
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.httpStatus = function (status, message) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#x27;httpStatus&#x27;, &#x27;httpStatus&#x27;, this._testShallowEquals, hash, {expected: status, message: message}).bind(this.test);
+  this._addToActionQueue([status, hash], &#x27;httpStatus&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that an element matching the provided selector expression exists in remote DOM environment.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;body&gt;
+ *   &lt;p id=&quot;so-lonely&quot;&gt;Last of the timelords&lt;/p&gt;
+ * &lt;/body&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test
+ *   .open(&#x27;http://doctor.thedoctor.com/doctor&#x27;)
+ *   .assert.exists(&#x27;#so-lonely&#x27;, &#x27;The loneliest element in the universe exists&#x27;)
+ *   .done()
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method exists
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.exists = function (selector, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;exists&#x27;, &#x27;exists&#x27;, this._testTruthy, hash, {selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, hash], &#x27;exists&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that an element matching the provided selector expression doesnʼt
+ * exists within the remote DOM environment.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;body&gt;
+ *   &lt;p id=&quot;so-lonely&quot;&gt;Last of the time lords&lt;/p&gt;
+ * &lt;/body&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * test
+ *   .open(&#x27;http://doctor.thedoctor.com/doctor&#x27;)
+ *   .assert.doesntExist(&#x27;#the-master&#x27;, &#x27;The master element has not been seen&#x27;)
+ *   .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method doesntExist
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.doesntExist = function (selector, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;exists&#x27;, &#x27;!exists&#x27;, this._testFalsy, hash, {selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, hash], &#x27;exists&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that the element matching the provided selector expression is not visible.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;body&gt;
+ *   &lt;h1 style=&quot;display: none&quot;&gt;Me? So hidden …&lt;/h1&gt;
+ *   &lt;h2&gt;Me? So in viewport...&lt;/h2&gt;
+ * &lt;/body&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://allyourviewportsbelongto.us&#x27;)
+ *    .assert.notVisible(&#x27;h1&#x27;, &#x27;Element is not visible&#x27;)
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
+ *
+ * &gt; NOTE: Buggy on all browsers
+ * 
+ * @api
+ * @method notVisible
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.notVisible = function (selector, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;visible&#x27;, &#x27;!visible&#x27;, this._testFalsy, hash, {selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, hash], &#x27;visible&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that the element matching the provided selector expression is visible.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;body&gt;
+ *   &lt;h1&gt;Me? So in viewport …&lt;/h1&gt;
+ * &lt;/body&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://allyourviewportsbelongto.us&#x27;)
+ *    .assert.visible(&#x27;h1&#x27;, &#x27;Element is visible&#x27;)
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * &gt; NOTE: Buggy on all browsers
+ * 
+ * @api
+ * @method visible
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.visible = function (selector, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;visible&#x27;, &#x27;visible&#x27;, this._testTruthy, hash, {selector: selector, message: message}).bind(this.test);
+  this._addToActionQueue([selector, hash], &#x27;visible&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that given text does not exist in the provided selector.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;body&gt;
+ *   &lt;h1&gt;This is a CasperJS sandbox&lt;/h1&gt;
+ * &lt;/body&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://dalekjs.com/guineapig/&#x27;)
+ *    .assert.doesntHaveText(&#x27;h1&#x27;, &#x27;This page is a Dalek sandbox&#x27;, &#x27;It´s a sandbox!&#x27;)
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ * 
+ * @api
+ * @method doesntHaveText
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} expected Expected test result
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.doesntHaveText = function (selector, expected, message) {
+  var hash = uuid.v4();
+  if (this.test.querying === true) {
+    message = expected;
+    expected = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;text&#x27;, &#x27;!text&#x27;, this._testShallowUnequals, hash, {selector: selector, expected: expected, message: message}).bind(this.test);
+  this._addToActionQueue([selector, expected, hash], &#x27;text&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that given text does not exist in the current alert/prompt/confirm dialog.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;a href=&quot;#&quot; id=&quot;alert_confirm&quot; onclick=&quot;confirm(&#x27;Confirm me!&#x27;)&quot;&gt;I make confirm&lt;/a&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://skaaro.com/index.html&#x27;)
+ *    .click(&#x27;#alert_confirm&#x27;)
+ *    .assert.dialogDoesntHaveText(&#x27;I am an alert&#x27;)
+ *    .accept()
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * &gt; NOTE: Does not work in Firefox &amp; PhantomJS
+ * 
+ * @api
+ * @method dialogDoesntHaveText
+ * @param {string} expected Expected test result
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.dialogDoesntHaveText = function (expected, message) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#x27;alertText&#x27;, &#x27;!alertText&#x27;, this._testShallowUnequals, hash, {expected: expected, message: message}).bind(this.test);
+  this._addToActionQueue([expected, hash], &#x27;alertText&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that given text does exist in the provided selector.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;body&gt;
+ *   &lt;h1&gt;This is a Dalek sandbox&lt;/h1&gt;
+ * &lt;/body&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://dalekjs.com/guineapig/&#x27;)
+ *    .assert.text(&#x27;h1&#x27;, &#x27;This page is a Dalek sandbox&#x27;, &#x27;Exterminate!&#x27;)
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * of course, text works also with the assertion helpers is() and not()
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://dalekjs.com/guineapig/&#x27;)
+ *    .assert.text(&#x27;h1&#x27;).is(&#x27;This page is a Dalek sandbox&#x27;, &#x27;Exterminate!&#x27;)
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://dalekjs.com/guineapig/&#x27;)
+ *    .assert.text(&#x27;h1&#x27;).is.not(&#x27;This page is a CasperJS sandbox&#x27;, &#x27;Exterminate!&#x27;)
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method text
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} expected Expected test result
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.text = function (selector, expected, message) {
+  var hash = uuid.v4();
+  if (this.test.querying === true) {
+    message = expected;
+    expected = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;text&#x27;, &#x27;text&#x27;, this._testShallowEquals, hash, {selector: selector, expected: expected, message: message}).bind(this.test);
+  this._addToActionQueue([selector, expected, hash], &#x27;text&#x27;, cb);
+  return (this.chaining || this.test.querying) ? this : this.test;
+};
+
+/**
+ * Asserts that given alertText does exist in the provided alert/confirm or prompt dialog.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;a href=&quot;#&quot; id=&quot;alert&quot; onclick=&quot;alert(&#x27;I am an alert&#x27;)&quot;&gt;I make alerts!&lt;/a&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://skaaro.com/index.html&#x27;)
+ *    .click(&#x27;#alert_confirm&#x27;)
+ *    .assert.dialogText(&#x27;I am an alert&#x27;)
+ *    .accept()
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * of course, text works also with the assertion helpers is() and not()
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://dalekjs.com/guineapig/&#x27;)
+ *    .assert.dialogText().is(&#x27;I am an alert&#x27;, &#x27;Exterminate!&#x27;)
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://dalekjs.com/guineapig/&#x27;)
+ *    .assert.dialogText().is.not(&#x27;I am an prompt&#x27;, &#x27;Exterminate!&#x27;)
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
+ *
+ * &gt; NOTE: Does not work in Firefox &amp; PhantomJS
+ * 
+ * @api
+ * @method dialogText
+ * @param {string} expected Expected testresult
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.dialogText = function (expected, message) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#x27;alertText&#x27;, &#x27;alertText&#x27;, this._testShallowEquals, hash, {expected: expected, message: message}).bind(this.test);
+  this._addToActionQueue([expected, hash], &#x27;alertText&#x27;, cb);
+  return (this.chaining || this.test.querying) ? this : this.test;
+};
+
+/**
+ * Asserts that the page title is as expected.
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
+ *     .assert.title(&#x27;Doctor Who TV&#x27;, &#x27;Not your Daleks TV&#x27;)
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * Yep, using assertion helpers is also possible:
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
+ *     .assert.title().is(&#x27;Doctor Who TV&#x27;, &#x27;Not your Daleks TV&#x27;)
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * and the not() helper is available too:
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
+ *     .assert.title().is.not(&#x27;Dalek Emperor TV&#x27;, &#x27;Not your Daleks TV&#x27;)
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method title
+ * @param {string} expected Expected test result
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.title = function (expected, message) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#x27;title&#x27;, &#x27;title&#x27;, this._testShallowEquals, hash, {expected: expected, message: message}).bind(this.test);
+  this._addToActionQueue([expected, hash], &#x27;title&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that given title does not match the given expectations.
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
+ *     .assert.doesntHaveTitle(&#x27;Dalek Emperor TV&#x27;, &#x27;Not your Daleks TV&#x27;)
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method doesntHaveTitle
+ * @param {string} expected Expected test result
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.doesntHaveTitle = function (expected, message) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#x27;title&#x27;, &#x27;!title&#x27;, this._testShallowUnequals, hash, {expected: expected, message: message}).bind(this.test);
+  this._addToActionQueue([expected, hash], &#x27;title&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that the pages url is as expected.
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
+ *     .assert.url(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;URL is as expected&#x27;)
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * You can also check if the protocol changed,
+ * nice to see when you open GitHub with &#x27;http&#x27; instead of &#x27;https&#x27;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *   test.open(&#x27;http://github.com&#x27;)
+ *     .assert.url(&#x27;https://github.com/&#x27;, &#x27;Changed prototcols&#x27;)
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * Yep, using assertion helpers is also possible:
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *   test.open(&#x27;http://github.com&#x27;)
+ *     .assert.url().is(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;URL is as expected&#x27;)
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * and the not() helper is available too:
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
+ *     .assert.url().is.not(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;URL is as expected&#x27;)
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method url
+ * @param {string} expected Expected test result
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.url = function (expected, message) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#x27;url&#x27;, &#x27;url&#x27;, this._testShallowEquals, hash, {expected: expected, message: message}).bind(this.test);
+  this._addToActionQueue([expected, hash], &#x27;url&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that the pages URL does not match the expectation.
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
+ *     .assert.doesntHaveUrl(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;URL is not expected&#x27;)
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method doesntHaveUrl
+ * @param {string} expected Expected test result
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.doesntHaveUrl = function (expected, message) {
+  var hash = uuid.v4();
+  var cb = this._generateCallbackAssertion(&#x27;url&#x27;, &#x27;!url&#x27;, this._testShallowUnequals, hash, {expected: expected, message: message}).bind(this.test);
+  this._addToActionQueue([expected, hash], &#x27;url&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
+ * Asserts that an elements attribute is as expected.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;form&gt;
+ *   &lt;button class=&quot;jumpButton&quot; type=&quot;submit&quot;&gt;Fire&lt;/button&gt;
+ * &lt;/form&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://dalekjs.com/guineapig/&#x27;)
+ *    .assert.attr(&#x27;.jumpButton&#x27;, &#x27;type&#x27;, &#x27;submit&#x27;)
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;div id=&quot;dataDiv&quot; data-spot=&quot;cat&quot;&gt;&lt;/div&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://dalekjs.com/guineapig/&#x27;)
+ *    .assert.attr(&#x27;#dataDiv&#x27;).is(&#x27;data-spot&#x27;, &#x27;cat&#x27;, &#x27;We found Dataʼs cat!&#x27;)
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://dalekjs.com/guineapig/&#x27;)
+ *    .assert.attr(&#x27;#dataDiv&#x27;).is.not(&#x27;data-spot&#x27;, &#x27;doc&#x27;, &#x27;Spot is not a dog!&#x27;)
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method attr
+ * @param {string} selector Selector that matches the elements to test
+ * @param {string} attribute The attribute to test
+ * @param {string} expected Expected test result
+ * @param {string} message Message for the test reporter
+ * @chainable
+ */
+
+Assertions.prototype.attr = function (selector, attribute, expected, message) {
+  var hash = uuid.v4();
+
+  if (this.test.querying === true) {
+    message = expected;
+    expected = attribute;
+    attribute = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;attribute&#x27;, &#x27;attribute&#x27;, this._testShallowEquals, hash, {expected: expected, message: message, selector: selector, attribute: attribute}).bind(this.test);
+  this._addToActionQueue([selector, attribute, expected, hash], &#x27;attribute&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+// TEST HELPER
+// -----------
+
+/**
+ * Is helper
+ *
+ * @method is
+ * @param {mixed} expected Value to check
+ * @param {string} message Test message
+ * @chainable
+ */
+
+Assertions.prototype.is = function (expected, message) {
+  return this.generateTestHelper(&#x27;is&#x27;, &#x27;_testShallowEquals&#x27;, false)(expected, message);
+};
+
+/**
+ * Not helper
+ *
+ * @method not
+ * @param {mixed} expected Value to check
+ * @param {string} message Test message
+ * @chainable
+ */
+
+Assertions.prototype.not = function (expected, message) {
+  return this.generateTestHelper(&#x27;not&#x27;, &#x27;_testShallowEquals&#x27;, true)(expected, message);
+};
+
+/**
+ * Between helper
+ *
+ * @method between
+ * @param {mixed} expected Value to check
+ * @param {string} message Test message
+ * @chainable
+ */
+
+Assertions.prototype.between = function (expected, message) {
+  return this.generateTestHelper(&#x27;between&#x27;, &#x27;_testBetween&#x27;, false)(expected, message);
+};
+
+/**
+ * Gt helper
+ *
+ * @method gt
+ * @param {mixed} expected Value to check
+ * @param {string} message Test message
+ * @chainable
+ */
+
+Assertions.prototype.gt = function (expected, message) {
+  return this.generateTestHelper(&#x27;gt&#x27;, &#x27;_testGreaterThan&#x27;, false)(expected, message);
+};
+
+/**
+ * Gte helper
+ *
+ * @method gte
+ * @param {mixed} expected Value to check
+ * @param {string} message Test message
+ * @chainable
+ */
+
+Assertions.prototype.gte = function (expected, message) {
+  return this.generateTestHelper(&#x27;gte&#x27;, &#x27;_testGreaterThanEqual&#x27;, false)(expected, message);
+};
+
+/**
+ * Lt helper
+ *
+ * @method lt
+ * @param {mixed} expected Value to check
+ * @param {string} message Test message
+ * @chainable
+ */
+
+Assertions.prototype.lt = function (expected, message) {
+  return this.generateTestHelper(&#x27;lt&#x27;, &#x27;_testLowerThan&#x27;, false)(expected, message);
+};
+
+/**
+ * Lte helper
+ *
+ * @method lte
+ * @param {mixed} expected Value to check
+ * @param {string} message Test message
+ * @chainable
+ */
+
+Assertions.prototype.lte = function (expected, message) {
+  return this.generateTestHelper(&#x27;lte&#x27;, &#x27;_testLowerThanEqual&#x27;, false)(expected, message);
+};
+
+/**
+ * Contain helper
+ *
+ * @method contain
+ * @param {mixed} expected Value to check
+ * @param {string} message Test message
+ * @chainable
+ */
+
+Assertions.prototype.contain = function (expected, message) {
+  return this.generateTestHelper(&#x27;contain&#x27;, &#x27;_contain&#x27;, false)(expected, message);
+};
+
+/**
+ * Match helper
+ *
+ * @method match
+ * @param {string} expected Regex to match on
+ * @param {string} message Test message
+ * @chainable
+ */
+
+Assertions.prototype.match = function (expected, message) {
+  return this.generateTestHelper(&#x27;match&#x27;, &#x27;_match&#x27;, false)(expected, message);
+};
+
+/**
+ * Equals case insensitive helper
+ *
+ * @method equalsCaseInsensitive
+ * @param {mixed} expected Value to check
+ * @param {string} message Test message
+ * @chainable
+ */
+
+Assertions.prototype.equalsCaseInsensitive = function (expected, message) {
+  return this.generateTestHelper(&#x27;equalsCaseInsensitive&#x27;, &#x27;_caseInsensitiveMatch&#x27;, false)(expected, message);
+};
+
+// HELPER METHODS
+// --------------
+
+/**
+ * Generates a callback that will be fired when the action has been completed.
+ * The callback itself will then validate the answer and will also emit an event
+ * that the action has been successfully executed.
+ *
+ * @method _generateCallbackAssertion
+ * @param {string} key Unique key of the action
+ * @param {string} type Type of the action (usually the actions name)
+ * @return {function} The generated callback function
+ * @private
+ */
+
+Assertions.prototype._generateCallbackAssertion = function (key, type, test, hash, opts) {
+  var cb = function (data) {
+    if (data &amp;&amp; data.key === key &amp;&amp; data.hash === hash) {
+
+      this._lastGeneratedAction = {key: key, type: type, test: test, hash: hash, opts: opts, data: data};
+
+      if (!opts.expected &amp;&amp; (key === &#x27;title&#x27; || key === &#x27;width&#x27; || key === &#x27;height&#x27; || key === &#x27;url&#x27; || key === &#x27;text&#x27; || key === &#x27;attribute&#x27; || key === &#x27;numberOfElements&#x27; || key === &#x27;numberOfVisibleElements&#x27;)) {
+        return false;
+      }
+
+      if (typeof opts.expected === &#x27;function&#x27;) {
+        opts.expected = opts.expected();
+      }
+
+      var testResult = test(data.value, opts.expected);
+
+      this.reporter.emit(&#x27;report:assertion&#x27;, {
+        success: testResult,
+        expected: opts.expected,
+        value: data.value,
+        message: opts.message,
+        type: type
+      });
+
+      this.incrementExpectations();
+      if (!testResult) {
+        this.incrementFailedAssertions();
+      }
+    }
+  };
+  return cb;
+};
+
+/**
+ * Adds a method to the queue of actions/assertions to execute
+ *
+ * @method _addToActionQueue
+ * @param {object} opts Options of the action to invoke
+ * @param {string} driverMethod Name of the method to call on the driver
+ * @param {function} A callback function that will be executed when the action has been executed
+ * @private
+ * @chainable
+ */
+
+Assertions.prototype._addToActionQueue = function (opts, driverMethod, cb) {
+  this._lastGeneratedShit = {opts: opts, driverMethod: driverMethod};
+  this.test.actionPromiseQueue.push(function () {
+    var deferredAction = Q.defer();
+    this.test.driver[driverMethod].apply(this.test.driver, opts);
+    deferredAction.resolve();
+    this.test.driver.events.on(&#x27;driver:message&#x27;, cb);
+    return deferredAction.promise;
+  }.bind(this));
+  return this;
+};
+
+/**
+ * Generates a function that can be used
+ *
+ * @method generateTestHelper
+ * @param name
+ * @param assertionFn
+ * @param negate
+ * @return
+ * @private
+ */
+
+Assertions.prototype.generateTestHelper = function (name, assertionFn, negate) {
+  return function (expected, message) {
+    var gen = this._lastGeneratedShit;
+
+    this.test.actionPromiseQueue.push(function () {
+      var deferredAction = Q.defer();
+      deferredAction.resolve();
+      this.test.driver.events.on(&#x27;driver:message&#x27;, function () {
+
+        if (gen.opts &amp;&amp; gen.opts[(gen.opts.length - 1)] &amp;&amp; this.test._lastGeneratedAction &amp;&amp; this.test._lastGeneratedAction.hash) {
+          if (gen.opts[(gen.opts.length - 1)] === this.test._lastGeneratedAction.hash &amp;&amp; !this.proceeded[this.test._lastGeneratedAction.hash + name]) {
+            var testResult = this[assertionFn](expected, this.test._lastGeneratedAction.data.value);
+
+            if (negate) {
+              testResult = !testResult;
+            }
+
+            this.proceeded[this.test._lastGeneratedAction.hash + name] = true;
+
+            this.test.reporter.emit(&#x27;report:assertion&#x27;, {
+              success: testResult,
+              expected: expected,
+              value: this.test._lastGeneratedAction.data.value,
+              message: message,
+              type: this.test._lastGeneratedAction.type
+            });
+
+            this.test.incrementExpectations();
+
+            if (!testResult) {
+              this.test.incrementFailedAssertions();
+            }
+          }
+        }
+      }.bind(this));
+      return deferredAction.promise;
+    }.bind(this));
+
+    return this.chaining ? this : this.test;
+  }.bind(this);
+};
+
+// ASSERT METHODS
+// --------------
+
+/**
+ * Assert if a given value shallow equals a second given value
+ *
+ * @method _testShallowEquals
+ * @param {mixed} a Value to test
+ * @param {mixed} b Value to test
+ * @return {bool} false if values donʼt match, true if they match
+ * @private
+ */
+
+Assertions.prototype._testShallowEquals = function (a, b) {
+  try {
+    chai.assert.equal(a, b);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+};
+
+/**
+ * Assert if a given value shallow does not equal a second given value
+ *
+ * @method _testShallowUnequals
+ * @param {mixed} a Value to test
+ * @param {mixed} b Value to test
+ * @return {bool} true if values donʼt match, false if they match
+ * @private
+ */
+
+Assertions.prototype._testShallowUnequals = function (a, b) {
+  try {
+    chai.assert.notEqual(a, b);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+};
+
+/**
+ * Assert if a given value matches a range
+ *
+ * @method _testBetween
+ * @param {array} a Range to test
+ * @param {bool} b Value to compare
+ * @return {bool} test result
+ * @private
+ */
+
+Assertions.prototype._testBetween = function (a, b) {
+  try {
+    chai.expect(b).to.be.within(a[0], a[1]);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+};
+
+/**
+ * Assert if a given value is greater than the value to compare
+ *
+ * @method _testGreaterThan
+ * @param {bool} a Value to test
+ * @param {bool} b Value to compare
+ * @return {bool} test result
+ * @private
+ */
+
+Assertions.prototype._testGreaterThan = function (a, b) {
+  try {
+    chai.expect(b).to.be.above(a);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+};
+
+/**
+ * Assert if a given value is greater or equal than the value to compare
+ *
+ * @method _testGreaterThanEqual
+ * @param {bool} a Value to test
+ * @param {bool} b Value to compare
+ * @return {bool} test result
+ * @private
+ */
+
+Assertions.prototype._testGreaterThanEqual = function (a, b) {
+  return this._testGreaterThan(a - 1, b);
+};
+
+/**
+ * Assert if a given value is lower than the value to compare
+ *
+ * @method _testLowerThan
+ * @param {bool} a Value to test
+ * @param {bool} b Value to compare
+ * @return {bool} test result
+ * @private
+ */
+
+Assertions.prototype._testLowerThan = function (a, b) {
+  try {
+    chai.expect(b).to.be.below(a);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+};
+
+/**
+ * Asserts that 2 string match regardless of case
+ *
+ * @method _caseInsensitiveMatch
+ * @param {string} a Value to test
+ * @param {string} b Value to compare
+ * @return {bool} testresult
+ * @private
+ */
+
+Assertions.prototype._caseInsensitiveMatch = function (a, b) {
+  try {
+    if(a.toLowerCase &amp;&amp; b.toLowerCase) {
+      chai.expect(b.toLowerCase()).to.eql(a.toLowerCase());
+    } else {
+      return false;
+    }
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+};
+
+/**
+ * Assert if a given value contain another value
+ *
+ * @method _contain
+ * @param {bool} a Value to test
+ * @param {bool} b Value to compare
+ * @return {bool} test result
+ * @private
+ */
+
+Assertions.prototype._contain = function (a, b) {
+  try {
+    chai.expect(b).to.include(a);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+};
+
+/**
+ * Assert if a given value is lower or equal than the value to compare
+ *
+ * @method _testLowerThanEqual
+ * @param {bool} a Value to test
+ * @param {bool} b Value to compare
+ * @return {bool} test result
+ * @private
+ */
+
+Assertions.prototype._testLowerThanEqual = function (a, b) {
+  return this._testLowerThan(a + 1, b);
+};
+
+/**
+ * Assert if a given value is boolean &#x27;true&#x27;
+ *
+ * @method _testTruthy
+ * @param {bool} a Value to test
+ * @return {bool} false if value is false, true if value is true
+ * @private
+ */
+
+Assertions.prototype._testTruthy = function (a) {
+  return a === &#x27;true&#x27; || a === true;
+};
+
+/**
+ * Assert if a given value is boolean &#x27;false&#x27;
+ *
+ * @method _testFalsy
+ * @param {bool} a Value to test
+ * @return {bool} true if value is false, false if value is true
+ * @private
+ */
+
+Assertions.prototype._testFalsy = function (a) {
+  return a === &#x27;false&#x27; || a === false;
+};
+
+/**
+ * Assert a given value matches a RegEx
+ *
+ * @method _contain
+ * @param {mixed} a Value to test
+ * @param {string} b Value to compare
+ * @return {bool} test result
+ * @private
+ */
+
+Assertions.prototype._match = function (a, b) {
+  try {
+    chai.expect(b).to.match(a);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+};
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
