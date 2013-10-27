@@ -133,7 +133,7 @@
 
 // ext. libs
 var Q = require(&#x27;q&#x27;);
-var uuid = require(&#x27;node-uuid&#x27;);
+var uuid = require(&#x27;./uuid&#x27;);
 var cheerio = require(&#x27;cheerio&#x27;);
 
 // int. global
@@ -222,7 +222,7 @@ Actions.prototype.$ = Actions.prototype.query;
  */
 
 Actions.prototype.mouseEvent = function (type, selector) {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;mouseEvent&#x27;, &#x27;mouseEvent&#x27;, type, selector, hash);
   this._addToActionQueue([type, selector, hash], &#x27;mouseEvent&#x27;, cb);
   return this;
@@ -279,7 +279,7 @@ Actions.prototype.mouseEvent = function (type, selector) {
  */
 
 Actions.prototype.setHttpAuth = function (username, password) {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;setHttpAuth&#x27;, &#x27;setHttpAuth&#x27;, username, password, hash);
   this._addToActionQueue([username, password, hash], &#x27;setHttpAuth&#x27;, cb);
   return this;
@@ -319,7 +319,7 @@ Actions.prototype.setHttpAuth = function (username, password) {
  */
 
 Actions.prototype.toFrame = function (selector) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.querying === true) {
     selector = this.selector;
@@ -358,7 +358,7 @@ Actions.prototype.toFrame = function (selector) {
  */
 
 Actions.prototype.toParent = function () {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;toFrame&#x27;, &#x27;toFrame&#x27;, null, hash);
   this._addToActionQueue([null, hash], &#x27;toFrame&#x27;, cb);
   return this;
@@ -398,7 +398,7 @@ Actions.prototype.toParent = function () {
  */
 
 Actions.prototype.toWindow = function (name) {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;toWindow&#x27;, &#x27;toWindow&#x27;, name, hash);
   this._addToActionQueue([name, hash], &#x27;toWindow&#x27;, cb);
   return this;
@@ -432,7 +432,7 @@ Actions.prototype.toWindow = function (name) {
  */
 
 Actions.prototype.toParentWindow = function () {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;toWindow&#x27;, &#x27;toWindow&#x27;, null, hash);
   this._addToActionQueue([null, hash], &#x27;toWindow&#x27;, cb);
   return this;
@@ -450,7 +450,7 @@ Actions.prototype.toParentWindow = function () {
  */
 
 Actions.prototype.waitForResource = function (ressource, timeout) {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;waitForResource&#x27;, &#x27;waitForResource&#x27;, ressource, timeout, hash);
   this._addToActionQueue([ressource, (timeout ? parseInt(timeout, 10) : 5000), hash], &#x27;waitForResource&#x27;, cb);
   return this;
@@ -468,7 +468,7 @@ Actions.prototype.waitForResource = function (ressource, timeout) {
  */
 
 Actions.prototype.waitForText = function (text, timeout) {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;waitForText&#x27;, &#x27;waitForText&#x27;, text, timeout, hash);
   this._addToActionQueue([text, (timeout ? parseInt(timeout, 10) : 5000), hash], &#x27;waitForText&#x27;, cb);
   return this;
@@ -486,7 +486,7 @@ Actions.prototype.waitForText = function (text, timeout) {
  */
 
 Actions.prototype.waitUntilVisible = function (selector, timeout) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.querying === true) {
     timeout = selector;
@@ -510,7 +510,7 @@ Actions.prototype.waitUntilVisible = function (selector, timeout) {
  */
 
 Actions.prototype.waitWhileVisible = function (selector, timeout) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.querying === true) {
     timeout = selector;
@@ -565,7 +565,7 @@ Actions.prototype.waitWhileVisible = function (selector, timeout) {
  */
 
 Actions.prototype.screenshot = function (pathname) {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;screenshot&#x27;, &#x27;screenshot&#x27;, pathname, hash);
   this._addToActionQueue([&#x27;&#x27;, pathname, hash], &#x27;screenshot&#x27;, cb);
   return this;
@@ -605,7 +605,7 @@ Actions.prototype.screenshot = function (pathname) {
  */
 
 Actions.prototype.wait = function (timeout) {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;wait&#x27;, &#x27;wait&#x27;, timeout, hash);
   this._addToActionQueue([(timeout ? parseInt(timeout, 10) : 5000), hash], &#x27;wait&#x27;, cb);
   return this;
@@ -628,7 +628,7 @@ Actions.prototype.wait = function (timeout) {
  */
 
 Actions.prototype.reload = function () {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;refresh&#x27;, &#x27;refresh&#x27;, &#x27;&#x27;, hash);
   this._addToActionQueue([hash], &#x27;refresh&#x27;, cb);
   return this;
@@ -656,7 +656,7 @@ Actions.prototype.reload = function () {
  */
 
 Actions.prototype.forward = function () {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;forward&#x27;, &#x27;forward&#x27;, &#x27;&#x27;, hash);
   this._addToActionQueue([hash], &#x27;forward&#x27;, cb);
   return this;
@@ -684,7 +684,7 @@ Actions.prototype.forward = function () {
  */
 
 Actions.prototype.back = function () {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;back&#x27;, &#x27;back&#x27;, &#x27;&#x27;, hash);
   this._addToActionQueue([hash], &#x27;back&#x27;, cb);
   return this;
@@ -725,7 +725,7 @@ Actions.prototype.back = function () {
  */
 
 Actions.prototype.click = function (selector) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.querying === true) {
     selector = this.selector;
@@ -762,7 +762,7 @@ Actions.prototype.click = function (selector) {
  */
 
 Actions.prototype.submit = function (selector) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.querying === true) {
     selector = this.selector;
@@ -793,7 +793,7 @@ Actions.prototype.submit = function (selector) {
  */
 
 Actions.prototype.open = function (location) {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;open&#x27;, &#x27;open&#x27;, location, hash);
   this._addToActionQueue([location, hash], &#x27;open&#x27;, cb);
   return this;
@@ -839,7 +839,7 @@ Actions.prototype.open = function (location) {
  */
 
 Actions.prototype.type = function (selector, keystrokes) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.querying === true) {
     keystrokes = selector;
@@ -874,7 +874,7 @@ Actions.prototype.type = function (selector, keystrokes) {
  */
 
 Actions.prototype.sendKeys = function (selector, keystrokes) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.querying === true) {
     keystrokes = selector;
@@ -914,7 +914,7 @@ Actions.prototype.sendKeys = function (selector, keystrokes) {
  */
 
 Actions.prototype.answer = function (keystrokes) {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;promptText&#x27;, &#x27;promptText&#x27;, keystrokes, hash);
   this._addToActionQueue([keystrokes, hash], &#x27;promptText&#x27;, cb);
   return this;
@@ -952,7 +952,7 @@ Actions.prototype.answer = function (keystrokes) {
  */
 
 Actions.prototype.execute = function (script) {
-  var hash = uuid.v4();
+  var hash = uuid();
   var args = [this.contextVars].concat(Array.prototype.slice.call(arguments, 1) || []);
   var cb = this._generateCallbackAssertion(&#x27;execute&#x27;, &#x27;execute&#x27;, script, args, hash);
   this._addToActionQueue([script, args, hash], &#x27;execute&#x27;, cb);
@@ -994,7 +994,7 @@ Actions.prototype.execute = function (script) {
  */
 
 Actions.prototype.waitFor = function (script, args, timeout) {
-  var hash = uuid.v4();
+  var hash = uuid();
   timeout = timeout || 5000;
   var cb = this._generateCallbackAssertion(&#x27;waitFor&#x27;, &#x27;waitFor&#x27;, script, args, timeout, hash);
   this._addToActionQueue([script, args, timeout, hash], &#x27;waitFor&#x27;, cb);
@@ -1028,7 +1028,7 @@ Actions.prototype.waitFor = function (script, args, timeout) {
  */
 
 Actions.prototype.accept = function () {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;acceptAlert&#x27;, &#x27;acceptAlert&#x27;, hash);
   this._addToActionQueue([hash], &#x27;acceptAlert&#x27;, cb);
   return this;
@@ -1062,7 +1062,7 @@ Actions.prototype.accept = function () {
  */
 
 Actions.prototype.dismiss = function () {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;dismissAlert&#x27;, &#x27;dismissAlert&#x27;, hash);
   this._addToActionQueue([hash], &#x27;dismissAlert&#x27;, cb);
   return this;
@@ -1108,7 +1108,7 @@ Actions.prototype.dismiss = function () {
  */
 
 Actions.prototype.resize = function (dimensions) {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;resize&#x27;, &#x27;resize&#x27;, dimensions, hash);
   this._addToActionQueue([dimensions, hash], &#x27;resize&#x27;, cb);
   return this;
@@ -1152,7 +1152,7 @@ Actions.prototype.resize = function (dimensions) {
  */
 
 Actions.prototype.maximize = function () {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;maximize&#x27;, &#x27;maximize&#x27;, hash);
   this._addToActionQueue([hash], &#x27;maximize&#x27;, cb);
   return this;
@@ -1176,7 +1176,7 @@ Actions.prototype.maximize = function () {
  */
 
 Actions.prototype.setCookie = function (name, contents) {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;setCookie&#x27;, &#x27;setCookie&#x27;, name, contents, hash);
   this._addToActionQueue([name, contents, hash], &#x27;setCookie&#x27;, cb);
   return this;
@@ -1209,7 +1209,7 @@ Actions.prototype.setCookie = function (name, contents) {
  */
 
 Actions.prototype.waitForElement = function (selector, timeout) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.querying === true) {
     timeout = selector;
@@ -1242,7 +1242,7 @@ Actions.prototype.waitForElement = function (selector, timeout) {
  */
 
 Actions.prototype.setValue = function (selector, value) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.querying === true) {
     value = selector;
@@ -1290,7 +1290,7 @@ Actions.prototype.logger = {};
  */
 
 Actions.prototype.logger.dom = function (selector) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   var cb = function logDomCb (data) {
     if (data &amp;&amp; data.key === &#x27;source&#x27; &amp;&amp; !this.uuids[data.uuid]) {
@@ -1336,7 +1336,7 @@ Actions.prototype.logger.dom = function (selector) {
  */
 
 Actions.prototype.logger.message = function (message) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   var cb = function logMessageCb (data) {
     if (data &amp;&amp; data.key === &#x27;noop&#x27; &amp;&amp; !this.uuids[data.hash]) {

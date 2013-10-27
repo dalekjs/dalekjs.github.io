@@ -133,7 +133,7 @@
 
 // ext. libs
 var Q = require(&#x27;q&#x27;);
-var uuid = require(&#x27;node-uuid&#x27;);
+var uuid = require(&#x27;./uuid&#x27;);
 var chai = require(&#x27;chai&#x27;);
 
 // Module variable
@@ -263,7 +263,7 @@ Assertions.prototype.end = function () {
  */
 
 Assertions.prototype.resourceExists = function (url, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;resourceExists&#x27;, &#x27;resourceExists&#x27;, this._testTruthy, hash, {url: url, message: message}).bind(this.test);
   this._addToActionQueue([url, hash], &#x27;resourceExists&#x27;, cb);
   return this.chaining ? this : this.test;
@@ -345,7 +345,7 @@ Assertions.prototype.resourceExists = function (url, message) {
  */
 
 Assertions.prototype.numberOfElements = function (selector, expected, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.test.querying === true) {
     message = expected;
@@ -438,7 +438,7 @@ Assertions.prototype.numberOfElements = function (selector, expected, message) {
  */
 
 Assertions.prototype.numberOfVisibleElements = function (selector, expected, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.test.querying === true) {
     message = expected;
@@ -502,7 +502,7 @@ Assertions.prototype.numberOfVisibleElements = function (selector, expected, mes
  */
 
 Assertions.prototype.val = function (selector, expected, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.test.querying === true) {
     message = expected;
@@ -547,7 +547,7 @@ Assertions.prototype.val = function (selector, expected, message) {
  */
 
 Assertions.prototype.css = function (selector, property, expected, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.test.querying === true) {
     message = expected;
@@ -593,7 +593,7 @@ Assertions.prototype.css = function (selector, property, expected, message) {
  */
 
 Assertions.prototype.width = function (selector, expected, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.test.querying === true) {
     message = expected;
@@ -638,7 +638,7 @@ Assertions.prototype.width = function (selector, expected, message) {
  */
 
 Assertions.prototype.height = function (selector, expected, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.test.querying === true) {
     message = expected;
@@ -690,7 +690,7 @@ Assertions.prototype.height = function (selector, expected, message) {
  */
 
 Assertions.prototype.selected = function (selector, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.test.querying === true) {
     message = selector;
@@ -742,7 +742,7 @@ Assertions.prototype.selected = function (selector, message) {
  */
 
 Assertions.prototype.notSelected = function (selector, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.test.querying === true) {
     message = selector;
@@ -776,7 +776,7 @@ Assertions.prototype.notSelected = function (selector, message) {
  */
 
 Assertions.prototype.enabled = function (selector, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.test.querying === true) {
     message = selector;
@@ -810,7 +810,7 @@ Assertions.prototype.enabled = function (selector, message) {
  */
 
 Assertions.prototype.disabled = function (selector, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.test.querying === true) {
     message = selector;
@@ -842,7 +842,7 @@ Assertions.prototype.disabled = function (selector, message) {
  */
 
 Assertions.prototype.cookie = function (name, expected, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;cookie&#x27;, &#x27;cookie&#x27;, this._testShallowEquals, hash, {expected: expected, name: name, message: message}).bind(this.test);
   this._addToActionQueue([name, expected, hash], &#x27;cookie&#x27;, cb);
   return this.chaining ? this : this.test;
@@ -859,7 +859,7 @@ Assertions.prototype.cookie = function (name, expected, message) {
  */
 
 Assertions.prototype.httpStatus = function (status, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;httpStatus&#x27;, &#x27;httpStatus&#x27;, this._testShallowEquals, hash, {expected: status, message: message}).bind(this.test);
   this._addToActionQueue([status, hash], &#x27;httpStatus&#x27;, cb);
   return this.chaining ? this : this.test;
@@ -889,7 +889,7 @@ Assertions.prototype.httpStatus = function (status, message) {
  */
 
 Assertions.prototype.exists = function (selector, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.test.querying === true) {
     message = selector;
@@ -926,7 +926,7 @@ Assertions.prototype.exists = function (selector, message) {
  */
 
 Assertions.prototype.doesntExist = function (selector, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.test.querying === true) {
     message = selector;
@@ -966,7 +966,7 @@ Assertions.prototype.doesntExist = function (selector, message) {
  */
 
 Assertions.prototype.notVisible = function (selector, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.test.querying === true) {
     message = selector;
@@ -1004,7 +1004,7 @@ Assertions.prototype.notVisible = function (selector, message) {
  */
 
 Assertions.prototype.visible = function (selector, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.test.querying === true) {
     message = selector;
@@ -1041,7 +1041,7 @@ Assertions.prototype.visible = function (selector, message) {
  */
 
 Assertions.prototype.doesntHaveText = function (selector, expected, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
   if (this.test.querying === true) {
     message = expected;
     expected = selector;
@@ -1079,7 +1079,7 @@ Assertions.prototype.doesntHaveText = function (selector, expected, message) {
  */
 
 Assertions.prototype.dialogDoesntHaveText = function (expected, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;alertText&#x27;, &#x27;!alertText&#x27;, this._testShallowUnequals, hash, {expected: expected, message: message}).bind(this.test);
   this._addToActionQueue([expected, hash], &#x27;alertText&#x27;, cb);
   return this.chaining ? this : this.test;
@@ -1126,7 +1126,7 @@ Assertions.prototype.dialogDoesntHaveText = function (expected, message) {
  */
 
 Assertions.prototype.text = function (selector, expected, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
   if (this.test.querying === true) {
     message = expected;
     expected = selector;
@@ -1181,7 +1181,7 @@ Assertions.prototype.text = function (selector, expected, message) {
  */
 
 Assertions.prototype.dialogText = function (expected, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;alertText&#x27;, &#x27;alertText&#x27;, this._testShallowEquals, hash, {expected: expected, message: message}).bind(this.test);
   this._addToActionQueue([expected, hash], &#x27;alertText&#x27;, cb);
   return (this.chaining || this.test.querying) ? this : this.test;
@@ -1220,7 +1220,7 @@ Assertions.prototype.dialogText = function (expected, message) {
  */
 
 Assertions.prototype.title = function (expected, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;title&#x27;, &#x27;title&#x27;, this._testShallowEquals, hash, {expected: expected, message: message}).bind(this.test);
   this._addToActionQueue([expected, hash], &#x27;title&#x27;, cb);
   return this.chaining ? this : this.test;
@@ -1243,7 +1243,7 @@ Assertions.prototype.title = function (expected, message) {
  */
 
 Assertions.prototype.doesntHaveTitle = function (expected, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;title&#x27;, &#x27;!title&#x27;, this._testShallowUnequals, hash, {expected: expected, message: message}).bind(this.test);
   this._addToActionQueue([expected, hash], &#x27;title&#x27;, cb);
   return this.chaining ? this : this.test;
@@ -1291,7 +1291,7 @@ Assertions.prototype.doesntHaveTitle = function (expected, message) {
  */
 
 Assertions.prototype.url = function (expected, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;url&#x27;, &#x27;url&#x27;, this._testShallowEquals, hash, {expected: expected, message: message}).bind(this.test);
   this._addToActionQueue([expected, hash], &#x27;url&#x27;, cb);
   return this.chaining ? this : this.test;
@@ -1314,7 +1314,7 @@ Assertions.prototype.url = function (expected, message) {
  */
 
 Assertions.prototype.doesntHaveUrl = function (expected, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
   var cb = this._generateCallbackAssertion(&#x27;url&#x27;, &#x27;!url&#x27;, this._testShallowUnequals, hash, {expected: expected, message: message}).bind(this.test);
   this._addToActionQueue([expected, hash], &#x27;url&#x27;, cb);
   return this.chaining ? this : this.test;
@@ -1364,7 +1364,7 @@ Assertions.prototype.doesntHaveUrl = function (expected, message) {
  */
 
 Assertions.prototype.attr = function (selector, attribute, expected, message) {
-  var hash = uuid.v4();
+  var hash = uuid();
 
   if (this.test.querying === true) {
     message = expected;
