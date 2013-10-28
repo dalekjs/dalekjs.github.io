@@ -129,6 +129,8 @@ var optimist = require(&#x27;optimist&#x27;);
  * &gt; --driver, -d    Driver(s) you would like to invoke
  *
  * &gt; --browser, -b   Browser(s) you would like to invoke
+ * 
+ * &gt; --remote Starts a dalek host server for clients to connect to
  *
  * &gt; --logLevel, -l  Log level, controls the amount of information outputted to the console (0 to 5)
  *
@@ -176,6 +178,10 @@ module.exports = function () {
           type : &#x27;string&#x27;,
           desc : &#x27;Log level, controls the amount of information outputted to the console (0 to 5)&#x27;
         })
+        .option(&#x27;remote&#x27;, {
+          type: &#x27;integer&#x27;,
+          desc: &#x27;Starts a dalek host server for clients to connect to&#x27;
+        })
         .option(&#x27;nocolors&#x27;, {
           type : &#x27;boolean&#x27;,
           desc : &#x27;Disable colorized output in the console&#x27;
@@ -219,7 +225,8 @@ module.exports = function () {
         browser: argv.browser ? argv.browser.split(&#x27;,&#x27;) : [],
         logLevel: argv.logLevel,
         noColors: argv.nocolors,
-        noSymbols: argv.nosymbols
+        noSymbols: argv.nosymbols,
+        remote: argv.remote
       });
 
       dalek.run();
