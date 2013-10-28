@@ -1419,7 +1419,7 @@ Actions.prototype._addToActionQueue = function (opts, driverMethod, cb) {
   this.actionPromiseQueue.push(function () {
     var deferred = Q.defer();
     // add a generic identifier as the last argument to any action method call
-    opts.push(uuid.v4());
+    opts.push(uuid());
     // check the method on the driver object &amp;&amp; the callback function
     if (typeof(this.driver[driverMethod]) === &#x27;function&#x27; &amp;&amp; typeof(cb) === &#x27;function&#x27;) {
       // call the method on the driver object

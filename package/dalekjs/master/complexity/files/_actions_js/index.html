@@ -63,11 +63,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">61.88</p>
+      <p class="stat">62.21</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">4.78</p>
+      <p class="stat">4.77</p>
     </div>
   </div>
 </div>
@@ -1403,7 +1403,7 @@ Actions.prototype._addToActionQueue = function (opts, driverMethod, cb) {
   this.actionPromiseQueue.push(function () {
     var deferred = Q.defer();
     // add a generic identifier as the last argument to any action method call
-    opts.push(uuid.v4());
+    opts.push(uuid());
     // check the method on the driver object &amp;&amp; the callback function
     if (typeof(this.driver[driverMethod]) === &#039;function&#039; &amp;&amp; typeof(cb) === &#039;function&#039;) {
       // call the method on the driver object
