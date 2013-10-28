@@ -2,7 +2,7 @@
     "project": {
         "name": "dalekjs",
         "description": "A node based cross browser testing tool",
-        "version": "0.0.7",
+        "version": "0.0.8",
         "url": ""
     },
     "files": {
