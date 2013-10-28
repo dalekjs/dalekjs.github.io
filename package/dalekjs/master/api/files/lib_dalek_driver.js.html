@@ -51,6 +51,8 @@
             
                 <li><a href="../classes/Dalek.Internal.Assertions.html">Dalek.Internal.Assertions</a></li>
             
+                <li><a href="../classes/Dalek.Remote.html">Dalek.Remote</a></li>
+            
                 <li><a href="../classes/Dalek.Reporter.html">Dalek.Reporter</a></li>
             
                 <li><a href="../classes/Dalek.Suite.html">Dalek.Suite</a></li>
@@ -59,13 +61,19 @@
             
                 <li><a href="../classes/Dalek.Unit.html">Dalek.Unit</a></li>
             
+                <li><a href="../classes/Host.html">Host</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
             
                 <li><a href="../modules/Assertions.html">Assertions</a></li>
             
+                <li><a href="../modules/Dalek.html">Dalek</a></li>
+            
                 <li><a href="../modules/DalekJS.html">DalekJS</a></li>
+            
+                <li><a href="../modules/Remote.html">Remote</a></li>
             
             </ul>
         </div>
@@ -283,13 +291,23 @@ Driver.prototype = {
   getDefaultBrowserConfiguration: function (browser, browsers) {
     var browserConfiguration = {configuration: null, module: null};
 
-    try {
-      browserConfiguration.module = require(&#x27;dalek-browser-&#x27; + browser);
-    } catch (e) {
-      browserConfiguration.module = require(&#x27;dalek-browser-&#x27; + browser + &#x27;-canary&#x27;);
-    }
+    // set browser configuration
     if (browsers[browser]) {
       browserConfiguration.configuration = browsers[browser];
+    }
+
+    // try to load &#x60;normal&#x60; browser modules first,
+    // if that doesnt work, try canary builds
+    try {
+      // check if the browser is a remote instance
+      // else, try to load the local browser
+      if (browserConfiguration.configuration &amp;&amp; browserConfiguration.configuration.type === &#x27;remote&#x27;) {
+        browserConfiguration.module = require(&#x27;./remote&#x27;);
+      } else {
+        browserConfiguration.module = require(&#x27;dalek-browser-&#x27; + browser);
+      }
+    } catch (e) {
+      browserConfiguration.module = require(&#x27;dalek-browser-&#x27; + browser + &#x27;-canary&#x27;);
     }
 
     return browserConfiguration;
@@ -434,7 +452,15 @@ Driver.prototype = {
       browsers = browsersRaw[0];
     }
 
+    // init the browser configuration
     var browserConfiguration = this.loadBrowserConfiguration(browser, browsers, driverModule);
+
+    // check if we need to inject the browser alias into the browser module
+    if (browserConfiguration.module.setBrowser) {
+      browserConfiguration.module.setBrowser(browser);
+    }
+
+    // init the driver instance 
     var driverInstance = driverModule.create({events: this.driverEmitter, reporter: this.reporterEvents, browser: browser, config: this.config, browserMo: browserConfiguration.module, browserConf: browserConfiguration.configuration});
     // couple driver &amp; session status events for the reporter
     this.coupleReporterEvents(driverName, browser);

@@ -51,6 +51,8 @@
             
                 <li><a href="../classes/Dalek.Internal.Assertions.html">Dalek.Internal.Assertions</a></li>
             
+                <li><a href="../classes/Dalek.Remote.html">Dalek.Remote</a></li>
+            
                 <li><a href="../classes/Dalek.Reporter.html">Dalek.Reporter</a></li>
             
                 <li><a href="../classes/Dalek.Suite.html">Dalek.Suite</a></li>
@@ -59,13 +61,19 @@
             
                 <li><a href="../classes/Dalek.Unit.html">Dalek.Unit</a></li>
             
+                <li><a href="../classes/Host.html">Host</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
             
                 <li><a href="../modules/Assertions.html">Assertions</a></li>
             
+                <li><a href="../modules/Dalek.html">Dalek</a></li>
+            
                 <li><a href="../modules/DalekJS.html">DalekJS</a></li>
+            
+                <li><a href="../modules/Remote.html">Remote</a></li>
             
             </ul>
         </div>
@@ -141,6 +149,7 @@ var Driver = require(&#x27;./dalek/driver&#x27;);
 var Reporter = require(&#x27;./dalek/reporter&#x27;);
 var Timer = require(&#x27;./dalek/timer&#x27;);
 var Config = require(&#x27;./dalek/config&#x27;);
+var Host = require(&#x27;./dalek/host&#x27;);
 
 /**
  * Default options
@@ -198,7 +207,8 @@ var Dalek = function (opts) {
   this._setupDriverEmitter();
 
   // check for file option, throw error if none is given
-  if (!Array.isArray(this.config.get(&#x27;tests&#x27;))) {
+  // only bypasses if dalek runs in the remote mode
+  if (!Array.isArray(this.config.get(&#x27;tests&#x27;)) &amp;&amp; !this.options.remote) {
     this.reporterEvents.emit(&#x27;error&#x27;, &#x27;No test files given!&#x27;);
     this.driverEmitter.emit(&#x27;killAll&#x27;);
     process.exit(127);
@@ -206,6 +216,14 @@ var Dalek = function (opts) {
 
   // init the driver instance
   this._initDriver();
+
+  // check if dalek runs as a remote browser launcher
+  if (this.options.remote) {
+    var host = new Host({reporterEvents: this.reporterEvents, config: this.config});
+    host.run({
+      port: !isNaN(parseFloat(this.options.remote)) &amp;&amp; isFinite(this.options.remote) ? this.options.remote : false
+    });
+  }
 };
 
 /**
@@ -227,6 +245,11 @@ Dalek.prototype = {
    */
 
   run: function () {
+    // early return; in case of remote 
+    if (this.options.remote) {
+      return this;
+    }
+    
     // start the timer to measure the execution time
     this.timer.start();
 

@@ -45,11 +45,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">67.31</p>
+      <p class="stat">66.59</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">329</p>
+      <p class="stat">347</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">38.48</p>
+      <p class="stat">40.91</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">2.02</p>
+      <p class="stat">2.11</p>
     </div>
   </div>
 </div>
@@ -267,13 +267,23 @@ Driver.prototype = {
   getDefaultBrowserConfiguration: function (browser, browsers) {
     var browserConfiguration = {configuration: null, module: null};
 
-    try {
-      browserConfiguration.module = require(&#039;dalek-browser-&#039; + browser);
-    } catch (e) {
-      browserConfiguration.module = require(&#039;dalek-browser-&#039; + browser + &#039;-canary&#039;);
-    }
+    // set browser configuration
     if (browsers[browser]) {
       browserConfiguration.configuration = browsers[browser];
+    }
+
+    // try to load `normal` browser modules first,
+    // if that doesnt work, try canary builds
+    try {
+      // check if the browser is a remote instance
+      // else, try to load the local browser
+      if (browserConfiguration.configuration &amp;&amp; browserConfiguration.configuration.type === &#039;remote&#039;) {
+        browserConfiguration.module = require(&#039;./remote&#039;);
+      } else {
+        browserConfiguration.module = require(&#039;dalek-browser-&#039; + browser);
+      }
+    } catch (e) {
+      browserConfiguration.module = require(&#039;dalek-browser-&#039; + browser + &#039;-canary&#039;);
     }
 
     return browserConfiguration;
@@ -418,7 +428,15 @@ Driver.prototype = {
       browsers = browsersRaw[0];
     }
 
+    // init the browser configuration
     var browserConfiguration = this.loadBrowserConfiguration(browser, browsers, driverModule);
+
+    // check if we need to inject the browser alias into the browser module
+    if (browserConfiguration.module.setBrowser) {
+      browserConfiguration.module.setBrowser(browser);
+    }
+
+    // init the driver instance 
     var driverInstance = driverModule.create({events: this.driverEmitter, reporter: this.reporterEvents, browser: browser, config: this.config, browserMo: browserConfiguration.module, browserConf: browserConfiguration.configuration});
     // couple driver &amp; session status events for the reporter
     this.coupleReporterEvents(driverName, browser);

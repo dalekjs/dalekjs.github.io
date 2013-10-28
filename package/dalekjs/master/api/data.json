@@ -30,9 +30,7 @@
         },
         "lib/dalek/config.js": {
             "name": "lib/dalek/config.js",
-            "modules": {
-                "DalekJS": 1
-            },
+            "modules": {},
             "classes": {
                 "Dalek.Config": 1
             },
@@ -52,9 +50,35 @@
                 "Dalek": 1
             }
         },
+        "lib/dalek/host.js": {
+            "name": "lib/dalek/host.js",
+            "modules": {
+                "Dalek": 1
+            },
+            "classes": {
+                "Host": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/dalek/remote.js": {
+            "name": "lib/dalek/remote.js",
+            "modules": {
+                "Remote": 1
+            },
+            "classes": {
+                "Dalek.Remote": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek": 1
+            }
+        },
         "lib/dalek/reporter.js": {
             "name": "lib/dalek/reporter.js",
-            "modules": {},
+            "modules": {
+                "DalekJS": 1
+            },
             "classes": {
                 "Dalek.Reporter": 1
             },
@@ -126,8 +150,8 @@
             },
             "tag": "module",
             "file": "lib/dalek.js",
-            "line": 103,
-            "description": "Parses config data & loads config files for [DalekJS](//github.com/dalekjs/dalek) tests.\n\nThis module is a driver plugin for [DalekJS](//github.com/dalekjs/dalek).\nIt connects Daleks testsuite with the remote testing environment of [Sauce Labs](https://saucelabs.com).\n\nThe driver can be installed with the following command:\n\n```bash\n$ npm install dalek-driver-sauce --save-dev\n```\n\nYou can use the driver by adding a config option to the your [Dalekfile](/docs/config.html)\n\n```javascript\n\"driver\": [\"sauce\"]\n```\n\nOr you can tell Dalek that it should run your tests via sauces service via the command line:\n\n```bash\n$ dalek mytest.js -d sauce\n```\n\nIn order to run your tests within the Sauce Labs infrastructure, you must add your sauce username & key \nto your dalek configuration. Those two parameters must be set in order to get this driver up & running.\nYou can specifiy them within your [Dalekfile](/docs/config.html) like so:\n\n```javascript\n\"driver.sauce\": {\n  \"user\": \"dalekjs\",\n  \"key\": \"aaaaaa-1234-567a-1abc-1br6d9f68689\"\n}\n```\n\nIt is also possible to specify a set of other extra saucy parameters like `name` & `tags`:\n\n```javascript\n\"driver.sauce\": {\n  \"user\": \"dalekjs\",\n  \"key\": \"aaaaaa-1234-567a-1abc-1br6d9f68689\",\n  \"name\": \"Guineapig\",\n  \"tags\": [\"dalek\", \"testproject\"]\n}\n```\n\nIf you would like to have a more control over the browser/OS combinations that are available, you are able \nto configure you custom combinations:\n\n```javascript\n\"browsers\": [{\n  \"chrome\": {\n    \"platform\": \"OS X 10.6\",\n    \"actAs\": \"chrome\",\n    \"version\": 27\n  },\n  \"chromeWin\": {\n    \"platform\": \"Windows 7\",\n    \"actAs\": \"chrome\",\n    \"version\": 27\n  },\n  \"chromeLinux\": {\n    \"platform\": \"Linux\",\n    \"actAs\": \"chrome\",\n    \"version\": 26\n  }\n```\n\nYou can then call your custom browsers like so:\n\n```bash\n$ dalek mytest.js -d sauce -b chrome,chromeWin,chromeLinux\n```\n\nor you can define them in your Dalekfile:\n\n```javascript\n\"browser\": [\"chrome\", \"chromeWin\", \"chromeLinux\"]\n```\n\nA list of all available browser/OS combinations, can be found [here](https://saucelabs.com/docs/platforms).",
+            "line": 113,
+            "description": "Checks & loads reporter modules",
             "part": "Config",
             "api": ""
         },
@@ -144,6 +168,36 @@
             "tag": "module",
             "file": "lib/dalek/assertions.js",
             "line": 43
+        },
+        "Dalek": {
+            "name": "Dalek",
+            "submodules": {},
+            "classes": {
+                "Host": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "lib/dalek/host.js",
+            "line": 45,
+            "description": "Remote Dalek host proxy",
+            "part": "Remote",
+            "api": ""
+        },
+        "Remote": {
+            "name": "Remote",
+            "submodules": {},
+            "classes": {
+                "Dalek.Remote": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek": 1
+            },
+            "tag": "module",
+            "file": "lib/dalek/remote.js",
+            "line": 31,
+            "description": "Mimics a real browser that runs in a remote dalek instance"
         }
     },
     "classes": {
@@ -207,6 +261,34 @@
             "file": "lib/dalek/driver.js",
             "line": 54,
             "description": "Generates & starts drivers & browsers\nthe tests will be run in"
+        },
+        "Host": {
+            "name": "Host",
+            "shortname": "Host",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Dalek",
+            "namespace": "",
+            "file": "lib/dalek/host.js",
+            "line": 45,
+            "description": "Remote Dalek host proxy"
+        },
+        "Dalek.Remote": {
+            "name": "Dalek.Remote",
+            "shortname": "Dalek.Remote",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Remote",
+            "namespace": "Dalek",
+            "file": "lib/dalek/remote.js",
+            "line": 31,
+            "description": "Mimics a real browser that runs in a remote dalek instance"
         },
         "Dalek.Reporter": {
             "name": "Dalek.Reporter",
@@ -276,7 +358,7 @@
             "module": "DalekJS",
             "namespace": "",
             "file": "lib/dalek.js",
-            "line": 103,
+            "line": 113,
             "description": "Daleks base module\nUsed to configure all the things\nand to start off the tests"
         }
     },
@@ -2785,7 +2867,7 @@
         },
         {
             "file": "lib/dalek/driver.js",
-            "line": 190,
+            "line": 200,
             "description": "Loads a user configured browser driver",
             "itemtype": "method",
             "name": "getUserBrowserConfiguration",
@@ -2811,7 +2893,7 @@
         },
         {
             "file": "lib/dalek/driver.js",
-            "line": 225,
+            "line": 235,
             "description": "Couple driver & session status events for the reporter",
             "itemtype": "method",
             "name": "coupleReporterEvents",
@@ -2834,7 +2916,7 @@
         },
         {
             "file": "lib/dalek/driver.js",
-            "line": 240,
+            "line": 250,
             "description": "Returns a list of testsuite runner functions",
             "itemtype": "method",
             "name": "getTestsuiteInstances",
@@ -2855,7 +2937,7 @@
         },
         {
             "file": "lib/dalek/driver.js",
-            "line": 252,
+            "line": 262,
             "description": "Creates a testsuite runner function",
             "itemtype": "method",
             "name": "createTestsuiteInstance",
@@ -2881,7 +2963,7 @@
         },
         {
             "file": "lib/dalek/driver.js",
-            "line": 266,
+            "line": 276,
             "description": "Generates a testsuite instance, emits the\nbrowser running event & starts a new async() sesries execution\nWill be called when the driver is ready",
             "itemtype": "method",
             "name": "_onDriverReadyclear",
@@ -2916,7 +2998,7 @@
         },
         {
             "file": "lib/dalek/driver.js",
-            "line": 288,
+            "line": 298,
             "description": "Emits a 'tests complete' event & calls asyncs next() callback",
             "itemtype": "method",
             "name": "_onTestsuiteComplete",
@@ -2946,7 +3028,7 @@
         },
         {
             "file": "lib/dalek/driver.js",
-            "line": 305,
+            "line": 315,
             "description": "Driver runner function.\nRegisters event handlers for this run,\nloads browser & driver configuration & instances,\nemits the 'driver ready' event for the browser/driver combination",
             "itemtype": "method",
             "name": "run",
@@ -2975,6 +3057,762 @@
             "chainable": 1,
             "class": "Dalek.Driver",
             "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 32,
+            "description": "Sets the configuration options for the \ndalek remote browser executor",
+            "params": [
+                {
+                    "name": "opts",
+                    "description": "Configuration options",
+                    "type": "Options"
+                }
+            ],
+            "is_constructor": 1,
+            "class": "Host",
+            "module": "DalekJS",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 56,
+            "description": "Default port that the Dalek remote server is linking against",
+            "itemtype": "property",
+            "name": "defaultPort",
+            "type": "{integer}",
+            "default": "9020",
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 66,
+            "description": "Instance of the local browser",
+            "itemtype": "property",
+            "name": "bro",
+            "type": "{object}",
+            "default": "null",
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 76,
+            "description": "Instance of the reporter event emitter",
+            "itemtype": "property",
+            "name": "reporterEvents",
+            "type": "{EventEmitter2}",
+            "default": "null",
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 86,
+            "description": "Instance of the dalek config",
+            "itemtype": "property",
+            "name": "config",
+            "type": "{Dalek.Config}",
+            "default": "null",
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 96,
+            "description": "Local configuration",
+            "itemtype": "property",
+            "name": "configuration",
+            "type": "{object}",
+            "default": "{}",
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 106,
+            "description": "Host address of the called webdriver server",
+            "itemtype": "property",
+            "name": "remoteHost",
+            "type": "{string}",
+            "default": "null",
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 116,
+            "description": "Path of the webdriver server endpoint",
+            "itemtype": "property",
+            "name": "remotePath",
+            "type": "{string}",
+            "default": "null",
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 126,
+            "description": "Port of the called webdriver server",
+            "itemtype": "property",
+            "name": "remotePort",
+            "type": "{string}",
+            "default": "null",
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 136,
+            "description": "Secret that got emitted by the remote instance",
+            "itemtype": "property",
+            "name": "remoteSecret",
+            "type": "{string}",
+            "default": "null",
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 146,
+            "description": "Identifier of the remote client",
+            "itemtype": "property",
+            "name": "remoteId",
+            "type": "{string}",
+            "default": "null",
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 156,
+            "description": "Secret that is stored in the local instance",
+            "itemtype": "property",
+            "name": "secret",
+            "type": "{string}",
+            "default": "null",
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 166,
+            "description": "Incoming message that needs to be proxied\nto the local webdriver server",
+            "itemtype": "property",
+            "name": "proxyRequest",
+            "type": "{http.IncomingMessage}",
+            "default": "null",
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 177,
+            "description": "Starts the remote proxy server,\nprepares the config",
+            "itemtype": "method",
+            "name": "run",
+            "params": [
+                {
+                    "name": "opts",
+                    "description": "Configuration options",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 200,
+            "description": "Shutdown the proxy server",
+            "itemtype": "method",
+            "name": "kill",
+            "return": {
+                "description": "Promise",
+                "type": "Object"
+            },
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 213,
+            "description": "Launches the local browser",
+            "itemtype": "method",
+            "name": "_launcher",
+            "params": [
+                {
+                    "name": "request",
+                    "description": "Request from the dalek remote caller",
+                    "type": "Object"
+                },
+                {
+                    "name": "response",
+                    "description": "Response to the dalek remote caller",
+                    "type": "Object"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "chainable": 1,
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 240,
+            "description": "Shuts the local browser down,\nend the otherwise hanging request",
+            "itemtype": "method",
+            "name": "_launcher",
+            "params": [
+                {
+                    "name": "response",
+                    "description": "Response to the dalek remote caller",
+                    "type": "Object"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "chainable": 1,
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 260,
+            "description": "Requires the local browser module & returns it",
+            "itemtype": "method",
+            "name": "_loadBrowserModule",
+            "params": [
+                {
+                    "name": "browser",
+                    "description": "Name of the browser to load",
+                    "type": "String"
+                },
+                {
+                    "name": "response",
+                    "description": "Response to the dalek remote caller",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The local browser module",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 286,
+            "description": "Stores network data from the local browser instance,\nsends browser specific data to the client",
+            "itemtype": "method",
+            "name": "_onBrowserLaunch",
+            "params": [
+                {
+                    "name": "browser",
+                    "description": "Name of the browser to load",
+                    "type": "String"
+                },
+                {
+                    "name": "response",
+                    "description": "Response to the dalek remote caller",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 307,
+            "description": "Dispatches all incoming requests,\npossible endpoints local webdriver server, \nbrowser launcher, browser shutdown handler",
+            "itemtype": "method",
+            "name": "_createServer",
+            "params": [
+                {
+                    "name": "request",
+                    "description": "Request from the dalek remote caller",
+                    "type": "Object"
+                },
+                {
+                    "name": "response",
+                    "description": "Response to the dalek remote caller",
+                    "type": "Object"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "chainable": 1,
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 351,
+            "description": "Proxies data from the local webdriver server to the client",
+            "itemtype": "method",
+            "name": "_onRequestDataChunk",
+            "params": [
+                {
+                    "name": "chunk",
+                    "description": "Chunk of the incoming request data",
+                    "type": "Buffer"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "chainable": 1,
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 365,
+            "description": "Proxies remote data to the webdriver server",
+            "itemtype": "method",
+            "name": "_onProxyRequest",
+            "params": [
+                {
+                    "name": "request",
+                    "description": "Request from the dalek remote caller",
+                    "type": "Object"
+                },
+                {
+                    "name": "response",
+                    "description": "Response to the dalek remote caller",
+                    "type": "Object"
+                },
+                {
+                    "name": "res",
+                    "description": "Response to the local webdriver server",
+                    "type": "Object"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "chainable": 1,
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 392,
+            "description": "Handles data exchange between the client and the\nlocal webdriver server",
+            "itemtype": "method",
+            "name": "_onProxyRequest",
+            "params": [
+                {
+                    "name": "request",
+                    "description": "Request from the dalek remote caller",
+                    "type": "Object"
+                },
+                {
+                    "name": "response",
+                    "description": "Response to the dalek remote caller",
+                    "type": "Object"
+                },
+                {
+                    "name": "res",
+                    "description": "Response to the local webdriver server",
+                    "type": "Object"
+                },
+                {
+                    "name": "chunks",
+                    "description": "Array of received data pieces that should be forwarded to the local webdriver server",
+                    "type": "Array"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "chainable": 1,
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 425,
+            "description": "Extracts the browser that should be launched\nfrom the launch url request",
+            "itemtype": "method",
+            "name": "_extractBrowser",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "Url to parse",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Extracted browser",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 439,
+            "description": "Generates the request options from the incoming\nrequest that should then be forwared to the local\nwebdriver server",
+            "itemtype": "method",
+            "name": "_generateProxyRequestOptions",
+            "params": [
+                {
+                    "name": "header",
+                    "description": "Header meta data",
+                    "type": "Object"
+                },
+                {
+                    "name": "method",
+                    "description": "HTTP method",
+                    "type": "String"
+                },
+                {
+                    "name": "url",
+                    "description": "Webriver server endpoint url",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Request options",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 473,
+            "description": "Gets the local ip address\n(should be the IPv4 address where the runner is accessible from)",
+            "itemtype": "method",
+            "name": "_getLocalIp",
+            "return": {
+                "description": "Local IP address",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/host.js",
+            "line": 493,
+            "description": "Tries to find the local IP address",
+            "itemtype": "method",
+            "name": "_grepIp",
+            "params": [],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Host",
+            "module": "Dalek"
+        },
+        {
+            "file": "lib/dalek/remote.js",
+            "line": 41,
+            "description": "Remote webdriver path",
+            "itemtype": "property",
+            "name": "path",
+            "type": "{string}",
+            "default": "''",
+            "class": "Dalek.Remote",
+            "module": "Remote",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/dalek/remote.js",
+            "line": 51,
+            "description": "Remote port",
+            "itemtype": "property",
+            "name": "port",
+            "type": "{integer}",
+            "default": "9020",
+            "class": "Dalek.Remote",
+            "module": "Remote",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/dalek/remote.js",
+            "line": 61,
+            "description": "Remote host",
+            "itemtype": "property",
+            "name": "host",
+            "type": "{string}",
+            "default": "''",
+            "class": "Dalek.Remote",
+            "module": "Remote",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/dalek/remote.js",
+            "line": 71,
+            "description": "Url (with placeholders) to launch browsers on the remote instance",
+            "itemtype": "property",
+            "name": "defaultLaunchUrl",
+            "type": "{string}",
+            "default": "http://{{host}}:{{port}}/dalek/launch/{{browser}}",
+            "class": "Dalek.Remote",
+            "module": "Remote",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/dalek/remote.js",
+            "line": 81,
+            "description": "Url (with placeholders) to kill browsers on the remote instance",
+            "itemtype": "property",
+            "name": "defaultKillUrl",
+            "type": "{string}",
+            "default": "http://{{host}}:{{port}}/dalek/kill",
+            "class": "Dalek.Remote",
+            "module": "Remote",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/dalek/remote.js",
+            "line": 91,
+            "description": "Url to start a specific remote browser session",
+            "itemtype": "property",
+            "name": "launchUrl",
+            "type": "{string}",
+            "default": "''",
+            "class": "Dalek.Remote",
+            "module": "Remote",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/dalek/remote.js",
+            "line": 101,
+            "description": "Url to kill a specific remote browser session",
+            "itemtype": "property",
+            "name": "killUrl",
+            "type": "{string}",
+            "default": "''",
+            "class": "Dalek.Remote",
+            "module": "Remote",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/dalek/remote.js",
+            "line": 111,
+            "description": "Internal config name of the browser to start remotly",
+            "itemtype": "property",
+            "name": "browser",
+            "type": "{string}",
+            "default": "'",
+            "class": "Dalek.Remote",
+            "module": "Remote",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/dalek/remote.js",
+            "line": 121,
+            "description": "Remote browser alias to start a browser\n(browser.name or browser.actAs or user input browser alias)",
+            "itemtype": "property",
+            "name": "browserAlias",
+            "type": "{string}",
+            "default": "'",
+            "class": "Dalek.Remote",
+            "module": "Remote",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/dalek/remote.js",
+            "line": 132,
+            "description": "Driver defaults",
+            "itemtype": "property",
+            "name": "driverDefaults",
+            "type": "{object}",
+            "class": "Dalek.Remote",
+            "module": "Remote",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/dalek/remote.js",
+            "line": 141,
+            "description": "Request secret or false when unsecure",
+            "params": [
+                {
+                    "name": "secret",
+                    "description": ""
+                }
+            ],
+            "type": "{string|bool}",
+            "default": "false",
+            "class": "Dalek.Remote",
+            "module": "Remote",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/dalek/remote.js",
+            "line": 151,
+            "description": "Stores & validates the incoming browser config",
+            "itemtype": "method",
+            "name": "launch",
+            "params": [
+                {
+                    "name": "configuration",
+                    "description": "Browser configuration",
+                    "type": "Object"
+                },
+                {
+                    "name": "events",
+                    "description": "EventEmitter (Reporter Emitter instance)",
+                    "type": "EventEmitter2"
+                },
+                {
+                    "name": "config",
+                    "description": "Dalek configuration class",
+                    "type": "Dalek.Internal.Config"
+                }
+            ],
+            "return": {
+                "description": "Browser promise",
+                "type": "Object"
+            },
+            "class": "Dalek.Remote",
+            "module": "Remote",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/dalek/remote.js",
+            "line": 186,
+            "description": "Kills the remote browser",
+            "itemtype": "method",
+            "name": "kill",
+            "return": {
+                "description": "Promise",
+                "type": "Object"
+            },
+            "class": "Dalek.Remote",
+            "module": "Remote",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/dalek/remote.js",
+            "line": 198,
+            "description": "Injects the browser name",
+            "itemtype": "method",
+            "name": "setBrowser",
+            "params": [
+                {
+                    "name": "browser",
+                    "description": "Browser to launch",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.Remote",
+            "module": "Remote",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/dalek/remote.js",
+            "line": 215,
+            "description": "Listens on the response of the initial browser launch call\nand collects the response data, fires the _handshakeFinished call\nafter the response ended",
+            "itemtype": "method",
+            "name": "_afterRemoteBrowserLaunched",
+            "params": [
+                {
+                    "name": "deferred",
+                    "description": "Promise",
+                    "type": "Object"
+                },
+                {
+                    "name": "response",
+                    "description": "Browser launch response object",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Remote",
+            "module": "Remote",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/dalek/remote.js",
+            "line": 237,
+            "description": "Parses the response data of the initial browser handshake,\nsets the longName, desiredCapabilities & driverDefaults,\nemits the browser data (can be used by reporters & drivers)",
+            "itemtype": "method",
+            "name": "_handshakeFinished",
+            "params": [
+                {
+                    "name": "deferred",
+                    "description": "Promise",
+                    "type": "Object"
+                },
+                {
+                    "name": "data",
+                    "description": "Remote browser data (longName, desiredCapabilities, driverDefaults)",
+                    "type": "Array"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Remote",
+            "module": "Remote",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/dalek/remote.js",
+            "line": 270,
+            "description": "Sets the host & port of the remote instance,\nextracts the remote browser to call,\ngenerates the launch & kill objects for this session",
+            "itemtype": "method",
+            "name": "_loadConfigs",
+            "params": [
+                {
+                    "name": "configuration",
+                    "description": "Browser session configuration",
+                    "type": "Object"
+                },
+                {
+                    "name": "config",
+                    "description": "Dalek configuration data",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Remote",
+            "module": "Remote",
+            "namespace": "Dalek"
+        },
+        {
+            "file": "lib/dalek/remote.js",
+            "line": 303,
+            "description": "Replaces {{host}}, {{port}} & {{browser}} placeholders\nin the given url with data from this.host, this.port & this.browserAlias",
+            "itemtype": "method",
+            "name": "_replaceUrlPlaceholder",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "Url with placeholder",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Url with replaced placeholders",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.Remote",
+            "module": "Remote",
             "namespace": "Dalek"
         },
         {
@@ -3693,7 +4531,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 37,
+            "line": 38,
             "description": "Default options",
             "type": "{Object}",
             "class": "Dalek",
@@ -3702,7 +4540,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 50,
+            "line": 51,
             "description": "Setup all the options needed to configure dalek",
             "params": [
                 {
@@ -3718,7 +4556,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 114,
+            "line": 124,
             "description": "Runs the configured testsuites",
             "itemtype": "method",
             "name": "run",
@@ -3728,7 +4566,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 134,
+            "line": 149,
             "description": "Reports the all testuites executed event",
             "itemtype": "method",
             "name": "testsuitesFinished",
@@ -3738,7 +4576,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 147,
+            "line": 162,
             "description": "Reports the all testuites executed event",
             "itemtype": "method",
             "name": "reportRunFinished",
@@ -3748,7 +4586,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 165,
+            "line": 180,
             "description": "Normalizes options",
             "itemtype": "method",
             "name": "normalizeOptions",
@@ -3768,7 +4606,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 183,
+            "line": 198,
             "description": "Sets up system env properties",
             "itemtype": "method",
             "name": "_initialize",
@@ -3780,7 +4618,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 204,
+            "line": 219,
             "description": "Sets up all the reporters",
             "itemtype": "method",
             "name": "_setupReporters",
@@ -3792,7 +4630,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 221,
+            "line": 236,
             "description": "Adds a reporter",
             "itemtype": "method",
             "name": "_addReporter",
@@ -3811,7 +4649,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 235,
+            "line": 250,
             "description": "Updates the assertion state",
             "itemtype": "method",
             "name": "_onReportAssertion",
@@ -3830,7 +4668,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 254,
+            "line": 269,
             "description": "Initizializes the driver instances",
             "itemtype": "method",
             "name": "_initDriver",
@@ -3842,7 +4680,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 273,
+            "line": 288,
             "description": "Sets up the event dispatcher for driver events",
             "itemtype": "method",
             "name": "_setupDriverEmitter",
@@ -3854,7 +4692,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 288,
+            "line": 303,
             "description": "Make sure to shutdown dalek & its spawned\ncomponents, webservers gracefully if a\nruntimew error pops up",
             "itemtype": "method",
             "name": "_registerExceptionHandler",
@@ -3866,7 +4704,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 304,
+            "line": 319,
             "description": "Shutdown on uncaught exception",
             "itemtype": "method",
             "name": "_shutdown",
@@ -4142,6 +4980,26 @@
         },
         {
             "message": "unknown tag: part",
+            "line": " lib/dalek/host.js:45"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " lib/dalek/host.js:45"
+        },
+        {
+            "message": "param name/type/descript missing",
+            "line": " lib/dalek/host.js:493"
+        },
+        {
+            "message": "param name/type/descript missing",
+            "line": " lib/dalek/host.js:493"
+        },
+        {
+            "message": "param name/type/descript missing",
+            "line": " lib/dalek/host.js:493"
+        },
+        {
+            "message": "unknown tag: part",
             "line": " lib/dalek/reporter.js:27"
         },
         {
@@ -4181,6 +5039,14 @@
             "line": " lib/dalek/driver.js:33"
         },
         {
+            "message": "Missing item type\nSets the configuration options for the \ndalek remote browser executor",
+            "line": " lib/dalek/host.js:32"
+        },
+        {
+            "message": "Missing item type\nRequest secret or false when unsecure",
+            "line": " lib/dalek/remote.js:141"
+        },
+        {
             "message": "Missing item type\nReporters from the canary channel",
             "line": " lib/dalek/reporter.js:39"
         },
@@ -4194,11 +5060,11 @@
         },
         {
             "message": "Missing item type\nDefault options",
-            "line": " lib/dalek.js:37"
+            "line": " lib/dalek.js:38"
         },
         {
             "message": "Missing item type\nSetup all the options needed to configure dalek",
-            "line": " lib/dalek.js:50"
+            "line": " lib/dalek.js:51"
         }
     ]
 }

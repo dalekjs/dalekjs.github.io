@@ -45,11 +45,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">70.59</p>
+      <p class="stat">68.57</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">301</p>
+      <p class="stat">316</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">27.85</p>
+      <p class="stat">30.49</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.56</p>
+      <p class="stat">1.76</p>
     </div>
   </div>
 </div>
@@ -125,6 +125,7 @@ var Driver = require(&#039;./dalek/driver&#039;);
 var Reporter = require(&#039;./dalek/reporter&#039;);
 var Timer = require(&#039;./dalek/timer&#039;);
 var Config = require(&#039;./dalek/config&#039;);
+var Host = require(&#039;./dalek/host&#039;);
 
 /**
  * Default options
@@ -182,7 +183,8 @@ var Dalek = function (opts) {
   this._setupDriverEmitter();
 
   // check for file option, throw error if none is given
-  if (!Array.isArray(this.config.get(&#039;tests&#039;))) {
+  // only bypasses if dalek runs in the remote mode
+  if (!Array.isArray(this.config.get(&#039;tests&#039;)) &amp;&amp; !this.options.remote) {
     this.reporterEvents.emit(&#039;error&#039;, &#039;No test files given!&#039;);
     this.driverEmitter.emit(&#039;killAll&#039;);
     process.exit(127);
@@ -190,6 +192,14 @@ var Dalek = function (opts) {
 
   // init the driver instance
   this._initDriver();
+
+  // check if dalek runs as a remote browser launcher
+  if (this.options.remote) {
+    var host = new Host({reporterEvents: this.reporterEvents, config: this.config});
+    host.run({
+      port: !isNaN(parseFloat(this.options.remote)) &amp;&amp; isFinite(this.options.remote) ? this.options.remote : false
+    });
+  }
 };
 
 /**
@@ -211,6 +221,11 @@ Dalek.prototype = {
    */
 
   run: function () {
+    // early return; in case of remote 
+    if (this.options.remote) {
+      return this;
+    }
+    
     // start the timer to measure the execution time
     this.timer.start();
 

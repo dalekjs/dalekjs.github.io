@@ -51,6 +51,8 @@
             
                 <li><a href="../classes/Dalek.Internal.Assertions.html">Dalek.Internal.Assertions</a></li>
             
+                <li><a href="../classes/Dalek.Remote.html">Dalek.Remote</a></li>
+            
                 <li><a href="../classes/Dalek.Reporter.html">Dalek.Reporter</a></li>
             
                 <li><a href="../classes/Dalek.Suite.html">Dalek.Suite</a></li>
@@ -59,13 +61,19 @@
             
                 <li><a href="../classes/Dalek.Unit.html">Dalek.Unit</a></li>
             
+                <li><a href="../classes/Host.html">Host</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
             
                 <li><a href="../modules/Assertions.html">Assertions</a></li>
             
+                <li><a href="../modules/Dalek.html">Dalek</a></li>
+            
                 <li><a href="../modules/DalekJS.html">DalekJS</a></li>
+            
+                <li><a href="../modules/Remote.html">Remote</a></li>
             
             </ul>
         </div>
@@ -110,7 +118,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/lib_dalek.js.html#l103"><code>lib&#x2F;dalek.js:103</code></a>
+            Defined in: <a href="../files/lib_dalek.js.html#l113"><code>lib&#x2F;dalek.js:113</code></a>
         </div>
     
 
@@ -120,52 +128,7 @@
 
 
 <div class="box intro">
-    <p>Parses config data &amp; loads config files for <a href="//github.com/dalekjs/dalek">DalekJS</a> tests.</p>
-<p>This module is a driver plugin for <a href="//github.com/dalekjs/dalek">DalekJS</a>.
-It connects Daleks testsuite with the remote testing environment of <a href="https://saucelabs.com">Sauce Labs</a>.</p>
-<p>The driver can be installed with the following command:</p>
-<pre><code class="lang-bash">$ npm install dalek-driver-sauce --save-dev</code></pre>
-<p>You can use the driver by adding a config option to the your <a href="/docs/config.html">Dalekfile</a></p>
-<pre><code class="lang-javascript">&quot;driver&quot;: [&quot;sauce&quot;]</code></pre>
-<p>Or you can tell Dalek that it should run your tests via sauces service via the command line:</p>
-<pre><code class="lang-bash">$ dalek mytest.js -d sauce</code></pre>
-<p>In order to run your tests within the Sauce Labs infrastructure, you must add your sauce username &amp; key 
-to your dalek configuration. Those two parameters must be set in order to get this driver up &amp; running.
-You can specifiy them within your <a href="/docs/config.html">Dalekfile</a> like so:</p>
-<pre><code class="lang-javascript">&quot;driver.sauce&quot;: {
-  &quot;user&quot;: &quot;dalekjs&quot;,
-  &quot;key&quot;: &quot;aaaaaa-1234-567a-1abc-1br6d9f68689&quot;
-}</code></pre>
-<p>It is also possible to specify a set of other extra saucy parameters like <code>name</code> &amp; <code>tags</code>:</p>
-<pre><code class="lang-javascript">&quot;driver.sauce&quot;: {
-  &quot;user&quot;: &quot;dalekjs&quot;,
-  &quot;key&quot;: &quot;aaaaaa-1234-567a-1abc-1br6d9f68689&quot;,
-  &quot;name&quot;: &quot;Guineapig&quot;,
-  &quot;tags&quot;: [&quot;dalek&quot;, &quot;testproject&quot;]
-}</code></pre>
-<p>If you would like to have a more control over the browser/OS combinations that are available, you are able 
-to configure you custom combinations:</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: [{
-  &quot;chrome&quot;: {
-    &quot;platform&quot;: &quot;OS X 10.6&quot;,
-    &quot;actAs&quot;: &quot;chrome&quot;,
-    &quot;version&quot;: 27
-  },
-  &quot;chromeWin&quot;: {
-    &quot;platform&quot;: &quot;Windows 7&quot;,
-    &quot;actAs&quot;: &quot;chrome&quot;,
-    &quot;version&quot;: 27
-  },
-  &quot;chromeLinux&quot;: {
-    &quot;platform&quot;: &quot;Linux&quot;,
-    &quot;actAs&quot;: &quot;chrome&quot;,
-    &quot;version&quot;: 26
-  }</code></pre>
-<p>You can then call your custom browsers like so:</p>
-<pre><code class="lang-bash">$ dalek mytest.js -d sauce -b chrome,chromeWin,chromeLinux</code></pre>
-<p>or you can define them in your Dalekfile:</p>
-<pre><code class="lang-javascript">&quot;browser&quot;: [&quot;chrome&quot;, &quot;chromeWin&quot;, &quot;chromeLinux&quot;]</code></pre>
-<p>A list of all available browser/OS combinations, can be found <a href="https://saucelabs.com/docs/platforms">here</a>.</p>
+    <p>Checks &amp; loads reporter modules</p>
 
 </div>
 
