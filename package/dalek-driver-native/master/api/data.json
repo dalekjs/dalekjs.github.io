@@ -96,13 +96,6 @@
                 "Dalek.DriverNative.Commands": 1
             }
         },
-        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
-            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
         "index.js": {
             "name": "index.js",
             "modules": {},
@@ -2879,14 +2872,6 @@
             "namespace": "Dalek.DriverNative.Commands"
         },
         {
-            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
-            "line": 1,
-            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
-            "class": "Dalek.DriverNative",
-            "module": "Driver",
-            "namespace": "Dalek.DriverNative.Commands"
-        },
-        {
             "file": "index.js",
             "line": 34,
             "description": "Loads the webdriver client,\nlaunches the browser,\ninitializes al object properties,\nbinds to browser events",
@@ -2944,7 +2929,7 @@
         },
         {
             "file": "index.js",
-            "line": 123,
+            "line": 127,
             "description": "Checks if a webdriver session has already been established,\nif not, create a new one",
             "itemtype": "method",
             "name": "start",
@@ -2958,7 +2943,7 @@
         },
         {
             "file": "index.js",
-            "line": 147,
+            "line": 151,
             "description": "Creates a new webdriver session\nGets the driver status\nGets the session status\nResolves the promise (e.g. let them tests run)",
             "itemtype": "method",
             "name": "_startBrowserSession",
@@ -2978,7 +2963,7 @@
         },
         {
             "file": "index.js",
-            "line": 193,
+            "line": 197,
             "description": "Starts to execution of a batch of tests",
             "itemtype": "method",
             "name": "end",
@@ -2989,7 +2974,7 @@
         },
         {
             "file": "index.js",
-            "line": 216,
+            "line": 220,
             "description": "Flushes the action queue (e.g. commands that should be send to the wbdriver server)",
             "itemtype": "method",
             "name": "flushQueue",
@@ -3000,7 +2985,7 @@
         },
         {
             "file": "index.js",
-            "line": 231,
+            "line": 235,
             "description": "Loads the browser session status",
             "itemtype": "method",
             "name": "_sessionStatus",
@@ -3023,7 +3008,7 @@
         },
         {
             "file": "index.js",
-            "line": 248,
+            "line": 252,
             "description": "Loads the browser driver status",
             "itemtype": "method",
             "name": "_driverStatus",
@@ -3046,7 +3031,7 @@
         },
         {
             "file": "index.js",
-            "line": 265,
+            "line": 269,
             "description": "Creates an anonymus function that calls a webdriver\nmethod that has no return value, emits an empty result event\nif the function has been run\nTODO: Name is weird, should be saner",
             "itemtype": "method",
             "name": "_createNonReturnee",
@@ -3069,7 +3054,7 @@
         },
         {
             "file": "index.js",
-            "line": 281,
+            "line": 285,
             "description": "Generates a chain of webdriver calls for webdriver\nmethods that don't have a return value\nTODO: Name is weird, should be saner",
             "itemtype": "method",
             "name": "_actionQueueNonReturneeTemplate",
@@ -3099,7 +3084,7 @@
         },
         {
             "file": "index.js",
-            "line": 300,
+            "line": 304,
             "description": "Creates a driver notification with an empty value\nTODO: Name is weird, should be saner",
             "itemtype": "method",
             "name": "_generateDummyDriverMessageFn",
@@ -3132,7 +3117,7 @@
         },
         {
             "file": "index.js",
-            "line": 320,
+            "line": 324,
             "description": "Determines if the driver is a \"multi\" browser driver,\ne.g. can handle more than one browser",
             "itemtype": "method",
             "name": "isMultiBrowser",
@@ -3146,7 +3131,7 @@
         },
         {
             "file": "index.js",
-            "line": 332,
+            "line": 336,
             "description": "Verifies a browser request\nTODO: Still a noop, need to add \"verify the browser\" logic",
             "itemtype": "method",
             "name": "verifyBrowser",
@@ -3160,7 +3145,7 @@
         },
         {
             "file": "index.js",
-            "line": 344,
+            "line": 348,
             "description": "Creates a new driver instance",
             "itemtype": "method",
             "name": "create",
@@ -3220,10 +3205,6 @@
         {
             "message": "Missing item type\nMixes in element methods",
             "line": " lib/commands/window.js:148"
-        },
-        {
-            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
-            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
         },
         {
             "message": "Missing item type\nLoads the webdriver client,\nlaunches the browser,\ninitializes al object properties,\nbinds to browser events",
