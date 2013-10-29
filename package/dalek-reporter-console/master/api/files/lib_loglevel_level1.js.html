@@ -246,6 +246,48 @@ LogLevel1.prototype.outputRunnerFinished = function (data) {
   return this;
 };
 
+/**
+ * Outputs a message when the remote connection has been established
+ *
+ * @method remoteConnectionEstablished
+ * @param {object} data
+ * @chainable
+ */
+
+LogLevel1.prototype.remoteConnectionReady = function (data) {
+  this.echo(&#x27;Remote connection is ready on IP:&#x27;, {nl: false, ec: true, foreground: &#x27;magentaBright&#x27;});
+  this.echo(data.ip + &#x27;:&#x27; + data.port, {foreground: &#x27;yellowBright&#x27;});
+  return this;
+};
+
+/**
+ * Outputs a message when the remote connection has been established
+ *
+ * @method remoteConnectionEstablished
+ * @param {object} data
+ * @chainable
+ */
+
+LogLevel1.prototype.remoteConnectionEstablished = function (data) {
+  this.echo(&#x27;Starting session:&#x27;, {nl: false, ec: true, foreground: &#x27;greenBright&#x27;});
+  this.echo(data.browser + &#x27;:&#x27; + data.id, {foreground: &#x27;cyanBright&#x27;});
+  return this;
+};
+
+/**
+ * Outputs a message when the remote connection has been closed
+ *
+ * @method remoteConnectionClosed
+ * @param {object} data
+ * @chainable
+ */
+
+LogLevel1.prototype.remoteConnectionClosed = function (data) {
+  this.echo(&#x27;Closing session:&#x27;, {nl: false, ec: true, foreground: &#x27;greenBright&#x27;});
+  this.echo(data.browser + &#x27;:&#x27; + data.id, {foreground: &#x27;cyanBright&#x27;});
+  return this;
+};
+
     </pre>
 </div>
 

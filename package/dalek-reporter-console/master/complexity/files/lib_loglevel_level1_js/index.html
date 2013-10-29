@@ -45,11 +45,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">65.87</p>
+      <p class="stat">66.57</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">105</p>
+      <p class="stat">147</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">20.13</p>
+      <p class="stat">24.90</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.59</p>
+      <p class="stat">0.90</p>
     </div>
   </div>
 </div>
@@ -217,6 +217,48 @@ LogLevel1.prototype.outputRunnerFinished = function (data) {
     data.assertionsPassed + &#039;/&#039; + data.assertions + &#039; assertions passed.&#039; + &#039; Elapsed Time: &#039; + timeOutput + &#039; &#039;,
     {foreground: (data.status ? &#039;black&#039; : &#039;whiteBright&#039;), background: (data.status ? &#039;bgGreenBright&#039; : &#039;bgRedBright&#039;)}
   );
+  return this;
+};
+
+/**
+ * Outputs a message when the remote connection has been established
+ *
+ * @method remoteConnectionEstablished
+ * @param {object} data
+ * @chainable
+ */
+
+LogLevel1.prototype.remoteConnectionReady = function (data) {
+  this.echo(&#039;Remote connection is ready on IP:&#039;, {nl: false, ec: true, foreground: &#039;magentaBright&#039;});
+  this.echo(data.ip + &#039;:&#039; + data.port, {foreground: &#039;yellowBright&#039;});
+  return this;
+};
+
+/**
+ * Outputs a message when the remote connection has been established
+ *
+ * @method remoteConnectionEstablished
+ * @param {object} data
+ * @chainable
+ */
+
+LogLevel1.prototype.remoteConnectionEstablished = function (data) {
+  this.echo(&#039;Starting session:&#039;, {nl: false, ec: true, foreground: &#039;greenBright&#039;});
+  this.echo(data.browser + &#039;:&#039; + data.id, {foreground: &#039;cyanBright&#039;});
+  return this;
+};
+
+/**
+ * Outputs a message when the remote connection has been closed
+ *
+ * @method remoteConnectionClosed
+ * @param {object} data
+ * @chainable
+ */
+
+LogLevel1.prototype.remoteConnectionClosed = function (data) {
+  this.echo(&#039;Closing session:&#039;, {nl: false, ec: true, foreground: &#039;greenBright&#039;});
+  this.echo(data.browser + &#039;:&#039; + data.id, {foreground: &#039;cyanBright&#039;});
   return this;
 };</textarea>
   </div>

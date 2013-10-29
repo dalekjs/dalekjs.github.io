@@ -437,6 +437,57 @@
             "module": "LogLevel1"
         },
         {
+            "file": "lib/loglevel/level1.js",
+            "line": 131,
+            "description": "Outputs a message when the remote connection has been established",
+            "itemtype": "method",
+            "name": "remoteConnectionEstablished",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "LogLevel1",
+            "module": "LogLevel1"
+        },
+        {
+            "file": "lib/loglevel/level1.js",
+            "line": 145,
+            "description": "Outputs a message when the remote connection has been established",
+            "itemtype": "method",
+            "name": "remoteConnectionEstablished",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "LogLevel1",
+            "module": "LogLevel1"
+        },
+        {
+            "file": "lib/loglevel/level1.js",
+            "line": 159,
+            "description": "Outputs a message when the remote connection has been closed",
+            "itemtype": "method",
+            "name": "remoteConnectionClosed",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "LogLevel1",
+            "module": "LogLevel1"
+        },
+        {
             "file": "lib/loglevel/level2.js",
             "line": 44,
             "description": "Outputs in which browser env the tests will run",
@@ -925,6 +976,57 @@
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputError",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "LevelBase",
+            "module": "LevelBase"
+        },
+        {
+            "file": "lib/levelbase.js",
+            "line": 319,
+            "description": "Does nothing",
+            "itemtype": "method",
+            "name": "remoteConnectionEstablished",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "LevelBase",
+            "module": "LevelBase"
+        },
+        {
+            "file": "lib/levelbase.js",
+            "line": 331,
+            "description": "Does nothing",
+            "itemtype": "method",
+            "name": "remoteConnectionClosed",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "LevelBase",
+            "module": "LevelBase"
+        },
+        {
+            "file": "lib/levelbase.js",
+            "line": 343,
+            "description": "Does nothing",
+            "itemtype": "method",
+            "name": "remoteConnectionReady",
             "params": [
                 {
                     "name": "data",
