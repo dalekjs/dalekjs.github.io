@@ -727,7 +727,8 @@ var ChromeDriver = {
    */
 
   _processesNix: function (fn) {
-    var cmd = [&#x27;ps -ax&#x27;, &#x27;|&#x27;, &#x27;grep &#x27; + this.processName];
+    var processName = process.platform === &#x27;darwin&#x27; ? this.processName : this.processName.toLowerCase();
+    var cmd = [&#x27;ps -ax&#x27;, &#x27;|&#x27;, &#x27;grep &#x27; + processName];
     cp.exec(cmd.join(&#x27; &#x27;), this._processListNix.bind(this, fn));
     return this;
   },

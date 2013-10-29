@@ -604,7 +604,7 @@
         },
         {
             "file": "index.js",
-            "line": 645,
+            "line": 646,
             "description": "Deserializes a process list on nix",
             "itemtype": "method",
             "name": "_processListNix",
@@ -634,7 +634,7 @@
         },
         {
             "file": "index.js",
-            "line": 663,
+            "line": 664,
             "description": "Reformats the process list output on *NIX systems",
             "itemtype": "method",
             "name": "_splitProcessListNix",
@@ -659,7 +659,7 @@
         },
         {
             "file": "index.js",
-            "line": 680,
+            "line": 681,
             "description": "Filters empty process list entries on *NIX",
             "itemtype": "method",
             "name": "_filterProcessItemsNix",
@@ -682,7 +682,7 @@
         },
         {
             "file": "index.js",
-            "line": 699,
+            "line": 700,
             "description": "Lists all running processes (win only)",
             "itemtype": "method",
             "name": "_processesWin",
@@ -702,7 +702,7 @@
         },
         {
             "file": "index.js",
-            "line": 713,
+            "line": 714,
             "description": "Deserializes the process list on win",
             "itemtype": "method",
             "name": "_processListWin",
@@ -732,7 +732,7 @@
         },
         {
             "file": "index.js",
-            "line": 752,
+            "line": 753,
             "description": "Processes (transforms) the list of processes",
             "itemtype": "method",
             "name": "_filterProcessItemsWin",
@@ -757,7 +757,7 @@
         },
         {
             "file": "index.js",
-            "line": 771,
+            "line": 772,
             "description": "Filters empty lines out of the process result",
             "itemtype": "method",
             "name": "_splitProcessListWin",
@@ -782,7 +782,7 @@
         },
         {
             "file": "index.js",
-            "line": 788,
+            "line": 789,
             "description": "Kills a process (based on a PID)\nthat was not opened BEFORE Dalek has\nbeen started",
             "itemtype": "method",
             "name": "_killWindows",
