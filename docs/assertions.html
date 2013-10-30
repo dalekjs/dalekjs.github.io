@@ -130,9 +130,35 @@
     .done();
  </code></pre></p><a data-name="meth-width" class="nav-helper"></a><h2 class="method">.width</h2><p>Checks the actual width of an element.</p><p><pre><code class="language-markup">
    &lt;div id=&quot;fixed-dimensions&quot; style=&quot;width: 100px&quot;&gt;&lt;/div&gt;
- </code></pre></p><p><code></code>`javascript test .open(&#39;http://localhost:5000/index.html&#39;) // all true, all pixel .assert.width(&#39;#fixed-dimensions&#39;, 100) .assert.width(&#39;#fixed-dimensions&#39;).is(100) .assert.width(&#39;#fixed-dimensions&#39;).is.not(100) .assert.width(&#39;#fixed-dimensions&#39;).is.gt(90) .assert.width(&#39;#fixed-dimensions&#39;).is.gte(97) .assert.width(&#39;#fixed-dimensions&#39;).is.lt(120) .assert.width(&#39;#fixed-dimensions&#39;).is.lte(110) .assert.width(&#39;#fixed-dimensions&#39;).is.between([90, 110]) .done();</p><p><code></code>`</p><a data-name="meth-height" class="nav-helper"></a><h2 class="method">.height</h2><p>Checks the actual height of an element.</p><p><pre><code class="language-markup">
+ </code></pre></p><p><pre><code class="language-javascript">
+  test
+    .open(&#39;http://localhost:5000/index.html&#39;)
+    // all true, all pixel
+    .assert.width(&#39;#fixed-dimensions&#39;, 100)
+    .assert.width(&#39;#fixed-dimensions&#39;).is(100)
+    .assert.width(&#39;#fixed-dimensions&#39;).is.not(100)
+    .assert.width(&#39;#fixed-dimensions&#39;).is.gt(90)
+    .assert.width(&#39;#fixed-dimensions&#39;).is.gte(97)
+    .assert.width(&#39;#fixed-dimensions&#39;).is.lt(120)
+    .assert.width(&#39;#fixed-dimensions&#39;).is.lte(110)
+    .assert.width(&#39;#fixed-dimensions&#39;).is.between([90, 110])
+    .done();
+</code></pre></p><a data-name="meth-height" class="nav-helper"></a><h2 class="method">.height</h2><p>Checks the actual height of an element.</p><p><pre><code class="language-markup">
    &lt;div id=&quot;fixed-dimensions&quot; style=&quot;height: 100px&quot;&gt;&lt;/div&gt;
- </code></pre></p><p><code></code>`javascript test .open(&#39;http://localhost:5000/index.html&#39;) // all true, all pixel .assert.height(&#39;#fixed-dimensions&#39;, 100) .assert.height(&#39;#fixed-dimensions&#39;).is(100) .assert.height(&#39;#fixed-dimensions&#39;).is.not(100) .assert.height(&#39;#fixed-dimensions&#39;).is.gt(90) .assert.height(&#39;#fixed-dimensions&#39;).is.gte(97) .assert.height(&#39;#fixed-dimensions&#39;).is.lt(120) .assert.height(&#39;#fixed-dimensions&#39;).is.lte(110) .assert.height(&#39;#fixed-dimensions&#39;).is.between([90, 110]) .done();</p><p><code></code>`</p><a data-name="meth-selected" class="nav-helper"></a><h2 class="method">.selected</h2><p>Determine if an &lt;option&gt; element, or an &lt;input&gt; element of type checkbox or radio is currently selected.</p><p><pre><code class="language-markup">
+ </code></pre></p><p><pre><code class="language-javascript">
+  test
+    .open(&#39;http://localhost:5000/index.html&#39;)
+    // all true, all pixel
+    .assert.height(&#39;#fixed-dimensions&#39;, 100)
+    .assert.height(&#39;#fixed-dimensions&#39;).is(100)
+    .assert.height(&#39;#fixed-dimensions&#39;).is.not(100)
+    .assert.height(&#39;#fixed-dimensions&#39;).is.gt(90)
+    .assert.height(&#39;#fixed-dimensions&#39;).is.gte(97)
+    .assert.height(&#39;#fixed-dimensions&#39;).is.lt(120)
+    .assert.height(&#39;#fixed-dimensions&#39;).is.lte(110)
+    .assert.height(&#39;#fixed-dimensions&#39;).is.between([90, 110])
+    .done();
+</code></pre></p><a data-name="meth-selected" class="nav-helper"></a><h2 class="method">.selected</h2><p>Determine if an &lt;option&gt; element, or an &lt;input&gt; element of type checkbox or radio is currently selected.</p><p><pre><code class="language-markup">
  &lt;input type=&quot;checkbox&quot; id=&quot;unchecked_checkbox&quot; name=&quot;unchecked_checkbox&quot;/&gt;
  &lt;input type=&quot;checkbox&quot; id=&quot;checked_checkbox&quot; name=&quot;checked_checkbox&quot; checked=&quot;checked&quot;/&gt;
  &lt;select id=&quot;select_elm&quot; name=&quot;select_elm&quot;&gt;
