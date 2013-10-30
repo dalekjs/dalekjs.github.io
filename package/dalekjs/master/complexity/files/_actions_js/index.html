@@ -45,11 +45,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">70.36</p>
+      <p class="stat">69.91</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">1315</p>
+      <p class="stat">1361</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">62.21</p>
+      <p class="stat">64.03</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">4.77</p>
+      <p class="stat">5.25</p>
     </div>
   </div>
 </div>
@@ -1417,6 +1417,52 @@ Actions.prototype._addToActionQueue = function (opts, driverMethod, cb) {
     this.driver.events.on(&#039;driver:message&#039;, cb);
     return deferred.promise;
   }.bind(this));
+  return this;
+};
+
+Actions.prototype._button = function(button) {
+  var buttons = {LEFT: 0, MIDDLE: 1, RIGHT: 2};
+  
+  if (button === undefined) {
+    button = 0;
+  } else if (typeof button !== &#039;number&#039;) {
+    button = buttons[button.toUpperCase()] || 0;
+  }
+  
+  return button;
+};
+
+// http://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/click
+Actions.prototype.buttonClick = function (button) {
+  var hash = uuid();
+  button = this._button(button);
+  
+  var cb = this._generateCallbackAssertion(&#039;buttonClick&#039;, &#039;buttonClick&#039;);
+  this._addToActionQueue([button, hash], &#039;buttonClick&#039;, cb);
+  
+  return this;
+};
+
+// http://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/moveto
+Actions.prototype.moveto = function (selector, x, y) {
+  var hash = uuid();
+  
+  if (this.querying === true) {
+    selector = this.selector;
+  }
+  
+  if (x === undefined) {
+    x = null;
+  }
+  
+  if (y === undefined) {
+    y = null;
+  }
+  
+  // move to coordinate
+  var cb = this._generateCallbackAssertion(&#039;moveto&#039;, &#039;moveto&#039;);
+  this._addToActionQueue([selector, x, y, hash], &#039;moveto&#039;, cb);
+
   return this;
 };
 
