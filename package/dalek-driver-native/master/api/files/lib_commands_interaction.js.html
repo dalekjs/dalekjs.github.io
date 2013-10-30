@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib/commands/execute.js - dalek-driver-native</title>
+    <title>lib/commands/interaction.js - dalek-driver-native</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -102,7 +102,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib/commands/execute.js</h1>
+                        <h1 class="file-heading">File: lib/commands/interaction.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -136,114 +136,59 @@
 var Q = require(&#x27;q&#x27;);
 
 /**
- * Execute related methods
+ * Interaction related methods
  *
  * @module Driver
- * @class Execute
+ * @class Interaction
  * @namespace Dalek.DriverNative.Commands
  */
 
-var Execute = {
+var Interaction = {
 
-  /**
-   * Executes a JavaScript function 
-   *
-   * @method execute
-   * @param {function} script Script to execute
-   * @param {array} args Arguments to pass to the function
-   * @param {string} hash Unique hash of that fn call
-   * @chainable
-   */
+  moveto: function (selector, x, y, hash) {
+    var result = {element: null, xoffset: x, yoffset: y};
+    if (selector !== null) {
+      this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
+      this.actionQueue.push(function(response) {
+        var defer = Q.defer();
+        var data = JSON.parse(response);
+        result.element = data.value.ELEMENT;
+        defer.resolve(data);
+        return defer.promise;
+      }.bind(this));
+    }
+    this.actionQueue.push(this.webdriverClient.moveto.bind(this.webdriverClient, result));
+    this.actionQueue.push(this._movetoCb.bind(this, selector, x, y, hash));
 
-  execute: function (script, args, hash) {
-    this.actionQueue.push(this.webdriverClient.execute.bind(this.webdriverClient, {script: script.toString(), arguments: args}));
-    this.actionQueue.push(this._setExecuteCb.bind(this, script.toString(), args, hash));
+    
     return this;
   },
 
-  /**
-   * Sends out an event with the results of the &#x60;execute&#x60; call
-   *
-   * @method _setExecuteCb
-   * @param {function} script Script to execute
-   * @param {array} args Arguments to pass to the function
-   * @param {string} hash Unique hash of that fn call
-   * @param {string} result Serialized JSON with the results of the call
-   * @return {object} promise Exists promise
-   * @private
-   */
-
-  _setExecuteCb: function (script, args, hash, data) {
+  _movetoCb: function (selector, x, y, hash) {
     var deferred = Q.defer();
-    this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;execute&#x27;, value: JSON.parse(data).value, uuid: hash, hash: hash});
+    this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;moveto&#x27;, value: selector, uuid: hash, hash: hash});
     deferred.resolve();
     return deferred.promise;
   },
-
-  /**
-   * Executes a JavaScript function until the timeout rans out or
-   * the function returns true
-   *
-   * @method execute
-   * @param {function} script Script to execute
-   * @param {array} args Arguments to pass to the function
-   * @param {integer} timeout Timeout of the function
-   * @param {string} hash Unique hash of that fn call
-   * @chainable
-   */
-
-  waitFor: function (script, args, timeout, hash) {
-    this.actionQueue.push(this.webdriverClient.execute.bind(this.webdriverClient, {script: script.toString(), arguments: args}));
-    this.actionQueue.push(this._waitForCb.bind(this, script.toString(), args, timeout, hash));
+  
+  buttonClick: function (button, hash) {
+    this.actionQueue.push(this.webdriverClient.buttonClick.bind(this.webdriverClient, button));
+    this.actionQueue.push(this._buttonClickCb.bind(this, button, hash));
     return this;
   },
 
-  /**
-   * Sends out an event with the results of the &#x60;waitFor&#x60; call
-   *
-   * @method _setExecuteCb
-   * @param {function} script Script to execute
-   * @param {array} args Arguments to pass to the function
-   * @param {integer} timeout Timeout of the function
-   * @param {string} hash Unique hash of that fn call
-   * @param {string} data Serialized JSON with the reuslts of the toFrame call
-   * @return {object} Promise
-   * @private
-   */
-
-  _waitForCb: function (script, args, timeout, hash, data) {
+  _buttonClickCb: function (button, hash) {
     var deferred = Q.defer();
-    var ret = JSON.parse(data);
-    var checker = function (yData) {
-      if (JSON.parse(yData).value.userRet === true) {
-        this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;waitFor&#x27;, value: &#x27;&#x27;, uuid: hash, hash: hash});
-        deferred.resolve();
-      } else {
-        Q.when(this.webdriverClient.execute.bind(this.webdriverClient, {script: script, arguments: args})())
-          .then(checker);
-      }
-    }.bind(this);
-
-    setTimeout(function () {
-      this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;waitFor&#x27;, value: &#x27;Interrupted by timeout&#x27;, uuid: hash, hash: hash});
-      deferred.resolve();
-    }.bind(this), timeout);
-
-    if (ret.value.userRet === true) {
-      this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;waitFor&#x27;, value: &#x27;&#x27;, uuid: hash, hash: hash});
-      deferred.resolve();
-    } else {
-      Q.when(this.webdriverClient.execute.bind(this.webdriverClient, {script: script, arguments: args})())
-        .then(checker);
-    }
-
+    this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;buttonClick&#x27;, value: button, uuid: hash, hash: hash});
+    deferred.resolve();
     return deferred.promise;
-  },
-
+  }
+  
+  
 };
 
 /**
- * Mixes in the script execute methods
+ * Mixes in interaction methods
  *
  * @param {Dalek.DriverNative} DalekNative Native driver base class
  * @return {Dalek.DriverNative} DalekNative Native driver base class
@@ -251,8 +196,8 @@ var Execute = {
 
 module.exports = function (DalekNative) {
   // mixin methods
-  Object.keys(Execute).forEach(function (fn) {
-    DalekNative.prototype[fn] = Execute[fn];
+  Object.keys(Interaction).forEach(function (fn) {
+    DalekNative.prototype[fn] = Interaction[fn];
   });
 
   return DalekNative;

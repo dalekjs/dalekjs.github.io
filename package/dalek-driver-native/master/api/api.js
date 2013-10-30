@@ -6,6 +6,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Dalek.DriverNative.Commands.Element",
         "Dalek.DriverNative.Commands.Execute",
         "Dalek.DriverNative.Commands.Frame",
+        "Dalek.DriverNative.Commands.Interaction",
         "Dalek.DriverNative.Commands.Page",
         "Dalek.DriverNative.Commands.Screenshot",
         "Dalek.DriverNative.Commands.Url",

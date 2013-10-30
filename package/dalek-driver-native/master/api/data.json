@@ -52,6 +52,17 @@
                 "Dalek.DriverNative.Commands": 1
             }
         },
+        "lib/commands/interaction.js": {
+            "name": "lib/commands/interaction.js",
+            "modules": {},
+            "classes": {
+                "Dalek.DriverNative.Commands.Interaction": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek.DriverNative.Commands": 1
+            }
+        },
         "lib/commands/page.js": {
             "name": "lib/commands/page.js",
             "modules": {},
@@ -117,6 +128,7 @@
                 "Dalek.DriverNative.Commands.Element": 1,
                 "Dalek.DriverNative.Commands.Execute": 1,
                 "Dalek.DriverNative.Commands.Frame": 1,
+                "Dalek.DriverNative.Commands.Interaction": 1,
                 "Dalek.DriverNative.Commands.Page": 1,
                 "Dalek.DriverNative.Commands.Screenshot": 1,
                 "Dalek.DriverNative.Commands.Url": 1,
@@ -192,6 +204,20 @@
             "file": "lib/commands/frame.js",
             "line": 30,
             "description": "Frame related methods"
+        },
+        "Dalek.DriverNative.Commands.Interaction": {
+            "name": "Dalek.DriverNative.Commands.Interaction",
+            "shortname": "Dalek.DriverNative.Commands.Interaction",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands",
+            "file": "lib/commands/interaction.js",
+            "line": 30,
+            "description": "Interaction related methods"
         },
         "Dalek.DriverNative.Commands.Page": {
             "name": "Dalek.DriverNative.Commands.Page",
@@ -1820,6 +1846,25 @@
             "namespace": "Dalek.DriverNative.Commands"
         },
         {
+            "file": "lib/commands/interaction.js",
+            "line": 82,
+            "description": "Mixes in interaction methods",
+            "params": [
+                {
+                    "name": "DalekNative",
+                    "description": "Native driver base class",
+                    "type": "Dalek.DriverNative"
+                }
+            ],
+            "return": {
+                "description": "DalekNative Native driver base class",
+                "type": "Dalek.DriverNative"
+            },
+            "class": "Dalek.DriverNative.Commands.Interaction",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
             "file": "lib/commands/page.js",
             "line": 40,
             "description": "This function is non operational",
@@ -3189,6 +3234,10 @@
         {
             "message": "Missing item type\nMixes in element methods",
             "line": " lib/commands/frame.js:77"
+        },
+        {
+            "message": "Missing item type\nMixes in interaction methods",
+            "line": " lib/commands/interaction.js:82"
         },
         {
             "message": "Missing item type\nMixes in page methods",
