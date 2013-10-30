@@ -1122,7 +1122,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 56,
+            "line": 60,
             "description": "Click any mouse button (at the coordinates set by the last moveto command).\nNote that calling this command after calling buttondown and before calling button up\n(or any out-of-order interactions sequence) will yield undefined behaviour).",
             "itemtype": "method",
             "name": "buttonClick",
@@ -1145,7 +1145,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 74,
+            "line": 79,
             "description": "Click and hold the left mouse button (at the coordinates set by the last moveto command).\nNote that the next mouse-related command that should follow is buttonup.\nAny other mouse command (such as click or another call to buttondown) will yield undefined behaviour.",
             "itemtype": "method",
             "name": "buttondown",
@@ -1168,7 +1168,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 92,
+            "line": 97,
             "description": "Releases the mouse button previously held (where the mouse is currently at).\nMust be called once for every buttondown command issued.\nSee the note in click and buttondown about implications of out-of-order commands.",
             "itemtype": "method",
             "name": "buttonup",
@@ -1191,7 +1191,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 110,
+            "line": 115,
             "description": "Double-clicks at the current mouse coordinates (set by moveto).",
             "itemtype": "method",
             "name": "doubleclickPage",
@@ -1209,7 +1209,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 124,
+            "line": 129,
             "description": "Single tap on the touch enabled device.",
             "itemtype": "method",
             "name": "tap",
@@ -1227,7 +1227,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 138,
+            "line": 144,
             "description": "Finger down on the screen.",
             "itemtype": "method",
             "name": "touchdown",
@@ -1255,7 +1255,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 155,
+            "line": 161,
             "description": "Finger up on the screen.",
             "itemtype": "method",
             "name": "touchup",
@@ -1283,7 +1283,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 172,
+            "line": 178,
             "description": "Finger move on the screen.",
             "itemtype": "method",
             "name": "touchmove",
@@ -1311,7 +1311,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 189,
+            "line": 195,
             "description": "Scroll on the touch screen using finger based motion events.\nUse this command if you don't care where the scroll starts on the screen.",
             "itemtype": "method",
             "name": "touchscroll",
@@ -1339,7 +1339,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 207,
+            "line": 213,
             "description": "Double tap on the touch screen using finger motion events.",
             "itemtype": "method",
             "name": "doubletap",
@@ -1357,7 +1357,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 221,
+            "line": 227,
             "description": "Long press on the touch screen using finger motion events.",
             "itemtype": "method",
             "name": "longpress",
@@ -1375,7 +1375,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 235,
+            "line": 241,
             "description": "Flick on the touch screen using finger motion events.\nThis flickcommand starts at a particulat screen location.",
             "itemtype": "method",
             "name": "flick",
