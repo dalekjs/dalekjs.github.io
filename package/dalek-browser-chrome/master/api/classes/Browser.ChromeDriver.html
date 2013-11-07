@@ -119,17 +119,17 @@ It provides all a WebDriverServer &amp; browser launcher for Google Chrome.</p>
 <p>The Webdriver Server tries to open Port 9002 by default,
 if this port is blocked, it tries to use a port between 9003 &amp; 9092
 You can specifiy a different port from within your <a href="/pages/config.html">Dalekfile</a> like so:</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: {
+<pre><code class="lang-javascript">&quot;browsers&quot;: [{
   &quot;chrome&quot;: {
     &quot;port&quot;: 5555 
   }
-}</code></pre>
+}]</code></pre>
 <p>It is also possible to specify a range of ports:</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: {
+<pre><code class="lang-javascript">&quot;browsers&quot;: [{
   &quot;chrome&quot;: {
     &quot;portRange&quot;: [6100, 6120] 
   }
-}</code></pre>
+}]</code></pre>
 <p>If you would like to test Chrome Canary oder Chromium releases, you can simply apply a snd. argument,
 which defines the browser type:</p>
 <pre><code class="lang-bash">$ dalek mytest.js -b chrome:canary</code></pre>
@@ -138,17 +138,17 @@ which defines the browser type:</p>
 <p>This will only work if you installed your browser in the default locations,
 if the browsers binary is located in a non default location, you are able to specify
 its location in your <a href="/pages/config.html">Dalekfile</a>:</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: {
+<pre><code class="lang-javascript">&quot;browsers&quot;: [{
   &quot;chrome&quot;: {
     &quot;binary&quot;: &quot;/Applications/Custom Located Chrome.app/MacOS/Contents/Chrome&quot; 
   }
-}</code></pre>
+}]</code></pre>
 <p>This also works for the canary &amp; chromium builds</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: {
+<pre><code class="lang-javascript">&quot;browsers&quot;: [{
   &quot;chrome&quot;: {
     &quot;binary&quot;: &quot;/Applications/Custom Located Chrome.app/MacOS/Contents/Chrome&quot; 
   }
-}</code></pre>
+}]</code></pre>
 
 </div>
 

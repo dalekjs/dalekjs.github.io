@@ -150,21 +150,21 @@ var chromedriver = require(&#x27;./lib/chromedriver&#x27;);
  * You can specifiy a different port from within your [Dalekfile](/pages/config.html) like so:
  *
  * &#x60;&#x60;&#x60;javascript
- * &quot;browsers&quot;: {
+ * &quot;browsers&quot;: [{
  *   &quot;chrome&quot;: {
  *     &quot;port&quot;: 5555 
  *   }
- * }
+ * }]
  * &#x60;&#x60;&#x60;
  *
  * It is also possible to specify a range of ports:
  *
  * &#x60;&#x60;&#x60;javascript
- * &quot;browsers&quot;: {
+ * &quot;browsers&quot;: [{
  *   &quot;chrome&quot;: {
  *     &quot;portRange&quot;: [6100, 6120] 
  *   }
- * }
+ * }]
  * &#x60;&#x60;&#x60;
  *
  * If you would like to test Chrome Canary oder Chromium releases, you can simply apply a snd. argument,
@@ -185,21 +185,21 @@ var chromedriver = require(&#x27;./lib/chromedriver&#x27;);
  * its location in your [Dalekfile](/pages/config.html):
  *
  * &#x60;&#x60;&#x60;javascript
- * &quot;browsers&quot;: {
+ * &quot;browsers&quot;: [{
  *   &quot;chrome&quot;: {
  *     &quot;binary&quot;: &quot;/Applications/Custom Located Chrome.app/MacOS/Contents/Chrome&quot; 
  *   }
- * }
+ * }]
  * &#x60;&#x60;&#x60;
  *
  * This also works for the canary &amp;amp; chromium builds
  *
  * &#x60;&#x60;&#x60;javascript
- * &quot;browsers&quot;: {
+ * &quot;browsers&quot;: [{
  *   &quot;chrome&quot;: {
  *     &quot;binary&quot;: &quot;/Applications/Custom Located Chrome.app/MacOS/Contents/Chrome&quot; 
  *   }
- * }
+ * }]
  * &#x60;&#x60;&#x60;
  *
  * @module DalekJS
