@@ -164,7 +164,7 @@ test.open(&#39;http://home.dalek.com&#39;)
      .sendKeys(&#39;body&#39;, &#39;\uE00C&#39;)
      .assert.dialogText(&#39;press the escape key give this alert text&#39;)
      .done();
- </code></pre></p><p>&gt; Note: Does not work correctly in Firefox with special keys</p><a data-name="meth-answer" class="nav-helper"></a><h2 class="method">.answer</h2><p>Types a text into the text inout field of a prompt dialog. Like you would do when using your keyboard.</p><p><pre><code class="language-markup">
+ </code></pre>You can go <a href="https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element/:id/value">here</a> to read up on special keys and unicodes for them (note that a code of U+EXXX is actually written in code as \uEXXX).</p><p>&gt; Note: Does not work correctly in Firefox with special keys</p><a data-name="meth-answer" class="nav-helper"></a><h2 class="method">.answer</h2><p>Types a text into the text inout field of a prompt dialog. Like you would do when using your keyboard.</p><p><pre><code class="language-markup">
  &lt;div&gt;
    &lt;a id=&quot;aquestion&quot; onclick=&quot;this.innerText = window.prompt(&#39;Your favourite companion:&#39;)&quot;&gt;????&lt;/a&gt;
  &lt;/div&gt;
