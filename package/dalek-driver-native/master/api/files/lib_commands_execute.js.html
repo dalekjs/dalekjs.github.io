@@ -214,9 +214,18 @@ var Execute = {
   _waitForCb: function (script, args, timeout, hash, data) {
     var deferred = Q.defer();
     var ret = JSON.parse(data);
+    var timeoutId;
+    var clearWaitForTimeout = function() {
+      if(timeoutId) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+      }
+    };
+    
     var checker = function (yData) {
       if (JSON.parse(yData).value.userRet === true) {
         this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;waitFor&#x27;, value: &#x27;&#x27;, uuid: hash, hash: hash});
+        clearWaitForTimeout();
         deferred.resolve();
       } else {
         Q.when(this.webdriverClient.execute.bind(this.webdriverClient, {script: script, arguments: args})())
@@ -224,13 +233,15 @@ var Execute = {
       }
     }.bind(this);
 
-    setTimeout(function () {
+    timeoutId = setTimeout(function () {
       this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;waitFor&#x27;, value: &#x27;Interrupted by timeout&#x27;, uuid: hash, hash: hash});
+      clearWaitForTimeout();
       deferred.resolve();
     }.bind(this), timeout);
 
     if (ret.value.userRet === true) {
       this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;waitFor&#x27;, value: &#x27;&#x27;, uuid: hash, hash: hash});
+      clearWaitForTimeout();
       deferred.resolve();
     } else {
       Q.when(this.webdriverClient.execute.bind(this.webdriverClient, {script: script, arguments: args})())

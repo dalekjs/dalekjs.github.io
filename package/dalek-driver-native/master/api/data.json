@@ -1753,7 +1753,7 @@
         },
         {
             "file": "lib/commands/execute.js",
-            "line": 137,
+            "line": 148,
             "description": "Mixes in the script execute methods",
             "params": [
                 {
@@ -3229,7 +3229,7 @@
         },
         {
             "message": "Missing item type\nMixes in the script execute methods",
-            "line": " lib/commands/execute.js:137"
+            "line": " lib/commands/execute.js:148"
         },
         {
             "message": "Missing item type\nMixes in element methods",
