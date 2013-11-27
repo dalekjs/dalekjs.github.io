@@ -1004,6 +1004,7 @@ Actions.prototype.execute = function (script) {
 Actions.prototype.waitFor = function (script, args, timeout) {
   var hash = uuid();
   timeout = timeout || 5000;
+  args = [this.contextVars].concat(Array.prototype.slice.call(arguments, 1) || []);
   var cb = this._generateCallbackAssertion(&#x27;waitFor&#x27;, &#x27;waitFor&#x27;, script, args, timeout, hash);
   this._addToActionQueue([script, args, timeout, hash], &#x27;waitFor&#x27;, cb);
   return this;
