@@ -216,7 +216,7 @@ Assertions = function (opts) {
  *     .done();
  * &#x60;&#x60;&#x60;
  *
- * Always make sure, you terminate it with the [end](#meth-end) method!
+ * Always make sure to terminate it with the [end](#meth-end) method!
  *
  * @api
  * @method chain
@@ -634,7 +634,6 @@ Assertions.prototype.css = function (selector, property, expected, message) {
  *    .assert.width(&#x27;#fixed-dimensions&#x27;).is.lte(110)
  *    .assert.width(&#x27;#fixed-dimensions&#x27;).is.between([90, 110])
  *    .done();
- *
  * &#x60;&#x60;&#x60;
  *
  * @api
@@ -679,7 +678,6 @@ Assertions.prototype.width = function (selector, expected, message) {
  *    .assert.height(&#x27;#fixed-dimensions&#x27;).is.lte(110)
  *    .assert.height(&#x27;#fixed-dimensions&#x27;).is.between([90, 110])
  *    .done();
- *
  * &#x60;&#x60;&#x60;
  *
  * @api
@@ -1303,7 +1301,7 @@ Assertions.prototype.doesntHaveTitle = function (expected, message) {
 };
 
 /**
- * Asserts that the pages url is as expected.
+ * Asserts that the page’s url is as expected.
  *
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)

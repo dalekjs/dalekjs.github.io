@@ -366,7 +366,7 @@
         {
             "file": "lib/dalek/actions.js",
             "line": 48,
-            "description": "It can be really cumbersome to repeat selectors all over when performing\nmultiple actions or assertions on the same element(s).\nWhen you use the query method (or its alias $), you're able to specify a\nselector once instead of repeating it all over the place.\n\nSo, instead of writing this:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .assert.text('#nav').is('Navigation')\n    .assert.visible('#nav')\n    .assert.attr('#nav', 'data-nav', 'true')\n    .click('#nav')\n    .done();\n```\n\nyou can write this:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .query('#nav')\n      .assert.text().is('Navigation')\n      .assert.visible()\n      .assert.attr('data-nav', 'true')\n      .click()\n    .end()\n    .done();\n```\n\nAlways make sure, you terminate it with the [assertions.html#meth-end](end) method!",
+            "description": "It can be really cumbersome to repeat selectors all over when performing\nmultiple actions or assertions on the same element(s).\nWhen you use the query method (or its alias $), you're able to specify a\nselector once instead of repeating it all over the place.\n\nSo, instead of writing this:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .assert.text('#nav').is('Navigation')\n    .assert.visible('#nav')\n    .assert.attr('#nav', 'data-nav', 'true')\n    .click('#nav')\n    .done();\n```\n\nyou can write this:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .query('#nav')\n      .assert.text().is('Navigation')\n      .assert.visible()\n      .assert.attr('data-nav', 'true')\n      .click()\n    .end()\n    .done();\n```\n\nAlways make sure to terminate it with the [end](assertions.html#meth-end) method!",
             "api": "",
             "itemtype": "method",
             "name": "query",
@@ -445,7 +445,7 @@
         {
             "file": "lib/dalek/actions.js",
             "line": 180,
-            "description": "Switches to an iFrame context\n\nSometimes you encounter situations, where you need to drive/access an iFrame sitting in your page.\nYou can access such frames with this mehtod, but be aware of the fact, that the complete test context\nthan switches to the iframe context, every action and assertion will be executed within the iFrame context.\nBtw.: The domain of the IFrame can be whatever you want, this method has no same origin policy restrictions.\n\nIf you wan't to get back to the parents context, you have to use the [toParent](#meth-toParent) method.\n\n```html\n<div>\n  <iframe id=\"login\" src=\"/login.html\"/>\n</div>\n```\n\n```javascript\n test.open('http://adomain.withiframe.com')\n   .assert.title().is('Title of a page that embeds an iframe')\n   .toFrame('#login')\n     .assert.title().is('Title of a page that can be embedded as an iframe')\n   .toParent()\n   .done();\n```\n\n> NOTE: Buggy in Firefox",
+            "description": "Switches to an iFrame context\n\nSometimes you encounter situations, where you need to drive/access an iFrame sitting in your page.\nYou can access such frames with this method, but be aware of the fact, that the complete test context\nthan switches to the iframe context, every action and assertion will be executed within the iFrame context.\nBtw.: The domain of the IFrame can be whatever you want, this method has no same origin policy restrictions.\n\nIf you wan't to get back to the parents context, you have to use the [toParent](#meth-toParent) method.\n\n```html\n<div>\n  <iframe id=\"login\" src=\"/login.html\"/>\n</div>\n```\n\n```javascript\n test.open('http://adomain.withiframe.com')\n   .assert.title().is('Title of a page that embeds an iframe')\n   .toFrame('#login')\n     .assert.title().is('Title of a page that can be embedded as an iframe')\n   .toParent()\n   .done();\n```\n\n> NOTE: Buggy in Firefox",
             "api": "",
             "itemtype": "method",
             "name": "toFrame",
@@ -472,7 +472,7 @@
         {
             "file": "lib/dalek/actions.js",
             "line": 259,
-            "description": "Switches to a different window context\n\nSometimes you encounter situations, where you need to access a .\nYou can access such frames with this mehtod, but be aware of the fact, that the complete test context\nthan switches to the window context, every action and assertion will be executed within the chosen window context.\nBtw.: The domain of the window can be whatever you want, this method has no same origin policy restrictions.\n\nIf you want to get back to the parents context, you have to use the [toParentWindow](#meth-toParentWindow) method.\n\n```html\n<div>\n  <a onclick=\"window.open('http://google.com','goog','width=480, height=300')\">Open Google</a>\n</div>\n```\n\n```javascript\n test.open('http://adomain.com')\n   .assert.title().is('Title of a page that can open a popup window')\n   .toWindow('goog')\n     .assert.title().is('Google')\n   .toParentWindow()\n   .done();\n```\n\n> NOTE: Buggy in Firefox",
+            "description": "Switches to a different window context\n\nSometimes you encounter situations, where you need to access a different window, like popup windows.\nYou can access such windows with this method, but be aware of the fact, that the complete test context\nthan switches to the window context, every action and assertion will be executed within the chosen window context.\nBtw.: The domain of the window can be whatever you want, this method has no same origin policy restrictions.\n\nIf you want to get back to the parents context, you have to use the [toParentWindow](#meth-toParentWindow) method.\n\n```html\n<div>\n  <a onclick=\"window.open('http://google.com','goog','width=480, height=300')\">Open Google</a>\n</div>\n```\n\n```javascript\n test.open('http://adomain.com')\n   .assert.title().is('Title of a page that can open a popup window')\n   .toWindow('goog')\n     .assert.title().is('Google')\n   .toParentWindow()\n   .done();\n```\n\n> NOTE: Buggy in Firefox",
             "api": "",
             "itemtype": "method",
             "name": "toWindow",
@@ -489,7 +489,7 @@
         {
             "file": "lib/dalek/actions.js",
             "line": 299,
-            "description": "Switches back to the parent windoe context when the test context has been\nswitched to a different windoe context\n\n```html\n<div>\n  <a onclick=\"window.open('http://google.com','goog','width=480, height=300')\">Open Google</a>\n</div>\n```\n\n```javascript\n test.open('http://adomain.com')\n   .assert.title().is('Title of a page that can open a popup window')\n   .toWindow('goog')\n     .assert.title().is('Google')\n   .toParentWindow()\n   .assert.title().is('Title of a page that can open a popup window')\n   .done();\n```\n\n> NOTE: Buggy in Firefox",
+            "description": "Switches back to the parent window context when the test context has been\nswitched to a different window context\n\n```html\n<div>\n  <a onclick=\"window.open('http://google.com','goog','width=480, height=300')\">Open Google</a>\n</div>\n```\n\n```javascript\n test.open('http://adomain.com')\n   .assert.title().is('Title of a page that can open a popup window')\n   .toWindow('goog')\n     .assert.title().is('Google')\n   .toParentWindow()\n   .assert.title().is('Title of a page that can open a popup window')\n   .done();\n```\n\n> NOTE: Buggy in Firefox",
             "api": "",
             "itemtype": "method",
             "name": "toParentWindow",
@@ -583,7 +583,7 @@
         {
             "file": "lib/dalek/actions.js",
             "line": 417,
-            "description": "Take a screenshot of the current page.\n\nThe pathname argument takes some placeholders that will be replaced\nPlaceholder:\n\n  - `:browser` - The browser name (e.g. ‘Chrome‘, ‘Safari‘, ‘Firefox‘, etc.)\n  - `:version` -  The browser version (e.g. ‘10_0‘, ‘23_11_5‘, etc.)\n  - `:os` - The operating system (e.g. `OSX`, `Windows`, `Linux`)\n  - `:osVersion` - The operating system version (e.g `XP`, `7`, `10_8`, etc.)\n  - `:viewport` - The current viewport in pixels (e.g. `w1024_h768`)\n  - `:timestamp` - UNIX like timestapm (e.g. `637657345`)\n  - `:date` - Current date in format MM_DD_YYYY (e.g. `12_24_2013`)\n  - `:datetime` - Current datetime in format MM_DD_YYYY_HH_mm_ss (e.g. `12_24_2013_14_55_23`)\n\n```javascript\n// creates 'my/folder/my_file.png'\ntest.screenshot('my/folder/my_file');\n// creates 'my/page/in/safari/homepage.png'\ntest.screenshot('my/page/in/:browser/homepage');\n// creates 'my/page/in/safari_6_0_1/homepage.png'\ntest.screenshot('my/page/in/:browser_:version/homepage');\n// creates 'my/page/in/safari_6_0_1/on/osx/homepage.png'\ntest.screenshot('my/page/in/:browser_:version/on/:os/homepage');\n// creates 'my/page/in/safari_6_0_1/on/osx_10_8/homepage.png'\ntest.screenshot('my/page/in/:browser_:version/on/:os_:osVersion/homepage');\n// creates 'my/page/at/w1024_h768/homepage.png'\ntest.screenshot('my/page/at/:viewport/homepage');\n// creates 'my/page/at/637657345/homepage.png'\ntest.screenshot('my/page/in_time/:timestamp/homepage');\n// creates 'my/page/at/12_24_2013/homepage.png'\ntest.screenshot('my/page/in_time/:date/homepage');\n// creates 'my/page/at/12_24_2013_14_55_23/homepage.png'\ntest.screenshot('my/page/in_time/:datetime/homepage');\n```",
+            "description": "Take a screenshot of the current page.\n\nThe pathname argument takes some placeholders that will be replaced\nPlaceholder:\n\n  - `:browser` - The browser name (e.g. 'Chrome', 'Safari', 'Firefox', etc.)\n  - `:version` -  The browser version (e.g. '10_0', '23_11_5', etc.)\n  - `:os` - The operating system (e.g. `OSX`, `Windows`, `Linux`)\n  - `:osVersion` - The operating system version (e.g `XP`, `7`, `10_8`, etc.)\n  - `:viewport` - The current viewport in pixels (e.g. `w1024_h768`)\n  - `:timestamp` - UNIX like timestapm (e.g. `637657345`)\n  - `:date` - Current date in format MM_DD_YYYY (e.g. `12_24_2013`)\n  - `:datetime` - Current datetime in format MM_DD_YYYY_HH_mm_ss (e.g. `12_24_2013_14_55_23`)\n\n```javascript\n// creates 'my/folder/my_file.png'\ntest.screenshot('my/folder/my_file');\n// creates 'my/page/in/safari/homepage.png'\ntest.screenshot('my/page/in/:browser/homepage');\n// creates 'my/page/in/safari_6_0_1/homepage.png'\ntest.screenshot('my/page/in/:browser_:version/homepage');\n// creates 'my/page/in/safari_6_0_1/on/osx/homepage.png'\ntest.screenshot('my/page/in/:browser_:version/on/:os/homepage');\n// creates 'my/page/in/safari_6_0_1/on/osx_10_8/homepage.png'\ntest.screenshot('my/page/in/:browser_:version/on/:os_:osVersion/homepage');\n// creates 'my/page/at/w1024_h768/homepage.png'\ntest.screenshot('my/page/at/:viewport/homepage');\n// creates 'my/page/at/637657345/homepage.png'\ntest.screenshot('my/page/in_time/:timestamp/homepage');\n// creates 'my/page/at/12_24_2013/homepage.png'\ntest.screenshot('my/page/in_time/:date/homepage');\n// creates 'my/page/at/12_24_2013_14_55_23/homepage.png'\ntest.screenshot('my/page/in_time/:datetime/homepage');\n```",
             "api": "",
             "itemtype": "method",
             "name": "screenshot",
@@ -683,7 +683,7 @@
         {
             "file": "lib/dalek/actions.js",
             "line": 668,
-            "description": "Performs an HTTP request for opening a given location.\nYou can forge GET, POST, PUT, DELETE and HEAD requests.\n\nBasically the same as typing a location into your browsers URL bar and\nhitting return.\n\n```javascript\ntest.open('http://dalekjs.com')\n    .assert.url().is('http://dalekjs.com', 'DalekJS I'm in you')\n    .done();\n```",
+            "description": "Performs an HTTP request for opening a given location.\nYou can forge GET, POST, PUT, DELETE and HEAD requests.\n\nBasically the same as typing a location into your browsers URL bar and\nhitting return.\n\n```javascript\ntest.open('http://dalekjs.com')\n    .assert.url().is('http://dalekjs.com', 'DalekJS I\\'m in you')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "open",
@@ -744,7 +744,7 @@
         {
             "file": "lib/dalek/actions.js",
             "line": 781,
-            "description": "Types a text into the text inout field of a prompt dialog.\nLike you would do when using your keyboard.\n\n```html\n<div>\n  <a id=\"aquestion\" onclick=\"this.innerText = window.prompt('Your favourite companion:')\">????</a>\n</div>\n```\n\n```javascript\n test.open('http://adomain.com')\n    .click('#aquestion')\n    .answer('Rose')\n    .assert.text('#aquestion').is('Rose', 'Awesome she was!')\n    .done();\n```\n\n\n> Note: Does not work in Firefox & PhantomJS",
+            "description": "Types a text into the text input field of a prompt dialog.\nLike you would do when using your keyboard.\n\n```html\n<div>\n  <a id=\"aquestion\" onclick=\"this.innerText = window.prompt('Your favourite companion:')\">????</a>\n</div>\n```\n\n```javascript\n test.open('http://adomain.com')\n    .click('#aquestion')\n    .answer('Rose')\n    .assert.text('#aquestion').is('Rose', 'Awesome she was!')\n    .done();\n```\n\n\n> Note: Does not work in Firefox & PhantomJS",
             "api": "",
             "itemtype": "method",
             "name": "answer",
@@ -861,7 +861,7 @@
         {
             "file": "lib/dalek/actions.js",
             "line": 1054,
-            "description": "Sets a cookie.\nMore configuration options will be implemented in the future,\nby now, you can only set a cookie with a specific name and contents.\nThis will be a domain wide set cookie.\n\n```javascript\n test.open('http://adomain.com')\n     .setCookie('my_cookie_name', 'my=content')\n    .done();\n```",
+            "description": "Sets a cookie.\nMore configuration options will be implemented in the future,\nby now, you can only set a cookie with a specific name and contents.\nThis will be a domain wide set cookie.\n\n```javascript\n test.open('http://adomain.com')\n     .setCookie('my_cookie_name', 'my=content')\n     .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "setCookie",
@@ -1006,7 +1006,7 @@
         {
             "file": "lib/dalek/assertions.js",
             "line": 61,
-            "description": "It can be really cumbersome to always write assert, assert & assert\nall over the place when your doing multiple assertions.\nTo avoid this, open an assertion context in your test which allows\nyou to write (n) assertions without having to write 'assert' before each.\n\nSo, instead of writing this:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .assert.text('#nav').is('Navigation')\n    .assert.visible('#nav')\n    .assert.attr('#nav', 'data-nav', 'true')\n    .done();\n```\n\nyou can write this:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .assert.chain()\n      .text('#nav').is('Navigation')\n      .visible('#nav')\n      .attr('#nav', 'data-nav', 'true')\n    .end()\n    .done();\n```\n\nto make it even more concise, you can combine this with the [query](actions.html#meth-query) method:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .assert.chain()\n      .query('#nav')\n          .text().is('Navigation')\n          .visible()\n          .attr('data-nav', 'true')\n        .end()\n    .end()\n    .done();\n```\n\nAlways make sure, you terminate it with the [end](#meth-end) method!",
+            "description": "It can be really cumbersome to always write assert, assert & assert\nall over the place when your doing multiple assertions.\nTo avoid this, open an assertion context in your test which allows\nyou to write (n) assertions without having to write 'assert' before each.\n\nSo, instead of writing this:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .assert.text('#nav').is('Navigation')\n    .assert.visible('#nav')\n    .assert.attr('#nav', 'data-nav', 'true')\n    .done();\n```\n\nyou can write this:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .assert.chain()\n      .text('#nav').is('Navigation')\n      .visible('#nav')\n      .attr('#nav', 'data-nav', 'true')\n    .end()\n    .done();\n```\n\nto make it even more concise, you can combine this with the [query](actions.html#meth-query) method:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .assert.chain()\n      .query('#nav')\n          .text().is('Navigation')\n          .visible()\n          .attr('data-nav', 'true')\n        .end()\n    .end()\n    .done();\n```\n\nAlways make sure to terminate it with the [end](#meth-end) method!",
             "api": "",
             "itemtype": "method",
             "name": "chain",
@@ -1174,7 +1174,7 @@
         {
             "file": "lib/dalek/assertions.js",
             "line": 501,
-            "description": "Checks the actual width of an element.\n\n```html\n  <div id=\"fixed-dimensions\" style=\"width: 100px\"></div>\n```\n\n```javascript\n test\n   .open('http://localhost:5000/index.html')\n   // all true, all pixel\n   .assert.width('#fixed-dimensions', 100)\n   .assert.width('#fixed-dimensions').is(100)\n   .assert.width('#fixed-dimensions').is.not(100)\n   .assert.width('#fixed-dimensions').is.gt(90)\n   .assert.width('#fixed-dimensions').is.gte(97)\n   .assert.width('#fixed-dimensions').is.lt(120)\n   .assert.width('#fixed-dimensions').is.lte(110)\n   .assert.width('#fixed-dimensions').is.between([90, 110])\n   .done();\n\n```",
+            "description": "Checks the actual width of an element.\n\n```html\n  <div id=\"fixed-dimensions\" style=\"width: 100px\"></div>\n```\n\n```javascript\n test\n   .open('http://localhost:5000/index.html')\n   // all true, all pixel\n   .assert.width('#fixed-dimensions', 100)\n   .assert.width('#fixed-dimensions').is(100)\n   .assert.width('#fixed-dimensions').is.not(100)\n   .assert.width('#fixed-dimensions').is.gt(90)\n   .assert.width('#fixed-dimensions').is.gte(97)\n   .assert.width('#fixed-dimensions').is.lt(120)\n   .assert.width('#fixed-dimensions').is.lte(110)\n   .assert.width('#fixed-dimensions').is.between([90, 110])\n   .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "width",
@@ -1202,8 +1202,8 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 546,
-            "description": "Checks the actual height of an element.\n\n```html\n  <div id=\"fixed-dimensions\" style=\"height: 100px\"></div>\n```\n\n```javascript\n test\n   .open('http://localhost:5000/index.html')\n   // all true, all pixel\n   .assert.height('#fixed-dimensions', 100)\n   .assert.height('#fixed-dimensions').is(100)\n   .assert.height('#fixed-dimensions').is.not(100)\n   .assert.height('#fixed-dimensions').is.gt(90)\n   .assert.height('#fixed-dimensions').is.gte(97)\n   .assert.height('#fixed-dimensions').is.lt(120)\n   .assert.height('#fixed-dimensions').is.lte(110)\n   .assert.height('#fixed-dimensions').is.between([90, 110])\n   .done();\n\n```",
+            "line": 545,
+            "description": "Checks the actual height of an element.\n\n```html\n  <div id=\"fixed-dimensions\" style=\"height: 100px\"></div>\n```\n\n```javascript\n test\n   .open('http://localhost:5000/index.html')\n   // all true, all pixel\n   .assert.height('#fixed-dimensions', 100)\n   .assert.height('#fixed-dimensions').is(100)\n   .assert.height('#fixed-dimensions').is.not(100)\n   .assert.height('#fixed-dimensions').is.gt(90)\n   .assert.height('#fixed-dimensions').is.gte(97)\n   .assert.height('#fixed-dimensions').is.lt(120)\n   .assert.height('#fixed-dimensions').is.lte(110)\n   .assert.height('#fixed-dimensions').is.between([90, 110])\n   .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "height",
@@ -1231,7 +1231,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 591,
+            "line": 589,
             "description": "Determine if an <option> element, or an <input> element of type checkbox or radio is currently selected.\n\n```html\n<input type=\"checkbox\" id=\"unchecked_checkbox\" name=\"unchecked_checkbox\"/>\n<input type=\"checkbox\" id=\"checked_checkbox\" name=\"checked_checkbox\" checked=\"checked\"/>\n<select id=\"select_elm\" name=\"select_elm\">\n  <option value=\"9\">Eccleston</option>\n  <option selected value=\"10\">Tennant</option>\n  <option value=\"11\">Smith</option>\n</select>\n```\n\nChecking radio and checkboxes:\n\n```javascript\n test\n   .open('http://selectables.org')\n   .assert.selected('#checked_checkbox')\n   .done();\n```\n\nChecking option elements:\n\n```javascript\n test\n   .open('http://selectables.org')\n   .assert.selected('#select_elm option:nth-child(2)')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1255,7 +1255,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 642,
+            "line": 640,
             "description": "Determine if an <option> element, or an <input> element of type\ncheckbox or radio is currently not selected.\n\n```html\n<input type=\"checkbox\" id=\"unchecked_checkbox\" name=\"unchecked_checkbox\"/>\n<input type=\"checkbox\" id=\"checked_checkbox\" name=\"checked_checkbox\" checked=\"checked\"/>\n<select id=\"select_elm\" name=\"select_elm\">\n  <option value=\"9\">Eccleston</option>\n  <option selected value=\"10\">Tennant</option>\n  <option value=\"11\">Smith</option>\n</select>\n```\n\nChecking radio and checkboxes:\n\n```javascript\n test\n   .open('http://selectables.org')\n   .assert.notSelected('#unchecked_checkbox')\n   .done();\n```\n\nChecking option elements:\n\n```javascript\n test\n   .open('http://selectables.org')\n   .assert.notSelected('#select_elm option:last-child')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1279,7 +1279,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 694,
+            "line": 692,
             "description": "Determine if an element is currently enabled.\n\n```html\n<input id=\"onmars\" type=\"text\" size=\"50\" name=\"onmars\" placeholder=\"State your name, rank and intention!\"></input>\n```\n\n```javascript\ntest\n  .open('http://doctor.thedoctor.com/doctor')\n  .assert.enabled('#onmars', 'Is enabled!')\n  .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1303,7 +1303,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 728,
+            "line": 726,
             "description": "Determine if an element is currently disabled.\n\n```html\n<input disabled id=\"onearth\" type=\"text\" size=\"50\" name=\"onearth\" placeholder=\"State your name, rank and intention!\"></input>\n```\n\n```javascript\ntest\n  .open('http://doctor.thedoctor.com/doctor')\n  .assert.disabled('#onearth', 'Is disabled!')\n  .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1327,7 +1327,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 762,
+            "line": 760,
             "description": "Checks the contents of a cookie.\n\n```javascript\n test\n   .open('http://cookiejar.io/not_your_mothers_javascript.html')\n   .setCookie('atestcookie', 'foobar=baz')\n   .assert.cookie('atestcookie', 'foobar=baz')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1356,7 +1356,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 788,
+            "line": 786,
             "description": "Asserts that current HTTP status code is the same as the one passed as argument.\nTODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method for this)",
             "itemtype": "method",
             "name": "httpStatus",
@@ -1379,7 +1379,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 805,
+            "line": 803,
             "description": "Asserts that an element matching the provided selector expression exists in remote DOM environment.\n\n```html\n<body>\n  <p id=\"so-lonely\">Last of the timelords</p>\n</body>\n```\n\n```javascript\ntest\n  .open('http://doctor.thedoctor.com/doctor')\n  .assert.exists('#so-lonely', 'The loneliest element in the universe exists')\n  .done()\n```",
             "api": "",
             "itemtype": "method",
@@ -1403,7 +1403,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 841,
+            "line": 839,
             "description": "Asserts that an element matching the provided selector expression doesnʼt\nexists within the remote DOM environment.\n\n```html\n<body>\n  <p id=\"so-lonely\">Last of the time lords</p>\n</body>\n```\n\n```javascript\ntest\n  .open('http://doctor.thedoctor.com/doctor')\n  .assert.doesntExist('#the-master', 'The master element has not been seen')\n  .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1427,7 +1427,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 878,
+            "line": 876,
             "description": "Asserts that the element matching the provided selector expression is not visible.\n\n```html\n<body>\n  <h1 style=\"display: none\">Me? So hidden …</h1>\n  <h2>Me? So in viewport...</h2>\n</body>\n```\n\n```javascript\n test\n   .open('http://allyourviewportsbelongto.us')\n   .assert.notVisible('h1', 'Element is not visible')\n   .done();\n```\n\n\n> NOTE: Buggy on all browsers",
             "api": "",
             "itemtype": "method",
@@ -1451,7 +1451,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 918,
+            "line": 916,
             "description": "Asserts that the element matching the provided selector expression is visible.\n\n```html\n<body>\n  <h1>Me? So in viewport …</h1>\n</body>\n```\n\n```javascript\n test\n   .open('http://allyourviewportsbelongto.us')\n   .assert.visible('h1', 'Element is visible')\n   .done();\n```\n\n> NOTE: Buggy on all browsers",
             "api": "",
             "itemtype": "method",
@@ -1475,7 +1475,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 956,
+            "line": 954,
             "description": "Asserts that given text does not exist in the provided selector.\n\n```html\n<body>\n  <h1>This is a CasperJS sandbox</h1>\n</body>\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.doesntHaveText('h1', 'This page is a Dalek sandbox', 'It´s a sandbox!')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1504,7 +1504,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 993,
+            "line": 991,
             "description": "Asserts that given text does not exist in the current alert/prompt/confirm dialog.\n\n```html\n<a href=\"#\" id=\"alert_confirm\" onclick=\"confirm('Confirm me!')\">I make confirm</a>\n```\n\n```javascript\n test\n   .open('http://skaaro.com/index.html')\n   .click('#alert_confirm')\n   .assert.dialogDoesntHaveText('I am an alert')\n   .accept()\n   .done();\n```\n\n> NOTE: Does not work in Firefox & PhantomJS",
             "api": "",
             "itemtype": "method",
@@ -1528,7 +1528,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1025,
+            "line": 1023,
             "description": "Asserts that given text does exist in the provided selector.\n\n```html\n<body>\n  <h1>This is a Dalek sandbox</h1>\n</body>\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.text('h1', 'This page is a Dalek sandbox', 'Exterminate!')\n   .done();\n```\n\nof course, text works also with the assertion helpers is() and not()\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.text('h1').is('This page is a Dalek sandbox', 'Exterminate!')\n   .done();\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.text('h1').is.not('This page is a CasperJS sandbox', 'Exterminate!')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1557,7 +1557,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1078,
+            "line": 1076,
             "description": "Asserts that given alertText does exist in the provided alert/confirm or prompt dialog.\n\n```html\n<a href=\"#\" id=\"alert\" onclick=\"alert('I am an alert')\">I make alerts!</a>\n```\n\n```javascript\n test\n   .open('http://skaaro.com/index.html')\n   .click('#alert_confirm')\n   .assert.dialogText('I am an alert')\n   .accept()\n   .done();\n```\n\nof course, text works also with the assertion helpers is() and not()\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.dialogText().is('I am an alert', 'Exterminate!')\n   .done();\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.dialogText().is.not('I am an prompt', 'Exterminate!')\n   .done();\n```\n\n\n> NOTE: Does not work in Firefox & PhantomJS",
             "api": "",
             "itemtype": "method",
@@ -1581,7 +1581,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1127,
+            "line": 1125,
             "description": "Asserts that the page title is as expected.\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.title('Doctor Who TV', 'Not your Daleks TV')\n    .done();\n```\n\nYep, using assertion helpers is also possible:\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.title().is('Doctor Who TV', 'Not your Daleks TV')\n    .done();\n```\n\nand the not() helper is available too:\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.title().is.not('Dalek Emperor TV', 'Not your Daleks TV')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1605,7 +1605,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1166,
+            "line": 1164,
             "description": "Asserts that given title does not match the given expectations.\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.doesntHaveTitle('Dalek Emperor TV', 'Not your Daleks TV')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1629,8 +1629,8 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1189,
-            "description": "Asserts that the pages url is as expected.\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.url('http://doctorwhotv.co.uk/', 'URL is as expected')\n    .done();\n```\n\nYou can also check if the protocol changed,\nnice to see when you open GitHub with 'http' instead of 'https'\n\n```javascript\n  test.open('http://github.com')\n    .assert.url('https://github.com/', 'Changed prototcols')\n    .done();\n```\n\nYep, using assertion helpers is also possible:\n\n```javascript\n  test.open('http://github.com')\n    .assert.url().is('http://doctorwhotv.co.uk/', 'URL is as expected')\n    .done();\n```\n\nand the not() helper is available too:\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.url().is.not('http://doctorwhotv.co.uk/', 'URL is as expected')\n    .done();\n```",
+            "line": 1187,
+            "description": "Asserts that the page’s url is as expected.\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.url('http://doctorwhotv.co.uk/', 'URL is as expected')\n    .done();\n```\n\nYou can also check if the protocol changed,\nnice to see when you open GitHub with 'http' instead of 'https'\n\n```javascript\n  test.open('http://github.com')\n    .assert.url('https://github.com/', 'Changed prototcols')\n    .done();\n```\n\nYep, using assertion helpers is also possible:\n\n```javascript\n  test.open('http://github.com')\n    .assert.url().is('http://doctorwhotv.co.uk/', 'URL is as expected')\n    .done();\n```\n\nand the not() helper is available too:\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.url().is.not('http://doctorwhotv.co.uk/', 'URL is as expected')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "url",
@@ -1653,7 +1653,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1237,
+            "line": 1235,
             "description": "Asserts that the pages URL does not match the expectation.\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.doesntHaveUrl('http://doctorwhotv.co.uk/', 'URL is not expected')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1677,7 +1677,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1260,
+            "line": 1258,
             "description": "Asserts that an elements attribute is as expected.\n\n```html\n<form>\n  <button class=\"jumpButton\" type=\"submit\">Fire</button>\n</form>\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.attr('.jumpButton', 'type', 'submit')\n   .done();\n```\n\n```html\n<div id=\"dataDiv\" data-spot=\"cat\"></div>\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.attr('#dataDiv').is('data-spot', 'cat', 'We found Dataʼs cat!')\n   .done();\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.attr('#dataDiv').is.not('data-spot', 'doc', 'Spot is not a dog!')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1711,7 +1711,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1321,
+            "line": 1319,
             "description": "Is helper",
             "itemtype": "method",
             "name": "is",
@@ -1734,7 +1734,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1334,
+            "line": 1332,
             "description": "Not helper",
             "itemtype": "method",
             "name": "not",
@@ -1757,7 +1757,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1347,
+            "line": 1345,
             "description": "Between helper",
             "itemtype": "method",
             "name": "between",
@@ -1780,7 +1780,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1360,
+            "line": 1358,
             "description": "Gt helper",
             "itemtype": "method",
             "name": "gt",
@@ -1803,7 +1803,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1373,
+            "line": 1371,
             "description": "Gte helper",
             "itemtype": "method",
             "name": "gte",
@@ -1826,7 +1826,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1386,
+            "line": 1384,
             "description": "Lt helper",
             "itemtype": "method",
             "name": "lt",
@@ -1849,7 +1849,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1399,
+            "line": 1397,
             "description": "Lte helper",
             "itemtype": "method",
             "name": "lte",
@@ -1872,7 +1872,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1412,
+            "line": 1410,
             "description": "Contain helper",
             "itemtype": "method",
             "name": "contain",
@@ -1895,7 +1895,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1425,
+            "line": 1423,
             "description": "Match helper",
             "itemtype": "method",
             "name": "match",
@@ -1918,7 +1918,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1438,
+            "line": 1436,
             "description": "Equals case insensitive helper",
             "itemtype": "method",
             "name": "equalsCaseInsensitive",
@@ -1941,7 +1941,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1454,
+            "line": 1452,
             "description": "Generates a callback that will be fired when the action has been completed.\nThe callback itself will then validate the answer and will also emit an event\nthat the action has been successfully executed.",
             "itemtype": "method",
             "name": "_generateCallbackAssertion",
@@ -1984,7 +1984,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1502,
+            "line": 1500,
             "description": "Adds a method to the queue of actions/assertions to execute",
             "itemtype": "method",
             "name": "_addToActionQueue",
@@ -2014,7 +2014,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1525,
+            "line": 1523,
             "description": "Generates a function that can be used",
             "itemtype": "method",
             "name": "generateTestHelper",
@@ -2043,7 +2043,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1581,
+            "line": 1579,
             "description": "Assert if a given value shallow equals a second given value",
             "itemtype": "method",
             "name": "_testShallowEquals",
@@ -2071,7 +2071,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1601,
+            "line": 1599,
             "description": "Assert if a given value shallow does not equal a second given value",
             "itemtype": "method",
             "name": "_testShallowUnequals",
@@ -2099,7 +2099,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1621,
+            "line": 1619,
             "description": "Assert if a given value matches a range",
             "itemtype": "method",
             "name": "_testBetween",
@@ -2127,7 +2127,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1641,
+            "line": 1639,
             "description": "Assert if a given value is greater than the value to compare",
             "itemtype": "method",
             "name": "_testGreaterThan",
@@ -2160,7 +2160,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1667,
+            "line": 1665,
             "description": "Assert if a given value is greater or equal than the value to compare",
             "itemtype": "method",
             "name": "_testGreaterThanEqual",
@@ -2188,7 +2188,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1681,
+            "line": 1679,
             "description": "Assert if a given value is lower than the value to compare",
             "itemtype": "method",
             "name": "_testLowerThan",
@@ -2221,7 +2221,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1707,
+            "line": 1705,
             "description": "Asserts that 2 string match regardless of case",
             "itemtype": "method",
             "name": "_caseInsensitiveMatch",
@@ -2249,7 +2249,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1731,
+            "line": 1729,
             "description": "Assert if a given value contain another value",
             "itemtype": "method",
             "name": "_contain",
@@ -2277,7 +2277,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1751,
+            "line": 1749,
             "description": "Assert if a given value is lower or equal than the value to compare",
             "itemtype": "method",
             "name": "_testLowerThanEqual",
@@ -2305,7 +2305,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1765,
+            "line": 1763,
             "description": "Assert if a given value is boolean 'true'",
             "itemtype": "method",
             "name": "_testTruthy",
@@ -2328,7 +2328,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1778,
+            "line": 1776,
             "description": "Assert if a given value is boolean 'false'",
             "itemtype": "method",
             "name": "_testFalsy",
@@ -2351,7 +2351,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1791,
+            "line": 1789,
             "description": "Assert a given value matches a RegEx",
             "itemtype": "method",
             "name": "_contain",
@@ -4909,79 +4909,79 @@
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:546"
+            "line": " lib/dalek/assertions.js:545"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:591"
+            "line": " lib/dalek/assertions.js:589"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:642"
+            "line": " lib/dalek/assertions.js:640"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:694"
+            "line": " lib/dalek/assertions.js:692"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:728"
+            "line": " lib/dalek/assertions.js:726"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:762"
+            "line": " lib/dalek/assertions.js:760"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:805"
+            "line": " lib/dalek/assertions.js:803"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:841"
+            "line": " lib/dalek/assertions.js:839"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:878"
+            "line": " lib/dalek/assertions.js:876"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:918"
+            "line": " lib/dalek/assertions.js:916"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:956"
+            "line": " lib/dalek/assertions.js:954"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:993"
+            "line": " lib/dalek/assertions.js:991"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:1025"
+            "line": " lib/dalek/assertions.js:1023"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:1078"
+            "line": " lib/dalek/assertions.js:1076"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:1127"
+            "line": " lib/dalek/assertions.js:1125"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:1166"
+            "line": " lib/dalek/assertions.js:1164"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:1189"
+            "line": " lib/dalek/assertions.js:1187"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:1237"
+            "line": " lib/dalek/assertions.js:1235"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:1260"
+            "line": " lib/dalek/assertions.js:1258"
         },
         {
             "message": "unknown tag: part",

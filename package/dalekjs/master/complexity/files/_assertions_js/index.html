@@ -49,7 +49,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">1786</p>
+      <p class="stat">1784</p>
     </div>
   </div>
   <div class="row historical">
@@ -192,7 +192,7 @@ Assertions = function (opts) {
  *     .done();
  * ```
  *
- * Always make sure, you terminate it with the [end](#meth-end) method!
+ * Always make sure to terminate it with the [end](#meth-end) method!
  *
  * @api
  * @method chain
@@ -610,7 +610,6 @@ Assertions.prototype.css = function (selector, property, expected, message) {
  *    .assert.width(&#039;#fixed-dimensions&#039;).is.lte(110)
  *    .assert.width(&#039;#fixed-dimensions&#039;).is.between([90, 110])
  *    .done();
- *
  * ```
  *
  * @api
@@ -655,7 +654,6 @@ Assertions.prototype.width = function (selector, expected, message) {
  *    .assert.height(&#039;#fixed-dimensions&#039;).is.lte(110)
  *    .assert.height(&#039;#fixed-dimensions&#039;).is.between([90, 110])
  *    .done();
- *
  * ```
  *
  * @api
@@ -1279,7 +1277,7 @@ Assertions.prototype.doesntHaveTitle = function (expected, message) {
 };
 
 /**
- * Asserts that the pages url is as expected.
+ * Asserts that the page’s url is as expected.
  *
  * ```javascript
  *   test.open(&#039;http://doctorwhotv.co.uk/&#039;)

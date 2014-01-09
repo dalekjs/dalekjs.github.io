@@ -191,7 +191,7 @@ var Actions = function () {
  *     .done();
  * &#x60;&#x60;&#x60;
  *
- * Always make sure, you terminate it with the [assertions.html#meth-end](end) method!
+ * Always make sure to terminate it with the [end](assertions.html#meth-end) method!
  *
  * @api
  * @method query
@@ -297,7 +297,7 @@ Actions.prototype.setHttpAuth = function (username, password) {
  * Switches to an iFrame context
  *
  * Sometimes you encounter situations, where you need to drive/access an iFrame sitting in your page.
- * You can access such frames with this mehtod, but be aware of the fact, that the complete test context
+ * You can access such frames with this method, but be aware of the fact, that the complete test context
  * than switches to the iframe context, every action and assertion will be executed within the iFrame context.
  * Btw.: The domain of the IFrame can be whatever you want, this method has no same origin policy restrictions.
  *
@@ -375,8 +375,8 @@ Actions.prototype.toParent = function () {
 /**
  * Switches to a different window context
  *
- * Sometimes you encounter situations, where you need to access a .
- * You can access such frames with this mehtod, but be aware of the fact, that the complete test context
+ * Sometimes you encounter situations, where you need to access a different window, like popup windows.
+ * You can access such windows with this method, but be aware of the fact, that the complete test context
  * than switches to the window context, every action and assertion will be executed within the chosen window context.
  * Btw.: The domain of the window can be whatever you want, this method has no same origin policy restrictions.
  *
@@ -413,8 +413,8 @@ Actions.prototype.toWindow = function (name) {
 };
 
 /**
- * Switches back to the parent windoe context when the test context has been
- * switched to a different windoe context
+ * Switches back to the parent window context when the test context has been
+ * switched to a different window context
  *
  * &#x60;&#x60;&#x60;html
  * &lt;div&gt;
@@ -536,8 +536,8 @@ Actions.prototype.waitWhileVisible = function (selector, timeout) {
  * The pathname argument takes some placeholders that will be replaced
  * Placeholder:
  *
- *   - &#x60;:browser&#x60; - The browser name (e.g. ‘Chrome‘, ‘Safari‘, ‘Firefox‘, etc.)
- *   - &#x60;:version&#x60; -  The browser version (e.g. ‘10_0‘, ‘23_11_5‘, etc.)
+ *   - &#x60;:browser&#x60; - The browser name (e.g. &#x27;Chrome&#x27;, &#x27;Safari&#x27;, &#x27;Firefox&#x27;, etc.)
+ *   - &#x60;:version&#x60; -  The browser version (e.g. &#x27;10_0&#x27;, &#x27;23_11_5&#x27;, etc.)
  *   - &#x60;:os&#x60; - The operating system (e.g. &#x60;OSX&#x60;, &#x60;Windows&#x60;, &#x60;Linux&#x60;)
  *   - &#x60;:osVersion&#x60; - The operating system version (e.g &#x60;XP&#x60;, &#x60;7&#x60;, &#x60;10_8&#x60;, etc.)
  *   - &#x60;:viewport&#x60; - The current viewport in pixels (e.g. &#x60;w1024_h768&#x60;)
@@ -790,7 +790,7 @@ Actions.prototype.submit = function (selector) {
  *
  * &#x60;&#x60;&#x60;javascript
  * test.open(&#x27;http://dalekjs.com&#x27;)
- *     .assert.url().is(&#x27;http://dalekjs.com&#x27;, &#x27;DalekJS I&#x27;m in you&#x27;)
+ *     .assert.url().is(&#x27;http://dalekjs.com&#x27;, &#x27;DalekJS I\&#x27;m in you&#x27;)
  *     .done();
  * &#x60;&#x60;&#x60;
  *
@@ -895,7 +895,7 @@ Actions.prototype.sendKeys = function (selector, keystrokes) {
 };
 
 /**
- * Types a text into the text inout field of a prompt dialog.
+ * Types a text into the text input field of a prompt dialog.
  * Like you would do when using your keyboard.
  *
  * &#x60;&#x60;&#x60;html
@@ -1176,7 +1176,7 @@ Actions.prototype.maximize = function () {
  * &#x60;&#x60;&#x60;javascript
  *  test.open(&#x27;http://adomain.com&#x27;)
  *      .setCookie(&#x27;my_cookie_name&#x27;, &#x27;my=content&#x27;)
- *     .done();
+ *      .done();
  * &#x60;&#x60;&#x60;
  *
  * @api

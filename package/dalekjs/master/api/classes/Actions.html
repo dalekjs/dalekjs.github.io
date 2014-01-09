@@ -990,7 +990,7 @@ you are clicking okay or hitting return in one of that dialogs.</p>
     </div>
 
     <div class="description">
-        <p>Types a text into the text inout field of a prompt dialog.
+        <p>Types a text into the text input field of a prompt dialog.
 Like you would do when using your keyboard.</p>
 <pre><code class="lang-html">&lt;div&gt;
   &lt;a id=&quot;aquestion&quot; onclick=&quot;this.innerText = window.prompt(&#39;Your favourite companion:&#39;)&quot;&gt;????&lt;/a&gt;
@@ -1937,7 +1937,7 @@ You can forge GET, POST, PUT, DELETE and HEAD requests.</p>
 <p>Basically the same as typing a location into your browsers URL bar and
 hitting return.</p>
 <pre><code class="lang-javascript">test.open(&#39;http://dalekjs.com&#39;)
-    .assert.url().is(&#39;http://dalekjs.com&#39;, &#39;DalekJS I&#39;m in you&#39;)
+    .assert.url().is(&#39;http://dalekjs.com&#39;, &#39;DalekJS I\&#39;m in you&#39;)
     .done();</code></pre>
 
     </div>
@@ -2049,7 +2049,7 @@ selector once instead of repeating it all over the place.</p>
       .click()
     .end()
     .done();</code></pre>
-<p>Always make sure, you terminate it with the <a href="end">assertions.html#meth-end</a> method!</p>
+<p>Always make sure to terminate it with the <a href="assertions.html#meth-end">end</a> method!</p>
 
     </div>
 
@@ -2319,8 +2319,8 @@ and a height of 1024px. You can specify your own default in the configuration.</
 <p>The pathname argument takes some placeholders that will be replaced
 Placeholder:</p>
 <ul>
-<li><code>:browser</code> - The browser name (e.g. ‘Chrome‘, ‘Safari‘, ‘Firefox‘, etc.)</li>
-<li><code>:version</code> -  The browser version (e.g. ‘10_0‘, ‘23_11_5‘, etc.)</li>
+<li><code>:browser</code> - The browser name (e.g. &#39;Chrome&#39;, &#39;Safari&#39;, &#39;Firefox&#39;, etc.)</li>
+<li><code>:version</code> -  The browser version (e.g. &#39;10_0&#39;, &#39;23_11_5&#39;, etc.)</li>
 <li><code>:os</code> - The operating system (e.g. <code>OSX</code>, <code>Windows</code>, <code>Linux</code>)</li>
 <li><code>:osVersion</code> - The operating system version (e.g <code>XP</code>, <code>7</code>, <code>10_8</code>, etc.)</li>
 <li><code>:viewport</code> - The current viewport in pixels (e.g. <code>w1024_h768</code>)</li>
@@ -2566,7 +2566,7 @@ by now, you can only set a cookie with a specific name and contents.
 This will be a domain wide set cookie.</p>
 <pre><code class="lang-javascript"> test.open(&#39;http://adomain.com&#39;)
      .setCookie(&#39;my_cookie_name&#39;, &#39;my=content&#39;)
-    .done();</code></pre>
+     .done();</code></pre>
 
     </div>
 
@@ -3011,7 +3011,7 @@ For more information about this, I recommend to check out the <a href="/docs/con
     <div class="description">
         <p>Switches to an iFrame context</p>
 <p>Sometimes you encounter situations, where you need to drive/access an iFrame sitting in your page.
-You can access such frames with this mehtod, but be aware of the fact, that the complete test context
+You can access such frames with this method, but be aware of the fact, that the complete test context
 than switches to the iframe context, every action and assertion will be executed within the iFrame context.
 Btw.: The domain of the IFrame can be whatever you want, this method has no same origin policy restrictions.</p>
 <p>If you wan&#39;t to get back to the parents context, you have to use the <a href="#meth-toParent">toParent</a> method.</p>
@@ -3178,8 +3178,8 @@ switched to an iFrame context</p>
     </div>
 
     <div class="description">
-        <p>Switches back to the parent windoe context when the test context has been
-switched to a different windoe context</p>
+        <p>Switches back to the parent window context when the test context has been
+switched to a different window context</p>
 <pre><code class="lang-html">&lt;div&gt;
   &lt;a onclick=&quot;window.open(&#39;http://google.com&#39;,&#39;goog&#39;,&#39;width=480, height=300&#39;)&quot;&gt;Open Google&lt;/a&gt;
 &lt;/div&gt;</code></pre>
@@ -3260,8 +3260,8 @@ switched to a different windoe context</p>
 
     <div class="description">
         <p>Switches to a different window context</p>
-<p>Sometimes you encounter situations, where you need to access a .
-You can access such frames with this mehtod, but be aware of the fact, that the complete test context
+<p>Sometimes you encounter situations, where you need to access a different window, like popup windows.
+You can access such windows with this method, but be aware of the fact, that the complete test context
 than switches to the window context, every action and assertion will be executed within the chosen window context.
 Btw.: The domain of the window can be whatever you want, this method has no same origin policy restrictions.</p>
 <p>If you want to get back to the parents context, you have to use the <a href="#meth-toParentWindow">toParentWindow</a> method.</p>
