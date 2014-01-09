@@ -1140,7 +1140,7 @@
         {
             "file": "lib/dalek/assertions.js",
             "line": 410,
-            "description": "Checks the computed style.\n\n```html\n<div id=\"superColoredElement\">Rose</div>\n```\n\n```css\n#superColoredElement {\n  background-color: rgba(255, 0, 0, 1);\n  color: rgba(0, 128, 0, 1);\n}\n```\n\n```javascript\n test\n   .open('http://unicorns.rainbows.io')\n   .assert.css('#superColoredElement', 'background-color', 'rgba(255, 0, 0, 1)')\n   .assert.css('#superColoredElement', 'color', 'rgba(0, 128, 0, 1)')\n   .done();\n```",
+            "description": "Checks the computed style.\nNote: When selecting values like em or percent, they will be converted to px. So it's currently not possible\nto check em, %, ... values, only px.\n\n```html\n<div id=\"superColoredElement\">Rose</div>\n```\n\n```css\n#superColoredElement {\n  background-color: rgba(255, 0, 0, 1);\n  color: rgba(0, 128, 0, 1);\n}\n```\n\n```javascript\n test\n   .open('http://unicorns.rainbows.io')\n   .assert.css('#superColoredElement', 'background-color', 'rgba(255, 0, 0, 1)')\n   .assert.css('#superColoredElement', 'color', 'rgba(0, 128, 0, 1)')\n   .done();\n```\n\nCan also check if a computed style is greater or lower than the expected value.\nTODO: We might extract the part that determines the comparison operator to reuse it in other test. We might also\n      add >= and <=.\n\n```html\n<div id=\"fancyPlacedElement\">Tulip</div>\n```\n\n```css\n#fancyPlacedElement {\n  top: 100px;\n}\n```\n\n```javascript\n test\n   .open('http://unicorns.rainbows.io')\n   .assert.css('#fancyPlacedElement', 'top', '>50px') // 100 is greater than 50, success\n   .assert.css('#fancyPlacedElement', 'top', '<150px') // 100 is lower than 150, success\n   .assert.css('#fancyPlacedElement', 'top', '>150px') // 100 is lower than 150, fail\n   .assert.css('#fancyPlacedElement', 'top', '<50px') // 100 is greater than 50, fail\n   .done();\n```",
             "api": "",
             "itemtype": "method",
             "name": "css",
@@ -1173,7 +1173,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 456,
+            "line": 501,
             "description": "Checks the actual width of an element.\n\n```html\n  <div id=\"fixed-dimensions\" style=\"width: 100px\"></div>\n```\n\n```javascript\n test\n   .open('http://localhost:5000/index.html')\n   // all true, all pixel\n   .assert.width('#fixed-dimensions', 100)\n   .assert.width('#fixed-dimensions').is(100)\n   .assert.width('#fixed-dimensions').is.not(100)\n   .assert.width('#fixed-dimensions').is.gt(90)\n   .assert.width('#fixed-dimensions').is.gte(97)\n   .assert.width('#fixed-dimensions').is.lt(120)\n   .assert.width('#fixed-dimensions').is.lte(110)\n   .assert.width('#fixed-dimensions').is.between([90, 110])\n   .done();\n\n```",
             "api": "",
             "itemtype": "method",
@@ -1202,7 +1202,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 501,
+            "line": 546,
             "description": "Checks the actual height of an element.\n\n```html\n  <div id=\"fixed-dimensions\" style=\"height: 100px\"></div>\n```\n\n```javascript\n test\n   .open('http://localhost:5000/index.html')\n   // all true, all pixel\n   .assert.height('#fixed-dimensions', 100)\n   .assert.height('#fixed-dimensions').is(100)\n   .assert.height('#fixed-dimensions').is.not(100)\n   .assert.height('#fixed-dimensions').is.gt(90)\n   .assert.height('#fixed-dimensions').is.gte(97)\n   .assert.height('#fixed-dimensions').is.lt(120)\n   .assert.height('#fixed-dimensions').is.lte(110)\n   .assert.height('#fixed-dimensions').is.between([90, 110])\n   .done();\n\n```",
             "api": "",
             "itemtype": "method",
@@ -1231,7 +1231,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 546,
+            "line": 591,
             "description": "Determine if an <option> element, or an <input> element of type checkbox or radio is currently selected.\n\n```html\n<input type=\"checkbox\" id=\"unchecked_checkbox\" name=\"unchecked_checkbox\"/>\n<input type=\"checkbox\" id=\"checked_checkbox\" name=\"checked_checkbox\" checked=\"checked\"/>\n<select id=\"select_elm\" name=\"select_elm\">\n  <option value=\"9\">Eccleston</option>\n  <option selected value=\"10\">Tennant</option>\n  <option value=\"11\">Smith</option>\n</select>\n```\n\nChecking radio and checkboxes:\n\n```javascript\n test\n   .open('http://selectables.org')\n   .assert.selected('#checked_checkbox')\n   .done();\n```\n\nChecking option elements:\n\n```javascript\n test\n   .open('http://selectables.org')\n   .assert.selected('#select_elm option:nth-child(2)')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1255,7 +1255,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 597,
+            "line": 642,
             "description": "Determine if an <option> element, or an <input> element of type\ncheckbox or radio is currently not selected.\n\n```html\n<input type=\"checkbox\" id=\"unchecked_checkbox\" name=\"unchecked_checkbox\"/>\n<input type=\"checkbox\" id=\"checked_checkbox\" name=\"checked_checkbox\" checked=\"checked\"/>\n<select id=\"select_elm\" name=\"select_elm\">\n  <option value=\"9\">Eccleston</option>\n  <option selected value=\"10\">Tennant</option>\n  <option value=\"11\">Smith</option>\n</select>\n```\n\nChecking radio and checkboxes:\n\n```javascript\n test\n   .open('http://selectables.org')\n   .assert.notSelected('#unchecked_checkbox')\n   .done();\n```\n\nChecking option elements:\n\n```javascript\n test\n   .open('http://selectables.org')\n   .assert.notSelected('#select_elm option:last-child')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1279,7 +1279,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 649,
+            "line": 694,
             "description": "Determine if an element is currently enabled.\n\n```html\n<input id=\"onmars\" type=\"text\" size=\"50\" name=\"onmars\" placeholder=\"State your name, rank and intention!\"></input>\n```\n\n```javascript\ntest\n  .open('http://doctor.thedoctor.com/doctor')\n  .assert.enabled('#onmars', 'Is enabled!')\n  .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1303,7 +1303,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 683,
+            "line": 728,
             "description": "Determine if an element is currently disabled.\n\n```html\n<input disabled id=\"onearth\" type=\"text\" size=\"50\" name=\"onearth\" placeholder=\"State your name, rank and intention!\"></input>\n```\n\n```javascript\ntest\n  .open('http://doctor.thedoctor.com/doctor')\n  .assert.disabled('#onearth', 'Is disabled!')\n  .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1327,7 +1327,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 717,
+            "line": 762,
             "description": "Checks the contents of a cookie.\n\n```javascript\n test\n   .open('http://cookiejar.io/not_your_mothers_javascript.html')\n   .setCookie('atestcookie', 'foobar=baz')\n   .assert.cookie('atestcookie', 'foobar=baz')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1356,7 +1356,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 743,
+            "line": 788,
             "description": "Asserts that current HTTP status code is the same as the one passed as argument.\nTODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method for this)",
             "itemtype": "method",
             "name": "httpStatus",
@@ -1379,7 +1379,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 760,
+            "line": 805,
             "description": "Asserts that an element matching the provided selector expression exists in remote DOM environment.\n\n```html\n<body>\n  <p id=\"so-lonely\">Last of the timelords</p>\n</body>\n```\n\n```javascript\ntest\n  .open('http://doctor.thedoctor.com/doctor')\n  .assert.exists('#so-lonely', 'The loneliest element in the universe exists')\n  .done()\n```",
             "api": "",
             "itemtype": "method",
@@ -1403,7 +1403,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 796,
+            "line": 841,
             "description": "Asserts that an element matching the provided selector expression doesnʼt\nexists within the remote DOM environment.\n\n```html\n<body>\n  <p id=\"so-lonely\">Last of the time lords</p>\n</body>\n```\n\n```javascript\ntest\n  .open('http://doctor.thedoctor.com/doctor')\n  .assert.doesntExist('#the-master', 'The master element has not been seen')\n  .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1427,7 +1427,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 833,
+            "line": 878,
             "description": "Asserts that the element matching the provided selector expression is not visible.\n\n```html\n<body>\n  <h1 style=\"display: none\">Me? So hidden …</h1>\n  <h2>Me? So in viewport...</h2>\n</body>\n```\n\n```javascript\n test\n   .open('http://allyourviewportsbelongto.us')\n   .assert.notVisible('h1', 'Element is not visible')\n   .done();\n```\n\n\n> NOTE: Buggy on all browsers",
             "api": "",
             "itemtype": "method",
@@ -1451,7 +1451,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 873,
+            "line": 918,
             "description": "Asserts that the element matching the provided selector expression is visible.\n\n```html\n<body>\n  <h1>Me? So in viewport …</h1>\n</body>\n```\n\n```javascript\n test\n   .open('http://allyourviewportsbelongto.us')\n   .assert.visible('h1', 'Element is visible')\n   .done();\n```\n\n> NOTE: Buggy on all browsers",
             "api": "",
             "itemtype": "method",
@@ -1475,7 +1475,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 911,
+            "line": 956,
             "description": "Asserts that given text does not exist in the provided selector.\n\n```html\n<body>\n  <h1>This is a CasperJS sandbox</h1>\n</body>\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.doesntHaveText('h1', 'This page is a Dalek sandbox', 'It´s a sandbox!')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1504,7 +1504,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 948,
+            "line": 993,
             "description": "Asserts that given text does not exist in the current alert/prompt/confirm dialog.\n\n```html\n<a href=\"#\" id=\"alert_confirm\" onclick=\"confirm('Confirm me!')\">I make confirm</a>\n```\n\n```javascript\n test\n   .open('http://skaaro.com/index.html')\n   .click('#alert_confirm')\n   .assert.dialogDoesntHaveText('I am an alert')\n   .accept()\n   .done();\n```\n\n> NOTE: Does not work in Firefox & PhantomJS",
             "api": "",
             "itemtype": "method",
@@ -1528,7 +1528,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 980,
+            "line": 1025,
             "description": "Asserts that given text does exist in the provided selector.\n\n```html\n<body>\n  <h1>This is a Dalek sandbox</h1>\n</body>\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.text('h1', 'This page is a Dalek sandbox', 'Exterminate!')\n   .done();\n```\n\nof course, text works also with the assertion helpers is() and not()\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.text('h1').is('This page is a Dalek sandbox', 'Exterminate!')\n   .done();\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.text('h1').is.not('This page is a CasperJS sandbox', 'Exterminate!')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1557,7 +1557,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1033,
+            "line": 1078,
             "description": "Asserts that given alertText does exist in the provided alert/confirm or prompt dialog.\n\n```html\n<a href=\"#\" id=\"alert\" onclick=\"alert('I am an alert')\">I make alerts!</a>\n```\n\n```javascript\n test\n   .open('http://skaaro.com/index.html')\n   .click('#alert_confirm')\n   .assert.dialogText('I am an alert')\n   .accept()\n   .done();\n```\n\nof course, text works also with the assertion helpers is() and not()\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.dialogText().is('I am an alert', 'Exterminate!')\n   .done();\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.dialogText().is.not('I am an prompt', 'Exterminate!')\n   .done();\n```\n\n\n> NOTE: Does not work in Firefox & PhantomJS",
             "api": "",
             "itemtype": "method",
@@ -1581,7 +1581,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1082,
+            "line": 1127,
             "description": "Asserts that the page title is as expected.\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.title('Doctor Who TV', 'Not your Daleks TV')\n    .done();\n```\n\nYep, using assertion helpers is also possible:\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.title().is('Doctor Who TV', 'Not your Daleks TV')\n    .done();\n```\n\nand the not() helper is available too:\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.title().is.not('Dalek Emperor TV', 'Not your Daleks TV')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1605,7 +1605,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1121,
+            "line": 1166,
             "description": "Asserts that given title does not match the given expectations.\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.doesntHaveTitle('Dalek Emperor TV', 'Not your Daleks TV')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1629,7 +1629,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1144,
+            "line": 1189,
             "description": "Asserts that the pages url is as expected.\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.url('http://doctorwhotv.co.uk/', 'URL is as expected')\n    .done();\n```\n\nYou can also check if the protocol changed,\nnice to see when you open GitHub with 'http' instead of 'https'\n\n```javascript\n  test.open('http://github.com')\n    .assert.url('https://github.com/', 'Changed prototcols')\n    .done();\n```\n\nYep, using assertion helpers is also possible:\n\n```javascript\n  test.open('http://github.com')\n    .assert.url().is('http://doctorwhotv.co.uk/', 'URL is as expected')\n    .done();\n```\n\nand the not() helper is available too:\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.url().is.not('http://doctorwhotv.co.uk/', 'URL is as expected')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1653,7 +1653,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1192,
+            "line": 1237,
             "description": "Asserts that the pages URL does not match the expectation.\n\n```javascript\n  test.open('http://doctorwhotv.co.uk/')\n    .assert.doesntHaveUrl('http://doctorwhotv.co.uk/', 'URL is not expected')\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1677,7 +1677,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1215,
+            "line": 1260,
             "description": "Asserts that an elements attribute is as expected.\n\n```html\n<form>\n  <button class=\"jumpButton\" type=\"submit\">Fire</button>\n</form>\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.attr('.jumpButton', 'type', 'submit')\n   .done();\n```\n\n```html\n<div id=\"dataDiv\" data-spot=\"cat\"></div>\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.attr('#dataDiv').is('data-spot', 'cat', 'We found Dataʼs cat!')\n   .done();\n```\n\n```javascript\n test\n   .open('http://dalekjs.com/guineapig/')\n   .assert.attr('#dataDiv').is.not('data-spot', 'doc', 'Spot is not a dog!')\n   .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -1711,7 +1711,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1276,
+            "line": 1321,
             "description": "Is helper",
             "itemtype": "method",
             "name": "is",
@@ -1734,7 +1734,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1289,
+            "line": 1334,
             "description": "Not helper",
             "itemtype": "method",
             "name": "not",
@@ -1757,7 +1757,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1302,
+            "line": 1347,
             "description": "Between helper",
             "itemtype": "method",
             "name": "between",
@@ -1780,7 +1780,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1315,
+            "line": 1360,
             "description": "Gt helper",
             "itemtype": "method",
             "name": "gt",
@@ -1803,7 +1803,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1328,
+            "line": 1373,
             "description": "Gte helper",
             "itemtype": "method",
             "name": "gte",
@@ -1826,7 +1826,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1341,
+            "line": 1386,
             "description": "Lt helper",
             "itemtype": "method",
             "name": "lt",
@@ -1849,7 +1849,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1354,
+            "line": 1399,
             "description": "Lte helper",
             "itemtype": "method",
             "name": "lte",
@@ -1872,7 +1872,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1367,
+            "line": 1412,
             "description": "Contain helper",
             "itemtype": "method",
             "name": "contain",
@@ -1895,7 +1895,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1380,
+            "line": 1425,
             "description": "Match helper",
             "itemtype": "method",
             "name": "match",
@@ -1918,7 +1918,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1393,
+            "line": 1438,
             "description": "Equals case insensitive helper",
             "itemtype": "method",
             "name": "equalsCaseInsensitive",
@@ -1941,7 +1941,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1409,
+            "line": 1454,
             "description": "Generates a callback that will be fired when the action has been completed.\nThe callback itself will then validate the answer and will also emit an event\nthat the action has been successfully executed.",
             "itemtype": "method",
             "name": "_generateCallbackAssertion",
@@ -1955,6 +1955,21 @@
                     "name": "type",
                     "description": "Type of the action (usually the actions name)",
                     "type": "String"
+                },
+                {
+                    "name": "test",
+                    "description": "test method to be used",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "the uuid",
+                    "type": "String"
+                },
+                {
+                    "name": "opts",
+                    "description": "the options object",
+                    "type": "Object"
                 }
             ],
             "return": {
@@ -1969,7 +1984,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1454,
+            "line": 1502,
             "description": "Adds a method to the queue of actions/assertions to execute",
             "itemtype": "method",
             "name": "_addToActionQueue",
@@ -1999,7 +2014,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1477,
+            "line": 1525,
             "description": "Generates a function that can be used",
             "itemtype": "method",
             "name": "generateTestHelper",
@@ -2028,7 +2043,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1533,
+            "line": 1581,
             "description": "Assert if a given value shallow equals a second given value",
             "itemtype": "method",
             "name": "_testShallowEquals",
@@ -2056,7 +2071,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1553,
+            "line": 1601,
             "description": "Assert if a given value shallow does not equal a second given value",
             "itemtype": "method",
             "name": "_testShallowUnequals",
@@ -2084,7 +2099,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1573,
+            "line": 1621,
             "description": "Assert if a given value matches a range",
             "itemtype": "method",
             "name": "_testBetween",
@@ -2112,7 +2127,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1593,
+            "line": 1641,
             "description": "Assert if a given value is greater than the value to compare",
             "itemtype": "method",
             "name": "_testGreaterThan",
@@ -2126,6 +2141,11 @@
                     "name": "b",
                     "description": "Value to compare",
                     "type": "Bool"
+                },
+                {
+                    "name": "b",
+                    "description": "Whether to apply parseFloat to both values prior comparision",
+                    "type": "ParseFloatOnValues"
                 }
             ],
             "return": {
@@ -2140,7 +2160,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1613,
+            "line": 1667,
             "description": "Assert if a given value is greater or equal than the value to compare",
             "itemtype": "method",
             "name": "_testGreaterThanEqual",
@@ -2168,7 +2188,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1627,
+            "line": 1681,
             "description": "Assert if a given value is lower than the value to compare",
             "itemtype": "method",
             "name": "_testLowerThan",
@@ -2182,6 +2202,11 @@
                     "name": "b",
                     "description": "Value to compare",
                     "type": "Bool"
+                },
+                {
+                    "name": "b",
+                    "description": "Whether to apply parseFloatOnValues to both values prior comparision",
+                    "type": "ParseFloatOnValues"
                 }
             ],
             "return": {
@@ -2196,7 +2221,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1647,
+            "line": 1707,
             "description": "Asserts that 2 string match regardless of case",
             "itemtype": "method",
             "name": "_caseInsensitiveMatch",
@@ -2224,7 +2249,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1671,
+            "line": 1731,
             "description": "Assert if a given value contain another value",
             "itemtype": "method",
             "name": "_contain",
@@ -2252,7 +2277,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1691,
+            "line": 1751,
             "description": "Assert if a given value is lower or equal than the value to compare",
             "itemtype": "method",
             "name": "_testLowerThanEqual",
@@ -2280,7 +2305,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1705,
+            "line": 1765,
             "description": "Assert if a given value is boolean 'true'",
             "itemtype": "method",
             "name": "_testTruthy",
@@ -2303,7 +2328,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1718,
+            "line": 1778,
             "description": "Assert if a given value is boolean 'false'",
             "itemtype": "method",
             "name": "_testFalsy",
@@ -2326,7 +2351,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1731,
+            "line": 1791,
             "description": "Assert a given value matches a RegEx",
             "itemtype": "method",
             "name": "_contain",
@@ -4880,10 +4905,6 @@
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:456"
-        },
-        {
-            "message": "unknown tag: api",
             "line": " lib/dalek/assertions.js:501"
         },
         {
@@ -4892,71 +4913,75 @@
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:597"
+            "line": " lib/dalek/assertions.js:591"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:649"
+            "line": " lib/dalek/assertions.js:642"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:683"
+            "line": " lib/dalek/assertions.js:694"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:717"
+            "line": " lib/dalek/assertions.js:728"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:760"
+            "line": " lib/dalek/assertions.js:762"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:796"
+            "line": " lib/dalek/assertions.js:805"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:833"
+            "line": " lib/dalek/assertions.js:841"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:873"
+            "line": " lib/dalek/assertions.js:878"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:911"
+            "line": " lib/dalek/assertions.js:918"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:948"
+            "line": " lib/dalek/assertions.js:956"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:980"
+            "line": " lib/dalek/assertions.js:993"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:1033"
+            "line": " lib/dalek/assertions.js:1025"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:1082"
+            "line": " lib/dalek/assertions.js:1078"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:1121"
+            "line": " lib/dalek/assertions.js:1127"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:1144"
+            "line": " lib/dalek/assertions.js:1166"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:1192"
+            "line": " lib/dalek/assertions.js:1189"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/assertions.js:1215"
+            "line": " lib/dalek/assertions.js:1237"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " lib/dalek/assertions.js:1260"
         },
         {
             "message": "unknown tag: part",

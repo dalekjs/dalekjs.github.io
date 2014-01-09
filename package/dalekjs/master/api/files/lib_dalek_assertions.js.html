@@ -525,6 +525,8 @@ Assertions.prototype.val = function (selector, expected, message) {
 
 /**
  * Checks the computed style.
+ * Note: When selecting values like em or percent, they will be converted to px. So it&#x27;s currently not possible
+ * to check em, %, ... values, only px.
  *
  * &#x60;&#x60;&#x60;html
  * &lt;div id=&quot;superColoredElement&quot;&gt;Rose&lt;/div&gt;
@@ -545,6 +547,30 @@ Assertions.prototype.val = function (selector, expected, message) {
  *    .done();
  * &#x60;&#x60;&#x60;
  *
+ * Can also check if a computed style is greater or lower than the expected value.
+ * TODO: We might extract the part that determines the comparison operator to reuse it in other test. We might also
+ *       add &gt;= and &lt;=.
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;div id=&quot;fancyPlacedElement&quot;&gt;Tulip&lt;/div&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;css
+ * #fancyPlacedElement {
+ *   top: 100px;
+ * }
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://unicorns.rainbows.io&#x27;)
+ *    .assert.css(&#x27;#fancyPlacedElement&#x27;, &#x27;top&#x27;, &#x27;&gt;50px&#x27;) // 100 is greater than 50, success
+ *    .assert.css(&#x27;#fancyPlacedElement&#x27;, &#x27;top&#x27;, &#x27;&lt;150px&#x27;) // 100 is lower than 150, success
+ *    .assert.css(&#x27;#fancyPlacedElement&#x27;, &#x27;top&#x27;, &#x27;&gt;150px&#x27;) // 100 is lower than 150, fail
+ *    .assert.css(&#x27;#fancyPlacedElement&#x27;, &#x27;top&#x27;, &#x27;&lt;50px&#x27;) // 100 is greater than 50, fail
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
  * @api
  * @method css
  * @param {string} selector Selector that matches the elements to test
@@ -556,6 +582,8 @@ Assertions.prototype.val = function (selector, expected, message) {
 
 Assertions.prototype.css = function (selector, property, expected, message) {
   var hash = uuid();
+  var assertionMethod;
+  var comparisonOperator;
 
   if (this.test.querying === true) {
     message = expected;
@@ -564,7 +592,24 @@ Assertions.prototype.css = function (selector, property, expected, message) {
     selector = this.test.selector;
   }
 
-  var cb = this._generateCallbackAssertion(&#x27;css&#x27;, &#x27;css&#x27;, this._testShallowEquals, hash, {expected: expected, selector: selector, porperty: property, message: message}).bind(this.test);
+  switch (expected.substr(0, 1)) {
+    case &#x27;&gt;&#x27;:
+      assertionMethod = this._testLowerThan;
+      expected = expected.substr(1);
+      comparisonOperator = &#x27;&gt;&#x27;;
+      break;
+    case &#x27;&lt;&#x27;:
+      assertionMethod = this._testGreaterThan;
+      expected = expected.substr(1);
+      comparisonOperator = &#x27;&lt;&#x27;;
+      break;
+    default:
+      assertionMethod = this._testShallowEquals;
+      comparisonOperator = &#x27;&#x27;;
+      break;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;css&#x27;, &#x27;css&#x27;, assertionMethod, hash, {comparisonOperator: comparisonOperator, expected: expected, selector: selector, porperty: property, message: message, parseFloatOnValues: true}).bind(this.test);
   this._addToActionQueue([selector, property, expected, hash], &#x27;css&#x27;, cb);
   return this.chaining ? this : this.test;
 };
@@ -1530,6 +1575,9 @@ Assertions.prototype.equalsCaseInsensitive = function (expected, message) {
  * @method _generateCallbackAssertion
  * @param {string} key Unique key of the action
  * @param {string} type Type of the action (usually the actions name)
+ * @param {string} test test method to be used
+ * @param {string} hash the uuid
+ * @param {object} opts the options object
  * @return {function} The generated callback function
  * @private
  */
@@ -1548,11 +1596,11 @@ Assertions.prototype._generateCallbackAssertion = function (key, type, test, has
         opts.expected = opts.expected();
       }
 
-      var testResult = test(data.value, opts.expected);
+      var testResult = test(data.value, opts.expected, opts.parseFloatOnValues);
 
       this.reporter.emit(&#x27;report:assertion&#x27;, {
         success: testResult,
-        expected: opts.expected,
+        expected: opts.comparisonOperator ? opts.comparisonOperator + opts.expected : opts.expected,
         value: data.value,
         message: opts.message,
         type: type
@@ -1712,11 +1760,17 @@ Assertions.prototype._testBetween = function (a, b) {
  * @method _testGreaterThan
  * @param {bool} a Value to test
  * @param {bool} b Value to compare
+ * @param {parseFloatOnValues} b Whether to apply parseFloat to both values prior comparision
  * @return {bool} test result
  * @private
  */
 
-Assertions.prototype._testGreaterThan = function (a, b) {
+Assertions.prototype._testGreaterThan = function (a, b, parseFloatOnValues) {
+  if (parseFloatOnValues) {
+    a = parseFloat(a);
+    b = parseFloat(b);
+  }
+
   try {
     chai.expect(b).to.be.above(a);
   } catch (e) {
@@ -1746,11 +1800,17 @@ Assertions.prototype._testGreaterThanEqual = function (a, b) {
  * @method _testLowerThan
  * @param {bool} a Value to test
  * @param {bool} b Value to compare
+ * @param {parseFloatOnValues} b Whether to apply parseFloatOnValues to both values prior comparision
  * @return {bool} test result
  * @private
  */
 
-Assertions.prototype._testLowerThan = function (a, b) {
+Assertions.prototype._testLowerThan = function (a, b, parseFloatOnValues) {
+  if (parseFloatOnValues) {
+    a = parseFloat(a);
+    b = parseFloat(b);
+  }
+
   try {
     chai.expect(b).to.be.below(a);
   } catch (e) {
