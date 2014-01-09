@@ -45,11 +45,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">60.38</p>
+      <p class="stat">58.03</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">167</p>
+      <p class="stat">183</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">25.44</p>
+      <p class="stat">27.50</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.21</p>
+      <p class="stat">1.40</p>
     </div>
   </div>
 </div>
@@ -135,7 +135,9 @@ var optimist = require(&#039;optimist&#039;);
  * &gt; --driver, -d    Driver(s) you would like to invoke
  *
  * &gt; --browser, -b   Browser(s) you would like to invoke
- * 
+ *
+ * &gt; --viewport      Viewport dimensions you would like to invoke
+ *
  * &gt; --remote Starts a dalek host server for clients to connect to
  *
  * &gt; --logLevel, -l  Log level, controls the amount of information outputted to the console (0 to 5)
@@ -178,6 +180,10 @@ module.exports = function () {
           alias: &#039;b&#039;,
           type : &#039;string&#039;,
           desc : &#039;Browser(s) you would like to invoke&#039;
+        })
+        .option(&#039;viewport&#039;, {
+          type: &#039;integer&#039;,
+          desc: &#039;Viewport dimensions you would like to invoke&#039;
         })
         .option(&#039;logLevel&#039;, {
           alias: &#039;l&#039;,
@@ -222,6 +228,15 @@ module.exports = function () {
         })
         .argv;
 
+      // building viewport option
+      var viewportDimensions, viewportWidth, viewportHeight, viewportOption;
+      if( argv.viewport ) {
+        viewportDimensions = argv.viewport.split(&#039;,&#039;);
+        viewportWidth = +viewportDimensions[0];
+        viewportHeight = +viewportDimensions[1];
+        viewportOption = ( isNaN( viewportWidth ) || isNaN( viewportHeight ) ) ? {} : { width: viewportWidth, height: viewportHeight };
+      }
+
       // run dalekjs
       var Dalek = require(path);
       var dalek = new Dalek({
@@ -229,6 +244,7 @@ module.exports = function () {
         driver: argv.driver ? argv.driver.split(&#039;,&#039;) : [],
         reporter: argv.reporter ? argv.reporter.split(&#039;,&#039;) : [],
         browser: argv.browser ? argv.browser.split(&#039;,&#039;) : [],
+        viewport: argv.viewport ? viewportOption : {},
         logLevel: argv.logLevel,
         noColors: argv.nocolors,
         noSymbols: argv.nosymbols,

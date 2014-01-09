@@ -129,7 +129,9 @@ var optimist = require(&#x27;optimist&#x27;);
  * &gt; --driver, -d    Driver(s) you would like to invoke
  *
  * &gt; --browser, -b   Browser(s) you would like to invoke
- * 
+ *
+ * &gt; --viewport      Viewport dimensions you would like to invoke
+ *
  * &gt; --remote Starts a dalek host server for clients to connect to
  *
  * &gt; --logLevel, -l  Log level, controls the amount of information outputted to the console (0 to 5)
@@ -172,6 +174,10 @@ module.exports = function () {
           alias: &#x27;b&#x27;,
           type : &#x27;string&#x27;,
           desc : &#x27;Browser(s) you would like to invoke&#x27;
+        })
+        .option(&#x27;viewport&#x27;, {
+          type: &#x27;integer&#x27;,
+          desc: &#x27;Viewport dimensions you would like to invoke&#x27;
         })
         .option(&#x27;logLevel&#x27;, {
           alias: &#x27;l&#x27;,
@@ -216,6 +222,15 @@ module.exports = function () {
         })
         .argv;
 
+      // building viewport option
+      var viewportDimensions, viewportWidth, viewportHeight, viewportOption;
+      if( argv.viewport ) {
+        viewportDimensions = argv.viewport.split(&#x27;,&#x27;);
+        viewportWidth = +viewportDimensions[0];
+        viewportHeight = +viewportDimensions[1];
+        viewportOption = ( isNaN( viewportWidth ) || isNaN( viewportHeight ) ) ? {} : { width: viewportWidth, height: viewportHeight };
+      }
+
       // run dalekjs
       var Dalek = require(path);
       var dalek = new Dalek({
@@ -223,6 +238,7 @@ module.exports = function () {
         driver: argv.driver ? argv.driver.split(&#x27;,&#x27;) : [],
         reporter: argv.reporter ? argv.reporter.split(&#x27;,&#x27;) : [],
         browser: argv.browser ? argv.browser.split(&#x27;,&#x27;) : [],
+        viewport: argv.viewport ? viewportOption : {},
         logLevel: argv.logLevel,
         noColors: argv.nocolors,
         noSymbols: argv.nosymbols,
