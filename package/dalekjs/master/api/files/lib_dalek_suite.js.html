@@ -214,7 +214,7 @@ Suite.prototype = {
         return suite;
       }
     } catch (e) {
-      this.error = &#x27;Failure loading suite &quot;&#x27; + testfile + &#x27;&quot;. Skipping!&#x27;;
+      this.error = &#x27;\n&#x27; + e.name + &#x27;: &#x27; + e.message + &#x27;\nFailure loading suite &quot;&#x27; + testfile + &#x27;&quot;. Skipping!&#x27;;
       return suite;
     }
 
