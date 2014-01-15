@@ -2591,19 +2591,19 @@ that the action has been successfully executed.</p>
 
     <div class="description">
         <p>Asserts that an elements attribute is as expected.</p>
-<pre><code class="lang-html">&lt;form&gt;
+<pre class="code prettyprint"><code class="lang-html">&lt;form&gt;
   &lt;button class=&quot;jumpButton&quot; type=&quot;submit&quot;&gt;Fire&lt;/button&gt;
 &lt;/form&gt;</code></pre>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://dalekjs.com/guineapig/&#39;)
    .assert.attr(&#39;.jumpButton&#39;, &#39;type&#39;, &#39;submit&#39;)
    .done();</code></pre>
-<pre><code class="lang-html">&lt;div id=&quot;dataDiv&quot; data-spot=&quot;cat&quot;&gt;&lt;/div&gt;</code></pre>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-html">&lt;div id=&quot;dataDiv&quot; data-spot=&quot;cat&quot;&gt;&lt;/div&gt;</code></pre>
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://dalekjs.com/guineapig/&#39;)
    .assert.attr(&#39;#dataDiv&#39;).is(&#39;data-spot&#39;, &#39;cat&#39;, &#39;We found Dataʼs cat!&#39;)
    .done();</code></pre>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://dalekjs.com/guineapig/&#39;)
    .assert.attr(&#39;#dataDiv&#39;).is.not(&#39;data-spot&#39;, &#39;doc&#39;, &#39;Spot is not a dog!&#39;)
    .done();</code></pre>
@@ -2853,13 +2853,13 @@ all over the place when your doing multiple assertions.
 To avoid this, open an assertion context in your test which allows
 you to write (n) assertions without having to write &#39;assert&#39; before each.</p>
 <p>So, instead of writing this:</p>
-<pre><code class="lang-javascript">test.open(&#39;http://doctorwhotv.co.uk/&#39;)
+<pre class="code prettyprint"><code class="lang-javascript">test.open(&#39;http://doctorwhotv.co.uk/&#39;)
     .assert.text(&#39;#nav&#39;).is(&#39;Navigation&#39;)
     .assert.visible(&#39;#nav&#39;)
     .assert.attr(&#39;#nav&#39;, &#39;data-nav&#39;, &#39;true&#39;)
     .done();</code></pre>
 <p>you can write this:</p>
-<pre><code class="lang-javascript">test.open(&#39;http://doctorwhotv.co.uk/&#39;)
+<pre class="code prettyprint"><code class="lang-javascript">test.open(&#39;http://doctorwhotv.co.uk/&#39;)
     .assert.chain()
       .text(&#39;#nav&#39;).is(&#39;Navigation&#39;)
       .visible(&#39;#nav&#39;)
@@ -2867,7 +2867,7 @@ you to write (n) assertions without having to write &#39;assert&#39; before each
     .end()
     .done();</code></pre>
 <p>to make it even more concise, you can combine this with the <a href="actions.html#meth-query">query</a> method:</p>
-<pre><code class="lang-javascript">test.open(&#39;http://doctorwhotv.co.uk/&#39;)
+<pre class="code prettyprint"><code class="lang-javascript">test.open(&#39;http://doctorwhotv.co.uk/&#39;)
     .assert.chain()
       .query(&#39;#nav&#39;)
           .text().is(&#39;Navigation&#39;)
@@ -3069,7 +3069,7 @@ you to write (n) assertions without having to write &#39;assert&#39; before each
 
     <div class="description">
         <p>Checks the contents of a cookie.</p>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://cookiejar.io/not_your_mothers_javascript.html&#39;)
    .setCookie(&#39;atestcookie&#39;, &#39;foobar=baz&#39;)
    .assert.cookie(&#39;atestcookie&#39;, &#39;foobar=baz&#39;)
@@ -3217,12 +3217,12 @@ you to write (n) assertions without having to write &#39;assert&#39; before each
         <p>Checks the computed style.
 Note: When selecting values like em or percent, they will be converted to px. So it&#39;s currently not possible
 to check em, %, ... values, only px.</p>
-<pre><code class="lang-html">&lt;div id=&quot;superColoredElement&quot;&gt;Rose&lt;/div&gt;</code></pre>
-<pre><code class="lang-css">#superColoredElement {
+<pre class="code prettyprint"><code class="lang-html">&lt;div id=&quot;superColoredElement&quot;&gt;Rose&lt;/div&gt;</code></pre>
+<pre class="code prettyprint"><code class="lang-css">#superColoredElement {
   background-color: rgba(255, 0, 0, 1);
   color: rgba(0, 128, 0, 1);
 }</code></pre>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://unicorns.rainbows.io&#39;)
    .assert.css(&#39;#superColoredElement&#39;, &#39;background-color&#39;, &#39;rgba(255, 0, 0, 1)&#39;)
    .assert.css(&#39;#superColoredElement&#39;, &#39;color&#39;, &#39;rgba(0, 128, 0, 1)&#39;)
@@ -3230,11 +3230,11 @@ to check em, %, ... values, only px.</p>
 <p>Can also check if a computed style is greater or lower than the expected value.
 TODO: We might extract the part that determines the comparison operator to reuse it in other test. We might also
       add &gt;= and &lt;=.</p>
-<pre><code class="lang-html">&lt;div id=&quot;fancyPlacedElement&quot;&gt;Tulip&lt;/div&gt;</code></pre>
-<pre><code class="lang-css">#fancyPlacedElement {
+<pre class="code prettyprint"><code class="lang-html">&lt;div id=&quot;fancyPlacedElement&quot;&gt;Tulip&lt;/div&gt;</code></pre>
+<pre class="code prettyprint"><code class="lang-css">#fancyPlacedElement {
   top: 100px;
 }</code></pre>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://unicorns.rainbows.io&#39;)
    .assert.css(&#39;#fancyPlacedElement&#39;, &#39;top&#39;, &#39;&gt;50px&#39;) // 100 is greater than 50, success
    .assert.css(&#39;#fancyPlacedElement&#39;, &#39;top&#39;, &#39;&lt;150px&#39;) // 100 is lower than 150, success
@@ -3386,8 +3386,8 @@ TODO: We might extract the part that determines the comparison operator to reuse
 
     <div class="description">
         <p>Asserts that given text does not exist in the current alert/prompt/confirm dialog.</p>
-<pre><code class="lang-html">&lt;a href=&quot;#&quot; id=&quot;alert_confirm&quot; onclick=&quot;confirm(&#39;Confirm me!&#39;)&quot;&gt;I make confirm&lt;/a&gt;</code></pre>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-html">&lt;a href=&quot;#&quot; id=&quot;alert_confirm&quot; onclick=&quot;confirm(&#39;Confirm me!&#39;)&quot;&gt;I make confirm&lt;/a&gt;</code></pre>
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://skaaro.com/index.html&#39;)
    .click(&#39;#alert_confirm&#39;)
    .assert.dialogDoesntHaveText(&#39;I am an alert&#39;)
@@ -3509,19 +3509,19 @@ TODO: We might extract the part that determines the comparison operator to reuse
 
     <div class="description">
         <p>Asserts that given alertText does exist in the provided alert/confirm or prompt dialog.</p>
-<pre><code class="lang-html">&lt;a href=&quot;#&quot; id=&quot;alert&quot; onclick=&quot;alert(&#39;I am an alert&#39;)&quot;&gt;I make alerts!&lt;/a&gt;</code></pre>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-html">&lt;a href=&quot;#&quot; id=&quot;alert&quot; onclick=&quot;alert(&#39;I am an alert&#39;)&quot;&gt;I make alerts!&lt;/a&gt;</code></pre>
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://skaaro.com/index.html&#39;)
    .click(&#39;#alert_confirm&#39;)
    .assert.dialogText(&#39;I am an alert&#39;)
    .accept()
    .done();</code></pre>
 <p>of course, text works also with the assertion helpers is() and not()</p>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://dalekjs.com/guineapig/&#39;)
    .assert.dialogText().is(&#39;I am an alert&#39;, &#39;Exterminate!&#39;)
    .done();</code></pre>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://dalekjs.com/guineapig/&#39;)
    .assert.dialogText().is.not(&#39;I am an prompt&#39;, &#39;Exterminate!&#39;)
    .done();</code></pre>
@@ -3641,8 +3641,8 @@ TODO: We might extract the part that determines the comparison operator to reuse
 
     <div class="description">
         <p>Determine if an element is currently disabled.</p>
-<pre><code class="lang-html">&lt;input disabled id=&quot;onearth&quot; type=&quot;text&quot; size=&quot;50&quot; name=&quot;onearth&quot; placeholder=&quot;State your name, rank and intention!&quot;&gt;&lt;/input&gt;</code></pre>
-<pre><code class="lang-javascript">test
+<pre class="code prettyprint"><code class="lang-html">&lt;input disabled id=&quot;onearth&quot; type=&quot;text&quot; size=&quot;50&quot; name=&quot;onearth&quot; placeholder=&quot;State your name, rank and intention!&quot;&gt;&lt;/input&gt;</code></pre>
+<pre class="code prettyprint"><code class="lang-javascript">test
   .open(&#39;http://doctor.thedoctor.com/doctor&#39;)
   .assert.disabled(&#39;#onearth&#39;, &#39;Is disabled!&#39;)
   .done();</code></pre>
@@ -3760,10 +3760,10 @@ TODO: We might extract the part that determines the comparison operator to reuse
     <div class="description">
         <p>Asserts that an element matching the provided selector expression doesnʼt
 exists within the remote DOM environment.</p>
-<pre><code class="lang-html">&lt;body&gt;
+<pre class="code prettyprint"><code class="lang-html">&lt;body&gt;
   &lt;p id=&quot;so-lonely&quot;&gt;Last of the time lords&lt;/p&gt;
 &lt;/body&gt;</code></pre>
-<pre><code class="lang-javascript">test
+<pre class="code prettyprint"><code class="lang-javascript">test
   .open(&#39;http://doctor.thedoctor.com/doctor&#39;)
   .assert.doesntExist(&#39;#the-master&#39;, &#39;The master element has not been seen&#39;)
   .done();</code></pre>
@@ -3886,10 +3886,10 @@ exists within the remote DOM environment.</p>
 
     <div class="description">
         <p>Asserts that given text does not exist in the provided selector.</p>
-<pre><code class="lang-html">&lt;body&gt;
+<pre class="code prettyprint"><code class="lang-html">&lt;body&gt;
   &lt;h1&gt;This is a CasperJS sandbox&lt;/h1&gt;
 &lt;/body&gt;</code></pre>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://dalekjs.com/guineapig/&#39;)
    .assert.doesntHaveText(&#39;h1&#39;, &#39;This page is a Dalek sandbox&#39;, &#39;It´s a sandbox!&#39;)
    .done();</code></pre>
@@ -4022,7 +4022,7 @@ exists within the remote DOM environment.</p>
 
     <div class="description">
         <p>Asserts that given title does not match the given expectations.</p>
-<pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
+<pre class="code prettyprint"><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
     .assert.doesntHaveTitle(&#39;Dalek Emperor TV&#39;, &#39;Not your Daleks TV&#39;)
     .done();</code></pre>
 
@@ -4138,7 +4138,7 @@ exists within the remote DOM environment.</p>
 
     <div class="description">
         <p>Asserts that the pages URL does not match the expectation.</p>
-<pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
+<pre class="code prettyprint"><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
     .assert.doesntHaveUrl(&#39;http://doctorwhotv.co.uk/&#39;, &#39;URL is not expected&#39;)
     .done();</code></pre>
 
@@ -4254,8 +4254,8 @@ exists within the remote DOM environment.</p>
 
     <div class="description">
         <p>Determine if an element is currently enabled.</p>
-<pre><code class="lang-html">&lt;input id=&quot;onmars&quot; type=&quot;text&quot; size=&quot;50&quot; name=&quot;onmars&quot; placeholder=&quot;State your name, rank and intention!&quot;&gt;&lt;/input&gt;</code></pre>
-<pre><code class="lang-javascript">test
+<pre class="code prettyprint"><code class="lang-html">&lt;input id=&quot;onmars&quot; type=&quot;text&quot; size=&quot;50&quot; name=&quot;onmars&quot; placeholder=&quot;State your name, rank and intention!&quot;&gt;&lt;/input&gt;</code></pre>
+<pre class="code prettyprint"><code class="lang-javascript">test
   .open(&#39;http://doctor.thedoctor.com/doctor&#39;)
   .assert.enabled(&#39;#onmars&#39;, &#39;Is enabled!&#39;)
   .done();</code></pre>
@@ -4356,7 +4356,7 @@ exists within the remote DOM environment.</p>
 
     <div class="description">
         <p>Terminates an assertion chain or a query</p>
-<pre><code class="lang-javascript">test.open(&#39;http://doctorwhotv.co.uk/&#39;)
+<pre class="code prettyprint"><code class="lang-javascript">test.open(&#39;http://doctorwhotv.co.uk/&#39;)
     .assert.chain()
       .query(&#39;#nav&#39;)
           .text().is(&#39;Navigation&#39;)
@@ -4551,10 +4551,10 @@ exists within the remote DOM environment.</p>
 
     <div class="description">
         <p>Asserts that an element matching the provided selector expression exists in remote DOM environment.</p>
-<pre><code class="lang-html">&lt;body&gt;
+<pre class="code prettyprint"><code class="lang-html">&lt;body&gt;
   &lt;p id=&quot;so-lonely&quot;&gt;Last of the timelords&lt;/p&gt;
 &lt;/body&gt;</code></pre>
-<pre><code class="lang-javascript">test
+<pre class="code prettyprint"><code class="lang-javascript">test
   .open(&#39;http://doctor.thedoctor.com/doctor&#39;)
   .assert.exists(&#39;#so-lonely&#39;, &#39;The loneliest element in the universe exists&#39;)
   .done()</code></pre>
@@ -5049,8 +5049,8 @@ exists within the remote DOM environment.</p>
 
     <div class="description">
         <p>Checks the actual height of an element.</p>
-<pre><code class="lang-html">  &lt;div id=&quot;fixed-dimensions&quot; style=&quot;height: 100px&quot;&gt;&lt;/div&gt;</code></pre>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-html">  &lt;div id=&quot;fixed-dimensions&quot; style=&quot;height: 100px&quot;&gt;&lt;/div&gt;</code></pre>
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://localhost:5000/index.html&#39;)
    // all true, all pixel
    .assert.height(&#39;#fixed-dimensions&#39;, 100)
@@ -5871,7 +5871,7 @@ TODO: Needs some work to be implement (maybe JavaScript, Webdriver ha no method 
     <div class="description">
         <p>Determine if an <option> element, or an <input> element of type
 checkbox or radio is currently not selected.</p>
-<pre><code class="lang-html">&lt;input type=&quot;checkbox&quot; id=&quot;unchecked_checkbox&quot; name=&quot;unchecked_checkbox&quot;/&gt;
+<pre class="code prettyprint"><code class="lang-html">&lt;input type=&quot;checkbox&quot; id=&quot;unchecked_checkbox&quot; name=&quot;unchecked_checkbox&quot;/&gt;
 &lt;input type=&quot;checkbox&quot; id=&quot;checked_checkbox&quot; name=&quot;checked_checkbox&quot; checked=&quot;checked&quot;/&gt;
 &lt;select id=&quot;select_elm&quot; name=&quot;select_elm&quot;&gt;
   &lt;option value=&quot;9&quot;&gt;Eccleston&lt;/option&gt;
@@ -5879,12 +5879,12 @@ checkbox or radio is currently not selected.</p>
   &lt;option value=&quot;11&quot;&gt;Smith&lt;/option&gt;
 &lt;/select&gt;</code></pre>
 <p>Checking radio and checkboxes:</p>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://selectables.org&#39;)
    .assert.notSelected(&#39;#unchecked_checkbox&#39;)
    .done();</code></pre>
 <p>Checking option elements:</p>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://selectables.org&#39;)
    .assert.notSelected(&#39;#select_elm option:last-child&#39;)
    .done();</code></pre>
@@ -6001,11 +6001,11 @@ checkbox or radio is currently not selected.</p>
 
     <div class="description">
         <p>Asserts that the element matching the provided selector expression is not visible.</p>
-<pre><code class="lang-html">&lt;body&gt;
+<pre class="code prettyprint"><code class="lang-html">&lt;body&gt;
   &lt;h1 style=&quot;display: none&quot;&gt;Me? So hidden …&lt;/h1&gt;
   &lt;h2&gt;Me? So in viewport...&lt;/h2&gt;
 &lt;/body&gt;</code></pre>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://allyourviewportsbelongto.us&#39;)
    .assert.notVisible(&#39;h1&#39;, &#39;Element is not visible&#39;)
    .done();</code></pre>
@@ -6133,36 +6133,36 @@ checkbox or radio is currently not selected.</p>
         <p>Asserts that a given element appears n times on the page.</p>
 <p>Given this portion of HTML, you would like to assure that all of these elements
 are ending up in your rendered markup on your page.</p>
-<pre><code class="lang-html">&lt;section id=&quot;blog-overview&quot;&gt;
+<pre class="code prettyprint"><code class="lang-html">&lt;section id=&quot;blog-overview&quot;&gt;
   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
   &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
 &lt;/section&gt;</code></pre>
 <p>The simple solution is to check if all these elements are present</p>
-<pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;, 4, &#39;4 blog teasers are present&#39;)</code></pre>
+<pre class="code prettyprint"><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;, 4, &#39;4 blog teasers are present&#39;)</code></pre>
 <p>The alternate syntax for this is:</p>
-<pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
+<pre class="code prettyprint"><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is(4, &#39;4 blog teasers are present&#39;)</code></pre>
 <p>If you are not sure how many elements will exactly end up in your markup,
 you could use the between assertion handler</p>
-<pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
+<pre class="code prettyprint"><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is.between([2, 6], &#39;Between 2 and 6 blog teasers are present&#39;)</code></pre>
 <p>If you dealing with the situation that you have a minimum of elements,
 you expect, you can use this helper:</p>
-<pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
+<pre class="code prettyprint"><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is.gt(2, &#39;At least 3 blog teasers are present&#39;)</code></pre>
 <p>If you want to know if its &#39;greater than equal&#39;, use this one</p>
-<pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
+<pre class="code prettyprint"><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is.gte(2, &#39;At least 2 blog teasers are present&#39;)</code></pre>
 <p>as well as their &#39;lower than&#39; and &#39;lower than equal&#39; equivalents.</p>
-<pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
+<pre class="code prettyprint"><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is.lt(5, &#39;Less than 5 blog teasers are present&#39;)</code></pre>
-<pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
+<pre class="code prettyprint"><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is.lte(5, &#39;Less than, or 5 blog teasers are present&#39;)</code></pre>
 <p>And if you just want to know, if a certain amount of teasers isnʼt present,
 you can still use the not() assertion helper</p>
-<pre><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
+<pre class="code prettyprint"><code class="lang-javascript">test.assert.numberOfElements(&#39;#blog-overview .teaser&#39;)
     .is.not(5, &#39;There are more or less than 5 teasers present&#39;)</code></pre>
 
     </div>
@@ -6301,36 +6301,36 @@ you can still use the not() assertion helper</p>
         <p>Asserts that a given element is visible n times in the current viewport.</p>
 <p>Given this portion of HTML, you would like to assure that all of these elements
  are ending up in your rendered markup on your page.</p>
-<pre><code class="lang-html"> &lt;section id=&quot;blog-overview&quot;&gt;
+<pre class="code prettyprint"><code class="lang-html"> &lt;section id=&quot;blog-overview&quot;&gt;
    &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
    &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
    &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
    &lt;article class=&quot;teaser&quot;&gt;&lt;/article&gt;
  &lt;/section&gt;</code></pre>
 <p>The simple solution is to check if all these elements are visible</p>
-<pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;, 4, &#39;4 blog teasers are visible&#39;)</code></pre>
+<pre class="code prettyprint"><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;, 4, &#39;4 blog teasers are visible&#39;)</code></pre>
 <p> The alternate syntax for this is:</p>
-<pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+<pre class="code prettyprint"><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
      .is(4, &#39;4 blog teasers are visible&#39;)</code></pre>
 <p>If you are not sure how many elements will exactly be shown in the current viewport,
  you could use the between assertion handler</p>
-<pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+<pre class="code prettyprint"><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
      .is.between(2, 6, &#39;Between 2 and 6 blog teasers are visible&#39;)</code></pre>
 <p>If you dealing with the situation that you have a minimum of elements,
  you expect, use this helper:</p>
-<pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+<pre class="code prettyprint"><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
      .is.gt(2, &#39;At least 3 blog teasers are visible&#39;)</code></pre>
 <p> If you want to know if its &#39;greater than equal&#39;, you can use this one</p>
-<pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+<pre class="code prettyprint"><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
      .is.gte(2, &#39;At least 2 blog teasers are visible&#39;)</code></pre>
 <p> as well as their &#39;lower than&#39; and &#39;lower than equal&#39; equivalents.</p>
-<pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+<pre class="code prettyprint"><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
      .is.lt(5, &#39;Less than 5 blog teasers are visible&#39;)</code></pre>
-<pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+<pre class="code prettyprint"><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
      .is.lte(5, &#39;Less than, or 5 blog teasers are visible&#39;)</code></pre>
 <p> And if you just want to know, if a certain amount of teasers isnʼt visible,
  you can still use the &#39;:not(): assertion helper</p>
-<pre><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
+<pre class="code prettyprint"><code class="lang-javascript"> test.assert.numberOfVisibleElements(&#39;#blog-overview .teaser&#39;)
      .is.not(5, &#39;There are more or less than 5 teasers visible&#39;)</code></pre>
 <blockquote>
 <p>NOTE: Buggy on all browsers</p>
@@ -6577,7 +6577,7 @@ you can still use the not() assertion helper</p>
 
     <div class="description">
         <p>Determine if an <option> element, or an <input> element of type checkbox or radio is currently selected.</p>
-<pre><code class="lang-html">&lt;input type=&quot;checkbox&quot; id=&quot;unchecked_checkbox&quot; name=&quot;unchecked_checkbox&quot;/&gt;
+<pre class="code prettyprint"><code class="lang-html">&lt;input type=&quot;checkbox&quot; id=&quot;unchecked_checkbox&quot; name=&quot;unchecked_checkbox&quot;/&gt;
 &lt;input type=&quot;checkbox&quot; id=&quot;checked_checkbox&quot; name=&quot;checked_checkbox&quot; checked=&quot;checked&quot;/&gt;
 &lt;select id=&quot;select_elm&quot; name=&quot;select_elm&quot;&gt;
   &lt;option value=&quot;9&quot;&gt;Eccleston&lt;/option&gt;
@@ -6585,12 +6585,12 @@ you can still use the not() assertion helper</p>
   &lt;option value=&quot;11&quot;&gt;Smith&lt;/option&gt;
 &lt;/select&gt;</code></pre>
 <p>Checking radio and checkboxes:</p>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://selectables.org&#39;)
    .assert.selected(&#39;#checked_checkbox&#39;)
    .done();</code></pre>
 <p>Checking option elements:</p>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://selectables.org&#39;)
    .assert.selected(&#39;#select_elm option:nth-child(2)&#39;)
    .done();</code></pre>
@@ -6713,19 +6713,19 @@ you can still use the not() assertion helper</p>
 
     <div class="description">
         <p>Asserts that given text does exist in the provided selector.</p>
-<pre><code class="lang-html">&lt;body&gt;
+<pre class="code prettyprint"><code class="lang-html">&lt;body&gt;
   &lt;h1&gt;This is a Dalek sandbox&lt;/h1&gt;
 &lt;/body&gt;</code></pre>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://dalekjs.com/guineapig/&#39;)
    .assert.text(&#39;h1&#39;, &#39;This page is a Dalek sandbox&#39;, &#39;Exterminate!&#39;)
    .done();</code></pre>
 <p>of course, text works also with the assertion helpers is() and not()</p>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://dalekjs.com/guineapig/&#39;)
    .assert.text(&#39;h1&#39;).is(&#39;This page is a Dalek sandbox&#39;, &#39;Exterminate!&#39;)
    .done();</code></pre>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://dalekjs.com/guineapig/&#39;)
    .assert.text(&#39;h1&#39;).is.not(&#39;This page is a CasperJS sandbox&#39;, &#39;Exterminate!&#39;)
    .done();</code></pre>
@@ -6858,15 +6858,15 @@ you can still use the not() assertion helper</p>
 
     <div class="description">
         <p>Asserts that the page title is as expected.</p>
-<pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
+<pre class="code prettyprint"><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
     .assert.title(&#39;Doctor Who TV&#39;, &#39;Not your Daleks TV&#39;)
     .done();</code></pre>
 <p>Yep, using assertion helpers is also possible:</p>
-<pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
+<pre class="code prettyprint"><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
     .assert.title().is(&#39;Doctor Who TV&#39;, &#39;Not your Daleks TV&#39;)
     .done();</code></pre>
 <p>and the not() helper is available too:</p>
-<pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
+<pre class="code prettyprint"><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
     .assert.title().is.not(&#39;Dalek Emperor TV&#39;, &#39;Not your Daleks TV&#39;)
     .done();</code></pre>
 
@@ -6982,20 +6982,20 @@ you can still use the not() assertion helper</p>
 
     <div class="description">
         <p>Asserts that the page’s url is as expected.</p>
-<pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
+<pre class="code prettyprint"><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
     .assert.url(&#39;http://doctorwhotv.co.uk/&#39;, &#39;URL is as expected&#39;)
     .done();</code></pre>
 <p>You can also check if the protocol changed,
 nice to see when you open GitHub with &#39;http&#39; instead of &#39;https&#39;</p>
-<pre><code class="lang-javascript">  test.open(&#39;http://github.com&#39;)
+<pre class="code prettyprint"><code class="lang-javascript">  test.open(&#39;http://github.com&#39;)
     .assert.url(&#39;https://github.com/&#39;, &#39;Changed prototcols&#39;)
     .done();</code></pre>
 <p>Yep, using assertion helpers is also possible:</p>
-<pre><code class="lang-javascript">  test.open(&#39;http://github.com&#39;)
+<pre class="code prettyprint"><code class="lang-javascript">  test.open(&#39;http://github.com&#39;)
     .assert.url().is(&#39;http://doctorwhotv.co.uk/&#39;, &#39;URL is as expected&#39;)
     .done();</code></pre>
 <p>and the not() helper is available too:</p>
-<pre><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
+<pre class="code prettyprint"><code class="lang-javascript">  test.open(&#39;http://doctorwhotv.co.uk/&#39;)
     .assert.url().is.not(&#39;http://doctorwhotv.co.uk/&#39;, &#39;URL is as expected&#39;)
     .done();</code></pre>
 
@@ -7119,14 +7119,14 @@ nice to see when you open GitHub with &#39;http&#39; instead of &#39;https&#39;<
         <p>Asserts that a given form field has the provided value.</p>
 <p>Given this portion of HTML, we would like to get the information which option element
 is currently selected.</p>
-<pre><code class="lang-html">&lt;form name=&quot;fav-doctor&quot; id=&quot;fav-doctor&quot;&gt;
+<pre class="code prettyprint"><code class="lang-html">&lt;form name=&quot;fav-doctor&quot; id=&quot;fav-doctor&quot;&gt;
   &lt;select id=&quot;the-doctors&quot;&gt;
     &lt;option value=&quot;9&quot;&gt;Eccleston&lt;/option&gt;
     &lt;option selected value=&quot;10&quot;&gt;Tennant&lt;/option&gt;
     &lt;option value=&quot;11&quot;&gt;Smith&lt;/option&gt;
   &lt;/select&gt;
 &lt;/form&gt;</code></pre>
-<pre><code class="lang-javascript">test
+<pre class="code prettyprint"><code class="lang-javascript">test
   .assert.val(&#39;#the-doctors&#39;, 10, &#39;David is the favourite&#39;)
   // lets change the favourite by selection the last option
  .click(&#39;#the-doctors option:last&#39;)
@@ -7134,9 +7134,9 @@ is currently selected.</p>
 <p>This assertion is capable of getting the values from every form element
 that holds a value attribute</p>
 <p>Getting texts out of normal input fields is pretty straight forward</p>
-<pre><code class="lang-html">&lt;label for=&quot;fav-enemy&quot;&gt;Tell my your favourity Who enemy:&lt;/label&gt;
+<pre class="code prettyprint"><code class="lang-html">&lt;label for=&quot;fav-enemy&quot;&gt;Tell my your favourity Who enemy:&lt;/label&gt;
 &lt;input id=&quot;fav-enemy&quot; name=&quot;fav-enemy&quot; type=&quot;text&quot; value=&quot;Daleks&quot; /&gt;</code></pre>
-<pre><code class="lang-javascript">test
+<pre class="code prettyprint"><code class="lang-javascript">test
   .assert.val(&#39;#fav-enemy&#39;, &#39;Daleks&#39;, &#39;Daleks are so cute&#39;)
   // lets change the favourite by typing smth. new
  .type(&#39;#fav-enemy&#39;, &#39;Cyberman&#39;)
@@ -7270,10 +7270,10 @@ that holds a value attribute</p>
 
     <div class="description">
         <p>Asserts that the element matching the provided selector expression is visible.</p>
-<pre><code class="lang-html">&lt;body&gt;
+<pre class="code prettyprint"><code class="lang-html">&lt;body&gt;
   &lt;h1&gt;Me? So in viewport …&lt;/h1&gt;
 &lt;/body&gt;</code></pre>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://allyourviewportsbelongto.us&#39;)
    .assert.visible(&#39;h1&#39;, &#39;Element is visible&#39;)
    .done();</code></pre>
@@ -7399,8 +7399,8 @@ that holds a value attribute</p>
 
     <div class="description">
         <p>Checks the actual width of an element.</p>
-<pre><code class="lang-html">  &lt;div id=&quot;fixed-dimensions&quot; style=&quot;width: 100px&quot;&gt;&lt;/div&gt;</code></pre>
-<pre><code class="lang-javascript"> test
+<pre class="code prettyprint"><code class="lang-html">  &lt;div id=&quot;fixed-dimensions&quot; style=&quot;width: 100px&quot;&gt;&lt;/div&gt;</code></pre>
+<pre class="code prettyprint"><code class="lang-javascript"> test
    .open(&#39;http://localhost:5000/index.html&#39;)
    // all true, all pixel
    .assert.width(&#39;#fixed-dimensions&#39;, 100)

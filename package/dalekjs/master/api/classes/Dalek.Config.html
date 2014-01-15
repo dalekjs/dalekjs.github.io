@@ -138,20 +138,20 @@
 <p>This module is a driver plugin for <a href="//github.com/dalekjs/dalek">DalekJS</a>.
 It connects Daleks testsuite with the remote testing environment of <a href="https://saucelabs.com">Sauce Labs</a>.</p>
 <p>The driver can be installed with the following command:</p>
-<pre><code class="lang-bash">$ npm install dalek-driver-sauce --save-dev</code></pre>
+<pre class="code prettyprint"><code class="lang-bash">$ npm install dalek-driver-sauce --save-dev</code></pre>
 <p>You can use the driver by adding a config option to the your <a href="/docs/config.html">Dalekfile</a></p>
-<pre><code class="lang-javascript">&quot;driver&quot;: [&quot;sauce&quot;]</code></pre>
+<pre class="code prettyprint"><code class="lang-javascript">&quot;driver&quot;: [&quot;sauce&quot;]</code></pre>
 <p>Or you can tell Dalek that it should run your tests via sauces service via the command line:</p>
-<pre><code class="lang-bash">$ dalek mytest.js -d sauce</code></pre>
+<pre class="code prettyprint"><code class="lang-bash">$ dalek mytest.js -d sauce</code></pre>
 <p>In order to run your tests within the Sauce Labs infrastructure, you must add your sauce username &amp; key 
 to your dalek configuration. Those two parameters must be set in order to get this driver up &amp; running.
 You can specifiy them within your <a href="/docs/config.html">Dalekfile</a> like so:</p>
-<pre><code class="lang-javascript">&quot;driver.sauce&quot;: {
+<pre class="code prettyprint"><code class="lang-javascript">&quot;driver.sauce&quot;: {
   &quot;user&quot;: &quot;dalekjs&quot;,
   &quot;key&quot;: &quot;aaaaaa-1234-567a-1abc-1br6d9f68689&quot;
 }</code></pre>
 <p>It is also possible to specify a set of other extra saucy parameters like <code>name</code> &amp; <code>tags</code>:</p>
-<pre><code class="lang-javascript">&quot;driver.sauce&quot;: {
+<pre class="code prettyprint"><code class="lang-javascript">&quot;driver.sauce&quot;: {
   &quot;user&quot;: &quot;dalekjs&quot;,
   &quot;key&quot;: &quot;aaaaaa-1234-567a-1abc-1br6d9f68689&quot;,
   &quot;name&quot;: &quot;Guineapig&quot;,
@@ -159,7 +159,7 @@ You can specifiy them within your <a href="/docs/config.html">Dalekfile</a> like
 }</code></pre>
 <p>If you would like to have a more control over the browser/OS combinations that are available, you are able 
 to configure you custom combinations:</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: [{
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: [{
   &quot;chrome&quot;: {
     &quot;platform&quot;: &quot;OS X 10.6&quot;,
     &quot;actAs&quot;: &quot;chrome&quot;,
@@ -176,9 +176,9 @@ to configure you custom combinations:</p>
     &quot;version&quot;: 26
   }</code></pre>
 <p>You can then call your custom browsers like so:</p>
-<pre><code class="lang-bash">$ dalek mytest.js -d sauce -b chrome,chromeWin,chromeLinux</code></pre>
+<pre class="code prettyprint"><code class="lang-bash">$ dalek mytest.js -d sauce -b chrome,chromeWin,chromeLinux</code></pre>
 <p>or you can define them in your Dalekfile:</p>
-<pre><code class="lang-javascript">&quot;browser&quot;: [&quot;chrome&quot;, &quot;chromeWin&quot;, &quot;chromeLinux&quot;]</code></pre>
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browser&quot;: [&quot;chrome&quot;, &quot;chromeWin&quot;, &quot;chromeLinux&quot;]</code></pre>
 <p>A list of all available browser/OS combinations, can be found <a href="https://saucelabs.com/docs/platforms">here</a>.</p>
 
 </div>

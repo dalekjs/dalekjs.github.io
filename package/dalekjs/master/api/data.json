@@ -4102,7 +4102,7 @@
         },
         {
             "file": "lib/dalek/suite.js",
-            "line": 251,
+            "line": 253,
             "description": "Generates a new test instance",
             "itemtype": "method",
             "name": "getTestInstance",
@@ -4123,7 +4123,7 @@
         },
         {
             "file": "lib/dalek/suite.js",
-            "line": 263,
+            "line": 265,
             "description": "Returns a test function by its name",
             "itemtype": "method",
             "name": "getTest",
@@ -4144,7 +4144,7 @@
         },
         {
             "file": "lib/dalek/suite.js",
-            "line": 275,
+            "line": 277,
             "description": "Will be executed if a test is started, that does not exist",
             "itemtype": "method",
             "name": "testDoesNotExist",
@@ -4161,7 +4161,7 @@
         },
         {
             "file": "lib/dalek/suite.js",
-            "line": 289,
+            "line": 291,
             "description": "Runs any tests from this testsuite in sequence",
             "itemtype": "method",
             "name": "run",
