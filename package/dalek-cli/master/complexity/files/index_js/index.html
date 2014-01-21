@@ -45,11 +45,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">58.03</p>
+      <p class="stat">58.02</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">183</p>
+      <p class="stat">184</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">27.50</p>
+      <p class="stat">27.14</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.40</p>
+      <p class="stat">1.44</p>
     </div>
   </div>
 </div>
@@ -118,6 +118,7 @@
 // ext. libs
 var spawn = require(&#039;child_process&#039;).spawn;
 var optimist = require(&#039;optimist&#039;);
+var path = require(&#039;path&#039;);
 
 /**
  * Dalek Command Line Tools
@@ -154,11 +155,11 @@ var optimist = require(&#039;optimist&#039;);
 
 module.exports = function () {
 
-  var loadDalek = function (code, path, isCanary) {
+  var loadDalek = function (code, dalekPath, isCanary) {
     // Removing trailing newline from stdout.
-    path = path.trim();
+    dalekPath = dalekPath.trim();
     // If a local dalek isn&#039;t found, throw an error an exit
-    if (code !== 127 &amp;&amp; path) {
+    if (code !== 127 &amp;&amp; dalekPath) {
       var argv = optimist
         .usage(&#039;Usage: dalek [test files] {OPTIONS}&#039;)
         .wrap(80)
@@ -211,7 +212,7 @@ module.exports = function () {
           if (argv.version) {
             // load the versions
             var fs = require(&#039;fs&#039;);
-            var localVersion = JSON.parse(fs.readFileSync(path.replace(&#039;index.js&#039;, &#039;package.json&#039;))).version;
+            var localVersion = JSON.parse(fs.readFileSync(dalekPath.replace(&#039;lib&#039;+path.sep+&#039;dalek.js&#039;, &#039;package.json&#039;))).version;
             var cliVersion = JSON.parse(fs.readFileSync(__dirname + &#039;/package.json&#039;)).version;
 
             console.log(&#039;DalekJS CLI Tools Version:&#039;, cliVersion);
@@ -238,7 +239,7 @@ module.exports = function () {
       }
 
       // run dalekjs
-      var Dalek = require(path);
+      var Dalek = require(dalekPath);
       var dalek = new Dalek({
         tests: argv._,
         driver: argv.driver ? argv.driver.split(&#039;,&#039;) : [],
