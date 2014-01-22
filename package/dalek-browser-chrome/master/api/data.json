@@ -144,7 +144,7 @@
         },
         {
             "file": "index.js",
-            "line": 182,
+            "line": 183,
             "description": "Driver defaults, what should the driver be able to access.",
             "itemtype": "property",
             "name": "driverDefaults",
@@ -155,7 +155,7 @@
         },
         {
             "file": "index.js",
-            "line": 195,
+            "line": 196,
             "description": "Root path of the ChromeWebDriverServer",
             "itemtype": "property",
             "name": "path",
@@ -167,7 +167,7 @@
         },
         {
             "file": "index.js",
-            "line": 205,
+            "line": 206,
             "description": "Child process instance of the Chrome browser",
             "itemtype": "property",
             "name": "spawned",
@@ -179,7 +179,7 @@
         },
         {
             "file": "index.js",
-            "line": 215,
+            "line": 216,
             "description": "Chrome processes that are running on startup,\nand therefor shouldn`t be closed",
             "itemtype": "property",
             "name": "openProcesses",
@@ -191,7 +191,7 @@
         },
         {
             "file": "index.js",
-            "line": 226,
+            "line": 227,
             "description": "Name of the process (platform dependent)\nthat represents the browser itself",
             "itemtype": "property",
             "name": "processName",
@@ -203,7 +203,7 @@
         },
         {
             "file": "index.js",
-            "line": 237,
+            "line": 238,
             "description": "Different browser types (Canary / Chromium) that can be controlled\nvia the Chromedriver",
             "itemtype": "property",
             "name": "browserTypes",
@@ -214,7 +214,7 @@
         },
         {
             "file": "index.js",
-            "line": 247,
+            "line": 248,
             "description": "Chrome Canary",
             "itemtype": "property",
             "name": "canary",
@@ -225,7 +225,7 @@
         },
         {
             "file": "index.js",
-            "line": 261,
+            "line": 262,
             "description": "Chromium",
             "itemtype": "property",
             "name": "chromium",
@@ -236,7 +236,7 @@
         },
         {
             "file": "index.js",
-            "line": 277,
+            "line": 278,
             "description": "Resolves the driver port",
             "itemtype": "method",
             "name": "getPort",
@@ -250,7 +250,7 @@
         },
         {
             "file": "index.js",
-            "line": 288,
+            "line": 289,
             "description": "Resolves the maximum range for the driver port",
             "itemtype": "method",
             "name": "getMaxPort",
@@ -264,7 +264,7 @@
         },
         {
             "file": "index.js",
-            "line": 299,
+            "line": 300,
             "description": "Returns the driver host",
             "itemtype": "method",
             "name": "getHost",
@@ -278,7 +278,7 @@
         },
         {
             "file": "index.js",
-            "line": 310,
+            "line": 311,
             "description": "Launches the ChromeWebDriverServer\n(which implicitly launches Chrome itself)\nand checks for an available port",
             "itemtype": "method",
             "name": "launch",
@@ -309,7 +309,7 @@
         },
         {
             "file": "index.js",
-            "line": 351,
+            "line": 358,
             "description": "Kills the ChromeWebDriverServer\n& Chrome browser processes",
             "itemtype": "method",
             "name": "kill",
@@ -320,7 +320,7 @@
         },
         {
             "file": "index.js",
-            "line": 364,
+            "line": 371,
             "description": "Modifies the verbose browser name",
             "itemtype": "method",
             "name": "_modifyVerboseBrowserName",
@@ -343,7 +343,7 @@
         },
         {
             "file": "index.js",
-            "line": 381,
+            "line": 388,
             "description": "Change the process name for browser instances like Canary &amp; Chromium",
             "itemtype": "method",
             "name": "_fetchProcessName",
@@ -366,7 +366,7 @@
         },
         {
             "file": "index.js",
-            "line": 399,
+            "line": 406,
             "description": "Process user defined ports",
             "itemtype": "method",
             "name": "_checkUserDefinedPorts",
@@ -386,7 +386,7 @@
         },
         {
             "file": "index.js",
-            "line": 426,
+            "line": 433,
             "description": "Checks if the binary exists,\nwhen set manually by the user",
             "itemtype": "method",
             "name": "_checkUserDefinedBinary",
@@ -409,7 +409,7 @@
         },
         {
             "file": "index.js",
-            "line": 457,
+            "line": 462,
             "description": "Checks if the def. port is blocked & if we need to switch to another port\nKicks off the process manager (for closing the opened browsers after the run has been finished)\nAlso starts the chromedriver instance",
             "itemtype": "method",
             "name": "_checkPorts",
@@ -439,7 +439,7 @@
         },
         {
             "file": "index.js",
-            "line": 482,
+            "line": 487,
             "description": "Spawns an instance of Chromedriver",
             "itemtype": "method",
             "name": "_startChromedriver",
@@ -469,7 +469,7 @@
         },
         {
             "file": "index.js",
-            "line": 501,
+            "line": 506,
             "description": "Watches the chromedriver console output to capture the starting message",
             "itemtype": "method",
             "name": "_catchDriverLogs",
@@ -494,7 +494,7 @@
         },
         {
             "file": "index.js",
-            "line": 536,
+            "line": 541,
             "description": "Remove the chromedriver log that is written to the current working directory",
             "itemtype": "method",
             "name": "_unlinkChromedriverLog",
@@ -514,7 +514,7 @@
         },
         {
             "file": "index.js",
-            "line": 560,
+            "line": 565,
             "description": "Tracks running browser processes for chrome on mac & linux",
             "itemtype": "method",
             "name": "_processes",
@@ -539,7 +539,7 @@
         },
         {
             "file": "index.js",
-            "line": 580,
+            "line": 585,
             "description": "Kills all associated processes",
             "itemtype": "method",
             "name": "_checkProcesses",
@@ -564,7 +564,7 @@
         },
         {
             "file": "index.js",
-            "line": 605,
+            "line": 610,
             "description": "Kills a process",
             "itemtype": "method",
             "name": "_killNix",
@@ -584,7 +584,7 @@
         },
         {
             "file": "index.js",
-            "line": 630,
+            "line": 635,
             "description": "Lists all chrome processes on *NIX systems",
             "itemtype": "method",
             "name": "_processesNix",
@@ -604,7 +604,7 @@
         },
         {
             "file": "index.js",
-            "line": 646,
+            "line": 651,
             "description": "Deserializes a process list on nix",
             "itemtype": "method",
             "name": "_processListNix",
@@ -634,7 +634,7 @@
         },
         {
             "file": "index.js",
-            "line": 664,
+            "line": 669,
             "description": "Reformats the process list output on *NIX systems",
             "itemtype": "method",
             "name": "_splitProcessListNix",
@@ -659,7 +659,7 @@
         },
         {
             "file": "index.js",
-            "line": 681,
+            "line": 686,
             "description": "Filters empty process list entries on *NIX",
             "itemtype": "method",
             "name": "_filterProcessItemsNix",
@@ -682,7 +682,7 @@
         },
         {
             "file": "index.js",
-            "line": 700,
+            "line": 705,
             "description": "Lists all running processes (win only)",
             "itemtype": "method",
             "name": "_processesWin",
@@ -702,7 +702,7 @@
         },
         {
             "file": "index.js",
-            "line": 714,
+            "line": 719,
             "description": "Deserializes the process list on win",
             "itemtype": "method",
             "name": "_processListWin",
@@ -732,7 +732,7 @@
         },
         {
             "file": "index.js",
-            "line": 753,
+            "line": 758,
             "description": "Processes (transforms) the list of processes",
             "itemtype": "method",
             "name": "_filterProcessItemsWin",
@@ -757,7 +757,7 @@
         },
         {
             "file": "index.js",
-            "line": 772,
+            "line": 777,
             "description": "Filters empty lines out of the process result",
             "itemtype": "method",
             "name": "_splitProcessListWin",
@@ -782,7 +782,7 @@
         },
         {
             "file": "index.js",
-            "line": 789,
+            "line": 794,
             "description": "Kills a process (based on a PID)\nthat was not opened BEFORE Dalek has\nbeen started",
             "itemtype": "method",
             "name": "_killWindows",

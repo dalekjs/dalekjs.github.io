@@ -111,40 +111,40 @@
     <p>This module is a browser plugin for <a href="//github.com/dalekjs/dalek">DalekJS</a>.
 It provides all a WebDriverServer &amp; browser launcher for Google Chrome.</p>
 <p>The browser plugin can be installed with the following command:</p>
-<pre><code class="lang-bash">$ npm install dalek-browser-chrome --save-dev</code></pre>
+<pre class="code prettyprint"><code class="lang-bash">$ npm install dalek-browser-chrome --save-dev</code></pre>
 <p>You can use the browser plugin by adding a config option to the your <a href="/pages/config.html">Dalekfile</a></p>
-<pre><code class="lang-javascript">&quot;browser&quot;: [&quot;chrome&quot;]</code></pre>
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browser&quot;: [&quot;chrome&quot;]</code></pre>
 <p>Or you can tell Dalek that it should test in this browser via the command line:</p>
-<pre><code class="lang-bash">$ dalek mytest.js -b chrome</code></pre>
+<pre class="code prettyprint"><code class="lang-bash">$ dalek mytest.js -b chrome</code></pre>
 <p>The Webdriver Server tries to open Port 9002 by default,
 if this port is blocked, it tries to use a port between 9003 &amp; 9092
 You can specifiy a different port from within your <a href="/pages/config.html">Dalekfile</a> like so:</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: [{
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: [{
   &quot;chrome&quot;: {
     &quot;port&quot;: 5555 
   }
 }]</code></pre>
 <p>It is also possible to specify a range of ports:</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: [{
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: [{
   &quot;chrome&quot;: {
     &quot;portRange&quot;: [6100, 6120] 
   }
 }]</code></pre>
 <p>If you would like to test Chrome Canary oder Chromium releases, you can simply apply a snd. argument,
 which defines the browser type:</p>
-<pre><code class="lang-bash">$ dalek mytest.js -b chrome:canary</code></pre>
+<pre class="code prettyprint"><code class="lang-bash">$ dalek mytest.js -b chrome:canary</code></pre>
 <p>for canary, and if you would like to use chromium, just append <code>:chromium</code>:</p>
-<pre><code class="lang-bash">$ dalek mytest.js -b chrome:chromium</code></pre>
+<pre class="code prettyprint"><code class="lang-bash">$ dalek mytest.js -b chrome:chromium</code></pre>
 <p>This will only work if you installed your browser in the default locations,
 if the browsers binary is located in a non default location, you are able to specify
 its location in your <a href="/pages/config.html">Dalekfile</a>:</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: [{
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: [{
   &quot;chrome&quot;: {
     &quot;binary&quot;: &quot;/Applications/Custom Located Chrome.app/MacOS/Contents/Chrome&quot; 
   }
 }]</code></pre>
 <p>This also works for the canary &amp; chromium builds</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: [{
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: [{
   &quot;chrome&quot;: {
     &quot;binary&quot;: &quot;/Applications/Custom Located Chrome.app/MacOS/Contents/Chrome&quot; 
   }
@@ -520,7 +520,7 @@ its location in your <a href="/pages/config.html">Dalekfile</a>:</p>
             
         
         
-        <a href="../files/index.js.html#l501"><code>index.js:501</code></a>
+        <a href="../files/index.js.html#l506"><code>index.js:506</code></a>
         
         </p>
 
@@ -641,7 +641,7 @@ its location in your <a href="/pages/config.html">Dalekfile</a>:</p>
             
         
         
-        <a href="../files/index.js.html#l457"><code>index.js:457</code></a>
+        <a href="../files/index.js.html#l462"><code>index.js:462</code></a>
         
         </p>
 
@@ -774,7 +774,7 @@ Also starts the chromedriver instance</p>
             
         
         
-        <a href="../files/index.js.html#l580"><code>index.js:580</code></a>
+        <a href="../files/index.js.html#l585"><code>index.js:585</code></a>
         
         </p>
 
@@ -885,7 +885,7 @@ Also starts the chromedriver instance</p>
             
         
         
-        <a href="../files/index.js.html#l426"><code>index.js:426</code></a>
+        <a href="../files/index.js.html#l433"><code>index.js:433</code></a>
         
         </p>
 
@@ -993,7 +993,7 @@ when set manually by the user</p>
             
         
         
-        <a href="../files/index.js.html#l399"><code>index.js:399</code></a>
+        <a href="../files/index.js.html#l406"><code>index.js:406</code></a>
         
         </p>
 
@@ -1088,7 +1088,7 @@ when set manually by the user</p>
             
         
         
-        <a href="../files/index.js.html#l381"><code>index.js:381</code></a>
+        <a href="../files/index.js.html#l388"><code>index.js:388</code></a>
         
         </p>
 
@@ -1197,7 +1197,7 @@ when set manually by the user</p>
             
         
         
-        <a href="../files/index.js.html#l681"><code>index.js:681</code></a>
+        <a href="../files/index.js.html#l686"><code>index.js:686</code></a>
         
         </p>
 
@@ -1310,7 +1310,7 @@ when set manually by the user</p>
             
         
         
-        <a href="../files/index.js.html#l753"><code>index.js:753</code></a>
+        <a href="../files/index.js.html#l758"><code>index.js:758</code></a>
         
         </p>
 
@@ -1419,7 +1419,7 @@ when set manually by the user</p>
             
         
         
-        <a href="../files/index.js.html#l605"><code>index.js:605</code></a>
+        <a href="../files/index.js.html#l610"><code>index.js:610</code></a>
         
         </p>
 
@@ -1512,7 +1512,7 @@ when set manually by the user</p>
             
         
         
-        <a href="../files/index.js.html#l789"><code>index.js:789</code></a>
+        <a href="../files/index.js.html#l794"><code>index.js:794</code></a>
         
         </p>
 
@@ -1609,7 +1609,7 @@ been started</p>
             
         
         
-        <a href="../files/index.js.html#l364"><code>index.js:364</code></a>
+        <a href="../files/index.js.html#l371"><code>index.js:371</code></a>
         
         </p>
 
@@ -1722,7 +1722,7 @@ been started</p>
             
         
         
-        <a href="../files/index.js.html#l560"><code>index.js:560</code></a>
+        <a href="../files/index.js.html#l565"><code>index.js:565</code></a>
         
         </p>
 
@@ -1831,7 +1831,7 @@ been started</p>
             
         
         
-        <a href="../files/index.js.html#l630"><code>index.js:630</code></a>
+        <a href="../files/index.js.html#l635"><code>index.js:635</code></a>
         
         </p>
 
@@ -1924,7 +1924,7 @@ been started</p>
             
         
         
-        <a href="../files/index.js.html#l700"><code>index.js:700</code></a>
+        <a href="../files/index.js.html#l705"><code>index.js:705</code></a>
         
         </p>
 
@@ -2029,7 +2029,7 @@ been started</p>
             
         
         
-        <a href="../files/index.js.html#l646"><code>index.js:646</code></a>
+        <a href="../files/index.js.html#l651"><code>index.js:651</code></a>
         
         </p>
 
@@ -2166,7 +2166,7 @@ been started</p>
             
         
         
-        <a href="../files/index.js.html#l714"><code>index.js:714</code></a>
+        <a href="../files/index.js.html#l719"><code>index.js:719</code></a>
         
         </p>
 
@@ -2297,7 +2297,7 @@ been started</p>
             
         
         
-        <a href="../files/index.js.html#l664"><code>index.js:664</code></a>
+        <a href="../files/index.js.html#l669"><code>index.js:669</code></a>
         
         </p>
 
@@ -2412,7 +2412,7 @@ been started</p>
             
         
         
-        <a href="../files/index.js.html#l772"><code>index.js:772</code></a>
+        <a href="../files/index.js.html#l777"><code>index.js:777</code></a>
         
         </p>
 
@@ -2533,7 +2533,7 @@ been started</p>
             
         
         
-        <a href="../files/index.js.html#l482"><code>index.js:482</code></a>
+        <a href="../files/index.js.html#l487"><code>index.js:487</code></a>
         
         </p>
 
@@ -2658,7 +2658,7 @@ been started</p>
             
         
         
-        <a href="../files/index.js.html#l536"><code>index.js:536</code></a>
+        <a href="../files/index.js.html#l541"><code>index.js:541</code></a>
         
         </p>
 
@@ -2741,7 +2741,7 @@ been started</p>
             
         
         
-        <a href="../files/index.js.html#l299"><code>index.js:299</code></a>
+        <a href="../files/index.js.html#l300"><code>index.js:300</code></a>
         
         </p>
 
@@ -2814,7 +2814,7 @@ been started</p>
             
         
         
-        <a href="../files/index.js.html#l288"><code>index.js:288</code></a>
+        <a href="../files/index.js.html#l289"><code>index.js:289</code></a>
         
         </p>
 
@@ -2887,7 +2887,7 @@ been started</p>
             
         
         
-        <a href="../files/index.js.html#l277"><code>index.js:277</code></a>
+        <a href="../files/index.js.html#l278"><code>index.js:278</code></a>
         
         </p>
 
@@ -2958,7 +2958,7 @@ been started</p>
             
         
         
-        <a href="../files/index.js.html#l351"><code>index.js:351</code></a>
+        <a href="../files/index.js.html#l358"><code>index.js:358</code></a>
         
         </p>
 
@@ -3040,7 +3040,7 @@ been started</p>
             
         
         
-        <a href="../files/index.js.html#l310"><code>index.js:310</code></a>
+        <a href="../files/index.js.html#l311"><code>index.js:311</code></a>
         
         </p>
 
@@ -3166,7 +3166,7 @@ and checks for an available port</p>
             
         
         
-        <a href="../files/index.js.html#l237"><code>index.js:237</code></a>
+        <a href="../files/index.js.html#l238"><code>index.js:238</code></a>
         
         </p>
 
@@ -3212,7 +3212,7 @@ via the Chromedriver</p>
             
         
         
-        <a href="../files/index.js.html#l247"><code>index.js:247</code></a>
+        <a href="../files/index.js.html#l248"><code>index.js:248</code></a>
         
         </p>
 
@@ -3257,7 +3257,7 @@ via the Chromedriver</p>
             
         
         
-        <a href="../files/index.js.html#l261"><code>index.js:261</code></a>
+        <a href="../files/index.js.html#l262"><code>index.js:262</code></a>
         
         </p>
 
@@ -3348,7 +3348,7 @@ transferred when the browser session gets requested</p>
             
         
         
-        <a href="../files/index.js.html#l182"><code>index.js:182</code></a>
+        <a href="../files/index.js.html#l183"><code>index.js:183</code></a>
         
         </p>
 
@@ -3538,7 +3538,7 @@ by the ChromeWebDriverServer</p>
             
         
         
-        <a href="../files/index.js.html#l215"><code>index.js:215</code></a>
+        <a href="../files/index.js.html#l216"><code>index.js:216</code></a>
         
         </p>
 
@@ -3586,7 +3586,7 @@ and therefor shouldn`t be closed</p>
             
         
         
-        <a href="../files/index.js.html#l195"><code>index.js:195</code></a>
+        <a href="../files/index.js.html#l196"><code>index.js:196</code></a>
         
         </p>
 
@@ -3682,7 +3682,7 @@ tool might pick another one, if the default one is blocked</p>
             
         
         
-        <a href="../files/index.js.html#l226"><code>index.js:226</code></a>
+        <a href="../files/index.js.html#l227"><code>index.js:227</code></a>
         
         </p>
 
@@ -3730,7 +3730,7 @@ that represents the browser itself</p>
             
         
         
-        <a href="../files/index.js.html#l205"><code>index.js:205</code></a>
+        <a href="../files/index.js.html#l206"><code>index.js:206</code></a>
         
         </p>
 
