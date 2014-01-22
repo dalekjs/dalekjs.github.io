@@ -1082,6 +1082,8 @@ Assertions.prototype.visible = function (selector, message) {
  *    .assert.doesntHaveText(&#x27;h1&#x27;, &#x27;This page is a Dalek sandbox&#x27;, &#x27;It´s a sandbox!&#x27;)
  *    .done();
  * &#x60;&#x60;&#x60;
+ *
+ * &gt; NOTE: You cant match for a substring with contain() here.
  * 
  * @api
  * @method doesntHaveText
@@ -1120,6 +1122,7 @@ Assertions.prototype.doesntHaveText = function (selector, expected, message) {
  *    .done();
  * &#x60;&#x60;&#x60;
  *
+ * &gt; NOTE: You cant match for a substring with contain() here.
  * &gt; NOTE: Does not work in Firefox &amp; PhantomJS
  * 
  * @api
@@ -1165,6 +1168,15 @@ Assertions.prototype.dialogDoesntHaveText = function (expected, message) {
  *  test
  *    .open(&#x27;http://dalekjs.com/guineapig/&#x27;)
  *    .assert.text(&#x27;h1&#x27;).is.not(&#x27;This page is a CasperJS sandbox&#x27;, &#x27;Exterminate!&#x27;)
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * and you can also check for the occurrence of a substring with to.contain() (but don&#x27;t try to chain it with not() as this is not possible)
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://dalekjs.com/guineapig/&#x27;)
+ *    .assert.text(&#x27;h1&#x27;).to.contain(&#x27;CasperJS&#x27;)
  *    .done();
  * &#x60;&#x60;&#x60;
  *
@@ -1255,11 +1267,19 @@ Assertions.prototype.dialogText = function (expected, message) {
  *     .done();
  * &#x60;&#x60;&#x60;
  *
- * and the not() helper is available too:
+ * the not() helper is available too:
  *
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
  *     .assert.title().is.not(&#x27;Dalek Emperor TV&#x27;, &#x27;Not your Daleks TV&#x27;)
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * and you can also match for a substring with to.contain() (but don&#x27;t try to chain it with not() as this is not possible):
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
+ *     .assert.title().to.contain(&#x27;Emperor&#x27;)
  *     .done();
  * &#x60;&#x60;&#x60;
  *
@@ -1326,11 +1346,19 @@ Assertions.prototype.doesntHaveTitle = function (expected, message) {
  *     .done();
  * &#x60;&#x60;&#x60;
  *
- * and the not() helper is available too:
+ * the not() helper is available too:
  *
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
  *     .assert.url().is.not(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;URL is as expected&#x27;)
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * and you can also match for a substring with to.contain() (but don&#x27;t try to chain it with not() as this is not possible):
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
+ *     .assert.url().to.contain(&#x27;doctor&#x27;)
  *     .done();
  * &#x60;&#x60;&#x60;
  *
@@ -1354,6 +1382,14 @@ Assertions.prototype.url = function (expected, message) {
  * &#x60;&#x60;&#x60;javascript
  *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
  *     .assert.doesntHaveUrl(&#x27;http://doctorwhotv.co.uk/&#x27;, &#x27;URL is not expected&#x27;)
+ *     .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * Oh, you might also match for a substring with to.contain():
+ *
+ *  * &#x60;&#x60;&#x60;javascript
+ *   test.open(&#x27;http://doctorwhotv.co.uk/&#x27;)
+ *     .assert.doesntHaveUrl().to.contain(&#x27;doctor&#x27;)
  *     .done();
  * &#x60;&#x60;&#x60;
  *
@@ -1388,7 +1424,7 @@ Assertions.prototype.doesntHaveUrl = function (expected, message) {
  * &#x60;&#x60;&#x60;
  *
  * &#x60;&#x60;&#x60;html
- * &lt;div id=&quot;dataDiv&quot; data-spot=&quot;cat&quot;&gt;&lt;/div&gt;
+ * &lt;div class=&quot;wellImUpperUpperClassHighSociety&quot; id=&quot;dataDiv&quot; data-spot=&quot;cat&quot;&gt;&lt;/div&gt;
  * &#x60;&#x60;&#x60;
  *
  * &#x60;&#x60;&#x60;javascript
@@ -1402,6 +1438,24 @@ Assertions.prototype.doesntHaveUrl = function (expected, message) {
  *  test
  *    .open(&#x27;http://dalekjs.com/guineapig/&#x27;)
  *    .assert.attr(&#x27;#dataDiv&#x27;).is.not(&#x27;data-spot&#x27;, &#x27;doc&#x27;, &#x27;Spot is not a dog!&#x27;)
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * You can also use attr() for checking if a class is existent
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://dalekjs.com/guineapig/&#x27;)
+ *    .assert.attr(&#x27;#dataDiv&#x27;, &#x27;class&#x27;, &#x27;wellImUpperUpperClassHighSociety&#x27;)
+ *    .done();
+ * &#x60;&#x60;&#x60;
+ *
+ * and you can also match a substring (e. g. a single class if more classes are on that elem) with to.contain():
+ *
+ * &#x60;&#x60;&#x60;javascript
+ *  test
+ *    .open(&#x27;http://dalekjs.com/guineapig/&#x27;)
+ *    .assert.attr(&#x27;#dataDiv&#x27;, &#x27;class&#x27;).to.contain(&#x27;upperUpperClass&#x27;)
  *    .done();
  * &#x60;&#x60;&#x60;
  *
