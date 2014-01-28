@@ -178,7 +178,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "lib/levelbase.js",
-            "line": 31
+            "line": 30
         },
         "Reporter": {
             "name": "Reporter",
@@ -314,7 +314,7 @@
             "module": "LevelBase",
             "namespace": "",
             "file": "lib/levelbase.js",
-            "line": 31,
+            "line": 30,
             "is_constructor": 1,
             "params": [
                 {
@@ -704,7 +704,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 48,
+            "line": 47,
             "description": "Outputs a string",
             "itemtype": "method",
             "name": "outputTestStarted",
@@ -721,7 +721,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 102,
+            "line": 101,
             "description": "Outputs a symbol",
             "itemtype": "method",
             "name": "outputTestStarted",
@@ -741,7 +741,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 140,
+            "line": 139,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputRunnerStarted",
@@ -758,7 +758,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 152,
+            "line": 151,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputTestFinished",
@@ -775,7 +775,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 164,
+            "line": 163,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputRunnerFinished",
@@ -792,7 +792,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 176,
+            "line": 175,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputAssertionResult",
@@ -809,7 +809,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 188,
+            "line": 187,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputRunBrowser",
@@ -826,7 +826,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 200,
+            "line": 199,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputAction",
@@ -836,7 +836,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 211,
+            "line": 210,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputAssertionExpecation",
@@ -853,7 +853,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 223,
+            "line": 222,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputAction",
@@ -870,7 +870,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 235,
+            "line": 234,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputTestStarted",
@@ -887,7 +887,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 247,
+            "line": 246,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputLogUser",
@@ -904,7 +904,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 259,
+            "line": 258,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputBrowserVersion",
@@ -921,7 +921,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 271,
+            "line": 270,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputOSVersion",
@@ -938,7 +938,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 283,
+            "line": 282,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputReportWritten",
@@ -955,7 +955,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 295,
+            "line": 294,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputWarning",
@@ -972,7 +972,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 307,
+            "line": 306,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "outputError",
@@ -989,7 +989,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 319,
+            "line": 318,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "remoteConnectionEstablished",
@@ -1006,7 +1006,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 331,
+            "line": 330,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "remoteConnectionClosed",
@@ -1023,7 +1023,7 @@
         },
         {
             "file": "lib/levelbase.js",
-            "line": 343,
+            "line": 342,
             "description": "Does nothing",
             "itemtype": "method",
             "name": "remoteConnectionReady",

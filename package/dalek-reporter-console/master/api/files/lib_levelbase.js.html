@@ -144,7 +144,6 @@
 
 // ext. libs
 var clc = require(&#x27;cli-color&#x27;);
-var util = require(&#x27;util&#x27;);
 
 /**
  * @class LevelBase
@@ -173,18 +172,18 @@ module.exports = LevelBase;
 
 LevelBase.prototype.echo = function (message, options) {
   options = options || {};
-  var echo = options.nl === false ? util.print : util.puts;
+  var nl = options.nl === false ? &#x27;&#x27; :&#x27;\n&#x27;;
   var coloredOutput = clc;
   message = options.ec === true ? message + &#x27; &#x27; : message;
 
   // should a newline be outputted before the current message
   if (options.pnl) {
-    util.puts(&#x27;&#x27;);
+    console.log(&#x27;&#x27;);
   }
 
   // output a message without any colors
   if (this.noColor) {
-    echo(message);
+    process.stdout.write(message + nl);
     return this;
   }
 
@@ -213,7 +212,7 @@ LevelBase.prototype.echo = function (message, options) {
   }
 
   // output the message
-  echo(coloredOutput(message));
+  process.stdout.write(coloredOutput(message + nl));
   return this;
 };
 
