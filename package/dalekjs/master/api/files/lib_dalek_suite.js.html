@@ -204,6 +204,18 @@ Suite.prototype = {
 
   loadTestsuite: function (testfile) {
     var suite = {};
+
+    // if the tests were passed in *as* a list of tests, just use them
+    if (testfile &amp;&amp; typeof testfile === &#x27;object&#x27;) {
+      var allAreTestFunctions = true;
+      for (var testname in testfile) {
+        if (typeof testfile[testname] !== &#x27;function&#x27;) { allAreTestFunctions = false; }
+      }
+      if (allAreTestFunctions) {
+        return testfile;
+      }
+    }
+
     // catch any errors, like falsy requires &amp; stuff
     try {
 

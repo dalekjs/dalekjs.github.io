@@ -3957,7 +3957,7 @@
         },
         {
             "file": "lib/dalek/suite.js",
-            "line": 109,
+            "line": 121,
             "description": "Checks if all tests from the testsuite are executed.\nRuns the next test if not.\nTriggers `asyncs` callback if the suite is finished.\nDecrements the `testsToBeExecuted` counter",
             "itemtype": "method",
             "name": "testFinished",
@@ -3990,7 +3990,7 @@
         },
         {
             "file": "lib/dalek/suite.js",
-            "line": 149,
+            "line": 161,
             "description": "Decrements number of tests that should be executed in this suite",
             "itemtype": "method",
             "name": "decrementTestsToBeExecuted",
@@ -4004,7 +4004,7 @@
         },
         {
             "file": "lib/dalek/suite.js",
-            "line": 160,
+            "line": 172,
             "description": "Returns the name of the testsuite\nIf the suite has no name, it will return the testsuites filename",
             "itemtype": "method",
             "name": "getName",
@@ -4018,7 +4018,7 @@
         },
         {
             "file": "lib/dalek/suite.js",
-            "line": 178,
+            "line": 190,
             "description": "Returns the options of the testsuite\nIf the suite has no options, it will return an empty object",
             "itemtype": "method",
             "name": "getOptions",
@@ -4032,7 +4032,7 @@
         },
         {
             "file": "lib/dalek/suite.js",
-            "line": 196,
+            "line": 208,
             "description": "Returns all names (aka. object keys) the tests that should be executed",
             "itemtype": "method",
             "name": "getTests",
@@ -4046,7 +4046,7 @@
         },
         {
             "file": "lib/dalek/suite.js",
-            "line": 207,
+            "line": 219,
             "description": "Returns the number of tests to be executed",
             "itemtype": "method",
             "name": "getNumberOfTests",
@@ -4067,7 +4067,7 @@
         },
         {
             "file": "lib/dalek/suite.js",
-            "line": 219,
+            "line": 231,
             "description": "Returns the next test, that should be executed",
             "itemtype": "method",
             "name": "getNextTest",
@@ -4081,7 +4081,7 @@
         },
         {
             "file": "lib/dalek/suite.js",
-            "line": 230,
+            "line": 242,
             "description": "Executes the next test in the sequence",
             "itemtype": "method",
             "name": "executeNextTest",
@@ -4102,7 +4102,7 @@
         },
         {
             "file": "lib/dalek/suite.js",
-            "line": 253,
+            "line": 265,
             "description": "Generates a new test instance",
             "itemtype": "method",
             "name": "getTestInstance",
@@ -4123,7 +4123,7 @@
         },
         {
             "file": "lib/dalek/suite.js",
-            "line": 265,
+            "line": 277,
             "description": "Returns a test function by its name",
             "itemtype": "method",
             "name": "getTest",
@@ -4144,7 +4144,7 @@
         },
         {
             "file": "lib/dalek/suite.js",
-            "line": 277,
+            "line": 289,
             "description": "Will be executed if a test is started, that does not exist",
             "itemtype": "method",
             "name": "testDoesNotExist",
@@ -4161,7 +4161,7 @@
         },
         {
             "file": "lib/dalek/suite.js",
-            "line": 291,
+            "line": 303,
             "description": "Runs any tests from this testsuite in sequence",
             "itemtype": "method",
             "name": "run",
