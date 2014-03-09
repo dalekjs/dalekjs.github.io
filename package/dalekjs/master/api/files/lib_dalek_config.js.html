@@ -146,6 +146,7 @@ var fs = require(&#x27;fs&#x27;);
 var _ = require(&#x27;lodash&#x27;);
 var yaml = require(&#x27;js-yaml&#x27;);
 var JSON5 = require(&#x27;json5&#x27;);
+var glob = require(&#x27;glob&#x27;);
 require(&#x27;coffee-script&#x27;);
 
 /**
@@ -342,6 +343,22 @@ Config.prototype = {
     // remove the tests property if the array length is 0
     if (opts.tests.length === 0) {
       delete opts.tests;
+    }
+
+    if(data.tests &amp;&amp; _.isArray(data.tests) &amp;&amp; data.tests.length &gt; 0) {
+      var tests = [];
+
+      //get all the files that match
+      _.forEach(data.tests, function(search) {
+        tests = tests.concat(glob.sync(search));
+      });
+
+      //remove duplicate files
+      tests = tests.filter(function(elem, pos, self) {
+        return self.indexOf(elem) === pos;
+      });
+
+      data.tests = tests;
     }
 
     return _.merge(defaults, data, opts, (this.advancedOptions || {}));
