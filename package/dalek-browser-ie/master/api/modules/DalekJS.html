@@ -105,21 +105,21 @@
     <p>This module is a browser plugin for <a href="//github.com/dalekjs/dalek">DalekJS</a>.
 It provides all a WebDriverServer &amp; browser launcher for Internet Explorer.</p>
 <p>The browser plugin can be installed with the following command:</p>
-<pre><code class="lang-bash">$ npm install dalek-browser-ie --save-dev</code></pre>
+<pre class="code prettyprint"><code class="lang-bash">$ npm install dalek-browser-ie --save-dev</code></pre>
 <p>You can use the browser plugin by adding a config option to the your Dalekfile</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: [&quot;IE&quot;]</code></pre>
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: [&quot;IE&quot;]</code></pre>
 <p>Or you can tell Dalek that it should test in this browser via the command line:</p>
-<pre><code class="lang-bash">$ dalek mytest.js -b IE</code></pre>
+<pre class="code prettyprint"><code class="lang-bash">$ dalek mytest.js -b IE</code></pre>
 <p>The Webdriver Server tries to open Port 5555 by default,
 if this port is blocked, it tries to use a port between 5555 &amp; 5564
 You can specifiy a different port from within your <a href="/pages/config.html">Dalekfile</a> like so:</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: {
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: {
   &quot;ie&quot;: {
     &quot;port&quot;: 6555 
   }
 }</code></pre>
 <p>It is also possible to specify a range of ports:</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: {
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: {
   &quot;ie&quot;: {
     &quot;portRange&quot;: [6100, 6120] 
   }
