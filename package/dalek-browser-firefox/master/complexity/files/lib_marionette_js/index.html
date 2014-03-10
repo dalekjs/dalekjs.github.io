@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Plato - lib/marionette.js</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
@@ -26,7 +26,7 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
     <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
@@ -44,12 +44,12 @@
 <div class="container aggregate-stats">
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">70.95</p>
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">70.54</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">287</p>
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">308</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,12 +62,12 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">30.62</p>
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">37.04</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">1.59</p>
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.85</p>
     </div>
   </div>
 </div>
@@ -78,11 +78,11 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
     <div class="col-md-6">
-      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
   </div>
@@ -216,7 +216,7 @@ Marionette.prototype.addCommand = function (command) {
     var deferred = Q.defer();
 
     deferred.promise.then(function (data) {
-      this.events.emit(&#039;marionette:cmd:&#039; + command.name + &#039;:response&#039;, data);
+      this.events.emit(&#039;marionette:cmd:&#039; + command.name + &#039;:response&#039;, JSON.stringify(data));
     }.bind(this));
 
     // parse the command skeleton &amp; create a message with values
@@ -265,7 +265,7 @@ Marionette.prototype._loadCommands = function () {
  */
 
 Marionette.prototype._parseRequestKey = function (placeholder, params) {
-  if (placeholder[0] !== &#039;:&#039;) {
+  if (typeof placeholder !== &#039;object&#039; &amp;&amp; placeholder[0] !== &#039;:&#039;) {
     return placeholder;
   }
 
@@ -275,14 +275,37 @@ Marionette.prototype._parseRequestKey = function (placeholder, params) {
   }
 
   // add the marionetteID to the params
-  params.marionetteId = this._marionetteID;
+  if (typeof placeholder !== &#039;object&#039;) {
+    params.marionetteId = this._marionetteID;
+  }
 
   var content = &#039;&#039;;
-  Object.keys(params).forEach(function (key){
-    if (key === placeholder.substr(1)) {
-      content = params[key];
-    }
-  }.bind(this));
+  if (typeof placeholder !== &#039;object&#039;) {
+    Object.keys(params).forEach(function (key){
+      if (key === placeholder.substr(1)) {
+        content = params[key];
+      }
+    }.bind(this));
+  }
+
+  // check if we have a params object (and replace also there)
+  if (typeof placeholder === &#039;object&#039;) {
+    content = {};
+
+    Object.keys(params).forEach(function (key) {
+      Object.keys(placeholder).forEach(function (name) {
+        if (placeholder[name] &amp;&amp; placeholder[name].substring(1) === key) {
+          content[name] = params[key];
+        }
+      }.bind(this));
+    }.bind(this));
+
+    Object.keys(placeholder).forEach(function (name) {
+      if (placeholder[name].substr(0, 1) !== &#039;:&#039;) {
+        content[name] = placeholder[name];
+      }
+    }.bind(this));
+  }
 
   return content;
 };
@@ -346,7 +369,6 @@ Marionette.prototype._onData = function (data) {
   Q.when(def.promise).then(function(data) {
     // parse the message &amp; call the resolving function
     var parsedMessage = this._parseMessage(data);
-
     // avoid resolving the initial handshake command
     if (!parsedMessage.applicationType) {
       this._lastCommand.resolve(parsedMessage);
@@ -391,7 +413,6 @@ Marionette.prototype._sendCommand = function (command, deferred) {
   // serialize message
   var commandSerialized = JSON.stringify(command);
   var msg = commandSerialized.length + &#039;:&#039; + commandSerialized;
-
   // reference promise
   this._lastCommand = deferred;
   // send command

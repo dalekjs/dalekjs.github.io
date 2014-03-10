@@ -203,7 +203,8 @@ module.exports = function (Driver) {
    */
 
   Driver._helper.parseElement = function (element) {
-    return (!element.value) ? -1 : {ELEMENT: element.value};
+    element = JSON.parse(element);
+    return (!element.value) ? -1 : {ELEMENT: element.value.ELEMENT};
   };
 
   /**
@@ -216,6 +217,7 @@ module.exports = function (Driver) {
    */
 
   Driver._helper.parseElements = function (elements) {
+    elements = JSON.parse(elements);
     if (!elements.value) {
       return -1;
     }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Plato - index.js</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
@@ -26,7 +26,7 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
     <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
@@ -44,12 +44,12 @@
 <div class="container aggregate-stats">
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">68.85</p>
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">68.43</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">888</p>
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">903</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,12 +62,12 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">38.42</p>
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">38.79</p>
     </div>
     <div class="col-md-6">
-      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">3.78</p>
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">4.01</p>
     </div>
   </div>
 </div>
@@ -78,11 +78,11 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
     <div class="col-md-6">
-      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
   </div>
@@ -347,7 +347,8 @@ var FirefoxDriver = {
   defaultBinaries: {
     default: &#039;firefox&#039;,
     darwin: &#039;/Applications/Firefox.app/Contents/MacOS/firefox-bin&#039;,
-    win32: process.env.ProgramFiles + &#039;\\Mozilla Firefox\\firefox.exe&#039;
+    win32: process.env.ProgramFiles + &#039;\\Mozilla Firefox\\firefox.exe&#039;,
+    win64: process.env[&#039;ProgramFiles(x86)&#039;] + &#039;\\Mozilla Firefox\\firefox.exe&#039;
   },
 
   /**
@@ -371,7 +372,8 @@ var FirefoxDriver = {
       name: &#039;Firefox Nightly&#039;,
       linux: &#039;firefox&#039;,
       darwin: &#039;/Applications/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin&#039;,
-      win32: process.env.ProgramFiles + &#039;\\Nightly\\firefox.exe&#039;
+      win32: process.env.ProgramFiles + &#039;\\Nightly\\firefox.exe&#039;,
+      win64: process.env[&#039;ProgramFiles(x86)&#039;] + &#039;\\Mozilla Firefox Nightly\\firefox.exe&#039;
     },
 
     /**
@@ -385,7 +387,8 @@ var FirefoxDriver = {
       name: &#039;Firefox Aurora&#039;,
       linux: &#039;firefox&#039;,
       darwin: &#039;/Applications/FirefoxAuroraDebug.app/Contents/MacOS/firefox-bin&#039;,
-      win32: process.env.ProgramFiles + &#039;\\AuroraDebug\\firefox.exe&#039;
+      win32: process.env.ProgramFiles + &#039;\\AuroraDebug\\firefox.exe&#039;,
+      win64: process.env[&#039;ProgramFiles(x86)&#039;] + &#039;\\Mozilla AuroraDebug\\firefox.exe&#039;
     },
 
     /**
@@ -399,7 +402,8 @@ var FirefoxDriver = {
       name: &#039;Firefox OS&#039;,
       linux: &#039;b2g&#039;,
       darwin: &#039;/Applications/B2G.app/Contents/MacOS/b2g&#039;,
-      win32: process.env.ProgramFiles + &#039;\\B2G\\b2g.exe&#039;
+      win32: process.env.ProgramFiles + &#039;\\B2G\\b2g.exe&#039;,
+      win64: process.env.ProgramFiles + &#039;\\B2G\\b2g.exe&#039;
     }
   },
 
@@ -673,6 +677,17 @@ var FirefoxDriver = {
 
   _getDefaultBinary: function () {
     var platform = process.platform;
+
+    // check default binary for linuy
+    if (platform !== &#039;darwin&#039; &amp;&amp; platform !== &#039;win32&#039; &amp;&amp; this.defaultBinaries[platform]) {
+      return which(this.defaultBinaries.linux);
+    }
+
+    // check to see if we are on Windows x64
+    if (platform === &#039;win32&#039; &amp;&amp; process.arch === &#039;x64&#039;) {
+      platform = &#039;win64&#039;;
+    }
+	
     return this.defaultBinaries[platform] ?
       this.defaultBinaries[platform] :
       which(this.defaultBinaries.default);
@@ -813,7 +828,7 @@ var FirefoxDriver = {
 
   _afterPortResolved: function (deferred, profileName, error, port) {
     // check for errors
-    if (error !== null) {
+    if (error !== null &amp;&amp; error.code !== &#039;ECONNREFUSED&#039;) {
       this.reporterEvents.emit(&#039;error&#039;, &#039;dalek-browser-firefox: Error starting WebDriverServer, port &#039; + port + &#039; in use&#039;);
       deferred.reject(error);
       process.exit();

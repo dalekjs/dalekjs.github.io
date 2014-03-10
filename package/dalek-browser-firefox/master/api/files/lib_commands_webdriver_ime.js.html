@@ -208,6 +208,7 @@ module.exports = function (Driver) {
 
       // send out the raw status response
       this.events.on(&#x27;marionette:cmd:status:response&#x27;, function (data) {
+        data = JSON.parse(data);
         res.send(JSON.stringify(data));
       }.bind(this));
     }

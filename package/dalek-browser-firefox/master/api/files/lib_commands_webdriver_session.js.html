@@ -211,6 +211,7 @@ module.exports = function (Driver) {
 
       // send out the webdriver session response
       this.events.on(&#x27;marionette:cmd:getSession:response&#x27;, function (session) {
+        session = JSON.parse(session);
         res.location(&#x27;http://&#x27; + this.host + &#x27;:&#x27; + this.port + &#x27;/session/&#x27; + session.value);
         res.end();
       }.bind(this));

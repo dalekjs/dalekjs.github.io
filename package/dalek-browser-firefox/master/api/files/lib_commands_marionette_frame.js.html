@@ -197,9 +197,11 @@ module.exports = function (Marionette) {
     request: {
       to: &#x27;:marionetteId&#x27;,
       session: &#x27;:sessionId&#x27;,
-      type: &#x27;switchToFrame&#x27;,
-      element: &#x27;:elementId&#x27;,
-      focus: true
+      name: &#x27;switchToFrame&#x27;,
+      parameters: {
+        element: &#x27;:elementId&#x27;,
+        focus: true
+      }
     }
   });
 

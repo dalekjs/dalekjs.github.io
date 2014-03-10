@@ -171,15 +171,15 @@
     <p>This module is a browser plugin for <a href="//github.com/dalekjs/dalek">DalekJS</a>.
 It provides all a WebDriverServer &amp; browser launcher for Mozilla Firefox &amp; Firefox OS.</p>
 <p>The browser plugin can be installed with the following command:</p>
-<pre><code class="lang-bash">$ npm install dalek-browser-firefox --save-dev</code></pre>
+<pre class="code prettyprint"><code class="lang-bash">$ npm install dalek-browser-firefox --save-dev</code></pre>
 <p>You can use the browser plugin by adding a config option to the your Dalekfile</p>
-<pre><code class="lang-javascript">&quot;browser&quot;: [&quot;firefox&quot;]</code></pre>
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browser&quot;: [&quot;firefox&quot;]</code></pre>
 <p>Or you can tell Dalek that it should test in this browser via the command line:</p>
-<pre><code class="lang-bash">$ dalek mytest.js -b firefox</code></pre>
+<pre class="code prettyprint"><code class="lang-bash">$ dalek mytest.js -b firefox</code></pre>
 <p>Dalek looks for the browser in the std. installation directory, if you installed the
 browser in a different place, you can add the location of the browser executable to you Dalekfile,
 because Dalek isnʼt capable of finding the executable yet on its own.</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: [{
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: [{
   &quot;firefox&quot;: {
     &quot;path&quot;: &quot;~/Apps/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin&quot;
   }
@@ -190,32 +190,32 @@ Please report any issues you find, Thank you :)</p>
 <p>The Webdriver Server tries to open Port 9006 by default,
 if this port is blocked, it tries to use a port between 9007 &amp; 9096
 You can specifiy a different port from within your <a href="/pages/config.html">Dalekfile</a> like so:</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: {
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: {
   &quot;firefox&quot;: {
     &quot;port&quot;: 5555 
   }
 }</code></pre>
 <p>It is also possible to specify a range of ports:</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: {
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: {
   &quot;firefox&quot;: {
     &quot;portRange&quot;: [6100, 6120] 
   }
 }</code></pre>
 <p>If you would like to test Nightly, Aurora oder Firefox OS releases, you can simply apply a snd. argument,
 which defines the browser type:</p>
-<pre><code class="lang-bash">$ dalek mytest.js -b firefox:aurora</code></pre>
+<pre class="code prettyprint"><code class="lang-bash">$ dalek mytest.js -b firefox:aurora</code></pre>
 <p>for Firefox Aurora, and if you would like to use the Firefox OS, just append <code>:os</code>:</p>
-<pre><code class="lang-bash">$ dalek mytest.js -b firefox:os</code></pre>
+<pre class="code prettyprint"><code class="lang-bash">$ dalek mytest.js -b firefox:os</code></pre>
 <p>This will only work if you installed your browser in the default locations,
 if the browsers binary is located in a non default location, you are able to specify
 its location in your <a href="/pages/config.html">Dalekfile</a>:</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: {
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: {
   &quot;firefox&quot;: {
     &quot;binary&quot;: &quot;/Applications/Custom Located Firefox.app/MacOS/Contents/firefox-bin&quot; 
   }
 }</code></pre>
 <p>This also works for the aurora &amp; Firefox OS builds</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: {
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: {
   &quot;firefox:aurora&quot;: {
     &quot;binary&quot;: &quot;/Applications/Custom Located Firefox Aurora.app/MacOS/Contents/firefox-bin&quot; 
   }
@@ -619,7 +619,7 @@ its location in your <a href="/pages/config.html">Dalekfile</a>:</p>
             
         
         
-        <a href="../files/index.js.html#l469"><code>index.js:469</code></a>
+        <a href="../files/index.js.html#l473"><code>index.js:473</code></a>
         
         </p>
 
@@ -735,7 +735,7 @@ browser binary has been found</p>
             
         
         
-        <a href="../files/index.js.html#l744"><code>index.js:744</code></a>
+        <a href="../files/index.js.html#l759"><code>index.js:759</code></a>
         
         </p>
 
@@ -852,7 +852,7 @@ has been launched correctly</p>
             
         
         
-        <a href="../files/index.js.html#l857"><code>index.js:857</code></a>
+        <a href="../files/index.js.html#l872"><code>index.js:872</code></a>
         
         </p>
 
@@ -968,7 +968,7 @@ have been created</p>
             
         
         
-        <a href="../files/index.js.html#l513"><code>index.js:513</code></a>
+        <a href="../files/index.js.html#l517"><code>index.js:517</code></a>
         
         </p>
 
@@ -1079,7 +1079,7 @@ have been created</p>
             
         
         
-        <a href="../files/index.js.html#l786"><code>index.js:786</code></a>
+        <a href="../files/index.js.html#l801"><code>index.js:801</code></a>
         
         </p>
 
@@ -1186,7 +1186,7 @@ have been created</p>
             
         
         
-        <a href="../files/index.js.html#l661"><code>index.js:661</code></a>
+        <a href="../files/index.js.html#l676"><code>index.js:676</code></a>
         
         </p>
 
@@ -1285,7 +1285,7 @@ have been created</p>
             
         
         
-        <a href="../files/index.js.html#l880"><code>index.js:880</code></a>
+        <a href="../files/index.js.html#l895"><code>index.js:895</code></a>
         
         </p>
 
@@ -1387,7 +1387,7 @@ when set manually by the user</p>
             
         
         
-        <a href="../files/index.js.html#l806"><code>index.js:806</code></a>
+        <a href="../files/index.js.html#l821"><code>index.js:821</code></a>
         
         </p>
 
@@ -1470,7 +1470,7 @@ when set manually by the user</p>
             
         
         
-        <a href="../files/index.js.html#l822"><code>index.js:822</code></a>
+        <a href="../files/index.js.html#l837"><code>index.js:837</code></a>
         
         </p>
 
@@ -1568,7 +1568,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l574"><code>index.js:574</code></a>
+        <a href="../files/index.js.html#l578"><code>index.js:578</code></a>
         
         </p>
 
@@ -1653,7 +1653,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l549"><code>index.js:549</code></a>
+        <a href="../files/index.js.html#l553"><code>index.js:553</code></a>
         
         </p>
 
@@ -1748,7 +1748,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l528"><code>index.js:528</code></a>
+        <a href="../files/index.js.html#l532"><code>index.js:532</code></a>
         
         </p>
 
@@ -1819,7 +1819,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l496"><code>index.js:496</code></a>
+        <a href="../files/index.js.html#l500"><code>index.js:500</code></a>
         
         </p>
 
@@ -1932,7 +1932,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l769"><code>index.js:769</code></a>
+        <a href="../files/index.js.html#l784"><code>index.js:784</code></a>
         
         </p>
 
@@ -2059,7 +2059,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l710"><code>index.js:710</code></a>
+        <a href="../files/index.js.html#l725"><code>index.js:725</code></a>
         
         </p>
 
@@ -2206,7 +2206,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l688"><code>index.js:688</code></a>
+        <a href="../files/index.js.html#l703"><code>index.js:703</code></a>
         
         </p>
 
@@ -2315,7 +2315,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l626"><code>index.js:626</code></a>
+        <a href="../files/index.js.html#l641"><code>index.js:641</code></a>
         
         </p>
 
@@ -2420,7 +2420,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l589"><code>index.js:589</code></a>
+        <a href="../files/index.js.html#l604"><code>index.js:604</code></a>
         
         </p>
 
@@ -2563,7 +2563,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l640"><code>index.js:640</code></a>
+        <a href="../files/index.js.html#l655"><code>index.js:655</code></a>
         
         </p>
 
@@ -2704,7 +2704,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l436"><code>index.js:436</code></a>
+        <a href="../files/index.js.html#l440"><code>index.js:440</code></a>
         
         </p>
 
@@ -2801,7 +2801,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l368"><code>index.js:368</code></a>
+        <a href="../files/index.js.html#l372"><code>index.js:372</code></a>
         
         </p>
 
@@ -2874,7 +2874,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l357"><code>index.js:357</code></a>
+        <a href="../files/index.js.html#l361"><code>index.js:361</code></a>
         
         </p>
 
@@ -2947,7 +2947,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l346"><code>index.js:346</code></a>
+        <a href="../files/index.js.html#l350"><code>index.js:350</code></a>
         
         </p>
 
@@ -3020,7 +3020,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l335"><code>index.js:335</code></a>
+        <a href="../files/index.js.html#l339"><code>index.js:339</code></a>
         
         </p>
 
@@ -3091,7 +3091,7 @@ Saves them in <code>user.js</code> in the newly created profile</p>
             
         
         
-        <a href="../files/index.js.html#l417"><code>index.js:417</code></a>
+        <a href="../files/index.js.html#l421"><code>index.js:421</code></a>
         
         </p>
 
@@ -3173,7 +3173,7 @@ then kills the browser process &amp; cleans up the profiles</p>
             
         
         
-        <a href="../files/index.js.html#l379"><code>index.js:379</code></a>
+        <a href="../files/index.js.html#l383"><code>index.js:383</code></a>
         
         </p>
 
@@ -3299,7 +3299,7 @@ Creates a user profile for the browser</p>
             
         
         
-        <a href="../files/index.js.html#l285"><code>index.js:285</code></a>
+        <a href="../files/index.js.html#l287"><code>index.js:287</code></a>
         
         </p>
 
@@ -3391,7 +3391,7 @@ Creates a user profile for the browser</p>
             
         
         
-        <a href="../files/index.js.html#l261"><code>index.js:261</code></a>
+        <a href="../files/index.js.html#l262"><code>index.js:262</code></a>
         
         </p>
 
@@ -3767,7 +3767,7 @@ by the WebDriverServer</p>
             
         
         
-        <a href="../files/index.js.html#l271"><code>index.js:271</code></a>
+        <a href="../files/index.js.html#l272"><code>index.js:272</code></a>
         
         </p>
 
@@ -3812,7 +3812,7 @@ by the WebDriverServer</p>
             
         
         
-        <a href="../files/index.js.html#l299"><code>index.js:299</code></a>
+        <a href="../files/index.js.html#l302"><code>index.js:302</code></a>
         
         </p>
 
@@ -3953,7 +3953,7 @@ tool might pick another one, if the default one is blocked</p>
             
         
         
-        <a href="../files/index.js.html#l324"><code>index.js:324</code></a>
+        <a href="../files/index.js.html#l328"><code>index.js:328</code></a>
         
         </p>
 
@@ -4001,7 +4001,7 @@ path, name, etc.</p>
             
         
         
-        <a href="../files/index.js.html#l314"><code>index.js:314</code></a>
+        <a href="../files/index.js.html#l318"><code>index.js:318</code></a>
         
         </p>
 

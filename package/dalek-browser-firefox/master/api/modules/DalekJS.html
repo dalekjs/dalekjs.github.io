@@ -165,15 +165,15 @@
     <p>This module is a browser plugin for <a href="//github.com/dalekjs/dalek">DalekJS</a>.
 It provides all a WebDriverServer &amp; browser launcher for Mozilla Firefox &amp; Firefox OS.</p>
 <p>The browser plugin can be installed with the following command:</p>
-<pre><code class="lang-bash">$ npm install dalek-browser-firefox --save-dev</code></pre>
+<pre class="code prettyprint"><code class="lang-bash">$ npm install dalek-browser-firefox --save-dev</code></pre>
 <p>You can use the browser plugin by adding a config option to the your Dalekfile</p>
-<pre><code class="lang-javascript">&quot;browser&quot;: [&quot;firefox&quot;]</code></pre>
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browser&quot;: [&quot;firefox&quot;]</code></pre>
 <p>Or you can tell Dalek that it should test in this browser via the command line:</p>
-<pre><code class="lang-bash">$ dalek mytest.js -b firefox</code></pre>
+<pre class="code prettyprint"><code class="lang-bash">$ dalek mytest.js -b firefox</code></pre>
 <p>Dalek looks for the browser in the std. installation directory, if you installed the
 browser in a different place, you can add the location of the browser executable to you Dalekfile,
 because Dalek isnʼt capable of finding the executable yet on its own.</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: [{
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: [{
   &quot;firefox&quot;: {
     &quot;path&quot;: &quot;~/Apps/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin&quot;
   }
@@ -184,32 +184,32 @@ Please report any issues you find, Thank you :)</p>
 <p>The Webdriver Server tries to open Port 9006 by default,
 if this port is blocked, it tries to use a port between 9007 &amp; 9096
 You can specifiy a different port from within your <a href="/pages/config.html">Dalekfile</a> like so:</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: {
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: {
   &quot;firefox&quot;: {
     &quot;port&quot;: 5555 
   }
 }</code></pre>
 <p>It is also possible to specify a range of ports:</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: {
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: {
   &quot;firefox&quot;: {
     &quot;portRange&quot;: [6100, 6120] 
   }
 }</code></pre>
 <p>If you would like to test Nightly, Aurora oder Firefox OS releases, you can simply apply a snd. argument,
 which defines the browser type:</p>
-<pre><code class="lang-bash">$ dalek mytest.js -b firefox:aurora</code></pre>
+<pre class="code prettyprint"><code class="lang-bash">$ dalek mytest.js -b firefox:aurora</code></pre>
 <p>for Firefox Aurora, and if you would like to use the Firefox OS, just append <code>:os</code>:</p>
-<pre><code class="lang-bash">$ dalek mytest.js -b firefox:os</code></pre>
+<pre class="code prettyprint"><code class="lang-bash">$ dalek mytest.js -b firefox:os</code></pre>
 <p>This will only work if you installed your browser in the default locations,
 if the browsers binary is located in a non default location, you are able to specify
 its location in your <a href="/pages/config.html">Dalekfile</a>:</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: {
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: {
   &quot;firefox&quot;: {
     &quot;binary&quot;: &quot;/Applications/Custom Located Firefox.app/MacOS/Contents/firefox-bin&quot; 
   }
 }</code></pre>
 <p>This also works for the aurora &amp; Firefox OS builds</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: {
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: {
   &quot;firefox:aurora&quot;: {
     &quot;binary&quot;: &quot;/Applications/Custom Located Firefox Aurora.app/MacOS/Contents/firefox-bin&quot; 
   }

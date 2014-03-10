@@ -178,6 +178,7 @@
 var fs = require(&#x27;fs&#x27;);
 var Q = require(&#x27;q&#x27;);
 var express = require(&#x27;express&#x27;);
+var connect = require(&#x27;connect&#x27;);
 
 /**
  * Firefox Autotest (Marionette)
@@ -207,7 +208,9 @@ var WebDriverServer = function (events) {
 
   // configure express
   this.app = express();
-  this.app.use(express.bodyParser());
+
+  this.app.use(connect.json());
+  this.app.use(connect.urlencoded());
 
   // load the commands
   this._loadCommands();
@@ -312,6 +315,15 @@ WebDriverServer.prototype._onRequest = function (command, req, res) {
 
   // generate &amp; send the webdriver response when the command has been executed by marionette
   this.events.on(&#x27;marionette:cmd:&#x27; + command.name + &#x27;:response&#x27;, function (data) {
+    var parsedData = {};
+
+    try {
+      parsedData = JSON.parse(data);
+    } catch (e) {
+      parsedData = data;
+    }
+
+    data = parsedData;
     var answer = { sessionId: parameters.sessionId, status: 0};
 
     // check if we need to send a value with the response

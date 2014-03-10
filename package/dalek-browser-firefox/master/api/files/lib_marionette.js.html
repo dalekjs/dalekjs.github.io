@@ -274,7 +274,7 @@ Marionette.prototype.addCommand = function (command) {
     var deferred = Q.defer();
 
     deferred.promise.then(function (data) {
-      this.events.emit(&#x27;marionette:cmd:&#x27; + command.name + &#x27;:response&#x27;, data);
+      this.events.emit(&#x27;marionette:cmd:&#x27; + command.name + &#x27;:response&#x27;, JSON.stringify(data));
     }.bind(this));
 
     // parse the command skeleton &amp; create a message with values
@@ -323,7 +323,7 @@ Marionette.prototype._loadCommands = function () {
  */
 
 Marionette.prototype._parseRequestKey = function (placeholder, params) {
-  if (placeholder[0] !== &#x27;:&#x27;) {
+  if (typeof placeholder !== &#x27;object&#x27; &amp;&amp; placeholder[0] !== &#x27;:&#x27;) {
     return placeholder;
   }
 
@@ -333,14 +333,37 @@ Marionette.prototype._parseRequestKey = function (placeholder, params) {
   }
 
   // add the marionetteID to the params
-  params.marionetteId = this._marionetteID;
+  if (typeof placeholder !== &#x27;object&#x27;) {
+    params.marionetteId = this._marionetteID;
+  }
 
   var content = &#x27;&#x27;;
-  Object.keys(params).forEach(function (key){
-    if (key === placeholder.substr(1)) {
-      content = params[key];
-    }
-  }.bind(this));
+  if (typeof placeholder !== &#x27;object&#x27;) {
+    Object.keys(params).forEach(function (key){
+      if (key === placeholder.substr(1)) {
+        content = params[key];
+      }
+    }.bind(this));
+  }
+
+  // check if we have a params object (and replace also there)
+  if (typeof placeholder === &#x27;object&#x27;) {
+    content = {};
+
+    Object.keys(params).forEach(function (key) {
+      Object.keys(placeholder).forEach(function (name) {
+        if (placeholder[name] &amp;&amp; placeholder[name].substring(1) === key) {
+          content[name] = params[key];
+        }
+      }.bind(this));
+    }.bind(this));
+
+    Object.keys(placeholder).forEach(function (name) {
+      if (placeholder[name].substr(0, 1) !== &#x27;:&#x27;) {
+        content[name] = placeholder[name];
+      }
+    }.bind(this));
+  }
 
   return content;
 };
@@ -404,7 +427,6 @@ Marionette.prototype._onData = function (data) {
   Q.when(def.promise).then(function(data) {
     // parse the message &amp; call the resolving function
     var parsedMessage = this._parseMessage(data);
-
     // avoid resolving the initial handshake command
     if (!parsedMessage.applicationType) {
       this._lastCommand.resolve(parsedMessage);
@@ -449,7 +471,6 @@ Marionette.prototype._sendCommand = function (command, deferred) {
   // serialize message
   var commandSerialized = JSON.stringify(command);
   var msg = commandSerialized.length + &#x27;:&#x27; + commandSerialized;
-
   // reference promise
   this._lastCommand = deferred;
   // send command

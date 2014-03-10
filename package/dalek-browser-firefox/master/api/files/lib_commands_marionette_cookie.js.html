@@ -196,7 +196,7 @@ module.exports = function (Marionette) {
     request: {
       to: &#x27;:marionetteId&#x27;,
       session: &#x27;:sessionId&#x27;,
-      type: &#x27;getAllCookies&#x27;
+      name: &#x27;getAllCookies&#x27;
     }
   });
 
@@ -211,7 +211,7 @@ module.exports = function (Marionette) {
     request: {
       to: &#x27;:marionetteId&#x27;,
       session: &#x27;:sessionId&#x27;,
-      type: &#x27;deleteAllCookies&#x27;
+      name: &#x27;deleteAllCookies&#x27;
     }
   });
 
@@ -227,8 +227,10 @@ module.exports = function (Marionette) {
     request: {
       to: &#x27;:marionetteId&#x27;,
       session: &#x27;:sessionId&#x27;,
-      name: &#x27;:name&#x27;,
-      type: &#x27;deleteCookie&#x27;
+      name: &#x27;deleteCookie&#x27;,
+      parameters: {
+        name: &#x27;:name&#x27;,
+      }
     }
   });
 
@@ -245,7 +247,7 @@ module.exports = function (Marionette) {
       to: &#x27;:marionetteId&#x27;,
       session: &#x27;:sessionId&#x27;,
       cookie: &#x27;:cookie&#x27;,
-      type: &#x27;addCookie&#x27;
+      name: &#x27;addCookie&#x27;
     }
   });
 

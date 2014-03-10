@@ -195,7 +195,7 @@ module.exports = function (Marionette) {
     name: &#x27;getMarionetteID&#x27;,
     request: {
       to: &#x27;root&#x27;,
-      type: &#x27;getMarionetteID&#x27;
+      name: &#x27;getMarionetteID&#x27;
     }
   });
 
@@ -209,7 +209,7 @@ module.exports = function (Marionette) {
     name: &#x27;getSession&#x27;,
     request: {
       to: &#x27;:marionetteId&#x27;,
-      type: &#x27;newSession&#x27;
+      name: &#x27;newSession&#x27;
     }
   });
 
@@ -224,7 +224,7 @@ module.exports = function (Marionette) {
     request: {
       to: &#x27;:marionetteId&#x27;,
       session: &#x27;:sessionId&#x27;,
-      type: &#x27;getSessionCapabilities&#x27;
+      name: &#x27;getSessionCapabilities&#x27;
     }
   });
 

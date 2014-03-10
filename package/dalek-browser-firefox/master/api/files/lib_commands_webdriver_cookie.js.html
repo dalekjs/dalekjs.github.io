@@ -204,6 +204,7 @@ module.exports = function (Driver) {
       // load the marionette connection id &amp; then request the session id
       this.events.emit(&#x27;marionette:cmd:cookies&#x27;, {&#x27;sessionId&#x27;: req.params.sessionId, &#x27;cookie&#x27;: {&#x27;name&#x27;: req.body.cookie.name, &#x27;value&#x27;: req.body.cookie.value}});
       this.events.on(&#x27;marionette:cmd:cookies:response&#x27;, function (data) {
+        data = JSON.parse(data);
         var answer = {
           sessionId: req.params.sessionId,
           status: 0,

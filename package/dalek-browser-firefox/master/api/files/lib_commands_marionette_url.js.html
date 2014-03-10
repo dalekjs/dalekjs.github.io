@@ -197,8 +197,10 @@ module.exports = function (Marionette) {
     request: {
       to: &#x27;:marionetteId&#x27;,
       session: &#x27;:sessionId&#x27;,
-      value: &#x27;:url&#x27;,
-      type: &#x27;goUrl&#x27;
+      name: &#x27;goUrl&#x27;,
+      parameters: {
+        url: &#x27;:url&#x27;
+      }
     }
   });
 
@@ -213,7 +215,7 @@ module.exports = function (Marionette) {
     request: {
       to: &#x27;:marionetteId&#x27;,
       session: &#x27;:sessionId&#x27;,
-      type: &#x27;getUrl&#x27;
+      name: &#x27;getUrl&#x27;
     }
   });
 
@@ -228,7 +230,7 @@ module.exports = function (Marionette) {
     request: {
       to: &#x27;:marionetteId&#x27;,
       session: &#x27;:sessionId&#x27;,
-      type: &#x27;goBack&#x27;
+      name: &#x27;goBack&#x27;
     }
   });
 
@@ -243,7 +245,7 @@ module.exports = function (Marionette) {
     request: {
       to: &#x27;:marionetteId&#x27;,
       session: &#x27;:sessionId&#x27;,
-      type: &#x27;goForward&#x27;
+      name: &#x27;goForward&#x27;
     }
   });
 
@@ -258,7 +260,7 @@ module.exports = function (Marionette) {
     request: {
       to: &#x27;:marionetteId&#x27;,
       session: &#x27;:sessionId&#x27;,
-      type: &#x27;refresh&#x27;
+      name: &#x27;refresh&#x27;
     }
   });
 

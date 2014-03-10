@@ -327,6 +327,13 @@
                 "FirefoxDriver": 1
             }
         },
+        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
+            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "index.js": {
             "name": "index.js",
             "modules": {
@@ -384,7 +391,7 @@
             },
             "tag": "module",
             "file": "lib/webdriver.js",
-            "line": 32,
+            "line": 33,
             "description": "Cookie related Marionette commands\nsee [JsonProtocol](https://wiki.mozilla.org/Auto-tools/Projects/Marionette/JSON_Protocol)"
         },
         "DalekJS": {
@@ -809,7 +816,7 @@
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver",
             "file": "lib/webdriver.js",
-            "line": 32,
+            "line": 33,
             "description": "Firefox Autotest (Marionette)\nWebDriver handler & request executor"
         },
         "Browser.FirefoxDriver": {
@@ -860,7 +867,7 @@
         },
         {
             "file": "lib/commands/marionette/cookie.js",
-            "line": 85,
+            "line": 87,
             "description": "Set a cookie. If the cookie path is not specified, it should be set to \"/\".\nLikewise, if the domain is omitted, it should default to the current page's domain.",
             "itemtype": "method",
             "name": "addCookie",
@@ -880,7 +887,7 @@
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 56,
+            "line": 58,
             "description": "Selects multiple elements",
             "itemtype": "method",
             "name": "elements",
@@ -890,7 +897,7 @@
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 74,
+            "line": 78,
             "description": "Clicks an element",
             "itemtype": "method",
             "name": "click",
@@ -900,7 +907,7 @@
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 91,
+            "line": 95,
             "description": "Gets the width & height of an element",
             "itemtype": "method",
             "name": "size",
@@ -910,7 +917,7 @@
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 108,
+            "line": 112,
             "description": "Checks if an element is displayed",
             "itemtype": "method",
             "name": "displayed",
@@ -920,7 +927,7 @@
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 125,
+            "line": 129,
             "description": "Gets the inner text of an element",
             "itemtype": "method",
             "name": "text",
@@ -930,7 +937,7 @@
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 142,
+            "line": 148,
             "description": "Gets the value of an element",
             "itemtype": "method",
             "name": "val",
@@ -940,7 +947,7 @@
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 160,
+            "line": 168,
             "description": "Clears the contents of an input/text field",
             "itemtype": "method",
             "name": "clear",
@@ -950,7 +957,7 @@
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 177,
+            "line": 187,
             "description": "Gets the value of an css property",
             "itemtype": "method",
             "name": "cssProperty",
@@ -960,7 +967,7 @@
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 195,
+            "line": 207,
             "description": "Checks if an element is enabled",
             "itemtype": "method",
             "name": "enabled",
@@ -970,7 +977,7 @@
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 212,
+            "line": 226,
             "description": "Checks if an element is selected",
             "itemtype": "method",
             "name": "selected",
@@ -980,7 +987,7 @@
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 229,
+            "line": 245,
             "description": "TODO: Find JS workaround (Marionette doesn't has a submit handler yet)\nDOES NOT WORK YET!",
             "itemtype": "method",
             "name": "submit",
@@ -990,7 +997,7 @@
         },
         {
             "file": "lib/commands/marionette/element.js",
-            "line": 249,
+            "line": 265,
             "description": "Gets the value of an specific attribute",
             "itemtype": "method",
             "name": "attribute",
@@ -1010,7 +1017,7 @@
         },
         {
             "file": "lib/commands/marionette/execute.js",
-            "line": 62,
+            "line": 64,
             "description": "Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame.\nThe executed script is assumed to be asynchronous and must signal that is done by invoking the provided callback,\nwhich is always provided as the final argument to the function. The value to this callback will be returned to the client.\nAsynchronous script commands may not span page loads.\nIf an unload event is fired while waiting for a script result, an error should be returned to the client.\n\nThe script argument defines the script to execute in teh form of a function body.\nThe function will be invoked with the provided args array and the values may be accessed\nvia the arguments object in the order specified.\nThe final argument will always be a callback function that must be invoked to signal that the script has finished.",
             "itemtype": "method",
             "name": "executeAsync",
@@ -1137,7 +1144,7 @@
         },
         {
             "file": "lib/commands/marionette/url.js",
-            "line": 55,
+            "line": 57,
             "description": "Retrieve the URL of the current page",
             "itemtype": "method",
             "name": "url",
@@ -1147,7 +1154,7 @@
         },
         {
             "file": "lib/commands/marionette/url.js",
-            "line": 70,
+            "line": 72,
             "description": "Navigate backwards in the browser history, if possible",
             "itemtype": "method",
             "name": "back",
@@ -1157,7 +1164,7 @@
         },
         {
             "file": "lib/commands/marionette/url.js",
-            "line": 85,
+            "line": 87,
             "description": "Navigate forwards in the browser history, if possible.",
             "itemtype": "method",
             "name": "forward",
@@ -1167,7 +1174,7 @@
         },
         {
             "file": "lib/commands/marionette/url.js",
-            "line": 100,
+            "line": 102,
             "description": "Refresh the current page",
             "itemtype": "method",
             "name": "refresh",
@@ -1232,7 +1239,7 @@
         },
         {
             "file": "lib/commands/webdriver/cookie.js",
-            "line": 69,
+            "line": 70,
             "description": "Retrieve all cookies visible to the current page.",
             "itemtype": "method",
             "name": "getCookies",
@@ -1252,7 +1259,7 @@
         },
         {
             "file": "lib/commands/webdriver/cookie.js",
-            "line": 83,
+            "line": 84,
             "description": "Delete all cookies visible to the current page.",
             "itemtype": "method",
             "name": "deleteCookies",
@@ -1272,7 +1279,7 @@
         },
         {
             "file": "lib/commands/webdriver/cookie.js",
-            "line": 97,
+            "line": 98,
             "description": "Delete the cookie with the given name.\nThis command should be a no-op if there is no such cookie visible to the current page.",
             "itemtype": "method",
             "name": "deleteCookie",
@@ -1315,7 +1322,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 59,
+            "line": 60,
             "description": "Parses multi elements return value",
             "itemtype": "method",
             "name": "parseElements",
@@ -1338,7 +1345,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 81,
+            "line": 83,
             "description": "Generic multi elements response handler",
             "itemtype": "method",
             "name": "multiElementResponse",
@@ -1362,7 +1369,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 101,
+            "line": 103,
             "description": "Generic single element response handler",
             "itemtype": "method",
             "name": "singleElementResponse",
@@ -1386,7 +1393,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 121,
+            "line": 123,
             "description": "Search for an element on the page, starting from the document root.\nThe located element will be returned as a WebElement JSON object.",
             "itemtype": "method",
             "name": "element",
@@ -1416,7 +1423,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 143,
+            "line": 145,
             "description": "Search for an element on the page, starting from the identified element.\nThe located element will be returned as a WebElement JSON object.\nThe table below lists the locator strategies that each server should support.\nEach locator must return the first matching element located in the DOM.",
             "itemtype": "method",
             "name": "childElement",
@@ -1451,7 +1458,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 168,
+            "line": 170,
             "description": "Search for multiple elements on the page, starting from the document root.\nThe located element will be returned as a WebElement JSON object.",
             "itemtype": "method",
             "name": "elements",
@@ -1481,7 +1488,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 190,
+            "line": 192,
             "description": "Search for multiple elements on the page, starting from the identified element.\nThe located elements will be returned as a WebElement JSON objects.\nThe table below lists the locator strategies that each server should support.\nElements should be returned in the order located in the DOM.",
             "itemtype": "method",
             "name": "childElements",
@@ -1516,7 +1523,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 215,
+            "line": 217,
             "description": "Click on an element.",
             "itemtype": "method",
             "name": "click",
@@ -1541,7 +1548,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 231,
+            "line": 233,
             "description": "Submit a FORM element.\nThe submit command may also be applied to any element that is a descendant of a FORM element.",
             "itemtype": "method",
             "name": "submit",
@@ -1566,7 +1573,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 248,
+            "line": 250,
             "description": "Send a sequence of key strokes to an element",
             "itemtype": "method",
             "name": "value",
@@ -1596,7 +1603,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 265,
+            "line": 267,
             "description": "Clears the contents of an element",
             "itemtype": "method",
             "name": "value",
@@ -1626,7 +1633,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 287,
+            "line": 289,
             "description": "Send a sequence of key strokes to the active element.\nThis command is similar to the send keys command in every aspect except the implicit termination:\nThe modifiers are not released at the end of the call.\nRather, the state of the modifier keys is kept between calls,\nso mouse interactions can be performed while modifier keys are depressed.",
             "itemtype": "method",
             "name": "keys",
@@ -1651,7 +1658,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 307,
+            "line": 309,
             "description": "Returns the visible text for the element.",
             "itemtype": "method",
             "name": "text",
@@ -1676,7 +1683,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 322,
+            "line": 324,
             "description": "Get the value of an element's attribute.",
             "itemtype": "method",
             "name": "attribute",
@@ -1706,7 +1713,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 338,
+            "line": 340,
             "description": "Determine an element's location on the page.\nThe point (0, 0) refers to the upper-left corner of the page.\nThe element's coordinates are returned as a JSON object with x and y properties.",
             "itemtype": "method",
             "name": "displayed",
@@ -1731,7 +1738,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 355,
+            "line": 357,
             "description": "Query for an element's tag name",
             "itemtype": "method",
             "name": "tagName",
@@ -1756,7 +1763,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 370,
+            "line": 372,
             "description": "Clear a TEXTAREA or text INPUT element's value",
             "itemtype": "method",
             "name": "clear",
@@ -1781,7 +1788,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 385,
+            "line": 387,
             "description": "Determine if an OPTION element, or an INPUT element of type checkbox or radiobutton is currently selected",
             "itemtype": "method",
             "name": "selected",
@@ -1806,7 +1813,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 400,
+            "line": 402,
             "description": "Determine if an element is currently enabled",
             "itemtype": "method",
             "name": "enabled",
@@ -1831,7 +1838,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 415,
+            "line": 417,
             "description": "Test if two element IDs refer to the same DOM element",
             "itemtype": "method",
             "name": "equals",
@@ -1861,7 +1868,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 431,
+            "line": 433,
             "description": "Determine an element's location on the page. The point (0, 0) refers to the upper-left corner of the page.\nThe element's coordinates are returned as a JSON object with x and y properties.",
             "itemtype": "method",
             "name": "location",
@@ -1886,7 +1893,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 447,
+            "line": 449,
             "description": "Determine an element's location on the screen once it has been scrolled into view.\nNote: This is considered an internal command and should only be used to determine an element's location for correctly generating native events.",
             "itemtype": "method",
             "name": "locationInView",
@@ -1911,7 +1918,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 463,
+            "line": 465,
             "description": "Determine an element's size in pixels.\nThe size will be returned as a JSON object with width and height properties.",
             "itemtype": "method",
             "name": "size",
@@ -1936,7 +1943,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 479,
+            "line": 481,
             "description": "Get the element on the page that currently has focus.\nThe element will be returned as a WebElement JSON object.",
             "itemtype": "method",
             "name": "active",
@@ -1961,7 +1968,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 495,
+            "line": 497,
             "description": "Get the element on the page that currently has focus.\nThe element will be returned as a WebElement JSON object.",
             "itemtype": "method",
             "name": "elementInfo",
@@ -1986,7 +1993,7 @@
         },
         {
             "file": "lib/commands/webdriver/element.js",
-            "line": 511,
+            "line": 513,
             "description": "Query the value of an element's computed CSS property.\nThe CSS property to query should be specified using the CSS property name,\nnot the JavaScript property name (e.g. background-color instead of backgroundColor).",
             "itemtype": "method",
             "name": "cssProperty",
@@ -2046,7 +2053,7 @@
         },
         {
             "file": "lib/commands/webdriver/execute.js",
-            "line": 76,
+            "line": 75,
             "description": "Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame.\nThe executed script is assumed to be asynchronous and must signal that is done by invoking the provided callback,\nwhich is always provided as the final argument to the function. The value to this callback will be returned to the client.\nAsynchronous script commands may not span page loads.\nIf an unload event is fired while waiting for a script result, an error should be returned to the client.\n\nThe script argument defines the script to execute in teh form of a function body.\nThe function will be invoked with the provided args array and the values may be accessed\nvia the arguments object in the order specified.\nThe final argument will always be a callback function that must be invoked to signal that the script has finished.",
             "itemtype": "method",
             "name": "executeAsync",
@@ -2118,7 +2125,7 @@
         },
         {
             "file": "lib/commands/webdriver/ime.js",
-            "line": 66,
+            "line": 67,
             "description": "List all available engines on the machine.\nTo use an engine, it has to be present in this list.",
             "itemtype": "method",
             "name": "availableEngines",
@@ -2138,7 +2145,7 @@
         },
         {
             "file": "lib/commands/webdriver/ime.js",
-            "line": 81,
+            "line": 82,
             "description": "Get the name of the active IME engine.\nThe name string is platform specific.",
             "itemtype": "method",
             "name": "activeEngine",
@@ -2158,7 +2165,7 @@
         },
         {
             "file": "lib/commands/webdriver/ime.js",
-            "line": 96,
+            "line": 97,
             "description": "Indicates whether IME input is active at the moment",
             "itemtype": "method",
             "name": "activatedEngine",
@@ -2178,7 +2185,7 @@
         },
         {
             "file": "lib/commands/webdriver/ime.js",
-            "line": 110,
+            "line": 111,
             "description": "De-activates the currently-active IME engine",
             "itemtype": "method",
             "name": "deactivateEngine",
@@ -2198,7 +2205,7 @@
         },
         {
             "file": "lib/commands/webdriver/ime.js",
-            "line": 124,
+            "line": 125,
             "description": "Make an engines that is available (appears on the list returned by getAvailableEngines) active.\nAfter this call, the engine will be added to the list of engines loaded in the IME daemon\nand the input sent using sendKeys will be converted by the active engine.\nNote that this is a platform-independent method of activating IME\n(the platform-specific way being using keyboard shortcuts)",
             "itemtype": "method",
             "name": "activateEngine",
@@ -2757,7 +2764,7 @@
         },
         {
             "file": "lib/commands/webdriver/session.js",
-            "line": 70,
+            "line": 71,
             "description": "Returns a list of the currently active sessions",
             "itemtype": "method",
             "name": "sessions",
@@ -2770,7 +2777,7 @@
         },
         {
             "file": "lib/commands/webdriver/session.js",
-            "line": 83,
+            "line": 84,
             "description": "Returns a list of the currently active sessions",
             "itemtype": "method",
             "name": "sessions",
@@ -2783,7 +2790,7 @@
         },
         {
             "file": "lib/commands/webdriver/session.js",
-            "line": 96,
+            "line": 97,
             "description": "Retrieve the capabilities of the specified session.",
             "itemtype": "method",
             "name": "session",
@@ -2803,7 +2810,7 @@
         },
         {
             "file": "lib/commands/webdriver/session.js",
-            "line": 110,
+            "line": 111,
             "description": "Delete the session.",
             "itemtype": "method",
             "name": "session",
@@ -3767,7 +3774,7 @@
         },
         {
             "file": "lib/marionette.js",
-            "line": 198,
+            "line": 221,
             "description": "Will be called if a socket error occurs",
             "itemtype": "method",
             "name": "_onError",
@@ -3787,7 +3794,7 @@
         },
         {
             "file": "lib/marionette.js",
-            "line": 214,
+            "line": 237,
             "description": "Handles the incoming data from the marionette sockets",
             "itemtype": "method",
             "name": "_onData",
@@ -3807,7 +3814,7 @@
         },
         {
             "file": "lib/marionette.js",
-            "line": 269,
+            "line": 291,
             "description": "Parses a marionette response message",
             "itemtype": "method",
             "name": "_parseMessage",
@@ -3830,7 +3837,7 @@
         },
         {
             "file": "lib/marionette.js",
-            "line": 285,
+            "line": 307,
             "description": "Issues a command to the marionette server\nGenerates a reference to the last called command,\nso that we are able to call the right receiver function for\nthe response from marionette",
             "itemtype": "method",
             "name": "_sendCommand",
@@ -3855,7 +3862,7 @@
         },
         {
             "file": "lib/webdriver.js",
-            "line": 41,
+            "line": 42,
             "description": "Configures the express server\nPrepares the object properties\nLoads the webdriver commands",
             "is_constructor": 1,
             "params": [
@@ -3871,7 +3878,7 @@
         },
         {
             "file": "lib/webdriver.js",
-            "line": 66,
+            "line": 69,
             "description": "Opens the WebDriverServer port",
             "itemtype": "method",
             "name": "connect",
@@ -3894,7 +3901,7 @@
         },
         {
             "file": "lib/webdriver.js",
-            "line": 85,
+            "line": 88,
             "description": "Closes the webdriver server port & cleans up",
             "itemtype": "method",
             "name": "kill",
@@ -3910,7 +3917,7 @@
         },
         {
             "file": "lib/webdriver.js",
-            "line": 99,
+            "line": 102,
             "description": "Generates a function for every webdriver command\nand an express route endpoint",
             "itemtype": "method",
             "name": "addCommand",
@@ -3933,7 +3940,7 @@
         },
         {
             "file": "lib/webdriver.js",
-            "line": 117,
+            "line": 120,
             "description": "Loads the webdriver commands (aka. REST endpoints) from the commands library",
             "itemtype": "method",
             "name": "_loadCommands",
@@ -3946,7 +3953,7 @@
         },
         {
             "file": "lib/webdriver.js",
-            "line": 133,
+            "line": 136,
             "description": "Default webdriver request handler,\nwill be used if no `onRequest` method is given in the\nwebdriver command",
             "itemtype": "method",
             "name": "_onRequest",
@@ -3971,6 +3978,14 @@
             "access": "private",
             "tagname": "",
             "class": "FirefoxDriver.WebDriverServer",
+            "module": "FirefoxDriver",
+            "namespace": "FirefoxDriver"
+        },
+        {
+            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "line": 1,
+            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "class": "Browser.FirefoxDriver",
             "module": "FirefoxDriver",
             "namespace": "FirefoxDriver"
         },
@@ -4093,7 +4108,7 @@
         },
         {
             "file": "index.js",
-            "line": 261,
+            "line": 262,
             "description": "Different browser types (Aurora / firefox OS) that can be controlled\nvia the Firefox driver",
             "itemtype": "property",
             "name": "browserTypes",
@@ -4104,7 +4119,7 @@
         },
         {
             "file": "index.js",
-            "line": 271,
+            "line": 272,
             "description": "Nightly Firefox",
             "itemtype": "property",
             "name": "nightly",
@@ -4115,7 +4130,7 @@
         },
         {
             "file": "index.js",
-            "line": 285,
+            "line": 287,
             "description": "Firefox Aurora",
             "itemtype": "property",
             "name": "aurora",
@@ -4126,7 +4141,7 @@
         },
         {
             "file": "index.js",
-            "line": 299,
+            "line": 302,
             "description": "Firefox OS",
             "itemtype": "property",
             "name": "os",
@@ -4137,7 +4152,7 @@
         },
         {
             "file": "index.js",
-            "line": 314,
+            "line": 318,
             "description": "Child process instance of the Firefox browser",
             "itemtype": "property",
             "name": "spawned",
@@ -4149,7 +4164,7 @@
         },
         {
             "file": "index.js",
-            "line": 324,
+            "line": 328,
             "description": "Collected data about the created profile,\npath, name, etc.",
             "itemtype": "property",
             "name": "profile",
@@ -4161,7 +4176,7 @@
         },
         {
             "file": "index.js",
-            "line": 335,
+            "line": 339,
             "description": "Resolves the driver port",
             "itemtype": "method",
             "name": "getPort",
@@ -4175,7 +4190,7 @@
         },
         {
             "file": "index.js",
-            "line": 346,
+            "line": 350,
             "description": "Resolves the maximum range for the driver port",
             "itemtype": "method",
             "name": "getMaxPort",
@@ -4189,7 +4204,7 @@
         },
         {
             "file": "index.js",
-            "line": 357,
+            "line": 361,
             "description": "Resolves the marionette port",
             "itemtype": "method",
             "name": "getMarionettePort",
@@ -4203,7 +4218,7 @@
         },
         {
             "file": "index.js",
-            "line": 368,
+            "line": 372,
             "description": "Returns the driver host",
             "itemtype": "method",
             "name": "getHost",
@@ -4217,7 +4232,7 @@
         },
         {
             "file": "index.js",
-            "line": 379,
+            "line": 383,
             "description": "Launches the FirefoxWebDriverServer, \nthe marionette client, & the browser.\nCreates a user profile for the browser",
             "itemtype": "method",
             "name": "launch",
@@ -4248,7 +4263,7 @@
         },
         {
             "file": "index.js",
-            "line": 417,
+            "line": 421,
             "description": "Shuts down the TCP (Marionette) & HTTP connection (Webdriver),\nthen kills the browser process & cleans up the profiles",
             "itemtype": "method",
             "name": "kill",
@@ -4259,7 +4274,7 @@
         },
         {
             "file": "index.js",
-            "line": 436,
+            "line": 440,
             "description": "Locates the browser binary",
             "itemtype": "method",
             "name": "findBrowserBinary",
@@ -4280,7 +4295,7 @@
         },
         {
             "file": "index.js",
-            "line": 469,
+            "line": 473,
             "description": "Makes all needed modifications after we are sure if the\nbrowser binary has been found",
             "itemtype": "method",
             "name": "_afterBinaryFound",
@@ -4305,7 +4320,7 @@
         },
         {
             "file": "index.js",
-            "line": 496,
+            "line": 500,
             "description": "Modifies the verbose browser name",
             "itemtype": "method",
             "name": "_modifyVerboseBrowserName",
@@ -4328,7 +4343,7 @@
         },
         {
             "file": "index.js",
-            "line": 513,
+            "line": 517,
             "description": "Initiates the browser startup after the desktop binary has been found",
             "itemtype": "method",
             "name": "_afterDesktopBinaryFound",
@@ -4353,7 +4368,7 @@
         },
         {
             "file": "index.js",
-            "line": 528,
+            "line": 532,
             "description": "Kills the currently running browser process",
             "itemtype": "method",
             "name": "_killProcess",
@@ -4365,7 +4380,7 @@
         },
         {
             "file": "index.js",
-            "line": 549,
+            "line": 553,
             "description": "Initializes config & properties",
             "itemtype": "method",
             "name": "_initiaize",
@@ -4388,7 +4403,7 @@
         },
         {
             "file": "index.js",
-            "line": 574,
+            "line": 578,
             "description": "Get the default binary location",
             "itemtype": "method",
             "name": "_getDefaultBinary",
@@ -4404,7 +4419,7 @@
         },
         {
             "file": "index.js",
-            "line": 589,
+            "line": 604,
             "description": "Launches the browser",
             "itemtype": "method",
             "name": "_startBrowser",
@@ -4434,7 +4449,7 @@
         },
         {
             "file": "index.js",
-            "line": 626,
+            "line": 641,
             "description": "Repeatadly checks the status of the marionette port",
             "itemtype": "method",
             "name": "_scanMarionettePort",
@@ -4454,7 +4469,7 @@
         },
         {
             "file": "index.js",
-            "line": 640,
+            "line": 655,
             "description": "Checks if the browser is available by listening on the marionette socket",
             "itemtype": "method",
             "name": "_startByInterval",
@@ -4489,7 +4504,7 @@
         },
         {
             "file": "index.js",
-            "line": 661,
+            "line": 676,
             "description": "Process user defined ports",
             "itemtype": "method",
             "name": "_checkUserDefinedPorts",
@@ -4509,7 +4524,7 @@
         },
         {
             "file": "index.js",
-            "line": 688,
+            "line": 703,
             "description": "Resolve the WebDriverServer port",
             "itemtype": "method",
             "name": "_resolvePort",
@@ -4534,7 +4549,7 @@
         },
         {
             "file": "index.js",
-            "line": 710,
+            "line": 725,
             "description": "Resolve the WebDriverServer port",
             "itemtype": "method",
             "name": "_resolvePort",
@@ -4569,7 +4584,7 @@
         },
         {
             "file": "index.js",
-            "line": 744,
+            "line": 759,
             "description": "Callback that will be invoked after the marionette client has \nestablished a connection to the browser & after the webdriver server\nhas been launched correctly",
             "itemtype": "method",
             "name": "_afterConnectionHasBeenEstablished",
@@ -4594,7 +4609,7 @@
         },
         {
             "file": "index.js",
-            "line": 769,
+            "line": 784,
             "description": "Consumes the console output when the browser is started",
             "itemtype": "method",
             "name": "_onBrowserStartup",
@@ -4619,7 +4634,7 @@
         },
         {
             "file": "index.js",
-            "line": 786,
+            "line": 801,
             "description": "Checks if the browser is ready for communication",
             "itemtype": "method",
             "name": "_browserIsReady",
@@ -4642,7 +4657,7 @@
         },
         {
             "file": "index.js",
-            "line": 806,
+            "line": 821,
             "description": "Creates a new Firefox profile",
             "itemtype": "method",
             "name": "_createProfile",
@@ -4658,7 +4673,7 @@
         },
         {
             "file": "index.js",
-            "line": 822,
+            "line": 837,
             "description": "Creates user preferences for the profile\nSaves them in `user.js` in the newly created profile",
             "itemtype": "method",
             "name": "_createProfile",
@@ -4681,7 +4696,7 @@
         },
         {
             "file": "index.js",
-            "line": 857,
+            "line": 872,
             "description": "Callback that will be executed after the user preferences\nhave been created",
             "itemtype": "method",
             "name": "_afterCreatingUserPreferences",
@@ -4706,7 +4721,7 @@
         },
         {
             "file": "index.js",
-            "line": 880,
+            "line": 895,
             "description": "Checks if the binary exists,\nwhen set manually by the user",
             "itemtype": "method",
             "name": "_checkUserSetBinary",
@@ -4741,7 +4756,7 @@
         },
         {
             "message": "unknown tag: priavte",
-            "line": " index.js:528"
+            "line": " index.js:532"
         },
         {
             "message": "Missing item type",
@@ -4753,7 +4768,11 @@
         },
         {
             "message": "Missing item type\nConfigures the express server\nPrepares the object properties\nLoads the webdriver commands",
-            "line": " lib/webdriver.js:41"
+            "line": " lib/webdriver.js:42"
+        },
+        {
+            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
         }
     ]
 }

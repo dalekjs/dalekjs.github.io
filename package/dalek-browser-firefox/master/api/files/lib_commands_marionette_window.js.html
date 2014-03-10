@@ -196,7 +196,7 @@ module.exports = function (Marionette) {
     request: {
       to: &#x27;:marionetteId&#x27;,
       session: &#x27;:sessionId&#x27;,
-      type: &#x27;executeScript&#x27;,
+      name: &#x27;executeScript&#x27;,
       value: &#x27;:value&#x27;,
       newSandbox: false
     }
@@ -213,7 +213,7 @@ module.exports = function (Marionette) {
     request: {
       to: &#x27;:marionetteId&#x27;,
       session: &#x27;:sessionId&#x27;,
-      type: &#x27;getWindows&#x27;
+      name: &#x27;getWindows&#x27;
     }
   });
 
@@ -228,8 +228,10 @@ module.exports = function (Marionette) {
     request: {
       to: &#x27;:marionetteId&#x27;,
       session: &#x27;:sessionId&#x27;,
-      type: &#x27;switchToWindow&#x27;,
-      value: &#x27;:value&#x27;
+      name: &#x27;switchToWindow&#x27;,
+      parameters: {
+        value: &#x27;:value&#x27;
+      }
     }
   });
 

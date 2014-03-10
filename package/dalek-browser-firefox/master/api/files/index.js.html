@@ -405,7 +405,8 @@ var FirefoxDriver = {
   defaultBinaries: {
     default: &#x27;firefox&#x27;,
     darwin: &#x27;/Applications/Firefox.app/Contents/MacOS/firefox-bin&#x27;,
-    win32: process.env.ProgramFiles + &#x27;\\Mozilla Firefox\\firefox.exe&#x27;
+    win32: process.env.ProgramFiles + &#x27;\\Mozilla Firefox\\firefox.exe&#x27;,
+    win64: process.env[&#x27;ProgramFiles(x86)&#x27;] + &#x27;\\Mozilla Firefox\\firefox.exe&#x27;
   },
 
   /**
@@ -429,7 +430,8 @@ var FirefoxDriver = {
       name: &#x27;Firefox Nightly&#x27;,
       linux: &#x27;firefox&#x27;,
       darwin: &#x27;/Applications/FirefoxNightlyDebug.app/Contents/MacOS/firefox-bin&#x27;,
-      win32: process.env.ProgramFiles + &#x27;\\Nightly\\firefox.exe&#x27;
+      win32: process.env.ProgramFiles + &#x27;\\Nightly\\firefox.exe&#x27;,
+      win64: process.env[&#x27;ProgramFiles(x86)&#x27;] + &#x27;\\Mozilla Firefox Nightly\\firefox.exe&#x27;
     },
 
     /**
@@ -443,7 +445,8 @@ var FirefoxDriver = {
       name: &#x27;Firefox Aurora&#x27;,
       linux: &#x27;firefox&#x27;,
       darwin: &#x27;/Applications/FirefoxAuroraDebug.app/Contents/MacOS/firefox-bin&#x27;,
-      win32: process.env.ProgramFiles + &#x27;\\AuroraDebug\\firefox.exe&#x27;
+      win32: process.env.ProgramFiles + &#x27;\\AuroraDebug\\firefox.exe&#x27;,
+      win64: process.env[&#x27;ProgramFiles(x86)&#x27;] + &#x27;\\Mozilla AuroraDebug\\firefox.exe&#x27;
     },
 
     /**
@@ -457,7 +460,8 @@ var FirefoxDriver = {
       name: &#x27;Firefox OS&#x27;,
       linux: &#x27;b2g&#x27;,
       darwin: &#x27;/Applications/B2G.app/Contents/MacOS/b2g&#x27;,
-      win32: process.env.ProgramFiles + &#x27;\\B2G\\b2g.exe&#x27;
+      win32: process.env.ProgramFiles + &#x27;\\B2G\\b2g.exe&#x27;,
+      win64: process.env.ProgramFiles + &#x27;\\B2G\\b2g.exe&#x27;
     }
   },
 
@@ -731,6 +735,17 @@ var FirefoxDriver = {
 
   _getDefaultBinary: function () {
     var platform = process.platform;
+
+    // check default binary for linuy
+    if (platform !== &#x27;darwin&#x27; &amp;&amp; platform !== &#x27;win32&#x27; &amp;&amp; this.defaultBinaries[platform]) {
+      return which(this.defaultBinaries.linux);
+    }
+
+    // check to see if we are on Windows x64
+    if (platform === &#x27;win32&#x27; &amp;&amp; process.arch === &#x27;x64&#x27;) {
+      platform = &#x27;win64&#x27;;
+    }
+	
     return this.defaultBinaries[platform] ?
       this.defaultBinaries[platform] :
       which(this.defaultBinaries.default);
@@ -871,7 +886,7 @@ var FirefoxDriver = {
 
   _afterPortResolved: function (deferred, profileName, error, port) {
     // check for errors
-    if (error !== null) {
+    if (error !== null &amp;&amp; error.code !== &#x27;ECONNREFUSED&#x27;) {
       this.reporterEvents.emit(&#x27;error&#x27;, &#x27;dalek-browser-firefox: Error starting WebDriverServer, port &#x27; + port + &#x27; in use&#x27;);
       deferred.reject(error);
       process.exit();

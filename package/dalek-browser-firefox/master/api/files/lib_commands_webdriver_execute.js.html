@@ -206,11 +206,10 @@ module.exports = function (Driver) {
     method: &#x27;post&#x27;,
     params: {value: &#x27;script&#x27;, args: &#x27;args&#x27;},
     onRequest: function (req, res) {
-      console.log(req.body);
       // load the marionette connection id &amp; then request the session id
       this.events.emit(&#x27;marionette:cmd:execute&#x27;, {&#x27;sessionId&#x27;: req.params.sessionId, &#x27;value&#x27;: req.body.script, &#x27;args&#x27;: req.body.args});
       this.events.on(&#x27;marionette:cmd:execute:response&#x27;, function (data) {
-        console.log(data);
+        data = JSON.parse(data);
         var answer = {
           sessionId: req.params.sessionId,
           status: 0,
