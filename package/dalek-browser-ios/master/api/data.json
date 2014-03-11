@@ -458,7 +458,7 @@
         },
         {
             "file": "index.js",
-            "line": 484,
+            "line": 483,
             "description": "Configures appium",
             "itemtype": "method",
             "name": "_loadAppiumArgs",
@@ -481,7 +481,7 @@
         },
         {
             "file": "index.js",
-            "line": 499,
+            "line": 498,
             "description": "Process user defined ports",
             "itemtype": "method",
             "name": "_checkUserDefinedPorts",
@@ -501,7 +501,7 @@
         },
         {
             "file": "index.js",
-            "line": 514,
+            "line": 513,
             "description": "Process user defined appium ports",
             "itemtype": "method",
             "name": "_checkAppiumPorts",
@@ -521,7 +521,7 @@
         },
         {
             "file": "index.js",
-            "line": 541,
+            "line": 540,
             "description": "Process user defined webhook ports",
             "itemtype": "method",
             "name": "_checkWebhookPorts",
@@ -541,7 +541,7 @@
         },
         {
             "file": "index.js",
-            "line": 568,
+            "line": 567,
             "description": "Tracks running simulator processes",
             "itemtype": "method",
             "name": "_processes",
@@ -561,7 +561,7 @@
         },
         {
             "file": "index.js",
-            "line": 583,
+            "line": 582,
             "description": "Transforms the process list output into\na json structure",
             "itemtype": "method",
             "name": "_transformProcesses",
@@ -591,7 +591,7 @@
         },
         {
             "file": "index.js",
-            "line": 602,
+            "line": 601,
             "description": "Scans and transforms the process list",
             "itemtype": "method",
             "name": "_scanProcess",
@@ -616,7 +616,7 @@
         },
         {
             "file": "index.js",
-            "line": 623,
+            "line": 622,
             "description": "Filters process list items",
             "itemtype": "method",
             "name": "_filterProcessItem",
@@ -639,7 +639,7 @@
         },
         {
             "file": "index.js",
-            "line": 640,
+            "line": 639,
             "description": "Overwrite default stdout & stderr handler\nto suppress some appium logs",
             "itemtype": "method",
             "name": "_suppressAppiumLogs",
@@ -652,7 +652,7 @@
         },
         {
             "file": "index.js",
-            "line": 658,
+            "line": 666,
             "description": "Reinstantiate stdout handler after appium has\nbeen started",
             "itemtype": "method",
             "name": "_reinstantiateLog",
