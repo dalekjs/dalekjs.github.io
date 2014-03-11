@@ -113,39 +113,39 @@ It provides a browser launcher as well the PhantomJS browser itself.</p>
 <p>The browser plugin comes bundled with the DalekJS base framework.</p>
 <p>You can use the browser plugin beside others (it is the default)
 by adding a config option to the your Dalekfile:</p>
-<pre><code class="lang-javascript">&quot;browser&quot;: [&quot;phantomjs&quot;, &quot;chrome&quot;]</code></pre>
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browser&quot;: [&quot;phantomjs&quot;, &quot;chrome&quot;]</code></pre>
 <p>Or you can tell Dalek that it should test in this &amp; another browser via the command line:</p>
-<pre><code class="lang-bash">$ dalek mytest.js -b phantomjs,chrome</code></pre>
+<pre class="code prettyprint"><code class="lang-bash">$ dalek mytest.js -b phantomjs,chrome</code></pre>
 <p>The Webdriver Server tries to open Port 9001 by default,
 if this port is blocked, it tries to use a port between 9002 &amp; 9091
 You can specifiy a different port from within your <a href="/pages/config.html">Dalekfile</a> like so:</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: {
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: {
   &quot;phantomjs&quot;: {
     &quot;port&quot;: 5555 
   }
 }</code></pre>
 <p>It is also possible to specify a range of ports:</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: {
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: {
   &quot;phantomjs&quot;: {
     &quot;portRange&quot;: [6100, 6120] 
   }
 }</code></pre>
 <p>If you would like to use a different Phantom version than the one that comes bundled with the driver,
 your are able to specify its location in your <a href="/pages/config.html">Dalekfile</a>:</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: {
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: {
   &quot;phantomjs&quot;: {
     &quot;binary&quot;: &quot;~/bin/phantomjs&quot; 
   }
 }</code></pre>
 <p>If you would like to preserve the ability to use the bundled version,
 you can also add an additional browser launcher in your <a href="/pages/config.html">Dalekfile</a>.</p>
-<pre><code class="lang-javascript">&quot;browsers&quot;: {
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: {
   &quot;phantomjs:1.9.1&quot;: {
     &quot;binary&quot;: &quot;~/bin/phantomjs&quot; 
   }
 }</code></pre>
 <p>And then launch it like this:</p>
-<pre><code class="lang-bash">$ dalek mytest.js -b phantomjs:1.9.1</code></pre>
+<pre class="code prettyprint"><code class="lang-bash">$ dalek mytest.js -b phantomjs:1.9.1</code></pre>
 
 </div>
 
