@@ -237,7 +237,7 @@
 module.exports = function(grunt) {
   &#x27;use strict&#x27;;
 
-  grunt.registerMultiTask(&#x27;dalek&#x27;, &#x27;dalekjs browser tests&#x27;, function () {
+  grunt.registerMultiTask(&#x27;dalek&#x27;, &#x27;dalekjs browser tests&#x27;, function dalekMultiTask () {
     // tagging this task as async
     var done = this.async();
 
@@ -326,12 +326,12 @@ module.exports = function(grunt) {
     };
 
     // register browser launcher event
-    dalek.reporterEvents.on(&#x27;report:run:browser&#x27;, function(browserName) {
+    dalek.reporterEvents.on(&#x27;report:run:browser&#x27;, function reportRunBrowser (browserName) {
       currentBrowser = browserName;
     });
 
     // register logging for runner finished
-    dalek.reporterEvents.on(&#x27;report:runner:finished&#x27;, function(data) {
+    dalek.reporterEvents.on(&#x27;report:runner:finished&#x27;, function reportRunnerFinished (data) {
       var message = &#x27;&#x27;;
       // Print assertion errors here, if verbose mode is disabled.
       if (!data.status) {
