@@ -552,7 +552,7 @@
             "line": 101,
             "description": "Outputs a message when all assertions of a test has been run",
             "itemtype": "method",
-            "name": "outputAssertionExpecation",
+            "name": "outputAssertionExpectation",
             "params": [
                 {
                     "name": "data",
@@ -839,7 +839,7 @@
             "line": 210,
             "description": "Does nothing",
             "itemtype": "method",
-            "name": "outputAssertionExpecation",
+            "name": "outputAssertionExpectation",
             "params": [
                 {
                     "name": "data",

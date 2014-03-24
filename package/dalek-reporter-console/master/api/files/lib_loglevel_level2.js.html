@@ -219,12 +219,12 @@ LogLevel2.prototype.outputAssertionResult = function (data) {
 /**
  * Outputs a message when all assertions of a test has been run
  *
- * @method outputAssertionExpecation
+ * @method outputAssertionExpectation
  * @param {object} data
  * @return {LogLevel2}
  */
 
-LogLevel2.prototype.outputAssertionExpecation = function (data) {
+LogLevel2.prototype.outputAssertionExpectation = function (data) {
   if (data.status) {
     this.echo(this.symbol(&#x27;*&#x27;), {nl: false, ec: true, foreground: &#x27;greenBright&#x27;});
     this.echo(data.expected, {nl: false, ec: true, foreground: &#x27;magentaBright&#x27;});

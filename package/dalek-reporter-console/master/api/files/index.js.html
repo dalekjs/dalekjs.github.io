@@ -228,7 +228,7 @@ Reporter.prototype = {
   startListening: function () {
     // assertion &amp; action status
     this.events.on(&#x27;report:assertion&#x27;, this.outputAssertionResult.bind(this));
-    this.events.on(&#x27;report:assertion:status&#x27;, this.outputAssertionExpecation.bind(this));
+    this.events.on(&#x27;report:assertion:status&#x27;, this.outputAssertionExpectation.bind(this));
     this.events.on(&#x27;report:action&#x27;, this.outputAction.bind(this));
 
     // test status
