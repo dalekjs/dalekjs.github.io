@@ -4611,7 +4611,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 180,
+            "line": 193,
             "description": "Normalizes options",
             "itemtype": "method",
             "name": "normalizeOptions",
@@ -4631,7 +4631,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 198,
+            "line": 211,
             "description": "Sets up system env properties",
             "itemtype": "method",
             "name": "_initialize",
@@ -4643,7 +4643,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 219,
+            "line": 232,
             "description": "Sets up all the reporters",
             "itemtype": "method",
             "name": "_setupReporters",
@@ -4655,7 +4655,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 236,
+            "line": 249,
             "description": "Adds a reporter",
             "itemtype": "method",
             "name": "_addReporter",
@@ -4674,7 +4674,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 250,
+            "line": 263,
             "description": "Updates the assertion state",
             "itemtype": "method",
             "name": "_onReportAssertion",
@@ -4693,7 +4693,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 269,
+            "line": 282,
             "description": "Initizializes the driver instances",
             "itemtype": "method",
             "name": "_initDriver",
@@ -4705,7 +4705,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 288,
+            "line": 301,
             "description": "Sets up the event dispatcher for driver events",
             "itemtype": "method",
             "name": "_setupDriverEmitter",
@@ -4717,7 +4717,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 303,
+            "line": 316,
             "description": "Make sure to shutdown dalek & its spawned\ncomponents, webservers gracefully if a\nruntimew error pops up",
             "itemtype": "method",
             "name": "_registerExceptionHandler",
@@ -4729,7 +4729,7 @@
         },
         {
             "file": "lib/dalek.js",
-            "line": 319,
+            "line": 332,
             "description": "Shutdown on uncaught exception",
             "itemtype": "method",
             "name": "_shutdown",
