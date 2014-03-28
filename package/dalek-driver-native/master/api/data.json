@@ -142,7 +142,7 @@
             },
             "tag": "module",
             "file": "index.js",
-            "line": 70,
+            "line": 82,
             "description": "Cookie related methods",
             "part": "DriverNative",
             "api": ""
@@ -286,7 +286,7 @@
             "module": "Driver",
             "namespace": "Dalek",
             "file": "index.js",
-            "line": 70,
+            "line": 82,
             "description": "Launches the browsers to test\nand handles the webdriver requests & responses"
         }
     },
@@ -2918,7 +2918,7 @@
         },
         {
             "file": "index.js",
-            "line": 34,
+            "line": 46,
             "description": "Loads the webdriver client,\nlaunches the browser,\ninitializes al object properties,\nbinds to browser events",
             "params": [
                 {
@@ -2934,7 +2934,7 @@
         },
         {
             "file": "index.js",
-            "line": 83,
+            "line": 95,
             "description": "Initializes the driver properties",
             "itemtype": "method",
             "name": "_initializeProperties",
@@ -2954,7 +2954,7 @@
         },
         {
             "file": "index.js",
-            "line": 106,
+            "line": 118,
             "description": "Binds listeners on browser events",
             "itemtype": "method",
             "name": "_initializeProperties",
@@ -2974,7 +2974,7 @@
         },
         {
             "file": "index.js",
-            "line": 127,
+            "line": 139,
             "description": "Checks if a webdriver session has already been established,\nif not, create a new one",
             "itemtype": "method",
             "name": "start",
@@ -2988,7 +2988,7 @@
         },
         {
             "file": "index.js",
-            "line": 151,
+            "line": 163,
             "description": "Creates a new webdriver session\nGets the driver status\nGets the session status\nResolves the promise (e.g. let them tests run)",
             "itemtype": "method",
             "name": "_startBrowserSession",
@@ -3008,7 +3008,7 @@
         },
         {
             "file": "index.js",
-            "line": 197,
+            "line": 209,
             "description": "Starts to execution of a batch of tests",
             "itemtype": "method",
             "name": "end",
@@ -3019,7 +3019,7 @@
         },
         {
             "file": "index.js",
-            "line": 220,
+            "line": 232,
             "description": "Flushes the action queue (e.g. commands that should be send to the wbdriver server)",
             "itemtype": "method",
             "name": "flushQueue",
@@ -3030,7 +3030,7 @@
         },
         {
             "file": "index.js",
-            "line": 235,
+            "line": 247,
             "description": "Loads the browser session status",
             "itemtype": "method",
             "name": "_sessionStatus",
@@ -3053,7 +3053,7 @@
         },
         {
             "file": "index.js",
-            "line": 252,
+            "line": 264,
             "description": "Loads the browser driver status",
             "itemtype": "method",
             "name": "_driverStatus",
@@ -3076,7 +3076,7 @@
         },
         {
             "file": "index.js",
-            "line": 269,
+            "line": 281,
             "description": "Creates an anonymus function that calls a webdriver\nmethod that has no return value, emits an empty result event\nif the function has been run\nTODO: Name is weird, should be saner",
             "itemtype": "method",
             "name": "_createNonReturnee",
@@ -3099,7 +3099,7 @@
         },
         {
             "file": "index.js",
-            "line": 285,
+            "line": 297,
             "description": "Generates a chain of webdriver calls for webdriver\nmethods that don't have a return value\nTODO: Name is weird, should be saner",
             "itemtype": "method",
             "name": "_actionQueueNonReturneeTemplate",
@@ -3129,7 +3129,7 @@
         },
         {
             "file": "index.js",
-            "line": 304,
+            "line": 316,
             "description": "Creates a driver notification with an empty value\nTODO: Name is weird, should be saner",
             "itemtype": "method",
             "name": "_generateDummyDriverMessageFn",
@@ -3162,7 +3162,7 @@
         },
         {
             "file": "index.js",
-            "line": 324,
+            "line": 336,
             "description": "Determines if the driver is a \"multi\" browser driver,\ne.g. can handle more than one browser",
             "itemtype": "method",
             "name": "isMultiBrowser",
@@ -3176,7 +3176,7 @@
         },
         {
             "file": "index.js",
-            "line": 336,
+            "line": 348,
             "description": "Verifies a browser request\nTODO: Still a noop, need to add \"verify the browser\" logic",
             "itemtype": "method",
             "name": "verifyBrowser",
@@ -3190,7 +3190,7 @@
         },
         {
             "file": "index.js",
-            "line": 348,
+            "line": 360,
             "description": "Creates a new driver instance",
             "itemtype": "method",
             "name": "create",
@@ -3213,11 +3213,11 @@
     "warnings": [
         {
             "message": "unknown tag: part",
-            "line": " index.js:70"
+            "line": " index.js:82"
         },
         {
             "message": "unknown tag: api",
-            "line": " index.js:70"
+            "line": " index.js:82"
         },
         {
             "message": "Missing item type\nMixes in cookie methods",
@@ -3257,7 +3257,7 @@
         },
         {
             "message": "Missing item type\nLoads the webdriver client,\nlaunches the browser,\ninitializes al object properties,\nbinds to browser events",
-            "line": " index.js:34"
+            "line": " index.js:46"
         }
     ]
 }

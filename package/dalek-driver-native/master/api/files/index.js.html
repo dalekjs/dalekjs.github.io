@@ -137,7 +137,19 @@ var fs = require(&#x27;fs&#x27;);
 var Q = require(&#x27;q&#x27;);
 
 // int. libs
-var WD = require(&#x27;dalek-internal-webdriver&#x27;);
+var WD = null;
+
+// try/catch loading of the webdriver, so we can
+// fall back to canary builds
+try {
+  WD = require(&#x27;dalek-internal-webdriver&#x27;);
+} catch (e) {
+  try {
+    WD = require(&#x27;dalek-internal-webdriver-canary&#x27;);
+  } catch (e) {
+    throw e;
+  }
+}
 
 /**
  * Loads the webdriver client,
