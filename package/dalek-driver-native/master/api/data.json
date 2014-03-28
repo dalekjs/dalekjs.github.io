@@ -2470,9 +2470,16 @@
         {
             "file": "lib/commands/screenshot.js",
             "line": 175,
-            "description": "Return the formatted date",
+            "description": "Return the ISO 8601 formatted date",
             "itemtype": "method",
             "name": "_parseDate",
+            "params": [
+                {
+                    "name": "optional",
+                    "description": "A javascript date object. If undefined, the current date is used.",
+                    "type": "Object"
+                }
+            ],
             "return": {
                 "description": "Date",
                 "type": "String"
@@ -2485,10 +2492,17 @@
         },
         {
             "file": "lib/commands/screenshot.js",
-            "line": 199,
-            "description": "Return the formatted datetime",
+            "line": 196,
+            "description": "Return the ISO 8601 formatted datetime",
             "itemtype": "method",
             "name": "_parseDatetime",
+            "params": [
+                {
+                    "name": "optional",
+                    "description": "A javascript date object. If undefined, the current date is used.",
+                    "type": "Object"
+                }
+            ],
             "return": {
                 "description": "Datetime",
                 "type": "String"
@@ -2501,7 +2515,7 @@
         },
         {
             "file": "lib/commands/screenshot.js",
-            "line": 225,
+            "line": 244,
             "description": "Return the formatted viewport",
             "itemtype": "method",
             "name": "_parseViewport",
@@ -2517,7 +2531,7 @@
         },
         {
             "file": "lib/commands/screenshot.js",
-            "line": 240,
+            "line": 259,
             "description": "Mixes in screenshot methods",
             "params": [
                 {
@@ -3245,7 +3259,7 @@
         },
         {
             "message": "Missing item type\nMixes in screenshot methods",
-            "line": " lib/commands/screenshot.js:240"
+            "line": " lib/commands/screenshot.js:259"
         },
         {
             "message": "Missing item type\nMixes in url methods",

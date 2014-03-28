@@ -281,53 +281,72 @@ var Screenshot = {
   },
 
   /**
-   * Return the formatted date
+   * Return the ISO 8601 formatted date
    *
    * @method _parseDate
+   * @param {object} optional A javascript date object. If undefined, the current date is used.
    * @return {string} Date
    * @private
    */
 
-  _parseDate: function () {
-    var date = new Date();
-    var dateStr = &#x27;&#x27;;
+  _parseDate: function (date) {
+    date = date ? date : new Date();
     var day = date.getDate();
-    var month = date.getMonth();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
 
-    month = (month+&#x27;&#x27;).length === 1 ? &#x27;0&#x27; + month : month;
-    day = (day+&#x27;&#x27;).length === 1 ? &#x27;0&#x27; + day : day;
+    month = (&#x27;0&#x27; + month).slice(-2);
+    day = (&#x27;0&#x27; + day).slice(-2);
 
-    dateStr += month + &#x27;_&#x27;;
-    dateStr += day + &#x27;_&#x27;;
-    dateStr += date.getFullYear();
-
-    return dateStr;
+    return year + &#x27;-&#x27; + month + &#x27;-&#x27; + day;
   },
 
   /**
-   * Return the formatted datetime
+   * Return the ISO 8601 formatted datetime
    *
    * @method _parseDatetime
+   * @param {object} optional A javascript date object. If undefined, the current date is used.
    * @return {string} Datetime
    * @private
    */
 
-  _parseDatetime: function () {
-    var date = new Date();
+  _parseDatetime: function (date) {
+    date = date ? date : new Date();
     var dateStr = this._parseDate();
+    var timeStr = &#x27;T#hours#:#minutes#:#seconds##formattedOffset#&#x27;;
     var hours = date.getHours();
     var minutes = date.getMinutes();
     var seconds = date.getSeconds();
+    var offsetHours = &#x27;&#x27; + Math.ceil(date.getTimezoneOffset() / 60);
+    var offsetMinutes = &#x27;&#x27; + Math.abs(date.getTimezoneOffset() % 60);
+    var formattedOffset;
 
-    hours = (hours+&#x27;&#x27;).length === 1 ? &#x27;0&#x27; + hours : hours;
-    minutes = (minutes+&#x27;&#x27;).length === 1 ? &#x27;0&#x27; + minutes : minutes;
-    seconds = (seconds+&#x27;&#x27;).length === 1 ? &#x27;0&#x27; + seconds : seconds;
+    hours = (&#x27;0&#x27; + hours).slice(-2);
+    minutes = (&#x27;0&#x27; + minutes).slice(-2);
+    seconds = (&#x27;0&#x27; + seconds).slice(-2);
 
-    dateStr = dateStr + &#x27;_&#x27; + hours;
-    dateStr = dateStr + &#x27;_&#x27; + minutes;
-    dateStr = dateStr + &#x27;_&#x27; + seconds;
+    if (offsetHours[0] === &#x27;-&#x27; &amp;&amp; offsetHours.length &lt; 3) {
+      formattedOffset = offsetHours[0] + &#x27;0&#x27; + offsetHours[1];
+    } else if (offsetHours.length &lt; 2) {
+      formattedOffset = &#x27;+0&#x27; + offsetHours;
+    }
 
-    return dateStr;
+    if (offsetMinutes.length &lt; 2) {
+      formattedOffset += &#x27;:0&#x27; + offsetMinutes;
+    } else {
+      formattedOffset += &#x27;:&#x27; + offsetMinutes;
+    }
+
+    if (offsetHours === &#x27;0&#x27; &amp;&amp; offsetMinutes === &#x27;0&#x27;) {
+      formattedOffset = &#x27;Z&#x27;;
+    }
+
+    timeStr = timeStr.replace(&#x27;#hours#&#x27;, hours);
+    timeStr = timeStr.replace(&#x27;#minutes#&#x27;, minutes);
+    timeStr = timeStr.replace(&#x27;#seconds#&#x27;, seconds);
+    timeStr = timeStr.replace(&#x27;#formattedOffset#&#x27;, formattedOffset);
+
+    return dateStr + timeStr;
   },
 
   /**
@@ -353,6 +372,9 @@ var Screenshot = {
  */
 
 module.exports = function (DalekNative) {
+  if (&#x27;undefined&#x27; === typeof DalekNative) {
+    return Screenshot;
+  }
   // mixin methods
   Object.keys(Screenshot).forEach(function (fn) {
     DalekNative.prototype[fn] = Screenshot[fn];

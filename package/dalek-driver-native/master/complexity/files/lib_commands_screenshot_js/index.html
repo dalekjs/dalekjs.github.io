@@ -45,11 +45,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">68.28</p>
+      <p class="stat">65.19</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">230</p>
+      <p class="stat">252</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">26.63</p>
+      <p class="stat">33.79</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">1.49</p>
+      <p class="stat">1.80</p>
     </div>
   </div>
 </div>
@@ -265,53 +265,72 @@ var Screenshot = {
   },
 
   /**
-   * Return the formatted date
+   * Return the ISO 8601 formatted date
    *
    * @method _parseDate
+   * @param {object} optional A javascript date object. If undefined, the current date is used.
    * @return {string} Date
    * @private
    */
 
-  _parseDate: function () {
-    var date = new Date();
-    var dateStr = &#039;&#039;;
+  _parseDate: function (date) {
+    date = date ? date : new Date();
     var day = date.getDate();
-    var month = date.getMonth();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
 
-    month = (month+&#039;&#039;).length === 1 ? &#039;0&#039; + month : month;
-    day = (day+&#039;&#039;).length === 1 ? &#039;0&#039; + day : day;
+    month = (&#039;0&#039; + month).slice(-2);
+    day = (&#039;0&#039; + day).slice(-2);
 
-    dateStr += month + &#039;_&#039;;
-    dateStr += day + &#039;_&#039;;
-    dateStr += date.getFullYear();
-
-    return dateStr;
+    return year + &#039;-&#039; + month + &#039;-&#039; + day;
   },
 
   /**
-   * Return the formatted datetime
+   * Return the ISO 8601 formatted datetime
    *
    * @method _parseDatetime
+   * @param {object} optional A javascript date object. If undefined, the current date is used.
    * @return {string} Datetime
    * @private
    */
 
-  _parseDatetime: function () {
-    var date = new Date();
+  _parseDatetime: function (date) {
+    date = date ? date : new Date();
     var dateStr = this._parseDate();
+    var timeStr = &#039;T#hours#:#minutes#:#seconds##formattedOffset#&#039;;
     var hours = date.getHours();
     var minutes = date.getMinutes();
     var seconds = date.getSeconds();
+    var offsetHours = &#039;&#039; + Math.ceil(date.getTimezoneOffset() / 60);
+    var offsetMinutes = &#039;&#039; + Math.abs(date.getTimezoneOffset() % 60);
+    var formattedOffset;
 
-    hours = (hours+&#039;&#039;).length === 1 ? &#039;0&#039; + hours : hours;
-    minutes = (minutes+&#039;&#039;).length === 1 ? &#039;0&#039; + minutes : minutes;
-    seconds = (seconds+&#039;&#039;).length === 1 ? &#039;0&#039; + seconds : seconds;
+    hours = (&#039;0&#039; + hours).slice(-2);
+    minutes = (&#039;0&#039; + minutes).slice(-2);
+    seconds = (&#039;0&#039; + seconds).slice(-2);
 
-    dateStr = dateStr + &#039;_&#039; + hours;
-    dateStr = dateStr + &#039;_&#039; + minutes;
-    dateStr = dateStr + &#039;_&#039; + seconds;
+    if (offsetHours[0] === &#039;-&#039; &amp;&amp; offsetHours.length &lt; 3) {
+      formattedOffset = offsetHours[0] + &#039;0&#039; + offsetHours[1];
+    } else if (offsetHours.length &lt; 2) {
+      formattedOffset = &#039;+0&#039; + offsetHours;
+    }
 
-    return dateStr;
+    if (offsetMinutes.length &lt; 2) {
+      formattedOffset += &#039;:0&#039; + offsetMinutes;
+    } else {
+      formattedOffset += &#039;:&#039; + offsetMinutes;
+    }
+
+    if (offsetHours === &#039;0&#039; &amp;&amp; offsetMinutes === &#039;0&#039;) {
+      formattedOffset = &#039;Z&#039;;
+    }
+
+    timeStr = timeStr.replace(&#039;#hours#&#039;, hours);
+    timeStr = timeStr.replace(&#039;#minutes#&#039;, minutes);
+    timeStr = timeStr.replace(&#039;#seconds#&#039;, seconds);
+    timeStr = timeStr.replace(&#039;#formattedOffset#&#039;, formattedOffset);
+
+    return dateStr + timeStr;
   },
 
   /**
@@ -337,6 +356,9 @@ var Screenshot = {
  */
 
 module.exports = function (DalekNative) {
+  if (&#039;undefined&#039; === typeof DalekNative) {
+    return Screenshot;
+  }
   // mixin methods
   Object.keys(Screenshot).forEach(function (fn) {
     DalekNative.prototype[fn] = Screenshot[fn];
