@@ -190,17 +190,17 @@ Please report any issues you find, Thank you :)</p>
 <p>The Webdriver Server tries to open Port 9006 by default,
 if this port is blocked, it tries to use a port between 9007 &amp; 9096
 You can specifiy a different port from within your <a href="/pages/config.html">Dalekfile</a> like so:</p>
-<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: {
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: [{
   &quot;firefox&quot;: {
     &quot;port&quot;: 5555 
   }
-}</code></pre>
+}]</code></pre>
 <p>It is also possible to specify a range of ports:</p>
-<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: {
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: [{
   &quot;firefox&quot;: {
     &quot;portRange&quot;: [6100, 6120] 
   }
-}</code></pre>
+}]</code></pre>
 <p>If you would like to test Nightly, Aurora oder Firefox OS releases, you can simply apply a snd. argument,
 which defines the browser type:</p>
 <pre class="code prettyprint"><code class="lang-bash">$ dalek mytest.js -b firefox:aurora</code></pre>
@@ -209,17 +209,17 @@ which defines the browser type:</p>
 <p>This will only work if you installed your browser in the default locations,
 if the browsers binary is located in a non default location, you are able to specify
 its location in your <a href="/pages/config.html">Dalekfile</a>:</p>
-<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: {
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: [{
   &quot;firefox&quot;: {
     &quot;binary&quot;: &quot;/Applications/Custom Located Firefox.app/MacOS/Contents/firefox-bin&quot; 
   }
-}</code></pre>
+}]</code></pre>
 <p>This also works for the aurora &amp; Firefox OS builds</p>
-<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: {
+<pre class="code prettyprint"><code class="lang-javascript">&quot;browsers&quot;: [{
   &quot;firefox:aurora&quot;: {
     &quot;binary&quot;: &quot;/Applications/Custom Located Firefox Aurora.app/MacOS/Contents/firefox-bin&quot; 
   }
-}</code></pre>
+}]</code></pre>
 
 </div>
 
