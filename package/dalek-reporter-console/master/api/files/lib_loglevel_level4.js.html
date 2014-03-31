@@ -156,25 +156,6 @@ var LogLevel4 = Log;
  */
 
 module.exports = LogLevel4;
-
-/**
- * Outputs a system/driver/browser/user log message
- *
- * @method outputLogUser
- * @param {string} type
- * @param {string} message
- * @chainable
- */
-
-LogLevel4.prototype.outputLogUser = function (type, message) {
-  if (type === &#x27;browser&#x27; || type === &#x27;user&#x27;) {
-    this.echo(this.symbol(&#x27;&lt;&gt;&#x27;), {nl: false, ec: true, foreground: &#x27;cyan&#x27;});
-    this.echo(&#x27;[&#x27; + type.toUpperCase() + &#x27;]&#x27;, {nl: false, foreground: &#x27;whiteBright&#x27;, background: &#x27;bgCyanBright&#x27;});
-    this.echo(&#x27; &#x27; + message, {foreground: &#x27;cyan&#x27;});
-  }
-  return this;
-};
-
     </pre>
 </div>
 

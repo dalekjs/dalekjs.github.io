@@ -83,6 +83,13 @@
             "fors": {},
             "namespaces": {}
         },
+        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
+            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "index.js": {
             "name": "index.js",
             "modules": {
@@ -346,6 +353,28 @@
         {
             "file": "lib/loglevel/level1.js",
             "line": 44,
+            "description": "Outputs a browser or user log message",
+            "itemtype": "method",
+            "name": "outputLogUser",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "message",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "LogLevel1",
+            "module": "LogLevel1"
+        },
+        {
+            "file": "lib/loglevel/level1.js",
+            "line": 62,
             "description": "Outputs a message when the testrunner starts",
             "itemtype": "method",
             "name": "outputRunnerStarted",
@@ -358,7 +387,7 @@
         },
         {
             "file": "lib/loglevel/level1.js",
-            "line": 56,
+            "line": 74,
             "description": "Outputs a message when a test is finished",
             "itemtype": "method",
             "name": "outputTestFinished",
@@ -378,7 +407,7 @@
         },
         {
             "file": "lib/loglevel/level1.js",
-            "line": 69,
+            "line": 87,
             "description": "Outputs a message when an error occurs",
             "itemtype": "method",
             "name": "outputError",
@@ -398,7 +427,7 @@
         },
         {
             "file": "lib/loglevel/level1.js",
-            "line": 83,
+            "line": 101,
             "description": "Outputs a message when a warning occurs",
             "itemtype": "method",
             "name": "outputWarning",
@@ -418,7 +447,7 @@
         },
         {
             "file": "lib/loglevel/level1.js",
-            "line": 97,
+            "line": 115,
             "description": "Outputs a message when the testrunner has been finished",
             "itemtype": "method",
             "name": "outputRunnerFinished",
@@ -438,7 +467,7 @@
         },
         {
             "file": "lib/loglevel/level1.js",
-            "line": 131,
+            "line": 149,
             "description": "Outputs a message when the remote connection has been established",
             "itemtype": "method",
             "name": "remoteConnectionEstablished",
@@ -455,7 +484,7 @@
         },
         {
             "file": "lib/loglevel/level1.js",
-            "line": 145,
+            "line": 163,
             "description": "Outputs a message when the remote connection has been established",
             "itemtype": "method",
             "name": "remoteConnectionEstablished",
@@ -472,7 +501,7 @@
         },
         {
             "file": "lib/loglevel/level1.js",
-            "line": 159,
+            "line": 177,
             "description": "Outputs a message when the remote connection has been closed",
             "itemtype": "method",
             "name": "remoteConnectionClosed",
@@ -657,28 +686,6 @@
             "chainable": 1,
             "class": "LogLevel3",
             "module": "LogLevel3"
-        },
-        {
-            "file": "lib/loglevel/level4.js",
-            "line": 42,
-            "description": "Outputs a system/driver/browser/user log message",
-            "itemtype": "method",
-            "name": "outputLogUser",
-            "params": [
-                {
-                    "name": "type",
-                    "description": "",
-                    "type": "String"
-                },
-                {
-                    "name": "message",
-                    "description": "",
-                    "type": "String"
-                }
-            ],
-            "chainable": 1,
-            "class": "LogLevel4",
-            "module": "LogLevel4"
         },
         {
             "file": "lib/loglevel/level5.js",
@@ -1039,6 +1046,13 @@
             "module": "LevelBase"
         },
         {
+            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "line": 1,
+            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "class": "Reporter",
+            "module": "LevelBase"
+        },
+        {
             "file": "index.js",
             "line": 80,
             "description": "Imports an output module with the correct log state",
@@ -1081,6 +1095,10 @@
         {
             "message": "unknown tag: api",
             "line": " index.js:30"
+        },
+        {
+            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
         }
     ]
 }
