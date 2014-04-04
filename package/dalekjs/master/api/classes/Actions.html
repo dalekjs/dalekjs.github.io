@@ -3633,7 +3633,7 @@ and set the timeout using the timeout one, in milliseconds. The default timeout 
 <pre class="code prettyprint"><code class="lang-javascript"> test.open(&#39;http://adomain.com&#39;)
     .waitFor(function (aCheck) {
       return window.myThing === aCheck;
-    }, &#39;aValue&#39;, 10000)
+    }, [&#39;arg1&#39;, &#39;arg2&#39;], 10000)
     .done();</code></pre>
 <blockquote>
 <p>Note: Buggy in Firefox</p>

@@ -782,7 +782,7 @@
         {
             "file": "lib/dalek/actions.js",
             "line": 859,
-            "description": "Waits until a function returns true to process any next step.\n\nYou can also set a callback on timeout using the onTimeout argument,\nand set the timeout using the timeout one, in milliseconds. The default timeout is set to 5000ms.\n\n```javascript\n test.open('http://adomain.com')\n    .waitFor(function () {\n      return window.myCheck === true;\n    })\n    .done();\n```\n\nYou can also apply arguments to the function, as well as a timeout\n\n```javascript\n test.open('http://adomain.com')\n    .waitFor(function (aCheck) {\n      return window.myThing === aCheck;\n    }, 'aValue', 10000)\n    .done();\n```\n\n> Note: Buggy in Firefox",
+            "description": "Waits until a function returns true to process any next step.\n\nYou can also set a callback on timeout using the onTimeout argument,\nand set the timeout using the timeout one, in milliseconds. The default timeout is set to 5000ms.\n\n```javascript\n test.open('http://adomain.com')\n    .waitFor(function () {\n      return window.myCheck === true;\n    })\n    .done();\n```\n\nYou can also apply arguments to the function, as well as a timeout\n\n```javascript\n test.open('http://adomain.com')\n    .waitFor(function (aCheck) {\n      return window.myThing === aCheck;\n    }, ['arg1', 'arg2'], 10000)\n    .done();\n```\n\n> Note: Buggy in Firefox",
             "itemtype": "method",
             "name": "waitFor",
             "params": [
