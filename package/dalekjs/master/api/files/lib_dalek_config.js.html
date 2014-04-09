@@ -189,7 +189,7 @@ var Config = function (defaults, opts, advOpts) {
  * $ dalek mytest.js -d sauce
  * &#x60;&#x60;&#x60;
  *
- * In order to run your tests within the Sauce Labs infrastructure, you must add your sauce username &amp; key 
+ * In order to run your tests within the Sauce Labs infrastructure, you must add your sauce username &amp; key
  * to your dalek configuration. Those two parameters must be set in order to get this driver up &amp; running.
  * You can specifiy them within your [Dalekfile](/docs/config.html) like so:
  *
@@ -211,7 +211,7 @@ var Config = function (defaults, opts, advOpts) {
  * }
  * &#x60;&#x60;&#x60;
  *
- * If you would like to have a more control over the browser/OS combinations that are available, you are able 
+ * If you would like to have a more control over the browser/OS combinations that are available, you are able
  * to configure you custom combinations:
  *
  * &#x60;&#x60;&#x60;javascript
@@ -232,7 +232,7 @@ var Config = function (defaults, opts, advOpts) {
  *     &quot;version&quot;: 26
  *   }
  * &#x60;&#x60;&#x60;
- * 
+ *
  * You can then call your custom browsers like so:
  *
  * &#x60;&#x60;&#x60;bash
@@ -281,7 +281,7 @@ Config.prototype = {
    * @method _checkFile
    * @param {String} previousValue Last iterations result
    * @param {String} ext File extension to check
-   * @param {integer} idx Iteration index 
+   * @param {integer} idx Iteration index
    * @param {object} data File data
    * @return {String} config File path
    * @private
@@ -345,7 +345,7 @@ Config.prototype = {
       delete opts.tests;
     }
 
-    if(data.tests &amp;&amp; _.isArray(data.tests) &amp;&amp; data.tests.length &gt; 0) {
+    if (data.tests &amp;&amp; _.isArray(data.tests) &amp;&amp; data.tests.length &gt; 0) {
       var tests = [];
 
       //get all the files that match
@@ -473,7 +473,7 @@ Config.prototype = {
    * Verifies if a driver is given, exists &amp; is valid
    *
    * @method _verify
-   * @param {array} check Data that shoudl be mapped
+   * @param {array} check Data that should be mapped
    * @param {string} fn Name of the function that should be invoked on the veryify object
    * @param {object} instance Object instance where the verify function should be invoked
    * @return {array} data List of verified items

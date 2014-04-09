@@ -344,7 +344,7 @@ Driver.prototype = {
         };
       }
     }
-    
+
     return browserConfiguration;
   },
 
@@ -394,7 +394,7 @@ Driver.prototype = {
    * browser running event &amp; starts a new async() sesries execution
    * Will be called when the driver is ready
    *
-   * @method _onDriverReadyclear
+   * @method _onDriverReady
    * @param {string} browser Name of the requested browser
    * @param {string} driverName Name of the requested driver
    * @param {function} callback Asyncs next() callback function
@@ -412,10 +412,10 @@ Driver.prototype = {
   },
 
   /**
-   * Emits a &#x27;tests complete&#x27; event &amp; calls asyncs next() callback
+   * Emits a &#x27;tests complete&#x27; event &amp; calls async&#x27;s next() callback
    *
    * @method _onTestsuiteComplete
-   * @param {function} callback Asyncs next() callback function
+   * @param {function} callback Async&#x27;s next() callback function
    * @param {string} driverName Name of the requested driver
    * @param {string} browser Name of the requested browser
    * @chainable
@@ -460,7 +460,7 @@ Driver.prototype = {
       browserConfiguration.module.setBrowser(browser);
     }
 
-    // init the driver instance 
+    // init the driver instance
     var driverInstance = driverModule.create({events: this.driverEmitter, reporter: this.reporterEvents, browser: browser, config: this.config, browserMo: browserConfiguration.module, browserConf: browserConfiguration.configuration});
     // couple driver &amp; session status events for the reporter
     this.coupleReporterEvents(driverName, browser);

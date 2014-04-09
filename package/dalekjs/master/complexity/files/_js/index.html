@@ -221,11 +221,11 @@ Dalek.prototype = {
    */
 
   run: function () {
-    // early return; in case of remote 
+    // early return; in case of remote
     if (this.options.remote) {
       return this;
     }
-    
+
     // start the timer to measure the execution time
     this.timer.start();
 
@@ -239,7 +239,7 @@ Dalek.prototype = {
   },
 
   /**
-   * Reports the all testuites executed event
+   * Reports the all testsuites executed event
    *
    * @method testsuitesFinished
    * @chainable
@@ -252,7 +252,7 @@ Dalek.prototype = {
   },
 
   /**
-   * Reports the all testuites executed event
+   * Reports the all testsuites executed event
    *
    * @method reportRunFinished
    * @chainable
@@ -408,7 +408,7 @@ Dalek.prototype = {
   /**
    * Make sure to shutdown dalek &amp; its spawned
    * components, webservers gracefully if a
-   * runtimew error pops up
+   * runtime error pops up
    *
    * @method _registerExceptionHandler
    * @private
@@ -434,7 +434,7 @@ Dalek.prototype = {
     if (exception.message &amp;&amp; exception.message.search(&#039;This socket has been ended by the other party&#039;) !== -1) {
       return false;
     }
-    
+
     this.driverEmitter.emit(&#039;killAll&#039;);
     this.reporterEvents.emit(&#039;error&#039;, exception);
   }

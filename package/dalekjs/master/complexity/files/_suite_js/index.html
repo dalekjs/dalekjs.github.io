@@ -242,7 +242,7 @@ Suite.prototype = {
       this.options.teardown();
     }
 
-    // emit the suite started event
+    // emit the suite finished event
     this.reporterEmitter.emit(&#039;report:testsuite:finished&#039;, this.name);
 
     // move on to the next suite
