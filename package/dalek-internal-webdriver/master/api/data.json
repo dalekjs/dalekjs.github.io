@@ -121,13 +121,6 @@
                 "Internal": 1
             }
         },
-        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
-            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
         "index.js": {
             "name": "index.js",
             "modules": {},
@@ -1122,7 +1115,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 60,
+            "line": 59,
             "description": "Click any mouse button (at the coordinates set by the last moveto command).\nNote that calling this command after calling buttondown and before calling button up\n(or any out-of-order interactions sequence) will yield undefined behaviour).",
             "itemtype": "method",
             "name": "buttonClick",
@@ -1145,7 +1138,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 79,
+            "line": 78,
             "description": "Click and hold the left mouse button (at the coordinates set by the last moveto command).\nNote that the next mouse-related command that should follow is buttonup.\nAny other mouse command (such as click or another call to buttondown) will yield undefined behaviour.",
             "itemtype": "method",
             "name": "buttondown",
@@ -1168,7 +1161,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 97,
+            "line": 96,
             "description": "Releases the mouse button previously held (where the mouse is currently at).\nMust be called once for every buttondown command issued.\nSee the note in click and buttondown about implications of out-of-order commands.",
             "itemtype": "method",
             "name": "buttonup",
@@ -1191,7 +1184,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 115,
+            "line": 114,
             "description": "Double-clicks at the current mouse coordinates (set by moveto).",
             "itemtype": "method",
             "name": "doubleclickPage",
@@ -1209,7 +1202,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 129,
+            "line": 128,
             "description": "Single tap on the touch enabled device.",
             "itemtype": "method",
             "name": "tap",
@@ -1227,7 +1220,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 144,
+            "line": 143,
             "description": "Finger down on the screen.",
             "itemtype": "method",
             "name": "touchdown",
@@ -1255,7 +1248,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 161,
+            "line": 160,
             "description": "Finger up on the screen.",
             "itemtype": "method",
             "name": "touchup",
@@ -1283,7 +1276,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 178,
+            "line": 177,
             "description": "Finger move on the screen.",
             "itemtype": "method",
             "name": "touchmove",
@@ -1311,7 +1304,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 195,
+            "line": 194,
             "description": "Scroll on the touch screen using finger based motion events.\nUse this command if you don't care where the scroll starts on the screen.",
             "itemtype": "method",
             "name": "touchscroll",
@@ -1339,7 +1332,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 213,
+            "line": 212,
             "description": "Double tap on the touch screen using finger motion events.",
             "itemtype": "method",
             "name": "doubletap",
@@ -1357,7 +1350,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 227,
+            "line": 226,
             "description": "Long press on the touch screen using finger motion events.",
             "itemtype": "method",
             "name": "longpress",
@@ -1375,7 +1368,7 @@
         },
         {
             "file": "lib/commands/interaction.js",
-            "line": 241,
+            "line": 240,
             "description": "Flick on the touch screen using finger motion events.\nThis flickcommand starts at a particulat screen location.",
             "itemtype": "method",
             "name": "flick",
@@ -2790,14 +2783,6 @@
             "namespace": "Internal"
         },
         {
-            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
-            "line": 1,
-            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
-            "class": "",
-            "module": "DalekJS",
-            "namespace": "Internal"
-        },
-        {
             "file": "index.js",
             "line": 27,
             "description": "Its a webdriver client",
@@ -2880,10 +2865,6 @@
         {
             "message": "Missing item type\nLocal options, used to store data\nlike the current sessionId or similar",
             "line": " lib/webdriver.js:49"
-        },
-        {
-            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
-            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
         },
         {
             "message": "Missing item type\nIts a webdriver client",
