@@ -2835,7 +2835,7 @@
         {
             "file": "lib/commands/window.js",
             "line": 97,
-            "description": "Sends out an event with the results of the `resize` call",
+            "description": "Sends out an event with the results of the `resize` call\nand stores the current viewport dimensions to the\nglobale Config",
             "itemtype": "method",
             "name": "_windowCb",
             "params": [
@@ -2867,7 +2867,7 @@
         },
         {
             "file": "lib/commands/window.js",
-            "line": 115,
+            "line": 118,
             "description": "Maximizes the current window",
             "itemtype": "method",
             "name": "maximize",
@@ -2885,7 +2885,7 @@
         },
         {
             "file": "lib/commands/window.js",
-            "line": 129,
+            "line": 132,
             "description": "Sends out an event with the results of the `maximize` call",
             "itemtype": "method",
             "name": "_maximizeCb",
@@ -2913,7 +2913,7 @@
         },
         {
             "file": "lib/commands/window.js",
-            "line": 148,
+            "line": 151,
             "description": "Mixes in element methods",
             "params": [
                 {
@@ -3267,7 +3267,7 @@
         },
         {
             "message": "Missing item type\nMixes in element methods",
-            "line": " lib/commands/window.js:148"
+            "line": " lib/commands/window.js:151"
         },
         {
             "message": "Missing item type\nLoads the webdriver client,\nlaunches the browser,\ninitializes al object properties,\nbinds to browser events",

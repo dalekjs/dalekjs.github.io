@@ -204,6 +204,8 @@ var Window = {
 
   /**
    * Sends out an event with the results of the &#x60;resize&#x60; call
+   * and stores the current viewport dimensions to the
+   * globale Config
    *
    * @method _windowCb
    * @param {object} dimensions New window width &amp; height
@@ -215,6 +217,7 @@ var Window = {
 
   _resizeCb: function (dimensions, hash) {
     var deferred = Q.defer();
+    this.config.config.viewport = dimensions;
     this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;resize&#x27;, dimensions: dimensions, hash: hash, value: true});
     deferred.resolve();
     return deferred.promise;
