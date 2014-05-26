@@ -646,6 +646,41 @@ var Element = {
   },
 
   /**
+   * Set a value to an Element
+   *
+   * @method setValue
+   * @param {string} selector Selector expression to find the element
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
+  setValue: function (selector, keystrokes, hash) {
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this.webdriverClient.clear.bind(this.webdriverClient, selector));
+    this.actionQueue.push(this.webdriverClient.val.bind(this.webdriverClient, keystrokes));
+    this.actionQueue.push(this._setValueCb.bind(this, selector, keystrokes, hash));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the &#x60;setvalue&#x60; call
+   *
+   * @method _setValueCb
+   * @param {string} selector Selector expression to find the element
+   * @param {string} keystrokes Value to set
+   * @param {string} hash Unique hash of that fn call
+   * @return {object} promise Type promise
+   * @private
+   */
+
+  _setValueCb: function (selector, keystrokes, hash) {
+    var deferred = Q.defer();
+    this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;setValue&#x27;, value: selector, keystrokes: keystrokes, uuid: hash, hash: hash});
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
    * Sends keys to an element (whether or not it is an input)
    *
    * @method sendKeys

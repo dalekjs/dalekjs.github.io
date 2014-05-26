@@ -1344,6 +1344,62 @@
         {
             "file": "lib/commands/element.js",
             "line": 540,
+            "description": "Set a value to an Element",
+            "itemtype": "method",
+            "name": "setValue",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 557,
+            "description": "Sends out an event with the results of the `setvalue` call",
+            "itemtype": "method",
+            "name": "_setValueCb",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "Selector expression to find the element",
+                    "type": "String"
+                },
+                {
+                    "name": "keystrokes",
+                    "description": "Value to set",
+                    "type": "String"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Type promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Element",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/element.js",
+            "line": 575,
             "description": "Sends keys to an element (whether or not it is an input)",
             "itemtype": "method",
             "name": "sendKeys",
@@ -1366,7 +1422,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 556,
+            "line": 591,
             "description": "Sends out an event with the results of the `sendKeys` call",
             "itemtype": "method",
             "name": "_sendKeysCb",
@@ -1394,7 +1450,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 573,
+            "line": 608,
             "description": "Wait for an element for a specific amount of time",
             "itemtype": "method",
             "name": "waitForElement",
@@ -1427,7 +1483,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 590,
+            "line": 625,
             "description": "Sends out an event with the results of the `waitForElement` call",
             "itemtype": "method",
             "name": "_waitForElementCb",
@@ -1460,7 +1516,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 608,
+            "line": 643,
             "description": "Returns the number of elements matched by the selector",
             "itemtype": "method",
             "name": "getNumberOfElements",
@@ -1488,7 +1544,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 624,
+            "line": 659,
             "description": "Sends out an event with the results of the `getNumberOfElements` call",
             "itemtype": "method",
             "name": "_getNumberOfElementsCb",
@@ -1526,7 +1582,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 651,
+            "line": 686,
             "description": "Returns the number of visible elements matched by the selector",
             "itemtype": "method",
             "name": "getNumberOfVisibleElements",
@@ -1554,7 +1610,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 690,
+            "line": 725,
             "description": "Sends out an event with the results of the `getNumberOfVisibleElements` call",
             "itemtype": "method",
             "name": "_getNumberOfElementsCb",
@@ -1592,7 +1648,7 @@
         },
         {
             "file": "lib/commands/element.js",
-            "line": 719,
+            "line": 754,
             "description": "Mixes in element methods",
             "params": [
                 {
@@ -3239,7 +3295,7 @@
         },
         {
             "message": "Missing item type\nMixes in element methods",
-            "line": " lib/commands/element.js:719"
+            "line": " lib/commands/element.js:754"
         },
         {
             "message": "Missing item type\nMixes in the script execute methods",
