@@ -893,7 +893,7 @@
         {
             "file": "lib/dalek/actions.js",
             "line": 1122,
-            "description": "Fills the fields of a form with given values.\n\n```html\n<input type=\"hidden\" value=\"not really a value\" id=\"ijustwannahaveavalue\"/>\n```\n\n```javascript\ntest.open('http://dalekjs.com')\n    .setValue('#ijustwannahaveavalue', 'a value')\n    .title().is('DalekJS - Frequently asked questions', 'What the F.A.Q.');\n```",
+            "description": "Fills the fields of a form with given values.\n\n```html\n<input type=\"text\" value=\"not really a value\" id=\"ijustwannahaveavalue\"/>\n```\n\n```javascript\ntest.open('http://dalekjs.com')\n    .setValue('#ijustwannahaveavalue', 'a value')\n    .assert.val('#ijustwannahaveavalue', 'a value', 'Value is changed');\n```",
             "api": "",
             "itemtype": "method",
             "name": "setValue",

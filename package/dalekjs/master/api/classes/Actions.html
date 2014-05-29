@@ -2787,10 +2787,10 @@ For more information about this, I recommend to check out the <a href="/docs/con
 
     <div class="description">
         <p>Fills the fields of a form with given values.</p>
-<pre class="code prettyprint"><code class="lang-html">&lt;input type=&quot;hidden&quot; value=&quot;not really a value&quot; id=&quot;ijustwannahaveavalue&quot;/&gt;</code></pre>
+<pre class="code prettyprint"><code class="lang-html">&lt;input type=&quot;text&quot; value=&quot;not really a value&quot; id=&quot;ijustwannahaveavalue&quot;/&gt;</code></pre>
 <pre class="code prettyprint"><code class="lang-javascript">test.open(&#39;http://dalekjs.com&#39;)
     .setValue(&#39;#ijustwannahaveavalue&#39;, &#39;a value&#39;)
-    .title().is(&#39;DalekJS - Frequently asked questions&#39;, &#39;What the F.A.Q.&#39;);</code></pre>
+    .assert.val(&#39;#ijustwannahaveavalue&#39;, &#39;a value&#39;, &#39;Value is changed&#39;);</code></pre>
 
     </div>
 
