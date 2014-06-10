@@ -252,8 +252,37 @@ var Window = {
     this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;maximize&#x27;, hash: hash, value: true});
     deferred.resolve();
     return deferred.promise;
-  }
+  },
 
+  /**
+   * Closes the current window
+   *
+   * @method close
+   * @param {string} hash Unique hash of that fn call
+   * @chainable
+   */
+
+  close: function (hash) {
+    this.actionQueue.push(this.webdriverClient.close.bind(this.webdriverClient));
+    this.actionQueue.push(this._closeCb.bind(this, hash));
+    return this;
+  },
+
+  /**
+   * Sends out an event with the results of the &#x60;close&#x60; call
+   *
+   * @method _closeCb
+   * @param {string} hash Unique hash of that fn call
+   * @return {object} promise Exists promise
+   * @private
+   */
+
+  _closeCb: function (hash) {
+    var deferred = Q.defer();
+    this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;close&#x27;, hash: hash, value: true});
+    deferred.resolve();
+    return deferred.promise;
+  }
 };
 
 /**

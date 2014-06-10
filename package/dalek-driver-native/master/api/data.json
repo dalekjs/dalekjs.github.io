@@ -2969,7 +2969,48 @@
         },
         {
             "file": "lib/commands/window.js",
-            "line": 151,
+            "line": 149,
+            "description": "Closes the current window",
+            "itemtype": "method",
+            "name": "close",
+            "params": [
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Window",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/window.js",
+            "line": 163,
+            "description": "Sends out an event with the results of the `close` call",
+            "itemtype": "method",
+            "name": "_closeCb",
+            "params": [
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Exists promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Window",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/window.js",
+            "line": 180,
             "description": "Mixes in element methods",
             "params": [
                 {
@@ -3323,7 +3364,7 @@
         },
         {
             "message": "Missing item type\nMixes in element methods",
-            "line": " lib/commands/window.js:151"
+            "line": " lib/commands/window.js:180"
         },
         {
             "message": "Missing item type\nLoads the webdriver client,\nlaunches the browser,\ninitializes al object properties,\nbinds to browser events",
