@@ -270,6 +270,13 @@ like clicking elements, open urls, filling out input fields, etc.</p>
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_close">close</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_dismiss">dismiss</a>
 
                                 
@@ -1217,6 +1224,68 @@ In the future it might become the ability to also execute a &quot;right button&q
             
             </ul>
         </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_close" class="method item">
+    <h3 class="name"><code>close</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_dalek_actions.js.html#l1383"><code>lib&#x2F;dalek&#x2F;actions.js:1383</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Close the active window and automatically selects the parent window.</p>
+<pre class="code prettyprint"><code class="lang-javascript">this.test.toWindow(&#39;test&#39;);
+this.test.close();
+
+//you can now write your code as if the original parent window was selected because .close()
+//selects that automatically for you so you don&#39;t have to call .toParentWindow() everytime</code></pre>
+
+    </div>
+
     
 
     

@@ -1004,6 +1004,16 @@
             "class": "Actions"
         },
         {
+            "file": "lib/dalek/actions.js",
+            "line": 1383,
+            "description": "Close the active window and automatically selects the parent window.\n\n```javascript\nthis.test.toWindow('test');\nthis.test.close();\n\n//you can now write your code as if the original parent window was selected because .close()\n//selects that automatically for you so you don't have to call .toParentWindow() everytime\n```",
+            "api": "",
+            "itemtype": "method",
+            "name": "close",
+            "chainable": 1,
+            "class": "Actions"
+        },
+        {
             "file": "lib/dalek/assertions.js",
             "line": 61,
             "description": "It can be really cumbersome to always write assert, assert & assert\nall over the place when your doing multiple assertions.\nTo avoid this, open an assertion context in your test which allows\nyou to write (n) assertions without having to write 'assert' before each.\n\nSo, instead of writing this:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .assert.text('#nav').is('Navigation')\n    .assert.visible('#nav')\n    .assert.attr('#nav', 'data-nav', 'true')\n    .done();\n```\n\nyou can write this:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .assert.chain()\n      .text('#nav').is('Navigation')\n      .visible('#nav')\n      .attr('#nav', 'data-nav', 'true')\n    .end()\n    .done();\n```\n\nto make it even more concise, you can combine this with the [query](actions.html#meth-query) method:\n\n```javascript\ntest.open('http://doctorwhotv.co.uk/')\n    .assert.chain()\n      .query('#nav')\n          .text().is('Navigation')\n          .visible()\n          .attr('data-nav', 'true')\n        .end()\n    .end()\n    .done();\n```\n\nAlways make sure to terminate it with the [end](#meth-end) method!",
@@ -4870,6 +4880,10 @@
         {
             "message": "unknown tag: api",
             "line": " lib/dalek/actions.js:1208"
+        },
+        {
+            "message": "unknown tag: api",
+            "line": " lib/dalek/actions.js:1383"
         },
         {
             "message": "unknown tag: part",

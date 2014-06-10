@@ -279,7 +279,7 @@ Actions.prototype.mouseEvent = function (type, selector) {
  * For more information about this, I recommend to check out the [configuration docs](/docs/config.html)
  *
  * TODO: IMPLEMENT
- * 
+ *
  * @method setHttpAuth
  * @param {string} username
  * @param {string} password
@@ -319,7 +319,7 @@ Actions.prototype.setHttpAuth = function (username, password) {
  * &#x60;&#x60;&#x60;
  *
  * &gt; NOTE: Buggy in Firefox
- * 
+ *
  * @api
  * @method toFrame
  * @param {string} selector Selector of the frame to switch to
@@ -359,7 +359,7 @@ Actions.prototype.toFrame = function (selector) {
  * &#x60;&#x60;&#x60;
  *
  * &gt; NOTE: Buggy in Firefox
- * 
+ *
  * @api
  * @method toParent
  * @chainable
@@ -398,7 +398,7 @@ Actions.prototype.toParent = function () {
  * &#x60;&#x60;&#x60;
  *
  * &gt; NOTE: Buggy in Firefox
- * 
+ *
  * @api
  * @method toWindow
  * @param {string} name Name of the window to switch to
@@ -433,7 +433,7 @@ Actions.prototype.toWindow = function (name) {
  * &#x60;&#x60;&#x60;
  *
  * &gt; NOTE: Buggy in Firefox
- * 
+ *
  * @api
  * @method toParentWindow
  * @chainable
@@ -450,7 +450,7 @@ Actions.prototype.toParentWindow = function () {
  * Wait until a resource that matches the given testFx is loaded to process a next step.
  *
  * TODO: IMPLEMENT
- * 
+ *
  * @method waitForResource
  * @param {string} ressource URL of the ressource that should be waited for
  * @param {number} timeout Timeout in miliseconds
@@ -468,7 +468,7 @@ Actions.prototype.waitForResource = function (ressource, timeout) {
  * Waits until the passed text is present in the page contents before processing the immediate next step.
  *
  * TODO: IMPLEMENT
- * 
+ *
  * @method waitForText
  * @param {string} text Text to be waited for
  * @param {number} timeout Timeout in miliseconds
@@ -486,7 +486,7 @@ Actions.prototype.waitForText = function (text, timeout) {
  * Waits until an element matching the provided selector expression is visible in the remote DOM to process a next step.
  *
  * TODO: IMPLEMENT
- * 
+ *
  * @method waitUntilVisible
  * @param {string} selector Selector of the element that should be waited to become invisible
  * @param {number} timeout Timeout in miliseconds
@@ -510,7 +510,7 @@ Actions.prototype.waitUntilVisible = function (selector, timeout) {
  * Waits until an element matching the provided selector expression is no longer visible in remote DOM to process a next step.
  *
  * TODO: IMPLEMENT
- * 
+ *
  * @method waitWhileVisible
  * @param {string} selector Selector of the element that should be waited to become visible
  * @param {number} timeout Timeout in miliseconds
@@ -725,7 +725,7 @@ Actions.prototype.back = function () {
  * In the future it might become the ability to also execute a &quot;right button&quot; click.
  *
  * &gt; Note: Does not work correctly in Firefox when used on &#x60;&lt;select&gt;&#x60; &amp; &#x60;&lt;option&gt;&#x60; elements
- * 
+ *
  * @api
  * @method click
  * @param {string} selector Selector of the element to be clicked
@@ -762,7 +762,7 @@ Actions.prototype.click = function (selector) {
  * &#x60;&#x60;&#x60;
  *
  * &gt; Note: Does not work in Firefox yet
- * 
+ *
  * @api
  * @method submit
  * @param {string} selector Selector of the form to be submitted
@@ -843,7 +843,7 @@ Actions.prototype.open = function (location) {
  * You can go [here](https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/element/:id/value) to read up on special keys and unicodes for them (note that a code of U+EXXX is actually written in code as \uEXXX).
  *
  * &gt; Note: Does not work correctly in Firefox with special keys
- * 
+ *
  * @api
  * @method type
  * @param {string} selector Selector of the form field to be filled
@@ -878,7 +878,7 @@ Actions.prototype.type = function (selector, keystrokes) {
  *
  *
  * &gt; Note: Does not work correctly in Firefox with special keys
- * 
+ *
  * @api
  * @method sendKeys
  * @param {string} selector Selector of the form field to be filled
@@ -919,7 +919,7 @@ Actions.prototype.sendKeys = function (selector, keystrokes) {
  *
  *
  * &gt; Note: Does not work in Firefox &amp; PhantomJS
- * 
+ *
  * @api
  * @method answer
  * @param {string} keystrokes Text to be applied to the element
@@ -935,7 +935,7 @@ Actions.prototype.answer = function (keystrokes) {
 
 /**
  * Executes a JavaScript function within the browser context
- * 
+ *
  * &#x60;&#x60;&#x60;javascript
  *  test.open(&#x27;http://adomain.com&#x27;)
  *     .execute(function () {
@@ -957,7 +957,7 @@ Actions.prototype.answer = function (keystrokes) {
  * &#x60;&#x60;&#x60;
  *
  * &gt; Note: Buggy in Firefox
- * 
+ *
  * @api
  * @method execute
  * @param {function} script JavaScript function that should be executed
@@ -997,7 +997,7 @@ Actions.prototype.execute = function (script) {
  * &#x60;&#x60;&#x60;
  *
  * &gt; Note: Buggy in Firefox
- * 
+ *
  * @method waitFor
  * @param {function} fn Async function that resolves an promise when ready
  * @param {array} args Additional arguments
@@ -1035,7 +1035,7 @@ Actions.prototype.waitFor = function (script, args, timeout) {
  * &#x60;&#x60;&#x60;
  *
  * &gt; Note: Does not work in Firefox &amp; PhantomJS
- * 
+ *
  * @api
  * @method accept
  * @return chainable
@@ -1069,7 +1069,7 @@ Actions.prototype.accept = function () {
  * &#x60;&#x60;&#x60;
  *
  * &gt; Note: Does not work in Firefox &amp; PhantomJS
- * 
+ *
  * @api
  * @method dismiss
  * @return chainable
@@ -1114,7 +1114,7 @@ Actions.prototype.dismiss = function () {
  *
  *
  * &gt; Note: Does not work in Firefox
- * 
+ *
  * @api
  * @method resize
  * @param {object} dimensions Width and height as properties to apply
@@ -1159,7 +1159,7 @@ Actions.prototype.resize = function (dimensions) {
  * &#x60;&#x60;&#x60;
  *
  * &gt; Note: Does not work in Firefox and PhantomJS
- * 
+ *
  * @api
  * @method maximize
  * @chainable
@@ -1296,7 +1296,7 @@ Actions.prototype.logger = {};
  *  DOM: #smth &lt;input type=&quot;hidden&quot; value=&quot;not really a value&quot; id=&quot;ijustwannahaveavalue&quot;/&gt;
  * &#x60;&#x60;&#x60;
 
- * 
+ *
  * @api
  * @method log.dom
  * @param {string} selector CSS selector
@@ -1342,7 +1342,7 @@ Actions.prototype.logger.dom = function (selector) {
  *     .log.message(&#x27;FooBar&#x27;) // outputs MESSAGE: FooBar
  *     .done();
  * &#x60;&#x60;&#x60;
- * 
+ *
  * @api
  * @method log.message
  * @param {function|string} message
@@ -1452,13 +1452,13 @@ Actions.prototype._addToActionQueue = function (opts, driverMethod, cb) {
 
 Actions.prototype._button = function(button) {
   var buttons = {LEFT: 0, MIDDLE: 1, RIGHT: 2};
-  
+
   if (button === undefined) {
     button = 0;
   } else if (typeof button !== &#x27;number&#x27;) {
     button = buttons[button.toUpperCase()] || 0;
   }
-  
+
   return button;
 };
 
@@ -1466,32 +1466,58 @@ Actions.prototype._button = function(button) {
 Actions.prototype.buttonClick = function (button) {
   var hash = uuid();
   button = this._button(button);
-  
+
   var cb = this._generateCallbackAssertion(&#x27;buttonClick&#x27;, &#x27;buttonClick&#x27;);
   this._addToActionQueue([button, hash], &#x27;buttonClick&#x27;, cb);
-  
+
   return this;
 };
 
 // http://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/moveto
 Actions.prototype.moveTo = function (selector, x, y) {
   var hash = uuid();
-  
+
   if (this.querying === true) {
     selector = this.selector;
   }
-  
+
   if (x === undefined) {
     x = null;
   }
-  
+
   if (y === undefined) {
     y = null;
   }
-  
+
   // move to coordinate
   var cb = this._generateCallbackAssertion(&#x27;moveto&#x27;, &#x27;moveto&#x27;);
   this._addToActionQueue([selector, x, y, hash], &#x27;moveto&#x27;, cb);
+
+  return this;
+};
+
+/**
+ * Close the active window and automatically selects the parent window.
+ *
+ * &#x60;&#x60;&#x60;javascript
+ * this.test.toWindow(&#x27;test&#x27;);
+ * this.test.close();
+ *
+ * //you can now write your code as if the original parent window was selected because .close()
+ * //selects that automatically for you so you don&#x27;t have to call .toParentWindow() everytime
+ * &#x60;&#x60;&#x60;
+ *
+ * @api
+ * @method close
+ * @chainable
+ */
+Actions.prototype.close = function () {
+  var hash = uuid();
+  var cb = this._generateCallbackAssertion(&#x27;close&#x27;, &#x27;close&#x27;, hash);
+  this._addToActionQueue([hash], &#x27;close&#x27;, cb);
+
+  //since the current window is now closed, make sense to automatically select the parent window since you would have to do this anyway
+  this.toParentWindow();
 
   return this;
 };
