@@ -180,6 +180,11 @@ module.exports = function () {
           type: &#x27;integer&#x27;,
           desc: &#x27;Viewport dimensions you would like to invoke&#x27;
         })
+        .option(&#x27;baseUrl&#x27;, {
+          alias: &#x27;u&#x27;,
+          type : &#x27;string&#x27;,
+          desc : &#x27;Base URL to append all .open()\&#x27;s with if relative path is given&#x27;
+        })
         .option(&#x27;logLevel&#x27;, {
           alias: &#x27;l&#x27;,
           type : &#x27;string&#x27;,
@@ -241,6 +246,7 @@ module.exports = function () {
         browser: argv.browser ? argv.browser.split(&#x27;,&#x27;) : [],
         viewport: argv.viewport ? viewportOption : {},
         logLevel: argv.logLevel,
+        baseUrl: argv.baseUrl,
         noColors: argv.nocolors,
         noSymbols: argv.nosymbols,
         remote: argv.remote
