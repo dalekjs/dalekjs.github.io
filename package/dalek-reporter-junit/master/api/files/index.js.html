@@ -237,7 +237,7 @@ Reporter.prototype = {
     this.events.on(&#x27;report:test:finished&#x27;, this.testFinished.bind(this));
     this.events.on(&#x27;report:runner:finished&#x27;, this.runnerFinished.bind(this));
     this.events.on(&#x27;report:testsuite:started&#x27;, this.testsuiteStarted.bind(this));
-    this.events.on(&#x27;report:testsuite:finished&#x27;, this.testsuiteFinished.bind(this));
+    //this.events.on(&#x27;report:testsuite:finished&#x27;, this.testsuiteFinished.bind(this));
     return this;
   },
 
@@ -269,10 +269,7 @@ Reporter.prototype = {
       name: &#x27;testsuite&#x27;,
       children: [],
       attrs: {
-        start: Math.round(new Date().getTime() / 1000),
         name: name + &#x27; [&#x27; + this.browser + &#x27;]&#x27;,
-        end: null,
-        totalTests: 0
       }
     });
     return this;
@@ -286,7 +283,7 @@ Reporter.prototype = {
    */
 
   testsuiteFinished: function () {
-    this.xml[0].children[this.testIdx].attrs.end = Math.round(new Date().getTime() / 1000);
+ //   this.xml[0].children[this.testIdx].attrs.end = Math.round(new Date().getTime() / 1000);
     return this;
   },
 
@@ -299,26 +296,23 @@ Reporter.prototype = {
    */
 
   assertion: function (data) {
-    var timestamp = Math.round(new Date().getTime() / 1000);
-    this.xml[0].children[this.testIdx].children[this.testCount].children.push({
-      name: &#x27;variation&#x27;,
-      attrs: {
-        start: timestamp,
-        name: data.type,
-        end: null
-      },
-      children: [
-        {name: &#x27;severity&#x27;, text: (data.success ? &#x27;pass&#x27; : &#x27;fail&#x27;) },
-        {name: &#x27;description&#x27;, text: jsonxml.cdata((data.message ? data.message : &#x27;Expected: &#x27; + data.expected + &#x27;Actual: &#x27; + data.value)) },
-        {name: &#x27;resource&#x27;, text: &#x27;DalekJSTest&#x27;}
-      ]
-    });
+    if (! data.success) {
+      //var timestamp = Math.round(new Date().getTime() / 1000);
+      this.xml[0].children[this.testIdx].children[this.testCount].children.push({
+        name: &#x27;failure&#x27;,
+        attrs: {
+          name: data.type,
+          message:  (data.message ? data.message : &#x27;Expected: &#x27; + data.expected + &#x27;Actual: &#x27; + data.value)
+        }
+      });
 
-    if (this.variationCount &gt; -1 &amp;&amp; this.xml[0].children[this.testIdx].children[this.testCount].children[this.variationCount]) {
-      this.xml[0].children[this.testIdx].children[this.testCount].children[this.variationCount].attrs.end = timestamp;
+      //if (this.variationCount &gt; -1 &amp;&amp; this.xml[0].children[this.testIdx].children[this.testCount].children[this.variationCount]) {
+        //this.xml[0].children[this.testIdx].children[this.testCount].children[this.variationCount].attrs.end = timestamp;
+      //}
+
+      this.variationCount++;
     }
 
-    this.variationCount++;
     return this;
   },
 
@@ -336,10 +330,8 @@ Reporter.prototype = {
       name: &#x27;testcase&#x27;,
       children: [],
       attrs: {
-        start: Math.round(new Date().getTime() / 1000),
-        name: data.name,
-        end: null,
-        result: null
+        classname: this.xml[0].children[this.testIdx].attrs.name,
+        name: data.name
       }
     });
 
@@ -354,18 +346,24 @@ Reporter.prototype = {
    * @chainable
    */
 
-  testFinished: function (data) {
-    var timestamp = Math.round(new Date().getTime() / 1000);
-    this.xml[0].children[this.testIdx].children[this.testCount].attrs.end = timestamp;
-    this.xml[0].children[this.testIdx].children[this.testCount].attrs.result = data.status ? &#x27;Passed&#x27; : &#x27;Failed&#x27;;
+  testFinished: function () {
+    //var timestamp = Math.round(new Date().getTime() / 1000);
+
+    if (this._checkNodeAttributes(this.testIdx, this.testCount)) {
+      this.xml[0].children[this.testIdx].children[this.testCount].attrs = {};
+    }
+    //this.xml[0].children[this.testIdx].children[this.testCount].attrs.end = timestamp;
+    //this.xml[0].children[this.testIdx].children[this.testCount].attrs.result = data.status ? &#x27;Passed&#x27; : &#x27;Failed&#x27;;
 
     if (this.variationCount &gt; -1) {
-      this.xml[0].children[this.testIdx].children[this.testCount].children[this.variationCount].attrs.end = timestamp;
+      if (this._checkNodeAttributes(this.testIdx, this.testCount, this.variationCount)) {
+        this.xml[0].children[this.testIdx].children[this.testCount].children[this.variationCount].attrs = {};
+      }
+      //this.xml[0].children[this.testIdx].children[this.testCount].children[this.variationCount].attrs.end = timestamp;
     }
 
     this.testCount++;
     this.variationCount = -1;
-    this.xml[0].children[this.testIdx].attrs.totalTests = this.testCount;
     return this;
   },
 
@@ -399,7 +397,7 @@ Reporter.prototype = {
    * Helper method to generate deeper nested directory structures
    *
    * @method _recursiveMakeDirSync
-   * @param {string} path Path to create
+   * @param {string} path PAth to create
    */
 
   _recursiveMakeDirSync: function (path) {
@@ -417,6 +415,23 @@ Reporter.prototype = {
       }
       root += dir + pathSep;
     }
+  },
+
+  /**
+   * Helper method to check if attributes should be set to an empty object literal
+   *
+   * @method _checkNodeAttributes
+   * @param {string} testIdx Id of the test node
+   * @param {string} testCount Id of the child node
+   * @param {string} variationCount Id of the testCount child node
+   */
+
+  _checkNodeAttributes: function (testIdx, testCount, variationCount) {
+    if (variationCount === undefined) {
+      return typeof this.xml[0].children[testIdx].children[testCount].attrs === &#x27;undefined&#x27;;
+    }
+
+    return typeof this.xml[0].children[testIdx].children[testCount].children[variationCount].attrs === &#x27;undefined&#x27;;
   }
 };
 

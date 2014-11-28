@@ -6,6 +6,20 @@
         "url": "http://dalekjs.com"
     },
     "files": {
+        "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
+            "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "report/complexity/assets/scripts/vendor/lodash.min.js": {
+            "name": "report/complexity/assets/scripts/vendor/lodash.min.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "index.js": {
             "name": "index.js",
             "modules": {
@@ -52,6 +66,18 @@
     },
     "classitems": [
         {
+            "file": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "line": 1,
+            "description": "Tag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "class": "Reporter"
+        },
+        {
+            "file": "report/complexity/assets/scripts/vendor/lodash.min.js",
+            "line": 1,
+            "license": "Lo-Dash 2.4.1 (Custom Build) lodash.com/license | Underscore.js 1.5.2 underscorejs.org/LICENSE\nBuild: `lodash modern -o ./dist/lodash.js`",
+            "class": "Reporter"
+        },
+        {
             "file": "index.js",
             "line": 136,
             "description": "Connects to all the event listeners",
@@ -97,7 +123,7 @@
         },
         {
             "file": "index.js",
-            "line": 191,
+            "line": 188,
             "description": "Finishes XML skeleton for testsuites",
             "itemtype": "method",
             "name": "testsuiteFinished",
@@ -107,7 +133,7 @@
         },
         {
             "file": "index.js",
-            "line": 203,
+            "line": 200,
             "description": "Generates XML skeleton for an assertion",
             "itemtype": "method",
             "name": "assertion",
@@ -124,7 +150,7 @@
         },
         {
             "file": "index.js",
-            "line": 235,
+            "line": 229,
             "description": "Generates XML skeleton for a testcase",
             "itemtype": "method",
             "name": "testStarted",
@@ -141,7 +167,7 @@
         },
         {
             "file": "index.js",
-            "line": 259,
+            "line": 251,
             "description": "Finishes XML skeleton for a testcase",
             "itemtype": "method",
             "name": "testFinished",
@@ -158,7 +184,7 @@
         },
         {
             "file": "index.js",
-            "line": 282,
+            "line": 280,
             "description": "Finishes XML and writes file to the file system",
             "itemtype": "method",
             "name": "runnerFinished",
@@ -175,14 +201,40 @@
         },
         {
             "file": "index.js",
-            "line": 308,
+            "line": 306,
             "description": "Helper method to generate deeper nested directory structures",
             "itemtype": "method",
             "name": "_recursiveMakeDirSync",
             "params": [
                 {
                     "name": "path",
-                    "description": "Path to create",
+                    "description": "PAth to create",
+                    "type": "String"
+                }
+            ],
+            "class": "Reporter",
+            "module": "Reporter"
+        },
+        {
+            "file": "index.js",
+            "line": 330,
+            "description": "Helper method to check if attributes should be set to an empty object literal",
+            "itemtype": "method",
+            "name": "_checkNodeAttributes",
+            "params": [
+                {
+                    "name": "testIdx",
+                    "description": "Id of the test node",
+                    "type": "String"
+                },
+                {
+                    "name": "testCount",
+                    "description": "Id of the child node",
+                    "type": "String"
+                },
+                {
+                    "name": "variationCount",
+                    "description": "Id of the testCount child node",
                     "type": "String"
                 }
             ],
@@ -192,12 +244,24 @@
     ],
     "warnings": [
         {
+            "message": "unknown tag: license",
+            "line": " report/complexity/assets/scripts/vendor/lodash.min.js:1"
+        },
+        {
             "message": "unknown tag: part",
             "line": " index.js:35"
         },
         {
             "message": "unknown tag: api",
             "line": " index.js:35"
+        },
+        {
+            "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
+            "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
+        },
+        {
+            "message": "Missing item type",
+            "line": " report/complexity/assets/scripts/vendor/lodash.min.js:1"
         }
     ]
 }
