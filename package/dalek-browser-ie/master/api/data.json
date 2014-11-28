@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-browser-ie",
         "description": "Internet Explorer bindings for DalekJS",
-        "version": "0.0.4",
+        "version": "0.0.5",
         "url": "http://dalekjs.com"
     },
     "files": {
@@ -145,7 +145,7 @@
         },
         {
             "file": "index.js",
-            "line": 147,
+            "line": 148,
             "description": "Driver defaults, what should the driver be able to access.",
             "itemtype": "property",
             "name": "driverDefaults",
@@ -156,7 +156,7 @@
         },
         {
             "file": "index.js",
-            "line": 160,
+            "line": 161,
             "description": "Path to the IEDriverServer.exe file",
             "itemtype": "property",
             "name": "path",
@@ -168,7 +168,7 @@
         },
         {
             "file": "index.js",
-            "line": 170,
+            "line": 171,
             "description": "Child process instance of the IEDriverServer",
             "itemtype": "property",
             "name": "spawned",
@@ -179,7 +179,7 @@
         },
         {
             "file": "index.js",
-            "line": 179,
+            "line": 180,
             "description": "IE processes that are running on startup,\nand therefor shouldn`t be closed",
             "itemtype": "property",
             "name": "openProcesses",
@@ -191,7 +191,7 @@
         },
         {
             "file": "index.js",
-            "line": 190,
+            "line": 191,
             "description": "Resolves the driver port",
             "itemtype": "method",
             "name": "getPort",
@@ -205,7 +205,7 @@
         },
         {
             "file": "index.js",
-            "line": 201,
+            "line": 202,
             "description": "Returns the driver host",
             "itemtype": "method",
             "name": "getHost",
@@ -219,7 +219,7 @@
         },
         {
             "file": "index.js",
-            "line": 212,
+            "line": 213,
             "description": "Resolves the maximum range for the driver port",
             "itemtype": "method",
             "name": "getMaxPort",
@@ -233,7 +233,7 @@
         },
         {
             "file": "index.js",
-            "line": 223,
+            "line": 224,
             "description": "Launches the driver\n(the driver takes care of launching the browser)",
             "itemtype": "method",
             "name": "launch",
@@ -247,7 +247,7 @@
         },
         {
             "file": "index.js",
-            "line": 250,
+            "line": 251,
             "description": "Kills the driver & browser processes",
             "itemtype": "method",
             "name": "kill",
@@ -258,7 +258,7 @@
         },
         {
             "file": "index.js",
-            "line": 302,
+            "line": 303,
             "description": "Process user defined ports",
             "itemtype": "method",
             "name": "_checkUserDefinedPorts",
@@ -278,7 +278,7 @@
         },
         {
             "file": "index.js",
-            "line": 329,
+            "line": 330,
             "description": "Lists all running processes (win only)",
             "itemtype": "method",
             "name": "_list",
@@ -305,7 +305,7 @@
         },
         {
             "file": "index.js",
-            "line": 375,
+            "line": 380,
             "description": "Kill a specific process (win only)",
             "itemtype": "method",
             "name": "_kill",

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.4</em>
+            <em>API Docs for: 0.0.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -231,7 +231,8 @@ var InternetExplorer = {
    */
 
   desiredCapabilities: {
-    browserName: &#x27;InternetExplorer&#x27;
+    browserName: &#x27;InternetExplorer&#x27;,
+    initialBrowserUrl: &#x27;&#x27;
   },
 
   /**
@@ -352,7 +353,7 @@ var InternetExplorer = {
         Object.keys(item).forEach(function (key) {
           if(svc[idx][key] === &#x27;iexplore.exe&#x27;) {
             // kill the browser process
-            this._kill(svc[idx].PID);
+            this._kill(svc[idx].PID, true);
           }
         }.bind(this));
       }.bind(this));
@@ -448,6 +449,10 @@ var InternetExplorer = {
           for (var i=0;i&lt;head.length;i++){
             head[i] = head[i].replace(/ /gi,&#x27;&#x27;);
           }
+
+          if (head.indexOf(&#x27;PID&#x27;)&lt;0){
+            head[1] = &#x27;PID&#x27;;
+          }
         } else {
           var tmp = {};
           for (var j=0;j&lt;rec.length;j++){
@@ -474,7 +479,7 @@ var InternetExplorer = {
    */
 
   _kill: function(pid, force, callback) {
-    if (!pid){
+    if (!pid || isNaN(parseInt(pid))){
       throw new Error(&#x27;PID is required for the kill operation.&#x27;);
     }
     callback = callback || function(){};
