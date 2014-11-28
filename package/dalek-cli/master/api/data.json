@@ -2,12 +2,19 @@
     "project": {
         "name": "dalek-cli",
         "description": "DalekJS Command line interface",
-        "version": "0.0.4",
+        "version": "0.0.5",
         "url": ""
     },
     "files": {
         "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
             "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "report/complexity/assets/scripts/vendor/lodash.min.js": {
+            "name": "report/complexity/assets/scripts/vendor/lodash.min.js",
             "modules": {},
             "classes": {},
             "fors": {},
@@ -31,6 +38,12 @@
             "class": ""
         },
         {
+            "file": "report/complexity/assets/scripts/vendor/lodash.min.js",
+            "line": 1,
+            "license": "Lo-Dash 2.4.1 (Custom Build) lodash.com/license | Underscore.js 1.5.2 underscorejs.org/LICENSE\nBuild: `lodash modern -o ./dist/lodash.js`",
+            "class": ""
+        },
+        {
             "file": "index.js",
             "line": 31,
             "description": "Dalek Command Line Tools\n\nThe command line interface is your interface to the world of DalekJS.\nThis is the way to run your tests.\nThere might be a web interface to Dalek in the future, but as long as there is not, you have to deal with this;\nBut hey, this isn't difficult & I know you can do it! *\nAvailable options:\n\n> --version, -v   Shows the version of the dalek-cli & local dalek installation\n\n> --reporter, -r  Reporter(s) you would like to invoke\n\n> --driver, -d    Driver(s) you would like to invoke\n\n> --browser, -b   Browser(s) you would like to invoke\n\n> --viewport      Viewport dimensions you would like to invoke\n\n> --remote Starts a dalek host server for clients to connect to\n\n> --logLevel, -l  Log level, controls the amount of information outputted to the console (0 to 5)\n\n> --nocolors     Disable colorized output in the console\n\n> --nosymbols    Disable UTF-8 symbols in the console\n\n> --help, -h      Displays the cli help",
@@ -40,6 +53,10 @@
         }
     ],
     "warnings": [
+        {
+            "message": "unknown tag: license",
+            "line": " report/complexity/assets/scripts/vendor/lodash.min.js:1"
+        },
         {
             "message": "unknown tag: part",
             "line": " index.js:31"
@@ -51,6 +68,10 @@
         {
             "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
             "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
+        },
+        {
+            "message": "Missing item type",
+            "line": " report/complexity/assets/scripts/vendor/lodash.min.js:1"
         },
         {
             "message": "Missing item type\nDalek Command Line Tools\n\nThe command line interface is your interface to the world of DalekJS.\nThis is the way to run your tests.\nThere might be a web interface to Dalek in the future, but as long as there is not, you have to deal with this;\nBut hey, this isn't difficult & I know you can do it! *\nAvailable options:\n\n> --version, -v   Shows the version of the dalek-cli & local dalek installation\n\n> --reporter, -r  Reporter(s) you would like to invoke\n\n> --driver, -d    Driver(s) you would like to invoke\n\n> --browser, -b   Browser(s) you would like to invoke\n\n> --viewport      Viewport dimensions you would like to invoke\n\n> --remote Starts a dalek host server for clients to connect to\n\n> --logLevel, -l  Log level, controls the amount of information outputted to the console (0 to 5)\n\n> --nocolors     Disable colorized output in the console\n\n> --nosymbols    Disable UTF-8 symbols in the console\n\n> --help, -h      Displays the cli help",
