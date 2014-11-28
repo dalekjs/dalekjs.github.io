@@ -15,7 +15,6 @@
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
   <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
   <link href="../../assets/css/plato.css" rel="stylesheet">
   <link href="../../assets/css/plato-file.css" rel="stylesheet">
@@ -45,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">70.10</p>
+      <p class="stat">70.03</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">802</p>
+      <p class="stat">803</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">42.23</p>
+      <p class="stat">42.42</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">3.55</p>
+      <p class="stat">3.58</p>
     </div>
   </div>
 </div>
@@ -613,6 +612,7 @@ var ChromeDriver = {
     if (dataStr.search(&#039;DVFreeThread&#039;) === -1) {
       timeout = setTimeout(function () {
         deferred.reject();
+        this.reporterEvents.emit(&#039;error&#039;, &#039;Chromedriver: &#039; + dataStr.trim());
         this.reporterEvents.emit(&#039;error&#039;, &#039;dalek-driver-chrome: Could not launch Chromedriver&#039;);
         process.exit(127);
       }.bind(this), 2000);

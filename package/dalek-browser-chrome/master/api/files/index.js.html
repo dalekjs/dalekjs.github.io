@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.10</em>
+            <em>API Docs for: 0.0.11</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -611,6 +611,7 @@ var ChromeDriver = {
     if (dataStr.search(&#x27;DVFreeThread&#x27;) === -1) {
       timeout = setTimeout(function () {
         deferred.reject();
+        this.reporterEvents.emit(&#x27;error&#x27;, &#x27;Chromedriver: &#x27; + dataStr.trim());
         this.reporterEvents.emit(&#x27;error&#x27;, &#x27;dalek-driver-chrome: Could not launch Chromedriver&#x27;);
         process.exit(127);
       }.bind(this), 2000);

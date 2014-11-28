@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-browser-chrome",
         "description": "Google Chrome bindings for DalekJS",
-        "version": "0.0.10",
+        "version": "0.0.11",
         "url": "http://dalekjs.com"
     },
     "files": {
@@ -494,7 +494,7 @@
         },
         {
             "file": "index.js",
-            "line": 541,
+            "line": 542,
             "description": "Remove the chromedriver log that is written to the current working directory",
             "itemtype": "method",
             "name": "_unlinkChromedriverLog",
@@ -514,7 +514,7 @@
         },
         {
             "file": "index.js",
-            "line": 565,
+            "line": 566,
             "description": "Tracks running browser processes for chrome on mac & linux",
             "itemtype": "method",
             "name": "_processes",
@@ -539,7 +539,7 @@
         },
         {
             "file": "index.js",
-            "line": 585,
+            "line": 586,
             "description": "Kills all associated processes",
             "itemtype": "method",
             "name": "_checkProcesses",
@@ -564,7 +564,7 @@
         },
         {
             "file": "index.js",
-            "line": 610,
+            "line": 611,
             "description": "Kills a process",
             "itemtype": "method",
             "name": "_killNix",
@@ -584,7 +584,7 @@
         },
         {
             "file": "index.js",
-            "line": 635,
+            "line": 636,
             "description": "Lists all chrome processes on *NIX systems",
             "itemtype": "method",
             "name": "_processesNix",
@@ -604,7 +604,7 @@
         },
         {
             "file": "index.js",
-            "line": 651,
+            "line": 652,
             "description": "Deserializes a process list on nix",
             "itemtype": "method",
             "name": "_processListNix",
@@ -634,7 +634,7 @@
         },
         {
             "file": "index.js",
-            "line": 669,
+            "line": 670,
             "description": "Reformats the process list output on *NIX systems",
             "itemtype": "method",
             "name": "_splitProcessListNix",
@@ -659,7 +659,7 @@
         },
         {
             "file": "index.js",
-            "line": 686,
+            "line": 687,
             "description": "Filters empty process list entries on *NIX",
             "itemtype": "method",
             "name": "_filterProcessItemsNix",
@@ -682,7 +682,7 @@
         },
         {
             "file": "index.js",
-            "line": 705,
+            "line": 706,
             "description": "Lists all running processes (win only)",
             "itemtype": "method",
             "name": "_processesWin",
@@ -702,7 +702,7 @@
         },
         {
             "file": "index.js",
-            "line": 719,
+            "line": 720,
             "description": "Deserializes the process list on win",
             "itemtype": "method",
             "name": "_processListWin",
@@ -732,7 +732,7 @@
         },
         {
             "file": "index.js",
-            "line": 758,
+            "line": 759,
             "description": "Processes (transforms) the list of processes",
             "itemtype": "method",
             "name": "_filterProcessItemsWin",
@@ -757,7 +757,7 @@
         },
         {
             "file": "index.js",
-            "line": 777,
+            "line": 778,
             "description": "Filters empty lines out of the process result",
             "itemtype": "method",
             "name": "_splitProcessListWin",
@@ -782,7 +782,7 @@
         },
         {
             "file": "index.js",
-            "line": 794,
+            "line": 795,
             "description": "Kills a process (based on a PID)\nthat was not opened BEFORE Dalek has\nbeen started",
             "itemtype": "method",
             "name": "_killWindows",
