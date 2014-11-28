@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1</em>
+            <em>API Docs for: 0.0.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -202,7 +202,7 @@ DummyBrowser.prototype = {
    * Saucelabs remote host
    *
    * @property host
-   * @type {string} 
+   * @type {string}
    * @default host
    */
 
@@ -232,9 +232,9 @@ DummyBrowser.prototype = {
    * @property longName
    * @type {string}
    */
-  
+
   longName: &#x27;Mozilla Firefox&#x27;,
-  
+
   /**
    * Default desired capabilities
    *
@@ -257,7 +257,7 @@ DummyBrowser.prototype = {
    */
 
   driverDefaults: {
-    viewport: true,
+    viewport: false,
     status: {
       os: {
         name: &#x27;Linux&#x27;,
@@ -275,7 +275,7 @@ DummyBrowser.prototype = {
    * @type {array}
    */
 
-  platforms: [&#x27;Windows 8&#x27;, &#x27;Windows 7&#x27;, &#x27;Windows XP&#x27;, &#x27;OS X 10.8&#x27;, &#x27;OS X 10.7&#x27;, &#x27;OS X 10.6&#x27;, &#x27;Linux&#x27;],
+  platforms: [&#x27;Windows 8.1&#x27;, &#x27;Windows 8&#x27;, &#x27;Windows 7&#x27;, &#x27;Windows XP&#x27;, &#x27;OS X 10.9&#x27;, &#x27;OS X 10.8&#x27;, &#x27;OS X 10.6&#x27;, &#x27;Linux&#x27;],
 
   /**
    * Stores &amp; validates the incoming browser config
@@ -293,13 +293,13 @@ DummyBrowser.prototype = {
     // override desired capabilities, status &amp; browser longname
     this.desiredCapabilities = this._generateDesiredCaps(configuration.name, config);
     this.driverDefaults.status = this._generateStatusInfo(this.desiredCapabilities);
-    this.longName = this._generateLongName(this.desiredCapabilities);
+    this.longName = this._generateLongName(configuration.name,config);
 
     // store injected configuration/log event handlers
     this.reporterEvents = events;
     this.configuration = configuration;
     this.config = config;
-    
+
     // immediatly resolve the deferred
     deferred.resolve();
     return deferred.promise;
@@ -323,8 +323,8 @@ DummyBrowser.prototype = {
    * Generates the status defaults for the OS configuration
    *
    * @method getStatusDefaults
-   * @param {object} desiredCapabilities Desired capabilities 
-   * @param {object} desiredCapabilities Desired capabilities 
+   * @param {object} desiredCapabilities Desired capabilities
+   * @param {object} desiredCapabilities Desired capabilities
    * @return {object} OS status information
    */
 
@@ -336,7 +336,7 @@ DummyBrowser.prototype = {
    * Generates the status defaults for the OS configuration
    *
    * @method getStatusDefaults
-   * @param {object} desiredCapabilities Desired capabilities 
+   * @param {object} desiredCapabilities Desired capabilities
    * @return {object} OS status information
    */
 
@@ -360,7 +360,7 @@ DummyBrowser.prototype = {
 
   /**
    * Verifies the browser config
-   * 
+   *
    * @method _verfiyBrowserConfig
    * @param {string} browserName Name of the browser to verify
    * @param {object} config Daleks internal config helper
@@ -370,17 +370,17 @@ DummyBrowser.prototype = {
 
   _verfiyBrowserConfig: function (browserName, config) {
     var browsers = config.get(&#x27;browsers&#x27;);
-    var browser = browsers[0][browserName] || null;
 
+    // check if we couldnt find a configured alias,
+    // set to defaults otherwise
+    if (!browsers) {
+      return {actAs: this.desiredCapabilities.browserName, version: this.desiredCapabilities[&#x27;browser-version&#x27;]};
+    }
+    var browser = config.get(&#x27;browsers&#x27;)[0][browserName] || null;
     // check if we couldnt find a configured alias,
     // check and apply if there is a default config
     if (!browser &amp;&amp; this.browsers[browserName]) {
       browser = this.browsers[browserName];
-    }
-    // check if we couldnt find a configured alias,
-    // set to defaults otherwise
-    if (!browser) {
-      return {actAs: this.desiredCapabilities.browserName, version: this.desiredCapabilities[&#x27;browser-version&#x27;]};
     }
 
     // check if the actas property has been set, if not
@@ -394,22 +394,16 @@ DummyBrowser.prototype = {
 
   /**
    * Verfies the OS platform config
-   * 
+   *
    * @method _verfiyPlatformConfig
    * @param {object} browser Browser information
    * @return {string} Platform
    * @private
    */
-  
-  _verfiyPlatformConfig: function (browser) {
-    var bp = null;
-    var isValid = this.platforms.reduce(function (previousValue, platform) {
-      if (bp) {
-        return bp;
-      }
 
-      if (platform === browser.platform) {
-        bp = browser.platform;
+  _verfiyPlatformConfig: function (browser) {
+    var isValid = this.platforms.reduce(function (previousValue, platform) {
+      if (previousValue === browser.platform || platform === browser.platform) {
         return browser.platform;
       }
     });
@@ -419,7 +413,7 @@ DummyBrowser.prototype = {
 
   /**
    * Generates the desired capabilities for this session
-   * 
+   *
    * @method _generateDesiredCaps
    * @param {string} browserName The browser name
    * @param {object} config Daleks internal config helper
@@ -434,7 +428,8 @@ DummyBrowser.prototype = {
     var desiredCaps = {
       browserName: browser.actAs,
       platform: platform,
-      &#x27;browser-version&#x27;: (browser.version || this.desiredCapabilities[&#x27;browser-version&#x27;]),
+      &#x27;screen-resolution&#x27;: (browser[&#x27;screen-resolution&#x27;] || null),
+      version: (browser.version || this.desiredCapabilities[&#x27;browser-version&#x27;]),
       name: driverConfig.name || this.desiredCapabilities.name
     };
 
@@ -453,7 +448,7 @@ DummyBrowser.prototype = {
 
   /**
    * Generates OS status information
-   * 
+   *
    * @method _generateStatusInfo
    * @param {object} desiredCaps The sessions desired capabilities
    * @return {object} OS status information
@@ -466,19 +461,27 @@ DummyBrowser.prototype = {
 
   /**
    * Generates the verbose name of the current remote browser in use
-   * 
+   *
    * @method _generateLongName
    * @param {object} desiredCaps The sessions desired capabilities
    * @return {string} Verbose browser name
    * @private
    */
 
-  _generateLongName: function (desiredCaps) {
-    return this.browsers[desiredCaps.browserName].longName || null;
+  _generateLongName: function (browserName, config) {
+    var longName = null;
+    if(this.browsers.hasOwnProperty(browserName)){
+      longName = this.browsers[browserName].longName;
+    }
+    if(config.get(&#x27;browsers&#x27;)[0].hasOwnProperty(browserName)){
+      longName = config.get(&#x27;browsers&#x27;)[0][browserName].longName;
+    }
+    return longName;
   }
 };
 
 module.exports = DummyBrowser;
+
     </pre>
 </div>
 

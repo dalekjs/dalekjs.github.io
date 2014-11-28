@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-driver-sauce",
         "description": "Sauce Labs driver for DalekJS",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "url": "http://dalekjs.com"
     },
     "files": {
@@ -3194,7 +3194,7 @@
         },
         {
             "file": "lib/browser.js",
-            "line": 312,
+            "line": 306,
             "description": "Generates the desired capabilities for this session",
             "itemtype": "method",
             "name": "_generateDesiredCaps",
@@ -3222,7 +3222,7 @@
         },
         {
             "file": "lib/browser.js",
-            "line": 346,
+            "line": 341,
             "description": "Generates OS status information",
             "itemtype": "method",
             "name": "_generateStatusInfo",
@@ -3245,7 +3245,7 @@
         },
         {
             "file": "lib/browser.js",
-            "line": 359,
+            "line": 354,
             "description": "Generates the verbose name of the current remote browser in use",
             "itemtype": "method",
             "name": "_generateLongName",
@@ -3338,7 +3338,7 @@
         },
         {
             "file": "index.js",
-            "line": 235,
+            "line": 228,
             "description": "Creates a new webdriver session\nGets the driver status\nGets the session status\nResolves the promise (e.g. let them tests run)",
             "itemtype": "method",
             "name": "_startBrowserSession",
@@ -3358,7 +3358,7 @@
         },
         {
             "file": "index.js",
-            "line": 281,
+            "line": 274,
             "description": "Starts to execution of a batch of tests",
             "itemtype": "method",
             "name": "end",
@@ -3369,7 +3369,7 @@
         },
         {
             "file": "index.js",
-            "line": 304,
+            "line": 297,
             "description": "Flushes the action queue (e.g. commands that should be send to the wbdriver server)",
             "itemtype": "method",
             "name": "flushQueue",
@@ -3380,7 +3380,7 @@
         },
         {
             "file": "index.js",
-            "line": 326,
+            "line": 319,
             "description": "Loads the browser session status",
             "itemtype": "method",
             "name": "_sessionStatus",
@@ -3403,7 +3403,7 @@
         },
         {
             "file": "index.js",
-            "line": 343,
+            "line": 336,
             "description": "Loads the browser driver status",
             "itemtype": "method",
             "name": "_driverStatus",
@@ -3426,7 +3426,7 @@
         },
         {
             "file": "index.js",
-            "line": 360,
+            "line": 353,
             "description": "Creates an anonymus function that calls a webdriver\nmethod that has no return value, emits an empty result event\nif the function has been run\nTODO: Name is weird, should be saner",
             "itemtype": "method",
             "name": "_createNonReturnee",
@@ -3449,7 +3449,7 @@
         },
         {
             "file": "index.js",
-            "line": 376,
+            "line": 369,
             "description": "Generates a chain of webdriver calls for webdriver\nmethods that don't have a return value\nTODO: Name is weird, should be saner",
             "itemtype": "method",
             "name": "_actionQueueNonReturneeTemplate",
@@ -3479,7 +3479,7 @@
         },
         {
             "file": "index.js",
-            "line": 395,
+            "line": 388,
             "description": "Creates a driver notification with an empty value\nTODO: Name is weird, should be saner",
             "itemtype": "method",
             "name": "_generateDummyDriverMessageFn",
@@ -3512,7 +3512,7 @@
         },
         {
             "file": "index.js",
-            "line": 415,
+            "line": 408,
             "description": "Determines if the driver is a \"multi\" browser driver,\ne.g. can handle more than one browser",
             "itemtype": "method",
             "name": "isMultiBrowser",
@@ -3526,7 +3526,7 @@
         },
         {
             "file": "index.js",
-            "line": 427,
+            "line": 420,
             "description": "Verifies a browser request\nTODO: Still a noop, need to add \"verify the browser\" logic",
             "itemtype": "method",
             "name": "verifyBrowser",
@@ -3540,7 +3540,7 @@
         },
         {
             "file": "index.js",
-            "line": 439,
+            "line": 432,
             "description": "Determines if the driver comes with its own browsers bundled",
             "itemtype": "method",
             "name": "dummyBrowser",
@@ -3554,7 +3554,7 @@
         },
         {
             "file": "index.js",
-            "line": 450,
+            "line": 443,
             "description": "Returnes the browser that comes bundled with the driver",
             "itemtype": "method",
             "name": "getBrowser",
@@ -3575,7 +3575,7 @@
         },
         {
             "file": "index.js",
-            "line": 462,
+            "line": 455,
             "description": "Creates a new driver instance",
             "itemtype": "method",
             "name": "create",

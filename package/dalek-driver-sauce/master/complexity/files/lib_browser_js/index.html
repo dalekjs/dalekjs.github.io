@@ -15,7 +15,6 @@
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
   <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
   <link href="../../assets/css/plato.css" rel="stylesheet">
   <link href="../../assets/css/plato-file.css" rel="stylesheet">
@@ -45,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">71.66</p>
+      <p class="stat">70.96</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">349</p>
+      <p class="stat">351</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">24.78</p>
+      <p class="stat">25.79</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">1.36</p>
+      <p class="stat">1.47</p>
     </div>
   </div>
 </div>
@@ -186,7 +185,7 @@ DummyBrowser.prototype = {
    * Saucelabs remote host
    *
    * @property host
-   * @type {string} 
+   * @type {string}
    * @default host
    */
 
@@ -216,9 +215,9 @@ DummyBrowser.prototype = {
    * @property longName
    * @type {string}
    */
-  
+
   longName: &#039;Mozilla Firefox&#039;,
-  
+
   /**
    * Default desired capabilities
    *
@@ -241,7 +240,7 @@ DummyBrowser.prototype = {
    */
 
   driverDefaults: {
-    viewport: true,
+    viewport: false,
     status: {
       os: {
         name: &#039;Linux&#039;,
@@ -259,7 +258,7 @@ DummyBrowser.prototype = {
    * @type {array}
    */
 
-  platforms: [&#039;Windows 8&#039;, &#039;Windows 7&#039;, &#039;Windows XP&#039;, &#039;OS X 10.8&#039;, &#039;OS X 10.7&#039;, &#039;OS X 10.6&#039;, &#039;Linux&#039;],
+  platforms: [&#039;Windows 8.1&#039;, &#039;Windows 8&#039;, &#039;Windows 7&#039;, &#039;Windows XP&#039;, &#039;OS X 10.9&#039;, &#039;OS X 10.8&#039;, &#039;OS X 10.6&#039;, &#039;Linux&#039;],
 
   /**
    * Stores &amp; validates the incoming browser config
@@ -277,13 +276,13 @@ DummyBrowser.prototype = {
     // override desired capabilities, status &amp; browser longname
     this.desiredCapabilities = this._generateDesiredCaps(configuration.name, config);
     this.driverDefaults.status = this._generateStatusInfo(this.desiredCapabilities);
-    this.longName = this._generateLongName(this.desiredCapabilities);
+    this.longName = this._generateLongName(configuration.name,config);
 
     // store injected configuration/log event handlers
     this.reporterEvents = events;
     this.configuration = configuration;
     this.config = config;
-    
+
     // immediatly resolve the deferred
     deferred.resolve();
     return deferred.promise;
@@ -307,8 +306,8 @@ DummyBrowser.prototype = {
    * Generates the status defaults for the OS configuration
    *
    * @method getStatusDefaults
-   * @param {object} desiredCapabilities Desired capabilities 
-   * @param {object} desiredCapabilities Desired capabilities 
+   * @param {object} desiredCapabilities Desired capabilities
+   * @param {object} desiredCapabilities Desired capabilities
    * @return {object} OS status information
    */
 
@@ -320,7 +319,7 @@ DummyBrowser.prototype = {
    * Generates the status defaults for the OS configuration
    *
    * @method getStatusDefaults
-   * @param {object} desiredCapabilities Desired capabilities 
+   * @param {object} desiredCapabilities Desired capabilities
    * @return {object} OS status information
    */
 
@@ -344,7 +343,7 @@ DummyBrowser.prototype = {
 
   /**
    * Verifies the browser config
-   * 
+   *
    * @method _verfiyBrowserConfig
    * @param {string} browserName Name of the browser to verify
    * @param {object} config Daleks internal config helper
@@ -354,17 +353,17 @@ DummyBrowser.prototype = {
 
   _verfiyBrowserConfig: function (browserName, config) {
     var browsers = config.get(&#039;browsers&#039;);
-    var browser = browsers[0][browserName] || null;
 
+    // check if we couldnt find a configured alias,
+    // set to defaults otherwise
+    if (!browsers) {
+      return {actAs: this.desiredCapabilities.browserName, version: this.desiredCapabilities[&#039;browser-version&#039;]};
+    }
+    var browser = config.get(&#039;browsers&#039;)[0][browserName] || null;
     // check if we couldnt find a configured alias,
     // check and apply if there is a default config
     if (!browser &amp;&amp; this.browsers[browserName]) {
       browser = this.browsers[browserName];
-    }
-    // check if we couldnt find a configured alias,
-    // set to defaults otherwise
-    if (!browser) {
-      return {actAs: this.desiredCapabilities.browserName, version: this.desiredCapabilities[&#039;browser-version&#039;]};
     }
 
     // check if the actas property has been set, if not
@@ -378,22 +377,16 @@ DummyBrowser.prototype = {
 
   /**
    * Verfies the OS platform config
-   * 
+   *
    * @method _verfiyPlatformConfig
    * @param {object} browser Browser information
    * @return {string} Platform
    * @private
    */
-  
-  _verfiyPlatformConfig: function (browser) {
-    var bp = null;
-    var isValid = this.platforms.reduce(function (previousValue, platform) {
-      if (bp) {
-        return bp;
-      }
 
-      if (platform === browser.platform) {
-        bp = browser.platform;
+  _verfiyPlatformConfig: function (browser) {
+    var isValid = this.platforms.reduce(function (previousValue, platform) {
+      if (previousValue === browser.platform || platform === browser.platform) {
         return browser.platform;
       }
     });
@@ -403,7 +396,7 @@ DummyBrowser.prototype = {
 
   /**
    * Generates the desired capabilities for this session
-   * 
+   *
    * @method _generateDesiredCaps
    * @param {string} browserName The browser name
    * @param {object} config Daleks internal config helper
@@ -418,7 +411,8 @@ DummyBrowser.prototype = {
     var desiredCaps = {
       browserName: browser.actAs,
       platform: platform,
-      &#039;browser-version&#039;: (browser.version || this.desiredCapabilities[&#039;browser-version&#039;]),
+      &#039;screen-resolution&#039;: (browser[&#039;screen-resolution&#039;] || null),
+      version: (browser.version || this.desiredCapabilities[&#039;browser-version&#039;]),
       name: driverConfig.name || this.desiredCapabilities.name
     };
 
@@ -437,7 +431,7 @@ DummyBrowser.prototype = {
 
   /**
    * Generates OS status information
-   * 
+   *
    * @method _generateStatusInfo
    * @param {object} desiredCaps The sessions desired capabilities
    * @return {object} OS status information
@@ -450,15 +444,22 @@ DummyBrowser.prototype = {
 
   /**
    * Generates the verbose name of the current remote browser in use
-   * 
+   *
    * @method _generateLongName
    * @param {object} desiredCaps The sessions desired capabilities
    * @return {string} Verbose browser name
    * @private
    */
 
-  _generateLongName: function (desiredCaps) {
-    return this.browsers[desiredCaps.browserName].longName || null;
+  _generateLongName: function (browserName, config) {
+    var longName = null;
+    if(this.browsers.hasOwnProperty(browserName)){
+      longName = this.browsers[browserName].longName;
+    }
+    if(config.get(&#039;browsers&#039;)[0].hasOwnProperty(browserName)){
+      longName = config.get(&#039;browsers&#039;)[0][browserName].longName;
+    }
+    return longName;
   }
 };
 

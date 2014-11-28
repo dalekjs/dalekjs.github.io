@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1</em>
+            <em>API Docs for: 0.0.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -326,13 +326,6 @@ Sauce.prototype = {
     this.desiredCapabilities = this.browserData.getDesiredCapabilities(this.browserName, this.config);
     this.browserDefaults = this.browserData.driverDefaults;
     this.browserDefaults.status = this.browserData.getStatusDefaults(this.desiredCapabilities);
-
-    // check if a session is already active,
-    // if so, reuse that one
-    if(this.webdriverClient.hasSession()) {
-      deferred.resolve();
-      return deferred.promise;
-    }
 
     // start a browser session
     this._startBrowserSession(deferred, this.desiredCapabilities, this.browserDefaults);
