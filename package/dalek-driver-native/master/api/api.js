@@ -10,7 +10,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "Dalek.DriverNative.Commands.Page",
         "Dalek.DriverNative.Commands.Screenshot",
         "Dalek.DriverNative.Commands.Url",
-        "Dalek.DriverNative.Commands.Window"
+        "Dalek.DriverNative.Commands.Window",
+        "Dalek.DriverNative.Image.Image"
     ],
     "modules": [
         "Driver"

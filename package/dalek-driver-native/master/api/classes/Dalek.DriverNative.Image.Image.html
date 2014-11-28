@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib/commands/frame.js - dalek-driver-native</title>
+    <title>Dalek.DriverNative.Image.Image - dalek-driver-native</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -104,103 +104,67 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib/commands/frame.js</h1>
+                        <h1>Dalek.DriverNative.Image.Image Class</h1>
+<div class="box meta">
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-/*!
- *
- * Copyright (c) 2013 Sebastian Golasch
- *
- * Permission is hereby granted, free of charge, to any person obtaining a
- * copy of this software and associated documentation files (the &quot;Software&quot;),
- * to deal in the Software without restriction, including without limitation
- * the rights to use, copy, modify, merge, publish, distribute, sublicense,
- * and/or sell copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
- * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
- */
+    
 
-&#x27;use strict&#x27;;
+    
+        <div class="foundat">
+            Defined in: <a href="../files/lib_commands_image.js.html#l8"><code>lib&#x2F;commands&#x2F;image.js:8</code></a>
+        </div>
+    
 
-// ext. libs
-var Q = require(&#x27;q&#x27;);
+    
+        
+            Module: <a href="../modules/Driver.html">Driver</a>
+        
+    
 
-/**
- * Frame related methods
- *
- * @module Driver
- * @class Frame
- * @namespace Dalek.DriverNative.Commands
- */
+    
+</div>
 
-var Frame = {
 
-  /**
-   * Switches to frame context
-   *
-   * @method toFrame
-   * @param {string} selector Selector expression to find the element
-   * @param {string} hash Unique hash of that fn call
-   * @chainable
-   */
 
-  toFrame: function (selector, hash) {
-    if (selector !== null) {
-      this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, selector));
-    }
-    this.actionQueue.push(this.webdriverClient.frame.bind(this.webdriverClient));
-    this.actionQueue.push(this._frameCb.bind(this, selector, hash));
-    return this;
-  },
+<div class="box intro">
+    <p>Execute related methods</p>
 
-  /**
-   * Sends out an event with the results of the &#x60;toFrame&#x60; call
-   *
-   * @method _frameCb
-   * @param {string} selector Selector expression to find the element
-   * @param {string} hash Unique hash of that fn call
-   * @param {string} result Serialized JSON with the reuslts of the toFrame call
-   * @return {object} promise Exists promise
-   * @private
-   */
+</div>
 
-  _frameCb: function (selector, hash) {
-    var deferred = Q.defer();
-    this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;toFrame&#x27;, selector: selector, hash: hash, value: true});
-    deferred.resolve();
-    return deferred.promise;
-  }
-};
 
-/**
- * Mixes in element methods
- *
- * @param {Dalek.DriverNative} DalekNative Native driver base class
- * @return {Dalek.DriverNative} DalekNative Native driver base class
- */
 
-module.exports = function (DalekNative) {
-  // mixin methods
-  Object.keys(Frame).forEach(function (fn) {
-    DalekNative.prototype[fn] = Frame[fn];
-  });
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
 
-  return DalekNative;
-};
+        
+        
+        
+        
+    </ul>
 
-    </pre>
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+
+        
+
+        
+
+        
+    </div>
 </div>
 
                     </div>

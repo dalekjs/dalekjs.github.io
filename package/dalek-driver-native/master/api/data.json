@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-driver-native",
         "description": "Native driver for DalekJS",
-        "version": "0.0.5",
+        "version": "0.0.6",
         "url": "http://dalekjs.com"
     },
     "files": {
@@ -50,6 +50,17 @@
             "fors": {},
             "namespaces": {
                 "Dalek.DriverNative.Commands": 1
+            }
+        },
+        "lib/commands/image.js": {
+            "name": "lib/commands/image.js",
+            "modules": {},
+            "classes": {
+                "Dalek.DriverNative.Image.Image": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Dalek.DriverNative.Image": 1
             }
         },
         "lib/commands/interaction.js": {
@@ -128,6 +139,7 @@
                 "Dalek.DriverNative.Commands.Element": 1,
                 "Dalek.DriverNative.Commands.Execute": 1,
                 "Dalek.DriverNative.Commands.Frame": 1,
+                "Dalek.DriverNative.Image.Image": 1,
                 "Dalek.DriverNative.Commands.Interaction": 1,
                 "Dalek.DriverNative.Commands.Page": 1,
                 "Dalek.DriverNative.Commands.Screenshot": 1,
@@ -138,6 +150,7 @@
             "fors": {},
             "namespaces": {
                 "Dalek.DriverNative.Commands": 1,
+                "Dalek.DriverNative.Image": 1,
                 "Dalek": 1
             },
             "tag": "module",
@@ -204,6 +217,20 @@
             "file": "lib/commands/frame.js",
             "line": 30,
             "description": "Frame related methods"
+        },
+        "Dalek.DriverNative.Image.Image": {
+            "name": "Dalek.DriverNative.Image.Image",
+            "shortname": "Dalek.DriverNative.Image.Image",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Image",
+            "file": "lib/commands/image.js",
+            "line": 8,
+            "description": "Execute related methods"
         },
         "Dalek.DriverNative.Commands.Interaction": {
             "name": "Dalek.DriverNative.Commands.Interaction",

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - lib/commands/image.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>lib/commands/image.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">71.31</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">222</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">44.57</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">2.33</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">&#039;use strict&#039;;
+
+// ext. libs
+var Q = require(&#039;q&#039;);
+var fs = require(&#039;fs&#039;);
+var PNG = require(&#039;node-pngjs&#039;).PNG;
+
+/**
+ * Execute related methods
+ *
+ * @module Driver
+ * @class Image
+ * @namespace Dalek.DriverNative.Image
+ */
+
+var Image = {
+  imagecompareResults : {
+    equal         : &#039;equal&#039;,
+    sizeDifferent : &#039;images have different sizes&#039;,
+    imageDiffent  : &#039;images are different&#039;
+  },
+
+  imagecompare : function (opts, expected, makediff, hash) {
+    this.actionQueue.push(this._imagecompareCb.bind(this, opts, expected, makediff, hash));
+    return this;
+  },
+
+  imagecut : function (opts, hash) {
+    var position = {};
+
+    this.actionQueue.push(this.webdriverClient.element.bind(this.webdriverClient, opts.selector));
+    this.actionQueue.push(this.webdriverClient.location.bind(this.webdriverClient, opts.selector));
+
+    /* get left top positions of element*/
+    this.actionQueue.push(function (result) {
+      var value = JSON.parse(result).value;
+      position.x = Math.ceil(value.x);
+      position.y = Math.ceil(value.y);
+    });
+
+    this.actionQueue.push(this.webdriverClient.size.bind(this.webdriverClient, opts.selector));
+    this.actionQueue.push(this._imagecutCb.bind(this, opts, hash, opts.selector, position));
+
+    return this;
+  },
+
+  _imagecutCb: function (opts, hash, selector, position, result) {
+    var rect;
+    var size = JSON.parse(result);
+    var deferred = Q.defer();
+
+    rect = this._convertToRect(position, size.value);
+    var cb = function () {
+      this.events.emit(&#039;driver:message&#039;, {key: &#039;imagecut&#039;, value: selector, uuid: hash, hash: hash});
+      deferred.resolve();
+    };
+
+    this._doImagecut(opts.realpath, opts.selector, rect, cb.bind(this));
+
+    return deferred.promise;
+  },
+
+  _doCalcSize: function (dstPos, dstSize, srcSize) {
+    if (dstPos + dstSize &lt;= srcSize) {
+      return dstSize;
+    } else if (dstSize &lt;= srcSize) {
+      return srcSize - dstPos;
+    }
+    return 0;
+  },
+
+  _doImagecut: function (path, element, rect, cb) {
+    this._parsePNG(path).then(function (image) {
+      var width = this._doCalcSize (rect.x, rect.width, image.png.width);
+      var height = this._doCalcSize (rect.y, rect.height, image.png.height);
+
+      var pngDst = new PNG({
+        width :width,
+        height:height
+      });
+
+      if (width === 0 || height === 0) {
+        cb();
+        return &#039;Error in image cutting. Size of element is bigger of size image.&#039;;
+      }
+
+      image.png.bitblt(pngDst, rect.x, rect.y, width, height, 0, 0);
+      this._savePNG(pngDst, image.path).then(cb);
+
+    }.bind(this));
+  },
+
+  _imagecompareCb: function (opts, expected, makediff, hash) {
+    var deferred = Q.defer();
+    var current = opts.realpath;
+
+    var cb = function (result) {
+      this.events.emit(&#039;driver:message&#039;, {key: &#039;imagecompare&#039;, value: result, uuid: hash, hash: hash});
+      deferred.resolve();
+    };
+
+    this._doImagecompare(current, expected, makediff, cb.bind(this));
+
+    return deferred.promise;
+  },
+  _doImagecompare: function (actualPath, etalonPath, makediff, cb) {
+    var promises = [this._parsePNG(actualPath), this._parsePNG(etalonPath)];
+
+    Q.all(promises)
+    .spread(function (parsedImageA, parsedImageB) {
+      var result = this._checkIfImagesTheSameAndMakeDiff(parsedImageA, parsedImageB, makediff);
+      if (result === this.imagecompareResults.imageDiffent &amp;&amp; makediff) {
+        this._doSaveImageDiff(parsedImageB, result)
+        .then(function (filePath) {
+          cb(result + &#039;. See differences by path &#039; + filePath);
+        },
+        cb);
+      } else {
+        cb(result);
+      }
+    }.bind(this),
+    cb);
+  },
+  _doSaveImageDiff : function (image) {
+    var imageDiffPath = image.path.replace(&#039;.png&#039;, &#039;.diff.png&#039;);
+
+    return this._savePNG(image.png, imageDiffPath);
+  },
+  _checkIfImagesTheSameAndMakeDiff : function (a, b, makediff) {
+
+    if (a.data.length !== b.data.length) {
+      return this.imagecompareResults.sizeDifferent;
+    }
+
+    var result = this.imagecompareResults.equal;
+
+    for (var i = 0, len = a.data.length; i &lt; len; i += 4) {
+      if (a.data[i]     !== b.data[i] ||
+          a.data[i + 1] !== b.data[i + 1] ||
+          a.data[i + 2] !== b.data[i + 2]) {
+        result = this.imagecompareResults.imageDiffent;
+        if (makediff) {
+          this._setErrorPixel(b.data, i);
+        } else {
+          return result;
+        }
+      }
+    }
+
+    return result;
+  },
+  _parsePNG: function (path) {
+    var deferred = Q.defer();
+
+    fs.createReadStream(path)
+      .pipe(new PNG({
+        filterType: 1
+      }))
+      .on(&#039;parsed&#039;, function() {
+
+        var parsedImage = {
+          path   : path,
+          data   : this.data,
+          png    : this
+        };
+
+        deferred.resolve(parsedImage);
+      })
+      .on(&#039;error&#039;, function (event) {
+        deferred.reject(event);
+      });
+
+    return deferred.promise;
+  },
+
+  _savePNG : function (png, filePath) {
+    var deferred = Q.defer();
+
+    png
+    .pack()
+    .pipe(fs.createWriteStream(filePath, {flags: &#039;w&#039;}))
+    .on(&#039;error&#039;, function (errors) {
+      deferred.reject(errors);
+    })
+    .on(&#039;close&#039;, function () {
+      deferred.resolve(filePath);
+    });
+
+    return deferred.promise;
+  },
+  _setErrorPixel : function (dst, index) {
+    var errorPixelColor = { // Color for Error Pixels. Between 0 and 255.
+      red: 255,
+      green: 0,
+      blue: 255,
+      alpha: 255
+    };
+
+    dst[index]     = errorPixelColor.red;
+    dst[index + 1] = errorPixelColor.green;
+    dst[index + 2] = errorPixelColor.blue;
+    dst[index + 3] = errorPixelColor.alpha;
+  },
+  _convertToRect: function (position, size) {
+    return {
+      x:position.x,
+      y:position.y,
+      width : size.width,
+      height: size.height
+    };
+  }
+};
+
+module.exports = function (DalekNative) {
+  // mixin methods
+
+  Object.keys(Image).forEach(function (fn) {
+    DalekNative.prototype[fn] = Image[fn];
+  });
+
+  return DalekNative;
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>
