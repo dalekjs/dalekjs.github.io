@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.3</em>
+            <em>API Docs for: 0.0.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -192,8 +192,8 @@ module.exports = function (Driver) {
    *
    * @method setWindowSize
    * @see https://code.google.com/p/selenium/wiki/JsonWireProtocol#POST_/session/:sessionId/window/:windowHandle/size
-   * @param {GET} sessionId ID of the session to route the command to
-   * @param {GET} windowHandle ID of the window to route the command to
+   * @param {POST} sessionId ID of the session to route the command to
+   * @param {POST} windowHandle ID of the window to route the command to
    * @param {POST} width The new window width
    * @param {POST} height The new window height
    */
@@ -219,6 +219,23 @@ module.exports = function (Driver) {
     name: &#x27;getWindowPosition&#x27;,
     url: &#x27;/session/:sessionId/window/:windowHandle/position&#x27;,
     method: &#x27;GET&#x27;
+  });
+
+  /**
+   * Set the position of the specified window.
+   *
+   * @method setWindowPosition
+   * @see https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/window/:windowHandle/position
+   * @param {POST} sessionId ID of the session to route the command to
+   * @param {POST} x The X coordinates for the window, relative to the upper left corner of the screen.
+   * @param {POST} y The Y coordinates for the window, relative to the upper left corner of the screen.
+   */
+
+  Driver.addCommand({
+    name: &#x27;setWindowPosition&#x27;,
+    url: &#x27;/session/:sessionId/window/current/position&#x27;,
+    method: &#x27;POST&#x27;,
+    params: [&#x27;x&#x27;, &#x27;y&#x27;]
   });
 
   /**

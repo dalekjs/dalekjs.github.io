@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.3</em>
+            <em>API Docs for: 0.0.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -133,7 +133,10 @@ var Driver = require(&#x27;./lib/driver&#x27;)(WebDriver);
 // include webdriver commands
 var dir = __dirname + &#x27;/lib/commands/&#x27;;
 fs.readdirSync(dir).forEach(function (file) {
-  require(dir + file)(Driver);
+  var suffix = &#x27;.js&#x27;;
+  if (file.substring(file.length - suffix.length, file.length) === suffix) {
+    require(dir + file)(Driver);
+  }
 });
 
 // export the webdriver module

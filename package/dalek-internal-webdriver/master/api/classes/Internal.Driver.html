@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.3</em>
+            <em>API Docs for: 0.0.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -700,6 +700,13 @@
                         
                             <li class="index-item method">
                                 <a href="#method_setLocalStorage">setLocalStorage</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_setWindowPosition">setWindowPosition</a>
 
                                 
                                 
@@ -1873,7 +1880,7 @@
             
         
         
-        <a href="../files/lib_driver.js.html#l275"><code>lib&#x2F;driver.js:275</code></a>
+        <a href="../files/lib_driver.js.html#l285"><code>lib&#x2F;driver.js:285</code></a>
         
         </p>
 
@@ -4069,7 +4076,7 @@ Each locator must return the first matching element located in the DOM.</p>
             
         
         
-        <a href="../files/lib_commands_window.js.html#l148"><code>lib&#x2F;commands&#x2F;window.js:148</code></a>
+        <a href="../files/lib_commands_window.js.html#l165"><code>lib&#x2F;commands&#x2F;window.js:165</code></a>
         
         </p>
 
@@ -10213,6 +10220,139 @@ it should default to the current page&#39;s domain.</p>
 </div>
 
                 
+                    <div id="method_setWindowPosition" class="method item">
+    <h3 class="name"><code>setWindowPosition</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>sessionId</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>x</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>y</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_commands_window.js.html#l132"><code>lib&#x2F;commands&#x2F;window.js:132</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Set the position of the specified window.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">sessionId</code>
+                        <span class="type">POST</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>ID of the session to route the command to</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">x</code>
+                        <span class="type">POST</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The X coordinates for the window, relative to the upper left corner of the screen.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">y</code>
+                        <span class="type">POST</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The Y coordinates for the window, relative to the upper left corner of the screen.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="method_setWindowSize" class="method item">
     <h3 class="name"><code>setWindowSize</code></h3>
 
@@ -10299,7 +10439,7 @@ the currently active window will be resized.</p>
                 <li class="param">
                     
                         <code class="param-name">sessionId</code>
-                        <span class="type">GET</span>
+                        <span class="type">POST</span>
                     
 
                     
@@ -10315,7 +10455,7 @@ the currently active window will be resized.</p>
                 <li class="param">
                     
                         <code class="param-name">windowHandle</code>
-                        <span class="type">GET</span>
+                        <span class="type">POST</span>
                     
 
                     
@@ -12169,7 +12309,7 @@ Use this command if you don&#39;t care where the scroll starts on the screen.</p
             
         
         
-        <a href="../files/lib_commands_window.js.html#l132"><code>lib&#x2F;commands&#x2F;window.js:132</code></a>
+        <a href="../files/lib_commands_window.js.html#l149"><code>lib&#x2F;commands&#x2F;window.js:149</code></a>
         
         </p>
 

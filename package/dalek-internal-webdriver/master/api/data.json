@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-internal-webdriver",
         "description": "JavaScript Webdriver Client for DalekJS",
-        "version": "0.0.3",
+        "version": "0.0.5",
         "url": ""
     },
     "files": {
@@ -123,6 +123,13 @@
         },
         "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js": {
             "name": "report/complexity/assets/scripts/vendor/codemirror/util/closetag.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "report/complexity/assets/scripts/vendor/lodash.min.js": {
+            "name": "report/complexity/assets/scripts/vendor/lodash.min.js",
             "modules": {},
             "classes": {},
             "fors": {},
@@ -2241,12 +2248,12 @@
                 {
                     "name": "sessionId",
                     "description": "ID of the session to route the command to",
-                    "type": "GET"
+                    "type": "POST"
                 },
                 {
                     "name": "windowHandle",
                     "description": "ID of the window to route the command to",
-                    "type": "GET"
+                    "type": "POST"
                 },
                 {
                     "name": "width",
@@ -2287,6 +2294,34 @@
         {
             "file": "lib/commands/window.js",
             "line": 132,
+            "description": "Set the position of the specified window.",
+            "itemtype": "method",
+            "name": "setWindowPosition",
+            "see": [
+                "https://code.google.com/p/selenium/wiki/JsonWireProtocol#GET_/session/:sessionId/window/:windowHandle/position"
+            ],
+            "params": [
+                {
+                    "name": "sessionId",
+                    "description": "ID of the session to route the command to",
+                    "type": "POST"
+                },
+                {
+                    "name": "x",
+                    "description": "The X coordinates for the window, relative to the upper left corner of the screen.",
+                    "type": "POST"
+                },
+                {
+                    "name": "y",
+                    "description": "The Y coordinates for the window, relative to the upper left corner of the screen.",
+                    "type": "POST"
+                }
+            ],
+            "class": "Internal.Driver"
+        },
+        {
+            "file": "lib/commands/window.js",
+            "line": 149,
             "description": "Maximize the specified window if not already maximized.\nIf the :windowHandle URL parameter is \"current\", the currently active window will be maximized.",
             "itemtype": "method",
             "name": "windowMaximize",
@@ -2309,7 +2344,7 @@
         },
         {
             "file": "lib/commands/window.js",
-            "line": 148,
+            "line": 165,
             "description": "Closes the current window.",
             "itemtype": "method",
             "name": "close",
@@ -2720,7 +2755,7 @@
         },
         {
             "file": "lib/driver.js",
-            "line": 275,
+            "line": 285,
             "description": "On success callback function",
             "itemtype": "method",
             "name": "_onSuccess",
@@ -2816,6 +2851,14 @@
             "namespace": "Internal"
         },
         {
+            "file": "report/complexity/assets/scripts/vendor/lodash.min.js",
+            "line": 1,
+            "license": "Lo-Dash 2.4.1 (Custom Build) lodash.com/license | Underscore.js 1.5.2 underscorejs.org/LICENSE\nBuild: `lodash modern -o ./dist/lodash.js`",
+            "class": "",
+            "module": "DalekJS",
+            "namespace": "Internal"
+        },
+        {
             "file": "index.js",
             "line": 27,
             "description": "Its a webdriver client",
@@ -2830,6 +2873,10 @@
         {
             "message": "unknown tag: priavte",
             "line": " lib/driver.js:238"
+        },
+        {
+            "message": "unknown tag: license",
+            "line": " report/complexity/assets/scripts/vendor/lodash.min.js:1"
         },
         {
             "message": "unknown tag: part",
@@ -2902,6 +2949,10 @@
         {
             "message": "Missing item type\nTag-closer extension for CodeMirror.\n\nThis extension adds an \"autoCloseTags\" option that can be set to\neither true to get the default behavior, or an object to further\nconfigure its behavior.\n\nThese are supported options:\n\n`whenClosing` (default true)\n  Whether to autoclose when the '/' of a closing tag is typed.\n`whenOpening` (default true)\n  Whether to autoclose the tag when the final '>' of an opening\n  tag is typed.\n`dontCloseTags` (default is empty tags for HTML, none for XML)\n  An array of tag names that should not be autoclosed.\n`indentTags` (default is block tags for HTML, none for XML)\n  An array of tag names that should, when opened, cause a\n  blank line to be added inside the tag, and the blank line and\n  closing line to be indented.\n\nSee demos/closetag.html for a usage example.",
             "line": " report/complexity/assets/scripts/vendor/codemirror/util/closetag.js:1"
+        },
+        {
+            "message": "Missing item type",
+            "line": " report/complexity/assets/scripts/vendor/lodash.min.js:1"
         },
         {
             "message": "Missing item type\nIts a webdriver client",

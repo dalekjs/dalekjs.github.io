@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.3</em>
+            <em>API Docs for: 0.0.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -358,9 +358,19 @@ module.exports = function exportDriverBase(WebDriver) {
      */
 
     _onError: function (driver, response, remote, options, deferred) {
-      if (remote.onError) {
-        remote.onError.call(this, response, remote, options, deferred, this.data);
+      // Provide a default error handler to prevent hangs.
+      if (!remote.onError) {
+        remote.onError = function (request, remote, options, deferred, data) {
+          data = JSON.parse(data);
+          var value = -1;
+          if (typeof data.value.message === &#x27;string&#x27;) {
+            var msg = JSON.parse(data.value.message);
+            value = msg.errorMessage;
+          }
+          deferred.resolve(JSON.stringify({&#x27;sessionId&#x27;: data.sessionId, value: value}));
+        };
       }
+      remote.onError.call(this, response, remote, options, deferred, this.data);
       return this;
     },
 
