@@ -45,11 +45,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">67.45</p>
+      <p class="stat">68.01</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">248</p>
+      <p class="stat">282</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">34.19</p>
+      <p class="stat">35.64</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">1.19</p>
+      <p class="stat">1.37</p>
     </div>
   </div>
 </div>
@@ -232,6 +232,8 @@ Reporter.prototype = {
     this.events.on(&#039;report:test:started&#039;, this.testStarted.bind(this));
     this.events.on(&#039;report:test:finished&#039;, this.testFinished.bind(this));
     this.events.on(&#039;report:runner:finished&#039;, this.runnerFinished.bind(this));
+    this.events.on(&#039;report:log:user&#039;,this.messageLog.bind(this));
+    this.events.on(&#039;report:screenshot&#039;,this.screenshot.bind(this));
     return this;
   },
 
@@ -337,6 +339,38 @@ Reporter.prototype = {
     fs.writeFileSync(this.dest, contents, &#039;utf8&#039;);
     return this;
   },
+
+   /**
+    * Generates JSON for a message.log
+    *
+    * @method assertion
+    * @param {object} data Event data
+    * @chainable
+    */
+
+  messageLog: function(data) {
+    var logData = {
+      kind: &#039;message&#039;,
+      message: data
+    };
+    this.actionQueue.push(logData);
+    return this;
+  },
+
+  /**
+   * Generates JSON for a screenshot
+   *
+   * @method assertion
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  screenshot : function(data) {
+    data.kind = &#039;screenshot&#039;;
+    this.actionQueue.push(data);
+    return this;
+  },
+
 
   /**
    * Helper method to generate deeper nested directory structures

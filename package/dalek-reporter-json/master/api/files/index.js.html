@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1</em>
+            <em>API Docs for: 0.0.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -230,6 +230,8 @@ Reporter.prototype = {
     this.events.on(&#x27;report:test:started&#x27;, this.testStarted.bind(this));
     this.events.on(&#x27;report:test:finished&#x27;, this.testFinished.bind(this));
     this.events.on(&#x27;report:runner:finished&#x27;, this.runnerFinished.bind(this));
+    this.events.on(&#x27;report:log:user&#x27;,this.messageLog.bind(this));
+    this.events.on(&#x27;report:screenshot&#x27;,this.screenshot.bind(this));
     return this;
   },
 
@@ -335,6 +337,38 @@ Reporter.prototype = {
     fs.writeFileSync(this.dest, contents, &#x27;utf8&#x27;);
     return this;
   },
+
+   /**
+    * Generates JSON for a message.log
+    *
+    * @method assertion
+    * @param {object} data Event data
+    * @chainable
+    */
+
+  messageLog: function(data) {
+    var logData = {
+      kind: &#x27;message&#x27;,
+      message: data
+    };
+    this.actionQueue.push(logData);
+    return this;
+  },
+
+  /**
+   * Generates JSON for a screenshot
+   *
+   * @method assertion
+   * @param {object} data Event data
+   * @chainable
+   */
+
+  screenshot : function(data) {
+    data.kind = &#x27;screenshot&#x27;;
+    this.actionQueue.push(data);
+    return this;
+  },
+
 
   /**
    * Helper method to generate deeper nested directory structures

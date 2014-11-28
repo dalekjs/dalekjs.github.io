@@ -2,7 +2,7 @@
     "project": {
         "name": "dalek-reporter-json",
         "description": "JSON reporter for the Dalekjs testing framework",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "url": "http://dalekjs.com"
     },
     "files": {
@@ -76,7 +76,7 @@
         },
         {
             "file": "index.js",
-            "line": 146,
+            "line": 148,
             "description": "Stores the current browser name",
             "itemtype": "method",
             "name": "runBrowser",
@@ -93,7 +93,7 @@
         },
         {
             "file": "index.js",
-            "line": 159,
+            "line": 161,
             "description": "Generates JSON for an action",
             "itemtype": "method",
             "name": "action",
@@ -110,7 +110,7 @@
         },
         {
             "file": "index.js",
-            "line": 173,
+            "line": 175,
             "description": "Generates JSON for an assertion",
             "itemtype": "method",
             "name": "assertion",
@@ -127,7 +127,7 @@
         },
         {
             "file": "index.js",
-            "line": 187,
+            "line": 189,
             "description": "Sets up a new testcase",
             "itemtype": "method",
             "name": "testStarted",
@@ -144,7 +144,7 @@
         },
         {
             "file": "index.js",
-            "line": 201,
+            "line": 203,
             "description": "Writes data for a finished testcase",
             "itemtype": "method",
             "name": "testFinished",
@@ -161,7 +161,7 @@
         },
         {
             "file": "index.js",
-            "line": 222,
+            "line": 224,
             "description": "Serializes JSON and writes file to the file system",
             "itemtype": "method",
             "name": "runnerFinished",
@@ -178,7 +178,41 @@
         },
         {
             "file": "index.js",
-            "line": 249,
+            "line": 251,
+            "description": "Generates JSON for a message.log",
+            "itemtype": "method",
+            "name": "assertion",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Event data",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "Reporter",
+            "module": "Reporter"
+        },
+        {
+            "file": "index.js",
+            "line": 268,
+            "description": "Generates JSON for a screenshot",
+            "itemtype": "method",
+            "name": "assertion",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Event data",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "Reporter",
+            "module": "Reporter"
+        },
+        {
+            "file": "index.js",
+            "line": 283,
             "description": "Helper method to generate deeper nested directory structures",
             "itemtype": "method",
             "name": "_recursiveMakeDirSync",
