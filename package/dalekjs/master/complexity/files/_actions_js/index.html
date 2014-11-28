@@ -15,7 +15,6 @@
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
   <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
   <link href="../../assets/css/plato.css" rel="stylesheet">
   <link href="../../assets/css/plato-file.css" rel="stylesheet">
@@ -45,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">69.68</p>
+      <p class="stat">68.91</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">1393</p>
+      <p class="stat">1455</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">64.53</p>
+      <p class="stat">64.30</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">5.52</p>
+      <p class="stat">6.08</p>
     </div>
   </div>
 </div>
@@ -507,7 +506,7 @@ Actions.prototype.waitWhileVisible = function (selector, timeout) {
 };
 
 /**
- * Take a screenshot of the current page.
+ * Take a screenshot of the current page or css element.
  *
  * The pathname argument takes some placeholders that will be replaced
  * Placeholder:
@@ -545,14 +544,72 @@ Actions.prototype.waitWhileVisible = function (selector, timeout) {
  * @api
  * @method screenshot
  * @param {string} pathname Name of the folder and file the screenshot should be saved to
+ * @param {string} css selector of element should be screeshoted
  * @return chainable
  */
 
-Actions.prototype.screenshot = function (pathname) {
+Actions.prototype.screenshot = function (pathname, selector) {
   var hash = uuid();
-  var cb = this._generateCallbackAssertion(&#039;screenshot&#039;, &#039;screenshot&#039;, pathname, hash);
-  this._addToActionQueue([&#039;&#039;, pathname, hash], &#039;screenshot&#039;, cb);
+
+  if (this.querying === true) {
+    selector = this.selector;
+  }
+
+  var opts = {
+    realpath : undefined,
+    selector : selector
+  };
+
+  this.screenshotParams = opts;
+
+  var screenshotcb = this._generatePlainCallback(&#039;screenshot&#039;, hash, opts, &#039;realpath&#039;, typeof selector === &#039;undefined&#039;);
+  this._addToActionQueue([&#039;&#039;, pathname, hash], &#039;screenshot&#039;, screenshotcb.bind(this));
+
+  if (selector) {
+    var imagecutcb = this._generateCallbackAssertion(&#039;imagecut&#039;, &#039;screenshot element&#039;, opts, hash);
+    this._addToActionQueue([opts, hash], &#039;imagecut&#039;, imagecutcb);
+  }
+
+  this.reporter.emit(&#039;report:screenshot&#039;, {
+    &#039;pathname&#039; : pathname,
+    &#039;uuid&#039; : hash
+  });
+
   return this;
+};
+
+/**
+ * Generates a callback that will be fired when the action has been completed.
+ * The callback will then store value into opts variable.
+ *
+ * @method _generateCallbackAssertion
+ * @param {string} type Type of the action (normalle the actions name)
+ * @param {string} hash Unique id of the action
+ * @param {string} opts Variable where will be stored result of execution of the action
+ * @param {string} key Name of the property where will be stored result of execution of the action
+ * @return {function} The generated callback function
+ * @private
+ */
+Actions.prototype._generatePlainCallback = function (type, hash, opts, property, last) {
+  var cb = function (data) {
+    if (data.hash === hash &amp;&amp; data.key ===  type &amp;&amp; !this.uuids[data.uuid]) {
+      if (typeof opts === &#039;object&#039; &amp;&amp; typeof property === &#039;string&#039;) {
+        opts[property] = data.value;
+      }
+      if (data.key ===  &#039;screenshot&#039;) {
+        this.reporter.emit(&#039;report:action&#039;, {
+          value: data.value,
+          type: type,
+          uuid: data.uuid
+        });
+      }
+
+      if (last) {
+        this.uuids[data.uuid] = true;
+      }
+    }
+  };
+  return cb;
 };
 
 /**
@@ -1406,6 +1463,10 @@ Actions.prototype._generateCallbackAssertion = function (key, type) {
  */
 
 Actions.prototype._addToActionQueue = function (opts, driverMethod, cb) {
+  if (driverMethod !== &#039;screenshot&#039; &amp;&amp; driverMethod !== &#039;imagecut&#039;) {
+    this.screenshotParams = undefined;
+  }
+
   this.actionPromiseQueue.push(function () {
     var deferred = Q.defer();
     // add a generic identifier as the last argument to any action method call

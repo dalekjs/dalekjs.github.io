@@ -531,7 +531,7 @@ Actions.prototype.waitWhileVisible = function (selector, timeout) {
 };
 
 /**
- * Take a screenshot of the current page.
+ * Take a screenshot of the current page or css element.
  *
  * The pathname argument takes some placeholders that will be replaced
  * Placeholder:
@@ -569,14 +569,72 @@ Actions.prototype.waitWhileVisible = function (selector, timeout) {
  * @api
  * @method screenshot
  * @param {string} pathname Name of the folder and file the screenshot should be saved to
+ * @param {string} css selector of element should be screeshoted
  * @return chainable
  */
 
-Actions.prototype.screenshot = function (pathname) {
+Actions.prototype.screenshot = function (pathname, selector) {
   var hash = uuid();
-  var cb = this._generateCallbackAssertion(&#x27;screenshot&#x27;, &#x27;screenshot&#x27;, pathname, hash);
-  this._addToActionQueue([&#x27;&#x27;, pathname, hash], &#x27;screenshot&#x27;, cb);
+
+  if (this.querying === true) {
+    selector = this.selector;
+  }
+
+  var opts = {
+    realpath : undefined,
+    selector : selector
+  };
+
+  this.screenshotParams = opts;
+
+  var screenshotcb = this._generatePlainCallback(&#x27;screenshot&#x27;, hash, opts, &#x27;realpath&#x27;, typeof selector === &#x27;undefined&#x27;);
+  this._addToActionQueue([&#x27;&#x27;, pathname, hash], &#x27;screenshot&#x27;, screenshotcb.bind(this));
+
+  if (selector) {
+    var imagecutcb = this._generateCallbackAssertion(&#x27;imagecut&#x27;, &#x27;screenshot element&#x27;, opts, hash);
+    this._addToActionQueue([opts, hash], &#x27;imagecut&#x27;, imagecutcb);
+  }
+
+  this.reporter.emit(&#x27;report:screenshot&#x27;, {
+    &#x27;pathname&#x27; : pathname,
+    &#x27;uuid&#x27; : hash
+  });
+
   return this;
+};
+
+/**
+ * Generates a callback that will be fired when the action has been completed.
+ * The callback will then store value into opts variable.
+ *
+ * @method _generateCallbackAssertion
+ * @param {string} type Type of the action (normalle the actions name)
+ * @param {string} hash Unique id of the action
+ * @param {string} opts Variable where will be stored result of execution of the action
+ * @param {string} key Name of the property where will be stored result of execution of the action
+ * @return {function} The generated callback function
+ * @private
+ */
+Actions.prototype._generatePlainCallback = function (type, hash, opts, property, last) {
+  var cb = function (data) {
+    if (data.hash === hash &amp;&amp; data.key ===  type &amp;&amp; !this.uuids[data.uuid]) {
+      if (typeof opts === &#x27;object&#x27; &amp;&amp; typeof property === &#x27;string&#x27;) {
+        opts[property] = data.value;
+      }
+      if (data.key ===  &#x27;screenshot&#x27;) {
+        this.reporter.emit(&#x27;report:action&#x27;, {
+          value: data.value,
+          type: type,
+          uuid: data.uuid
+        });
+      }
+
+      if (last) {
+        this.uuids[data.uuid] = true;
+      }
+    }
+  };
+  return cb;
 };
 
 /**
@@ -1430,6 +1488,10 @@ Actions.prototype._generateCallbackAssertion = function (key, type) {
  */
 
 Actions.prototype._addToActionQueue = function (opts, driverMethod, cb) {
+  if (driverMethod !== &#x27;screenshot&#x27; &amp;&amp; driverMethod !== &#x27;imagecut&#x27;) {
+    this.screenshotParams = undefined;
+  }
+
   this.actionPromiseQueue.push(function () {
     var deferred = Q.defer();
     // add a generic identifier as the last argument to any action method call

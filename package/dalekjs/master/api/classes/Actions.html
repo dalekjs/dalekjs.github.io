@@ -241,6 +241,13 @@ like clicking elements, open urls, filling out input fields, etc.</p>
                                 
                             </li>
                         
+                            <li class="index-item method private">
+                                <a href="#method__generateCallbackAssertion">_generateCallbackAssertion</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item method">
                                 <a href="#method_accept">accept</a>
 
@@ -644,7 +651,7 @@ like clicking elements, open urls, filling out input fields, etc.</p>
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l1305"><code>lib&#x2F;dalek&#x2F;actions.js:1305</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l1363"><code>lib&#x2F;dalek&#x2F;actions.js:1363</code></a>
         
         </p>
 
@@ -777,7 +784,7 @@ like clicking elements, open urls, filling out input fields, etc.</p>
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l1251"><code>lib&#x2F;dalek&#x2F;actions.js:1251</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l1309"><code>lib&#x2F;dalek&#x2F;actions.js:1309</code></a>
         
         </p>
 
@@ -856,6 +863,182 @@ that the action has been successfully executed.</p>
 </div>
 
                 
+                    <div id="method__generateCallbackAssertion" class="method item private">
+    <h3 class="name"><code>_generateCallbackAssertion</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>type</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>hash</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>opts</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>key</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Function</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_dalek_actions.js.html#l490"><code>lib&#x2F;dalek&#x2F;actions.js:490</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Generates a callback that will be fired when the action has been completed.
+The callback will then store value into opts variable.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">type</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Type of the action (normalle the actions name)</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">hash</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Unique id of the action</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">opts</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Variable where will be stored result of execution of the action</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">key</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Name of the property where will be stored result of execution of the action</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Function</span>:
+                    
+                    <p>The generated callback function</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
                     <div id="method_accept" class="method item">
     <h3 class="name"><code>accept</code></h3>
 
@@ -892,7 +1075,7 @@ that the action has been successfully executed.</p>
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l902"><code>lib&#x2F;dalek&#x2F;actions.js:902</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l960"><code>lib&#x2F;dalek&#x2F;actions.js:960</code></a>
         
         </p>
 
@@ -986,7 +1169,7 @@ you are clicking okay or hitting return in one of that dialogs.</p>
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l786"><code>lib&#x2F;dalek&#x2F;actions.js:786</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l844"><code>lib&#x2F;dalek&#x2F;actions.js:844</code></a>
         
         </p>
 
@@ -1091,7 +1274,7 @@ Like you would do when using your keyboard.</p>
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l557"><code>lib&#x2F;dalek&#x2F;actions.js:557</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l615"><code>lib&#x2F;dalek&#x2F;actions.js:615</code></a>
         
         </p>
 
@@ -1167,7 +1350,7 @@ Like you would do when using your keyboard.</p>
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l585"><code>lib&#x2F;dalek&#x2F;actions.js:585</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l643"><code>lib&#x2F;dalek&#x2F;actions.js:643</code></a>
         
         </p>
 
@@ -1266,7 +1449,7 @@ In the future it might become the ability to also execute a &quot;right button&q
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l1383"><code>lib&#x2F;dalek&#x2F;actions.js:1383</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l1445"><code>lib&#x2F;dalek&#x2F;actions.js:1445</code></a>
         
         </p>
 
@@ -1330,7 +1513,7 @@ this.test.close();
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l935"><code>lib&#x2F;dalek&#x2F;actions.js:935</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l993"><code>lib&#x2F;dalek&#x2F;actions.js:993</code></a>
         
         </p>
 
@@ -1425,7 +1608,7 @@ you are clicking cancel in one of that dialogs.</p>
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l820"><code>lib&#x2F;dalek&#x2F;actions.js:820</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l878"><code>lib&#x2F;dalek&#x2F;actions.js:878</code></a>
         
         </p>
 
@@ -1534,7 +1717,7 @@ you are clicking cancel in one of that dialogs.</p>
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l529"><code>lib&#x2F;dalek&#x2F;actions.js:529</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l587"><code>lib&#x2F;dalek&#x2F;actions.js:587</code></a>
         
         </p>
 
@@ -1610,7 +1793,7 @@ you are clicking cancel in one of that dialogs.</p>
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l1160"><code>lib&#x2F;dalek&#x2F;actions.js:1160</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l1218"><code>lib&#x2F;dalek&#x2F;actions.js:1218</code></a>
         
         </p>
 
@@ -1711,7 +1894,7 @@ you are clicking cancel in one of that dialogs.</p>
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l1208"><code>lib&#x2F;dalek&#x2F;actions.js:1208</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l1266"><code>lib&#x2F;dalek&#x2F;actions.js:1266</code></a>
         
         </p>
 
@@ -1803,7 +1986,7 @@ you are clicking cancel in one of that dialogs.</p>
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l1015"><code>lib&#x2F;dalek&#x2F;actions.js:1015</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l1073"><code>lib&#x2F;dalek&#x2F;actions.js:1073</code></a>
         
         </p>
 
@@ -1990,7 +2173,7 @@ TODO: IMPLEMENT</p>
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l668"><code>lib&#x2F;dalek&#x2F;actions.js:668</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l726"><code>lib&#x2F;dalek&#x2F;actions.js:726</code></a>
         
         </p>
 
@@ -2188,7 +2371,7 @@ selector once instead of repeating it all over the place.</p>
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l506"><code>lib&#x2F;dalek&#x2F;actions.js:506</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l564"><code>lib&#x2F;dalek&#x2F;actions.js:564</code></a>
         
         </p>
 
@@ -2259,7 +2442,7 @@ selector once instead of repeating it all over the place.</p>
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l969"><code>lib&#x2F;dalek&#x2F;actions.js:969</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l1027"><code>lib&#x2F;dalek&#x2F;actions.js:1027</code></a>
         
         </p>
 
@@ -2340,6 +2523,12 @@ and a height of 1024px. You can specify your own default in the configuration.</
                     
                 </li>
             
+                <li class="arg">
+                    
+                        <code>css</code>
+                    
+                </li>
+            
             </ul><span class="paren">)</span>
         </div>
     
@@ -2384,7 +2573,7 @@ and a height of 1024px. You can specify your own default in the configuration.</
     </div>
 
     <div class="description">
-        <p>Take a screenshot of the current page.</p>
+        <p>Take a screenshot of the current page or css element.</p>
 <p>The pathname argument takes some placeholders that will be replaced
 Placeholder:</p>
 <ul>
@@ -2434,6 +2623,22 @@ test.screenshot(&#39;my/page/in_time/:datetime/homepage&#39;);</code></pre>
 
                     <div class="param-description">
                         <p>Name of the folder and file the screenshot should be saved to</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">css</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>selector of element should be screeshoted</p>
 
                     </div>
 
@@ -2512,7 +2717,7 @@ test.screenshot(&#39;my/page/in_time/:datetime/homepage&#39;);</code></pre>
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l751"><code>lib&#x2F;dalek&#x2F;actions.js:751</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l809"><code>lib&#x2F;dalek&#x2F;actions.js:809</code></a>
         
         </p>
 
@@ -2618,7 +2823,7 @@ So assumeing we have a keyboard shortcut that display an alert box, we could tes
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l1059"><code>lib&#x2F;dalek&#x2F;actions.js:1059</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l1117"><code>lib&#x2F;dalek&#x2F;actions.js:1117</code></a>
         
         </p>
 
@@ -2844,7 +3049,7 @@ For more information about this, I recommend to check out the <a href="/docs/con
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l1122"><code>lib&#x2F;dalek&#x2F;actions.js:1122</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l1180"><code>lib&#x2F;dalek&#x2F;actions.js:1180</code></a>
         
         </p>
 
@@ -2965,7 +3170,7 @@ For more information about this, I recommend to check out the <a href="/docs/con
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l631"><code>lib&#x2F;dalek&#x2F;actions.js:631</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l689"><code>lib&#x2F;dalek&#x2F;actions.js:689</code></a>
         
         </p>
 
@@ -3431,7 +3636,7 @@ Btw.: The domain of the window can be whatever you want, this method has no same
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l699"><code>lib&#x2F;dalek&#x2F;actions.js:699</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l757"><code>lib&#x2F;dalek&#x2F;actions.js:757</code></a>
         
         </p>
 
@@ -3559,7 +3764,7 @@ You can go <a href="https://code.google.com/p/selenium/wiki/JsonWireProtocol#/se
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l466"><code>lib&#x2F;dalek&#x2F;actions.js:466</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l524"><code>lib&#x2F;dalek&#x2F;actions.js:524</code></a>
         
         </p>
 
@@ -3679,7 +3884,7 @@ You can go <a href="https://code.google.com/p/selenium/wiki/JsonWireProtocol#/se
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l859"><code>lib&#x2F;dalek&#x2F;actions.js:859</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l917"><code>lib&#x2F;dalek&#x2F;actions.js:917</code></a>
         
         </p>
 
@@ -3824,7 +4029,7 @@ and set the timeout using the timeout one, in milliseconds. The default timeout 
             
         
         
-        <a href="../files/lib_dalek_actions.js.html#l1083"><code>lib&#x2F;dalek&#x2F;actions.js:1083</code></a>
+        <a href="../files/lib_dalek_actions.js.html#l1141"><code>lib&#x2F;dalek&#x2F;actions.js:1141</code></a>
         
         </p>
 

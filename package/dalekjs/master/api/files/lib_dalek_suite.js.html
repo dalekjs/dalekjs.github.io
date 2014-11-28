@@ -226,7 +226,7 @@ Suite.prototype = {
         return suite;
       }
     } catch (e) {
-      this.error = &#x27;\n&#x27; + e.name + &#x27;: &#x27; + e.message + &#x27;\nFailure loading suite &quot;&#x27; + testfile + &#x27;&quot;. Skipping!&#x27;;
+      this.error = &#x27;\n&#x27; + e.name + &#x27;: &#x27; + e.message + &#x27;\nFailure loading suite &quot;&#x27; + testfile + &#x27;&quot;. Skipping!&#x27; + e;
       return suite;
     }
 
@@ -249,29 +249,44 @@ Suite.prototype = {
    */
 
   testFinished: function (callback, tests) {
-    // run a function after the test, if given
-    if (this.options.afterEach) {
-      this.options.afterEach();
-    }
+    var complete = function() {
+      // check if there are still tests that should be executed in this suite,
+      // if so, run them
+      if (this.decrementTestsToBeExecuted() &gt; 1) {
+        this.executeNextTest(tests);
+        return this;
+      }
 
-    // check if there are still tests that should be executed in this suite,
-    // if so, run them
-    if (this.decrementTestsToBeExecuted() &gt; 1) {
-      this.executeNextTest(tests);
+      // run a function after the testsuite, if given
+      if (this.options.teardown) {
+        this.options.teardown();
+      }
+
+      // emit the suite finished event
+      this.reporterEmitter.emit(&#x27;report:testsuite:finished&#x27;, this.name);
+
+      // move on to the next suite
+      callback();
       return this;
+    }.bind(this);
+
+    // run a function after the test, if given
+
+    if (typeof this.options.afterEach === &#x27;function&#x27;) {
+      // If there is an argument, assume async.
+      if (this.options.afterEach.length === 1) {
+        this.options.afterEach(function() {
+          return complete();
+        }.bind(this));
+      } else {
+        // no argument, assume sync.
+        this.options.afterEach();
+        return complete();
+      }
+    } else {
+        return complete();
     }
 
-    // run a function after the testsuite, if given
-    if (this.options.teardown) {
-      this.options.teardown();
-    }
-
-    // emit the suite finished event
-    this.reporterEmitter.emit(&#x27;report:testsuite:finished&#x27;, this.name);
-
-    // move on to the next suite
-    callback();
-    return this;
   },
 
   /**
@@ -363,19 +378,34 @@ Suite.prototype = {
    * @return {mixed} testValue
    */
 
-  executeNextTest: function (tests) {
+  executeNextTest: function (tests, callback) {
+    var cb = callback || function() {};
     // grab the next test in the queue
-    var testName = this.getNextTest(tests),
+    var testName = this.getNextTest(tests);
     // get the next test function
-    testFunction = this.getTest(testName),
+    var testFunction = this.getTest(testName);
     // generate an instance of the test
-    test = this.getTestInstance(testName);
+    var test = this.getTestInstance(testName);
     // run a setup function before the test, if given
-    if (this.options.beforeEach) {
-      this.options.beforeEach();
+    if (typeof this.options.beforeEach !== &#x27;function&#x27;) {
+      cb(null, null);
+      testFunction.apply(test,[test]);
+      return this;
     }
-    // start it
-    return testFunction.apply(test,[test]);
+    if (this.options.beforeEach.length === 1) {
+      // if function takes an argument, assume async
+      this.options.beforeEach(function() {
+        // start it
+        testFunction.apply(test,[test]);
+        cb(null, null);
+      });
+    } else {
+      // otherwise, assume sync
+      this.options.beforeEach();
+      testFunction.apply(test,[test]);
+      cb(null, null);
+    }
+    return this;
   },
 
   /**
@@ -453,15 +483,15 @@ Suite.prototype = {
     }
 
     // kickstart the test execution
-    this.executeNextTest(tests);
+    this.executeNextTest(tests, function() {
+      // emit the suite started event
+      this.reporterEmitter.emit(&#x27;report:testsuite:started&#x27;, this.name);
+      // listen to the test:finished event &amp; then start the next test
+      // if there are no tests in this suite left,
+      // run the async callback &amp; mark this suite as finished
+      this.emitter.onAny(this.testFinished.bind(this, callback, tests));
+    }.bind(this));
 
-    // emit the suite started event
-    this.reporterEmitter.emit(&#x27;report:testsuite:started&#x27;, this.name);
-
-    // listen to the test:finished event &amp; then start the next test
-    // if there are no tests in this suite left,
-    // run the async callback &amp; mark this suite as finished
-    this.emitter.onAny(this.testFinished.bind(this, callback, tests));
     return this;
   }
 };

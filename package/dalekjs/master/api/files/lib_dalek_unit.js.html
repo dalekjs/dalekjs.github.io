@@ -148,6 +148,9 @@ var Q = require(&#x27;q&#x27;);
 var actions = require(&#x27;./actions&#x27;);
 var assertions = require(&#x27;./assertions&#x27;);
 
+// Default timeout for calling done
+var DONE_TIMEOUT = 10000;
+
 /**
  * Prepares the test instance values
  *
@@ -160,7 +163,7 @@ var Unit = function (opts) {
   this.actionPromiseQueue = [];
 
   // prepare assertion data
-  this.expactation = null;
+  this.expectation = null;
   this.runnedExpactations = 0;
   this.failedAssertions = 0;
 
@@ -173,8 +176,8 @@ var Unit = function (opts) {
   if (this.name) {
     this.timeoutForDone = setTimeout(function () {
       this.done();
-      this.reporter.emit(&#x27;warning&#x27;, &#x27;done not called!&#x27;);
-    }.bind(this), 2000);
+      this.reporter.emit(&#x27;warning&#x27;, &#x27;done() not called before timeout!&#x27;);
+    }.bind(this), DONE_TIMEOUT);
   }
 };
 
@@ -207,7 +210,7 @@ Unit.prototype = {
   /**
    * Global data store (works between the node &amp; browser envs)
    *
-   * @method expect
+   * @method data
    * @param {string|number} key Key to store or fetch data
    * @param {mixed} value *optional* Data that should be stored
    * @return {mixed} Data that has been stored
@@ -263,7 +266,7 @@ Unit.prototype = {
    * Checks if all runned assertions passed
    *
    * @method checkAssertions
-   * @return {bool} assertiosnFailed Any expectation failed
+   * @return {bool} assertionFailed Any expectation failed
    */
 
   checkAssertions: function () {
@@ -287,6 +290,53 @@ Unit.prototype = {
     // resolve the deferred when the test is finished
     Unit.testStarted.fin(this._testFinished.bind(this, result));
     return result;
+  },
+
+  /**
+   * Allow to use custom functions in order to embrace code reuse across
+   * multiple files (for example for use in Page Objects).
+   *
+   * @method andThen
+   * @param {function} a function, where &#x27;this&#x27; references the test
+   * @chainable
+   */
+  andThen: function(func) {
+    return func.call(this);
+  },
+
+  /**
+   * Adds a node style function (with node err callback) style to the test.
+   *
+   * @method node
+   * @param {function} a node function that is executed in the context of the test.
+   * @chainable
+   */
+  node: function(nodeFunction) {
+    var deferred = Q.defer(),
+      that = this;
+    nodeFunction.call(this, function(err) {
+      if (typeof err !== &#x27;undefined&#x27;) {
+        that.reporter.emit(&#x27;error&#x27;, err);
+        that.incrementFailedAssertions();
+        deferred.reject();
+      } else {
+        deferred.resolve();
+      }
+    });
+    this.promise(deferred);
+    return this;
+  },
+
+  /**
+   * Adds a promise to the chain of tests.
+   *
+   * @method promise
+   * @param {promise} a q promise
+   * @chainable
+   */
+  promise: function(deferred) {
+    this.actionPromiseQueue.push(deferred);
+    return this;
   },
 
   /**
@@ -483,6 +533,14 @@ Unit.prototype = {
       test.to[method] = test.assert[method].bind(test.assert);
       test.assert.to[method] = test.assert[method].bind(test.assert);
     });
+    [&#x27;notContain&#x27;].forEach(function (method) {
+      var apiName = method.substr(3, 1).toLowerCase() + method.substr(4);
+      test.to.not = test.to.not || {};
+      test.assert.to.not = test.assert.to.not || {};
+
+      test.to.not[apiName] = test.assert[method].bind(test.assert);
+      test.assert.to.not[apiName] = test.assert[method].bind(test.assert);
+    });
     return test;
   },
 
@@ -505,6 +563,14 @@ Unit.prototype = {
   }
 
 };
+
+/**
+ * Alias for &#x27;andThen&#x27;; use if it is the first function called in the test case.
+ *
+ * @method start
+ * @chainable
+ */
+Unit.prototype.start = Unit.prototype.andThen;
 
 // export a function that generates a new test instance
 module.exports = function (opts) {

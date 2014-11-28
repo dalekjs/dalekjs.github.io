@@ -176,7 +176,7 @@ Assertions = function (opts) {
 
 /**
  * It can be really cumbersome to always write assert, assert &amp; assert
- * all over the place when your doing multiple assertions.
+ * all over the place when you&#x27;re doing multiple assertions.
  * To avoid this, open an assertion context in your test which allows
  * you to write (n) assertions without having to write &#x27;assert&#x27; before each.
  *
@@ -1321,6 +1321,45 @@ Assertions.prototype.doesntHaveTitle = function (expected, message) {
 };
 
 /**
+* Asserts that screenshot is equal to already stored image.
+* Should follow only after screenshot action
+*
+* &#x60;&#x60;&#x60;javascript
+*    test.open(&#x27;http://google.com&#x27;)
+*      .wait(500)
+*      .screenshot(&#x27;test/screenshots/google.png&#x27;,&#x27;#lga&#x27;)
+*      .assert.screenshotIsEqualTo(&#x27;test/screenshots/google_etalon.png&#x27;, true, &#x27;Google Doodles&#x27;)
+*      .done();
+* &#x60;&#x60;&#x60;
+*
+* @api
+* @method doesntHaveTitle
+* @param {string} expected Path to expected png image
+* @param {boolean} do make diff image
+* @param {string} message Message for the test reporter
+* @chainable
+*/
+Assertions.prototype.screenshotIsEqualTo = function (expected, makediff, message) {
+  if (this.test.screenshotParams) {
+    var hash = uuid();
+
+    if (typeof makediff === &#x27;string&#x27;) {
+      message = makediff;
+      makediff = true;
+    } else if (typeof makediff === &#x27;undefined&#x27;) {
+      makediff = true;
+    }
+
+    var cb = this._generateCallbackAssertion(&#x27;imagecompare&#x27;, &#x27;compare with etalon&#x27;, this._testImagecompare, hash, { expected: expected, message: message, comparisonOperator: &#x27;Screenshot is equal to &#x27; }).bind(this.test);
+    this._addToActionQueue([this.test.screenshotParams, expected, makediff, hash], &#x27;imagecompare&#x27;, cb);
+  } else {
+    this.test.reporter.emit(&#x27;error&#x27;, &#x27;Assert screenshotIsEqualTo can follow only after screenshot action!&#x27;);
+  }
+
+  return this.chaining ? this : this.test;
+};
+
+/**
  * Asserts that the page’s url is as expected.
  *
  * &#x60;&#x60;&#x60;javascript
@@ -1483,6 +1522,34 @@ Assertions.prototype.attr = function (selector, attribute, expected, message) {
   return this.chaining ? this : this.test;
 };
 
+
+/**
+Assert result of the execution of JavaScript function within the browser context.
+  
+  test
+    .open(&#x27;http://dalekjs.com/index.html&#x27;)
+    .assert.evaluate(function () {
+      return document.getElementsByClassName(&#x27;grid&#x27;).length;
+    }).is(2, &#x27;Count of grid on page is equal 2&#x27;);
+
+* &gt; Note: Buggy in Firefox
+*
+* @api
+* @method execute
+* @param {function} script JavaScript function that should be executed
+* @return chainable
+*/
+
+Assertions.prototype.evaluate = function (script) {
+  var hash = uuid();
+  var args = [this.contextVars].concat(Array.prototype.slice.call(arguments, 1) || []);
+
+  var cb = this._generateCallbackAssertion(&#x27;evaluate&#x27;, &#x27;evaluate&#x27;, this._testTruthy, hash, {script: script, args: args, has:hash}).bind(this.test);
+  this._addToActionQueue([script, args, hash], &#x27;evaluate&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+
 // TEST HELPER
 // -----------
 
@@ -1591,6 +1658,19 @@ Assertions.prototype.contain = function (expected, message) {
 };
 
 /**
+ * Not contain helper
+ *
+ * @method notContain
+ * @param {mixed} expected Value to check
+ * @param {string} message Test message
+ * @chainable
+ */
+
+Assertions.prototype.notContain = function (expected, message) {
+  return this.generateTestHelper(&#x27;notContain&#x27;, &#x27;_notContain&#x27;, false)(expected, message);
+};
+
+/**
  * Match helper
  *
  * @method match
@@ -1647,9 +1727,8 @@ Assertions.prototype._generateCallbackAssertion = function (key, type, test, has
       if (typeof opts.expected === &#x27;function&#x27;) {
         opts.expected = opts.expected();
       }
-
+      
       var testResult = test(data.value, opts.expected, opts.parseFloatOnValues);
-
       this.reporter.emit(&#x27;report:assertion&#x27;, {
         success: testResult,
         expected: opts.comparisonOperator ? opts.comparisonOperator + opts.expected : opts.expected,
@@ -1917,6 +1996,25 @@ Assertions.prototype._contain = function (a, b) {
 };
 
 /**
+ * Assert if a given value doesn&#x27;t contain another value
+ *
+ * @method _notContain
+ * @param {bool} a Value to test
+ * @param {bool} b Value to compare
+ * @return {bool} test result
+ * @private
+ */
+Assertions.prototype._notContain = function (a, b) {
+  try {
+    chai.expect(b).to.not.include(a);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+};
+
+/**
  * Assert if a given value is lower or equal than the value to compare
  *
  * @method _testLowerThanEqual
@@ -1974,6 +2072,20 @@ Assertions.prototype._match = function (a, b) {
   }
 
   return true;
+};
+
+
+/**
+ * Assert if a image compare result is equal
+ *
+ * @method _testImagecompare
+ * @param {string} a Value to test if it equal to &#x27;equal&#x27;
+ * @return {bool} true if value is &#x27;equal&#x27;, false if value has some other values
+ * @private
+ */
+
+Assertions.prototype._testImagecompare = function (a) {
+  return a === &#x27;equal&#x27;;
 };
 
     </pre>

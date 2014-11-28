@@ -15,7 +15,6 @@
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
   <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
   <link href="../../assets/css/plato.css" rel="stylesheet">
   <link href="../../assets/css/plato-file.css" rel="stylesheet">
@@ -45,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">68.79</p>
+      <p class="stat">69.22</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">330</p>
+      <p class="stat">360</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">43.47</p>
+      <p class="stat">51.63</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">1.54</p>
+      <p class="stat">1.82</p>
     </div>
   </div>
 </div>
@@ -202,7 +201,7 @@ Suite.prototype = {
         return suite;
       }
     } catch (e) {
-      this.error = &#039;\n&#039; + e.name + &#039;: &#039; + e.message + &#039;\nFailure loading suite &quot;&#039; + testfile + &#039;&quot;. Skipping!&#039;;
+      this.error = &#039;\n&#039; + e.name + &#039;: &#039; + e.message + &#039;\nFailure loading suite &quot;&#039; + testfile + &#039;&quot;. Skipping!&#039; + e;
       return suite;
     }
 
@@ -225,29 +224,44 @@ Suite.prototype = {
    */
 
   testFinished: function (callback, tests) {
-    // run a function after the test, if given
-    if (this.options.afterEach) {
-      this.options.afterEach();
-    }
+    var complete = function() {
+      // check if there are still tests that should be executed in this suite,
+      // if so, run them
+      if (this.decrementTestsToBeExecuted() &gt; 1) {
+        this.executeNextTest(tests);
+        return this;
+      }
 
-    // check if there are still tests that should be executed in this suite,
-    // if so, run them
-    if (this.decrementTestsToBeExecuted() &gt; 1) {
-      this.executeNextTest(tests);
+      // run a function after the testsuite, if given
+      if (this.options.teardown) {
+        this.options.teardown();
+      }
+
+      // emit the suite finished event
+      this.reporterEmitter.emit(&#039;report:testsuite:finished&#039;, this.name);
+
+      // move on to the next suite
+      callback();
       return this;
+    }.bind(this);
+
+    // run a function after the test, if given
+
+    if (typeof this.options.afterEach === &#039;function&#039;) {
+      // If there is an argument, assume async.
+      if (this.options.afterEach.length === 1) {
+        this.options.afterEach(function() {
+          return complete();
+        }.bind(this));
+      } else {
+        // no argument, assume sync.
+        this.options.afterEach();
+        return complete();
+      }
+    } else {
+        return complete();
     }
 
-    // run a function after the testsuite, if given
-    if (this.options.teardown) {
-      this.options.teardown();
-    }
-
-    // emit the suite finished event
-    this.reporterEmitter.emit(&#039;report:testsuite:finished&#039;, this.name);
-
-    // move on to the next suite
-    callback();
-    return this;
   },
 
   /**
@@ -339,19 +353,34 @@ Suite.prototype = {
    * @return {mixed} testValue
    */
 
-  executeNextTest: function (tests) {
+  executeNextTest: function (tests, callback) {
+    var cb = callback || function() {};
     // grab the next test in the queue
-    var testName = this.getNextTest(tests),
+    var testName = this.getNextTest(tests);
     // get the next test function
-    testFunction = this.getTest(testName),
+    var testFunction = this.getTest(testName);
     // generate an instance of the test
-    test = this.getTestInstance(testName);
+    var test = this.getTestInstance(testName);
     // run a setup function before the test, if given
-    if (this.options.beforeEach) {
-      this.options.beforeEach();
+    if (typeof this.options.beforeEach !== &#039;function&#039;) {
+      cb(null, null);
+      testFunction.apply(test,[test]);
+      return this;
     }
-    // start it
-    return testFunction.apply(test,[test]);
+    if (this.options.beforeEach.length === 1) {
+      // if function takes an argument, assume async
+      this.options.beforeEach(function() {
+        // start it
+        testFunction.apply(test,[test]);
+        cb(null, null);
+      });
+    } else {
+      // otherwise, assume sync
+      this.options.beforeEach();
+      testFunction.apply(test,[test]);
+      cb(null, null);
+    }
+    return this;
   },
 
   /**
@@ -429,15 +458,15 @@ Suite.prototype = {
     }
 
     // kickstart the test execution
-    this.executeNextTest(tests);
+    this.executeNextTest(tests, function() {
+      // emit the suite started event
+      this.reporterEmitter.emit(&#039;report:testsuite:started&#039;, this.name);
+      // listen to the test:finished event &amp; then start the next test
+      // if there are no tests in this suite left,
+      // run the async callback &amp; mark this suite as finished
+      this.emitter.onAny(this.testFinished.bind(this, callback, tests));
+    }.bind(this));
 
-    // emit the suite started event
-    this.reporterEmitter.emit(&#039;report:testsuite:started&#039;, this.name);
-
-    // listen to the test:finished event &amp; then start the next test
-    // if there are no tests in this suite left,
-    // run the async callback &amp; mark this suite as finished
-    this.emitter.onAny(this.testFinished.bind(this, callback, tests));
     return this;
   }
 };

@@ -15,7 +15,6 @@
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
   <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
   <link href="../../assets/css/plato.css" rel="stylesheet">
   <link href="../../assets/css/plato-file.css" rel="stylesheet">
@@ -45,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">66.26</p>
+      <p class="stat">66.29</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">1838</p>
+      <p class="stat">1950</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">117.25</p>
+      <p class="stat">110.90</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">8.37</p>
+      <p class="stat">9.24</p>
     </div>
   </div>
 </div>
@@ -152,7 +151,7 @@ Assertions = function (opts) {
 
 /**
  * It can be really cumbersome to always write assert, assert &amp; assert
- * all over the place when your doing multiple assertions.
+ * all over the place when you&#039;re doing multiple assertions.
  * To avoid this, open an assertion context in your test which allows
  * you to write (n) assertions without having to write &#039;assert&#039; before each.
  *
@@ -1297,6 +1296,45 @@ Assertions.prototype.doesntHaveTitle = function (expected, message) {
 };
 
 /**
+* Asserts that screenshot is equal to already stored image.
+* Should follow only after screenshot action
+*
+* ```javascript
+*    test.open(&#039;http://google.com&#039;)
+*      .wait(500)
+*      .screenshot(&#039;test/screenshots/google.png&#039;,&#039;#lga&#039;)
+*      .assert.screenshotIsEqualTo(&#039;test/screenshots/google_etalon.png&#039;, true, &#039;Google Doodles&#039;)
+*      .done();
+* ```
+*
+* @api
+* @method doesntHaveTitle
+* @param {string} expected Path to expected png image
+* @param {boolean} do make diff image
+* @param {string} message Message for the test reporter
+* @chainable
+*/
+Assertions.prototype.screenshotIsEqualTo = function (expected, makediff, message) {
+  if (this.test.screenshotParams) {
+    var hash = uuid();
+
+    if (typeof makediff === &#039;string&#039;) {
+      message = makediff;
+      makediff = true;
+    } else if (typeof makediff === &#039;undefined&#039;) {
+      makediff = true;
+    }
+
+    var cb = this._generateCallbackAssertion(&#039;imagecompare&#039;, &#039;compare with etalon&#039;, this._testImagecompare, hash, { expected: expected, message: message, comparisonOperator: &#039;Screenshot is equal to &#039; }).bind(this.test);
+    this._addToActionQueue([this.test.screenshotParams, expected, makediff, hash], &#039;imagecompare&#039;, cb);
+  } else {
+    this.test.reporter.emit(&#039;error&#039;, &#039;Assert screenshotIsEqualTo can follow only after screenshot action!&#039;);
+  }
+
+  return this.chaining ? this : this.test;
+};
+
+/**
  * Asserts that the page’s url is as expected.
  *
  * ```javascript
@@ -1459,6 +1497,34 @@ Assertions.prototype.attr = function (selector, attribute, expected, message) {
   return this.chaining ? this : this.test;
 };
 
+
+/**
+Assert result of the execution of JavaScript function within the browser context.
+  
+  test
+    .open(&#039;http://dalekjs.com/index.html&#039;)
+    .assert.evaluate(function () {
+      return document.getElementsByClassName(&#039;grid&#039;).length;
+    }).is(2, &#039;Count of grid on page is equal 2&#039;);
+
+* &gt; Note: Buggy in Firefox
+*
+* @api
+* @method execute
+* @param {function} script JavaScript function that should be executed
+* @return chainable
+*/
+
+Assertions.prototype.evaluate = function (script) {
+  var hash = uuid();
+  var args = [this.contextVars].concat(Array.prototype.slice.call(arguments, 1) || []);
+
+  var cb = this._generateCallbackAssertion(&#039;evaluate&#039;, &#039;evaluate&#039;, this._testTruthy, hash, {script: script, args: args, has:hash}).bind(this.test);
+  this._addToActionQueue([script, args, hash], &#039;evaluate&#039;, cb);
+  return this.chaining ? this : this.test;
+};
+
+
 // TEST HELPER
 // -----------
 
@@ -1567,6 +1633,19 @@ Assertions.prototype.contain = function (expected, message) {
 };
 
 /**
+ * Not contain helper
+ *
+ * @method notContain
+ * @param {mixed} expected Value to check
+ * @param {string} message Test message
+ * @chainable
+ */
+
+Assertions.prototype.notContain = function (expected, message) {
+  return this.generateTestHelper(&#039;notContain&#039;, &#039;_notContain&#039;, false)(expected, message);
+};
+
+/**
  * Match helper
  *
  * @method match
@@ -1623,9 +1702,8 @@ Assertions.prototype._generateCallbackAssertion = function (key, type, test, has
       if (typeof opts.expected === &#039;function&#039;) {
         opts.expected = opts.expected();
       }
-
+      
       var testResult = test(data.value, opts.expected, opts.parseFloatOnValues);
-
       this.reporter.emit(&#039;report:assertion&#039;, {
         success: testResult,
         expected: opts.comparisonOperator ? opts.comparisonOperator + opts.expected : opts.expected,
@@ -1893,6 +1971,25 @@ Assertions.prototype._contain = function (a, b) {
 };
 
 /**
+ * Assert if a given value doesn&#039;t contain another value
+ *
+ * @method _notContain
+ * @param {bool} a Value to test
+ * @param {bool} b Value to compare
+ * @return {bool} test result
+ * @private
+ */
+Assertions.prototype._notContain = function (a, b) {
+  try {
+    chai.expect(b).to.not.include(a);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+};
+
+/**
  * Assert if a given value is lower or equal than the value to compare
  *
  * @method _testLowerThanEqual
@@ -1950,6 +2047,20 @@ Assertions.prototype._match = function (a, b) {
   }
 
   return true;
+};
+
+
+/**
+ * Assert if a image compare result is equal
+ *
+ * @method _testImagecompare
+ * @param {string} a Value to test if it equal to &#039;equal&#039;
+ * @return {bool} true if value is &#039;equal&#039;, false if value has some other values
+ * @private
+ */
+
+Assertions.prototype._testImagecompare = function (a) {
+  return a === &#039;equal&#039;;
 };</textarea>
   </div>
 </div>
