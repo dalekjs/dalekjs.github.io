@@ -912,7 +912,7 @@
         {
             "file": "lib/dalek/actions.js",
             "line": 1141,
-            "description": "Waits until an element matching the provided\nselector expression exists in remote DOM to process any next step.\n\nLets assume we have a ticker that loads its contents via AJAX,\nand appends new elements, when the call has been successfully answered:\n\n```javascript\ntest.open('http://myticker.org')\n  .assert.text('.ticker-element:first-child', 'First!', 'First ticker element is visible')\n  // now we load the next ticker element, defsult timeout is 5 seconds\n  .waitForElement('.ticker-element:nth-child(2)')\n  .assert.text('.ticker-element:nth-child(2)', 'Me snd. one', 'Snd. ticker element is visible')\n  // Lets assume that this AJAX call can take longer, so we raise the default timeout to 10 seconds\n  .waitForElement('.ticker-element:last-child', 10000)\n  .assert.text('.ticker-element:last-child', 'Me, third one!', 'Third ticker element is visible')\n  .done();\n```",
+            "description": "Waits until an element matching the provided\nselector expression exists in remote DOM to process any next step.\n\nLets assume we have a ticker that loads its contents via AJAX,\nand appends new elements, when the call has been successfully answered:\n\n```javascript\ntest.open('http://myticker.org')\n  .assert.text('.ticker-element:first-child', 'First!', 'First ticker element is visible')\n  // now we load the next ticker element, defsult timeout is 5 seconds\n  .waitForElement('.ticker-element:nth-child(2)')\n  .assert.text('.ticker-element:nth-child(2)', 'Me snd. one', 'Snd. ticker element is visible')\n  // Lets assume that this AJAX call can take longer, so we raise the default timeout to 10 seconds\n  .waitForElement('.ticker-element:last-child', 10000)\n  .assert.text('.ticker-element:last-child', 'Me, third one!', 'Third ticker element is visible')\n  .done();\n```\n\nNote that the function exits succesfully when the first element is found, matching the given selector",
             "api": "",
             "itemtype": "method",
             "name": "waitForElement",
@@ -933,7 +933,7 @@
         },
         {
             "file": "lib/dalek/actions.js",
-            "line": 1180,
+            "line": 1182,
             "description": "Fills the fields of a form with given values.\n\n```html\n<input type=\"text\" value=\"not really a value\" id=\"ijustwannahaveavalue\"/>\n```\n\n```javascript\ntest.open('http://dalekjs.com')\n    .setValue('#ijustwannahaveavalue', 'a value')\n    .assert.val('#ijustwannahaveavalue', 'a value', 'Value is changed');\n```",
             "api": "",
             "itemtype": "method",
@@ -958,7 +958,7 @@
         },
         {
             "file": "lib/dalek/actions.js",
-            "line": 1218,
+            "line": 1220,
             "description": "Logs a part of the remote dom\n\n```html\n<body>\n  <div id=\"smth\">\n    <input type=\"hidden\" value=\"not really a value\" id=\"ijustwannahaveavalue\"/>\n  </div>\n</body>\n```\n\n```javascript\ntest.open('http://dalekjs.com/guineapig')\n    .log.dom('#smth')\n    .done();\n```\n\nWill output this:\n\n```html\n DOM: #smth <input type=\"hidden\" value=\"not really a value\" id=\"ijustwannahaveavalue\"/>\n```",
             "api": "",
             "itemtype": "method",
@@ -975,7 +975,7 @@
         },
         {
             "file": "lib/dalek/actions.js",
-            "line": 1266,
+            "line": 1268,
             "description": "Logs a user defined message\n\n```javascript\ntest.open('http://dalekjs.com/guineapig')\n    .execute(function () {\n      this.data('aKey', 'aValue');\n    })\n    .log.message(function () {\n      return test.data('aKey'); // outputs MESSAGE: 'aValue'\n    })\n    .done();\n```\n\n'Normal' messages can be logged too:\n\n```javascript\ntest.open('http://dalekjs.com/guineapig')\n    .log.message('FooBar') // outputs MESSAGE: FooBar\n    .done();\n```",
             "api": "",
             "itemtype": "method",
@@ -992,7 +992,7 @@
         },
         {
             "file": "lib/dalek/actions.js",
-            "line": 1309,
+            "line": 1311,
             "description": "Generates a callback that will be fired when the action has been completed.\nThe callback itself will then validate the answer and will also emit an event\nthat the action has been successfully executed.",
             "itemtype": "method",
             "name": "_generateCallbackAssertion",
@@ -1018,7 +1018,7 @@
         },
         {
             "file": "lib/dalek/actions.js",
-            "line": 1363,
+            "line": 1365,
             "description": "Adds a method to the queue of actions/assertions to execute",
             "itemtype": "method",
             "name": "_addToActionQueue",
@@ -1046,7 +1046,7 @@
         },
         {
             "file": "lib/dalek/actions.js",
-            "line": 1445,
+            "line": 1447,
             "description": "Close the active window and automatically selects the parent window.\n\n```javascript\nthis.test.toWindow('test');\nthis.test.close();\n\n//you can now write your code as if the original parent window was selected because .close()\n//selects that automatically for you so you don't have to call .toParentWindow() everytime\n```",
             "api": "",
             "itemtype": "method",
@@ -5088,19 +5088,19 @@
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/actions.js:1180"
+            "line": " lib/dalek/actions.js:1182"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/actions.js:1218"
+            "line": " lib/dalek/actions.js:1220"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/actions.js:1266"
+            "line": " lib/dalek/actions.js:1268"
         },
         {
             "message": "unknown tag: api",
-            "line": " lib/dalek/actions.js:1445"
+            "line": " lib/dalek/actions.js:1447"
         },
         {
             "message": "unknown tag: part",
