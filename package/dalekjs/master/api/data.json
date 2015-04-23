@@ -2209,7 +2209,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1758,
+            "line": 1759,
             "description": "Adds a method to the queue of actions/assertions to execute",
             "itemtype": "method",
             "name": "_addToActionQueue",
@@ -2239,7 +2239,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1781,
+            "line": 1782,
             "description": "Generates a function that can be used",
             "itemtype": "method",
             "name": "generateTestHelper",
@@ -2268,7 +2268,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1837,
+            "line": 1838,
             "description": "Assert if a given value shallow equals a second given value",
             "itemtype": "method",
             "name": "_testShallowEquals",
@@ -2296,7 +2296,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1857,
+            "line": 1858,
             "description": "Assert if a given value shallow does not equal a second given value",
             "itemtype": "method",
             "name": "_testShallowUnequals",
@@ -2324,7 +2324,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1877,
+            "line": 1878,
             "description": "Assert if a given value matches a range",
             "itemtype": "method",
             "name": "_testBetween",
@@ -2352,7 +2352,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1897,
+            "line": 1898,
             "description": "Assert if a given value is greater than the value to compare",
             "itemtype": "method",
             "name": "_testGreaterThan",
@@ -2385,7 +2385,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1923,
+            "line": 1924,
             "description": "Assert if a given value is greater or equal than the value to compare",
             "itemtype": "method",
             "name": "_testGreaterThanEqual",
@@ -2413,7 +2413,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1937,
+            "line": 1938,
             "description": "Assert if a given value is lower than the value to compare",
             "itemtype": "method",
             "name": "_testLowerThan",
@@ -2446,7 +2446,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1963,
+            "line": 1964,
             "description": "Asserts that 2 string match regardless of case",
             "itemtype": "method",
             "name": "_caseInsensitiveMatch",
@@ -2474,7 +2474,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 1987,
+            "line": 1988,
             "description": "Assert if a given value contain another value",
             "itemtype": "method",
             "name": "_contain",
@@ -2502,7 +2502,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 2007,
+            "line": 2008,
             "description": "Assert if a given value doesn't contain another value",
             "itemtype": "method",
             "name": "_notContain",
@@ -2530,7 +2530,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 2026,
+            "line": 2027,
             "description": "Assert if a given value is lower or equal than the value to compare",
             "itemtype": "method",
             "name": "_testLowerThanEqual",
@@ -2558,7 +2558,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 2040,
+            "line": 2041,
             "description": "Assert if a given value is boolean 'true'",
             "itemtype": "method",
             "name": "_testTruthy",
@@ -2581,7 +2581,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 2053,
+            "line": 2054,
             "description": "Assert if a given value is boolean 'false'",
             "itemtype": "method",
             "name": "_testFalsy",
@@ -2604,7 +2604,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 2066,
+            "line": 2067,
             "description": "Assert a given value matches a RegEx",
             "itemtype": "method",
             "name": "_contain",
@@ -2632,7 +2632,7 @@
         },
         {
             "file": "lib/dalek/assertions.js",
-            "line": 2087,
+            "line": 2088,
             "description": "Assert if a image compare result is equal",
             "itemtype": "method",
             "name": "_testImagecompare",
