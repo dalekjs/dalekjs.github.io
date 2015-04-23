@@ -1761,6 +1761,72 @@
         {
             "file": "lib/commands/execute.js",
             "line": 75,
+            "description": "Executes a JavaScript function",
+            "itemtype": "method",
+            "name": "execute",
+            "params": [
+                {
+                    "name": "script",
+                    "description": "Script to execute",
+                    "type": "Function"
+                },
+                {
+                    "name": "args",
+                    "description": "Arguments to pass to the function",
+                    "type": "Array"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "class": "Dalek.DriverNative.Commands.Execute",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/execute.js",
+            "line": 90,
+            "description": "Sends out an event with the results of the `execute` call",
+            "itemtype": "method",
+            "name": "_setEvaluateCb",
+            "params": [
+                {
+                    "name": "script",
+                    "description": "Script to execute",
+                    "type": "Function"
+                },
+                {
+                    "name": "args",
+                    "description": "Arguments to pass to the function",
+                    "type": "Array"
+                },
+                {
+                    "name": "hash",
+                    "description": "Unique hash of that fn call",
+                    "type": "String"
+                },
+                {
+                    "name": "result",
+                    "description": "Serialized JSON with the results of the call",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "promise Exists promise",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Dalek.DriverNative.Commands.Execute",
+            "module": "Driver",
+            "namespace": "Dalek.DriverNative.Commands"
+        },
+        {
+            "file": "lib/commands/execute.js",
+            "line": 111,
             "description": "Executes a JavaScript function until the timeout rans out or\nthe function returns true",
             "itemtype": "method",
             "name": "execute",
@@ -1793,7 +1859,7 @@
         },
         {
             "file": "lib/commands/execute.js",
-            "line": 93,
+            "line": 129,
             "description": "Sends out an event with the results of the `waitFor` call",
             "itemtype": "method",
             "name": "_setExecuteCb",
@@ -1836,7 +1902,7 @@
         },
         {
             "file": "lib/commands/execute.js",
-            "line": 148,
+            "line": 184,
             "description": "Mixes in the script execute methods",
             "params": [
                 {
@@ -3367,7 +3433,7 @@
         },
         {
             "message": "Missing item type\nMixes in the script execute methods",
-            "line": " lib/commands/execute.js:148"
+            "line": " lib/commands/execute.js:184"
         },
         {
             "message": "Missing item type\nMixes in element methods",

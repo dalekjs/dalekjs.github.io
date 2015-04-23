@@ -148,7 +148,7 @@ var Q = require(&#x27;q&#x27;);
 var Execute = {
 
   /**
-   * Executes a JavaScript function 
+   * Executes a JavaScript function
    *
    * @method execute
    * @param {function} script Script to execute
@@ -178,6 +178,42 @@ var Execute = {
   _setExecuteCb: function (script, args, hash, data) {
     var deferred = Q.defer();
     this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;execute&#x27;, value: JSON.parse(data).value, uuid: hash, hash: hash});
+    deferred.resolve();
+    return deferred.promise;
+  },
+
+  /**
+  * Executes a JavaScript function
+  *
+  * @method execute
+  * @param {function} script Script to execute
+  * @param {array} args Arguments to pass to the function
+  * @param {string} hash Unique hash of that fn call
+  * @chainable
+  */
+  evaluate: function (script, args, hash) {
+    this.actionQueue.push(this.webdriverClient.execute.bind(this.webdriverClient, {script: script.toString(), arguments: args}));
+    this.actionQueue.push(this._setEvaluateCb.bind(this, script.toString(), args, hash));
+    return this;
+  },
+
+  /**
+  * Sends out an event with the results of the &#x60;execute&#x60; call
+  *
+  * @method _setEvaluateCb
+  * @param {function} script Script to execute
+  * @param {array} args Arguments to pass to the function
+  * @param {string} hash Unique hash of that fn call
+  * @param {string} result Serialized JSON with the results of the call
+  * @return {object} promise Exists promise
+  * @private
+  */
+
+  _setEvaluateCb: function (script, args, hash, data) {
+    var deferred = Q.defer();
+    var parsedData = JSON.parse(data);
+    var result = parsedData.value ? parsedData.value.userRet : undefined;
+    this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;evaluate&#x27;, value: result, uuid: hash, hash: hash});
     deferred.resolve();
     return deferred.promise;
   },
@@ -223,7 +259,7 @@ var Execute = {
         timeoutId = null;
       }
     };
-    
+
     var checker = function (yData) {
       if (JSON.parse(yData).value.userRet === true) {
         this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;waitFor&#x27;, value: &#x27;&#x27;, uuid: hash, hash: hash});
