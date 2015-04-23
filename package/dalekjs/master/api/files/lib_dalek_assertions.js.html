@@ -436,7 +436,7 @@ Assertions.prototype.numberOfElements = function (selector, expected, message) {
  * &#x60;&#x60;&#x60;
  *
  * &gt; NOTE: Buggy on all browsers
- * 
+ *
  * @api
  * @method numberOfVisibleElements
  * @param {string} selector Selector that matches the elements to test
@@ -1008,7 +1008,7 @@ Assertions.prototype.doesntExist = function (selector, message) {
  *
  *
  * &gt; NOTE: Buggy on all browsers
- * 
+ *
  * @api
  * @method notVisible
  * @param {string} selector Selector that matches the elements to test
@@ -1046,7 +1046,7 @@ Assertions.prototype.notVisible = function (selector, message) {
  * &#x60;&#x60;&#x60;
  *
  * &gt; NOTE: Buggy on all browsers
- * 
+ *
  * @api
  * @method visible
  * @param {string} selector Selector that matches the elements to test
@@ -1084,7 +1084,7 @@ Assertions.prototype.visible = function (selector, message) {
  * &#x60;&#x60;&#x60;
  *
  * &gt; NOTE: You cant match for a substring with contain() here.
- * 
+ *
  * @api
  * @method doesntHaveText
  * @param {string} selector Selector that matches the elements to test
@@ -1124,7 +1124,7 @@ Assertions.prototype.doesntHaveText = function (selector, expected, message) {
  *
  * &gt; NOTE: You cant match for a substring with contain() here.
  * &gt; NOTE: Does not work in Firefox &amp; PhantomJS
- * 
+ *
  * @api
  * @method dialogDoesntHaveText
  * @param {string} expected Expected test result
@@ -1235,7 +1235,7 @@ Assertions.prototype.text = function (selector, expected, message) {
  *
  *
  * &gt; NOTE: Does not work in Firefox &amp; PhantomJS
- * 
+ *
  * @api
  * @method dialogText
  * @param {string} expected Expected testresult
@@ -1524,13 +1524,93 @@ Assertions.prototype.attr = function (selector, attribute, expected, message) {
 
 
 /**
+* Asserts that an element contains class.
+*
+* &#x60;&#x60;&#x60;html
+* &lt;form&gt;
+*   &lt;button class=&quot;plain-btn action submit-product&quot; type=&quot;submit&quot;&gt;Fire&lt;/button&gt;
+* &lt;/form&gt;
+* &#x60;&#x60;&#x60;
+*
+* &#x60;&#x60;&#x60;javascript
+*  test
+*    .open(&#x27;http://dalekjs.com/index.html&#x27;)
+*    .assert.hasClass(&#x27;.grid__item.one-whole.info-box&#x27;, &#x27;info-box&#x27;, &#x27;div has info-box class&#x27;)
+*    .done();
+* &#x60;&#x60;&#x60;
+*
+* @api
+* @method attr
+* @param {string} selector Selector that matches the elements to test
+* @param {string} expected Expected test result
+* @param {string} message Message for the test reporter
+* @chainable
+*/
+
+Assertions.prototype.hasClass = function (selector, expected, message) {
+  var hash = uuid();
+  var attribute = &#x27;class&#x27;;
+
+  if (this.test.querying === true) {
+    message = expected;
+    expected = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;attribute&#x27;, &#x27;hasClass&#x27;, this._containsItem, hash, {expected: expected, message: message, selector: selector, attribute: attribute}).bind(this.test);
+  this._addToActionQueue([selector, attribute, expected, hash], &#x27;attribute&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+
+/**
+* Asserts that element doesn&#x27;t contain class.
+*
+* &#x60;&#x60;&#x60;html
+* &lt;form&gt;
+*   &lt;button class=&quot;plain-btn action submit-product&quot; type=&quot;submit&quot;&gt;Fire&lt;/button&gt;
+* &lt;/form&gt;
+* &#x60;&#x60;&#x60;
+*
+* &#x60;&#x60;&#x60;javascript
+*  test
+*    .open(&#x27;http://dalekjs.com/index.html&#x27;)
+*    .assert.doesntHaveClass(&#x27;.grid__item.one-whole.info-box&#x27;, &#x27;info&#x27;, &#x27;div doesn\&#x27;t have info class&#x27;)
+*    .done();
+* &#x60;&#x60;&#x60;
+*
+* @api
+* @method attr
+* @param {string} selector Selector that matches the elements to test
+* @param {string} expected Expected test result
+* @param {string} message Message for the test reporter
+* @chainable
+*/
+
+Assertions.prototype.doesntHaveClass = function (selector, expected, message) {
+  var hash = uuid();
+  var attribute = &#x27;class&#x27;;
+
+  if (this.test.querying === true) {
+    message = expected;
+    expected = selector;
+    selector = this.test.selector;
+  }
+
+  var cb = this._generateCallbackAssertion(&#x27;attribute&#x27;, &#x27;!hasClass&#x27;, this._doesntContainItem, hash, {expected: expected, message: message, selector: selector, attribute: attribute}).bind(this.test);
+  this._addToActionQueue([selector, attribute, expected, hash], &#x27;attribute&#x27;, cb);
+  return this.chaining ? this : this.test;
+};
+
+/**
 Assert result of the execution of JavaScript function within the browser context.
-  
+
   test
     .open(&#x27;http://dalekjs.com/index.html&#x27;)
     .assert.evaluate(function () {
       return document.getElementsByClassName(&#x27;grid&#x27;).length;
-    }).is(2, &#x27;Count of grid on page is equal 2&#x27;);
+    }).is(2, &#x27;Count of grid on page is equal 2&#x27;)
+    .done();
 
 * &gt; Note: Buggy in Firefox
 *
@@ -1645,6 +1725,50 @@ Assertions.prototype.lte = function (expected, message) {
 };
 
 /**
+* Assert if a given value contians a second given value
+*
+* @method _containsItem
+* @param {mixed} a Value to test
+* @param {mixed} b Value to test
+* @return {bool} false if values doesn&#x27;t contain, true if contains
+* @private
+*/
+
+Assertions.prototype._containsItem = function (a, b) {
+  a = a || &#x27;&#x27;;
+  var index = a.split(&#x27; &#x27;).indexOf(b);
+
+  try {
+    chai.expect(index).to.be.above(-1);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+};
+
+/**
+* Assert if a given value doesn&#x27;t contian a second given value
+*
+* @method _containsItem
+* @param {mixed} a Value to test
+* @param {mixed} b Value to test
+* @return {bool} false if values contains, true if don&#x27;t contain
+* @private
+*/
+Assertions.prototype._doesntContainItem = function (a, b) {
+  a = a || &#x27;&#x27;;
+  var index = a.split(&#x27; &#x27;).indexOf(b);
+  try {
+    chai.assert.equal(index, -1);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+};
+
+/**
  * Contain helper
  *
  * @method contain
@@ -1720,14 +1844,15 @@ Assertions.prototype._generateCallbackAssertion = function (key, type, test, has
 
       this._lastGeneratedAction = {key: key, type: type, test: test, hash: hash, opts: opts, data: data};
 
-      if (!opts.expected &amp;&amp; (key === &#x27;title&#x27; || key === &#x27;width&#x27; || key === &#x27;height&#x27; || key === &#x27;url&#x27; || key === &#x27;text&#x27; || key === &#x27;attribute&#x27; || key === &#x27;numberOfElements&#x27; || key === &#x27;numberOfVisibleElements&#x27;)) {
+      var chainingKeys = [&#x27;title&#x27;, &#x27;width&#x27;, &#x27;height&#x27;, &#x27;url&#x27;, &#x27;text&#x27; , &#x27;attribute&#x27;, &#x27;numberOfElements&#x27;, &#x27;numberOfVisibleElements&#x27;, &#x27;evaluate&#x27;];
+      if (!opts.expected &amp;&amp; chainingKeys.indexOf(key) &gt; -1) {
         return false;
       }
 
       if (typeof opts.expected === &#x27;function&#x27;) {
         opts.expected = opts.expected();
       }
-      
+
       var testResult = test(data.value, opts.expected, opts.parseFloatOnValues);
       this.reporter.emit(&#x27;report:assertion&#x27;, {
         success: testResult,
