@@ -745,7 +745,7 @@ var Element = {
 
   _waitForElementCb: function (selector, hash, uuid) {
     var deferred = Q.defer();
-    this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;waitForElement&#x27;, selector: selector, uuid: uuid, hash: hash});
+    this.events.emit(&#x27;driver:message&#x27;, {key: &#x27;waitForElement&#x27;, selector: selector, value: selector, uuid: uuid, hash: hash});
     deferred.resolve();
     return deferred.promise;
   },
