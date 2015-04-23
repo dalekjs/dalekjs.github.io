@@ -203,8 +203,9 @@ var Screenshot = {
    */
 
   _recursiveMakeDirSync: function (path) {
+    var normalizedPath = require(&#x27;path&#x27;).normalize(path);
     var pathSep = require(&#x27;path&#x27;).sep;
-    var dirs = path.split(pathSep);
+    var dirs = normalizedPath.split(pathSep);
     var root = &#x27;&#x27;;
 
     while (dirs.length &gt; 0) {

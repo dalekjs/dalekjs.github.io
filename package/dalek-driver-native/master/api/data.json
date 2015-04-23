@@ -2547,7 +2547,7 @@
         },
         {
             "file": "lib/commands/screenshot.js",
-            "line": 112,
+            "line": 113,
             "description": "Return the formatted os name",
             "itemtype": "method",
             "name": "_parseOS",
@@ -2570,7 +2570,7 @@
         },
         {
             "file": "lib/commands/screenshot.js",
-            "line": 133,
+            "line": 134,
             "description": "Return the formatted os name",
             "itemtype": "method",
             "name": "_parseOS",
@@ -2586,7 +2586,7 @@
         },
         {
             "file": "lib/commands/screenshot.js",
-            "line": 149,
+            "line": 150,
             "description": "Return the formatted os version",
             "itemtype": "method",
             "name": "_parseOSVersion",
@@ -2602,7 +2602,7 @@
         },
         {
             "file": "lib/commands/screenshot.js",
-            "line": 163,
+            "line": 164,
             "description": "Return the formatted browser version",
             "itemtype": "method",
             "name": "_parseBrowserVersion",
@@ -2618,7 +2618,7 @@
         },
         {
             "file": "lib/commands/screenshot.js",
-            "line": 175,
+            "line": 176,
             "description": "Return the ISO 8601 formatted date",
             "itemtype": "method",
             "name": "_parseDate",
@@ -2641,7 +2641,7 @@
         },
         {
             "file": "lib/commands/screenshot.js",
-            "line": 196,
+            "line": 197,
             "description": "Return the ISO 8601 formatted datetime",
             "itemtype": "method",
             "name": "_parseDatetime",
@@ -2664,7 +2664,7 @@
         },
         {
             "file": "lib/commands/screenshot.js",
-            "line": 244,
+            "line": 245,
             "description": "Return the formatted viewport",
             "itemtype": "method",
             "name": "_parseViewport",
@@ -2680,7 +2680,7 @@
         },
         {
             "file": "lib/commands/screenshot.js",
-            "line": 259,
+            "line": 260,
             "description": "Mixes in screenshot methods",
             "params": [
                 {
@@ -3449,7 +3449,7 @@
         },
         {
             "message": "Missing item type\nMixes in screenshot methods",
-            "line": " lib/commands/screenshot.js:259"
+            "line": " lib/commands/screenshot.js:260"
         },
         {
             "message": "Missing item type\nMixes in url methods",
